@@ -1,0 +1,87 @@
+<module>
+    
+    <libraries>
+
+        <module name="elemental2-core">
+            <packages>
+                <package>elemental2.core</package>
+            </packages>
+        </module>
+
+        <module name="elemental2-dom">
+            <packages>
+                <package>elemental2.dom</package>
+            </packages>
+        </module>
+
+        <module name="elemental2-svg">
+            <packages>
+                <package>elemental2.svg</package>
+            </packages>
+        </module>
+
+        <module name="gwt-user">
+            <packages>
+                <package>com.google.gwt.user.client</package>
+                <package>com.google.gwt.core.client</package>
+                <package>com.google.gwt.resources.client</package>
+                <package>com.google.gwt.regexp.shared</package>
+                <package>com.google.gwt.storage.client</package>
+                <package>com.google.gwt.media.client</package>
+            </packages>
+        </module>
+
+        <module name="java-base">
+            <packages>
+                <package>java.io</package>
+                <package>java.lang</package>
+                <package>java.lang.annotation</package>
+                <package>java.lang.management</package>
+                <package>java.lang.ref</package>
+                <package>java.lang.reflect</package>
+                <package>java.math</package>
+                <package>java.net</package>
+                <package>java.security</package>
+                <package>java.text</package>
+                <package>java.time</package>
+                <package>java.time.format</package>
+                <package>java.time.temporal</package>
+                <package>java.util</package>
+                <package>java.util.function</package>
+                <package>java.util.regex</package>
+                <package>java.util.stream</package>
+                <package>java.util.concurrent</package>
+                <package>java.util.concurrent.atomic</package>
+            </packages>
+        </module>
+
+        <module name="java-logging">
+            <packages>
+                <package>java.util.logging</package>
+            </packages>
+        </module>
+
+        <module name="java-nio-emul">
+            <packages>
+                <package>java.nio</package>
+                <package>java.nio.charset</package>
+                <package>java.nio.file</package>
+                <package>java.nio.file.attribute</package>
+            </packages>
+        </module>
+
+        <module name="jsinterop-annotations">
+            <packages>
+                <package>jsinterop.annotations</package>
+            </packages>
+        </module>
+
+        <module name="jsinterop-base">
+            <packages>
+                <package>jsinterop.base</package>
+            </packages>
+        </module>
+    
+    </libraries>
+    
+</module>
