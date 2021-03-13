@@ -2,23 +2,28 @@
     
     <libraries>
 
-        <module name="elemental2-core">
-            <packages>
-                <package>elemental2.core</package>
-            </packages>
-        </module>
+        <group>
+            <groupId>${lib.elemental2.groupId}</groupId>
 
-        <module name="elemental2-dom">
-            <packages>
-                <package>elemental2.dom</package>
-            </packages>
-        </module>
+            <module name="elemental2-core">
+                <packages>
+                    <package>elemental2.core</package>
+                </packages>
+            </module>
 
-        <module name="elemental2-svg">
-            <packages>
-                <package>elemental2.svg</package>
-            </packages>
-        </module>
+            <module name="elemental2-dom">
+                <packages>
+                    <package>elemental2.dom</package>
+                </packages>
+            </module>
+
+            <module name="elemental2-svg">
+                <packages>
+                    <package>elemental2.svg</package>
+                </packages>
+            </module>
+
+        </group>
 
         <module name="gwt-user">
             <packages>
@@ -30,6 +35,20 @@
                 <package>com.google.gwt.media.client</package>
             </packages>
         </module>
+
+        <group>
+            <groupId>org.jresearch.gwt.time</groupId>
+
+            <module name="gwt-time">
+                <artifactId>org.jresearch.gwt.time</artifactId>
+                <version>2.0.3</version>
+            </module>
+
+            <module name="org.jresearch.gwt.time.tzdb">
+                <version>1.4.15</version>
+            </module>
+
+        </group>
 
         <module name="java-base">
             <packages>
@@ -62,6 +81,8 @@
         </module>
 
         <module name="java-nio-emul">
+            <groupId>org.treblereel.gwt.nio</groupId>
+            <version>1.1</version>
             <packages>
                 <package>java.nio</package>
                 <package>java.nio.charset</package>
