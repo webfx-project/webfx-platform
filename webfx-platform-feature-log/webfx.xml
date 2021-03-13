@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<module>
+
+    <modules>
+        <module>webfx-platform-shared-log</module>
+        <module>webfx-platform-shared-log-impl-simple</module>
+        <module>webfx-platform-gwt-log-impl</module>
+    </modules>
+    
+</module>

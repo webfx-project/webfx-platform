@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<module>
+
+    <modules>
+        <module>webfx-platform-client-storage</module>
+        <module>webfx-platform-java-storage-impl</module>
+        <module>webfx-platform-gwt-storage-impl</module>
+    </modules>
+    
+</module>

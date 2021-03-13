@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<module>
+
+    <modules>
+        <module>webfx-platform-shared-resource</module>
+        <module>webfx-platform-java-resource-impl</module>
+        <module>webfx-platform-gwt-resource-impl</module>
+    </modules>
+    
+</module>

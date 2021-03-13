@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<module>
+
+    <modules>
+        <module>webfx-platform-shared-appcontainer</module>
+        <module>webfx-platform-java-appcontainer-impl</module>
+        <module>webfx-platform-gwt-appcontainer-impl</module>
+    </modules>
+    
+</module>

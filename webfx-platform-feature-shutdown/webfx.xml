@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<module>
+
+    <modules>
+        <module>webfx-platform-shared-shutdown</module>
+        <module>webfx-platform-java-shutdown-impl</module>
+        <module>webfx-platform-gwt-shutdown-impl</module>
+    </modules>
+    
+</module>
