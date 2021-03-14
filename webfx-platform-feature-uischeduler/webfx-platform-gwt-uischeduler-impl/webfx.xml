@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <module>
 
+    <packages exports="true"/>
+
     <providers>
         <provider spi="dev.webfx.platform.shared.services.scheduler.spi.SchedulerProvider">dev.webfx.platform.gwt.services.uischeduler.spi.impl.GwtUiSchedulerProvider</provider>
         <provider spi="dev.webfx.platform.client.services.uischeduler.spi.UiSchedulerProvider">dev.webfx.platform.gwt.services.uischeduler.spi.impl.GwtUiSchedulerProvider</provider>

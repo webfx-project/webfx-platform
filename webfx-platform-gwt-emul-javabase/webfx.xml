@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <module>
 
+    <packages exports="true"/>
+
     <html if-uses-java-package="java.util.regex">
         <body order="-1">
             <script type="text/javascript" charset="utf-8" src="emul/java/util/regex/xregexp.js"/>
