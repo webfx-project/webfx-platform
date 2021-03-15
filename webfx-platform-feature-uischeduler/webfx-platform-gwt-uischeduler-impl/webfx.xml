@@ -10,4 +10,8 @@
         <provider spi="dev.webfx.platform.client.services.uischeduler.spi.UiSchedulerProvider">dev.webfx.platform.gwt.services.uischeduler.spi.impl.GwtUiSchedulerProvider</provider>
     </providers>
 
+    <dependencies>
+        <source-modules/>
+    </dependencies>
+
 </module>

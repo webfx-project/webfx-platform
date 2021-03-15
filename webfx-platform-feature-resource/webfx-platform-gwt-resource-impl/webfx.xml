@@ -10,4 +10,8 @@
         <provider spi="dev.webfx.platform.shared.services.resource.spi.ResourceServiceProvider">dev.webfx.platform.gwt.services.resource.spi.impl.GwtResourceServiceProvider</provider>
     </providers>
 
+    <dependencies>
+        <source-modules/>
+    </dependencies>
+
 </module>

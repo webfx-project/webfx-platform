@@ -10,4 +10,8 @@
         <provider spi="dev.webfx.platform.client.services.storage.spi.SessionStorageProvider">dev.webfx.platform.gwt.services.storage.spi.impl.GwtSessionStorageProvider</provider>
     </providers>
 
+    <dependencies>
+        <source-modules/>
+    </dependencies>
+
 </module>

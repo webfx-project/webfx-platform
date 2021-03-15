@@ -9,4 +9,8 @@
         <provider spi="dev.webfx.platform.shared.services.shutdown.spi.ShutdownProvider">dev.webfx.platform.java.services.shutdown.spi.impl.JavaShutdownProvider</provider>
     </providers>
 
+    <dependencies>
+        <source-modules/>
+    </dependencies>
+
 </module>
