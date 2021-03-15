@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<module>
+<project>
 
     <modules>
         <module>webfx-platform-shared-scheduler</module>
         <module>webfx-platform-java-scheduler-impl</module>
     </modules>
     
-</module>
+</project>

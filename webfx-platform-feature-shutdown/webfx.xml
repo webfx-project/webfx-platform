@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<module>
+<project>
 
     <modules>
         <module>webfx-platform-shared-shutdown</module>
@@ -7,4 +7,4 @@
         <module>webfx-platform-gwt-shutdown-impl</module>
     </modules>
     
-</module>
+</project>
