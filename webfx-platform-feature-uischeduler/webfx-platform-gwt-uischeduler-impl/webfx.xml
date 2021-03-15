@@ -6,8 +6,8 @@
     </packages>
 
     <providers>
-        <provider spi="dev.webfx.platform.shared.services.scheduler.spi.SchedulerProvider">dev.webfx.platform.gwt.services.uischeduler.spi.impl.GwtUiSchedulerProvider</provider>
-        <provider spi="dev.webfx.platform.client.services.uischeduler.spi.UiSchedulerProvider">dev.webfx.platform.gwt.services.uischeduler.spi.impl.GwtUiSchedulerProvider</provider>
+        <dev.webfx.platform.shared.services.scheduler.spi.SchedulerProvider>dev.webfx.platform.gwt.services.uischeduler.spi.impl.GwtUiSchedulerProvider</dev.webfx.platform.shared.services.scheduler.spi.SchedulerProvider>
+        <dev.webfx.platform.client.services.uischeduler.spi.UiSchedulerProvider>dev.webfx.platform.gwt.services.uischeduler.spi.impl.GwtUiSchedulerProvider</dev.webfx.platform.client.services.uischeduler.spi.UiSchedulerProvider>
     </providers>
 
     <dependencies>

@@ -6,8 +6,8 @@
     </packages>
 
     <providers>
-        <provider spi="dev.webfx.platform.client.services.storage.spi.LocalStorageProvider">dev.webfx.platform.gwt.services.storage.spi.impl.GwtLocalStorageProvider</provider>
-        <provider spi="dev.webfx.platform.client.services.storage.spi.SessionStorageProvider">dev.webfx.platform.gwt.services.storage.spi.impl.GwtSessionStorageProvider</provider>
+        <dev.webfx.platform.client.services.storage.spi.LocalStorageProvider>dev.webfx.platform.gwt.services.storage.spi.impl.GwtLocalStorageProvider</dev.webfx.platform.client.services.storage.spi.LocalStorageProvider>
+        <dev.webfx.platform.client.services.storage.spi.SessionStorageProvider>dev.webfx.platform.gwt.services.storage.spi.impl.GwtSessionStorageProvider</dev.webfx.platform.client.services.storage.spi.SessionStorageProvider>
     </providers>
 
     <dependencies>

@@ -6,7 +6,7 @@
     </packages>
 
     <providers>
-        <provider spi="dev.webfx.platform.shared.services.log.spi.LoggerProvider">dev.webfx.platform.shared.services.log.spi.impl.simple.SimpleLoggerProvider</provider>
+        <dev.webfx.platform.shared.services.log.spi.LoggerProvider>dev.webfx.platform.shared.services.log.spi.impl.simple.SimpleLoggerProvider</dev.webfx.platform.shared.services.log.spi.LoggerProvider>
     </providers>
 
     <dependencies>

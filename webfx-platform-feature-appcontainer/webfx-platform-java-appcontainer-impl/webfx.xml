@@ -6,7 +6,7 @@
     </packages>
 
     <providers>
-        <provider spi="dev.webfx.platform.shared.services.appcontainer.spi.ApplicationContainerProvider">dev.webfx.platform.java.services.appcontainer.spi.impl.JavaApplicationContainerProvider</provider>
+        <dev.webfx.platform.shared.services.appcontainer.spi.ApplicationContainerProvider>dev.webfx.platform.java.services.appcontainer.spi.impl.JavaApplicationContainerProvider</dev.webfx.platform.shared.services.appcontainer.spi.ApplicationContainerProvider>
     </providers>
 
     <dependencies>

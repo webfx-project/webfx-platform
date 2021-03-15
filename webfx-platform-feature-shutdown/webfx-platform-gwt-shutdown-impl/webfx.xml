@@ -6,7 +6,7 @@
     </packages>
 
     <providers>
-        <provider spi="dev.webfx.platform.shared.services.shutdown.spi.ShutdownProvider">dev.webfx.platform.gwt.services.shutdown.spi.impl.GwtShutdownProvider</provider>
+        <dev.webfx.platform.shared.services.shutdown.spi.ShutdownProvider>dev.webfx.platform.gwt.services.shutdown.spi.impl.GwtShutdownProvider</dev.webfx.platform.shared.services.shutdown.spi.ShutdownProvider>
     </providers>
 
     <dependencies>

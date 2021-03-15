@@ -6,7 +6,7 @@
     </packages>
 
     <providers>
-        <provider spi="dev.webfx.platform.shared.services.scheduler.spi.SchedulerProvider">dev.webfx.platform.java.services.scheduler.spi.impl.JavaSchedulerProvider</provider>
+        <dev.webfx.platform.shared.services.scheduler.spi.SchedulerProvider>dev.webfx.platform.java.services.scheduler.spi.impl.JavaSchedulerProvider</dev.webfx.platform.shared.services.scheduler.spi.SchedulerProvider>
     </providers>
 
     <dependencies>
