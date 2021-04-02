@@ -11,6 +11,7 @@
     </parent>
 
     <artifactId>webfx-platform</artifactId>
+
     <packaging>pom</packaging>
 
     <repositories>

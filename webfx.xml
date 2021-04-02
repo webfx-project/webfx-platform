@@ -1,18 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project>
 
-    <modules>
-        <module>webfx-platform-feature-appcontainer</module>
-        <module>webfx-platform-feature-log</module>
-        <module>webfx-platform-feature-resource</module>
-        <module>webfx-platform-feature-scheduler</module>
-        <module>webfx-platform-feature-shutdown</module>
-        <module>webfx-platform-feature-storage</module>
-        <module>webfx-platform-feature-uischeduler</module>
-        <module>webfx-platform-gwt-emul-javabase</module>
-        <module>webfx-platform-independent-util</module>
-    </modules>
-
     <libraries>
 
         <group>

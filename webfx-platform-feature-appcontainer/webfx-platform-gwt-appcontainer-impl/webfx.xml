@@ -5,12 +5,12 @@
         <source-packages/>
     </packages>
 
-    <providers>
-        <dev.webfx.platform.shared.services.appcontainer.spi.ApplicationContainerProvider>dev.webfx.platform.gwt.services.appcontainer.spi.impl.GwtApplicationContainerProvider</dev.webfx.platform.shared.services.appcontainer.spi.ApplicationContainerProvider>
-    </providers>
-
     <dependencies>
         <source-modules/>
     </dependencies>
+
+    <providers>
+        <dev.webfx.platform.shared.services.appcontainer.spi.ApplicationContainerProvider>dev.webfx.platform.gwt.services.appcontainer.spi.impl.GwtApplicationContainerProvider</dev.webfx.platform.shared.services.appcontainer.spi.ApplicationContainerProvider>
+    </providers>
 
 </project>
