@@ -4,7 +4,26 @@
     <libraries>
 
         <group>
-            <groupId>${lib.elemental2.groupId}</groupId>
+            <groupId>com.google.gwt</groupId>
+            <version>2.9.0</version>
+
+            <library name="gwt-user">
+                <packages>
+                    <package>com.google.gwt.user.client</package>
+                    <package>com.google.gwt.core.client</package>
+                    <package>com.google.gwt.resources.client</package>
+                    <package>com.google.gwt.regexp.shared</package>
+                    <package>com.google.gwt.storage.client</package>
+                    <package>com.google.gwt.media.client</package>
+                </packages>
+            </library>
+
+            <library name="gwt-dev"/>
+        </group>
+
+        <group>
+            <groupId>com.google.elemental2</groupId>
+            <version>1.1.0</version>
 
             <library name="elemental2-core">
                 <packages>
@@ -25,17 +44,6 @@
             </library>
 
         </group>
-
-        <library name="gwt-user">
-            <packages>
-                <package>com.google.gwt.user.client</package>
-                <package>com.google.gwt.core.client</package>
-                <package>com.google.gwt.resources.client</package>
-                <package>com.google.gwt.regexp.shared</package>
-                <package>com.google.gwt.storage.client</package>
-                <package>com.google.gwt.media.client</package>
-            </packages>
-        </library>
 
         <group>
             <groupId>org.jresearch.gwt.time</groupId>
