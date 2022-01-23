@@ -1,5 +1,7 @@
 package dev.webfx.platform.shared.services.log.spi;
 
+import java.io.PrintStream;
+
 /**
  * @author Bruno Salmon
  */
@@ -17,10 +19,11 @@ public interface LoggerProvider {
     }
 
     default void log(String message, Throwable error) {
+        PrintStream printStream = error == null ? System.out : System.err;
         if (message != null)
-            System.out.println(message);
+            printStream.println(message);
         if (error != null)
-            error.printStackTrace(System.err);
+            error.printStackTrace(printStream);
     }
 
     default void logNative(Object nativeObject) {
