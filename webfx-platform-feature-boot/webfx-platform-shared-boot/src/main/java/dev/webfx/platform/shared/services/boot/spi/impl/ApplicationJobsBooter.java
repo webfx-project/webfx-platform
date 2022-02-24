@@ -18,7 +18,7 @@ public class ApplicationJobsBooter implements ApplicationModuleBooter {
 
     @Override
     public String getModuleName() {
-        return "webfx-platform-shared-appcontainer (jobs starter)";
+        return "webfx-platform-shared-boot (jobs starter)";
     }
 
     @Override
