@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project>
+
+    <packages>
+        <source-packages/>
+    </packages>
+
+    <providers>
+        <dev.webfx.platform.shared.services.boot.spi.ApplicationModuleBooter>dev.webfx.platform.shared.services.boot.spi.impl.ApplicationJobsBooter</dev.webfx.platform.shared.services.boot.spi.ApplicationModuleBooter>
+    </providers>
+
+    <dependencies>
+        <source-modules/>
+    </dependencies>
+
+</project>

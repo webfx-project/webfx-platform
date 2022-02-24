@@ -28,7 +28,7 @@
 
     <modules>
 
-        <module>webfx-platform-feature-appcontainer</module>
+        <module>webfx-platform-feature-boot</module>
         <module>webfx-platform-feature-log</module>
         <module>webfx-platform-feature-resource</module>
         <module>webfx-platform-feature-scheduler</module>

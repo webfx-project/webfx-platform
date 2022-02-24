@@ -6,7 +6,7 @@
     </packages>
 
     <providers>
-        <dev.webfx.platform.shared.services.appcontainer.spi.ApplicationModuleInitializer>dev.webfx.platform.gwt.services.resource.spi.impl.GwtResourceModuleInitializer</dev.webfx.platform.shared.services.appcontainer.spi.ApplicationModuleInitializer>
+        <dev.webfx.platform.shared.services.boot.spi.ApplicationModuleBooter>dev.webfx.platform.gwt.services.resource.spi.impl.GwtResourceModuleBooter</dev.webfx.platform.shared.services.boot.spi.ApplicationModuleBooter>
         <dev.webfx.platform.shared.services.resource.spi.ResourceServiceProvider>dev.webfx.platform.gwt.services.resource.spi.impl.GwtResourceServiceProvider</dev.webfx.platform.shared.services.resource.spi.ResourceServiceProvider>
     </providers>
 
