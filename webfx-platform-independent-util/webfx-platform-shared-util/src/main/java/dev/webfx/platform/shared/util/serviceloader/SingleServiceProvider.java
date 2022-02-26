@@ -56,7 +56,7 @@ public final class SingleServiceProvider {
 
         notFoundPolicy = serviceInfo.notFoundPolicy;
         if (notFoundPolicy != NotFoundPolicy.RETURN_NULL) {
-            String message = "Cannot find META-INF/services/" + serviceClass.getName() + " on classpath";
+            String message = "Cannot instantiate any provider for service " + serviceClass.getName();
             if (notFoundPolicy == NotFoundPolicy.THROW_EXCEPTION)
                 throw new IllegalStateException(message);
             Logger.getGlobal().log(Level.WARNING, message);
