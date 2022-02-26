@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project>
 
-    <packages>
+    <exported-packages>
         <source-packages/>
-    </packages>
+    </exported-packages>
 
     <providers>
         <dev.webfx.platform.shared.services.shutdown.spi.ShutdownProvider>dev.webfx.platform.gwt.services.shutdown.spi.impl.GwtShutdownProvider</dev.webfx.platform.shared.services.shutdown.spi.ShutdownProvider>

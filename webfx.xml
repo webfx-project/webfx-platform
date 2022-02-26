@@ -8,14 +8,14 @@
             <version>2.9.0</version>
 
             <library name="gwt-user">
-                <packages>
+                <exported-packages>
                     <package>com.google.gwt.user.client</package>
                     <package>com.google.gwt.core.client</package>
                     <package>com.google.gwt.resources.client</package>
                     <package>com.google.gwt.regexp.shared</package>
                     <package>com.google.gwt.storage.client</package>
                     <package>com.google.gwt.media.client</package>
-                </packages>
+                </exported-packages>
             </library>
 
             <library name="gwt-dev"/>
@@ -26,21 +26,21 @@
             <version>1.1.0</version>
 
             <library name="elemental2-core">
-                <packages>
+                <exported-packages>
                     <package>elemental2.core</package>
-                </packages>
+                </exported-packages>
             </library>
 
             <library name="elemental2-dom">
-                <packages>
+                <exported-packages>
                     <package>elemental2.dom</package>
-                </packages>
+                </exported-packages>
             </library>
 
             <library name="elemental2-svg">
-                <packages>
+                <exported-packages>
                     <package>elemental2.svg</package>
-                </packages>
+                </exported-packages>
             </library>
 
         </group>
@@ -60,7 +60,7 @@
         </group>
 
         <library name="java-base">
-            <packages>
+            <exported-packages>
                 <package>java.io</package>
                 <package>java.lang</package>
                 <package>java.lang.annotation</package>
@@ -80,36 +80,36 @@
                 <package>java.util.stream</package>
                 <package>java.util.concurrent</package>
                 <package>java.util.concurrent.atomic</package>
-            </packages>
+            </exported-packages>
         </library>
 
         <library name="java-logging">
-            <packages>
+            <exported-packages>
                 <package>java.util.logging</package>
-            </packages>
+            </exported-packages>
         </library>
 
         <library name="java-nio-emul">
             <groupId>org.treblereel.gwt.nio</groupId>
             <version>1.1</version>
-            <packages>
+            <exported-packages>
                 <package>java.nio</package>
                 <package>java.nio.charset</package>
                 <package>java.nio.file</package>
                 <package>java.nio.file.attribute</package>
-            </packages>
+            </exported-packages>
         </library>
 
         <library name="jsinterop-annotations">
-            <packages>
+            <exported-packages>
                 <package>jsinterop.annotations</package>
-            </packages>
+            </exported-packages>
         </library>
 
         <library name="jsinterop-base">
-            <packages>
+            <exported-packages>
                 <package>jsinterop.base</package>
-            </packages>
+            </exported-packages>
         </library>
     
     </libraries>

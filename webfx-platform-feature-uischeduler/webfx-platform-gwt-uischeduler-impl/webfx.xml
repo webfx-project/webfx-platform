@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project>
 
-    <packages>
+    <exported-packages>
         <source-packages/>
-    </packages>
+    </exported-packages>
 
     <providers>
         <dev.webfx.platform.shared.services.scheduler.spi.SchedulerProvider>dev.webfx.platform.gwt.services.uischeduler.spi.impl.GwtUiSchedulerProvider</dev.webfx.platform.shared.services.scheduler.spi.SchedulerProvider>
