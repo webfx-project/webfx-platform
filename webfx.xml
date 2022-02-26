@@ -47,14 +47,13 @@
 
         <group>
             <groupId>org.jresearch.gwt.time</groupId>
+            <version>2.0.7</version>
 
             <library name="gwt-time">
                 <artifactId>org.jresearch.gwt.time</artifactId>
-                <version>2.0.3</version>
             </library>
 
             <library name="org.jresearch.gwt.time.tzdb">
-                <version>1.4.15</version>
             </library>
 
         </group>
