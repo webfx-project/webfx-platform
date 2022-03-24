@@ -55,8 +55,12 @@ public final class Dates {
         if (s == null)
             return null;
         Instant instant = fastCheckParseIsoInstant(s);
-        if (instant != null)
-            return LocalDate.ofInstant(instant, ZoneOffset.UTC);
+        if (instant != null) {
+            // return LocalDate.ofInstant(instant, ZoneOffset.UTC); // Doesn't compile with GWT as this method is absent in gwt-time
+            long epochSec = instant.getEpochSecond();
+            long epochDay = Math.floorDiv(epochSec, 24 * 3600);
+            return LocalDate.ofEpochDay(epochDay);
+        }
         try {
             return LocalDate.parse(s);
         } catch (DateTimeParseException e) {
