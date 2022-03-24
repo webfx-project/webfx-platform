@@ -11,19 +11,19 @@ import static java.time.temporal.ChronoField.MILLI_OF_SECOND;
 public final class Dates {
 
     public static Instant asInstant(Object value) {
-        return value == null || !(value instanceof Instant) ? null : (Instant) value;
+        return !(value instanceof Instant) ? null : (Instant) value;
     }
 
     public static LocalDateTime asLocalDateTime(Object value) {
-        return value == null || !(value instanceof LocalDateTime) ? null : (LocalDateTime) value;
+        return !(value instanceof LocalDateTime) ? null : (LocalDateTime) value;
     }
 
     public static LocalDate asLocalDate(Object value) {
-        return value == null || !(value instanceof LocalDate) ? null : (LocalDate) value;
+        return !(value instanceof LocalDate) ? null : (LocalDate) value;
     }
 
     public static LocalTime asLocalTime(Object value) {
-        return value == null || !(value instanceof LocalTime) ? null : (LocalTime) value;
+        return !(value instanceof LocalTime) ? null : (LocalTime) value;
     }
 
     public static Instant parseIsoInstant(String s) {
@@ -36,8 +36,8 @@ public final class Dates {
         }
     }
 
-    public static Instant fastCheckParseIsoInstant(String s) {
-        if (s == null || !s.endsWith("Z") || s.length() != 23)
+    public static Instant fastCheckParseIsoInstant(String s) { // Iso format: YYYY-MM-ddThh:mm:ss[.xxxx]Z
+        if (s == null || !s.endsWith("Z") || s.length() < 20 || s.charAt(4) != '-' || s.charAt(7) != '-' || s.charAt(10) != 'T')
             return null;
         return parseIsoInstant(s);
     }
@@ -54,6 +54,9 @@ public final class Dates {
     public static LocalDate parseIsoLocalDate(String s) {
         if (s == null)
             return null;
+        Instant instant = fastCheckParseIsoInstant(s);
+        if (instant != null)
+            return LocalDate.ofInstant(instant, ZoneOffset.UTC);
         try {
             return LocalDate.parse(s);
         } catch (DateTimeParseException e) {
@@ -64,6 +67,9 @@ public final class Dates {
     public static LocalDateTime parseIsoLocalDateTime(String s) {
         if (s == null)
             return null;
+        Instant instant = fastCheckParseIsoInstant(s);
+        if (instant != null)
+            return LocalDateTime.ofInstant(instant, ZoneOffset.UTC);
         try {
             return LocalDateTime.parse(s);
         } catch (DateTimeParseException e) {
@@ -85,7 +91,7 @@ public final class Dates {
     }
 
     public static String formatIso(Instant instant) {
-        return formatIso(LocalDateTime.ofInstant(instant, ZoneId.of("Z")));
+        return formatIso(LocalDateTime.ofInstant(instant, ZoneOffset.UTC));
     }
 
     public static LocalDateTime toLocalDateTime(Object value) {
@@ -124,6 +130,8 @@ public final class Dates {
         LocalDate localDate = asLocalDate(value);
         if (localDate != null || value == null)
             return localDate;
+        if (value instanceof LocalDateTime)
+            return ((LocalDateTime) value).toLocalDate();
         return toLocalDate(value.toString());
     }
 
