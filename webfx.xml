@@ -5,7 +5,6 @@
 
         <group>
             <groupId>com.google.gwt</groupId>
-            <version>2.9.0</version>
 
             <library name="gwt-user">
                 <exported-packages>
@@ -23,7 +22,6 @@
 
         <group>
             <groupId>com.google.elemental2</groupId>
-            <version>1.1.0</version>
 
             <library name="elemental2-core">
                 <exported-packages>
@@ -47,7 +45,6 @@
 
         <group>
             <groupId>org.jresearch.gwt.time</groupId>
-            <version>2.0.7</version>
 
             <library name="gwt-time">
                 <artifactId>org.jresearch.gwt.time</artifactId>
