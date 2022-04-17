@@ -1,7 +1,51 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project>
 
-    <libraries>
+    <modules>
+        <subdirectories-modules/>
+    </modules>
+
+    <maven-pom-manual>
+        <properties>
+            <!-- Disabling the default behavior defined in the parent pom for the shade plugin -->
+            <plugin.shade.param.fat.phase>none</plugin.shade.param.fat.phase>
+        </properties>
+
+        <build>
+            <pluginManagement>
+                <plugins>
+                    <!-- Relocating the emul.java package to java for both classes and sources -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-shade-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>shade</goal>
+                                </goals>
+                                <configuration>
+                                    <shadedArtifactAttached>true</shadedArtifactAttached>
+                                    <relocations>
+                                        <relocation>
+                                            <pattern>emul.java</pattern>
+                                            <shadedPattern>java</shadedPattern>
+                                        </relocation>
+                                    </relocations>
+                                    <createSourcesJar>true</createSourcesJar>
+                                    <shadeSourcesContent>true</shadeSourcesContent>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </pluginManagement>
+        </build>
+    </maven-pom-manual>
+
+    <required-libraries>
+
+        <library artifact="dev.webfx:webfx-parent:0.1.0-SNAPSHOT"/>
 
         <group>
             <groupId>com.google.gwt</groupId>
@@ -50,40 +94,9 @@
                 <artifactId>org.jresearch.gwt.time</artifactId>
             </library>
 
-            <library name="org.jresearch.gwt.time.tzdb">
-            </library>
+            <library name="org.jresearch.gwt.time.tzdb"/>
 
         </group>
-
-        <library name="java-base">
-            <exported-packages>
-                <package>java.io</package>
-                <package>java.lang</package>
-                <package>java.lang.annotation</package>
-                <package>java.lang.management</package>
-                <package>java.lang.ref</package>
-                <package>java.lang.reflect</package>
-                <package>java.math</package>
-                <package>java.net</package>
-                <package>java.security</package>
-                <package>java.text</package>
-                <package>java.time</package>
-                <package>java.time.format</package>
-                <package>java.time.temporal</package>
-                <package>java.util</package>
-                <package>java.util.function</package>
-                <package>java.util.regex</package>
-                <package>java.util.stream</package>
-                <package>java.util.concurrent</package>
-                <package>java.util.concurrent.atomic</package>
-            </exported-packages>
-        </library>
-
-        <library name="java-logging">
-            <exported-packages>
-                <package>java.util.logging</package>
-            </exported-packages>
-        </library>
 
         <library name="java-nio-emul">
             <groupId>org.treblereel.gwt.nio</groupId>
@@ -109,6 +122,6 @@
             </exported-packages>
         </library>
     
-    </libraries>
+    </required-libraries>
     
 </project>

@@ -1,44 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- File managed by WebFX (DO NOT EDIT MANUALLY) -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>webfx-parent</artifactId>
         <groupId>dev.webfx</groupId>
+        <artifactId>webfx-parent</artifactId>
         <version>0.1.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>webfx-platform</artifactId>
 
-    <packaging>pom</packaging>
-
     <repositories>
 
-        <!-- For WebFx snapshots download (including webfx-parent) -->
+        <!-- For WebFX snapshots download (including webfx-parent) -->
         <repository>
             <id>webfx-snapshots</id>
             <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-            <releases><enabled>false</enabled></releases>
-            <snapshots><enabled>true</enabled></snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
         </repository>
 
     </repositories>
 
-    <modules>
-
-        <module>webfx-platform-feature-boot</module>
-        <module>webfx-platform-feature-log</module>
-        <module>webfx-platform-feature-resource</module>
-        <module>webfx-platform-feature-scheduler</module>
-        <module>webfx-platform-feature-shutdown</module>
-        <module>webfx-platform-feature-storage</module>
-        <module>webfx-platform-feature-uischeduler</module>
-        <module>webfx-platform-gwt-emul-javabase</module>
-        <module>webfx-platform-independent-util</module>
-
-    </modules>
 
     <properties>
         <!-- Disabling the default behavior defined in the parent pom for the shade plugin -->
@@ -75,5 +65,19 @@
             </plugins>
         </pluginManagement>
     </build>
+
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>webfx-platform-feature-boot</module>
+        <module>webfx-platform-feature-log</module>
+        <module>webfx-platform-feature-resource</module>
+        <module>webfx-platform-feature-scheduler</module>
+        <module>webfx-platform-feature-shutdown</module>
+        <module>webfx-platform-feature-storage</module>
+        <module>webfx-platform-feature-uischeduler</module>
+        <module>webfx-platform-gwt-emul-javabase</module>
+        <module>webfx-platform-independent-util</module>
+    </modules>
 
 </project>
