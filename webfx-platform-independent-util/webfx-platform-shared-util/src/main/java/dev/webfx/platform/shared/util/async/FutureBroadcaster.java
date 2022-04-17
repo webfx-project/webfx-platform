@@ -12,7 +12,7 @@ public final class FutureBroadcaster<T> {
 
     private final Callable<Future<T>> sourceProducer;
     private Future<T> source;
-    private final Collection<Future<T>> clients = new ArrayList<>();
+    private final Collection<Promise<T>> clients = new ArrayList<>();
 
     public FutureBroadcaster(Callable<Future<T>> sourceProducer) {
         this.sourceProducer = sourceProducer;
@@ -24,14 +24,14 @@ public final class FutureBroadcaster<T> {
     }
 
     private Future<T> armSource(Future<T> s) {
-        s.setHandler(ar -> onSourceCompleted());
+        s.onComplete(ar -> onSourceCompleted());
         return s;
     }
 
     private void onSourceCompleted() {
         synchronized (this) {
-            for (Future<T> destination : clients)
-                destination.complete(source);
+            for (Promise<T> destination : clients)
+                destination.complete(source.result());
             clients.clear();
             if (sourceProducer != null)
                 source = null;
@@ -40,13 +40,13 @@ public final class FutureBroadcaster<T> {
 
     public Future<T> newClient() {
         synchronized (this) {
-            Future<T> newClient = Future.future();
+            Promise<T> newClient = Promise.promise();
             clients.add(newClient);
             if (source == null)
                 source = armSource(sourceProducer.call());
             if (source.isComplete())
                 onSourceCompleted();
-            return newClient;
+            return newClient.future();
         }
     }
 

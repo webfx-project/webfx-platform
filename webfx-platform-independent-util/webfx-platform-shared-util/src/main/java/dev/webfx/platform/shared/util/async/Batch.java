@@ -20,82 +20,82 @@ public final class Batch<A> {
     }
 
     public <R> Future<Batch<R>> executeParallel(IntFunction<R[]> arrayGenerator, AsyncFunction<A, R> asyncFunction) {
-        return executeParallel(Future.future(), arrayGenerator, asyncFunction);
+        return executeParallel(Promise.promise(), arrayGenerator, asyncFunction);
     }
 
-    public <R> Future<Batch<R>> executeParallel(Future<Batch<R>> future, IntFunction<R[]> arrayGenerator, AsyncFunction<A, R> asyncFunction) {
+    public <R> Future<Batch<R>> executeParallel(Promise<Batch<R>> promise, IntFunction<R[]> arrayGenerator, AsyncFunction<A, R> asyncFunction) {
         int n = array.length, i = 0;
         R[] results = arrayGenerator.apply(n);
         Unit<Integer> responseCounter = new Unit<>(0);
         for (A argument : getArray()) {
             int index = i++;
-            asyncFunction.apply(argument).setHandler(asyncResult -> {
-                if (!future.isComplete()) {
+            asyncFunction.apply(argument).onComplete(asyncResult -> {
+                if (!promise.future().isComplete()) {
                     if (asyncResult.failed())
-                        future.fail(asyncResult.cause());
+                        promise.fail(asyncResult.cause());
                     else {
                         results[index] = asyncResult.result();
                         responseCounter.set(responseCounter.get() + 1);
                         if (responseCounter.get() == n)
-                            future.complete(new Batch<>(results));
+                            promise.complete(new Batch<>(results));
                     }
                 }
             });
         }
-        return future;
+        return promise.future();
     }
 
     public <R> Future<Batch<R>> executeSerial(IntFunction<R[]> arrayGenerator, AsyncFunction<A, R> asyncFunction) {
-        return executeSerial(Future.future(), arrayGenerator, asyncFunction);
+        return executeSerial(Promise.promise(), arrayGenerator, asyncFunction);
     }
 
-    public <R> Future<Batch<R>> executeSerial(Future<Batch<R>> future, IntFunction<R[]> arrayGenerator, AsyncFunction<A, R> asyncFunction) {
+    public <R> Future<Batch<R>> executeSerial(Promise<Batch<R>> promise, IntFunction<R[]> arrayGenerator, AsyncFunction<A, R> asyncFunction) {
         int n = array.length;
         R[] results = arrayGenerator.apply(n);
         Unit<Integer> responseCounter = new Unit<>(0);
         Unit<Handler<AsyncResult<R>>> handlerUnit = new Unit<>();
         handlerUnit.set(asyncResult -> {
-            if (!future.isComplete()) {
+            if (!promise.future().isComplete()) {
                 if (asyncResult.failed())
-                    future.fail(asyncResult.cause());
+                    promise.fail(asyncResult.cause());
                 else {
                     int count = responseCounter.get();
                     results[count] = asyncResult.result();
                     responseCounter.set(++count);
                     if (count < n)
-                        asyncFunction.apply(getArray()[count]).setHandler(handlerUnit.get());
+                        asyncFunction.apply(getArray()[count]).onComplete(handlerUnit.get());
                     else
-                        future.complete(new Batch<>(results));
+                        promise.complete(new Batch<>(results));
                 }
             }
         });
-        asyncFunction.apply(getArray()[0]).setHandler(handlerUnit.get());
-        return future;
+        asyncFunction.apply(getArray()[0]).onComplete(handlerUnit.get());
+        return promise.future();
     }
 
     public <R> Future<Batch<R>> executeIfSingularBatch(IntFunction<R[]> arrayGenerator, AsyncFunction<A, R> asyncFunction) {
         if (array.length > 1)
             return null;
-        Future<Batch<R>> future = Future.future();
-        executeIfSingularBatch(future, arrayGenerator, asyncFunction);
-        return future;
+        Promise<Batch<R>> promise = Promise.promise();
+        executeIfSingularBatch(promise, arrayGenerator, asyncFunction);
+        return promise.future();
     }
 
-    public <R> boolean executeIfSingularBatch(Future<Batch<R>> future, IntFunction<R[]> arrayGenerator, AsyncFunction<A, R> asyncFunction) {
+    public <R> boolean executeIfSingularBatch(Promise<Batch<R>> promise, IntFunction<R[]> arrayGenerator, AsyncFunction<A, R> asyncFunction) {
         int n = array.length;
         if (n > 1)
             return false;
         R[] results = arrayGenerator.apply(n);
         if (n == 0)
-            future.complete(new Batch<>(results));
+            promise.complete(new Batch<>(results));
         else
-            asyncFunction.apply(array[0]).setHandler(asyncResult -> {
-                if (!future.isComplete()) {
+            asyncFunction.apply(array[0]).onComplete(asyncResult -> {
+                if (!promise.future().isComplete()) {
                     if (asyncResult.failed())
-                        future.fail(asyncResult.cause());
+                        promise.fail(asyncResult.cause());
                     else {
                         results[0] = asyncResult.result();
-                        future.complete(new Batch<>(results));
+                        promise.complete(new Batch<>(results));
                     }
                 }
             });
