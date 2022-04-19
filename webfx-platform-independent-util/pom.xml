@@ -16,7 +16,6 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>webfx-platform-shared-async</module>
         <module>webfx-platform-shared-util</module>
     </modules>
 
