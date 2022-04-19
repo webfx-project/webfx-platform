@@ -14,12 +14,12 @@ public final class SimpleApplicationJobManager {
 
     public static void startApplicationJob(ApplicationJob applicationJob) {
         runningJobs.add(applicationJob);
-        applicationJob.onStartAsync();
+        applicationJob.onStart();
     }
 
 
     public static void stopApplicationJob(ApplicationJob applicationJob) {
-        applicationJob.onStopAsync();
+        applicationJob.onStop();
         runningJobs.remove(applicationJob);
     }
 

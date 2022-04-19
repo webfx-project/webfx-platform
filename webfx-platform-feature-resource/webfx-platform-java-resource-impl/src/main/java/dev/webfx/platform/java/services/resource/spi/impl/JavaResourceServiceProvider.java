@@ -1,6 +1,5 @@
 package dev.webfx.platform.java.services.resource.spi.impl;
 
-import dev.webfx.platform.shared.async.Future;
 import dev.webfx.platform.shared.services.resource.spi.ResourceServiceProvider;
 
 import java.io.InputStream;
@@ -17,9 +16,9 @@ public final class JavaResourceServiceProvider implements ResourceServiceProvide
     }
 
     @Override
-    public Future<String> getText(String resourcePath) {
+    public String getText(String resourcePath) {
         try (Scanner scanner = createScanner(getClass().getClassLoader().getResourceAsStream(resourcePath))) {
-            return Future.succeededFuture(scanner == null ? null : scanner.useDelimiter("\\A").next());
+            return scanner == null ? null : scanner.useDelimiter("\\A").next();
         }
     }
 

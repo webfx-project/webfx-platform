@@ -4,7 +4,6 @@ module webfx.platform.shared.boot {
 
     // Direct dependencies modules
     requires java.base;
-    requires webfx.platform.shared.async;
     requires webfx.platform.shared.log;
     requires webfx.platform.shared.shutdown;
     requires webfx.platform.shared.util;

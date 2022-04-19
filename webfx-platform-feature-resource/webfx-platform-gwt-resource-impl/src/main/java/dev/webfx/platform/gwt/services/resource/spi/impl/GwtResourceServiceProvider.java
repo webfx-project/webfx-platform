@@ -2,7 +2,6 @@ package dev.webfx.platform.gwt.services.resource.spi.impl;
 
 import com.google.gwt.resources.client.TextResource;
 import dev.webfx.platform.shared.services.resource.spi.ResourceServiceProvider;
-import dev.webfx.platform.shared.async.Future;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,12 +31,12 @@ public final class GwtResourceServiceProvider implements ResourceServiceProvider
     }
 
     @Override
-    public Future<String> getText(String resourcePath) {
+    public String getText(String resourcePath) {
         for (GwtResourceBundle bundle : bundles) {
             TextResource textResource = bundle.getTextResource(resourcePath);
             if (textResource != null)
-                return Future.succeededFuture(textResource.getText());
+                return textResource.getText();
         }
-        return Future.succeededFuture(null);
+        return null;
     }
 }

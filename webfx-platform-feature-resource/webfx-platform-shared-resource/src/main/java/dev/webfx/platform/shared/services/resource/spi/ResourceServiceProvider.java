@@ -1,6 +1,6 @@
 package dev.webfx.platform.shared.services.resource.spi;
 
-import dev.webfx.platform.shared.async.Future;
+import java.util.function.Consumer;
 
 /**
  * @author Bruno Salmon
@@ -9,6 +9,10 @@ public interface ResourceServiceProvider {
 
     String toUrl(String resourcePath, Class<?> loadingClass);
 
-    Future<String> getText(String resourcePath);
+    String getText(String resourcePath);
+
+    default void loadText(String resourcePath, Consumer<String> onSuccess, Consumer<Throwable> onFailure) {
+        onSuccess.accept(getText(resourcePath));
+    }
 
 }

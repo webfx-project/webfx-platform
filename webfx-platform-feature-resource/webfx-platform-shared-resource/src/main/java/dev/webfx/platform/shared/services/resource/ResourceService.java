@@ -1,10 +1,10 @@
 package dev.webfx.platform.shared.services.resource;
 
 import dev.webfx.platform.shared.services.resource.spi.ResourceServiceProvider;
-import dev.webfx.platform.shared.async.Future;
 import dev.webfx.platform.shared.util.serviceloader.SingleServiceProvider;
 
 import java.util.ServiceLoader;
+import java.util.function.Consumer;
 
 /**
  * @author Bruno Salmon
@@ -27,7 +27,11 @@ public final class ResourceService {
         return getProvider().toUrl(resourcePath, loadingClass);
     }
 
-    public static Future<String> getText(String resourcePath) {
+    public static String getText(String resourcePath) {
         return getProvider().getText(resourcePath);
+    }
+
+    public static void loadText(String resourcePath, Consumer<String> onSuccess, Consumer<Throwable> onFailure) {
+        getProvider().loadText(resourcePath, onSuccess, onFailure);
     }
 }
