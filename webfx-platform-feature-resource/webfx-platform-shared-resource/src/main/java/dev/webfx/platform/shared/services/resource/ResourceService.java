@@ -1,7 +1,7 @@
 package dev.webfx.platform.shared.services.resource;
 
 import dev.webfx.platform.shared.services.resource.spi.ResourceServiceProvider;
-import dev.webfx.platform.shared.util.async.Future;
+import dev.webfx.platform.shared.async.Future;
 import dev.webfx.platform.shared.util.serviceloader.SingleServiceProvider;
 
 import java.util.ServiceLoader;

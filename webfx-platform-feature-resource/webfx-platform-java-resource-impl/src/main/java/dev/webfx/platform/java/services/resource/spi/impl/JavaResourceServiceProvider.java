@@ -1,6 +1,6 @@
 package dev.webfx.platform.java.services.resource.spi.impl;
 
-import dev.webfx.platform.shared.util.async.Future;
+import dev.webfx.platform.shared.async.Future;
 import dev.webfx.platform.shared.services.resource.spi.ResourceServiceProvider;
 
 import java.io.InputStream;

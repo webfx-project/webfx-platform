@@ -2,7 +2,7 @@ package dev.webfx.platform.gwt.services.resource.spi.impl;
 
 import com.google.gwt.resources.client.TextResource;
 import dev.webfx.platform.shared.services.resource.spi.ResourceServiceProvider;
-import dev.webfx.platform.shared.util.async.Future;
+import dev.webfx.platform.shared.async.Future;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -4,8 +4,8 @@ module webfx.platform.java.resource.impl {
 
     // Direct dependencies modules
     requires java.base;
+    requires webfx.platform.shared.async;
     requires webfx.platform.shared.resource;
-    requires webfx.platform.shared.util;
 
     // Exported packages
     exports dev.webfx.platform.java.services.resource.spi.impl;

@@ -8,8 +8,6 @@ module webfx.platform.shared.util {
 
     // Exported packages
     exports dev.webfx.platform.shared.util;
-    exports dev.webfx.platform.shared.util.async;
-    exports dev.webfx.platform.shared.util.async.impl;
     exports dev.webfx.platform.shared.util.collection;
     exports dev.webfx.platform.shared.util.function;
     exports dev.webfx.platform.shared.util.noreflect;
