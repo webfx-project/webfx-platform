@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
 
+    <update-options>
+        <generate-export-snapshot/>
+    </update-options>
+
     <modules>
         <subdirectories-modules/>
     </modules>
@@ -124,4 +128,658 @@
     
     </required-libraries>
     
+    <export-snapshot>        <!-- Node managed by WebFX (DO NOT EDIT MANUALLY) -->
+
+        <project name="webfx-platform">
+
+            <update-options>
+                <generate-export-snapshot/>
+            </update-options>
+
+            <modules>
+                <module>webfx-platform-feature-boot</module>
+                <module>webfx-platform-feature-log</module>
+                <module>webfx-platform-feature-resource</module>
+                <module>webfx-platform-feature-scheduler</module>
+                <module>webfx-platform-feature-shutdown</module>
+                <module>webfx-platform-feature-storage</module>
+                <module>webfx-platform-feature-uischeduler</module>
+                <module>webfx-platform-gwt-emul-javabase</module>
+                <module>webfx-platform-independent-util</module>
+            </modules>
+
+            <maven-pom-manual>
+                <properties>
+                    <!-- Disabling the default behavior defined in the parent pom for the shade plugin -->
+                    <plugin.shade.param.fat.phase>none</plugin.shade.param.fat.phase>
+                </properties>
+
+                <build>
+                    <pluginManagement>
+                        <plugins>
+                            <!-- Relocating the emul.java package to java for both classes and sources -->
+                            <plugin>
+                                <groupId>org.apache.maven.plugins</groupId>
+                                <artifactId>maven-shade-plugin</artifactId>
+                                <executions>
+                                    <execution>
+                                        <phase>package</phase>
+                                        <goals>
+                                            <goal>shade</goal>
+                                        </goals>
+                                        <configuration>
+                                            <shadedArtifactAttached>true</shadedArtifactAttached>
+                                            <relocations>
+                                                <relocation>
+                                                    <pattern>emul.java</pattern>
+                                                    <shadedPattern>java</shadedPattern>
+                                                </relocation>
+                                            </relocations>
+                                            <createSourcesJar>true</createSourcesJar>
+                                            <shadeSourcesContent>true</shadeSourcesContent>
+                                        </configuration>
+                                    </execution>
+                                </executions>
+                            </plugin>
+                        </plugins>
+                    </pluginManagement>
+                </build>
+            </maven-pom-manual>
+
+            <required-libraries>
+
+                <webfx-library artifact="dev.webfx:webfx-parent:0.1.0-SNAPSHOT"/>
+
+                <group>
+                    <groupId>com.google.gwt</groupId>
+
+                    <library name="gwt-user">
+                        <exported-packages>
+                            <package>com.google.gwt.user.client</package>
+                            <package>com.google.gwt.core.client</package>
+                            <package>com.google.gwt.resources.client</package>
+                            <package>com.google.gwt.regexp.shared</package>
+                            <package>com.google.gwt.storage.client</package>
+                            <package>com.google.gwt.media.client</package>
+                        </exported-packages>
+                    </library>
+
+                    <library name="gwt-dev"/>
+                </group>
+
+                <group>
+                    <groupId>com.google.elemental2</groupId>
+
+                    <library name="elemental2-core">
+                        <exported-packages>
+                            <package>elemental2.core</package>
+                        </exported-packages>
+                    </library>
+
+                    <library name="elemental2-dom">
+                        <exported-packages>
+                            <package>elemental2.dom</package>
+                        </exported-packages>
+                    </library>
+
+                    <library name="elemental2-svg">
+                        <exported-packages>
+                            <package>elemental2.svg</package>
+                        </exported-packages>
+                    </library>
+
+                </group>
+
+                <group>
+                    <groupId>org.jresearch.gwt.time</groupId>
+
+                    <library name="gwt-time">
+                        <artifactId>org.jresearch.gwt.time</artifactId>
+                    </library>
+
+                    <library name="org.jresearch.gwt.time.tzdb"/>
+
+                </group>
+
+                <library name="java-nio-emul">
+                    <groupId>org.treblereel.gwt.nio</groupId>
+                    <artifactId>gwt-nio</artifactId>
+                    <version>1.1</version>
+                    <exported-packages>
+                        <package>java.nio</package>
+                        <package>java.nio.charset</package>
+                        <package>java.nio.file</package>
+                        <package>java.nio.file.attribute</package>
+                    </exported-packages>
+                </library>
+
+                <library name="jsinterop-annotations">
+                    <exported-packages>
+                        <package>jsinterop.annotations</package>
+                    </exported-packages>
+                </library>
+
+                <library name="jsinterop-base">
+                    <exported-packages>
+                        <package>jsinterop.base</package>
+                    </exported-packages>
+                </library>
+    
+            </required-libraries>
+    
+            <export-snapshot>                <!-- Node managed by WebFX (DO NOT EDIT MANUALLY) -->
+            </export-snapshot>
+
+        </project>
+
+        <project name="webfx-platform-feature-boot">
+
+            <modules>
+                <module>webfx-platform-gwt-boot-impl</module>
+                <module>webfx-platform-java-boot-impl</module>
+                <module>webfx-platform-shared-boot</module>
+            </modules>
+
+        </project>
+
+        <project name="webfx-platform-gwt-boot-impl">
+
+            <exported-packages>
+
+                <package>dev.webfx.platform.gwt.services.boot.spi.impl</package>
+            </exported-packages>
+
+            <dependencies>
+                <used-by-source-modules>
+                    <module>gwt-user</module>
+                    <module>webfx-platform-shared-boot</module>
+                </used-by-source-modules>
+            </dependencies>
+
+            <providers>
+                <dev.webfx.platform.shared.services.boot.spi.ApplicationBooterProvider>dev.webfx.platform.gwt.services.boot.spi.impl.GwtApplicationBooterProvider</dev.webfx.platform.shared.services.boot.spi.ApplicationBooterProvider>
+            </providers>
+
+        </project>
+
+        <project name="webfx-platform-java-boot-impl">
+
+            <exported-packages>
+
+                <package>dev.webfx.platform.java.services.boot.spi.impl</package>
+            </exported-packages>
+
+            <providers>
+                <dev.webfx.platform.shared.services.boot.spi.ApplicationBooterProvider>dev.webfx.platform.java.services.boot.spi.impl.JavaApplicationBooterProvider</dev.webfx.platform.shared.services.boot.spi.ApplicationBooterProvider>
+            </providers>
+
+            <dependencies>
+                <used-by-source-modules>
+                    <module>webfx-platform-shared-boot</module>
+                </used-by-source-modules>
+            </dependencies>
+
+        </project>
+
+        <project name="webfx-platform-shared-boot">
+
+            <exported-packages>
+    
+                <package>dev.webfx.platform.shared.services.boot.spi.impl</package>
+                <package>dev.webfx.platform.shared.services.boot.spi</package>
+                <package>dev.webfx.platform.shared.services.boot</package>
+            </exported-packages>
+
+            <providers>
+                <dev.webfx.platform.shared.services.boot.spi.ApplicationModuleBooter>dev.webfx.platform.shared.services.boot.spi.impl.ApplicationJobsBooter</dev.webfx.platform.shared.services.boot.spi.ApplicationModuleBooter>
+            </providers>
+
+            <dependencies>
+                <used-by-source-modules>
+                    <module>java.base</module>
+                    <module>webfx-platform-shared-log</module>
+                    <module>webfx-platform-shared-shutdown</module>
+                    <module>webfx-platform-shared-util</module>
+                </used-by-source-modules>
+            </dependencies>
+
+        </project>
+
+        <project name="webfx-platform-feature-log">
+
+            <modules>
+                <module>webfx-platform-gwt-log-impl</module>
+                <module>webfx-platform-shared-log</module>
+                <module>webfx-platform-shared-log-impl-simple</module>
+            </modules>
+
+        </project>
+
+        <project name="webfx-platform-gwt-log-impl">
+
+            <exported-packages>
+
+                <package>dev.webfx.platform.gwt.services.log.spi.impl</package>
+            </exported-packages>
+
+            <providers>
+                <dev.webfx.platform.shared.services.log.spi.LoggerProvider>dev.webfx.platform.gwt.services.log.spi.impl.GwtLoggerProvider</dev.webfx.platform.shared.services.log.spi.LoggerProvider>
+            </providers>
+
+            <dependencies>
+                <used-by-source-modules>
+                    <module>webfx-platform-shared-log</module>
+                </used-by-source-modules>
+            </dependencies>
+
+        </project>
+
+        <project name="webfx-platform-shared-log">
+
+            <exported-packages>
+    
+                <package>dev.webfx.platform.shared.services.log</package>
+                <package>dev.webfx.platform.shared.services.log.spi</package>
+            </exported-packages>
+
+            <dependencies>
+                <used-by-source-modules>
+                    <module>java.base</module>
+                    <module>webfx-platform-shared-util</module>
+                </used-by-source-modules>
+            </dependencies>
+
+        </project>
+
+        <project name="webfx-platform-shared-log-impl-simple">
+
+            <exported-packages>
+
+                <package>dev.webfx.platform.shared.services.log.spi.impl.simple</package>
+            </exported-packages>
+
+            <providers>
+                <dev.webfx.platform.shared.services.log.spi.LoggerProvider>dev.webfx.platform.shared.services.log.spi.impl.simple.SimpleLoggerProvider</dev.webfx.platform.shared.services.log.spi.LoggerProvider>
+            </providers>
+
+            <dependencies>
+                <used-by-source-modules>
+                    <module>webfx-platform-shared-log</module>
+                </used-by-source-modules>
+            </dependencies>
+
+        </project>
+
+        <project name="webfx-platform-feature-resource">
+
+            <modules>
+                <module>webfx-platform-gwt-resource-impl</module>
+                <module>webfx-platform-java-resource-impl</module>
+                <module>webfx-platform-shared-resource</module>
+            </modules>
+
+        </project>
+
+        <project name="webfx-platform-gwt-resource-impl">
+
+            <exported-packages>
+
+                <package>dev.webfx.platform.gwt.services.resource.spi.impl</package>
+            </exported-packages>
+
+            <providers>
+                <dev.webfx.platform.shared.services.boot.spi.ApplicationModuleBooter>dev.webfx.platform.gwt.services.resource.spi.impl.GwtResourceModuleBooter</dev.webfx.platform.shared.services.boot.spi.ApplicationModuleBooter>
+                <dev.webfx.platform.shared.services.resource.spi.ResourceServiceProvider>dev.webfx.platform.gwt.services.resource.spi.impl.GwtResourceServiceProvider</dev.webfx.platform.shared.services.resource.spi.ResourceServiceProvider>
+            </providers>
+
+            <dependencies>
+                <used-by-source-modules>
+                    <module>gwt-user</module>
+                    <module>java.base</module>
+                    <module>webfx-platform-shared-boot</module>
+                    <module>webfx-platform-shared-log</module>
+                    <module>webfx-platform-shared-resource</module>
+                    <module>webfx-platform-shared-util</module>
+                </used-by-source-modules>
+            </dependencies>
+
+        </project>
+
+        <project name="webfx-platform-java-resource-impl">
+
+            <exported-packages>
+
+                <package>dev.webfx.platform.java.services.resource.spi.impl</package>
+            </exported-packages>
+
+            <providers>
+                <dev.webfx.platform.shared.services.resource.spi.ResourceServiceProvider>dev.webfx.platform.java.services.resource.spi.impl.JavaResourceServiceProvider</dev.webfx.platform.shared.services.resource.spi.ResourceServiceProvider>
+            </providers>
+
+            <dependencies>
+                <used-by-source-modules>
+                    <module>java.base</module>
+                    <module>webfx-platform-shared-resource</module>
+                </used-by-source-modules>
+            </dependencies>
+
+        </project>
+
+        <project name="webfx-platform-shared-resource">
+
+            <exported-packages>
+    
+                <package>dev.webfx.platform.shared.services.resource</package>
+                <package>dev.webfx.platform.shared.services.resource.spi</package>
+            </exported-packages>
+
+            <dependencies>
+                <used-by-source-modules>
+                    <module>java.base</module>
+                    <module>webfx-platform-shared-util</module>
+                </used-by-source-modules>
+            </dependencies>
+
+        </project>
+
+        <project name="webfx-platform-feature-scheduler">
+
+            <modules>
+                <module>webfx-platform-java-scheduler-impl</module>
+                <module>webfx-platform-shared-scheduler</module>
+            </modules>
+
+        </project>
+
+        <project name="webfx-platform-java-scheduler-impl">
+
+            <exported-packages>
+
+                <package>dev.webfx.platform.java.services.scheduler.spi.impl</package>
+            </exported-packages>
+
+            <providers>
+                <dev.webfx.platform.shared.services.scheduler.spi.SchedulerProvider>dev.webfx.platform.java.services.scheduler.spi.impl.JavaSchedulerProvider</dev.webfx.platform.shared.services.scheduler.spi.SchedulerProvider>
+            </providers>
+
+            <dependencies>
+                <used-by-source-modules>
+                    <module>java.base</module>
+                    <module>webfx-platform-shared-log</module>
+                    <module>webfx-platform-shared-scheduler</module>
+                </used-by-source-modules>
+            </dependencies>
+
+        </project>
+
+        <project name="webfx-platform-shared-scheduler">
+
+            <exported-packages>
+    
+                <package>dev.webfx.platform.shared.services.scheduler</package>
+                <package>dev.webfx.platform.shared.services.scheduler.spi</package>
+            </exported-packages>
+
+            <dependencies>
+                <used-by-source-modules>
+                    <module>java.base</module>
+                    <module>webfx-platform-shared-util</module>
+                </used-by-source-modules>
+            </dependencies>
+
+        </project>
+
+        <project name="webfx-platform-feature-shutdown">
+
+            <modules>
+                <module>webfx-platform-gwt-shutdown-impl</module>
+                <module>webfx-platform-java-shutdown-impl</module>
+                <module>webfx-platform-shared-shutdown</module>
+            </modules>
+
+        </project>
+
+        <project name="webfx-platform-gwt-shutdown-impl">
+
+            <exported-packages>
+
+                <package>dev.webfx.platform.gwt.services.shutdown.spi.impl</package>
+            </exported-packages>
+
+            <providers>
+                <dev.webfx.platform.shared.services.shutdown.spi.ShutdownProvider>dev.webfx.platform.gwt.services.shutdown.spi.impl.GwtShutdownProvider</dev.webfx.platform.shared.services.shutdown.spi.ShutdownProvider>
+            </providers>
+
+            <dependencies>
+                <used-by-source-modules>
+                    <module>elemental2-dom</module>
+                    <module>webfx-platform-shared-shutdown</module>
+                </used-by-source-modules>
+            </dependencies>
+
+        </project>
+
+        <project name="webfx-platform-java-shutdown-impl">
+
+            <exported-packages>
+
+                <package>dev.webfx.platform.java.services.shutdown.spi.impl</package>
+            </exported-packages>
+
+            <providers>
+                <dev.webfx.platform.shared.services.shutdown.spi.ShutdownProvider>dev.webfx.platform.java.services.shutdown.spi.impl.JavaShutdownProvider</dev.webfx.platform.shared.services.shutdown.spi.ShutdownProvider>
+            </providers>
+
+            <dependencies>
+                <used-by-source-modules>
+                    <module>webfx-platform-shared-shutdown</module>
+                </used-by-source-modules>
+            </dependencies>
+
+        </project>
+
+        <project name="webfx-platform-shared-shutdown">
+
+            <exported-packages>
+    
+                <package>dev.webfx.platform.shared.services.shutdown.spi.impl</package>
+                <package>dev.webfx.platform.shared.services.shutdown.spi</package>
+                <package>dev.webfx.platform.shared.services.shutdown</package>
+            </exported-packages>
+
+            <dependencies>
+                <used-by-source-modules>
+                    <module>java.base</module>
+                    <module>webfx-platform-shared-util</module>
+                </used-by-source-modules>
+            </dependencies>
+
+        </project>
+
+        <project name="webfx-platform-feature-storage">
+
+            <modules>
+                <module>webfx-platform-client-storage</module>
+                <module>webfx-platform-gwt-storage-impl</module>
+                <module>webfx-platform-java-storage-impl</module>
+            </modules>
+
+        </project>
+
+        <project name="webfx-platform-client-storage">
+
+            <exported-packages>
+    
+                <package>dev.webfx.platform.client.services.storage</package>
+                <package>dev.webfx.platform.client.services.storage.spi</package>
+            </exported-packages>
+
+            <dependencies>
+                <used-by-source-modules>
+                    <module>java.base</module>
+                    <module>webfx-platform-shared-util</module>
+                </used-by-source-modules>
+            </dependencies>
+
+        </project>
+
+        <project name="webfx-platform-gwt-storage-impl">
+
+            <exported-packages>
+
+                <package>dev.webfx.platform.gwt.services.storage.spi.impl</package>
+            </exported-packages>
+
+            <providers>
+                <dev.webfx.platform.client.services.storage.spi.LocalStorageProvider>dev.webfx.platform.gwt.services.storage.spi.impl.GwtLocalStorageProvider</dev.webfx.platform.client.services.storage.spi.LocalStorageProvider>
+                <dev.webfx.platform.client.services.storage.spi.SessionStorageProvider>dev.webfx.platform.gwt.services.storage.spi.impl.GwtSessionStorageProvider</dev.webfx.platform.client.services.storage.spi.SessionStorageProvider>
+            </providers>
+
+            <dependencies>
+                <used-by-source-modules>
+                    <module>gwt-user</module>
+                    <module>java.base</module>
+                    <module>webfx-platform-client-storage</module>
+                </used-by-source-modules>
+            </dependencies>
+
+        </project>
+
+        <project name="webfx-platform-java-storage-impl">
+
+            <exported-packages>
+
+                <package>dev.webfx.platform.java.services.storage.spi.impl</package>
+            </exported-packages>
+
+            <providers>
+                <dev.webfx.platform.client.services.storage.spi.LocalStorageProvider>dev.webfx.platform.java.services.storage.spi.impl.JavaLocalStorageProvider</dev.webfx.platform.client.services.storage.spi.LocalStorageProvider>
+                <dev.webfx.platform.client.services.storage.spi.SessionStorageProvider>dev.webfx.platform.java.services.storage.spi.impl.JavaSessionStorageProvider</dev.webfx.platform.client.services.storage.spi.SessionStorageProvider>
+            </providers>
+
+            <dependencies>
+                <used-by-source-modules>
+                    <module>java.base</module>
+                    <module>webfx-platform-client-storage</module>
+                </used-by-source-modules>
+            </dependencies>
+
+        </project>
+
+        <project name="webfx-platform-feature-uischeduler">
+
+            <modules>
+                <module>webfx-platform-client-uischeduler</module>
+                <module>webfx-platform-gwt-uischeduler-impl</module>
+            </modules>
+
+        </project>
+
+        <project name="webfx-platform-client-uischeduler">
+
+            <exported-packages>
+    
+                <package>dev.webfx.platform.client.services.uischeduler</package>
+                <package>dev.webfx.platform.client.services.uischeduler.spi.impl</package>
+                <package>dev.webfx.platform.client.services.uischeduler.spi</package>
+            </exported-packages>
+
+            <dependencies>
+                <used-by-source-modules>
+                    <module>java.base</module>
+                    <module>webfx-platform-shared-scheduler</module>
+                    <module>webfx-platform-shared-util</module>
+                </used-by-source-modules>
+            </dependencies>
+
+        </project>
+
+        <project name="webfx-platform-gwt-uischeduler-impl">
+
+            <exported-packages>
+
+                <package>dev.webfx.platform.gwt.services.uischeduler.spi.impl</package>
+            </exported-packages>
+
+            <providers>
+                <dev.webfx.platform.shared.services.scheduler.spi.SchedulerProvider>dev.webfx.platform.gwt.services.uischeduler.spi.impl.GwtUiSchedulerProvider</dev.webfx.platform.shared.services.scheduler.spi.SchedulerProvider>
+                <dev.webfx.platform.client.services.uischeduler.spi.UiSchedulerProvider>dev.webfx.platform.gwt.services.uischeduler.spi.impl.GwtUiSchedulerProvider</dev.webfx.platform.client.services.uischeduler.spi.UiSchedulerProvider>
+            </providers>
+
+            <dependencies>
+                <used-by-source-modules>
+                    <module>elemental2-dom</module>
+                    <module>gwt-user</module>
+                    <module>webfx-platform-client-uischeduler</module>
+                    <module>webfx-platform-shared-log</module>
+                    <module>webfx-platform-shared-scheduler</module>
+                </used-by-source-modules>
+            </dependencies>
+
+        </project>
+
+        <project name="webfx-platform-gwt-emul-javabase">
+
+            <exported-packages>
+    
+                <package>emul.java.util</package>
+                <package>emul.java.util.function</package>
+                <package>emul.java.util.regex</package>
+                <package>emul.java.util.concurrent</package>
+                <package>emul.java.util.concurrent.atomic</package>
+                <package>emul.java.security</package>
+                <package>emul.java.io</package>
+                <package>emul.java.lang.ref</package>
+                <package>emul.java.lang</package>
+                <package>emul.java.text</package>
+            </exported-packages>
+
+            <dependencies>
+                <used-by-source-modules>
+                    <module>gwt-user</module>
+                    <module>java-nio-emul</module>
+                    <module>java.base</module>
+                </used-by-source-modules>
+            </dependencies>
+
+            <html if-uses-java-package="java.util.regex">
+                <body order="-1">
+                    <script charset="utf-8" src="emul/java/util/regex/xregexp.js" type="text/javascript"/>
+                </body>
+            </html>
+
+        </project>
+
+        <project name="webfx-platform-independent-util">
+
+            <modules>
+                <module>webfx-platform-shared-util</module>
+            </modules>
+
+        </project>
+
+        <project name="webfx-platform-shared-util">
+
+            <exported-packages>
+    
+                <package>dev.webfx.platform.shared.util</package>
+                <package>dev.webfx.platform.shared.util.collection</package>
+                <package>dev.webfx.platform.shared.util.tuples</package>
+                <package>dev.webfx.platform.shared.util.function</package>
+                <package>dev.webfx.platform.shared.util.uuid</package>
+                <package>dev.webfx.platform.shared.util.serviceloader</package>
+                <package>dev.webfx.platform.shared.util.noreflect</package>
+            </exported-packages>
+
+            <dependencies>
+                <used-by-source-modules>
+                    <module>java.base</module>
+                    <module>java.logging</module>
+                </used-by-source-modules>
+            </dependencies>
+
+        </project>
+
+    </export-snapshot>
+
 </project>
