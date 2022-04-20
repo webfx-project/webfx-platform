@@ -45,7 +45,7 @@
 
     <required-libraries>
 
-        <library artifact="dev.webfx:webfx-parent:0.1.0-SNAPSHOT"/>
+        <webfx-library artifact="dev.webfx:webfx-parent:0.1.0-SNAPSHOT"/>
 
         <group>
             <groupId>com.google.gwt</groupId>
