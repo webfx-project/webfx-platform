@@ -139,8 +139,8 @@
      single file. The export snapshot is optional, and a WebFX library that doesn't generate it can still be imported
      into another project, but WebFX will then need to download all individual webfx.xml files for every children
      modules, together with their pom and sources. Knowing that each download requires a maven invocation that takes
-     at least 3s (sometimes 10s or more), the export snapshot usually brings a significant performance improvement in
-     the import process.
+     at least 3s (sometimes 10s or more), the export snapshot brings a significant performance improvement in the
+     import process.
 
      -->
 
@@ -298,7 +298,6 @@
         <project name="webfx-platform-gwt-boot-impl">
 
             <exported-packages>
-
                 <package>dev.webfx.platform.gwt.services.boot.spi.impl</package>
             </exported-packages>
 
@@ -318,7 +317,6 @@
         <project name="webfx-platform-java-boot-impl">
 
             <exported-packages>
-
                 <package>dev.webfx.platform.java.services.boot.spi.impl</package>
             </exported-packages>
 
@@ -337,7 +335,6 @@
         <project name="webfx-platform-shared-boot">
 
             <exported-packages>
-    
                 <package>dev.webfx.platform.shared.services.boot.spi.impl</package>
                 <package>dev.webfx.platform.shared.services.boot.spi</package>
                 <package>dev.webfx.platform.shared.services.boot</package>
@@ -371,7 +368,6 @@
         <project name="webfx-platform-gwt-log-impl">
 
             <exported-packages>
-
                 <package>dev.webfx.platform.gwt.services.log.spi.impl</package>
             </exported-packages>
 
@@ -390,7 +386,6 @@
         <project name="webfx-platform-shared-log">
 
             <exported-packages>
-    
                 <package>dev.webfx.platform.shared.services.log</package>
                 <package>dev.webfx.platform.shared.services.log.spi</package>
             </exported-packages>
@@ -407,7 +402,6 @@
         <project name="webfx-platform-shared-log-impl-simple">
 
             <exported-packages>
-
                 <package>dev.webfx.platform.shared.services.log.spi.impl.simple</package>
             </exported-packages>
 
@@ -436,7 +430,6 @@
         <project name="webfx-platform-gwt-resource-impl">
 
             <exported-packages>
-
                 <package>dev.webfx.platform.gwt.services.resource.spi.impl</package>
             </exported-packages>
 
@@ -461,7 +454,6 @@
         <project name="webfx-platform-java-resource-impl">
 
             <exported-packages>
-
                 <package>dev.webfx.platform.java.services.resource.spi.impl</package>
             </exported-packages>
 
@@ -481,7 +473,6 @@
         <project name="webfx-platform-shared-resource">
 
             <exported-packages>
-    
                 <package>dev.webfx.platform.shared.services.resource</package>
                 <package>dev.webfx.platform.shared.services.resource.spi</package>
             </exported-packages>
@@ -507,7 +498,6 @@
         <project name="webfx-platform-java-scheduler-impl">
 
             <exported-packages>
-
                 <package>dev.webfx.platform.java.services.scheduler.spi.impl</package>
             </exported-packages>
 
@@ -528,7 +518,6 @@
         <project name="webfx-platform-shared-scheduler">
 
             <exported-packages>
-    
                 <package>dev.webfx.platform.shared.services.scheduler</package>
                 <package>dev.webfx.platform.shared.services.scheduler.spi</package>
             </exported-packages>
@@ -555,7 +544,6 @@
         <project name="webfx-platform-gwt-shutdown-impl">
 
             <exported-packages>
-
                 <package>dev.webfx.platform.gwt.services.shutdown.spi.impl</package>
             </exported-packages>
 
@@ -575,7 +563,6 @@
         <project name="webfx-platform-java-shutdown-impl">
 
             <exported-packages>
-
                 <package>dev.webfx.platform.java.services.shutdown.spi.impl</package>
             </exported-packages>
 
@@ -594,7 +581,6 @@
         <project name="webfx-platform-shared-shutdown">
 
             <exported-packages>
-    
                 <package>dev.webfx.platform.shared.services.shutdown.spi.impl</package>
                 <package>dev.webfx.platform.shared.services.shutdown.spi</package>
                 <package>dev.webfx.platform.shared.services.shutdown</package>
@@ -622,7 +608,6 @@
         <project name="webfx-platform-client-storage">
 
             <exported-packages>
-    
                 <package>dev.webfx.platform.client.services.storage</package>
                 <package>dev.webfx.platform.client.services.storage.spi</package>
             </exported-packages>
@@ -639,7 +624,6 @@
         <project name="webfx-platform-gwt-storage-impl">
 
             <exported-packages>
-
                 <package>dev.webfx.platform.gwt.services.storage.spi.impl</package>
             </exported-packages>
 
@@ -661,7 +645,6 @@
         <project name="webfx-platform-java-storage-impl">
 
             <exported-packages>
-
                 <package>dev.webfx.platform.java.services.storage.spi.impl</package>
             </exported-packages>
 
@@ -691,7 +674,6 @@
         <project name="webfx-platform-client-uischeduler">
 
             <exported-packages>
-    
                 <package>dev.webfx.platform.client.services.uischeduler</package>
                 <package>dev.webfx.platform.client.services.uischeduler.spi.impl</package>
                 <package>dev.webfx.platform.client.services.uischeduler.spi</package>
@@ -710,7 +692,6 @@
         <project name="webfx-platform-gwt-uischeduler-impl">
 
             <exported-packages>
-
                 <package>dev.webfx.platform.gwt.services.uischeduler.spi.impl</package>
             </exported-packages>
 
@@ -734,7 +715,6 @@
         <project name="webfx-platform-gwt-emul-javabase">
 
             <exported-packages>
-    
                 <package>emul.java.util</package>
                 <package>emul.java.util.function</package>
                 <package>emul.java.util.regex</package>
@@ -774,7 +754,6 @@
         <project name="webfx-platform-shared-util">
 
             <exported-packages>
-    
                 <package>dev.webfx.platform.shared.util</package>
                 <package>dev.webfx.platform.shared.util.collection</package>
                 <package>dev.webfx.platform.shared.util.tuples</package>
