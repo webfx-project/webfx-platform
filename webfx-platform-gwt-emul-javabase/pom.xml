@@ -13,6 +13,25 @@
 
     <artifactId>webfx-platform-gwt-emul-javabase</artifactId>
 
+
+    <properties>
+        <!-- Disabling the default behavior defined in the parent pom for the shade plugin -->
+        <plugin.shade.param.fat.phase>none</plugin.shade.param.fat.phase>
+    </properties>
+
+    <build>
+        <plugins>
+
+            <!-- Relocating the emul.java package to java for both classes and sources -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+            </plugin>
+
+        </plugins>
+
+    </build>
+
     <dependencies>
 
         <dependency>
