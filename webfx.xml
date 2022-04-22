@@ -148,10 +148,6 @@
 
         <project name="webfx-platform">
 
-            <update-options>
-                <generate-export-snapshot/>
-            </update-options>
-
             <modules>
                 <module>webfx-platform-feature-boot</module>
                 <module>webfx-platform-feature-log</module>
@@ -163,44 +159,6 @@
                 <module>webfx-platform-gwt-emul-javabase</module>
                 <module>webfx-platform-independent-util</module>
             </modules>
-
-            <maven-pom-manual>
-                <properties>
-                    <!-- Disabling the default behavior defined in the parent pom for the shade plugin -->
-                    <plugin.shade.param.fat.phase>none</plugin.shade.param.fat.phase>
-                </properties>
-
-                <build>
-                    <pluginManagement>
-                        <plugins>
-                            <!-- Relocating the emul.java package to java for both classes and sources -->
-                            <plugin>
-                                <groupId>org.apache.maven.plugins</groupId>
-                                <artifactId>maven-shade-plugin</artifactId>
-                                <executions>
-                                    <execution>
-                                        <phase>package</phase>
-                                        <goals>
-                                            <goal>shade</goal>
-                                        </goals>
-                                        <configuration>
-                                            <shadedArtifactAttached>true</shadedArtifactAttached>
-                                            <relocations>
-                                                <relocation>
-                                                    <pattern>emul.java</pattern>
-                                                    <shadedPattern>java</shadedPattern>
-                                                </relocation>
-                                            </relocations>
-                                            <createSourcesJar>true</createSourcesJar>
-                                            <shadeSourcesContent>true</shadeSourcesContent>
-                                        </configuration>
-                                    </execution>
-                                </executions>
-                            </plugin>
-                        </plugins>
-                    </pluginManagement>
-                </build>
-            </maven-pom-manual>
 
             <required-libraries>
 
@@ -353,6 +311,11 @@
                 </used-by-source-modules>
             </dependencies>
 
+            <used-services>
+                <required-service>dev.webfx.platform.shared.services.boot.spi.ApplicationBooterProvider</required-service>
+                <optional-service>dev.webfx.platform.shared.services.boot.spi.ApplicationModuleBooter</optional-service>
+                <optional-service>dev.webfx.platform.shared.services.boot.spi.ApplicationJob</optional-service>
+            </used-services>
         </project>
 
         <project name="webfx-platform-feature-log">
@@ -397,6 +360,9 @@
                 </used-by-source-modules>
             </dependencies>
 
+            <used-services>
+                <required-service>dev.webfx.platform.shared.services.log.spi.LoggerProvider</required-service>
+            </used-services>
         </project>
 
         <project name="webfx-platform-shared-log-impl-simple">
@@ -449,6 +415,9 @@
                 </used-by-source-modules>
             </dependencies>
 
+            <used-services>
+                <optional-service>dev.webfx.platform.gwt.services.resource.spi.impl.GwtResourceBundle</optional-service>
+            </used-services>
         </project>
 
         <project name="webfx-platform-java-resource-impl">
@@ -484,6 +453,9 @@
                 </used-by-source-modules>
             </dependencies>
 
+            <used-services>
+                <required-service>dev.webfx.platform.shared.services.resource.spi.ResourceServiceProvider</required-service>
+            </used-services>
         </project>
 
         <project name="webfx-platform-feature-scheduler">
@@ -529,6 +501,9 @@
                 </used-by-source-modules>
             </dependencies>
 
+            <used-services>
+                <required-service>dev.webfx.platform.shared.services.scheduler.spi.SchedulerProvider</required-service>
+            </used-services>
         </project>
 
         <project name="webfx-platform-feature-shutdown">
@@ -593,6 +568,9 @@
                 </used-by-source-modules>
             </dependencies>
 
+            <used-services>
+                <required-service>dev.webfx.platform.shared.services.shutdown.spi.ShutdownProvider</required-service>
+            </used-services>
         </project>
 
         <project name="webfx-platform-feature-storage">
@@ -619,6 +597,10 @@
                 </used-by-source-modules>
             </dependencies>
 
+            <used-services>
+                <required-service>dev.webfx.platform.client.services.storage.spi.LocalStorageProvider</required-service>
+                <required-service>dev.webfx.platform.client.services.storage.spi.SessionStorageProvider</required-service>
+            </used-services>
         </project>
 
         <project name="webfx-platform-gwt-storage-impl">
@@ -687,6 +669,9 @@
                 </used-by-source-modules>
             </dependencies>
 
+            <used-services>
+                <required-service>dev.webfx.platform.client.services.uischeduler.spi.UiSchedulerProvider</required-service>
+            </used-services>
         </project>
 
         <project name="webfx-platform-gwt-uischeduler-impl">
@@ -740,26 +725,6 @@
                     <script charset="utf-8" src="emul/java/util/regex/xregexp.js" type="text/javascript"/>
                 </body>
             </html>
-
-            <maven-pom-manual>
-                <properties>
-                    <!-- Disabling the default behavior defined in the parent pom for the shade plugin -->
-                    <plugin.shade.param.fat.phase>none</plugin.shade.param.fat.phase>
-                </properties>
-
-                <build>
-                    <plugins>
-
-                        <!-- Relocating the emul.java package to java for both classes and sources -->
-                        <plugin>
-                            <groupId>org.apache.maven.plugins</groupId>
-                            <artifactId>maven-shade-plugin</artifactId>
-                        </plugin>
-
-                    </plugins>
-
-                </build>
-            </maven-pom-manual>
 
         </project>
 
