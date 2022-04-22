@@ -256,7 +256,7 @@
         <project name="webfx-platform-gwt-boot-impl">
 
             <exported-packages>
-                <package>dev.webfx.platform.gwt.services.boot.spi.impl</package>
+                <source-packages/>
             </exported-packages>
 
             <dependencies>
@@ -270,12 +270,16 @@
                 <dev.webfx.platform.shared.services.boot.spi.ApplicationBooterProvider>dev.webfx.platform.gwt.services.boot.spi.impl.GwtApplicationBooterProvider</dev.webfx.platform.shared.services.boot.spi.ApplicationBooterProvider>
             </providers>
 
+            <source-packages>
+                <package>dev.webfx.platform.gwt.services.boot.spi.impl</package>
+            </source-packages>
+
         </project>
 
         <project name="webfx-platform-java-boot-impl">
 
             <exported-packages>
-                <package>dev.webfx.platform.java.services.boot.spi.impl</package>
+                <source-packages/>
             </exported-packages>
 
             <providers>
@@ -288,14 +292,16 @@
                 </used-by-source-modules>
             </dependencies>
 
+            <source-packages>
+                <package>dev.webfx.platform.java.services.boot.spi.impl</package>
+            </source-packages>
+
         </project>
 
         <project name="webfx-platform-shared-boot">
 
             <exported-packages>
-                <package>dev.webfx.platform.shared.services.boot.spi.impl</package>
-                <package>dev.webfx.platform.shared.services.boot.spi</package>
-                <package>dev.webfx.platform.shared.services.boot</package>
+                <source-packages/>
             </exported-packages>
 
             <providers>
@@ -311,11 +317,18 @@
                 </used-by-source-modules>
             </dependencies>
 
+            <source-packages>
+                <package>dev.webfx.platform.shared.services.boot.spi.impl</package>
+                <package>dev.webfx.platform.shared.services.boot.spi</package>
+                <package>dev.webfx.platform.shared.services.boot</package>
+            </source-packages>
+
             <used-services>
                 <required-service>dev.webfx.platform.shared.services.boot.spi.ApplicationBooterProvider</required-service>
                 <optional-service>dev.webfx.platform.shared.services.boot.spi.ApplicationModuleBooter</optional-service>
                 <optional-service>dev.webfx.platform.shared.services.boot.spi.ApplicationJob</optional-service>
             </used-services>
+
         </project>
 
         <project name="webfx-platform-feature-log">
@@ -331,7 +344,7 @@
         <project name="webfx-platform-gwt-log-impl">
 
             <exported-packages>
-                <package>dev.webfx.platform.gwt.services.log.spi.impl</package>
+                <source-packages/>
             </exported-packages>
 
             <providers>
@@ -344,13 +357,16 @@
                 </used-by-source-modules>
             </dependencies>
 
+            <source-packages>
+                <package>dev.webfx.platform.gwt.services.log.spi.impl</package>
+            </source-packages>
+
         </project>
 
         <project name="webfx-platform-shared-log">
 
             <exported-packages>
-                <package>dev.webfx.platform.shared.services.log</package>
-                <package>dev.webfx.platform.shared.services.log.spi</package>
+                <source-packages/>
             </exported-packages>
 
             <dependencies>
@@ -360,15 +376,21 @@
                 </used-by-source-modules>
             </dependencies>
 
+            <source-packages>
+                <package>dev.webfx.platform.shared.services.log</package>
+                <package>dev.webfx.platform.shared.services.log.spi</package>
+            </source-packages>
+
             <used-services>
                 <required-service>dev.webfx.platform.shared.services.log.spi.LoggerProvider</required-service>
             </used-services>
+
         </project>
 
         <project name="webfx-platform-shared-log-impl-simple">
 
             <exported-packages>
-                <package>dev.webfx.platform.shared.services.log.spi.impl.simple</package>
+                <source-packages/>
             </exported-packages>
 
             <providers>
@@ -380,6 +402,10 @@
                     <module>webfx-platform-shared-log</module>
                 </used-by-source-modules>
             </dependencies>
+
+            <source-packages>
+                <package>dev.webfx.platform.shared.services.log.spi.impl.simple</package>
+            </source-packages>
 
         </project>
 
@@ -396,7 +422,7 @@
         <project name="webfx-platform-gwt-resource-impl">
 
             <exported-packages>
-                <package>dev.webfx.platform.gwt.services.resource.spi.impl</package>
+                <source-packages/>
             </exported-packages>
 
             <providers>
@@ -415,15 +441,20 @@
                 </used-by-source-modules>
             </dependencies>
 
+            <source-packages>
+                <package>dev.webfx.platform.gwt.services.resource.spi.impl</package>
+            </source-packages>
+
             <used-services>
                 <optional-service>dev.webfx.platform.gwt.services.resource.spi.impl.GwtResourceBundle</optional-service>
             </used-services>
+
         </project>
 
         <project name="webfx-platform-java-resource-impl">
 
             <exported-packages>
-                <package>dev.webfx.platform.java.services.resource.spi.impl</package>
+                <source-packages/>
             </exported-packages>
 
             <providers>
@@ -437,13 +468,16 @@
                 </used-by-source-modules>
             </dependencies>
 
+            <source-packages>
+                <package>dev.webfx.platform.java.services.resource.spi.impl</package>
+            </source-packages>
+
         </project>
 
         <project name="webfx-platform-shared-resource">
 
             <exported-packages>
-                <package>dev.webfx.platform.shared.services.resource</package>
-                <package>dev.webfx.platform.shared.services.resource.spi</package>
+                <source-packages/>
             </exported-packages>
 
             <dependencies>
@@ -453,9 +487,15 @@
                 </used-by-source-modules>
             </dependencies>
 
+            <source-packages>
+                <package>dev.webfx.platform.shared.services.resource</package>
+                <package>dev.webfx.platform.shared.services.resource.spi</package>
+            </source-packages>
+
             <used-services>
                 <required-service>dev.webfx.platform.shared.services.resource.spi.ResourceServiceProvider</required-service>
             </used-services>
+
         </project>
 
         <project name="webfx-platform-feature-scheduler">
@@ -470,7 +510,7 @@
         <project name="webfx-platform-java-scheduler-impl">
 
             <exported-packages>
-                <package>dev.webfx.platform.java.services.scheduler.spi.impl</package>
+                <source-packages/>
             </exported-packages>
 
             <providers>
@@ -485,13 +525,16 @@
                 </used-by-source-modules>
             </dependencies>
 
+            <source-packages>
+                <package>dev.webfx.platform.java.services.scheduler.spi.impl</package>
+            </source-packages>
+
         </project>
 
         <project name="webfx-platform-shared-scheduler">
 
             <exported-packages>
-                <package>dev.webfx.platform.shared.services.scheduler</package>
-                <package>dev.webfx.platform.shared.services.scheduler.spi</package>
+                <source-packages/>
             </exported-packages>
 
             <dependencies>
@@ -501,9 +544,15 @@
                 </used-by-source-modules>
             </dependencies>
 
+            <source-packages>
+                <package>dev.webfx.platform.shared.services.scheduler</package>
+                <package>dev.webfx.platform.shared.services.scheduler.spi</package>
+            </source-packages>
+
             <used-services>
                 <required-service>dev.webfx.platform.shared.services.scheduler.spi.SchedulerProvider</required-service>
             </used-services>
+
         </project>
 
         <project name="webfx-platform-feature-shutdown">
@@ -519,7 +568,7 @@
         <project name="webfx-platform-gwt-shutdown-impl">
 
             <exported-packages>
-                <package>dev.webfx.platform.gwt.services.shutdown.spi.impl</package>
+                <source-packages/>
             </exported-packages>
 
             <providers>
@@ -533,12 +582,16 @@
                 </used-by-source-modules>
             </dependencies>
 
+            <source-packages>
+                <package>dev.webfx.platform.gwt.services.shutdown.spi.impl</package>
+            </source-packages>
+
         </project>
 
         <project name="webfx-platform-java-shutdown-impl">
 
             <exported-packages>
-                <package>dev.webfx.platform.java.services.shutdown.spi.impl</package>
+                <source-packages/>
             </exported-packages>
 
             <providers>
@@ -551,14 +604,16 @@
                 </used-by-source-modules>
             </dependencies>
 
+            <source-packages>
+                <package>dev.webfx.platform.java.services.shutdown.spi.impl</package>
+            </source-packages>
+
         </project>
 
         <project name="webfx-platform-shared-shutdown">
 
             <exported-packages>
-                <package>dev.webfx.platform.shared.services.shutdown.spi.impl</package>
-                <package>dev.webfx.platform.shared.services.shutdown.spi</package>
-                <package>dev.webfx.platform.shared.services.shutdown</package>
+                <source-packages/>
             </exported-packages>
 
             <dependencies>
@@ -568,9 +623,16 @@
                 </used-by-source-modules>
             </dependencies>
 
+            <source-packages>
+                <package>dev.webfx.platform.shared.services.shutdown.spi.impl</package>
+                <package>dev.webfx.platform.shared.services.shutdown.spi</package>
+                <package>dev.webfx.platform.shared.services.shutdown</package>
+            </source-packages>
+
             <used-services>
                 <required-service>dev.webfx.platform.shared.services.shutdown.spi.ShutdownProvider</required-service>
             </used-services>
+
         </project>
 
         <project name="webfx-platform-feature-storage">
@@ -586,8 +648,7 @@
         <project name="webfx-platform-client-storage">
 
             <exported-packages>
-                <package>dev.webfx.platform.client.services.storage</package>
-                <package>dev.webfx.platform.client.services.storage.spi</package>
+                <source-packages/>
             </exported-packages>
 
             <dependencies>
@@ -597,16 +658,22 @@
                 </used-by-source-modules>
             </dependencies>
 
+            <source-packages>
+                <package>dev.webfx.platform.client.services.storage</package>
+                <package>dev.webfx.platform.client.services.storage.spi</package>
+            </source-packages>
+
             <used-services>
                 <required-service>dev.webfx.platform.client.services.storage.spi.LocalStorageProvider</required-service>
                 <required-service>dev.webfx.platform.client.services.storage.spi.SessionStorageProvider</required-service>
             </used-services>
+
         </project>
 
         <project name="webfx-platform-gwt-storage-impl">
 
             <exported-packages>
-                <package>dev.webfx.platform.gwt.services.storage.spi.impl</package>
+                <source-packages/>
             </exported-packages>
 
             <providers>
@@ -622,12 +689,16 @@
                 </used-by-source-modules>
             </dependencies>
 
+            <source-packages>
+                <package>dev.webfx.platform.gwt.services.storage.spi.impl</package>
+            </source-packages>
+
         </project>
 
         <project name="webfx-platform-java-storage-impl">
 
             <exported-packages>
-                <package>dev.webfx.platform.java.services.storage.spi.impl</package>
+                <source-packages/>
             </exported-packages>
 
             <providers>
@@ -641,6 +712,10 @@
                     <module>webfx-platform-client-storage</module>
                 </used-by-source-modules>
             </dependencies>
+
+            <source-packages>
+                <package>dev.webfx.platform.java.services.storage.spi.impl</package>
+            </source-packages>
 
         </project>
 
@@ -656,9 +731,7 @@
         <project name="webfx-platform-client-uischeduler">
 
             <exported-packages>
-                <package>dev.webfx.platform.client.services.uischeduler</package>
-                <package>dev.webfx.platform.client.services.uischeduler.spi.impl</package>
-                <package>dev.webfx.platform.client.services.uischeduler.spi</package>
+                <source-packages/>
             </exported-packages>
 
             <dependencies>
@@ -669,15 +742,22 @@
                 </used-by-source-modules>
             </dependencies>
 
+            <source-packages>
+                <package>dev.webfx.platform.client.services.uischeduler</package>
+                <package>dev.webfx.platform.client.services.uischeduler.spi.impl</package>
+                <package>dev.webfx.platform.client.services.uischeduler.spi</package>
+            </source-packages>
+
             <used-services>
                 <required-service>dev.webfx.platform.client.services.uischeduler.spi.UiSchedulerProvider</required-service>
             </used-services>
+
         </project>
 
         <project name="webfx-platform-gwt-uischeduler-impl">
 
             <exported-packages>
-                <package>dev.webfx.platform.gwt.services.uischeduler.spi.impl</package>
+                <source-packages/>
             </exported-packages>
 
             <providers>
@@ -695,21 +775,16 @@
                 </used-by-source-modules>
             </dependencies>
 
+            <source-packages>
+                <package>dev.webfx.platform.gwt.services.uischeduler.spi.impl</package>
+            </source-packages>
+
         </project>
 
         <project name="webfx-platform-gwt-emul-javabase">
 
             <exported-packages>
-                <package>emul.java.util</package>
-                <package>emul.java.util.function</package>
-                <package>emul.java.util.regex</package>
-                <package>emul.java.util.concurrent</package>
-                <package>emul.java.util.concurrent.atomic</package>
-                <package>emul.java.security</package>
-                <package>emul.java.io</package>
-                <package>emul.java.lang.ref</package>
-                <package>emul.java.lang</package>
-                <package>emul.java.text</package>
+                <source-packages/>
             </exported-packages>
 
             <dependencies>
@@ -726,6 +801,19 @@
                 </body>
             </html>
 
+            <source-packages>
+                <package>emul.java.util</package>
+                <package>emul.java.util.function</package>
+                <package>emul.java.util.regex</package>
+                <package>emul.java.util.concurrent</package>
+                <package>emul.java.util.concurrent.atomic</package>
+                <package>emul.java.security</package>
+                <package>emul.java.io</package>
+                <package>emul.java.lang.ref</package>
+                <package>emul.java.lang</package>
+                <package>emul.java.text</package>
+            </source-packages>
+
         </project>
 
         <project name="webfx-platform-independent-util">
@@ -739,13 +827,7 @@
         <project name="webfx-platform-shared-util">
 
             <exported-packages>
-                <package>dev.webfx.platform.shared.util</package>
-                <package>dev.webfx.platform.shared.util.collection</package>
-                <package>dev.webfx.platform.shared.util.tuples</package>
-                <package>dev.webfx.platform.shared.util.function</package>
-                <package>dev.webfx.platform.shared.util.uuid</package>
-                <package>dev.webfx.platform.shared.util.serviceloader</package>
-                <package>dev.webfx.platform.shared.util.noreflect</package>
+                <source-packages/>
             </exported-packages>
 
             <dependencies>
@@ -754,6 +836,16 @@
                     <module>java.logging</module>
                 </used-by-source-modules>
             </dependencies>
+
+            <source-packages>
+                <package>dev.webfx.platform.shared.util</package>
+                <package>dev.webfx.platform.shared.util.collection</package>
+                <package>dev.webfx.platform.shared.util.tuples</package>
+                <package>dev.webfx.platform.shared.util.function</package>
+                <package>dev.webfx.platform.shared.util.uuid</package>
+                <package>dev.webfx.platform.shared.util.serviceloader</package>
+                <package>dev.webfx.platform.shared.util.noreflect</package>
+            </source-packages>
 
         </project>
 
