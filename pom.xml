@@ -50,16 +50,6 @@
                             </goals>
                             <configuration>
                                 <shadedArtifactAttached>true</shadedArtifactAttached>
-                                <filters>
-                                    <filter>
-                                        <artifact>*:*</artifact>
-                                        <includes>
-                                            <include>emul/java/**</include>
-                                            <!-- Also including the possible associated web resources (ex: XRegExp.js) -->
-                                            <include>public/emul/java/**</include>
-                                        </includes>
-                                    </filter>
-                                </filters>
                                 <relocations>
                                     <relocation>
                                         <pattern>emul.java</pattern>

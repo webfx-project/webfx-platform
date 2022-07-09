@@ -52,7 +52,7 @@
         <webfx-library artifact="dev.webfx:webfx-parent:0.1.0-SNAPSHOT"/>
 
         <group>
-            <groupId>com.google.gwt</groupId>
+            <groupId>org.gwtproject</groupId>
 
             <library name="gwt-user">
                 <exported-packages>
@@ -167,7 +167,7 @@
                 <webfx-library artifact="dev.webfx:webfx-parent:0.1.0-SNAPSHOT"/>
 
                 <group>
-                    <groupId>com.google.gwt</groupId>
+                    <groupId>org.gwtproject</groupId>
 
                     <library name="gwt-user">
                         <exported-packages>
@@ -321,9 +321,9 @@
             </dependencies>
 
             <source-packages>
-                <package>dev.webfx.platform.shared.services.boot.spi.impl</package>
-                <package>dev.webfx.platform.shared.services.boot.spi</package>
                 <package>dev.webfx.platform.shared.services.boot</package>
+                <package>dev.webfx.platform.shared.services.boot.spi</package>
+                <package>dev.webfx.platform.shared.services.boot.spi.impl</package>
             </source-packages>
 
             <used-by-source-modules>
@@ -335,8 +335,8 @@
 
             <used-services>
                 <required-service>dev.webfx.platform.shared.services.boot.spi.ApplicationBooterProvider</required-service>
-                <optional-service>dev.webfx.platform.shared.services.boot.spi.ApplicationModuleBooter</optional-service>
                 <optional-service>dev.webfx.platform.shared.services.boot.spi.ApplicationJob</optional-service>
+                <optional-service>dev.webfx.platform.shared.services.boot.spi.ApplicationModuleBooter</optional-service>
             </used-services>
 
         </project>
@@ -651,9 +651,9 @@
             </dependencies>
 
             <source-packages>
-                <package>dev.webfx.platform.shared.services.shutdown.spi.impl</package>
-                <package>dev.webfx.platform.shared.services.shutdown.spi</package>
                 <package>dev.webfx.platform.shared.services.shutdown</package>
+                <package>dev.webfx.platform.shared.services.shutdown.spi</package>
+                <package>dev.webfx.platform.shared.services.shutdown.spi.impl</package>
             </source-packages>
 
             <used-by-source-modules>
@@ -778,8 +778,8 @@
 
             <source-packages>
                 <package>dev.webfx.platform.client.services.uischeduler</package>
-                <package>dev.webfx.platform.client.services.uischeduler.spi.impl</package>
                 <package>dev.webfx.platform.client.services.uischeduler.spi</package>
+                <package>dev.webfx.platform.client.services.uischeduler.spi.impl</package>
             </source-packages>
 
             <used-by-source-modules>
@@ -840,21 +840,13 @@
             </html>
 
             <source-packages>
-                <package>emul.java.util</package>
-                <package>emul.java.util.function</package>
-                <package>emul.java.util.regex</package>
-                <package>emul.java.util.concurrent</package>
-                <package>emul.java.util.concurrent.atomic</package>
-                <package>emul.java.security</package>
-                <package>emul.java.io</package>
                 <package>emul.java.lang.ref</package>
-                <package>emul.java.lang</package>
-                <package>emul.java.text</package>
+                <package>emul.java.util</package>
+                <package>emul.java.util.regex</package>
             </source-packages>
 
             <used-by-source-modules>
                 <module>gwt-user</module>
-                <module>java-nio-emul</module>
                 <module>java.base</module>
             </used-by-source-modules>
 
@@ -881,11 +873,11 @@
             <source-packages>
                 <package>dev.webfx.platform.shared.util</package>
                 <package>dev.webfx.platform.shared.util.collection</package>
-                <package>dev.webfx.platform.shared.util.tuples</package>
                 <package>dev.webfx.platform.shared.util.function</package>
-                <package>dev.webfx.platform.shared.util.uuid</package>
-                <package>dev.webfx.platform.shared.util.serviceloader</package>
                 <package>dev.webfx.platform.shared.util.noreflect</package>
+                <package>dev.webfx.platform.shared.util.serviceloader</package>
+                <package>dev.webfx.platform.shared.util.tuples</package>
+                <package>dev.webfx.platform.shared.util.uuid</package>
             </source-packages>
 
             <used-by-source-modules>
