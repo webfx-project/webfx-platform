@@ -25,7 +25,7 @@ public class WeakReference<T> extends Reference<T> {
         this.value = value;
     }
 
-    public WeakReference(T value, @SuppressWarnings("unused") emul.java.lang.ref.ReferenceQueue<T> queue) {
+    public WeakReference(T value, @SuppressWarnings("unused") ReferenceQueue<T> queue) {
         this.value = value;
     }
 
