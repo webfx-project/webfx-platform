@@ -55,6 +55,8 @@
                                         <artifact>*:*</artifact>
                                         <includes>
                                             <include>emul/java/**</include>
+                                            <!-- Also including the possible associated web resources (ex: XRegExp.js) -->
+                                            <include>public/emul/java/**</include>
                                         </includes>
                                     </filter>
                                 </filters>
