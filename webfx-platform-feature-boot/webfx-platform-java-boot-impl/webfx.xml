@@ -6,7 +6,7 @@
     </exported-packages>
 
     <providers>
-        <dev.webfx.platform.shared.services.boot.spi.ApplicationBooterProvider>dev.webfx.platform.java.services.boot.spi.impl.JavaApplicationBooterProvider</dev.webfx.platform.shared.services.boot.spi.ApplicationBooterProvider>
+        <provider interface="dev.webfx.platform.shared.services.boot.spi.ApplicationBooterProvider">dev.webfx.platform.java.services.boot.spi.impl.JavaApplicationBooterProvider</provider>
     </providers>
 
     <dependencies>

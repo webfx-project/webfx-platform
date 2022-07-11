@@ -268,7 +268,7 @@
             </dependencies>
 
             <providers>
-                <dev.webfx.platform.shared.services.boot.spi.ApplicationBooterProvider>dev.webfx.platform.gwt.services.boot.spi.impl.GwtApplicationBooterProvider</dev.webfx.platform.shared.services.boot.spi.ApplicationBooterProvider>
+                <provider interface="dev.webfx.platform.shared.services.boot.spi.ApplicationBooterProvider">dev.webfx.platform.gwt.services.boot.spi.impl.GwtApplicationBooterProvider</provider>
             </providers>
 
             <source-packages>
@@ -289,7 +289,7 @@
             </exported-packages>
 
             <providers>
-                <dev.webfx.platform.shared.services.boot.spi.ApplicationBooterProvider>dev.webfx.platform.java.services.boot.spi.impl.JavaApplicationBooterProvider</dev.webfx.platform.shared.services.boot.spi.ApplicationBooterProvider>
+                <provider interface="dev.webfx.platform.shared.services.boot.spi.ApplicationBooterProvider">dev.webfx.platform.java.services.boot.spi.impl.JavaApplicationBooterProvider</provider>
             </providers>
 
             <dependencies>
@@ -313,7 +313,7 @@
             </exported-packages>
 
             <providers>
-                <dev.webfx.platform.shared.services.boot.spi.ApplicationModuleBooter>dev.webfx.platform.shared.services.boot.spi.impl.ApplicationJobsBooter</dev.webfx.platform.shared.services.boot.spi.ApplicationModuleBooter>
+                <provider interface="dev.webfx.platform.shared.services.boot.spi.ApplicationModuleBooter">dev.webfx.platform.shared.services.boot.spi.impl.ApplicationJobsBooter</provider>
             </providers>
 
             <dependencies>
@@ -335,8 +335,8 @@
 
             <used-services>
                 <required-service>dev.webfx.platform.shared.services.boot.spi.ApplicationBooterProvider</required-service>
-                <optional-service>dev.webfx.platform.shared.services.boot.spi.ApplicationJob</optional-service>
                 <optional-service>dev.webfx.platform.shared.services.boot.spi.ApplicationModuleBooter</optional-service>
+                <optional-service>dev.webfx.platform.shared.services.boot.spi.ApplicationJob</optional-service>
             </used-services>
 
         </project>
@@ -358,7 +358,7 @@
             </exported-packages>
 
             <providers>
-                <dev.webfx.platform.shared.services.log.spi.LoggerProvider>dev.webfx.platform.gwt.services.log.spi.impl.GwtLoggerProvider</dev.webfx.platform.shared.services.log.spi.LoggerProvider>
+                <provider interface="dev.webfx.platform.shared.services.log.spi.LoggerProvider">dev.webfx.platform.gwt.services.log.spi.impl.GwtLoggerProvider</provider>
             </providers>
 
             <dependencies>
@@ -408,7 +408,7 @@
             </exported-packages>
 
             <providers>
-                <dev.webfx.platform.shared.services.log.spi.LoggerProvider>dev.webfx.platform.shared.services.log.spi.impl.simple.SimpleLoggerProvider</dev.webfx.platform.shared.services.log.spi.LoggerProvider>
+                <provider interface="dev.webfx.platform.shared.services.log.spi.LoggerProvider">dev.webfx.platform.shared.services.log.spi.impl.simple.SimpleLoggerProvider</provider>
             </providers>
 
             <dependencies>
@@ -442,8 +442,8 @@
             </exported-packages>
 
             <providers>
-                <dev.webfx.platform.shared.services.boot.spi.ApplicationModuleBooter>dev.webfx.platform.gwt.services.resource.spi.impl.GwtResourceModuleBooter</dev.webfx.platform.shared.services.boot.spi.ApplicationModuleBooter>
-                <dev.webfx.platform.shared.services.resource.spi.ResourceServiceProvider>dev.webfx.platform.gwt.services.resource.spi.impl.GwtResourceServiceProvider</dev.webfx.platform.shared.services.resource.spi.ResourceServiceProvider>
+                <provider interface="dev.webfx.platform.shared.services.boot.spi.ApplicationModuleBooter">dev.webfx.platform.gwt.services.resource.spi.impl.GwtResourceModuleBooter</provider>
+                <provider interface="dev.webfx.platform.shared.services.resource.spi.ResourceServiceProvider">dev.webfx.platform.gwt.services.resource.spi.impl.GwtResourceServiceProvider</provider>
             </providers>
 
             <dependencies>
@@ -476,7 +476,7 @@
             </exported-packages>
 
             <providers>
-                <dev.webfx.platform.shared.services.resource.spi.ResourceServiceProvider>dev.webfx.platform.java.services.resource.spi.impl.JavaResourceServiceProvider</dev.webfx.platform.shared.services.resource.spi.ResourceServiceProvider>
+                <provider interface="dev.webfx.platform.shared.services.resource.spi.ResourceServiceProvider">dev.webfx.platform.java.services.resource.spi.impl.JavaResourceServiceProvider</provider>
             </providers>
 
             <dependencies>
@@ -536,7 +536,7 @@
             </exported-packages>
 
             <providers>
-                <dev.webfx.platform.shared.services.scheduler.spi.SchedulerProvider>dev.webfx.platform.java.services.scheduler.spi.impl.JavaSchedulerProvider</dev.webfx.platform.shared.services.scheduler.spi.SchedulerProvider>
+                <provider interface="dev.webfx.platform.shared.services.scheduler.spi.SchedulerProvider">dev.webfx.platform.java.services.scheduler.spi.impl.JavaSchedulerProvider</provider>
             </providers>
 
             <dependencies>
@@ -598,7 +598,7 @@
             </exported-packages>
 
             <providers>
-                <dev.webfx.platform.shared.services.shutdown.spi.ShutdownProvider>dev.webfx.platform.gwt.services.shutdown.spi.impl.GwtShutdownProvider</dev.webfx.platform.shared.services.shutdown.spi.ShutdownProvider>
+                <provider interface="dev.webfx.platform.shared.services.shutdown.spi.ShutdownProvider">dev.webfx.platform.gwt.services.shutdown.spi.impl.GwtShutdownProvider</provider>
             </providers>
 
             <dependencies>
@@ -623,7 +623,7 @@
             </exported-packages>
 
             <providers>
-                <dev.webfx.platform.shared.services.shutdown.spi.ShutdownProvider>dev.webfx.platform.java.services.shutdown.spi.impl.JavaShutdownProvider</dev.webfx.platform.shared.services.shutdown.spi.ShutdownProvider>
+                <provider interface="dev.webfx.platform.shared.services.shutdown.spi.ShutdownProvider">dev.webfx.platform.java.services.shutdown.spi.impl.JavaShutdownProvider</provider>
             </providers>
 
             <dependencies>
@@ -711,8 +711,8 @@
             </exported-packages>
 
             <providers>
-                <dev.webfx.platform.client.services.storage.spi.LocalStorageProvider>dev.webfx.platform.gwt.services.storage.spi.impl.GwtLocalStorageProvider</dev.webfx.platform.client.services.storage.spi.LocalStorageProvider>
-                <dev.webfx.platform.client.services.storage.spi.SessionStorageProvider>dev.webfx.platform.gwt.services.storage.spi.impl.GwtSessionStorageProvider</dev.webfx.platform.client.services.storage.spi.SessionStorageProvider>
+                <provider interface="dev.webfx.platform.client.services.storage.spi.LocalStorageProvider">dev.webfx.platform.gwt.services.storage.spi.impl.GwtLocalStorageProvider</provider>
+                <provider interface="dev.webfx.platform.client.services.storage.spi.SessionStorageProvider">dev.webfx.platform.gwt.services.storage.spi.impl.GwtSessionStorageProvider</provider>
             </providers>
 
             <dependencies>
@@ -738,8 +738,8 @@
             </exported-packages>
 
             <providers>
-                <dev.webfx.platform.client.services.storage.spi.LocalStorageProvider>dev.webfx.platform.java.services.storage.spi.impl.JavaLocalStorageProvider</dev.webfx.platform.client.services.storage.spi.LocalStorageProvider>
-                <dev.webfx.platform.client.services.storage.spi.SessionStorageProvider>dev.webfx.platform.java.services.storage.spi.impl.JavaSessionStorageProvider</dev.webfx.platform.client.services.storage.spi.SessionStorageProvider>
+                <provider interface="dev.webfx.platform.client.services.storage.spi.LocalStorageProvider">dev.webfx.platform.java.services.storage.spi.impl.JavaLocalStorageProvider</provider>
+                <provider interface="dev.webfx.platform.client.services.storage.spi.SessionStorageProvider">dev.webfx.platform.java.services.storage.spi.impl.JavaSessionStorageProvider</provider>
             </providers>
 
             <dependencies>
@@ -801,8 +801,8 @@
             </exported-packages>
 
             <providers>
-                <dev.webfx.platform.shared.services.scheduler.spi.SchedulerProvider>dev.webfx.platform.gwt.services.uischeduler.spi.impl.GwtUiSchedulerProvider</dev.webfx.platform.shared.services.scheduler.spi.SchedulerProvider>
-                <dev.webfx.platform.client.services.uischeduler.spi.UiSchedulerProvider>dev.webfx.platform.gwt.services.uischeduler.spi.impl.GwtUiSchedulerProvider</dev.webfx.platform.client.services.uischeduler.spi.UiSchedulerProvider>
+                <provider interface="dev.webfx.platform.shared.services.scheduler.spi.SchedulerProvider">dev.webfx.platform.gwt.services.uischeduler.spi.impl.GwtUiSchedulerProvider</provider>
+                <provider interface="dev.webfx.platform.client.services.uischeduler.spi.UiSchedulerProvider">dev.webfx.platform.gwt.services.uischeduler.spi.impl.GwtUiSchedulerProvider</provider>
             </providers>
 
             <dependencies>

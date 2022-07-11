@@ -10,7 +10,7 @@
     </dependencies>
 
     <providers>
-        <dev.webfx.platform.shared.services.boot.spi.ApplicationBooterProvider>dev.webfx.platform.gwt.services.boot.spi.impl.GwtApplicationBooterProvider</dev.webfx.platform.shared.services.boot.spi.ApplicationBooterProvider>
+        <provider interface="dev.webfx.platform.shared.services.boot.spi.ApplicationBooterProvider">dev.webfx.platform.gwt.services.boot.spi.impl.GwtApplicationBooterProvider</provider>
     </providers>
 
 </project>

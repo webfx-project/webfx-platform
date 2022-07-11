@@ -6,7 +6,7 @@
     </exported-packages>
 
     <providers>
-        <dev.webfx.platform.shared.services.shutdown.spi.ShutdownProvider>dev.webfx.platform.java.services.shutdown.spi.impl.JavaShutdownProvider</dev.webfx.platform.shared.services.shutdown.spi.ShutdownProvider>
+        <provider interface="dev.webfx.platform.shared.services.shutdown.spi.ShutdownProvider">dev.webfx.platform.java.services.shutdown.spi.impl.JavaShutdownProvider</provider>
     </providers>
 
     <dependencies>

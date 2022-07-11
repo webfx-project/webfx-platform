@@ -6,7 +6,7 @@
     </exported-packages>
 
     <providers>
-        <dev.webfx.platform.shared.services.resource.spi.ResourceServiceProvider>dev.webfx.platform.java.services.resource.spi.impl.JavaResourceServiceProvider</dev.webfx.platform.shared.services.resource.spi.ResourceServiceProvider>
+        <provider interface="dev.webfx.platform.shared.services.resource.spi.ResourceServiceProvider">dev.webfx.platform.java.services.resource.spi.impl.JavaResourceServiceProvider</provider>
     </providers>
 
     <dependencies>

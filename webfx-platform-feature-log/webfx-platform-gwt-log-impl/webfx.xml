@@ -6,7 +6,7 @@
     </exported-packages>
 
     <providers>
-        <dev.webfx.platform.shared.services.log.spi.LoggerProvider>dev.webfx.platform.gwt.services.log.spi.impl.GwtLoggerProvider</dev.webfx.platform.shared.services.log.spi.LoggerProvider>
+        <provider interface="dev.webfx.platform.shared.services.log.spi.LoggerProvider">dev.webfx.platform.gwt.services.log.spi.impl.GwtLoggerProvider</provider>
     </providers>
 
     <dependencies>
