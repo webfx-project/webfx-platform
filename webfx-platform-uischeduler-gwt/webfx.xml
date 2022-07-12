@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+
+    <exported-packages>
+        <source-packages/>
+    </exported-packages>
+
+    <providers>
+        <provider interface="dev.webfx.platform.scheduler.spi.SchedulerProvider">dev.webfx.platform.uischeduler.spi.impl.gwt.GwtUiSchedulerProvider</provider>
+        <provider interface="dev.webfx.platform.uischeduler.spi.UiSchedulerProvider">dev.webfx.platform.uischeduler.spi.impl.gwt.GwtUiSchedulerProvider</provider>
+    </providers>
+
+    <dependencies>
+        <used-by-source-modules/>
+    </dependencies>
+
+</project>

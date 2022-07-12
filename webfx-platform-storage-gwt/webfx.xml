@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+
+    <exported-packages>
+        <source-packages/>
+    </exported-packages>
+
+    <providers>
+        <provider interface="dev.webfx.platform.storage.spi.LocalStorageProvider">dev.webfx.platform.storage.spi.impl.gwt.GwtLocalStorageProvider</provider>
+        <provider interface="dev.webfx.platform.storage.spi.SessionStorageProvider">dev.webfx.platform.storage.spi.impl.gwt.GwtSessionStorageProvider</provider>
+    </providers>
+
+    <dependencies>
+        <used-by-source-modules/>
+    </dependencies>
+
+</project>

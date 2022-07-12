@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+
+    <exported-packages>
+        <source-packages/>
+    </exported-packages>
+
+    <providers>
+        <provider interface="dev.webfx.platform.boot.spi.ApplicationModuleBooter">dev.webfx.platform.resource.spi.impl.gwt.GwtResourceModuleBooter</provider>
+        <provider interface="dev.webfx.platform.resource.spi.ResourceProvider">dev.webfx.platform.resource.spi.impl.gwt.GwtResourceProvider</provider>
+    </providers>
+
+    <dependencies>
+        <used-by-source-modules/>
+    </dependencies>
+
+</project>

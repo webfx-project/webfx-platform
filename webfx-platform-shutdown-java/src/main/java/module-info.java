@@ -1,0 +1,14 @@
+// File managed by WebFX (DO NOT EDIT MANUALLY)
+
+module webfx.platform.shutdown.java {
+
+    // Direct dependencies modules
+    requires webfx.platform.shutdown;
+
+    // Exported packages
+    exports dev.webfx.platform.shutdown.spi.impl.java;
+
+    // Provided services
+    provides dev.webfx.platform.shutdown.spi.ShutdownProvider with dev.webfx.platform.shutdown.spi.impl.java.JavaShutdownProvider;
+
+}

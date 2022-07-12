@@ -50,6 +50,16 @@
                             </goals>
                             <configuration>
                                 <shadedArtifactAttached>true</shadedArtifactAttached>
+                                <filters>
+                                    <filter>
+                                        <artifact>*:*</artifact>
+                                        <includes>
+                                            <include>emul/java/**</include>
+                                            <include>public/**</include>
+                                            <include>META-INF/maven/**</include>
+                                        </includes>
+                                    </filter>
+                                </filters>
                                 <relocations>
                                     <relocation>
                                         <pattern>emul.java</pattern>
@@ -58,6 +68,7 @@
                                 </relocations>
                                 <createSourcesJar>true</createSourcesJar>
                                 <shadeSourcesContent>true</shadeSourcesContent>
+                                <createDependencyReducedPom>false</createDependencyReducedPom>
                             </configuration>
                         </execution>
                     </executions>
@@ -69,15 +80,27 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>webfx-platform-feature-boot</module>
-        <module>webfx-platform-feature-log</module>
-        <module>webfx-platform-feature-resource</module>
-        <module>webfx-platform-feature-scheduler</module>
-        <module>webfx-platform-feature-shutdown</module>
-        <module>webfx-platform-feature-storage</module>
-        <module>webfx-platform-feature-uischeduler</module>
-        <module>webfx-platform-gwt-emul-javabase</module>
-        <module>webfx-platform-independent-util</module>
+        <module>webfx-platform-boot</module>
+        <module>webfx-platform-boot-gwt</module>
+        <module>webfx-platform-boot-java</module>
+        <module>webfx-platform-console</module>
+        <module>webfx-platform-console-gwt</module>
+        <module>webfx-platform-console-java</module>
+        <module>webfx-platform-emul-javabase-gwt</module>
+        <module>webfx-platform-resource</module>
+        <module>webfx-platform-resource-gwt</module>
+        <module>webfx-platform-resource-java</module>
+        <module>webfx-platform-scheduler</module>
+        <module>webfx-platform-scheduler-java</module>
+        <module>webfx-platform-shutdown</module>
+        <module>webfx-platform-shutdown-gwt</module>
+        <module>webfx-platform-shutdown-java</module>
+        <module>webfx-platform-storage</module>
+        <module>webfx-platform-storage-gwt</module>
+        <module>webfx-platform-storage-java</module>
+        <module>webfx-platform-uischeduler</module>
+        <module>webfx-platform-uischeduler-gwt</module>
+        <module>webfx-platform-util</module>
     </modules>
 
 </project>
