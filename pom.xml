@@ -86,7 +86,7 @@
         <module>webfx-platform-console</module>
         <module>webfx-platform-console-gwt</module>
         <module>webfx-platform-console-java</module>
-        <module>webfx-platform-emul-javabase-gwt</module>
+        <module>webfx-platform-javabase-emul-gwt</module>
         <module>webfx-platform-resource</module>
         <module>webfx-platform-resource-gwt</module>
         <module>webfx-platform-resource-java</module>

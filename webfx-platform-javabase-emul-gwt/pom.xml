@@ -11,7 +11,7 @@
         <version>0.1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>webfx-platform-emul-javabase-gwt</artifactId>
+    <artifactId>webfx-platform-javabase-emul-gwt</artifactId>
 
 
     <properties>
