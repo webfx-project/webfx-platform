@@ -15,7 +15,7 @@ public class GwtResourceModuleBooter implements ApplicationModuleBooter {
 
     @Override
     public String getModuleName() {
-        return "webfx-platform-gwt-resource-impl";
+        return "webfx-platform-resource-gwt";
     }
 
     @Override
