@@ -7,9 +7,9 @@ module webfx.platform.windowlocation.java {
     requires webfx.platform.windowlocation;
 
     // Exported packages
-    exports dev.webfx.stack.platform.windowlocation.spi.impl.java;
+    exports dev.webfx.platform.windowlocation.spi.impl.java;
 
     // Provided services
-    provides dev.webfx.stack.platform.windowlocation.spi.WindowLocationProvider with dev.webfx.stack.platform.windowlocation.spi.impl.java.JavaWindowLocationProvider;
+    provides dev.webfx.platform.windowlocation.spi.WindowLocationProvider with dev.webfx.platform.windowlocation.spi.impl.java.JavaWindowLocationProvider;
 
 }

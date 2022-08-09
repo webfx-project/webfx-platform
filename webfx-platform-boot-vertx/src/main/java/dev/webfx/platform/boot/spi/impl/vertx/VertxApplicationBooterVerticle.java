@@ -5,7 +5,7 @@ import dev.webfx.platform.boot.spi.ApplicationBooterProvider;
 import dev.webfx.platform.boot.spi.ApplicationJob;
 import dev.webfx.platform.boot.spi.impl.ApplicationModuleBooterManager;
 import dev.webfx.platform.shutdown.Shutdown;
-import dev.webfx.stack.vertx.common.VertxInstance;
+import dev.webfx.platform.vertx.common.VertxInstance;
 import io.vertx.core.*;
 
 import java.util.ArrayList;

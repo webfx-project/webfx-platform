@@ -8,10 +8,10 @@ module webfx.platform.webassembly {
     requires webfx.platform.util;
 
     // Exported packages
-    exports dev.webfx.stack.platform.webassembly;
-    exports dev.webfx.stack.platform.webassembly.spi;
+    exports dev.webfx.platform.webassembly;
+    exports dev.webfx.platform.webassembly.spi;
 
     // Used services
-    uses dev.webfx.stack.platform.webassembly.spi.WebAssemblyProvider;
+    uses dev.webfx.platform.webassembly.spi.WebAssemblyProvider;
 
 }

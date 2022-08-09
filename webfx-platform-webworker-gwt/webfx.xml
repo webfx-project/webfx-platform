@@ -6,7 +6,7 @@
     </exported-packages>
 
     <providers>
-        <provider interface="dev.webfx.stack.platform.webworker.spi.WorkerServiceProvider">dev.webfx.stack.platform.webworker.spi.impl.gwt.GwtWorkerServiceProvider</provider>
+        <provider interface="dev.webfx.platform.webworker.spi.WorkerServiceProvider">dev.webfx.platform.webworker.spi.impl.gwt.GwtWorkerServiceProvider</provider>
     </providers>
 
     <dependencies>

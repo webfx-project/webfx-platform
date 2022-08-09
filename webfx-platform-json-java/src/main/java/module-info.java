@@ -6,9 +6,9 @@ module webfx.platform.json.java {
     requires webfx.platform.json;
 
     // Exported packages
-    exports dev.webfx.stack.platform.json.spi.impl.java;
+    exports dev.webfx.platform.json.spi.impl.java;
 
     // Provided services
-    provides dev.webfx.stack.platform.json.spi.JsonProvider with dev.webfx.stack.platform.json.spi.impl.java.JavaJsonProvider;
+    provides dev.webfx.platform.json.spi.JsonProvider with dev.webfx.platform.json.spi.impl.java.JavaJsonProvider;
 
 }

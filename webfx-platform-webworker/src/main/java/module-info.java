@@ -7,12 +7,12 @@ module webfx.platform.webworker {
     requires webfx.platform.util;
 
     // Exported packages
-    exports dev.webfx.stack.platform.webworker;
-    exports dev.webfx.stack.platform.webworker.pool;
-    exports dev.webfx.stack.platform.webworker.spi;
-    exports dev.webfx.stack.platform.webworker.spi.base;
+    exports dev.webfx.platform.webworker;
+    exports dev.webfx.platform.webworker.pool;
+    exports dev.webfx.platform.webworker.spi;
+    exports dev.webfx.platform.webworker.spi.base;
 
     // Used services
-    uses dev.webfx.stack.platform.webworker.spi.WorkerServiceProvider;
+    uses dev.webfx.platform.webworker.spi.WorkerServiceProvider;
 
 }

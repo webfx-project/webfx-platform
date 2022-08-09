@@ -6,7 +6,7 @@
     </exported-packages>
 
     <providers>
-        <provider interface="dev.webfx.stack.platform.windowhistory.spi.WindowHistoryProvider">dev.webfx.stack.platform.windowhistory.spi.impl.web.WebWindowHistoryProvider</provider>
+        <provider interface="dev.webfx.platform.windowhistory.spi.WindowHistoryProvider">dev.webfx.platform.windowhistory.spi.impl.web.WebWindowHistoryProvider</provider>
     </providers>
 
     <dependencies>

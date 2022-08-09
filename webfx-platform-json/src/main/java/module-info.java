@@ -8,14 +8,14 @@ module webfx.platform.json {
     requires webfx.platform.util;
 
     // Exported packages
-    exports dev.webfx.stack.platform.json;
-    exports dev.webfx.stack.platform.json.parser;
-    exports dev.webfx.stack.platform.json.parser.javacup;
-    exports dev.webfx.stack.platform.json.parser.jflex;
-    exports dev.webfx.stack.platform.json.spi;
-    exports dev.webfx.stack.platform.json.spi.impl.listmap;
+    exports dev.webfx.platform.json;
+    exports dev.webfx.platform.json.parser;
+    exports dev.webfx.platform.json.parser.javacup;
+    exports dev.webfx.platform.json.parser.jflex;
+    exports dev.webfx.platform.json.spi;
+    exports dev.webfx.platform.json.spi.impl.listmap;
 
     // Used services
-    uses dev.webfx.stack.platform.json.spi.JsonProvider;
+    uses dev.webfx.platform.json.spi.JsonProvider;
 
 }

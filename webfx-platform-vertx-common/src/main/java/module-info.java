@@ -6,6 +6,6 @@ module webfx.platform.vertx.common {
     requires io.vertx.core;
 
     // Exported packages
-    exports dev.webfx.stack.vertx.common;
+    exports dev.webfx.platform.vertx.common;
 
 }

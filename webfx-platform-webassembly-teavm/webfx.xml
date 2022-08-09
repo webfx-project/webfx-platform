@@ -6,7 +6,7 @@
     </exported-packages>
 
     <providers>
-        <provider interface="dev.webfx.stack.platform.webassembly.spi.WebAssemblyProvider">dev.webfx.stack.platform.webassembly.spi.impl.teavm.TeaVmWebAssemblyProvider</provider>
+        <provider interface="dev.webfx.platform.webassembly.spi.WebAssemblyProvider">dev.webfx.platform.webassembly.spi.impl.teavm.TeaVmWebAssemblyProvider</provider>
     </providers>
 
     <dependencies>

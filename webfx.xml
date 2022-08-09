@@ -527,8 +527,8 @@
             </dependencies>
 
             <source-packages>
-                <package>dev.webfx.stack.async</package>
-                <package>dev.webfx.stack.async.impl</package>
+                <package>dev.webfx.platform.async</package>
+                <package>dev.webfx.platform.async.impl</package>
             </source-packages>
 
             <used-by-source-modules>
@@ -768,12 +768,12 @@
             </dependencies>
 
             <source-packages>
-                <package>dev.webfx.stack.platform.json</package>
-                <package>dev.webfx.stack.platform.json.parser</package>
-                <package>dev.webfx.stack.platform.json.parser.javacup</package>
-                <package>dev.webfx.stack.platform.json.parser.jflex</package>
-                <package>dev.webfx.stack.platform.json.spi</package>
-                <package>dev.webfx.stack.platform.json.spi.impl.listmap</package>
+                <package>dev.webfx.platform.json</package>
+                <package>dev.webfx.platform.json.parser</package>
+                <package>dev.webfx.platform.json.parser.javacup</package>
+                <package>dev.webfx.platform.json.parser.jflex</package>
+                <package>dev.webfx.platform.json.spi</package>
+                <package>dev.webfx.platform.json.spi.impl.listmap</package>
             </source-packages>
 
             <used-by-source-modules>
@@ -783,7 +783,7 @@
             </used-by-source-modules>
 
             <used-services>
-                <required-service>dev.webfx.stack.platform.json.spi.JsonProvider</required-service>
+                <required-service>dev.webfx.platform.json.spi.JsonProvider</required-service>
             </used-services>
 
         </project>
@@ -795,7 +795,7 @@
             </exported-packages>
 
             <providers>
-                <provider interface="dev.webfx.stack.platform.json.spi.JsonProvider">dev.webfx.stack.platform.json.spi.impl.gwt.GwtJsonObject</provider>
+                <provider interface="dev.webfx.platform.json.spi.JsonProvider">dev.webfx.platform.json.spi.impl.gwt.GwtJsonObject</provider>
             </providers>
 
             <dependencies>
@@ -803,7 +803,7 @@
             </dependencies>
 
             <source-packages>
-                <package>dev.webfx.stack.platform.json.spi.impl.gwt</package>
+                <package>dev.webfx.platform.json.spi.impl.gwt</package>
             </source-packages>
 
             <used-by-source-modules>
@@ -820,7 +820,7 @@
             </exported-packages>
 
             <providers>
-                <provider interface="dev.webfx.stack.platform.json.spi.JsonProvider">dev.webfx.stack.platform.json.spi.impl.java.JavaJsonProvider</provider>
+                <provider interface="dev.webfx.platform.json.spi.JsonProvider">dev.webfx.platform.json.spi.impl.java.JavaJsonProvider</provider>
             </providers>
 
             <dependencies>
@@ -828,7 +828,7 @@
             </dependencies>
 
             <source-packages>
-                <package>dev.webfx.stack.platform.json.spi.impl.java</package>
+                <package>dev.webfx.platform.json.spi.impl.java</package>
             </source-packages>
 
             <used-by-source-modules>
@@ -844,7 +844,7 @@
             </exported-packages>
 
             <providers>
-                <provider interface="dev.webfx.stack.platform.json.spi.JsonProvider">dev.webfx.stack.platform.json.spi.impl.teavm.TeaVmJsonObject</provider>
+                <provider interface="dev.webfx.platform.json.spi.JsonProvider">dev.webfx.platform.json.spi.impl.teavm.TeaVmJsonObject</provider>
             </providers>
 
             <dependencies>
@@ -852,7 +852,7 @@
             </dependencies>
 
             <source-packages>
-                <package>dev.webfx.stack.platform.json.spi.impl.teavm</package>
+                <package>dev.webfx.platform.json.spi.impl.teavm</package>
             </source-packages>
 
             <used-by-source-modules>
@@ -870,7 +870,7 @@
             </exported-packages>
 
             <providers>
-                <provider interface="dev.webfx.stack.platform.json.spi.JsonProvider">dev.webfx.stack.platform.json.spi.impl.vertx.VertxJsonObject</provider>
+                <provider interface="dev.webfx.platform.json.spi.JsonProvider">dev.webfx.platform.json.spi.impl.vertx.VertxJsonObject</provider>
             </providers>
 
             <dependencies>
@@ -878,7 +878,7 @@
             </dependencies>
 
             <source-packages>
-                <package>dev.webfx.stack.platform.json.spi.impl.vertx</package>
+                <package>dev.webfx.platform.json.spi.impl.vertx</package>
             </source-packages>
 
             <used-by-source-modules>
@@ -1318,7 +1318,7 @@
             </required-libraries>
 
             <source-packages>
-                <package>dev.webfx.stack.vertx.common</package>
+                <package>dev.webfx.platform.vertx.common</package>
             </source-packages>
 
             <used-by-source-modules>
@@ -1338,8 +1338,8 @@
             </dependencies>
 
             <source-packages>
-                <package>dev.webfx.stack.platform.webassembly</package>
-                <package>dev.webfx.stack.platform.webassembly.spi</package>
+                <package>dev.webfx.platform.webassembly</package>
+                <package>dev.webfx.platform.webassembly.spi</package>
             </source-packages>
 
             <used-by-source-modules>
@@ -1349,7 +1349,7 @@
             </used-by-source-modules>
 
             <used-services>
-                <required-service>dev.webfx.stack.platform.webassembly.spi.WebAssemblyProvider</required-service>
+                <required-service>dev.webfx.platform.webassembly.spi.WebAssemblyProvider</required-service>
             </used-services>
 
         </project>
@@ -1361,7 +1361,7 @@
             </exported-packages>
 
             <providers>
-                <provider interface="dev.webfx.stack.platform.webassembly.spi.WebAssemblyProvider">dev.webfx.stack.platform.webassembly.spi.impl.teavm.TeaVmWebAssemblyProvider</provider>
+                <provider interface="dev.webfx.platform.webassembly.spi.WebAssemblyProvider">dev.webfx.platform.webassembly.spi.impl.teavm.TeaVmWebAssemblyProvider</provider>
             </providers>
 
             <dependencies>
@@ -1369,8 +1369,8 @@
             </dependencies>
 
             <source-packages>
-                <package>dev.webfx.stack.platform.webassembly.spi.impl.teavm</package>
-                <package>dev.webfx.stack.platform.webassembly.spi.impl.teavm.wasm</package>
+                <package>dev.webfx.platform.webassembly.spi.impl.teavm</package>
+                <package>dev.webfx.platform.webassembly.spi.impl.teavm.wasm</package>
             </source-packages>
 
             <used-by-source-modules>
@@ -1396,10 +1396,10 @@
             </dependencies>
 
             <source-packages>
-                <package>dev.webfx.stack.platform.webworker</package>
-                <package>dev.webfx.stack.platform.webworker.pool</package>
-                <package>dev.webfx.stack.platform.webworker.spi</package>
-                <package>dev.webfx.stack.platform.webworker.spi.base</package>
+                <package>dev.webfx.platform.webworker</package>
+                <package>dev.webfx.platform.webworker.pool</package>
+                <package>dev.webfx.platform.webworker.spi</package>
+                <package>dev.webfx.platform.webworker.spi.base</package>
             </source-packages>
 
             <used-by-source-modules>
@@ -1408,7 +1408,7 @@
             </used-by-source-modules>
 
             <used-services>
-                <required-service>dev.webfx.stack.platform.webworker.spi.WorkerServiceProvider</required-service>
+                <required-service>dev.webfx.platform.webworker.spi.WorkerServiceProvider</required-service>
             </used-services>
 
         </project>
@@ -1420,7 +1420,7 @@
             </exported-packages>
 
             <providers>
-                <provider interface="dev.webfx.stack.platform.webworker.spi.WorkerServiceProvider">dev.webfx.stack.platform.webworker.spi.impl.gwt.GwtWorkerServiceProvider</provider>
+                <provider interface="dev.webfx.platform.webworker.spi.WorkerServiceProvider">dev.webfx.platform.webworker.spi.impl.gwt.GwtWorkerServiceProvider</provider>
             </providers>
 
             <dependencies>
@@ -1428,7 +1428,7 @@
             </dependencies>
 
             <source-packages>
-                <package>dev.webfx.stack.platform.webworker.spi.impl.gwt</package>
+                <package>dev.webfx.platform.webworker.spi.impl.gwt</package>
             </source-packages>
 
             <used-by-source-modules>
@@ -1446,7 +1446,7 @@
             </exported-packages>
 
             <providers>
-                <provider interface="dev.webfx.stack.platform.webworker.spi.WorkerServiceProvider">dev.webfx.stack.platform.webworker.spi.impl.java.JavaWorkerServiceProvider</provider>
+                <provider interface="dev.webfx.platform.webworker.spi.WorkerServiceProvider">dev.webfx.platform.webworker.spi.impl.java.JavaWorkerServiceProvider</provider>
             </providers>
 
             <dependencies>
@@ -1454,7 +1454,7 @@
             </dependencies>
 
             <source-packages>
-                <package>dev.webfx.stack.platform.webworker.spi.impl.java</package>
+                <package>dev.webfx.platform.webworker.spi.impl.java</package>
             </source-packages>
 
             <used-by-source-modules>
@@ -1478,7 +1478,7 @@
             </dependencies>
 
             <source-packages>
-                <package>dev.webfx.stack.platform.webworker.spi.impl.teavm</package>
+                <package>dev.webfx.platform.webworker.spi.impl.teavm</package>
             </source-packages>
 
             <used-by-source-modules>
@@ -1502,9 +1502,9 @@
             </dependencies>
 
             <source-packages>
-                <package>dev.webfx.stack.platform.windowhistory</package>
-                <package>dev.webfx.stack.platform.windowhistory.spi</package>
-                <package>dev.webfx.stack.platform.windowhistory.spi.impl</package>
+                <package>dev.webfx.platform.windowhistory</package>
+                <package>dev.webfx.platform.windowhistory.spi</package>
+                <package>dev.webfx.platform.windowhistory.spi.impl</package>
             </source-packages>
 
             <used-by-source-modules>
@@ -1516,7 +1516,7 @@
             </used-by-source-modules>
 
             <used-services>
-                <required-service>dev.webfx.stack.platform.windowhistory.spi.WindowHistoryProvider</required-service>
+                <required-service>dev.webfx.platform.windowhistory.spi.WindowHistoryProvider</required-service>
             </used-services>
 
         </project>
@@ -1528,7 +1528,7 @@
             </exported-packages>
 
             <providers>
-                <provider interface="dev.webfx.stack.platform.windowhistory.spi.impl.web.JsWindowHistory">dev.webfx.stack.platform.windowhistory.spi.impl.gwt.GwtJsWindowHistory</provider>
+                <provider interface="dev.webfx.platform.windowhistory.spi.impl.web.JsWindowHistory">dev.webfx.platform.windowhistory.spi.impl.gwt.GwtJsWindowHistory</provider>
             </providers>
 
             <dependencies>
@@ -1536,8 +1536,8 @@
             </dependencies>
 
             <source-packages>
-                <package>dev.webfx.stack.platform.windowhistory.spi.impl.gwt</package>
-                <package>dev.webfx.stack.platform.windowhistory.spi.impl.gwt.jsinterop</package>
+                <package>dev.webfx.platform.windowhistory.spi.impl.gwt</package>
+                <package>dev.webfx.platform.windowhistory.spi.impl.gwt.jsinterop</package>
             </source-packages>
 
             <used-by-source-modules>
@@ -1559,7 +1559,7 @@
             </exported-packages>
 
             <providers>
-                <provider interface="dev.webfx.stack.platform.windowhistory.spi.WindowHistoryProvider">dev.webfx.stack.platform.windowhistory.spi.impl.java.JavaWindowHistoryProvider</provider>
+                <provider interface="dev.webfx.platform.windowhistory.spi.WindowHistoryProvider">dev.webfx.platform.windowhistory.spi.impl.java.JavaWindowHistoryProvider</provider>
             </providers>
 
             <dependencies>
@@ -1567,7 +1567,7 @@
             </dependencies>
 
             <source-packages>
-                <package>dev.webfx.stack.platform.windowhistory.spi.impl.java</package>
+                <package>dev.webfx.platform.windowhistory.spi.impl.java</package>
             </source-packages>
 
             <used-by-source-modules>
@@ -1583,7 +1583,7 @@
             </exported-packages>
 
             <providers>
-                <provider interface="dev.webfx.stack.platform.windowhistory.spi.WindowHistoryProvider">dev.webfx.stack.platform.windowhistory.spi.impl.web.WebWindowHistoryProvider</provider>
+                <provider interface="dev.webfx.platform.windowhistory.spi.WindowHistoryProvider">dev.webfx.platform.windowhistory.spi.impl.web.WebWindowHistoryProvider</provider>
             </providers>
 
             <dependencies>
@@ -1591,7 +1591,7 @@
             </dependencies>
 
             <source-packages>
-                <package>dev.webfx.stack.platform.windowhistory.spi.impl.web</package>
+                <package>dev.webfx.platform.windowhistory.spi.impl.web</package>
             </source-packages>
 
             <used-by-source-modules>
@@ -1606,7 +1606,7 @@
             </used-by-source-modules>
 
             <used-services>
-                <required-service>dev.webfx.stack.platform.windowhistory.spi.impl.web.JsWindowHistory</required-service>
+                <required-service>dev.webfx.platform.windowhistory.spi.impl.web.JsWindowHistory</required-service>
             </used-services>
 
         </project>
@@ -1622,9 +1622,9 @@
             </dependencies>
 
             <source-packages>
-                <package>dev.webfx.stack.platform.windowlocation</package>
-                <package>dev.webfx.stack.platform.windowlocation.spi</package>
-                <package>dev.webfx.stack.platform.windowlocation.spi.impl</package>
+                <package>dev.webfx.platform.windowlocation</package>
+                <package>dev.webfx.platform.windowlocation.spi</package>
+                <package>dev.webfx.platform.windowlocation.spi.impl</package>
             </source-packages>
 
             <used-by-source-modules>
@@ -1634,7 +1634,7 @@
             </used-by-source-modules>
 
             <used-services>
-                <required-service>dev.webfx.stack.platform.windowlocation.spi.WindowLocationProvider</required-service>
+                <required-service>dev.webfx.platform.windowlocation.spi.WindowLocationProvider</required-service>
             </used-services>
 
         </project>
@@ -1646,7 +1646,7 @@
             </exported-packages>
 
             <providers>
-                <provider interface="dev.webfx.stack.platform.windowlocation.spi.WindowLocationProvider">dev.webfx.stack.platform.windowlocation.spi.impl.gwt.GwtWindowLocationProvider</provider>
+                <provider interface="dev.webfx.platform.windowlocation.spi.WindowLocationProvider">dev.webfx.platform.windowlocation.spi.impl.gwt.GwtWindowLocationProvider</provider>
             </providers>
 
             <dependencies>
@@ -1654,8 +1654,8 @@
             </dependencies>
 
             <source-packages>
-                <package>dev.webfx.stack.platform.windowlocation.spi.impl.gwt</package>
-                <package>dev.webfx.stack.platform.windowlocation.spi.impl.gwt.jsinterop</package>
+                <package>dev.webfx.platform.windowlocation.spi.impl.gwt</package>
+                <package>dev.webfx.platform.windowlocation.spi.impl.gwt.jsinterop</package>
             </source-packages>
 
             <used-by-source-modules>
@@ -1674,7 +1674,7 @@
             </exported-packages>
 
             <providers>
-                <provider interface="dev.webfx.stack.platform.windowlocation.spi.WindowLocationProvider">dev.webfx.stack.platform.windowlocation.spi.impl.java.JavaWindowLocationProvider</provider>
+                <provider interface="dev.webfx.platform.windowlocation.spi.WindowLocationProvider">dev.webfx.platform.windowlocation.spi.impl.java.JavaWindowLocationProvider</provider>
             </providers>
 
             <dependencies>
@@ -1682,7 +1682,7 @@
             </dependencies>
 
             <source-packages>
-                <package>dev.webfx.stack.platform.windowlocation.spi.impl.java</package>
+                <package>dev.webfx.platform.windowlocation.spi.impl.java</package>
             </source-packages>
 
             <used-by-source-modules>

@@ -9,9 +9,9 @@ module webfx.platform.json.vertx {
     requires webfx.platform.util;
 
     // Exported packages
-    exports dev.webfx.stack.platform.json.spi.impl.vertx;
+    exports dev.webfx.platform.json.spi.impl.vertx;
 
     // Provided services
-    provides dev.webfx.stack.platform.json.spi.JsonProvider with dev.webfx.stack.platform.json.spi.impl.vertx.VertxJsonObject;
+    provides dev.webfx.platform.json.spi.JsonProvider with dev.webfx.platform.json.spi.impl.vertx.VertxJsonObject;
 
 }

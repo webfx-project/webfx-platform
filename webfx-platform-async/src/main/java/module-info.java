@@ -8,7 +8,7 @@ module webfx.platform.async {
     requires webfx.platform.util;
 
     // Exported packages
-    exports dev.webfx.stack.async;
-    exports dev.webfx.stack.async.impl;
+    exports dev.webfx.platform.async;
+    exports dev.webfx.platform.async.impl;
 
 }

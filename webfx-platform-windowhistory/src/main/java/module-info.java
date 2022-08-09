@@ -10,11 +10,11 @@ module webfx.platform.windowhistory {
     requires webfx.platform.windowlocation;
 
     // Exported packages
-    exports dev.webfx.stack.platform.windowhistory;
-    exports dev.webfx.stack.platform.windowhistory.spi;
-    exports dev.webfx.stack.platform.windowhistory.spi.impl;
+    exports dev.webfx.platform.windowhistory;
+    exports dev.webfx.platform.windowhistory.spi;
+    exports dev.webfx.platform.windowhistory.spi.impl;
 
     // Used services
-    uses dev.webfx.stack.platform.windowhistory.spi.WindowHistoryProvider;
+    uses dev.webfx.platform.windowhistory.spi.WindowHistoryProvider;
 
 }
