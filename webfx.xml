@@ -60,7 +60,14 @@
 
     <required-libraries>
 
-        <webfx-library artifact="dev.webfx:webfx-parent:0.1.0-SNAPSHOT"/>
+        <group>
+            <groupId>dev.webfx</groupId>
+            <version>0.1.0-SNAPSHOT</version>
+
+            <webfx-library name="webfx-parent"/>
+            <webfx-library name="webfx-lib-javacupruntime"/>
+        </group>
+
 
         <group>
             <groupId>org.gwtproject</groupId>
@@ -138,7 +145,112 @@
                 <package>jsinterop.base</package>
             </exported-packages>
         </library>
-    
+
+        <library name="com-zaxxer-hikari">
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <exported-packages>
+                <package>com.zaxxer.hikari</package>
+            </exported-packages>
+        </library>
+
+        <library name="Java-WebSocket">
+            <groupId>org.java-websocket</groupId>
+            <exported-packages>
+                <package>org.java_websocket</package>
+                <package>org.java_websocket.client</package>
+                <package>org.java_websocket.drafts</package>
+                <package>org.java_websocket.enums</package>
+                <package>org.java_websocket.handshake</package>
+            </exported-packages>
+        </library>
+
+        <group>
+            <groupId>org.teavm</groupId>
+
+            <library name="teavm-interop">
+                <exported-packages>
+                    <package>org.teavm.interop</package>
+                </exported-packages>
+            </library>
+
+            <library name="teavm-jso">
+                <exported-packages>
+                    <package>org.teavm.jso</package>
+                </exported-packages>
+            </library>
+
+            <library name="teavm-jso-apis">
+                <exported-packages>
+                    <package>org.teavm.jso.core</package>
+                    <package>org.teavm.jso.dom.events</package>
+                    <package>org.teavm.jso.typedarrays</package>
+                </exported-packages>
+            </library>
+
+        </group>
+
+        <group>
+            <groupId>io.vertx</groupId>
+
+            <library name="io-vertx-core">
+                <artifactId>vertx-core</artifactId>
+                <exported-packages>
+                    <package>io.vertx.core</package>
+                    <package>io.vertx.core.eventbus</package>
+                    <package>io.vertx.core.eventbus.impl</package>
+                    <package>io.vertx.core.http</package>
+                    <package>io.vertx.core.json</package>
+                    <package>io.vertx.core.net</package>
+                    <package>io.vertx.core.spi.cluster</package>
+                </exported-packages>
+            </library>
+
+            <library name="io-vertx-eventbusbridge-common">
+                <artifactId>vertx-bridge-common</artifactId>
+                <exported-packages>
+                    <package>io.vertx.ext.bridge</package>
+                </exported-packages>
+            </library>
+
+            <library name="io-vertx-client-jdbc">
+                <artifactId>vertx-jdbc-client</artifactId>
+                <exported-packages>
+                    <package>io.vertx.jdbcclient</package>
+                </exported-packages>
+            </library>
+
+            <library name="io-vertx-client-sql">
+                <artifactId>vertx-sql-client</artifactId>
+                <exported-packages>
+                    <package>io.vertx.sqlclient</package>
+                </exported-packages>
+            </library>
+
+            <library name="io-vertx-client-sql-pg">
+                <artifactId>vertx-pg-client</artifactId>
+                <exported-packages>
+                    <package>io.vertx.pgclient</package>
+                </exported-packages>
+            </library>
+
+            <library name="io-vertx-web">
+                <artifactId>vertx-web</artifactId>
+                <exported-packages>
+                    <package>io.vertx.ext.web</package>
+                    <package>io.vertx.ext.web.handler</package>
+                    <package>io.vertx.ext.web.handler.sockjs</package>
+                </exported-packages>
+            </library>
+
+        </group>
+
+        <!-- Additional library required at runtime when authenticating to a postgres database in a docker container -->
+        <library name="com-ongres-scram-client">
+            <artifactId>client</artifactId>
+            <groupId>com.ongres.scram</groupId>
+        </library>
+
     </required-libraries>
 
     <!--
@@ -162,18 +274,26 @@
         <project name="webfx-platform">
 
             <modules>
+                <module>webfx-platform-async</module>
                 <module>webfx-platform-boot</module>
                 <module>webfx-platform-boot-gwt</module>
                 <module>webfx-platform-boot-java</module>
+                <module>webfx-platform-boot-vertx</module>
                 <module>webfx-platform-console</module>
                 <module>webfx-platform-console-gwt</module>
                 <module>webfx-platform-console-java</module>
                 <module>webfx-platform-javabase-emul-gwt</module>
+                <module>webfx-platform-json</module>
+                <module>webfx-platform-json-gwt</module>
+                <module>webfx-platform-json-java</module>
+                <module>webfx-platform-json-teavm</module>
+                <module>webfx-platform-json-vertx</module>
                 <module>webfx-platform-resource</module>
                 <module>webfx-platform-resource-gwt</module>
                 <module>webfx-platform-resource-java</module>
                 <module>webfx-platform-scheduler</module>
                 <module>webfx-platform-scheduler-java</module>
+                <module>webfx-platform-scheduler-vertx</module>
                 <module>webfx-platform-shutdown</module>
                 <module>webfx-platform-shutdown-gwt</module>
                 <module>webfx-platform-shutdown-java</module>
@@ -183,11 +303,32 @@
                 <module>webfx-platform-uischeduler</module>
                 <module>webfx-platform-uischeduler-gwt</module>
                 <module>webfx-platform-util</module>
+                <module>webfx-platform-vertx-common</module>
+                <module>webfx-platform-webassembly</module>
+                <module>webfx-platform-webassembly-teavm</module>
+                <module>webfx-platform-webworker</module>
+                <module>webfx-platform-webworker-gwt</module>
+                <module>webfx-platform-webworker-java</module>
+                <module>webfx-platform-webworker-teavm</module>
+                <module>webfx-platform-windowhistory</module>
+                <module>webfx-platform-windowhistory-gwt</module>
+                <module>webfx-platform-windowhistory-java</module>
+                <module>webfx-platform-windowhistory-web</module>
+                <module>webfx-platform-windowlocation</module>
+                <module>webfx-platform-windowlocation-gwt</module>
+                <module>webfx-platform-windowlocation-java</module>
             </modules>
 
             <required-libraries>
 
-                <webfx-library artifact="dev.webfx:webfx-parent:0.1.0-SNAPSHOT"/>
+                <group>
+                    <groupId>dev.webfx</groupId>
+                    <version>0.1.0-SNAPSHOT</version>
+
+                    <webfx-library name="webfx-parent"/>
+                    <webfx-library name="webfx-lib-javacupruntime"/>
+                </group>
+
 
                 <group>
                     <groupId>org.gwtproject</groupId>
@@ -265,8 +406,136 @@
                         <package>jsinterop.base</package>
                     </exported-packages>
                 </library>
-    
+
+                <library name="com-zaxxer-hikari">
+                    <groupId>com.zaxxer</groupId>
+                    <artifactId>HikariCP</artifactId>
+                    <exported-packages>
+                        <package>com.zaxxer.hikari</package>
+                    </exported-packages>
+                </library>
+
+                <library name="Java-WebSocket">
+                    <groupId>org.java-websocket</groupId>
+                    <exported-packages>
+                        <package>org.java_websocket</package>
+                        <package>org.java_websocket.client</package>
+                        <package>org.java_websocket.drafts</package>
+                        <package>org.java_websocket.enums</package>
+                        <package>org.java_websocket.handshake</package>
+                    </exported-packages>
+                </library>
+
+                <group>
+                    <groupId>org.teavm</groupId>
+
+                    <library name="teavm-interop">
+                        <exported-packages>
+                            <package>org.teavm.interop</package>
+                        </exported-packages>
+                    </library>
+
+                    <library name="teavm-jso">
+                        <exported-packages>
+                            <package>org.teavm.jso</package>
+                        </exported-packages>
+                    </library>
+
+                    <library name="teavm-jso-apis">
+                        <exported-packages>
+                            <package>org.teavm.jso.core</package>
+                            <package>org.teavm.jso.dom.events</package>
+                            <package>org.teavm.jso.typedarrays</package>
+                        </exported-packages>
+                    </library>
+
+                </group>
+
+                <group>
+                    <groupId>io.vertx</groupId>
+
+                    <library name="io-vertx-core">
+                        <artifactId>vertx-core</artifactId>
+                        <exported-packages>
+                            <package>io.vertx.core</package>
+                            <package>io.vertx.core.eventbus</package>
+                            <package>io.vertx.core.eventbus.impl</package>
+                            <package>io.vertx.core.http</package>
+                            <package>io.vertx.core.json</package>
+                            <package>io.vertx.core.net</package>
+                            <package>io.vertx.core.spi.cluster</package>
+                        </exported-packages>
+                    </library>
+
+                    <library name="io-vertx-eventbusbridge-common">
+                        <artifactId>vertx-bridge-common</artifactId>
+                        <exported-packages>
+                            <package>io.vertx.ext.bridge</package>
+                        </exported-packages>
+                    </library>
+
+                    <library name="io-vertx-client-jdbc">
+                        <artifactId>vertx-jdbc-client</artifactId>
+                        <exported-packages>
+                            <package>io.vertx.jdbcclient</package>
+                        </exported-packages>
+                    </library>
+
+                    <library name="io-vertx-client-sql">
+                        <artifactId>vertx-sql-client</artifactId>
+                        <exported-packages>
+                            <package>io.vertx.sqlclient</package>
+                        </exported-packages>
+                    </library>
+
+                    <library name="io-vertx-client-sql-pg">
+                        <artifactId>vertx-pg-client</artifactId>
+                        <exported-packages>
+                            <package>io.vertx.pgclient</package>
+                        </exported-packages>
+                    </library>
+
+                    <library name="io-vertx-web">
+                        <artifactId>vertx-web</artifactId>
+                        <exported-packages>
+                            <package>io.vertx.ext.web</package>
+                            <package>io.vertx.ext.web.handler</package>
+                            <package>io.vertx.ext.web.handler.sockjs</package>
+                        </exported-packages>
+                    </library>
+
+                </group>
+
+                <!-- Additional library required at runtime when authenticating to a postgres database in a docker container -->
+                <library name="com-ongres-scram-client">
+                    <artifactId>client</artifactId>
+                    <groupId>com.ongres.scram</groupId>
+                </library>
+
             </required-libraries>
+
+        </project>
+
+        <project name="webfx-platform-async">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <dependencies>
+                <used-by-source-modules/>
+            </dependencies>
+
+            <source-packages>
+                <package>dev.webfx.stack.async</package>
+                <package>dev.webfx.stack.async.impl</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>java.base</module>
+                <module>java.logging</module>
+                <module>webfx-platform-util</module>
+            </used-by-source-modules>
 
         </project>
 
@@ -350,6 +619,37 @@
 
             <used-by-source-modules>
                 <module>webfx-platform-boot</module>
+            </used-by-source-modules>
+
+        </project>
+
+        <project name="webfx-platform-boot-vertx">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <providers>
+                <provider interface="dev.webfx.platform.boot.spi.ApplicationBooterProvider">dev.webfx.platform.boot.spi.impl.vertx.VertxApplicationBooterVerticle</provider>
+            </providers>
+
+            <dependencies>
+                <used-by-source-modules/>
+            </dependencies>
+
+            <source-packages>
+                <package>dev.webfx.platform.boot.spi.impl.vertx</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>io-vertx-core</module>
+                <module>io-vertx-eventbusbridge-common</module>
+                <module>io-vertx-web</module>
+                <module>java-nio-emul</module>
+                <module>java.base</module>
+                <module>webfx-platform-boot</module>
+                <module>webfx-platform-shutdown</module>
+                <module>webfx-platform-vertx-common</module>
             </used-by-source-modules>
 
         </project>
@@ -453,6 +753,139 @@
             <used-by-source-modules>
                 <module>gwt-user</module>
                 <module>java.base</module>
+            </used-by-source-modules>
+
+        </project>
+
+        <project name="webfx-platform-json">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <dependencies>
+                <used-by-source-modules/>
+            </dependencies>
+
+            <source-packages>
+                <package>dev.webfx.stack.platform.json</package>
+                <package>dev.webfx.stack.platform.json.parser</package>
+                <package>dev.webfx.stack.platform.json.parser.javacup</package>
+                <package>dev.webfx.stack.platform.json.parser.jflex</package>
+                <package>dev.webfx.stack.platform.json.spi</package>
+                <package>dev.webfx.stack.platform.json.spi.impl.listmap</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>java.base</module>
+                <module>webfx-lib-javacupruntime</module>
+                <module>webfx-platform-util</module>
+            </used-by-source-modules>
+
+            <used-services>
+                <required-service>dev.webfx.stack.platform.json.spi.JsonProvider</required-service>
+            </used-services>
+
+        </project>
+
+        <project name="webfx-platform-json-gwt">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <providers>
+                <provider interface="dev.webfx.stack.platform.json.spi.JsonProvider">dev.webfx.stack.platform.json.spi.impl.gwt.GwtJsonObject</provider>
+            </providers>
+
+            <dependencies>
+                <used-by-source-modules/>
+            </dependencies>
+
+            <source-packages>
+                <package>dev.webfx.stack.platform.json.spi.impl.gwt</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>gwt-user</module>
+                <module>webfx-platform-json</module>
+            </used-by-source-modules>
+
+        </project>
+
+        <project name="webfx-platform-json-java">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <providers>
+                <provider interface="dev.webfx.stack.platform.json.spi.JsonProvider">dev.webfx.stack.platform.json.spi.impl.java.JavaJsonProvider</provider>
+            </providers>
+
+            <dependencies>
+                <used-by-source-modules/>
+            </dependencies>
+
+            <source-packages>
+                <package>dev.webfx.stack.platform.json.spi.impl.java</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>webfx-platform-json</module>
+            </used-by-source-modules>
+
+        </project>
+
+        <project name="webfx-platform-json-teavm">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <providers>
+                <provider interface="dev.webfx.stack.platform.json.spi.JsonProvider">dev.webfx.stack.platform.json.spi.impl.teavm.TeaVmJsonObject</provider>
+            </providers>
+
+            <dependencies>
+                <used-by-source-modules/>
+            </dependencies>
+
+            <source-packages>
+                <package>dev.webfx.stack.platform.json.spi.impl.teavm</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>teavm-jso</module>
+                <module>teavm-jso-apis</module>
+                <module>webfx-platform-json</module>
+            </used-by-source-modules>
+
+        </project>
+
+        <project name="webfx-platform-json-vertx">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <providers>
+                <provider interface="dev.webfx.stack.platform.json.spi.JsonProvider">dev.webfx.stack.platform.json.spi.impl.vertx.VertxJsonObject</provider>
+            </providers>
+
+            <dependencies>
+                <used-by-source-modules/>
+            </dependencies>
+
+            <source-packages>
+                <package>dev.webfx.stack.platform.json.spi.impl.vertx</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>io-vertx-core</module>
+                <module>java.base</module>
+                <module>webfx-platform-json</module>
+                <module>webfx-platform-util</module>
             </used-by-source-modules>
 
         </project>
@@ -590,6 +1023,32 @@
                 <module>java.base</module>
                 <module>webfx-platform-console</module>
                 <module>webfx-platform-scheduler</module>
+            </used-by-source-modules>
+
+        </project>
+
+        <project name="webfx-platform-scheduler-vertx">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <providers>
+                <provider interface="dev.webfx.platform.scheduler.spi.SchedulerProvider">dev.webfx.platform.scheduler.spi.impl.vertx.VertxSchedulerProvider</provider>
+            </providers>
+
+            <dependencies>
+                <used-by-source-modules/>
+            </dependencies>
+
+            <source-packages>
+                <package>dev.webfx.platform.scheduler.spi.impl.vertx</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>io-vertx-core</module>
+                <module>webfx-platform-scheduler</module>
+                <module>webfx-platform-vertx-common</module>
             </used-by-source-modules>
 
         </project>
@@ -830,6 +1289,405 @@
             <used-by-source-modules>
                 <module>java.base</module>
                 <module>java.logging</module>
+            </used-by-source-modules>
+
+        </project>
+
+        <project name="webfx-platform-vertx-common">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <dependencies>
+                <used-by-source-modules/>
+                <plugin-module>org.slf4j.jul</plugin-module>
+            </dependencies>
+
+            <required-libraries>
+                <library name="org.slf4j.jul">
+                    <artifactId>slf4j-jdk14</artifactId>
+                    <groupId>org.slf4j</groupId>
+                    <version>1.7.36</version>
+        
+                    <exported-packages>
+                        <package>org.slf4j.impl</package>
+                    </exported-packages>
+
+                </library>
+            </required-libraries>
+
+            <source-packages>
+                <package>dev.webfx.stack.vertx.common</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>io-vertx-core</module>
+            </used-by-source-modules>
+
+        </project>
+
+        <project name="webfx-platform-webassembly">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <dependencies>
+                <used-by-source-modules/>
+            </dependencies>
+
+            <source-packages>
+                <package>dev.webfx.stack.platform.webassembly</package>
+                <package>dev.webfx.stack.platform.webassembly.spi</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>java.base</module>
+                <module>webfx-platform-async</module>
+                <module>webfx-platform-util</module>
+            </used-by-source-modules>
+
+            <used-services>
+                <required-service>dev.webfx.stack.platform.webassembly.spi.WebAssemblyProvider</required-service>
+            </used-services>
+
+        </project>
+
+        <project name="webfx-platform-webassembly-teavm">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <providers>
+                <provider interface="dev.webfx.stack.platform.webassembly.spi.WebAssemblyProvider">dev.webfx.stack.platform.webassembly.spi.impl.teavm.TeaVmWebAssemblyProvider</provider>
+            </providers>
+
+            <dependencies>
+                <used-by-source-modules/>
+            </dependencies>
+
+            <source-packages>
+                <package>dev.webfx.stack.platform.webassembly.spi.impl.teavm</package>
+                <package>dev.webfx.stack.platform.webassembly.spi.impl.teavm.wasm</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>java-nio-emul</module>
+                <module>teavm-interop</module>
+                <module>teavm-jso</module>
+                <module>teavm-jso-apis</module>
+                <module>webfx-platform-async</module>
+                <module>webfx-platform-json</module>
+                <module>webfx-platform-webassembly</module>
+            </used-by-source-modules>
+
+        </project>
+
+        <project name="webfx-platform-webworker">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <dependencies>
+                <used-by-source-modules/>
+            </dependencies>
+
+            <source-packages>
+                <package>dev.webfx.stack.platform.webworker</package>
+                <package>dev.webfx.stack.platform.webworker.pool</package>
+                <package>dev.webfx.stack.platform.webworker.spi</package>
+                <package>dev.webfx.stack.platform.webworker.spi.base</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>java.base</module>
+                <module>webfx-platform-util</module>
+            </used-by-source-modules>
+
+            <used-services>
+                <required-service>dev.webfx.stack.platform.webworker.spi.WorkerServiceProvider</required-service>
+            </used-services>
+
+        </project>
+
+        <project name="webfx-platform-webworker-gwt">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <providers>
+                <provider interface="dev.webfx.stack.platform.webworker.spi.WorkerServiceProvider">dev.webfx.stack.platform.webworker.spi.impl.gwt.GwtWorkerServiceProvider</provider>
+            </providers>
+
+            <dependencies>
+                <used-by-source-modules/>
+            </dependencies>
+
+            <source-packages>
+                <package>dev.webfx.stack.platform.webworker.spi.impl.gwt</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>elemental2-dom</module>
+                <module>java.base</module>
+                <module>webfx-platform-webworker</module>
+            </used-by-source-modules>
+
+        </project>
+
+        <project name="webfx-platform-webworker-java">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <providers>
+                <provider interface="dev.webfx.stack.platform.webworker.spi.WorkerServiceProvider">dev.webfx.stack.platform.webworker.spi.impl.java.JavaWorkerServiceProvider</provider>
+            </providers>
+
+            <dependencies>
+                <used-by-source-modules/>
+            </dependencies>
+
+            <source-packages>
+                <package>dev.webfx.stack.platform.webworker.spi.impl.java</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>java.base</module>
+                <module>webfx-platform-console</module>
+                <module>webfx-platform-json</module>
+                <module>webfx-platform-uischeduler</module>
+                <module>webfx-platform-webworker</module>
+            </used-by-source-modules>
+
+        </project>
+
+        <project name="webfx-platform-webworker-teavm">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <dependencies>
+                <used-by-source-modules/>
+            </dependencies>
+
+            <source-packages>
+                <package>dev.webfx.stack.platform.webworker.spi.impl.teavm</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>java.base</module>
+                <module>teavm-interop</module>
+                <module>teavm-jso</module>
+                <module>teavm-jso-apis</module>
+                <module>webfx-platform-webworker</module>
+            </used-by-source-modules>
+
+        </project>
+
+        <project name="webfx-platform-windowhistory">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <dependencies>
+                <used-by-source-modules/>
+            </dependencies>
+
+            <source-packages>
+                <package>dev.webfx.stack.platform.windowhistory</package>
+                <package>dev.webfx.stack.platform.windowhistory.spi</package>
+                <package>dev.webfx.stack.platform.windowhistory.spi.impl</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>java.base</module>
+                <module>webfx-platform-async</module>
+                <module>webfx-platform-json</module>
+                <module>webfx-platform-util</module>
+                <module>webfx-platform-windowlocation</module>
+            </used-by-source-modules>
+
+            <used-services>
+                <required-service>dev.webfx.stack.platform.windowhistory.spi.WindowHistoryProvider</required-service>
+            </used-services>
+
+        </project>
+
+        <project name="webfx-platform-windowhistory-gwt">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <providers>
+                <provider interface="dev.webfx.stack.platform.windowhistory.spi.impl.web.JsWindowHistory">dev.webfx.stack.platform.windowhistory.spi.impl.gwt.GwtJsWindowHistory</provider>
+            </providers>
+
+            <dependencies>
+                <used-by-source-modules/>
+            </dependencies>
+
+            <source-packages>
+                <package>dev.webfx.stack.platform.windowhistory.spi.impl.gwt</package>
+                <package>dev.webfx.stack.platform.windowhistory.spi.impl.gwt.jsinterop</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>gwt-user</module>
+                <module>java.base</module>
+                <module>jsinterop-annotations</module>
+                <module>webfx-platform-async</module>
+                <module>webfx-platform-json</module>
+                <module>webfx-platform-json-gwt</module>
+                <module>webfx-platform-windowhistory-web</module>
+            </used-by-source-modules>
+
+        </project>
+
+        <project name="webfx-platform-windowhistory-java">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <providers>
+                <provider interface="dev.webfx.stack.platform.windowhistory.spi.WindowHistoryProvider">dev.webfx.stack.platform.windowhistory.spi.impl.java.JavaWindowHistoryProvider</provider>
+            </providers>
+
+            <dependencies>
+                <used-by-source-modules/>
+            </dependencies>
+
+            <source-packages>
+                <package>dev.webfx.stack.platform.windowhistory.spi.impl.java</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>webfx-platform-windowhistory</module>
+            </used-by-source-modules>
+
+        </project>
+
+        <project name="webfx-platform-windowhistory-web">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <providers>
+                <provider interface="dev.webfx.stack.platform.windowhistory.spi.WindowHistoryProvider">dev.webfx.stack.platform.windowhistory.spi.impl.web.WebWindowHistoryProvider</provider>
+            </providers>
+
+            <dependencies>
+                <used-by-source-modules/>
+            </dependencies>
+
+            <source-packages>
+                <package>dev.webfx.stack.platform.windowhistory.spi.impl.web</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>java.base</module>
+                <module>webfx-platform-async</module>
+                <module>webfx-platform-console</module>
+                <module>webfx-platform-json</module>
+                <module>webfx-platform-uischeduler</module>
+                <module>webfx-platform-util</module>
+                <module>webfx-platform-windowhistory</module>
+                <module>webfx-platform-windowlocation</module>
+            </used-by-source-modules>
+
+            <used-services>
+                <required-service>dev.webfx.stack.platform.windowhistory.spi.impl.web.JsWindowHistory</required-service>
+            </used-services>
+
+        </project>
+
+        <project name="webfx-platform-windowlocation">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <dependencies>
+                <used-by-source-modules/>
+            </dependencies>
+
+            <source-packages>
+                <package>dev.webfx.stack.platform.windowlocation</package>
+                <package>dev.webfx.stack.platform.windowlocation.spi</package>
+                <package>dev.webfx.stack.platform.windowlocation.spi.impl</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>java.base</module>
+                <module>webfx-platform-json</module>
+                <module>webfx-platform-util</module>
+            </used-by-source-modules>
+
+            <used-services>
+                <required-service>dev.webfx.stack.platform.windowlocation.spi.WindowLocationProvider</required-service>
+            </used-services>
+
+        </project>
+
+        <project name="webfx-platform-windowlocation-gwt">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <providers>
+                <provider interface="dev.webfx.stack.platform.windowlocation.spi.WindowLocationProvider">dev.webfx.stack.platform.windowlocation.spi.impl.gwt.GwtWindowLocationProvider</provider>
+            </providers>
+
+            <dependencies>
+                <used-by-source-modules/>
+            </dependencies>
+
+            <source-packages>
+                <package>dev.webfx.stack.platform.windowlocation.spi.impl.gwt</package>
+                <package>dev.webfx.stack.platform.windowlocation.spi.impl.gwt.jsinterop</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>gwt-user</module>
+                <module>jsinterop-annotations</module>
+                <module>webfx-platform-util</module>
+                <module>webfx-platform-windowlocation</module>
+            </used-by-source-modules>
+
+        </project>
+
+        <project name="webfx-platform-windowlocation-java">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <providers>
+                <provider interface="dev.webfx.stack.platform.windowlocation.spi.WindowLocationProvider">dev.webfx.stack.platform.windowlocation.spi.impl.java.JavaWindowLocationProvider</provider>
+            </providers>
+
+            <dependencies>
+                <used-by-source-modules/>
+            </dependencies>
+
+            <source-packages>
+                <package>dev.webfx.stack.platform.windowlocation.spi.impl.java</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>webfx-platform-windowhistory</module>
+                <module>webfx-platform-windowlocation</module>
             </used-by-source-modules>
 
         </project>

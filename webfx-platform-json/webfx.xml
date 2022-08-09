@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+
+    <exported-packages>
+        <source-packages/>
+    </exported-packages>
+
+    <dependencies>
+        <used-by-source-modules/>
+    </dependencies>
+
+    <maven-pom-manual>
+        <build>
+            <plugins>
+
+                <!-- Calling the Java CUP plugin to generate JavaCupJsonParser.java and JsonSymbols.java from the JsonParser.cup grammar file -->
+                <plugin>
+                    <groupId>com.github.vbmacher</groupId>
+                    <artifactId>cup-maven-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>json-parser</id>
+                            <goals>
+                                <goal>generate</goal>
+                            </goals>
+                            <configuration>
+                                <cupDefinition>src/main/java/dev/webfx/stack/platform/json/parser/javacup/JsonParser.cup</cupDefinition>
+                                <outputDirectory>src/main/java</outputDirectory>
+                                <className>JavaCupJsonParser</className>
+                                <symbolsName>JsonSymbols</symbolsName>
+                                <packageName>dev.webfx.stack.platform.json.parser.javacup</packageName>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <!-- Calling the JFlex plugin to generate JsonLexer.java from the JsonLexer.flex lexical file -->
+                <plugin>
+                    <groupId>de.jflex</groupId>
+                    <artifactId>jflex-maven-plugin</artifactId>
+                    <configuration>
+                        <outputDirectory>src/main/java</outputDirectory>
+                        <lexDefinitions>
+                            <lexDefinition>src/main/java/dev/webfx/stack/platform/json/parser/jflex/JsonLexer.flex</lexDefinition>
+                        </lexDefinitions>
+                    </configuration>
+                </plugin>
+
+            </plugins>
+        </build>
+    </maven-pom-manual>
+
+</project>
