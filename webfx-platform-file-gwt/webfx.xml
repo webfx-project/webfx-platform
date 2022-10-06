@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+
+    <providers>
+        <provider interface="dev.webfx.platform.file.spi.FileProvider">dev.webfx.platform.file.spi.impl.gwt.GwtFileProvider</provider>
+    </providers>
+
+    <exported-packages>
+        <source-packages/>
+    </exported-packages>
+
+    <dependencies>
+        <used-by-source-modules/>
+    </dependencies>
+
+</project>
