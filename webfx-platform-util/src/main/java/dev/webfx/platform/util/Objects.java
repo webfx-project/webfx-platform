@@ -41,4 +41,17 @@ public final class Objects {
         }
         return o1.equals(o2);
     }
+
+// This isAssignableFrom() method is compatible with GWT. Please note that it is a simplified version of
+// Class.isAssignableFrom() that doesn't consider interfaces.
+
+    public static boolean isAssignableFrom(Class<?> leftClass, Class<?> rightClass) {
+        if (leftClass != null)
+            while (rightClass != null) {
+                if (leftClass.equals(rightClass))
+                    return true;
+                rightClass = rightClass.getSuperclass();
+            }
+        return false;
+    }
 }
