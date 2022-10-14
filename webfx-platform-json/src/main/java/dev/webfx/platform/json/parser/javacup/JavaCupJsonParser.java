@@ -10,7 +10,6 @@ import dev.webfx.platform.json.WritableJsonArray;
 import dev.webfx.platform.json.WritableJsonObject;
 import dev.webfx.platform.util.Numbers;
 import dev.webfx.platform.util.tuples.Pair;
-import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
   */
@@ -143,40 +142,7 @@ public class JavaCupJsonParser extends java_cup.runtime.lr_parser {
        reason for the error which is passed into the method in the
        String 'message'. */
     public void report_error(String message, Object info) {
-   
-        /* Create a StringBuffer called 'm' with the string 'Error' in it. */
-        StringBuilder m = new StringBuilder("Error");
-   
-        /* Check if the information passed to the method is the same
-           type as the type java_cup.runtime.Symbol. */
-        if (info instanceof java_cup.runtime.Symbol) {
-            /* Declare a java_cup.runtime.Symbol object 's' with the
-               information in the object info that is being typecasted
-               as a java_cup.runtime.Symbol object. */
-            java_cup.runtime.Symbol s = ((java_cup.runtime.Symbol) info);
-   
-            /* Check if the line number in the input is greater or
-               equal to zero. */
-            if (s.left >= 0) {                
-                /* Add to the end of the StringBuffer error message
-                   the line number of the error in the input. */
-                m.append(" in line "+(s.left+1));   
-                /* Check if the column number in the input is greater
-                   or equal to zero. */
-                if (s.right >= 0)                    
-                    /* Add to the end of the StringBuffer error message
-                       the column number of the error in the input. */
-                    m.append(", column "+(s.right+1));
-            }
-        }
-   
-        /* Add to the end of the StringBuffer error message created in
-           this method the message that was passed into this method. */
-        m.append(" : "+message);
-   
-        /* Print the contents of the StringBuffer 'm', which contains
-           an error message, out on a line. */
-        System.err.println(m);
+        System.err.println(generateErrorMessage(message, info));
     }
    
     /* Change the method report_fatal_error so when it reports a fatal
@@ -185,7 +151,42 @@ public class JavaCupJsonParser extends java_cup.runtime.lr_parser {
        fatal error which is passed into the method in the object
        'message' and then exit.*/
     public void report_fatal_error(String message, Object info) {
-        report_error(message, info);
+        throw new IllegalArgumentException(generateErrorMessage(message, info));
+    }
+
+    private String generateErrorMessage(String message, Object info) {
+
+        /* Create a StringBuffer called 'm' with the string 'Error' in it. */
+        StringBuilder m = new StringBuilder("Error");
+
+        /* Check if the information passed to the method is the same
+           type as the type java_cup.runtime.Symbol. */
+        if (info instanceof java_cup.runtime.Symbol) {
+            /* Declare a java_cup.runtime.Symbol object 's' with the
+               information in the object info that is being typecasted
+               as a java_cup.runtime.Symbol object. */
+            java_cup.runtime.Symbol s = ((java_cup.runtime.Symbol) info);
+
+            /* Check if the line number in the input is greater or
+               equal to zero. */
+            if (s.left >= 0) {
+                /* Add to the end of the StringBuffer error message
+                   the line number of the error in the input. */
+                m.append(" in line "+(s.left+1));
+                /* Check if the column number in the input is greater
+                   or equal to zero. */
+                if (s.right >= 0)
+                    /* Add to the end of the StringBuffer error message
+                       the column number of the error in the input. */
+                    m.append(", column "+(s.right+1));
+            }
+        }
+
+        /* Add to the end of the StringBuffer error message created in
+           this method the message that was passed into this method. */
+        m.append(" : "+message);
+
+        return m.toString();
     }
 
 

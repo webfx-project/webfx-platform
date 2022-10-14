@@ -37,8 +37,24 @@ public final class Json {
         return getProvider().parseObject(text);
     }
 
+    public static WritableJsonObject parseObjectSilently(String text) {
+        try {
+            return parseObject(text);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     public static WritableJsonArray parseArray(String text) {
         return getProvider().parseArray(text);
+    }
+
+    public static WritableJsonArray parseArraySilently(String text) {
+        try {
+            return parseArray(text);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public static Object javaToNativeScalar(Object scalar) {

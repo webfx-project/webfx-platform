@@ -24,8 +24,10 @@ public final class BuiltInJsonParser {
         try {
             return (T) new JavaCupJsonParser(new JsonLexer(new StringReader(json))).parse().value;
         } catch (Throwable e) {
-            e.printStackTrace();
-            return null;
+            if (e instanceof RuntimeException)
+                throw (RuntimeException) e;
+            else
+                throw new RuntimeException(e);
         }
     }
 }
