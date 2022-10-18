@@ -17,11 +17,11 @@ public interface File {
 
     long lastModified();
 
-    String getParentPath();
-
-    String getURLPath();
-
     String getMimeType();
+
+    String getObjectURL();
+
+    String getParentPath(); // experimental
 
     static File create(Object platformFile) {
         return FileProvider.get().createFile(platformFile);

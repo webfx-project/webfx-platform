@@ -38,12 +38,16 @@ public final class JavaFile implements File {
     }
 
     @Override
-    public String getParentPath() {
-        return javaPlatformFile.getParentFile().getPath();
+    public String getMimeType() {
+        try {
+            return Files.probeContentType(javaPlatformFile.toPath());
+        } catch (IOException e) {
+            return null;
+        }
     }
 
     @Override
-    public String getURLPath() {
+    public String getObjectURL() {
         try {
             return javaPlatformFile.toURI().toURL().toExternalForm();
         } catch (MalformedURLException e) {
@@ -52,11 +56,8 @@ public final class JavaFile implements File {
     }
 
     @Override
-    public String getMimeType() {
-        try {
-            return Files.probeContentType(javaPlatformFile.toPath());
-        } catch (IOException e) {
-            return null;
-        }
+    public String getParentPath() {
+        return javaPlatformFile.getParentFile().getPath();
     }
+
 }

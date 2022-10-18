@@ -36,20 +36,20 @@ public final class GwtFile implements File {
     }
 
     @Override
-    public String getParentPath() {
-        return getJsJavaObjectAttribute(jsPlatformFile, "webkitRelativePath");
+    public String getMimeType() {
+        return jsPlatformFile.type;
     }
 
     @Override
-    public String getURLPath() {
+    public String getObjectURL() {
         if (url == null)
             url = URL.createObjectURL(jsPlatformFile);
         return url;
     }
 
     @Override
-    public String getMimeType() {
-        return jsPlatformFile.type;
+    public String getParentPath() {
+        return getJsJavaObjectAttribute(jsPlatformFile, "webkitRelativePath");
     }
 
     public static native <T> T getJsJavaObjectAttribute(elemental2.dom.File o, String name) /*-{
