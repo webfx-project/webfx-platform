@@ -22,6 +22,7 @@ The WebFX Platform is the foundation layer & API for cross-platform development 
 | **Scheduler**      | Shared   | Cross-platform API for scheduling non-UI tasks                             |
 | **Json**           | Shared   | Cross-platform Json API                                                    |
 | **Async**          | Shared   | Future & Promise API for async operations                                  |
+| **File**           | Shared   | Cross-platform API for accessing local files                               |
 | **Vert.x** *       | Server   | Implementation of the server-side modules for [Vert.x](https://vertx.io)   |
 
 *\* An additional implementation for Spring Boot might be considered in the future*.
