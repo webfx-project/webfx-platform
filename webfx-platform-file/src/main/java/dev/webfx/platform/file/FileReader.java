@@ -10,6 +10,8 @@ public interface FileReader {
 
     Future<String> readAsText(File file);
 
+    Future<byte[]> readAsBytes(File file);
+
     static FileReader create() {
         return FileProvider.get().createFileReader();
     }

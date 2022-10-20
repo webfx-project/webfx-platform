@@ -14,12 +14,18 @@ final class JavaFileReader implements FileReader {
 
     @Override
     public Future<String> readAsText(File file) {
+        return readAsBytes(file).map(String::new);
+    }
+
+    @Override
+    public Future<byte[]> readAsBytes(File file) {
+        IOException failure;
         try {
             JavaFile peer = (JavaFile) file;
-            return Future.succeededFuture(new String(Files.readAllBytes((peer.getPlatformFile().toPath()))));
+            return Future.succeededFuture(Files.readAllBytes((peer.getPlatformFile().toPath())));
         } catch (IOException e) {
-            Future.failedFuture(e);
+            failure = e;
         }
-        return null;
+        return Future.failedFuture(failure);
     }
 }
