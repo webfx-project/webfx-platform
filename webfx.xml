@@ -1741,7 +1741,6 @@
 
             <used-by-source-modules>
                 <module>java.base</module>
-                <module>webfx-platform-json</module>
                 <module>webfx-platform-util</module>
             </used-by-source-modules>
 

@@ -4,7 +4,6 @@ module webfx.platform.windowlocation {
 
     // Direct dependencies modules
     requires java.base;
-    requires webfx.platform.json;
     requires webfx.platform.util;
 
     // Exported packages

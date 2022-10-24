@@ -2,31 +2,30 @@ package dev.webfx.platform.windowlocation.spi.impl;
 
 import dev.webfx.platform.windowlocation.spi.PathLocation;
 import dev.webfx.platform.windowlocation.spi.PathStateLocation;
-import dev.webfx.platform.json.JsonObject;
 
 /**
  * @author Bruno Salmon
  */
 public class PathStateLocationImpl extends PathLocationImpl implements PathStateLocation {
 
-    private final JsonObject state;
+    private final Object state;
 
     public PathStateLocationImpl(PathStateLocation pathStateLocation) {
         this(pathStateLocation, pathStateLocation.getState());
     }
 
-    public PathStateLocationImpl(PathLocation pathLocation, JsonObject state) {
+    public PathStateLocationImpl(PathLocation pathLocation, Object state) {
         super(pathLocation);
         this.state = state;
     }
 
-    public PathStateLocationImpl(String path, String queryString, String fragment, JsonObject state) {
+    public PathStateLocationImpl(String path, String queryString, String fragment, Object state) {
         super(path, queryString, fragment);
         this.state = state;
     }
 
     @Override
-    public JsonObject getState() {
+    public Object getState() {
         return state;
     }
 }

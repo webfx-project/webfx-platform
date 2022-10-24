@@ -45,7 +45,7 @@ public interface JsWindowHistory {
      * @param title
      * @param url
      */
-    void pushState(JsonObject stateObj, String title, String url);
+    void pushState(Object stateObj, String title, String url);
 
     /**
      * Updates the current element of history
@@ -53,7 +53,7 @@ public interface JsWindowHistory {
      * @param title
      * @param url
      */
-    void replaceState(JsonObject stateObj, String title, String url);
+    void replaceState(Object stateObj, String title, String url);
 
     /**
      * An event handler for the popstate event on the window.

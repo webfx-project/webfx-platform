@@ -36,12 +36,12 @@ public final class GwtJsWindowHistory implements JsWindowHistory {
     }
 
     @Override
-    public void pushState(JsonObject stateObj, String title, String url) {
+    public void pushState(Object stateObj, String title, String url) {
         Window.history.pushState((GwtJsonObject) stateObj, title, url);
     }
 
     @Override
-    public void replaceState(JsonObject stateObj, String title, String url) {
+    public void replaceState(Object stateObj, String title, String url) {
         Window.history.replaceState((GwtJsonObject) stateObj, title, url);
     }
 

@@ -2,7 +2,6 @@ package dev.webfx.platform.windowlocation.spi.impl;
 
 import dev.webfx.platform.windowlocation.spi.BrowsingLocation;
 import dev.webfx.platform.windowlocation.spi.PathLocation;
-import dev.webfx.platform.json.JsonObject;
 
 /**
  * @author Bruno Salmon
@@ -57,6 +56,7 @@ public class BrowsingLocationImpl extends PathLocationImpl implements BrowsingLo
         return new BrowsingLocationImpl(protocol, hostname, port, new PathLocationImpl(path));
     }
 
+/*
     public static BrowsingLocationImpl fromJson(JsonObject json) {
         String href = json.getString("href");
         if (href != null)
@@ -77,4 +77,5 @@ public class BrowsingLocationImpl extends PathLocationImpl implements BrowsingLo
         }
         return new BrowsingLocationImpl(protocol, hostname, port, PathLocationImpl.fromJson(json));
     }
+*/
 }

@@ -1,9 +1,7 @@
 package dev.webfx.platform.windowlocation.spi.impl;
 
-import dev.webfx.platform.windowlocation.spi.PathLocation;
-import dev.webfx.platform.json.JsonObject;
-import dev.webfx.platform.util.Objects;
 import dev.webfx.platform.util.Strings;
+import dev.webfx.platform.windowlocation.spi.PathLocation;
 
 /**
  * @author Bruno Salmon
@@ -57,6 +55,7 @@ public class PathLocationImpl implements PathLocation {
         return fragment;
     }
 
+/*
     public static PathLocationImpl fromJson(JsonObject json) {
         String path = json.getString("path");
         if (path != null)
@@ -69,6 +68,7 @@ public class PathLocationImpl implements PathLocation {
         }
         return null;
     }
+*/
 
     /**
      *  Implementing equals() and hashCode() so a location can be identified in the history from a path location.

@@ -1,7 +1,5 @@
 package dev.webfx.platform.windowlocation.spi;
 
-import dev.webfx.platform.json.JsonObject;
-
 /**
  * A location descriptor is the pushable analogue of a location.
  * The history object uses locations to tell its listeners where they are, while history users use location descriptors
@@ -22,6 +20,6 @@ public interface PathStateLocation extends PathLocation {
      *
      * @return a json object representing the location state
      */
-    JsonObject getState();
+    Object getState();
 
 }
