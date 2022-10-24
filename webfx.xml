@@ -804,6 +804,7 @@
             </source-packages>
 
             <used-by-source-modules>
+                <module>elemental2-core</module>
                 <module>elemental2-dom</module>
                 <module>java.base</module>
                 <module>webfx-platform-async</module>

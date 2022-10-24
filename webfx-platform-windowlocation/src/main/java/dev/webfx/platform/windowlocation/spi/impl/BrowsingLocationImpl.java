@@ -14,7 +14,7 @@ public class BrowsingLocationImpl extends PathLocationImpl implements BrowsingLo
     private final String port;
 
     public BrowsingLocationImpl(String protocol, String hostname, String port, PathLocation pathLocation) {
-        this(protocol, hostname, port, pathLocation.getPathname(), pathLocation.getQueryString(), pathLocation.getFragment());
+        this(protocol, hostname, port, pathLocation != null ? pathLocation.getPathname() : null, pathLocation != null ? pathLocation.getQueryString() : null, pathLocation != null ? pathLocation.getFragment() : null);
     }
 
     public BrowsingLocationImpl(String protocol, String hostname, String port, String pathname, String queryString, String fragment) {

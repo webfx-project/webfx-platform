@@ -14,7 +14,7 @@ public final class JavaWindowLocationProvider extends BrowsingLocationImpl imple
     private static HostLocation HOST_LOCATION;
 
     public JavaWindowLocationProvider() {
-        super(HOST_LOCATION.getProtocol(), HOST_LOCATION.getHostname(), HOST_LOCATION.getPort(), WindowHistory.getCurrentLocation());
+        super(HOST_LOCATION != null ? HOST_LOCATION.getProtocol() : "", HOST_LOCATION != null ? HOST_LOCATION.getHostname() : "", HOST_LOCATION != null ? HOST_LOCATION.getPort() : "", WindowHistory.getCurrentLocation());
     }
 
     // Should be called before using this provider (see JavaWebsocketBusServiceProvider)

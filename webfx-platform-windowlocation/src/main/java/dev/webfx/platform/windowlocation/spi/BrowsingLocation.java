@@ -47,7 +47,7 @@ public interface BrowsingLocation extends HostLocation, PathLocation {
      */
     //String getOrigin();
 
-    default void assignHref(String href) {throw new UnsupportedOperationException();}
+    default void assignHref(String href) { }
 
-    default void replaceHref(String href) {throw new UnsupportedOperationException();}
+    default void replaceHref(String href) { }
 }
