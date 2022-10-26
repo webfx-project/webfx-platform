@@ -3,7 +3,10 @@
 The WebFX Platform is the foundation layer & API for cross-platform development with [WebFX](https://github.com/webfx-project/webfx).
 
 <div align="center">
-  <img src="https://docs.webfx.dev/webfx-platform/webfx-platform.svg" />
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://docs.webfx.dev/webfx-readmes/webfx-platform-dark.svg">
+      <img src="https://docs.webfx.dev/webfx-readmes/webfx-platform-light.svg" />
+    </picture>
 
 <p></p>
 
