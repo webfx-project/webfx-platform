@@ -46,6 +46,10 @@ public final class JavaSchedulerProvider implements SchedulerProvider {
 */
     }
 
+    public Executor getExecutor() {
+        return executor;
+    }
+
     @Override
     public void scheduleDeferred(Runnable runnable) {
         executor.execute(caughtRunnable(runnable));

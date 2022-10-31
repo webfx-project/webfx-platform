@@ -2,62 +2,51 @@ package dev.webfx.platform.file.spi.impl.java;
 
 import dev.webfx.platform.file.File;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.nio.file.Files;
+import java.net.URI;
+import java.nio.file.Path;
 
 /**
  * @author Bruno Salmon
  */
-public final class JavaFile implements File {
-
-    private final java.io.File javaPlatformFile;
+public final class JavaFile extends JavaPathBasedBlob implements File {
 
     public JavaFile(java.io.File javaPlatformFile) {
-        this.javaPlatformFile = javaPlatformFile;
+        super(javaPlatformFile);
     }
 
     @Override
-    public java.io.File getPlatformFile() {
-        return javaPlatformFile;
+    public java.io.File getPlatformBlob() {
+        return (java.io.File) super.getPlatformBlob();
     }
 
     @Override
     public String getName() {
-        return javaPlatformFile.getName();
+        return getPlatformBlob().getName();
     }
 
     @Override
     public long length() {
-        return javaPlatformFile.length();
+        return getPlatformBlob().length();
     }
 
     @Override
     public long lastModified() {
-        return javaPlatformFile.lastModified();
+        return getPlatformBlob().lastModified();
     }
 
     @Override
-    public String getMimeType() {
-        try {
-            return Files.probeContentType(javaPlatformFile.toPath());
-        } catch (IOException e) {
-            return null;
-        }
+    protected Path toPath() {
+        return getPlatformBlob().toPath();
     }
 
     @Override
-    public String getObjectURL() {
-        try {
-            return javaPlatformFile.toURI().toURL().toExternalForm();
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-        }
+    protected URI toURI() {
+        return getPlatformBlob().toURI();
     }
 
     @Override
     public String getParentPath() {
-        return javaPlatformFile.getParentFile().getPath();
+        return getPlatformBlob().getParentFile().getPath();
     }
 
 }

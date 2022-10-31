@@ -22,7 +22,7 @@ final class JavaFileReader implements FileReader {
         IOException failure;
         try {
             JavaFile peer = (JavaFile) file;
-            return Future.succeededFuture(Files.readAllBytes((peer.getPlatformFile().toPath())));
+            return Future.succeededFuture(Files.readAllBytes((peer.getPlatformBlob().toPath())));
         } catch (IOException e) {
             failure = e;
         }

@@ -7,19 +7,11 @@ import java.util.List;
 /**
  * @author Bruno Salmon
  */
-public interface File {
-
-    Object getPlatformFile();
+public interface File extends Blob {
 
     String getName();
 
-    long length();
-
     long lastModified();
-
-    String getMimeType();
-
-    String getObjectURL();
 
     String getParentPath(); // experimental
 

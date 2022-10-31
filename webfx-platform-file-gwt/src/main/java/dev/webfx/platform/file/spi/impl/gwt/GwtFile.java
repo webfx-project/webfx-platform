@@ -1,55 +1,34 @@
 package dev.webfx.platform.file.spi.impl.gwt;
 
 import dev.webfx.platform.file.File;
-import elemental2.dom.URL;
 
 /**
  * @author Bruno Salmon
  */
-public final class GwtFile implements File {
+public final class GwtFile extends GwtBlob implements File {
 
-    private final elemental2.dom.File jsPlatformFile;
-    private String url;
-
-    public GwtFile(elemental2.dom.File jsPlatformFile) {
-        this.jsPlatformFile = jsPlatformFile;
+    public GwtFile(elemental2.dom.File jsFile) {
+        super(jsFile);
     }
 
     @Override
-    public elemental2.dom.File getPlatformFile() {
-        return jsPlatformFile;
+    public elemental2.dom.File getPlatformBlob() {
+        return (elemental2.dom.File) super.getPlatformBlob();
     }
 
     @Override
     public String getName() {
-        return jsPlatformFile.name;
-    }
-
-    @Override
-    public long length() {
-        return jsPlatformFile.size;
+        return getPlatformBlob().name;
     }
 
     @Override
     public long lastModified() {
-        return (long) jsPlatformFile.lastModified;
-    }
-
-    @Override
-    public String getMimeType() {
-        return jsPlatformFile.type;
-    }
-
-    @Override
-    public String getObjectURL() {
-        if (url == null)
-            url = URL.createObjectURL(jsPlatformFile);
-        return url;
+        return (long) getPlatformBlob().lastModified;
     }
 
     @Override
     public String getParentPath() {
-        return getJsJavaObjectAttribute(jsPlatformFile, "webkitRelativePath");
+        return getJsJavaObjectAttribute(getPlatformBlob(), "webkitRelativePath");
     }
 
     public static native <T> T getJsJavaObjectAttribute(elemental2.dom.File o, String name) /*-{

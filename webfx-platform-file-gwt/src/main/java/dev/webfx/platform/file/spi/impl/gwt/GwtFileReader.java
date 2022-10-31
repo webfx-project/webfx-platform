@@ -18,7 +18,7 @@ final class GwtFileReader implements FileReader {
     public Future<String> readAsText(File file) {
         Promise<String> promise = Promise.promise();
         GwtFile gwtFile = (GwtFile) file;
-        jsFileReader.readAsText(gwtFile.getPlatformFile());
+        jsFileReader.readAsText(gwtFile.getPlatformBlob());
         jsFileReader.onloadend = pe -> {
             try {
                 promise.complete(jsFileReader.result.toString());
@@ -34,7 +34,7 @@ final class GwtFileReader implements FileReader {
     public Future<byte[]> readAsBytes(File file) {
         Promise<byte[]> promise = Promise.promise();
         GwtFile gwtFile = (GwtFile) file;
-        jsFileReader.readAsArrayBuffer(gwtFile.getPlatformFile());
+        jsFileReader.readAsArrayBuffer(gwtFile.getPlatformBlob());
         jsFileReader.onloadend = pe -> {
             try {
                 ArrayBuffer arrayBuffer = (ArrayBuffer) (jsFileReader.result);
