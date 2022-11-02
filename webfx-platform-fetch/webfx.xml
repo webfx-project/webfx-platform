@@ -6,7 +6,10 @@
     </exported-packages>
 
     <dependencies>
-        <used-by-source-modules/>
+        <used-by-source-modules>
+            <module transitive="true">webfx-platform-async</module>
+            <module transitive="true">webfx-platform-json</module>
+        </used-by-source-modules>
     </dependencies>
 
 </project>

@@ -4,9 +4,9 @@ module webfx.platform.fetch {
 
     // Direct dependencies modules
     requires java.base;
-    requires webfx.platform.async;
+    requires transitive webfx.platform.async;
     requires webfx.platform.file;
-    requires webfx.platform.json;
+    requires transitive webfx.platform.json;
     requires webfx.platform.util;
 
     // Exported packages
