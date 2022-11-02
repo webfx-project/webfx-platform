@@ -8,16 +8,6 @@ import dev.webfx.platform.util.noreflect.IndexedArray;
 public interface JsonArray extends JsonElement, IndexedArray {
 
     /**
-     * Return true if it is an array.
-     */
-    default boolean isArray() { return true; }
-
-    /**
-     * Return true if it is an object.
-     */
-    default boolean isObject() { return false; }
-
-    /**
      * Returns the first index of the given element, or -1 if it cannot be found.
      */
     int indexOfNativeElement(Object element);

@@ -19,7 +19,9 @@ package dev.webfx.platform.json.spi.impl.gwt;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import dev.webfx.platform.json.ElementType;
+import dev.webfx.platform.json.WritableJsonArray;
 import dev.webfx.platform.json.WritableJsonElement;
+import dev.webfx.platform.json.WritableJsonObject;
 import dev.webfx.platform.json.parser.BuiltInJsonParser;
 
 /*
@@ -39,11 +41,23 @@ abstract class GwtJsonElement extends JavaScriptObject implements WritableJsonEl
     }
 
     @Override
+    public final WritableJsonObject asJsonObject() {
+        return cast();
+    }
+
+    @Override
+    public final WritableJsonArray asJsonArray() {
+        return cast();
+    }
+
+    @Override
     public final ElementType getNativeElementType(Object nativeElement) {
         if (nativeElement == null)
             return ElementType.NULL;
+        if (isArray(nativeElement))
+            return ElementType.ARRAY;
         switch(typeof(nativeElement)) {
-            case "object":  return isArray(nativeElement) ? ElementType.ARRAY : ElementType.OBJECT;
+            case "object":  return ElementType.OBJECT;
             case "string":  return ElementType.STRING;
             case "number":  return ElementType.NUMBER;
             case "boolean": return ElementType.BOOLEAN;
@@ -56,8 +70,7 @@ abstract class GwtJsonElement extends JavaScriptObject implements WritableJsonEl
     }-*/;
 
     private static native boolean isArray(Object obj) /*-{
-        // ensure that array detection works cross-frame
-        return Object.prototype.toString.apply(obj) === '[object Array]';
+        return Array.isArray(obj);
     }-*/;
 
     @Override
@@ -65,7 +78,7 @@ abstract class GwtJsonElement extends JavaScriptObject implements WritableJsonEl
         return isObject() ? sizeObject() : sizeArray();
     }
 
-    private final native int sizeArray() /*-{
+    private native int sizeArray() /*-{
         return this.length;
     }-*/;
 
@@ -76,7 +89,7 @@ abstract class GwtJsonElement extends JavaScriptObject implements WritableJsonEl
      *
      * @return the size of the map.
      */
-    private final native int sizeObject() /*-{
+    private native int sizeObject() /*-{
         size = 0;
         for (key in this)
           if (Object.prototype.hasOwnProperty.call(this, key))

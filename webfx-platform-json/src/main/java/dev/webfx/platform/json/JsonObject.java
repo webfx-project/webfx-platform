@@ -8,16 +8,6 @@ import dev.webfx.platform.util.noreflect.KeyObject;
 public interface JsonObject extends KeyObject, JsonElement {
 
     /**
-     * Return true if it is an array.
-     */
-    default boolean isArray() { return false; }
-
-    /**
-     * Return true if it is an object.
-     */
-    default boolean isObject() { return true; }
-
-    /**
      * All keys of the object.
      */
     JsonArray keys();
