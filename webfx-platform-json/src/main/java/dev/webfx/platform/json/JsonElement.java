@@ -24,6 +24,15 @@ public interface JsonElement extends JsonProvider {
      */
     int size();
 
+    default JsonObject asJsonObject() {
+        return (JsonObject) this;
+    }
+
+    default JsonArray asJsonArray() {
+        return (JsonArray) this;
+    }
+
+
     /**
      * Make a copy of this object or array.
      */

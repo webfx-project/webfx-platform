@@ -17,4 +17,13 @@ public interface WritableJsonElement extends JsonElement {
      */
     //boolean removeValue(Object value);
 
+    @Override
+    default WritableJsonObject asJsonObject() {
+        return (WritableJsonObject) this;
+    }
+
+    @Override
+    default WritableJsonArray asJsonArray() {
+        return (WritableJsonArray) this;
+    }
 }

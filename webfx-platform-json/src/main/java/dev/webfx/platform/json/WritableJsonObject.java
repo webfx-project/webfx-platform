@@ -7,7 +7,7 @@ import dev.webfx.platform.util.noreflect.WritableKeyObject;
 /**
  * @author Bruno Salmon
  */
-public interface WritableJsonObject extends JsonObject, WritableKeyObject {
+public interface WritableJsonObject extends JsonObject, WritableJsonElement, WritableKeyObject {
 
     /**
      * Set a given key to the given element. Fluent API (return this).

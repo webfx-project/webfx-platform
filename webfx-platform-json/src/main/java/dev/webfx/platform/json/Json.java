@@ -57,6 +57,14 @@ public final class Json {
         }
     }
 
+    public static WritableJsonElement parseElement(String text) {
+        return text.trim().startsWith("[") ? parseArray(text) : parseObject(text);
+    }
+
+    public static WritableJsonElement parseElementSilently(String text) {
+        return text.trim().startsWith("[") ? parseArraySilently(text) : parseObjectSilently(text);
+    }
+
     public static Object javaToNativeScalar(Object scalar) {
         return getProvider().javaToNativeScalar(scalar);
     }
