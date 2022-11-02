@@ -1,10 +1,15 @@
 package dev.webfx.platform.fetch.spi.impl.gwt;
 
 import dev.webfx.platform.async.Future;
-import dev.webfx.platform.async.Promise;
+import dev.webfx.platform.fetch.FetchOptions;
+import dev.webfx.platform.fetch.Headers;
 import dev.webfx.platform.fetch.Response;
 import dev.webfx.platform.fetch.spi.FetchProvider;
+import dev.webfx.platform.json.Json;
+import dev.webfx.platform.json.WritableJsonObject;
 import elemental2.dom.DomGlobal;
+import elemental2.dom.RequestInit;
+import jsinterop.base.Js;
 
 /**
  * @author Bruno Salmon
@@ -12,20 +17,22 @@ import elemental2.dom.DomGlobal;
 public class GwtFetchProvider implements FetchProvider {
 
     @Override
-    public Future<Response> fetch(String url) {
-        Promise<Response> promise = Promise.promise();
-        DomGlobal.window.fetch(url)
-                .then(r -> {
-                    promise.complete(new GwtResponse(r));
-                    return null;
-                })
-                .catch_(error -> {
-                    if (error instanceof Throwable)
-                        promise.fail((Throwable) error);
-                    else
-                        promise.fail(error.toString());
-                    return null;
-                });
-        return promise.future();
+    public Future<Response> fetch(String url, FetchOptions options) {
+        RequestInit requestInit = null;
+        if (options != null) {
+            WritableJsonObject js = Json.createObject();
+            js.set("method", options.getMethod());
+            js.set("mode", options.getMode());
+            Headers headers = options.getHeaders();
+            if (headers instanceof GwtHeaders)
+                js.set("headers", ((GwtHeaders) headers).getJsHeaders());
+            requestInit = Js.uncheckedCast(js);
+        }
+        return GwtUtil.jsPromiseToWebFXFuture(DomGlobal.window.fetch(url, requestInit), GwtResponse::new);
+    }
+
+    @Override
+    public Headers createHeaders() {
+        return new GwtHeaders();
     }
 }

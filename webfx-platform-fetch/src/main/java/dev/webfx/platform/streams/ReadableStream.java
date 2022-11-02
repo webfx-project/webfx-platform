@@ -5,6 +5,6 @@ package dev.webfx.platform.streams;
  */
 public interface ReadableStream {
 
-
+    ReadableStreamDefaultReader getReader();
 
 }

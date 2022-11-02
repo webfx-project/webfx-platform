@@ -3,6 +3,7 @@
 module webfx.platform.fetch.java {
 
     // Direct dependencies modules
+    requires java.base;
     requires java.net.http;
     requires webfx.platform.async;
     requires webfx.platform.fetch;
@@ -14,6 +15,7 @@ module webfx.platform.fetch.java {
 
     // Exported packages
     exports dev.webfx.platform.fetch.spi.impl.java;
+    exports dev.webfx.platform.streams.spi.impl.java;
 
     // Provided services
     provides dev.webfx.platform.fetch.spi.FetchProvider with dev.webfx.platform.fetch.spi.impl.java.JavaFetchProvider;

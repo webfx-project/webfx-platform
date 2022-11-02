@@ -2,13 +2,13 @@ package dev.webfx.platform.fetch.spi.impl.gwt;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import dev.webfx.platform.async.Future;
-import dev.webfx.platform.async.Promise;
+import dev.webfx.platform.fetch.Headers;
 import dev.webfx.platform.fetch.Response;
 import dev.webfx.platform.file.Blob;
 import dev.webfx.platform.file.spi.impl.gwt.GwtBlob;
-import dev.webfx.platform.json.JsonObject;
-import dev.webfx.platform.streams.GwtReadableStream;
+import dev.webfx.platform.json.WritableJsonElement;
 import dev.webfx.platform.streams.ReadableStream;
+import dev.webfx.platform.streams.spi.impl.gwt.GwtReadableStream;
 
 /**
  * @author Bruno Salmon
@@ -16,32 +16,21 @@ import dev.webfx.platform.streams.ReadableStream;
 public class GwtResponse implements Response {
 
     private final elemental2.dom.Response jsResponse;
+    private Headers headers;
+    private ReadableStream body;
 
     public GwtResponse(elemental2.dom.Response jsResponse) {
         this.jsResponse = jsResponse;
     }
 
     @Override
-    public Future<Blob> blob() {
-        Promise<Blob> promise = Promise.promise();
-        jsResponse.blob()
-                .then(r -> {
-                    promise.complete(new GwtBlob(r));
-                    return null;
-                })
-                .catch_(error -> {
-                    if (error instanceof Throwable)
-                        promise.fail((Throwable) error);
-                    else
-                        promise.fail(error.toString());
-                    return null;
-                });
-        return promise.future();
+    public int status() {
+        return jsResponse.status;
     }
 
     @Override
-    public ReadableStream body() {
-        return new GwtReadableStream(jsResponse.body);
+    public String statusText() {
+        return jsResponse.statusText;
     }
 
     @Override
@@ -50,20 +39,42 @@ public class GwtResponse implements Response {
     }
 
     @Override
-    public Future<JsonObject> json() {
-        Promise<JsonObject> promise = Promise.promise();
-        jsResponse.json()
-                .then(obj -> {
-                    promise.complete(((JavaScriptObject) obj).cast());
-                    return null;
-                })
-                .catch_(error -> {
-                    if (error instanceof Throwable)
-                        promise.fail((Throwable) error);
-                    else
-                        promise.fail(error.toString());
-                    return null;
-                });
-        return promise.future();
+    public boolean redirected() {
+        return jsResponse.redirected;
     }
+
+    @Override
+    public String url() {
+        return jsResponse.url;
+    }
+
+    @Override
+    public Headers headers() {
+        if (headers == null)
+            headers = new GwtHeaders(jsResponse.headers);
+        return headers;
+    }
+
+    @Override
+    public Future<Blob> blob() {
+        return GwtUtil.jsPromiseToWebFXFuture(jsResponse.blob(), GwtBlob::new);
+    }
+
+    @Override
+    public Future<WritableJsonElement> json() {
+        return GwtUtil.jsPromiseToWebFXFuture(jsResponse.json(), obj -> ((JavaScriptObject) obj).cast());
+    }
+
+    @Override
+    public Future<String> text() {
+        return GwtUtil.jsPromiseToWebFXFuture(jsResponse.text(), text -> text);
+    }
+
+    @Override
+    public ReadableStream body() {
+        if (body == null)
+            body = new GwtReadableStream(jsResponse.body);
+        return body;
+    }
+
 }

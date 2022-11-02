@@ -598,8 +598,8 @@
 
             <used-services>
                 <required-service>dev.webfx.platform.boot.spi.ApplicationBooterProvider</required-service>
-                <optional-service>dev.webfx.platform.boot.spi.ApplicationJob</optional-service>
                 <optional-service>dev.webfx.platform.boot.spi.ApplicationModuleBooter</optional-service>
+                <optional-service>dev.webfx.platform.boot.spi.ApplicationJob</optional-service>
             </used-services>
 
         </project>
@@ -804,12 +804,16 @@
 
             <source-packages>
                 <package>dev.webfx.platform.fetch.spi.impl.gwt</package>
-                <package>dev.webfx.platform.streams</package>
+                <package>dev.webfx.platform.streams.spi.impl.gwt</package>
             </source-packages>
 
             <used-by-source-modules>
+                <module>elemental2-core</module>
                 <module>elemental2-dom</module>
+                <module>elemental2-promise</module>
                 <module>gwt-user</module>
+                <module>java.base</module>
+                <module>jsinterop-base</module>
                 <module>webfx-platform-async</module>
                 <module>webfx-platform-fetch</module>
                 <module>webfx-platform-file</module>
@@ -835,9 +839,11 @@
 
             <source-packages>
                 <package>dev.webfx.platform.fetch.spi.impl.java</package>
+                <package>dev.webfx.platform.streams.spi.impl.java</package>
             </source-packages>
 
             <used-by-source-modules>
+                <module>java.base</module>
                 <module>java.net.http</module>
                 <module>webfx-platform-async</module>
                 <module>webfx-platform-fetch</module>

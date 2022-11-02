@@ -16,7 +16,15 @@ public class Fetch {
     }
 
     public static Future<Response> fetch(String url) {
-        return getProvider().fetch(url);
+        return fetch(url, null);
+    }
+
+    public static Future<Response> fetch(String url, FetchOptions options) {
+        return getProvider().fetch(url, options);
+    }
+
+    public static Headers createHeaders() {
+        return getProvider().createHeaders();
     }
 
 }
