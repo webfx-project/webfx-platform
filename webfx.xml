@@ -252,6 +252,7 @@
                     <package>io.vertx.ext.web</package>
                     <package>io.vertx.ext.web.handler</package>
                     <package>io.vertx.ext.web.handler.sockjs</package>
+                    <package>io.vertx.ext.web.sstore</package>
                 </exported-packages>
             </library>
 
@@ -531,6 +532,7 @@
                             <package>io.vertx.ext.web</package>
                             <package>io.vertx.ext.web.handler</package>
                             <package>io.vertx.ext.web.handler.sockjs</package>
+                            <package>io.vertx.ext.web.sstore</package>
                         </exported-packages>
                     </library>
 
@@ -982,7 +984,9 @@
             </exported-packages>
 
             <dependencies>
-                <used-by-source-modules/>
+                <used-by-source-modules>
+                    <module transitive="true">webfx-platform-util</module>                    <!-- for use of dev.webfx.platform.util.noreflect.* -->
+                </used-by-source-modules>
             </dependencies>
 
             <source-packages>
@@ -1541,6 +1545,7 @@
 
             <used-by-source-modules>
                 <module>io-vertx-core</module>
+                <module>io-vertx-web</module>
             </used-by-source-modules>
 
         </project>
