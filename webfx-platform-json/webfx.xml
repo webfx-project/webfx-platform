@@ -6,7 +6,9 @@
     </exported-packages>
 
     <dependencies>
-        <used-by-source-modules/>
+        <used-by-source-modules>
+            <module transitive="true">webfx-platform-util</module> <!-- for use of dev.webfx.platform.util.noreflect.* -->
+        </used-by-source-modules>
     </dependencies>
 
     <maven-pom-manual>

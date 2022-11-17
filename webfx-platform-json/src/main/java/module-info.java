@@ -5,7 +5,7 @@ module webfx.platform.json {
     // Direct dependencies modules
     requires java.base;
     requires webfx.lib.javacupruntime;
-    requires webfx.platform.util;
+    requires transitive webfx.platform.util;
 
     // Exported packages
     exports dev.webfx.platform.json;
