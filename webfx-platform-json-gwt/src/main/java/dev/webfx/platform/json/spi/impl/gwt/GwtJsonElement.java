@@ -19,9 +19,9 @@ package dev.webfx.platform.json.spi.impl.gwt;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import dev.webfx.platform.json.ElementType;
-import dev.webfx.platform.json.WritableJsonArray;
-import dev.webfx.platform.json.WritableJsonElement;
-import dev.webfx.platform.json.WritableJsonObject;
+import dev.webfx.platform.json.JsonObject;
+import dev.webfx.platform.json.JsonArray;
+import dev.webfx.platform.json.JsonElement;
 import dev.webfx.platform.json.parser.BuiltInJsonParser;
 
 /*
@@ -30,7 +30,7 @@ import dev.webfx.platform.json.parser.BuiltInJsonParser;
  *
  * <a href="https://github.com/goodow/realtime-json/tree/master/src/main/java/com/goodow/realtime/json/js/JsJsonElement.java">Original Goodow class</a>
  */
-abstract class GwtJsonElement extends JavaScriptObject implements WritableJsonElement {
+abstract class GwtJsonElement extends JavaScriptObject implements JsonElement {
 
     // GWT: Constructors must be 'protected' in subclasses of JavaScriptObject
     protected GwtJsonElement() {} // instances are actually always obtained from a javascript cast
@@ -41,12 +41,12 @@ abstract class GwtJsonElement extends JavaScriptObject implements WritableJsonEl
     }
 
     @Override
-    public final WritableJsonObject asJsonObject() {
+    public final JsonObject asJsonObject() {
         return cast();
     }
 
     @Override
-    public final WritableJsonArray asJsonArray() {
+    public final JsonArray asJsonArray() {
         return cast();
     }
 

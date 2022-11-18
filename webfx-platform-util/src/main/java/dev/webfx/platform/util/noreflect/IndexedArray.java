@@ -1,97 +1,96 @@
 package dev.webfx.platform.util.noreflect;
 
-import dev.webfx.platform.util.Booleans;
-import dev.webfx.platform.util.Numbers;
-import dev.webfx.platform.util.Objects;
-import dev.webfx.platform.util.Strings;
-
 /**
  * @author Bruno Salmon
  */
-public interface IndexedArray {
+public interface IndexedArray extends ReadOnlyIndexedArray {
 
     /**
-     * Length of the array or number of keys of the object
+     * Remove a given index and associated value from the object.
      */
-    int size();
+    <V> V remove(int index);
 
     /**
-     * Returns the first index of the given value, or -1 if it cannot be found.
+     * Pushes the given element onto the end of the array. Most consuming call.
      */
-    int indexOf(Object value);
+    <T extends IndexedArray> T push(Object element);
 
     /**
-     * Return the ith element of the array. Most consuming call.
+     * Set a given index to the given object.
      */
-    <V> V getElement(int index);
+    default <T extends IndexedArray> T push(ReadOnlyKeyObject object) { return push((Object) object); }
 
     /**
-     * Return the ith element of the array as a JsonObject. If the type is not an object, this can result in runtime errors.
+     * Set a given index to the given array.
      */
-    default KeyObject getObject(int index) { return getElement(index); }
+    default <T extends IndexedArray> T push(ReadOnlyIndexedArray array) { return push((Object) array); }
 
     /**
-     * Return the ith element of the array as a JsonArray. If the type is not an array, this can result in runtime errors.
+     * Set a given index to the given element.
      */
-    default IndexedArray getArray(int index) { return getElement(index); }
+    default <T extends IndexedArray> T pushScalar(Object scalar) { return push(scalar); }
 
-    default <T> T getScalar(int index) {
-        return getElement(index);
+    /**
+     * Pushes the given boolean string onto the end of the array.
+     */
+    default <T extends IndexedArray> T push(String value) { return pushScalar(value); }
+
+    /**
+     * Pushes the given boolean value onto the end of the array.
+     */
+    default <T extends IndexedArray> T push(boolean value) { return pushScalar(value); }
+
+    /**
+     * Pushes the given double value onto the end of the array.
+     */
+    default <T extends IndexedArray> T push(double value) { return pushScalar(value); }
+
+    /**
+     * Set a given index to the given value. Most consuming call.
+     */
+    <T extends IndexedArray> T set(int index, Object value);
+
+    /**
+     * Set a given index to the given object.
+     */
+    default <T extends IndexedArray> T set(int index, ReadOnlyKeyObject object) {
+        return set(index, (Object) object);
     }
 
-    default <T> T getScalar(int index, T defaultValue) {
-        return Objects.coalesce(getScalar(index), defaultValue);
+    /**
+     * Set a given index to the given array.
+     */
+    default <T extends IndexedArray> T set(int index, ReadOnlyIndexedArray array) {
+        return set(index, (Object) array);
     }
 
     /**
-     * Return the ith element of the array as a boolean. If the type is not a boolean, this can result in runtime errors.
+     * Set a given index to the given scalar.
      */
-    default Boolean getBoolean(int index) { return Booleans.toBoolean(getScalar(index)); }
+    default <T extends IndexedArray> T setScalar(int index, Object scalar) {
+        return set(index, scalar);
+    }
 
     /**
-     * Return the ith element of the array as a boolean. If the type is not a boolean, this can result in runtime errors.
+     * Set a given index to the given string.
      */
-    default Boolean getBoolean(int index, Boolean defaultValue) { return Booleans.toBoolean(getScalar(index, defaultValue)); }
+    default <T extends IndexedArray> T set(int index, String value) {
+        return setScalar(index, value);
+    }
 
     /**
-     * Return the ith element of the array as a String. If the type is not a String, this can result in runtime errors.
+     * Set a given index to the given boolean.
      */
-    default String getString(int index) { return Strings.toString(getScalar(index)); }
+    default <T extends IndexedArray> T set(int index, Boolean value) {
+        return setScalar(index, value);
+    }
 
     /**
-     * Return the ith element of the array as a String. If the type is not a String, this can result in runtime errors.
+     * Set a given index to the given double.
      */
-    default String getString(int index, String defaultValue) { return Strings.toString(getScalar(index, defaultValue)); }
-
-    /**
-     * Return the ith element of the array as a int. If the type is not a int, this can result in runtime errors.
-     */
-    default Integer getInteger(int index) { return Numbers.toInteger(getScalar(index)); }
-
-    /**
-     * Return the ith element of the array as a int. If the type is not a int, this can result in runtime errors.
-     */
-    default Integer getInteger(int index, Integer defaultValue) { return Numbers.toInteger(getScalar(index, defaultValue)); }
-
-    /**
-     * Return the ith element of the array as a long. If the type is not a long, this can result in runtime errors.
-     */
-    default Long getLong(int index) { return Numbers.longValue(getScalar(index)); }
-
-    /**
-     * Return the ith element of the array as a long. If the type is not a long, this can result in runtime errors.
-     */
-    default Long getLong(int index, Long defaultValue) { return Numbers.toLong(getScalar(index, defaultValue)); }
-
-    /**
-     * Return the ith element of the array as a double. If the type is not a double, this can result in runtime errors.
-     */
-    default Double getDouble(int index) { return Numbers.toDouble(getScalar(index)); }
-
-    /**
-     * Return the ith element of the array as a double. If the type is not a double, this can result in runtime errors.
-     */
-    default Double getDouble(int index, Double defaultValue) { return Numbers.toDouble(getScalar(index, defaultValue)); }
+    default <T extends IndexedArray> T set(int index, Double value) {
+        return setScalar(index, value);
+    }
 
 
 }

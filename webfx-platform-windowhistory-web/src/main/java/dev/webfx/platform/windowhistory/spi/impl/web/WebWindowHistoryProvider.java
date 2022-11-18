@@ -1,16 +1,15 @@
 package dev.webfx.platform.windowhistory.spi.impl.web;
 
-import dev.webfx.platform.console.Console;
-import dev.webfx.platform.json.JsonObject;
+import dev.webfx.platform.json.ReadOnlyJsonObject;
 import dev.webfx.platform.uischeduler.UiScheduler;
+import dev.webfx.platform.util.Objects;
+import dev.webfx.platform.util.Strings;
 import dev.webfx.platform.windowhistory.spi.BrowsingHistoryEvent;
 import dev.webfx.platform.windowhistory.spi.WindowHistoryProvider;
 import dev.webfx.platform.windowhistory.spi.impl.BrowsingHistoryLocationImpl;
 import dev.webfx.platform.windowhistory.spi.impl.MemoryBrowsingHistory;
 import dev.webfx.platform.windowlocation.WindowLocation;
 import dev.webfx.platform.windowlocation.spi.PathStateLocation;
-import dev.webfx.platform.util.Objects;
-import dev.webfx.platform.util.Strings;
 
 /**
  * @author Bruno Salmon
@@ -74,11 +73,11 @@ public final class WebWindowHistoryProvider extends MemoryBrowsingHistory implem
         return super.getCurrentLocation();
     }
 
-    private void onPopState(JsonObject state) {
-        //Logger.log("Entering onPopState");
+    private void onPopState(ReadOnlyJsonObject state) {
+        //Console.log("Entering onPopState");
         // Transforming the current window location into a history location descriptor
         String path = fullToMountPath(WindowLocation.getPath());
-        Console.log("Pop state with path = " + path);
+        //Console.log("Pop state with path = " + path);
         PathStateLocation pathStateLocation = createPathStateLocation(path, state);
         BrowsingHistoryLocationImpl location;
         int p = locationStack.indexOf(pathStateLocation);

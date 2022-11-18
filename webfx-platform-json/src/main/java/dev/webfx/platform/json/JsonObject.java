@@ -1,38 +1,75 @@
 package dev.webfx.platform.json;
 
+import dev.webfx.platform.util.noreflect.ReadOnlyIndexedArray;
+import dev.webfx.platform.util.noreflect.ReadOnlyKeyObject;
 import dev.webfx.platform.util.noreflect.KeyObject;
+
+import java.time.Instant;
 
 /**
  * @author Bruno Salmon
  */
-public interface JsonObject extends KeyObject, JsonElement {
+public interface JsonObject extends ReadOnlyJsonObject, JsonElement, KeyObject {
+
+    @Override
+    default JsonObject getObject(String key) {
+        return (JsonObject) ReadOnlyJsonObject.super.getObject(key);
+    }
 
     /**
-     * All keys of the object.
+     * Set a given key to the given element. Fluent API (return this).
      */
-    JsonArray keys();
+    JsonObject setNativeElement(String key, Object element);
 
     /**
-     * Return the element as it is stored (unwrapped) in the underlying structure (so either a value or an unwrapped object/array).
+     * Set a given key to the given value.
      */
-    Object getNativeElement(String key);
+    default JsonObject set(String key, Object value) {
+        return setNativeElement(key, anyJavaToNative(value));
+    }
 
     /**
-     * Return the element as a value or wrapped object/array.
+     * Set a given key to the given object.
      */
-    default <T> T get(String key) { return anyNativeToJava(getNativeElement(key)); }
+    default JsonObject setObject(String key, ReadOnlyKeyObject object) { return setNativeElement(key, javaToNativeJsonObject((ReadOnlyJsonObject) object)); }
 
     /**
-     * Return the element as a JsonObject. If the type is not an object, this can result in runtime errors.
+     * Set a given key to the given array.
      */
-    default JsonObject getObject(String key) { return nativeToJavaJsonObject(getNativeElement(key)); }
+    default JsonObject setArray(String key, ReadOnlyIndexedArray array) { return setNativeElement(key, javaToNativeJsonArray((ReadOnlyJsonArray) array)); }
 
     /**
-     * Return the element as a JsonArray. If the type is not an array, this can result in runtime errors.
+     * Set a given key to the given element.
      */
-    default JsonArray getArray(String key) { return nativeToJavaJsonArray(getNativeElement(key)); }
+    default JsonObject setScalar(String key, Object scalar) { return setNativeElement(key, javaToNativeScalar(scalar)); }
 
-    default <T> T getScalar(String key) {
-        return nativeToJavaScalar(getNativeElement(key));
+    @Override
+    default JsonObject set(String key, Boolean value) {
+        return KeyObject.super.set(key, value);
+    }
+
+    @Override
+    default JsonObject set(String key, Integer value) {
+        return KeyObject.super.set(key, value);
+    }
+
+    @Override
+    default JsonObject set(String key, Long value) {
+        return KeyObject.super.set(key, value);
+    }
+
+    @Override
+    default JsonObject set(String key, Double value) {
+        return KeyObject.super.set(key, value);
+    }
+
+    @Override
+    default JsonObject set(String key, String value) {
+        return KeyObject.super.set(key, value);
+    }
+
+    @Override
+    default JsonObject set(String key, Instant value) {
+        return KeyObject.super.set(key, value);
     }
 }

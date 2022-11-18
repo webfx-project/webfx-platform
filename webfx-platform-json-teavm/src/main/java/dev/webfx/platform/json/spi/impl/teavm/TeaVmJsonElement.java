@@ -1,7 +1,7 @@
 package dev.webfx.platform.json.spi.impl.teavm;
 
 import dev.webfx.platform.json.ElementType;
-import dev.webfx.platform.json.WritableJsonElement;
+import dev.webfx.platform.json.JsonElement;
 import org.teavm.jso.JSBody;
 import org.teavm.jso.JSObject;
 import org.teavm.jso.core.JSArray;
@@ -12,7 +12,7 @@ import org.teavm.jso.core.JSString;
 /*
  * @author Bruno Salmon
  */
-abstract class TeaVmJsonElement implements WritableJsonElement {
+abstract class TeaVmJsonElement implements JsonElement {
 
     protected final JSObject nativeElement; // As opposed to GWT, TeaVM needs the element to be embed as a member field
 

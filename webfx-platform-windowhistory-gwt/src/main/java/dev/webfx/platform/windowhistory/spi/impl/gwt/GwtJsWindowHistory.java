@@ -2,7 +2,7 @@ package dev.webfx.platform.windowhistory.spi.impl.gwt;
 
 import dev.webfx.platform.windowhistory.spi.impl.gwt.jsinterop.Window;
 import dev.webfx.platform.json.spi.impl.gwt.GwtJsonObject;
-import dev.webfx.platform.json.JsonObject;
+import dev.webfx.platform.json.ReadOnlyJsonObject;
 import dev.webfx.platform.windowhistory.spi.impl.web.JsWindowHistory;
 import dev.webfx.platform.async.Handler;
 import java.util.function.Function;
@@ -31,7 +31,7 @@ public final class GwtJsWindowHistory implements JsWindowHistory {
     }-*/;
 
     @Override
-    public JsonObject state() {
+    public ReadOnlyJsonObject state() {
         return Window.history.state.cast();
     }
 
@@ -46,12 +46,12 @@ public final class GwtJsWindowHistory implements JsWindowHistory {
     }
 
     @Override
-    public void onPopState(Handler<JsonObject> stateListener) {
+    public void onPopState(Handler<ReadOnlyJsonObject> stateListener) {
         Window.onpopstate = event -> stateListener.handle((GwtJsonObject) event.state);
     }
 
     @Override
-    public void onBeforeUnload(Function<JsonObject, String> listener) {
+    public void onBeforeUnload(Function<ReadOnlyJsonObject, String> listener) {
         Window.onbeforeunload = event -> listener.apply((GwtJsonObject) event);
     }
 

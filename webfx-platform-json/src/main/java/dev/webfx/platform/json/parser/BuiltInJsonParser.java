@@ -1,9 +1,9 @@
 package dev.webfx.platform.json.parser;
 
+import dev.webfx.platform.json.JsonArray;
+import dev.webfx.platform.json.JsonObject;
 import dev.webfx.platform.json.parser.javacup.JavaCupJsonParser;
 import dev.webfx.platform.json.parser.jflex.JsonLexer;
-import dev.webfx.platform.json.WritableJsonArray;
-import dev.webfx.platform.json.WritableJsonObject;
 
 import java.io.StringReader;
 
@@ -12,11 +12,11 @@ import java.io.StringReader;
  */
 public final class BuiltInJsonParser {
 
-    public static WritableJsonObject parseJsonObject(String json) {
+    public static JsonObject parseJsonObject(String json) {
         return parseWithJavaCup(json);
     }
 
-    public static WritableJsonArray parseJsonArray(String json) {
+    public static JsonArray parseJsonArray(String json) {
         return parseWithJavaCup(json);
     }
 

@@ -1,6 +1,6 @@
 package dev.webfx.platform.windowhistory.spi.impl.web;
 
-import dev.webfx.platform.json.JsonObject;
+import dev.webfx.platform.json.ReadOnlyJsonObject;
 import dev.webfx.platform.async.Handler;
 import dev.webfx.platform.util.serviceloader.SingleServiceProvider;
 
@@ -37,7 +37,7 @@ public interface JsWindowHistory {
      *
      * @return the current history object.
      */
-    JsonObject state();
+    ReadOnlyJsonObject state();
 
     /**
      * Adds an element to the history.
@@ -68,7 +68,7 @@ public interface JsWindowHistory {
      * a popstate event on page load, but Firefox doesn't.
      * @param stateListener
      */
-    void onPopState(Handler<JsonObject> stateListener);
+    void onPopState(Handler<ReadOnlyJsonObject> stateListener);
 
-    void onBeforeUnload(Function<JsonObject, String> listener);
+    void onBeforeUnload(Function<ReadOnlyJsonObject, String> listener);
 }

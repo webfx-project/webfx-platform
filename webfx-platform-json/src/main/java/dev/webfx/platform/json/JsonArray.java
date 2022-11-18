@@ -1,47 +1,72 @@
 package dev.webfx.platform.json;
 
+import dev.webfx.platform.util.noreflect.ReadOnlyIndexedArray;
+import dev.webfx.platform.util.noreflect.ReadOnlyKeyObject;
 import dev.webfx.platform.util.noreflect.IndexedArray;
 
 /**
  * @author Bruno Salmon
  */
-public interface JsonArray extends JsonElement, IndexedArray {
+public interface JsonArray extends ReadOnlyJsonArray, JsonElement, IndexedArray {
 
     /**
-     * Returns the first index of the given element, or -1 if it cannot be found.
+     * Pushes the given element onto the end of the array. Fluent API (return this).
      */
-    int indexOfNativeElement(Object element);
+    JsonArray pushNativeElement(Object element);
 
     /**
-     * Returns the first index of the given value, or -1 if it cannot be found.
+     * Pushes the given element onto the end of the array. Most consuming call.
      */
-    default int indexOf(Object value) {
-        return indexOfNativeElement(anyJavaToNative(value));
+    default JsonArray push(Object element) {
+        return pushNativeElement(anyJavaToNative(element));
     }
 
     /**
-     * Return the ith element of the array.
+     * Set a given index to the given object.
      */
-    Object getNativeElement(int index);
+    default JsonArray push(ReadOnlyKeyObject object) { return pushNativeElement(javaToNativeJsonObject((ReadOnlyJsonObject) object)); }
 
     /**
-     * Return the ith element of the array. Most consuming call.
+     * Set a given index to the given array.
      */
-    default <V> V getElement(int index) {
-        return anyNativeToJava(getNativeElement(index));
+    default JsonArray push(ReadOnlyIndexedArray array) { return pushNativeElement(javaToNativeJsonArray((ReadOnlyJsonArray) array)); }
+
+    /**
+     * Set a given index to the given element.
+     */
+    default JsonArray pushScalar(Object scalar) { return pushNativeElement(javaToNativeScalar(scalar)); }
+
+
+    /**
+     * Set a given index to the given value. Fluent API (return this).
+     */
+    JsonArray setNativeElement(int index, Object value);
+
+    /**
+     * Set a given index to the given value. Most consuming call.
+     */
+    default JsonArray set(int index, Object value) {
+        return setNativeElement(index, anyJavaToNative(value));
     }
 
     /**
-     * Return the ith element of the array as a JsonObject. If the type is not an object, this can result in runtime errors.
+     * Set a given index to the given object.
      */
-    default JsonObject getObject(int index) { return nativeToJavaJsonObject(getNativeElement(index)); }
+    default JsonArray set(int index, ReadOnlyJsonObject object) {
+        return setNativeElement(index, javaToNativeJsonObject(object));
+    }
 
     /**
-     * Return the ith element of the array as a JsonArray. If the type is not an array, this can result in runtime errors.
+     * Set a given index to the given array.
      */
-    default JsonArray getArray(int index) { return nativeToJavaJsonArray(getNativeElement(index)); }
+    default JsonArray set(int index, ReadOnlyJsonArray array) {
+        return setNativeElement(index, javaToNativeJsonArray(array));
+    }
 
-    default <T> T getScalar(int index) {
-        return nativeToJavaScalar(getNativeElement(index));
+    /**
+     * Set a given index to the given scalar.
+     */
+    default JsonArray setScalar(int index, Object scalar) {
+        return setNativeElement(index, javaToNativeScalar(scalar));
     }
 }

@@ -1,6 +1,6 @@
 package dev.webfx.platform.json.spi.impl.teavm;
 
-import dev.webfx.platform.json.WritableJsonObject;
+import dev.webfx.platform.json.JsonObject;
 import org.teavm.jso.JSObject;
 import org.teavm.jso.core.JSBoolean;
 import org.teavm.jso.core.JSNumber;
@@ -11,7 +11,7 @@ import org.teavm.jso.core.JSString;
  *
  * @author Bruno Salmon
  */
-public final class TeaVmJsonObject extends TeaVmJsonElement implements WritableJsonObject {
+public final class TeaVmJsonObject extends TeaVmJsonElement implements JsonObject {
 
     public static TeaVmJsonObject create(JSObject jso) {
         if (jso == null || isUndefined(jso))

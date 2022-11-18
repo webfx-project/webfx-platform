@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * @author Bruno Salmon
  */
-public interface ListMapBasedJsonElement extends WritableJsonElement {
+public interface ListMapBasedJsonElement extends JsonElement {
 
     @Override
     default Object createNativeObject() {
@@ -24,16 +24,16 @@ public interface ListMapBasedJsonElement extends WritableJsonElement {
     }
 
     @Override
-    default WritableJsonObject nativeToJavaJsonObject(Object nativeObject) {
-        if (nativeObject == null || nativeObject instanceof WritableJsonObject)
-            return (WritableJsonObject) nativeObject;
+    default JsonObject nativeToJavaJsonObject(Object nativeObject) {
+        if (nativeObject == null || nativeObject instanceof JsonObject)
+            return (JsonObject) nativeObject;
         return new MapJsonObject((Map) nativeObject);
     }
 
     @Override
-    default WritableJsonArray nativeToJavaJsonArray(Object nativeArray) {
-        if (nativeArray == null || nativeArray instanceof WritableJsonArray)
-            return (WritableJsonArray) nativeArray;
+    default JsonArray nativeToJavaJsonArray(Object nativeArray) {
+        if (nativeArray == null || nativeArray instanceof JsonArray)
+            return (JsonArray) nativeArray;
         return new ListJsonArray((List) nativeArray);
     }
 
@@ -41,9 +41,9 @@ public interface ListMapBasedJsonElement extends WritableJsonElement {
     default ElementType getNativeElementType(Object nativeElement) {
         if (nativeElement == null)
             return ElementType.NULL;
-        if (nativeElement instanceof Map || nativeElement instanceof JsonObject)
+        if (nativeElement instanceof Map || nativeElement instanceof ReadOnlyJsonObject)
             return ElementType.OBJECT;
-        if (nativeElement instanceof List || nativeElement instanceof JsonArray)
+        if (nativeElement instanceof List || nativeElement instanceof ReadOnlyJsonArray)
             return ElementType.ARRAY;
         if (nativeElement instanceof Boolean)
             return ElementType.NUMBER;

@@ -1,7 +1,7 @@
 package dev.webfx.platform.json.spi.impl.listmap;
 
-import dev.webfx.platform.json.JsonArray;
-import dev.webfx.platform.json.WritableJsonObject;
+import dev.webfx.platform.json.ReadOnlyJsonArray;
+import dev.webfx.platform.json.JsonObject;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * @author Bruno Salmon
  */
-public abstract class MapBasedJsonObject implements WritableJsonObject, ListMapBasedJsonElement {
+public abstract class MapBasedJsonObject implements JsonObject, ListMapBasedJsonElement {
     protected boolean isShallowCopy;
 
     protected MapBasedJsonObject() {
@@ -43,7 +43,7 @@ public abstract class MapBasedJsonObject implements WritableJsonObject, ListMapB
     }
 
     @Override
-    public JsonArray keys() {
+    public ReadOnlyJsonArray keys() {
         return nativeToJavaJsonArray(new ArrayList(getMap().keySet()));
     }
 

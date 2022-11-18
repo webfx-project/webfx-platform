@@ -1,8 +1,8 @@
 package dev.webfx.platform.json.parser.javacup;
 
 import dev.webfx.platform.json.Json;
-import dev.webfx.platform.json.WritableJsonArray;
-import dev.webfx.platform.json.WritableJsonObject;
+import dev.webfx.platform.json.JsonArray;
+import dev.webfx.platform.json.JsonObject;
 import dev.webfx.platform.util.Numbers;
 import dev.webfx.platform.util.tuples.Pair;
 
@@ -79,10 +79,10 @@ terminal String   STRING, IDENTIFIER;
 /* Non terminals used in the grammar section.*/
 non terminal Object                     json_element;
 non terminal Object                     json_native_scalar, json_java_scalar;
-non terminal WritableJsonArray          json_array;
-non terminal WritableJsonArray          json_array_body;
-non terminal WritableJsonObject         json_object;
-non terminal WritableJsonObject         json_object_body;
+non terminal JsonArray                  json_array;
+non terminal JsonArray                  json_array_body;
+non terminal JsonObject                 json_object;
+non terminal JsonObject                 json_object_body;
 non terminal Pair<String, Object>       json_object_entry;
 
 /* -------------Precedence and Associatively of Terminals Section----------- */

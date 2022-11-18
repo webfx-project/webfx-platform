@@ -1,7 +1,7 @@
 package dev.webfx.platform.webworker.spi.impl.java;
 
 import dev.webfx.platform.uischeduler.UiScheduler;
-import dev.webfx.platform.json.JsonObject;
+import dev.webfx.platform.json.ReadOnlyJsonObject;
 import dev.webfx.platform.console.Console;
 import dev.webfx.platform.webworker.spi.base.JavaCodedWebWorkerBase;
 import dev.webfx.platform.webworker.spi.base.PlatformWebWorkerBase;
@@ -47,12 +47,12 @@ public class JavaWebWorker extends WebWorkerBase { // this instance represents t
 
         @Override
         public int getJsonInt(Object nativeObject, String key) {
-            return ((JsonObject) nativeObject).getInteger(key);
+            return ((ReadOnlyJsonObject) nativeObject).getInteger(key);
         }
 
         @Override
         public double getJsonDouble(Object nativeObject, String key) {
-            return ((JsonObject) nativeObject).getDouble(key);
+            return ((ReadOnlyJsonObject) nativeObject).getDouble(key);
         }
 
         @Override

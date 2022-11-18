@@ -21,26 +21,26 @@ public interface JsonWrapper {
     default <T> T nativeToJavaScalar(Object nativeScalar) { return (T) nativeScalar; }
 
     // Temporary removed default implementation due to TeaVm bug
-    /*default*/ WritableJsonArray nativeToJavaJsonArray(Object nativeArray); /*{ return  (WritableJsonArray) nativeArray; }*/
+    /*default*/ JsonArray nativeToJavaJsonArray(Object nativeArray); /*{ return  (WritableJsonArray) nativeArray; }*/
 
     // Temporary removed default implementation due to TeaVm bug
-    /*default*/ WritableJsonObject nativeToJavaJsonObject(Object nativeObject); /*{ return (WritableJsonObject) nativeObject; }*/
+    /*default*/ JsonObject nativeToJavaJsonObject(Object nativeObject); /*{ return (WritableJsonObject) nativeObject; }*/
 
     default Object anyJavaToNative(Object value) {
         if (value == null)
             return null;
-        if (value instanceof JsonArray)
-            return javaToNativeJsonArray((JsonArray) value);
-        if (value instanceof JsonObject)
-            return javaToNativeJsonObject((JsonObject) value);
+        if (value instanceof ReadOnlyJsonArray)
+            return javaToNativeJsonArray((ReadOnlyJsonArray) value);
+        if (value instanceof ReadOnlyJsonObject)
+            return javaToNativeJsonObject((ReadOnlyJsonObject) value);
         return javaToNativeScalar(value);
     }
 
     // Temporary removed default implementation due to TeaVm bug
     /*default*/ Object javaToNativeScalar(Object scalar); /*{ return scalar; }*/
 
-    default Object javaToNativeJsonArray(JsonArray array) { return array.getNativeElement(); }
+    default Object javaToNativeJsonArray(ReadOnlyJsonArray array) { return array.getNativeElement(); }
 
-    default Object javaToNativeJsonObject(JsonObject object) { return object.getNativeElement(); }
+    default Object javaToNativeJsonObject(ReadOnlyJsonObject object) { return object.getNativeElement(); }
 
 }

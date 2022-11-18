@@ -17,7 +17,7 @@
  */
 package dev.webfx.platform.json.spi.impl.gwt;
 
-import dev.webfx.platform.json.WritableJsonArray;
+import dev.webfx.platform.json.JsonArray;
 
 /**
  * Client-side implementation of JsonArray.
@@ -27,7 +27,7 @@ import dev.webfx.platform.json.WritableJsonArray;
  *
  * <a href="https://github.com/goodow/realtime-json/tree/master/src/main/java/com/goodow/realtime/json/js/JsJsonArray.java">Original Goodow class</a>
  */
-public final class GwtJsonArray extends GwtJsonElement implements WritableJsonArray {
+public final class GwtJsonArray extends GwtJsonElement implements JsonArray {
 
     // GWT: Constructors must be 'protected' in subclasses of JavaScriptObject
     protected GwtJsonArray() {} // instances are actually always obtained from a javascript array cast

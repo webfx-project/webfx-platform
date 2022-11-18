@@ -1,6 +1,6 @@
 package dev.webfx.platform.json.spi.impl.teavm;
 
-import dev.webfx.platform.json.WritableJsonArray;
+import dev.webfx.platform.json.JsonArray;
 import org.teavm.jso.JSObject;
 import org.teavm.jso.core.JSArray;
 
@@ -9,7 +9,7 @@ import org.teavm.jso.core.JSArray;
  *
  * @author Bruno Salmon
  */
-final class TeaVmJsonArray extends TeaVmJsonElement implements WritableJsonArray {
+final class TeaVmJsonArray extends TeaVmJsonElement implements JsonArray {
 
     public static TeaVmJsonArray create(JSArray jsArray) {
         if (jsArray == null || isUndefined(jsArray))

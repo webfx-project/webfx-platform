@@ -2,8 +2,8 @@ package dev.webfx.platform.json.spi.impl.vertx;
 
 import dev.webfx.platform.json.ElementType;
 import dev.webfx.platform.json.JsonArray;
-import dev.webfx.platform.json.JsonObject;
-import dev.webfx.platform.json.WritableJsonArray;
+import dev.webfx.platform.json.ReadOnlyJsonArray;
+import dev.webfx.platform.json.ReadOnlyJsonObject;
 import dev.webfx.platform.util.Numbers;
 import dev.webfx.platform.json.spi.impl.listmap.ListMapBasedJsonElement;
 import dev.webfx.platform.json.spi.impl.listmap.MapBasedJsonObject;
@@ -20,9 +20,9 @@ interface VertxJsonElement extends ListMapBasedJsonElement {
     default ElementType getNativeElementType(Object nativeElement) {
         if (nativeElement == null)
             return ElementType.NULL;
-        if (nativeElement instanceof Map || nativeElement instanceof JsonObject || nativeElement instanceof io.vertx.core.json.JsonObject)
+        if (nativeElement instanceof Map || nativeElement instanceof ReadOnlyJsonObject || nativeElement instanceof io.vertx.core.json.JsonObject)
             return ElementType.OBJECT;
-        if (nativeElement instanceof List || nativeElement instanceof JsonArray || nativeElement instanceof io.vertx.core.json.JsonArray)
+        if (nativeElement instanceof List || nativeElement instanceof ReadOnlyJsonArray || nativeElement instanceof io.vertx.core.json.JsonArray)
             return ElementType.ARRAY;
         if (nativeElement instanceof Boolean)
             return ElementType.NUMBER;
@@ -43,9 +43,9 @@ interface VertxJsonElement extends ListMapBasedJsonElement {
     }
 
     @Override
-    default WritableJsonArray nativeToJavaJsonArray(Object nativeArray) {
-        if (nativeArray == null || nativeArray instanceof WritableJsonArray)
-            return (WritableJsonArray) nativeArray;
+    default JsonArray nativeToJavaJsonArray(Object nativeArray) {
+        if (nativeArray == null || nativeArray instanceof JsonArray)
+            return (JsonArray) nativeArray;
         if (nativeArray instanceof io.vertx.core.json.JsonArray)
             return new VertxJsonArray((io.vertx.core.json.JsonArray) nativeArray);
         return new VertxJsonArray((List) nativeArray);

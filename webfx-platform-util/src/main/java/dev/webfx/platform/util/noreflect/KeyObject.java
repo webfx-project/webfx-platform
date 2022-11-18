@@ -1,110 +1,49 @@
 package dev.webfx.platform.util.noreflect;
 
-import dev.webfx.platform.util.*;
+import dev.webfx.platform.util.Dates;
 
 import java.time.Instant;
 
 /**
  * @author Bruno Salmon
  */
-public interface KeyObject {
+public interface KeyObject extends ReadOnlyKeyObject {
 
     /**
-     * Test whether a given key has present.
+     * Remove a given key and associated value from the object.
      */
-    default boolean has(String key) {
-        return get(key) != null;
-    }
+    <V> V remove(String key);
 
     /**
-     * All keys of the object.
+     * Set a given key to the given value.
      */
-    IndexedArray keys();
+    <T extends KeyObject> T set(String key, Object value);
 
     /**
-     * Return the element as a value or wrapped object/array.
+     * Set a given key to the given object.
      */
-    <T> T get(String key);
+    default <T extends KeyObject> T setObject(String key, ReadOnlyKeyObject object) { return set(key, object); }
 
     /**
-     * Return the element as a JsonObject. If the type is not an object, this can result in runtime errors.
+     * Set a given key to the given array.
      */
-    default KeyObject getObject(String key) { return get(key); }
+    default <T extends KeyObject> T setArray(String key, ReadOnlyIndexedArray array) { return set(key, array); }
 
     /**
-     * Return the element as a JsonArray. If the type is not an array, this can result in runtime errors.
+     * Set a given key to the given element.
      */
-    default IndexedArray getArray(String key) { return get(key); }
+    default <T extends KeyObject> T setScalar(String key, Object scalar) { return set(key, scalar); }
 
-    default <T> T getScalar(String key) {
-        return get(key);
-    }
+    default <T extends KeyObject> T set(String key, Boolean value) { return setScalar(key, value); }
 
-    default <T> T getScalar(String key, T defaultValue) {
-        return Objects.coalesce(getScalar(key), defaultValue);
-    }
+    default <T extends KeyObject> T set(String key, Integer value) { return setScalar(key, value); }
 
-    default boolean isTrue(String key) {
-        return Boolean.TRUE.equals(getBoolean(key));
-    }
-    /**
-     * Return the element as a boolean. If the type is not a boolean, this can result in runtime errors.
-     */
-    default Boolean getBoolean(String key) { return Booleans.toBoolean(getScalar(key)); }
+    default <T extends KeyObject> T set(String key, Long value) { return setScalar(key, value); }
 
-    /**
-     * Return the element as a boolean. If the type is not a boolean, this can result in runtime errors.
-     */
-    default Boolean getBoolean(String key, Boolean defaultValue) { return Booleans.toBoolean(getScalar(key, defaultValue)); }
+    default <T extends KeyObject> T set(String key, Double value) { return setScalar(key, value); }
 
-    /**
-     * Return the element as a String. If the type is not a String, this can result in runtime errors.
-     */
-    default String getString(String key) { return Strings.toString(getScalar(key)); }
+    default <T extends KeyObject> T set(String key, String value) { return setScalar(key, value); }
 
-    /**
-     * Return the element as a String. If the type is not a String, this can result in runtime errors.
-     */
-    default String getString(String key, String defaultValue) { return Strings.toString(getScalar(key, defaultValue)); }
+    default <T extends KeyObject> T set(String key, Instant value) { return setScalar(key, Dates.formatIso(value)); }
 
-    /**
-     * Return the element as a int. If the type is not a int, this can result in runtime errors.
-     */
-    default Integer getInteger(String key) { return Numbers.toInteger(getScalar(key)); }
-
-    /**
-     * Return the element as a int. If the type is not a int, this can result in runtime errors.
-     */
-    default Integer getInteger(String key, Integer defaultValue) { return Numbers.toInteger(getScalar(key, defaultValue)); }
-
-    /**
-     * Return the element as a long. If the type is not a long, this can result in runtime errors.
-     */
-    default Long getLong(String key) { return Numbers.toLong(getScalar(key)); }
-
-    /**
-     * Return the element as a long. If the type is not a long, this can result in runtime errors.
-     */
-    default Long getLong(String key, Long defaultValue) { return Numbers.toLong(getScalar(key, defaultValue)); }
-
-    /**
-     * Return the element as a double. If the type is not a double, this can result in runtime errors.
-     */
-    default Double getDouble(String key) { return Numbers.toDouble(getScalar(key)); }
-
-    /**
-     * Return the element as a double. If the type is not a double, this can result in runtime errors.
-     */
-    default Double getDouble(String key, Double defaultValue) { return Numbers.toDouble(getScalar(key, defaultValue)); }
-
-    /**
-     * Return the element as an instant. If the type is not an instant, this can result in runtime errors.
-     */
-    default Instant getInstant(String key) { return Dates.toInstant(getScalar(key)); }
-
-    /**
-     * Return the element as an instant. If the type is not an instant, this can result in runtime errors.
-     */
-    default Instant getInstant(String key, Instant defaultValue) { return Dates.toInstant(getScalar(key, defaultValue)); }
 }
-

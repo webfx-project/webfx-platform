@@ -1,13 +1,13 @@
 package dev.webfx.platform.json.spi.impl.listmap;
 
-import dev.webfx.platform.json.WritableJsonArray;
+import dev.webfx.platform.json.JsonArray;
 
 import java.util.List;
 
 /**
  * @author Bruno Salmon
  */
-public abstract class ListBasedJsonArray implements WritableJsonArray, ListMapBasedJsonElement {
+public abstract class ListBasedJsonArray implements JsonArray, ListMapBasedJsonElement {
     protected boolean isShallowCopy;
 
     protected ListBasedJsonArray() {

@@ -1820,7 +1820,6 @@
             <used-by-source-modules>
                 <module>java.base</module>
                 <module>webfx-platform-async</module>
-                <module>webfx-platform-console</module>
                 <module>webfx-platform-json</module>
                 <module>webfx-platform-uischeduler</module>
                 <module>webfx-platform-util</module>

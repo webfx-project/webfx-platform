@@ -29,14 +29,14 @@ public interface JsonFormatter extends JsonWrapper {
      *  with <code>}</code>&nbsp;<small>(right brace)</small>.
      */
 
-    static String toJsonString(JsonObject json) {
+    static String toJsonString(ReadOnlyJsonObject json) {
         return appendJsonObject(json, new StringBuilder()).toString();
     }
 
-    static StringBuilder appendJsonObject(JsonObject json, StringBuilder sb) {
+    static StringBuilder appendJsonObject(ReadOnlyJsonObject json, StringBuilder sb) {
         sb.append('{');
         boolean first = true;
-        JsonArray keys = json.keys();
+        ReadOnlyJsonArray keys = json.keys();
         for (int i = 0, size = keys.size(); i < size; i++) {
             String key = keys.getString(i);
             if (!first)
@@ -49,11 +49,11 @@ public interface JsonFormatter extends JsonWrapper {
         return sb.append('}');
     }
 
-    static String toJsonString(JsonArray ca) {
+    static String toJsonString(ReadOnlyJsonArray ca) {
         return appendJsonArray(ca, new StringBuilder()).toString();
     }
 
-    static StringBuilder appendJsonArray(JsonArray ca, StringBuilder sb) {
+    static StringBuilder appendJsonArray(ReadOnlyJsonArray ca, StringBuilder sb) {
         return join(ca, ",", sb.append('[')).append(']');
     }
     /**
@@ -64,7 +64,7 @@ public interface JsonFormatter extends JsonWrapper {
      * @return a string.
      * @throws IllegalArgumentException If the array contains an invalid number.
      */
-    static StringBuilder join(JsonArray ca, String separator, StringBuilder sb) {
+    static StringBuilder join(ReadOnlyJsonArray ca, String separator, StringBuilder sb) {
         int len = ca.size();
         for (int i = 0; i < len; i += 1) {
             if (i > 0)

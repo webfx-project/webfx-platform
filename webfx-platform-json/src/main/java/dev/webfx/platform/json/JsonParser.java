@@ -30,7 +30,7 @@ public interface JsonParser extends JsonWrapper {
      * @param text the text to parse
      * @return the json object
      */
-    default WritableJsonObject parseObject(String text) {
+    default JsonObject parseObject(String text) {
         return nativeToJavaJsonObject(parseNativeObject(text));
     }
 
@@ -39,7 +39,7 @@ public interface JsonParser extends JsonWrapper {
      * @param text the text to parse
      * @return the json array
      */
-    default WritableJsonArray parseArray(String text) {
+    default JsonArray parseArray(String text) {
         return nativeToJavaJsonArray(parseNativeArray(text));
     }
 }

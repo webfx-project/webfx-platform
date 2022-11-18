@@ -1,7 +1,6 @@
 package dev.webfx.platform.json.spi.impl.vertx;
 
-import io.vertx.core.json.JsonArray;
-import dev.webfx.platform.json.WritableJsonArray;
+import dev.webfx.platform.json.JsonArray;
 import dev.webfx.platform.json.spi.impl.listmap.ListBasedJsonArray;
 
 import java.util.List;
@@ -9,9 +8,9 @@ import java.util.List;
 /**
  * @author Bruno Salmon
  */
-public final class VertxJsonArray extends ListBasedJsonArray implements VertxJsonElement, WritableJsonArray {
+public final class VertxJsonArray extends ListBasedJsonArray implements VertxJsonElement, JsonArray {
 
-    private JsonArray vertxArray;
+    private io.vertx.core.json.JsonArray vertxArray;
 
     VertxJsonArray() {  // super constructor will call recreateEmptyNativeArray() to initialize the array
     }
@@ -20,7 +19,7 @@ public final class VertxJsonArray extends ListBasedJsonArray implements VertxJso
         setList(list);
     }
 
-    VertxJsonArray(JsonArray vertxArray) {
+    VertxJsonArray(io.vertx.core.json.JsonArray vertxArray) {
         this.vertxArray = vertxArray;
     }
 
@@ -31,11 +30,11 @@ public final class VertxJsonArray extends ListBasedJsonArray implements VertxJso
 
     @Override
     protected void setList(List<Object> list) {
-        vertxArray = new JsonArray(list);
+        vertxArray = new io.vertx.core.json.JsonArray(list);
     }
 
     @Override
-    public JsonArray getNativeElement() {
+    public io.vertx.core.json.JsonArray getNativeElement() {
         return vertxArray;
     }
 

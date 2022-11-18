@@ -6,7 +6,7 @@ import dev.webfx.platform.fetch.Response;
 import dev.webfx.platform.file.Blob;
 import dev.webfx.platform.file.spi.impl.java.JavaBlob;
 import dev.webfx.platform.json.Json;
-import dev.webfx.platform.json.WritableJsonElement;
+import dev.webfx.platform.json.JsonElement;
 import dev.webfx.platform.streams.ReadableStream;
 import dev.webfx.platform.streams.spi.impl.java.JavaReadableStreams;
 
@@ -150,7 +150,7 @@ public class JavaResponse implements Response {
     }
 
     @Override
-    public Future<WritableJsonElement> json() {
+    public Future<JsonElement> json() {
         return text().map(Json::parseElement);
     }
 

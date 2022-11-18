@@ -6,7 +6,7 @@ import dev.webfx.platform.fetch.Headers;
 import dev.webfx.platform.fetch.Response;
 import dev.webfx.platform.file.Blob;
 import dev.webfx.platform.file.spi.impl.gwt.GwtBlob;
-import dev.webfx.platform.json.WritableJsonElement;
+import dev.webfx.platform.json.JsonElement;
 import dev.webfx.platform.streams.ReadableStream;
 import dev.webfx.platform.streams.spi.impl.gwt.GwtReadableStream;
 
@@ -61,7 +61,7 @@ public class GwtResponse implements Response {
     }
 
     @Override
-    public Future<WritableJsonElement> json() {
+    public Future<JsonElement> json() {
         return GwtUtil.jsPromiseToWebFXFuture(jsResponse.json(), obj -> ((JavaScriptObject) obj).cast());
     }
 

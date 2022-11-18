@@ -1,7 +1,6 @@
 package dev.webfx.platform.json.spi.impl.vertx;
 
-import io.vertx.core.json.JsonObject;
-import dev.webfx.platform.json.WritableJsonObject;
+import dev.webfx.platform.json.JsonObject;
 import dev.webfx.platform.json.spi.impl.listmap.MapBasedJsonObject;
 
 import java.util.Map;
@@ -9,9 +8,9 @@ import java.util.Map;
 /**
  * @author Bruno Salmon
  */
-public final class VertxJsonObject extends MapBasedJsonObject implements VertxJsonElement, WritableJsonObject {
+public final class VertxJsonObject extends MapBasedJsonObject implements VertxJsonElement, JsonObject {
 
-    private JsonObject vertxObject;
+    private io.vertx.core.json.JsonObject vertxObject;
 
     public VertxJsonObject() { // super constructor will call recreateEmptyNativeObject() to initialize the map
     }
@@ -20,7 +19,7 @@ public final class VertxJsonObject extends MapBasedJsonObject implements VertxJs
         setMap(map);
     }
 
-    VertxJsonObject(JsonObject vertxObject) {
+    VertxJsonObject(io.vertx.core.json.JsonObject vertxObject) {
         this.vertxObject = vertxObject;
     }
 
@@ -31,11 +30,11 @@ public final class VertxJsonObject extends MapBasedJsonObject implements VertxJs
 
     @Override
     protected void setMap(Map<String, Object> map) {
-        vertxObject = new JsonObject(map);
+        vertxObject = new io.vertx.core.json.JsonObject(map);
     }
 
     @Override
-    public JsonObject getNativeElement() {
+    public io.vertx.core.json.JsonObject getNativeElement() {
         return vertxObject;
     }
 

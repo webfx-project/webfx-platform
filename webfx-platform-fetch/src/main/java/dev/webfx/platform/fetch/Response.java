@@ -2,9 +2,9 @@ package dev.webfx.platform.fetch;
 
 import dev.webfx.platform.async.Future;
 import dev.webfx.platform.file.Blob;
-import dev.webfx.platform.json.WritableJsonArray;
-import dev.webfx.platform.json.WritableJsonElement;
-import dev.webfx.platform.json.WritableJsonObject;
+import dev.webfx.platform.json.JsonArray;
+import dev.webfx.platform.json.JsonObject;
+import dev.webfx.platform.json.JsonElement;
 import dev.webfx.platform.streams.ReadableStream;
 
 /**
@@ -32,14 +32,14 @@ public interface Response {
 
     Future<Blob> blob();
 
-    Future<WritableJsonElement> json();
+    Future<JsonElement> json();
 
-    default Future<WritableJsonObject> jsonObject() {
-        return json().map(WritableJsonElement::asJsonObject);
+    default Future<JsonObject> jsonObject() {
+        return json().map(JsonElement::asJsonObject);
     }
 
-    default Future<WritableJsonArray> jsonArray() {
-        return json().map(WritableJsonElement::asJsonArray);
+    default Future<JsonArray> jsonArray() {
+        return json().map(JsonElement::asJsonArray);
     }
 
     Future<String> text();

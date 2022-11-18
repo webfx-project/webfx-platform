@@ -2,8 +2,8 @@ package dev.webfx.platform.json;
 
 import dev.webfx.platform.json.spi.JsonProvider;
 import dev.webfx.platform.json.spi.impl.listmap.MapJsonObject;
-import dev.webfx.platform.util.noreflect.IndexedArray;
-import dev.webfx.platform.util.noreflect.KeyObject;
+import dev.webfx.platform.util.noreflect.ReadOnlyIndexedArray;
+import dev.webfx.platform.util.noreflect.ReadOnlyKeyObject;
 import dev.webfx.platform.util.serviceloader.SingleServiceProvider;
 
 import java.util.ServiceLoader;
@@ -17,27 +17,27 @@ public final class Json {
      * Factory methods helpers *
      **************************/
 
-    public static WritableJsonObject createObject() {
+    public static JsonObject createObject() {
         return getProvider().createJsonObject();
     }
 
-    public static <NO> WritableJsonObject createObject(NO nativeObject) {
+    public static <NO> JsonObject createObject(NO nativeObject) {
         return getProvider().nativeToJavaJsonObject(nativeObject);
     }
 
-    public static WritableJsonArray createArray() {
+    public static JsonArray createArray() {
         return getProvider().createJsonArray();
     }
 
-    public static <NA> WritableJsonArray createArray(NA nativeArray) {
+    public static <NA> JsonArray createArray(NA nativeArray) {
         return getProvider().nativeToJavaJsonArray(nativeArray);
     }
 
-    public static WritableJsonObject parseObject(String text) {
+    public static JsonObject parseObject(String text) {
         return getProvider().parseObject(text);
     }
 
-    public static WritableJsonObject parseObjectSilently(String text) {
+    public static JsonObject parseObjectSilently(String text) {
         try {
             return parseObject(text);
         } catch (Exception e) {
@@ -45,11 +45,11 @@ public final class Json {
         }
     }
 
-    public static WritableJsonArray parseArray(String text) {
+    public static JsonArray parseArray(String text) {
         return getProvider().parseArray(text);
     }
 
-    public static WritableJsonArray parseArraySilently(String text) {
+    public static JsonArray parseArraySilently(String text) {
         try {
             return parseArray(text);
         } catch (Exception e) {
@@ -57,11 +57,11 @@ public final class Json {
         }
     }
 
-    public static WritableJsonElement parseElement(String text) {
+    public static JsonElement parseElement(String text) {
         return text.trim().startsWith("[") ? parseArray(text) : parseObject(text);
     }
 
-    public static WritableJsonElement parseElementSilently(String text) {
+    public static JsonElement parseElementSilently(String text) {
         return text.trim().startsWith("[") ? parseArraySilently(text) : parseObjectSilently(text);
     }
 
@@ -95,16 +95,16 @@ public final class Json {
      * Java conversion methods helpers *
      **********************************/
 
-    public static <T> WritableJsonArray fromJavaArray(T[] javaArray) {
+    public static <T> JsonArray fromJavaArray(T[] javaArray) {
         if (javaArray == null)
             return null;
-        WritableJsonArray valuesArray = createArray();
+        JsonArray valuesArray = createArray();
         for (Object javaValue : javaArray)
             valuesArray.push(javaValue);
         return valuesArray;
     }
 
-    public static Object[] toJavaArray(JsonArray jsonArray) {
+    public static Object[] toJavaArray(ReadOnlyJsonArray jsonArray) {
         if (jsonArray == null)
             return null;
         int length = jsonArray.size();
@@ -118,11 +118,11 @@ public final class Json {
         return JsonFormatter.appendNativeElement(nativeElement, Json.getProvider(), new StringBuilder()).toString();
     }
 
-    public static WritableJsonObject mergeInto(JsonObject src, WritableJsonObject dst) {
+    public static JsonObject mergeInto(ReadOnlyJsonObject src, JsonObject dst) {
         return mergeInto(src, dst, src.keys());
     }
 
-    public static WritableJsonObject mergeInto(KeyObject src, WritableJsonObject dst, IndexedArray keys) {
+    public static JsonObject mergeInto(ReadOnlyKeyObject src, JsonObject dst, ReadOnlyIndexedArray keys) {
         for (int i = 0, size = keys.size(); i < size; i++) {
             String key = keys.getString(i);
             Object value = src.get(key);

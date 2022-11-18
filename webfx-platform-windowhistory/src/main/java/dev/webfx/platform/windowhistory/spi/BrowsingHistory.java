@@ -3,7 +3,7 @@ package dev.webfx.platform.windowhistory.spi;
 import dev.webfx.platform.windowlocation.spi.PathStateLocation;
 import dev.webfx.platform.async.Future;
 import dev.webfx.platform.async.Handler;
-import dev.webfx.platform.json.JsonObject;
+import dev.webfx.platform.json.ReadOnlyJsonObject;
 
 import java.util.function.Function;
 
@@ -38,7 +38,7 @@ public interface BrowsingHistory {
      * @param path A path string that represents a complete URL path. Path = Pathname + Search + Hash
      * @param state A state object associated with this history entry
      */
-    default void push(String path, JsonObject state) { push(createPathStateLocation(path, state)); }
+    default void push(String path, ReadOnlyJsonObject state) { push(createPathStateLocation(path, state)); }
 
     /**
      * Push a new entry onto the history stack.
@@ -57,7 +57,7 @@ public interface BrowsingHistory {
      * @param path A path string that represents a complete URL path. Path = Pathname + Search + Hash
      * @param state A state object associated with this history entry
      */
-    default void replace(String path, JsonObject state) { replace(createPathStateLocation(path, state)); }
+    default void replace(String path, ReadOnlyJsonObject state) { replace(createPathStateLocation(path, state)); }
 
     /**
      * Replace the current entry on the history stack.
@@ -142,8 +142,8 @@ public interface BrowsingHistory {
 
     String getPath(PathStateLocation location); // Path = Pathname + Search + Hash;
 
-    PathStateLocation createPathStateLocation(String path, JsonObject state);
+    PathStateLocation createPathStateLocation(String path, ReadOnlyJsonObject state);
 
-    BrowsingHistoryLocation createHistoryLocation(String path, JsonObject state);
+    BrowsingHistoryLocation createHistoryLocation(String path, ReadOnlyJsonObject state);
 
 }

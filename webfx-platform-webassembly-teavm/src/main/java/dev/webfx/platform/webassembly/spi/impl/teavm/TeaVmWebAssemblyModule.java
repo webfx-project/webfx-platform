@@ -1,10 +1,10 @@
 package dev.webfx.platform.webassembly.spi.impl.teavm;
 
+import dev.webfx.platform.json.JsonObject;
 import dev.webfx.platform.webassembly.WebAssemblyImport;
 import dev.webfx.platform.webassembly.WebAssemblyInstance;
 import dev.webfx.platform.webassembly.WebAssemblyModule;
 import dev.webfx.platform.json.Json;
-import dev.webfx.platform.json.WritableJsonObject;
 import dev.webfx.platform.async.Future;
 import dev.webfx.platform.async.Promise;
 import org.teavm.jso.JSBody;
@@ -25,9 +25,9 @@ final class TeaVmWebAssemblyModule implements WebAssemblyModule {
     @Override
     public Future<WebAssemblyInstance> instantiate(WebAssemblyImport... imports) {
         Promise<WebAssemblyInstance> promise = Promise.promise();
-        WritableJsonObject json = Json.createObject();
+        JsonObject json = Json.createObject();
         for (WebAssemblyImport i : imports) {
-            WritableJsonObject mod = (WritableJsonObject) json.getObject(i.getModuleName());
+            JsonObject mod = json.getObject(i.getModuleName());
             if (mod == null)
                 json.set(i.getModuleName(), mod = Json.createObject());
             BiIntHandler ih = (x, count) -> i.getMethod().handle(x, count);

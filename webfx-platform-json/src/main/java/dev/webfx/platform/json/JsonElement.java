@@ -1,43 +1,29 @@
 package dev.webfx.platform.json;
 
-import dev.webfx.platform.json.spi.JsonProvider;
-
 /**
  * @author Bruno Salmon
  */
-public interface JsonElement extends JsonProvider {
-
-    Object getNativeElement();
+public interface JsonElement extends ReadOnlyJsonElement {
 
     /**
-     * Return true if it is an array.
+     * Removes all entries.
      */
-    default boolean isArray() { return getNativeElementType(getNativeElement()) == ElementType.ARRAY; }
+    void clear();
 
     /**
-     * Return true if it is an object.
+     * Removes the first instance of the given value from the list.
+     *
+     * @return Whether the item was removed.
      */
-    default boolean isObject() {return getNativeElementType(getNativeElement()) == ElementType.OBJECT; }
+    //boolean removeValue(Object value);
 
-    /**
-     * Length of the array or number of keys of the object
-     */
-    int size();
-
+    @Override
     default JsonObject asJsonObject() {
         return (JsonObject) this;
     }
 
+    @Override
     default JsonArray asJsonArray() {
         return (JsonArray) this;
     }
-
-
-    /**
-     * Make a copy of this object or array.
-     */
-    default <SC extends JsonElement> SC copy() {
-        return isArray() ? (SC) parseArray(toJsonString()) : (SC) parseObject(toJsonString());
-    }
-
 }

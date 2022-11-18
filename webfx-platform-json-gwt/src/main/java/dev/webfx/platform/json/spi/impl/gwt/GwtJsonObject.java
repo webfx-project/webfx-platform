@@ -18,14 +18,14 @@
 package dev.webfx.platform.json.spi.impl.gwt;
 
 import com.google.gwt.core.client.JsArrayString;
-import dev.webfx.platform.json.WritableJsonObject;
+import dev.webfx.platform.json.JsonObject;
 
 /**
  * Client-side implementation of JsonObject interface.
  *
  * @author Bruno Salmon
  */
-public final class GwtJsonObject extends GwtJsonElement implements WritableJsonObject {
+public final class GwtJsonObject extends GwtJsonElement implements JsonObject {
 
     // GWT: Constructors must be 'protected' in subclasses of JavaScriptObject
     protected GwtJsonObject() {} // instances are actually always obtained from a javascript object cast
