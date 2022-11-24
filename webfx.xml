@@ -212,6 +212,7 @@
                     <package>io.vertx.core.eventbus</package>
                     <package>io.vertx.core.eventbus.impl</package>
                     <package>io.vertx.core.http</package>
+                    <package>io.vertx.core.http.impl.headers</package>
                     <package>io.vertx.core.json</package>
                     <package>io.vertx.core.net</package>
                     <package>io.vertx.core.spi.cluster</package>
@@ -298,6 +299,7 @@
                 <module>webfx-platform-fetch</module>
                 <module>webfx-platform-fetch-gwt</module>
                 <module>webfx-platform-fetch-java</module>
+                <module>webfx-platform-fetch-vertx</module>
                 <module>webfx-platform-file</module>
                 <module>webfx-platform-file-gwt</module>
                 <module>webfx-platform-file-java</module>
@@ -492,6 +494,7 @@
                             <package>io.vertx.core.eventbus</package>
                             <package>io.vertx.core.eventbus.impl</package>
                             <package>io.vertx.core.http</package>
+                            <package>io.vertx.core.http.impl.headers</package>
                             <package>io.vertx.core.json</package>
                             <package>io.vertx.core.net</package>
                             <package>io.vertx.core.spi.cluster</package>
@@ -857,6 +860,36 @@
                 <module>webfx-platform-json</module>
                 <module>webfx-platform-scheduler</module>
                 <module>webfx-platform-scheduler-java</module>
+            </used-by-source-modules>
+
+        </project>
+
+        <project name="webfx-platform-fetch-vertx">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <dependencies>
+                <used-by-source-modules/>
+            </dependencies>
+
+            <providers>
+                <provider interface="dev.webfx.platform.fetch.spi.FetchProvider">dev.webfx.platform.fetch.spi.impl.vertx.VertxFetchProvider</provider>
+            </providers>
+
+            <source-packages>
+                <package>dev.webfx.platform.fetch.spi.impl.vertx</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>io-vertx-core</module>
+                <module>java.base</module>
+                <module>webfx-platform-async</module>
+                <module>webfx-platform-fetch</module>
+                <module>webfx-platform-file</module>
+                <module>webfx-platform-json</module>
+                <module>webfx-platform-vertx-common</module>
             </used-by-source-modules>
 
         </project>
