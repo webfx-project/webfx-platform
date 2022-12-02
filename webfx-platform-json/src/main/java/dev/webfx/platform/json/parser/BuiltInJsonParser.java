@@ -21,6 +21,8 @@ public final class BuiltInJsonParser {
     }
 
     private static <T> T parseWithJavaCup(String json) {
+        if (json == null)
+            return null;
         try {
             return (T) new JavaCupJsonParser(new JsonLexer(new StringReader(json))).parse().value;
         } catch (Throwable e) {
