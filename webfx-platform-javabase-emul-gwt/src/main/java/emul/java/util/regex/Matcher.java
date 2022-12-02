@@ -44,16 +44,48 @@ public class Matcher {
     }-*/;
 
     private final JavaScriptObject xRegExp;
-    private final JavaScriptObject matchResult;
+    private JavaScriptObject matchResult;
+    private boolean findConsumed;
+    private int findStartPos, findMatchStartPos, findMatchLength;
 
     Matcher (Pattern pattern, CharSequence input) {
         this.input = String.valueOf(input);
         xRegExp = pattern.xRegExp;
-        matchResult = newMatchResult(xRegExp, this.input);
+        nextMatchResult(0);
+    }
+
+    private void nextMatchResult(int findStartPos) {
+        matchResult = newMatchResult(xRegExp, input, findStartPos);
+        this.findStartPos = findStartPos;
+        if (matchResult != null) {
+            findMatchStartPos = matchIndex(matchResult);
+            findMatchLength = matchLength(matchResult);
+        }
     }
 
     public boolean matches() {
         return matchResult != null;
+    }
+
+    public boolean find() {
+        if (matchResult == null)
+            return false;
+        if (!findConsumed) {
+            findConsumed = true;
+            return true;
+        }
+        nextMatchResult(findMatchStartPos + findMatchLength);
+        findConsumed = false;
+        return matchResult != null;
+    }
+
+    public Matcher appendReplacement(StringBuilder sb, String replacement) {
+        sb.append(input, findStartPos, findMatchStartPos).append(replacement);
+        return this;
+    }
+
+    public StringBuilder appendTail(StringBuilder sb) {
+        return sb.append(input.substring(findMatchStartPos));
     }
 
     public int groupCount() {
@@ -68,9 +100,18 @@ public class Matcher {
         return getMatchResultGroup(matchResult, name);
     }
 
-    private static native JavaScriptObject newMatchResult(JavaScriptObject xRegExp, String input) /*-{
-        return $wnd.XRegExp.exec(input, xRegExp);
+    private static native JavaScriptObject newMatchResult(JavaScriptObject xRegExp, String input, int pos) /*-{
+        return $wnd.XRegExp.exec(input, xRegExp, pos);
     }-*/;
+
+    private static native int matchIndex(JavaScriptObject mr) /*-{
+        return mr.index;
+    }-*/;
+
+    private static native int matchLength(JavaScriptObject mr) /*-{
+        return mr[0].length;
+    }-*/;
+
 
     private static native int matchResultLength(JavaScriptObject mr) /*-{
         return mr.length;
