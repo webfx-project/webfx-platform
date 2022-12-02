@@ -4,8 +4,6 @@ module webfx.platform.boot.vertx {
 
     // Direct dependencies modules
     requires io.vertx.core;
-    requires io.vertx.eventbusbridge.common;
-    requires io.vertx.web;
     requires java.base;
     requires webfx.platform.boot;
     requires webfx.platform.shutdown;

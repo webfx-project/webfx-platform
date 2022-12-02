@@ -32,7 +32,7 @@ public final class VertxApplicationBooterVerticle extends AbstractVerticle imple
     public void boot() { // Entry point 1)
         containerInstance = this;
         if (verticleInstance == null)
-            VertxRunner.runVerticle(VertxApplicationBooterVerticle.class);
+            VertxRunner.runVerticle(VertxApplicationBooterVerticle.class); // Uncomment to avoid trace when debugging: , new VertxOptions().setBlockedThreadCheckInterval(9999999999L));
         ApplicationModuleBooterManager.initialize();
         Shutdown.addShutdownHook(() -> {
             for (String deploymentId : VertxInstance.getVertx().deploymentIDs())
@@ -44,11 +44,11 @@ public final class VertxApplicationBooterVerticle extends AbstractVerticle imple
 
     @Override
     public void start() { // Entry point 2)
-        verticleInstance = this;
+        // Passing vertx to the VertxInstance for further use by other modules
         VertxInstance.setVertx(vertx);
+        verticleInstance = this;
         if (containerInstance == null)
             ApplicationBooter.main(null);
-        vertx.deployVerticle(new VertxWebVerticle());
     }
 
     @Override

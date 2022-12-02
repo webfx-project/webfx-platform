@@ -678,9 +678,6 @@
 
             <used-by-source-modules>
                 <module>io-vertx-core</module>
-                <module>io-vertx-eventbusbridge-common</module>
-                <module>io-vertx-web</module>
-                <module>java-nio-emul</module>
                 <module>java.base</module>
                 <module>webfx-platform-boot</module>
                 <module>webfx-platform-shutdown</module>
@@ -1224,6 +1221,7 @@
             </source-packages>
 
             <used-by-source-modules>
+                <module>java-nio-emul</module>
                 <module>java.base</module>
                 <module>webfx-platform-resource</module>
             </used-by-source-modules>

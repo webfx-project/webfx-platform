@@ -17,7 +17,11 @@ public final class VertxRunner {
     }
 
     public static void runVerticle(Class clazz) {
-        runVerticle(clazz, null);
+        runVerticle(clazz, null, null);
+    }
+
+    public static void runVerticle(Class clazz, VertxOptions options) {
+        runVerticle(clazz, options, null);
     }
 
     public static void runVerticle(Class clazz, DeploymentOptions options) {
