@@ -1,8 +1,8 @@
 package dev.webfx.platform.json;
 
-import dev.webfx.platform.util.noreflect.ReadOnlyIndexedArray;
-import dev.webfx.platform.util.noreflect.ReadOnlyKeyObject;
-import dev.webfx.platform.util.noreflect.KeyObject;
+import dev.webfx.platform.util.keyobject.ReadOnlyIndexedArray;
+import dev.webfx.platform.util.keyobject.ReadOnlyKeyObject;
+import dev.webfx.platform.util.keyobject.KeyObject;
 
 import java.time.Instant;
 

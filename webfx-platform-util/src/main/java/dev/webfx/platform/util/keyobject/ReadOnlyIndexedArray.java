@@ -1,4 +1,4 @@
-package dev.webfx.platform.util.noreflect;
+package dev.webfx.platform.util.keyobject;
 
 import dev.webfx.platform.util.Booleans;
 import dev.webfx.platform.util.Numbers;

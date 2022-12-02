@@ -1015,7 +1015,7 @@
 
             <dependencies>
                 <used-by-source-modules>
-                    <module transitive="true">webfx-platform-util</module>                    <!-- for use of dev.webfx.platform.util.noreflect.* -->
+                    <module transitive="true">webfx-platform-util</module>                    <!-- for use of dev.webfx.platform.util.keyobject.* -->
                 </used-by-source-modules>
             </dependencies>
 
@@ -1533,7 +1533,7 @@
                 <package>dev.webfx.platform.util</package>
                 <package>dev.webfx.platform.util.collection</package>
                 <package>dev.webfx.platform.util.function</package>
-                <package>dev.webfx.platform.util.noreflect</package>
+                <package>dev.webfx.platform.util.keyobject</package>
                 <package>dev.webfx.platform.util.serviceloader</package>
                 <package>dev.webfx.platform.util.tuples</package>
                 <package>dev.webfx.platform.util.uuid</package>

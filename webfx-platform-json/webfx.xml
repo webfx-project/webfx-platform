@@ -7,7 +7,7 @@
 
     <dependencies>
         <used-by-source-modules>
-            <module transitive="true">webfx-platform-util</module> <!-- for use of dev.webfx.platform.util.noreflect.* -->
+            <module transitive="true">webfx-platform-util</module> <!-- for use of dev.webfx.platform.util.keyobject.* -->
         </used-by-source-modules>
     </dependencies>
 

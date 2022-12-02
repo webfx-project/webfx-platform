@@ -1,4 +1,4 @@
-package dev.webfx.platform.util.noreflect;
+package dev.webfx.platform.util.keyobject;
 
 /**
  * @author Bruno Salmon

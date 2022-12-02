@@ -10,7 +10,7 @@ module webfx.platform.util {
     exports dev.webfx.platform.util;
     exports dev.webfx.platform.util.collection;
     exports dev.webfx.platform.util.function;
-    exports dev.webfx.platform.util.noreflect;
+    exports dev.webfx.platform.util.keyobject;
     exports dev.webfx.platform.util.serviceloader;
     exports dev.webfx.platform.util.tuples;
     exports dev.webfx.platform.util.uuid;

@@ -1,6 +1,6 @@
 package dev.webfx.platform.json;
 
-import dev.webfx.platform.util.noreflect.ReadOnlyKeyObject;
+import dev.webfx.platform.util.keyobject.ReadOnlyKeyObject;
 
 /**
  * @author Bruno Salmon

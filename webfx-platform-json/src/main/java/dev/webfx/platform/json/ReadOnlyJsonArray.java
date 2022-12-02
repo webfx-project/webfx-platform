@@ -1,6 +1,6 @@
 package dev.webfx.platform.json;
 
-import dev.webfx.platform.util.noreflect.ReadOnlyIndexedArray;
+import dev.webfx.platform.util.keyobject.ReadOnlyIndexedArray;
 
 /**
  * @author Bruno Salmon
