@@ -2,8 +2,6 @@ package dev.webfx.platform.resource.spi.impl.java;
 
 import dev.webfx.platform.resource.spi.ResourceProvider;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -33,10 +31,12 @@ public final class JavaResourceProvider implements ResourceProvider {
 
     private InputStream getResourceInputStream(String resourcePath) {
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream(resourcePath);
-        if (inputStream == null && resourcePath.startsWith("file:"))
+        if (inputStream == null) {
             try {
-                inputStream = new FileInputStream(resourcePath.substring(5));
-            } catch (FileNotFoundException e) { }
+                inputStream = new URL(resourcePath).openStream();
+            } catch (Exception e) {
+            }
+        }
         return inputStream;
     }
 
