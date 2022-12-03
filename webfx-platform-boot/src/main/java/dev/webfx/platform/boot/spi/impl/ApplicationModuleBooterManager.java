@@ -38,6 +38,7 @@ public final class ApplicationModuleBooterManager {
 
     private static void callModules(boolean boot) {
         // Calling all registered application modules
+        long t0 = System.currentTimeMillis();
         int n = moduleBooters.size();
         logInFrame((boot ? "Booting " : "Exiting ") + n + " application modules");
         for (int i = 0; i < n; i++) {
@@ -54,13 +55,15 @@ public final class ApplicationModuleBooterManager {
             else
                 module.exitModule();
         }
-        logInFrame(n + " application modules " + (boot ? "booted" : "exited"));
+        long t1 = System.currentTimeMillis();
+        logInFrame(n + " application modules " + (boot ? "booted" : "exited") + " in " + (t1 - t0) + " ms");
     }
 
     private static void logInFrame(String s) {
         s = "***** " + s + " *****";
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < s.length(); i++) // String.repeat() not emulated by GWT
+        int length = s.length();
+        for (int i = 0; i < length; i++) // String.repeat() not emulated by GWT
             sb.append('*');
         Console.log(sb + "\n" + s + "\n" + sb);
     }
