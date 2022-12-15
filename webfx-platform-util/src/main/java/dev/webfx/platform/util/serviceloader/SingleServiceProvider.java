@@ -7,6 +7,23 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Simple utility class to get a provider that is meant to be unique. Its main benefit is that it keeps that provider
+ * in memory, so it will always return the same provider instance, without instantiating it again on subsequent calls.
+ * This would not be the case with the standard ServiceLoader, which creates a new provider instance on each call.
+ * So this utility class can be useful for pieces of code that need to refer to a provider several times, with
+ * the guarantee to have the same unique instance each time. By using this utility class, you spare the declaration
+ * of a field for storing your provider, and it can therefore be used even in interface default methods.
+ *
+ * Typical usage:
+ *
+ *     private static MyProvider getMyProvider() {
+ *         return SingleServiceProvider.getProvider(MyProvider.class, () -> ServiceLoader.load(MyProvider.class));
+ *     }
+ *
+ * Note: the reason why ServiceLoader.load() is written in the caller code and not in this utility class is to be
+ * compliant with the Java Platform Module System. The caller module has to declare in module-info.java that it's using
+ * this service, and only the caller code can ask the ServiceLoader to load this service, this utility class can't.
+ *
  * @author Bruno Salmon
  */
 public final class SingleServiceProvider {
