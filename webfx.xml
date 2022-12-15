@@ -1561,10 +1561,10 @@
                 <library name="org.slf4j.jul">
                     <artifactId>slf4j-jdk14</artifactId>
                     <groupId>org.slf4j</groupId>
-                    <version>1.7.36</version>
+                    <version>2.0.5</version>
         
                     <exported-packages>
-                        <package>org.slf4j.impl</package>
+                        <package>org.slf4j.jul</package>
                     </exported-packages>
 
                 </library>
@@ -1577,6 +1577,7 @@
             <used-by-source-modules>
                 <module>io-vertx-core</module>
                 <module>io-vertx-web</module>
+                <module>webfx-platform-console</module>
             </used-by-source-modules>
 
         </project>
