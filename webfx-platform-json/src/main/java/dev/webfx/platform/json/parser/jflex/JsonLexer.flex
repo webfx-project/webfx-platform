@@ -6,6 +6,7 @@ package dev.webfx.platform.json.parser.jflex;
 import java_cup.runtime.*;
 import        dev.webfx.platform.json.parser.javacup.JsonSymbols;
 import static dev.webfx.platform.json.parser.javacup.JsonSymbols.*;
+import        dev.webfx.platform.util.Numbers;
 
 %%
    
@@ -48,7 +49,7 @@ StringGraveAccentCharacter = [^\r\n`\\]
 Comment = {TraditionalComment} | {EndOfLineComment}
 TraditionalComment = "/*" [^*] ~"*/" | "/*" "*"+ "/"
 EndOfLineComment = "//" {InputCharacter}* {LineTerminator}?
-IntegerLiteral = 0 | [1-9][0-9]*
+LongLiteral = 0 | [1-9][0-9]*
 DoubleLiteral = ({FLit1}|{FLit2}|{FLit3}) {Exponent}?
 FLit1    = [0-9]+ \. [0-9]*
 FLit2    = \. [0-9]+
@@ -67,7 +68,7 @@ Exponent = [eE] [+-]? [0-9]+
 
   /* internal usage parser tokens */
 
-    {IntegerLiteral}               { return symbol(NUMBER, Integer.valueOf(yytext())); }
+    {LongLiteral}                  { return symbol(NUMBER, Numbers.parseShortestNumber(yytext())); }
     {DoubleLiteral}                { return symbol(NUMBER, Double.valueOf(yytext())); }
 
   /* boolean literals */

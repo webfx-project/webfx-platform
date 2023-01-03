@@ -7,8 +7,10 @@
 
 package dev.webfx.platform.json.parser.jflex;
 
-import java_cup.runtime.*;
-import        dev.webfx.platform.json.parser.javacup.JsonSymbols;
+import dev.webfx.platform.json.parser.javacup.JsonSymbols;
+import dev.webfx.platform.util.Numbers;
+import java_cup.runtime.Symbol;
+
 import static dev.webfx.platform.json.parser.javacup.JsonSymbols.*;
 
 
@@ -776,7 +778,7 @@ public class JsonLexer implements java_cup.runtime.Scanner {
             // fall through
           case 34: break;
           case 7:
-            { return symbol(NUMBER, Integer.valueOf(yytext()));
+            { return symbol(NUMBER, Numbers.parseShortestNumber(yytext()));
             }
             // fall through
           case 35: break;
