@@ -31,6 +31,10 @@ public final class Numbers {
     }
 
     public static Object negate(Object value) {
+        return negate((Number) value);
+    }
+
+    public static Number negate(Number value) {
         if (value == null)
             return null;
         if (value instanceof Byte)
@@ -75,7 +79,6 @@ public final class Numbers {
     public static Short asShort(Object value){
         return value == null ? null : value instanceof Short ? (Short) value : value instanceof Number ? ((Number) value).shortValue() : null;
     }
-
 
     public static Integer parseInteger(String s) {
         if (s == null)
@@ -137,6 +140,10 @@ public final class Numbers {
         }
     }
 
+    public static Number parseShortestNumber(String s) {
+        return toShortestNumber(parseLong(s));
+    }
+
     public static Integer toInteger(Object value) {
         Integer number = asInteger(value);
         if (number != null || value == null)
@@ -177,6 +184,37 @@ public final class Numbers {
         if (number != null || value == null)
             return number;
         return parseShort(value.toString());
+    }
+
+    public static Number toShortestNumber(Long value) {
+        if (value == null)
+            return null;
+        long v = value;
+        if (v >= Integer.MIN_VALUE && v <= Integer.MAX_VALUE)
+            return toShortestNumber(value.intValue());
+        return value;
+    }
+
+    public static Number toShortestNumber(Integer value) {
+        if (value == null)
+            return null;
+        int v = value;
+        if (v >= Short.MIN_VALUE && v <= Short.MAX_VALUE)
+            return toShortestNumber(value.shortValue());
+        return value;
+    }
+
+    public static Number toShortestNumber(Short value) {
+        if (value == null)
+            return null;
+        short v = value;
+        if (v >= Byte.MIN_VALUE && v <= Byte.MAX_VALUE)
+            return toShortestNumber(value.byteValue());
+        return value;
+    }
+
+    public static Number toShortestNumber(Byte value) {
+        return value;
     }
 
     public static int intValue(Object value) {
