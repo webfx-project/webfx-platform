@@ -113,6 +113,8 @@
         <module>webfx-platform-storage</module>
         <module>webfx-platform-storage-gwt</module>
         <module>webfx-platform-storage-java</module>
+        <module>webfx-platform-storagelocation</module>
+        <module>webfx-platform-storagelocation-java</module>
         <module>webfx-platform-uischeduler</module>
         <module>webfx-platform-uischeduler-gwt</module>
         <module>webfx-platform-util</module>

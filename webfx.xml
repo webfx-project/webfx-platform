@@ -321,6 +321,8 @@
                 <module>webfx-platform-storage</module>
                 <module>webfx-platform-storage-gwt</module>
                 <module>webfx-platform-storage-java</module>
+                <module>webfx-platform-storagelocation</module>
+                <module>webfx-platform-storagelocation-java</module>
                 <module>webfx-platform-uischeduler</module>
                 <module>webfx-platform-uischeduler-gwt</module>
                 <module>webfx-platform-util</module>
@@ -1456,9 +1458,89 @@
             </source-packages>
 
             <used-by-source-modules>
+                <module>java-nio-emul</module>
                 <module>java.base</module>
                 <module>webfx-platform-storage</module>
+                <module>webfx-platform-storagelocation</module>
             </used-by-source-modules>
+
+        </project>
+
+        <project name="webfx-platform-storagelocation">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <dependencies>
+                <used-by-source-modules/>
+            </dependencies>
+
+            <source-packages>
+                <package>dev.webfx.platform.storagelocation</package>
+                <package>dev.webfx.platform.storagelocation.spi</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>java.base</module>
+                <module>webfx-platform-util</module>
+            </used-by-source-modules>
+
+            <used-services>
+                <required-service>dev.webfx.platform.storagelocation.spi.StorageLocationProvider</required-service>
+            </used-services>
+
+        </project>
+
+        <project name="webfx-platform-storagelocation-java">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <dependencies>
+                <used-by-source-modules/>
+            </dependencies>
+
+            <required-libraries>
+                <library artifact="com.gluonhq.attach:storage:4.0.16" name="com.gluonhq.attach.storage">
+
+                    <exported-packages>
+                        <package>com.gluonhq.attach.storage</package>
+                        <package>com.gluonhq.attach.storage.impl</package>
+                    </exported-packages>
+
+                </library>
+                <library artifact="com.gluonhq.attach:util:4.0.16" name="com.gluonhq.attach.util">
+
+                    <exported-packages>
+                        <package>com.gluonhq.attach.util</package>
+                        <package>com.gluonhq.attach.util.impl</package>
+                    </exported-packages>
+
+                </library>
+            </required-libraries>
+
+            <providers>
+                <provider interface="dev.webfx.platform.storagelocation.spi.StorageLocationProvider">dev.webfx.platform.storagelocation.spi.impl.java.JavaStorageLocationProvider</provider>
+            </providers>
+
+            <source-packages>
+                <package>dev.webfx.platform.storagelocation.spi.impl.java</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>com.gluonhq.attach.storage</module>
+                <module>com.gluonhq.attach.util</module>
+                <module>java.base</module>
+                <module>webfx-kit-javafxgraphics-emul</module>
+                <module>webfx-platform-storagelocation</module>
+                <module>webfx-platform-util</module>
+            </used-by-source-modules>
+
+            <used-services>
+                <required-service>javafx.application.Application</required-service>
+            </used-services>
 
         </project>
 
