@@ -1,15 +1,17 @@
 package dev.webfx.platform.storage.spi.impl.java;
 
+import dev.webfx.platform.storagelocation.StorageLocation;
 import dev.webfx.platform.storage.spi.LocalStorageProvider;
 
 import java.io.*;
+import java.nio.file.Paths;
 
 /**
  * @author Bruno Salmon
  */
 public final class JavaLocalStorageProvider extends JavaStorageProvider implements LocalStorageProvider {
 
-    private final File locateStorageFile = new File(getWorkingDirectory(), "storage/localStorage.properties");
+    private final File locateStorageFile = Paths.get(StorageLocation.getInternalStorageLocation() , "localStorage.properties").toFile();
 
     public JavaLocalStorageProvider() {
         loadProperties();
@@ -37,12 +39,5 @@ public final class JavaLocalStorageProvider extends JavaStorageProvider implemen
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    private static File getWorkingDirectory() {
-        String jarPath = JavaLocalStorageProvider.class.getProtectionDomain().getCodeSource().getLocation().getPath();
-        if (jarPath.endsWith(".jar"))
-            return new File(jarPath.replaceAll("%20", " ")).getParentFile();
-        return new File(jarPath);
     }
 }
