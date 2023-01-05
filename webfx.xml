@@ -1219,7 +1219,6 @@
                 <module>gwt-user</module>
                 <module>java.base</module>
                 <module>webfx-platform-boot</module>
-                <module>webfx-platform-console</module>
                 <module>webfx-platform-resource</module>
                 <module>webfx-platform-util</module>
             </used-by-source-modules>
