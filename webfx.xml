@@ -309,6 +309,7 @@
                 <module>webfx-platform-json-java</module>
                 <module>webfx-platform-json-teavm</module>
                 <module>webfx-platform-json-vertx</module>
+                <module>webfx-platform-meta</module>
                 <module>webfx-platform-resource</module>
                 <module>webfx-platform-resource-gwt</module>
                 <module>webfx-platform-resource-java</module>
@@ -316,12 +317,14 @@
                 <module>webfx-platform-scheduler-java</module>
                 <module>webfx-platform-scheduler-vertx</module>
                 <module>webfx-platform-shutdown</module>
+                <module>webfx-platform-shutdown-gluon</module>
                 <module>webfx-platform-shutdown-gwt</module>
                 <module>webfx-platform-shutdown-java</module>
                 <module>webfx-platform-storage</module>
                 <module>webfx-platform-storage-gwt</module>
                 <module>webfx-platform-storage-java</module>
                 <module>webfx-platform-storagelocation</module>
+                <module>webfx-platform-storagelocation-gluon</module>
                 <module>webfx-platform-storagelocation-java</module>
                 <module>webfx-platform-uischeduler</module>
                 <module>webfx-platform-uischeduler-gwt</module>
@@ -599,6 +602,7 @@
             <used-by-source-modules>
                 <module>java.base</module>
                 <module>webfx-platform-console</module>
+                <module>webfx-platform-meta</module>
                 <module>webfx-platform-shutdown</module>
                 <module>webfx-platform-util</module>
             </used-by-source-modules>
@@ -1144,6 +1148,28 @@
 
         </project>
 
+        <project name="webfx-platform-meta">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <dependencies>
+                <used-by-source-modules/>
+            </dependencies>
+
+            <source-packages>
+                <package>dev.webfx.platform.meta</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>java.base</module>
+                <module>webfx-platform-console</module>
+                <module>webfx-platform-resource</module>
+            </used-by-source-modules>
+
+        </project>
+
         <project name="webfx-platform-resource">
 
             <exported-packages>
@@ -1335,6 +1361,42 @@
 
         </project>
 
+        <project name="webfx-platform-shutdown-gluon">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <dependencies>
+                <used-by-source-modules/>
+            </dependencies>
+
+            <required-libraries>
+                <library artifact="com.gluonhq.attach:lifecycle:4.0.16" name="com.gluonhq.attach.lifecycle">
+
+                    <exported-packages>
+                        <package>com.gluonhq.attach.lifecycle</package>
+                        <package>com.gluonhq.attach.lifecycle.impl</package>
+                    </exported-packages>
+
+                </library>
+            </required-libraries>
+
+            <providers>
+                <provider interface="dev.webfx.platform.shutdown.spi.ShutdownProvider">dev.webfx.platform.shutdown.spi.impl.gluon.GluonShutdownProvider</provider>
+            </providers>
+
+            <source-packages>
+                <package>dev.webfx.platform.shutdown.spi.impl.gluon</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>com.gluonhq.attach.lifecycle</module>
+                <module>webfx-platform-shutdown</module>
+            </used-by-source-modules>
+
+        </project>
+
         <project name="webfx-platform-shutdown-gwt">
 
             <exported-packages>
@@ -1492,7 +1554,7 @@
 
         </project>
 
-        <project name="webfx-platform-storagelocation-java">
+        <project name="webfx-platform-storagelocation-gluon">
 
             <exported-packages>
                 <source-packages/>
@@ -1522,6 +1584,32 @@
             </required-libraries>
 
             <providers>
+                <provider interface="dev.webfx.platform.storagelocation.spi.StorageLocationProvider">dev.webfx.platform.storagelocation.spi.impl.gluon.GluonStorageLocationProvider</provider>
+            </providers>
+
+            <source-packages>
+                <package>dev.webfx.platform.storagelocation.spi.impl.gluon</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>com.gluonhq.attach.storage</module>
+                <module>com.gluonhq.attach.util</module>
+                <module>webfx-platform-storagelocation</module>
+            </used-by-source-modules>
+
+        </project>
+
+        <project name="webfx-platform-storagelocation-java">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <dependencies>
+                <used-by-source-modules/>
+            </dependencies>
+
+            <providers>
                 <provider interface="dev.webfx.platform.storagelocation.spi.StorageLocationProvider">dev.webfx.platform.storagelocation.spi.impl.java.JavaStorageLocationProvider</provider>
             </providers>
 
@@ -1530,17 +1618,10 @@
             </source-packages>
 
             <used-by-source-modules>
-                <module>com.gluonhq.attach.storage</module>
-                <module>com.gluonhq.attach.util</module>
                 <module>java.base</module>
-                <module>webfx-kit-javafxgraphics-emul</module>
+                <module>webfx-platform-meta</module>
                 <module>webfx-platform-storagelocation</module>
-                <module>webfx-platform-util</module>
             </used-by-source-modules>
-
-            <used-services>
-                <required-service>javafx.application.Application</required-service>
-            </used-services>
 
         </project>
 

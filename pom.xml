@@ -101,6 +101,7 @@
         <module>webfx-platform-json-java</module>
         <module>webfx-platform-json-teavm</module>
         <module>webfx-platform-json-vertx</module>
+        <module>webfx-platform-meta</module>
         <module>webfx-platform-resource</module>
         <module>webfx-platform-resource-gwt</module>
         <module>webfx-platform-resource-java</module>
@@ -108,12 +109,14 @@
         <module>webfx-platform-scheduler-java</module>
         <module>webfx-platform-scheduler-vertx</module>
         <module>webfx-platform-shutdown</module>
+        <module>webfx-platform-shutdown-gluon</module>
         <module>webfx-platform-shutdown-gwt</module>
         <module>webfx-platform-shutdown-java</module>
         <module>webfx-platform-storage</module>
         <module>webfx-platform-storage-gwt</module>
         <module>webfx-platform-storage-java</module>
         <module>webfx-platform-storagelocation</module>
+        <module>webfx-platform-storagelocation-gluon</module>
         <module>webfx-platform-storagelocation-java</module>
         <module>webfx-platform-uischeduler</module>
         <module>webfx-platform-uischeduler-gwt</module>

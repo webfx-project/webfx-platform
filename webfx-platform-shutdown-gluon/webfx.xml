@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+
+    <exported-packages>
+        <source-packages/>
+    </exported-packages>
+
+    <dependencies>
+        <used-by-source-modules/>
+    </dependencies>
+
+    <required-libraries>
+        <library name="com.gluonhq.attach.lifecycle" artifact="com.gluonhq.attach:lifecycle:4.0.16"/>
+    </required-libraries>
+
+    <providers>
+        <provider interface="dev.webfx.platform.shutdown.spi.ShutdownProvider">dev.webfx.platform.shutdown.spi.impl.gluon.GluonShutdownProvider</provider>
+    </providers>
+
+</project>
