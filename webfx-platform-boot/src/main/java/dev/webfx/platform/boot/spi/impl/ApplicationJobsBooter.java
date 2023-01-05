@@ -1,7 +1,6 @@
 package dev.webfx.platform.boot.spi.impl;
 
 import dev.webfx.platform.boot.ApplicationBooter;
-import dev.webfx.platform.console.Console;
 import dev.webfx.platform.boot.spi.ApplicationJob;
 import dev.webfx.platform.boot.spi.ApplicationModuleBooter;
 import dev.webfx.platform.util.collection.Collections;
@@ -29,9 +28,9 @@ public class ApplicationJobsBooter implements ApplicationModuleBooter {
     @Override
     public void bootModule() {
         providedJobs = Collections.listOf(ServiceLoader.load(ApplicationJob.class));
-        Console.log(providedJobs.size() + " provided application jobs:");
+        log(providedJobs.size() + " provided application jobs:");
         providedJobs.forEach(job -> {
-            Console.log("- Starting " + job.getClass().getSimpleName());
+            log("- Starting " + job.getClass().getSimpleName());
             ApplicationBooter.startApplicationJob(job);
         });
     }
@@ -39,7 +38,7 @@ public class ApplicationJobsBooter implements ApplicationModuleBooter {
     @Override
     public void exitModule() {
         providedJobs.forEach(job -> {
-            Console.log("Stopping " + job.getClass().getSimpleName());
+            log("Stopping " + job.getClass().getSimpleName());
             ApplicationBooter.stopApplicationJob(job);
         });
     }

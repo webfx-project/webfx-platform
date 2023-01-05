@@ -1,5 +1,7 @@
 package dev.webfx.platform.boot.spi;
 
+import dev.webfx.platform.boot.spi.impl.ApplicationModuleBooterManager;
+
 /**
  * @author Bruno Salmon
  */
@@ -22,5 +24,9 @@ public interface ApplicationModuleBooter {
     void bootModule();
 
     default void exitModule() {}
+
+    default void log(String message) {
+        ApplicationModuleBooterManager.log(message);
+    }
 
 }

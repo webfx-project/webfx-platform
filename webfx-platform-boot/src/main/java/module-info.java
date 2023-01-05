@@ -5,6 +5,7 @@ module webfx.platform.boot {
     // Direct dependencies modules
     requires java.base;
     requires webfx.platform.console;
+    requires webfx.platform.meta;
     requires webfx.platform.shutdown;
     requires webfx.platform.util;
 

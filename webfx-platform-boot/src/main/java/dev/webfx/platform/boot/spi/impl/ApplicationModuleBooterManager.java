@@ -2,11 +2,14 @@ package dev.webfx.platform.boot.spi.impl;
 
 import dev.webfx.platform.boot.spi.ApplicationModuleBooter;
 import dev.webfx.platform.console.Console;
+import dev.webfx.platform.meta.Meta;
 import dev.webfx.platform.util.collection.Collections;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.ServiceLoader;
+
+import static dev.webfx.platform.boot.spi.ApplicationModuleBooter.RESOURCE_BUNDLE_BOOT_LEVEL;
 
 /**
  * @author Bruno Salmon
@@ -16,7 +19,9 @@ public final class ApplicationModuleBooterManager {
     private static final List<ApplicationModuleBooter> moduleBooters = Collections.listOf(ServiceLoader.load(ApplicationModuleBooter.class));
 
     public static void initialize() {
+        // We first sort the modules by boot level
         sortModulesByBootLevel();
+        // And then we boot them
         bootModules();
     }
 
@@ -36,27 +41,65 @@ public final class ApplicationModuleBooterManager {
         callModules(false);
     }
 
+    /* Note regarding log: we will log the header later, so we start by buffering the logs of the first module booter.
+       The reason is that the header starts with a frame saying *** Booting xxx *** where xxx is the executable
+       module name that we get from the meta resource file. But when running with GWT, we can't read that resource
+       file before GwtResourceModuleBooter has been executed. GwtResourceModuleBooter, if present, should be the
+       first module booter to be executed as its boot level is RESOURCE_BUNDLE_BOOT_LEVEL = 1. So we buffer all logs
+       until we reach a module booter with a higher level, ensuring that GwtResourceModuleBooter has been executed.
+       Then we call logHeaderAndBuffer() which actually logs the header with the executable module name (we can read
+       the meta file with no pb at this point), and then append the module booter logs buffered so far. */
+
+    private static StringBuilder logBuffer = new StringBuilder();
+
+    public static void log(String message) {
+        // First stage: we buffer the logs
+        if (logBuffer != null) // non-null at the beginning until logHeaderAndBuffer() is called (=> set logBuffer to null)
+            logBuffer.append(message);
+        else // Second stage: we print the logs directly to the console
+            Console.log(message);
+    }
+
     private static void callModules(boolean boot) {
-        // Calling all registered application modules
+        // Getting start time for boot duration measurement
         long t0 = System.currentTimeMillis();
+
+        // Calling all registered application modules
         int n = moduleBooters.size();
-        logInFrame((boot ? "Booting " : "Exiting ") + n + " application modules");
         for (int i = 0; i < n; i++) {
             int moduleIndex = boot ? i : n - i - 1;
             ApplicationModuleBooter module = moduleBooters.get(moduleIndex);
-            Console.log((moduleIndex + 1) + ") " + module.getModuleName() + " (boot level " + module.getBootLevel() + ")");
-        }
-        for (int i = 0; i < n; i++) {
-            int moduleIndex = boot ? i : n - i - 1;
-            ApplicationModuleBooter module = moduleBooters.get(moduleIndex);
-            Console.log(">>>>> " + (boot ? "Booting " : "Exiting ") + (moduleIndex + 1) + ") " + module.getModuleName() + " with " + module.getClass().getSimpleName() + " <<<<<");
+            // We log the header and the buffer after RESOURCE_BUNDLE_BOOT_LEVEL has been executed
+            if (logBuffer != null && module.getBootLevel() > RESOURCE_BUNDLE_BOOT_LEVEL)
+                logHeaderAndBuffer(boot);
+            log(">>>>> " + (boot ? "Booting " : "Exiting ") + (moduleIndex + 1) + ") " + module.getModuleName() + " with " + module.getClass().getSimpleName() + " <<<<<");
             if (boot)
                 module.bootModule();
             else
                 module.exitModule();
         }
+        if (logBuffer != null)
+            logHeaderAndBuffer(boot);
         long t1 = System.currentTimeMillis();
-        logInFrame(n + " application modules " + (boot ? "booted" : "exited") + " in " + (t1 - t0) + " ms");
+        logInFrame(Meta.getExecutableModuleName() + (boot ? " booted" : " exited") + " in " + (t1 - t0) + " ms");
+    }
+
+    private static void logHeaderAndBuffer(boolean boot) {
+        // We convert the buffer into a String and set the buffer to null
+        String logBufferString = logBuffer.toString();
+        logBuffer = null; // So from now, log() will redirect directly to the console
+        // We first log the header
+        int n = moduleBooters.size();
+        String bootingOrExiting = boot ? "Booting " : "Exiting ";
+        logInFrame(bootingOrExiting + Meta.getExecutableModuleName());
+        log(bootingOrExiting + n + " application modules in the following order:");
+        for (int i = 0; i < n; i++) {
+            int moduleIndex = boot ? i : n - i - 1;
+            ApplicationModuleBooter module = moduleBooters.get(moduleIndex);
+            log((moduleIndex + 1) + ") " + module.getModuleName() + " (boot level " + module.getBootLevel() + ")");
+        }
+        // And then we log the buffer
+        log(logBufferString);
     }
 
     private static void logInFrame(String s) {
@@ -65,6 +108,7 @@ public final class ApplicationModuleBooterManager {
         int length = s.length();
         for (int i = 0; i < length; i++) // String.repeat() not emulated by GWT
             sb.append('*');
-        Console.log(sb + "\n" + s + "\n" + sb);
+        log(sb + "\n" + s + "\n" + sb);
     }
+
 }
