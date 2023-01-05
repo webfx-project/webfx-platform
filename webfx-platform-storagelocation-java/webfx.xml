@@ -9,11 +9,6 @@
         <used-by-source-modules/>
     </dependencies>
 
-    <required-libraries>
-        <library name="com.gluonhq.attach.storage" artifact="com.gluonhq.attach:storage:4.0.16"/>
-        <library name="com.gluonhq.attach.util" artifact="com.gluonhq.attach:util:4.0.16"/>
-    </required-libraries>
-
     <providers>
         <provider interface="dev.webfx.platform.storagelocation.spi.StorageLocationProvider">dev.webfx.platform.storagelocation.spi.impl.java.JavaStorageLocationProvider</provider>
     </providers>
