@@ -4,7 +4,6 @@ module webfx.platform.storagelocation.gluon {
 
     // Direct dependencies modules
     requires com.gluonhq.attach.storage;
-    requires com.gluonhq.attach.util;
     requires webfx.platform.storagelocation;
 
     // Exported packages

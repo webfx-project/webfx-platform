@@ -1597,7 +1597,6 @@
 
             <used-by-source-modules>
                 <module>com.gluonhq.attach.storage</module>
-                <module>com.gluonhq.attach.util</module>
                 <module>webfx-platform-storagelocation</module>
             </used-by-source-modules>
 
