@@ -330,6 +330,10 @@
                 <module>webfx-platform-uischeduler-gwt</module>
                 <module>webfx-platform-util</module>
                 <module>webfx-platform-vertx-common</module>
+                <module>webfx-platform-visibility</module>
+                <module>webfx-platform-visibility-gluon</module>
+                <module>webfx-platform-visibility-gwt</module>
+                <module>webfx-platform-visibility-java-headless</module>
                 <module>webfx-platform-webassembly</module>
                 <module>webfx-platform-webassembly-teavm</module>
                 <module>webfx-platform-webworker</module>
@@ -1523,6 +1527,7 @@
                 <module>java.base</module>
                 <module>webfx-platform-storage</module>
                 <module>webfx-platform-storagelocation</module>
+                <module>webfx-platform-visibility</module>
             </used-by-source-modules>
 
         </project>
@@ -1740,6 +1745,120 @@
                 <module>io-vertx-core</module>
                 <module>io-vertx-web</module>
                 <module>webfx-platform-console</module>
+            </used-by-source-modules>
+
+        </project>
+
+        <project name="webfx-platform-visibility">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <dependencies>
+                <used-by-source-modules/>
+            </dependencies>
+
+            <source-packages>
+                <package>dev.webfx.platform.visibility</package>
+                <package>dev.webfx.platform.visibility.spi</package>
+                <package>dev.webfx.platform.visibility.spi.impl</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>java.base</module>
+                <module>webfx-platform-util</module>
+            </used-by-source-modules>
+
+            <used-services>
+                <required-service>dev.webfx.platform.visibility.spi.VisibilityProvider</required-service>
+            </used-services>
+
+        </project>
+
+        <project name="webfx-platform-visibility-gluon">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <dependencies>
+                <used-by-source-modules/>
+            </dependencies>
+
+            <required-libraries>
+                <library artifact="com.gluonhq.attach:lifecycle:4.0.16" name="com.gluonhq.attach.lifecycle">
+
+                    <exported-packages>
+                        <package>com.gluonhq.attach.lifecycle</package>
+                        <package>com.gluonhq.attach.lifecycle.impl</package>
+                    </exported-packages>
+
+                </library>
+            </required-libraries>
+
+            <providers>
+                <provider interface="dev.webfx.platform.visibility.spi.VisibilityProvider">dev.webfx.platform.visibility.spi.impl.gluon.GluonVisibilityProvider</provider>
+            </providers>
+
+            <source-packages>
+                <package>dev.webfx.platform.visibility.spi.impl.gluon</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>com.gluonhq.attach.lifecycle</module>
+                <module>webfx-platform-visibility</module>
+            </used-by-source-modules>
+
+        </project>
+
+        <project name="webfx-platform-visibility-gwt">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <dependencies>
+                <used-by-source-modules/>
+            </dependencies>
+
+            <providers>
+                <provider interface="dev.webfx.platform.visibility.spi.VisibilityProvider">dev.webfx.platform.visibility.spi.impl.gwt.GwtVisibilityProvider</provider>
+            </providers>
+
+            <source-packages>
+                <package>dev.webfx.platform.visibility.spi.impl.gwt</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>elemental2-dom</module>
+                <module>webfx-platform-visibility</module>
+            </used-by-source-modules>
+
+        </project>
+
+        <project name="webfx-platform-visibility-java-headless">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <dependencies>
+                <used-by-source-modules/>
+            </dependencies>
+
+            <providers>
+                <provider interface="dev.webfx.platform.boot.spi.ApplicationJob">dev.webfx.platform.visibility.spi.impl.java.headless.JavaHeadlessVisibilityJob</provider>
+                <provider interface="dev.webfx.platform.visibility.spi.VisibilityProvider">dev.webfx.platform.visibility.spi.impl.java.headless.JavaHeadlessVisibilityProvider</provider>
+            </providers>
+
+            <source-packages>
+                <package>dev.webfx.platform.visibility.spi.impl.java.headless</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>webfx-platform-boot</module>
+                <module>webfx-platform-visibility</module>
             </used-by-source-modules>
 
         </project>

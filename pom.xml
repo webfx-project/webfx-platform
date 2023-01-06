@@ -122,6 +122,10 @@
         <module>webfx-platform-uischeduler-gwt</module>
         <module>webfx-platform-util</module>
         <module>webfx-platform-vertx-common</module>
+        <module>webfx-platform-visibility</module>
+        <module>webfx-platform-visibility-gluon</module>
+        <module>webfx-platform-visibility-gwt</module>
+        <module>webfx-platform-visibility-java-headless</module>
         <module>webfx-platform-webassembly</module>
         <module>webfx-platform-webassembly-teavm</module>
         <module>webfx-platform-webworker</module>
