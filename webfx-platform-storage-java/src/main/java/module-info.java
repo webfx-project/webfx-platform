@@ -6,6 +6,7 @@ module webfx.platform.storage.java {
     requires java.base;
     requires webfx.platform.storage;
     requires webfx.platform.storagelocation;
+    requires webfx.platform.visibility;
 
     // Exported packages
     exports dev.webfx.platform.storage.spi.impl.java;

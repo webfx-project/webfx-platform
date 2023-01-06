@@ -1,7 +1,9 @@
 package dev.webfx.platform.storage.spi.impl.java;
 
-import dev.webfx.platform.storagelocation.StorageLocation;
 import dev.webfx.platform.storage.spi.LocalStorageProvider;
+import dev.webfx.platform.storagelocation.StorageLocation;
+import dev.webfx.platform.visibility.Visibility;
+import dev.webfx.platform.visibility.VisibilityState;
 
 import java.io.*;
 import java.nio.file.Paths;
@@ -15,7 +17,11 @@ public final class JavaLocalStorageProvider extends JavaStorageProvider implemen
 
     public JavaLocalStorageProvider() {
         loadProperties();
-        Runtime.getRuntime().addShutdownHook(new Thread(this::storeProperties));
+        Visibility.addVisibilityListener(visibilityState -> {
+            if (visibilityState == VisibilityState.HIDDEN)
+                storeProperties();
+        });
+        //Runtime.getRuntime().addShutdownHook(new Thread(this::storeProperties));
     }
 
     private void loadProperties() {
