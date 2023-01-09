@@ -81,6 +81,8 @@
 
     <modules>
         <module>webfx-platform-async</module>
+        <module>webfx-platform-audio</module>
+        <module>webfx-platform-audio-gluon</module>
         <module>webfx-platform-boot</module>
         <module>webfx-platform-boot-gwt</module>
         <module>webfx-platform-boot-java</module>

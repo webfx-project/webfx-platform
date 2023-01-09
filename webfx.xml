@@ -289,6 +289,8 @@
 
             <modules>
                 <module>webfx-platform-async</module>
+                <module>webfx-platform-audio</module>
+                <module>webfx-platform-audio-gluon</module>
                 <module>webfx-platform-boot</module>
                 <module>webfx-platform-boot-gwt</module>
                 <module>webfx-platform-boot-java</module>
@@ -579,6 +581,70 @@
                 <module>java.base</module>
                 <module>java.logging</module>
                 <module>webfx-platform-util</module>
+            </used-by-source-modules>
+
+        </project>
+
+        <project name="webfx-platform-audio">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <dependencies>
+                <used-by-source-modules/>
+            </dependencies>
+
+
+            <source-packages>
+                <package>dev.webfx.platform.audio</package>
+                <package>dev.webfx.platform.audio.spi</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>java.base</module>
+                <module>webfx-platform-util</module>
+            </used-by-source-modules>
+
+            <used-services>
+                <required-service>dev.webfx.platform.audio.spi.AudioServiceProvider</required-service>
+            </used-services>
+
+        </project>
+
+        <project name="webfx-platform-audio-gluon">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <dependencies>
+                <used-by-source-modules/>
+            </dependencies>
+
+            <required-libraries>
+                <library artifact="com.gluonhq.attach:audio:4.0.16" name="com.gluonhq.attach.audio">
+
+                    <exported-packages>
+                        <package>com.gluonhq.attach.audio</package>
+                        <package>com.gluonhq.attach.audio.impl</package>
+                    </exported-packages>
+
+                </library>
+            </required-libraries>
+
+            <providers>
+                <provider interface="dev.webfx.platform.audio.spi.AudioServiceProvider">dev.webfx.platform.audio.spi.impl.gluon.GluonAudioServiceProvider</provider>
+            </providers>
+
+            <source-packages>
+                <package>dev.webfx.platform.audio.spi.impl.gluon</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>com.gluonhq.attach.audio</module>
+                <module>java.base</module>
+                <module>webfx-platform-audio</module>
             </used-by-source-modules>
 
         </project>
