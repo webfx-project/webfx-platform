@@ -8,6 +8,7 @@ import dev.webfx.platform.audio.Audio;
 final class GluonAudio implements Audio {
 
     private final com.gluonhq.attach.audio.Audio audio;
+    private long startTime;
 
     public GluonAudio(com.gluonhq.attach.audio.Audio audio) {
         this.audio = audio;
@@ -26,6 +27,7 @@ final class GluonAudio implements Audio {
     @Override
     public void play() {
         audio.play();
+        startTime = System.currentTimeMillis();
     }
 
     @Override
@@ -48,4 +50,8 @@ final class GluonAudio implements Audio {
         return audio.isDisposed();
     }
 
+    @Override
+    public long getCurrentTimeMillis() {
+        return System.currentTimeMillis() - startTime;
+    }
 }

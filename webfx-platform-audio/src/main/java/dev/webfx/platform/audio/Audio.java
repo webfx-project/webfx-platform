@@ -15,4 +15,7 @@ public interface Audio {
     void dispose();
 
     boolean isDisposed();
+
+    long getCurrentTimeMillis();
+
 }
