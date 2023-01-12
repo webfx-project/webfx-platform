@@ -8,4 +8,6 @@ public interface AudioServiceProvider {
 
     Audio loadMusic(String url);
 
+    boolean supportsMusicSpectrumAnalysis();
+
 }

@@ -22,4 +22,8 @@ public final class AudioService {
         return getProvider().loadMusic(url);
     }
 
+    public static boolean supportsMusicSpectrumAnalysis() {
+        return getProvider().supportsMusicSpectrumAnalysis();
+    }
+
 }

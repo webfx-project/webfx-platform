@@ -34,4 +34,9 @@ public final class GluonAudioServiceProvider implements AudioServiceProvider {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public boolean supportsMusicSpectrumAnalysis() {
+        return false;
+    }
 }
