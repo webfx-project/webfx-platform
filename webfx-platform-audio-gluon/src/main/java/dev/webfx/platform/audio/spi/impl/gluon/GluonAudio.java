@@ -1,6 +1,7 @@
 package dev.webfx.platform.audio.spi.impl.gluon;
 
 import dev.webfx.platform.audio.Audio;
+import dev.webfx.platform.audio.AudioSpectrumListener;
 
 /**
  * @author Bruno Salmon
@@ -54,4 +55,19 @@ final class GluonAudio implements Audio {
     public long getCurrentTimeMillis() {
         return System.currentTimeMillis() - startTime;
     }
+
+    @Override
+    public boolean supportsSpectrumAnalysis() {
+        return false;
+    }
+
+    @Override
+    public void setAudioSpectrumInterval(double value) { } // Not supported
+
+    @Override
+    public void setAudioSpectrumNumBands(int value) { } // Not supported
+
+    @Override
+    public void setAudioSpectrumListener(AudioSpectrumListener listener) { } // Not supported
+
 }
