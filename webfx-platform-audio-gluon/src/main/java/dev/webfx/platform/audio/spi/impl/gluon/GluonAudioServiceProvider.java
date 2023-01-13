@@ -2,6 +2,7 @@ package dev.webfx.platform.audio.spi.impl.gluon;
 
 import dev.webfx.platform.audio.Audio;
 import dev.webfx.platform.audio.spi.AudioServiceProvider;
+import dev.webfx.platform.console.Console;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -17,19 +18,23 @@ public final class GluonAudioServiceProvider implements AudioServiceProvider {
 
     @Override
     public Audio loadSound(String url) {
-        try {
-            Optional<com.gluonhq.attach.audio.Audio> audio = audioService.loadSound(new URL(url));
-            return new GluonAudio(audio.get());
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-        }
+        return loadAudio(url, false);
     }
 
     @Override
     public Audio loadMusic(String url) {
+        return loadAudio(url, true);
+    }
+
+    private Audio loadAudio(String urlString, boolean music) {
+        Console.log("Loading " + (music ? "music" : "sound") + " from url " + urlString);
         try {
-            Optional<com.gluonhq.attach.audio.Audio> audio = audioService.loadMusic(new URL(url));
-            return new GluonAudio(audio.get());
+            URL url = new URL(urlString);
+            Optional<com.gluonhq.attach.audio.Audio> audio = music ? audioService.loadMusic(url) : audioService.loadSound(url);
+            GluonAudio gluonAudio = audio.map(GluonAudio::new).orElse(null);
+            if (gluonAudio == null)
+                Console.log("Unable to load " + urlString + " (maybe not enough memory)");
+            return gluonAudio;
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
