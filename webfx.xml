@@ -313,6 +313,7 @@
                 <module>webfx-platform-json-vertx</module>
                 <module>webfx-platform-meta</module>
                 <module>webfx-platform-resource</module>
+                <module>webfx-platform-resource-gluon</module>
                 <module>webfx-platform-resource-gwt</module>
                 <module>webfx-platform-resource-java</module>
                 <module>webfx-platform-scheduler</module>
@@ -680,8 +681,8 @@
 
             <used-services>
                 <required-service>dev.webfx.platform.boot.spi.ApplicationBooterProvider</required-service>
-                <optional-service>dev.webfx.platform.boot.spi.ApplicationJob</optional-service>
                 <optional-service>dev.webfx.platform.boot.spi.ApplicationModuleBooter</optional-service>
+                <optional-service>dev.webfx.platform.boot.spi.ApplicationJob</optional-service>
             </used-services>
 
         </project>
@@ -1264,6 +1265,32 @@
             <used-services>
                 <required-service>dev.webfx.platform.resource.spi.ResourceProvider</required-service>
             </used-services>
+
+        </project>
+
+        <project name="webfx-platform-resource-gluon">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <dependencies>
+                <used-by-source-modules/>
+                <plugin-module>com.gluonhq.attach.storage</plugin-module>
+            </dependencies>
+
+            <providers>
+                <provider interface="dev.webfx.platform.resource.spi.ResourceProvider">dev.webfx.platform.resource.spi.impl.gluon.GluonResourceProvider</provider>
+            </providers>
+
+            <source-packages>
+                <package>dev.webfx.platform.resource.spi.impl.gluon</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>webfx-platform-resource</module>
+                <module>webfx-platform-resource-java</module>
+            </used-by-source-modules>
 
         </project>
 

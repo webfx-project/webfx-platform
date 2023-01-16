@@ -10,7 +10,7 @@ import java.util.Scanner;
 /**
  * @author Bruno Salmon
  */
-public final class JavaResourceProvider implements ResourceProvider {
+public class JavaResourceProvider implements ResourceProvider {
 
     @Override
     public String toUrl(String resourcePath, Class<?> loadingClass) {

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+
+    <exported-packages>
+        <source-packages/>
+    </exported-packages>
+
+    <dependencies>
+        <used-by-source-modules/>
+        <plugin-module>com.gluonhq.attach.storage</plugin-module>
+    </dependencies>
+
+    <providers>
+        <provider interface="dev.webfx.platform.resource.spi.ResourceProvider">dev.webfx.platform.resource.spi.impl.gluon.GluonResourceProvider</provider>
+    </providers>
+
+</project>
