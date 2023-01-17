@@ -312,6 +312,9 @@
                 <module>webfx-platform-json-teavm</module>
                 <module>webfx-platform-json-vertx</module>
                 <module>webfx-platform-meta</module>
+                <module>webfx-platform-os</module>
+                <module>webfx-platform-os-gwt</module>
+                <module>webfx-platform-os-java</module>
                 <module>webfx-platform-resource</module>
                 <module>webfx-platform-resource-gluon</module>
                 <module>webfx-platform-resource-gwt</module>
@@ -1238,6 +1241,82 @@
                 <module>java.base</module>
                 <module>webfx-platform-console</module>
                 <module>webfx-platform-resource</module>
+            </used-by-source-modules>
+
+        </project>
+
+        <project name="webfx-platform-os">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <dependencies>
+                <used-by-source-modules/>
+            </dependencies>
+
+            <source-packages>
+                <package>dev.webfx.platform.os</package>
+                <package>dev.webfx.platform.os.spi</package>
+                <package>dev.webfx.platform.os.spi.impl</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>java.base</module>
+                <module>webfx-platform-util</module>
+            </used-by-source-modules>
+
+            <used-services>
+                <required-service>dev.webfx.platform.os.spi.OSProvider</required-service>
+            </used-services>
+
+        </project>
+
+        <project name="webfx-platform-os-gwt">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <dependencies>
+                <used-by-source-modules/>
+            </dependencies>
+
+            <providers>
+                <provider interface="dev.webfx.platform.os.spi.OSProvider">dev.webfx.platform.os.spi.impl.gwt.GwtOSProvider</provider>
+            </providers>
+
+            <source-packages>
+                <package>dev.webfx.platform.os.spi.impl.gwt</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>elemental2-dom</module>
+                <module>webfx-platform-os</module>
+            </used-by-source-modules>
+
+        </project>
+
+        <project name="webfx-platform-os-java">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <dependencies>
+                <used-by-source-modules/>
+            </dependencies>
+
+            <providers>
+                <provider interface="dev.webfx.platform.os.spi.OSProvider">dev.webfx.platform.os.spi.impl.java.JavaOSProvider</provider>
+            </providers>
+
+            <source-packages>
+                <package>dev.webfx.platform.os.spi.impl.java</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>webfx-platform-os</module>
             </used-by-source-modules>
 
         </project>
