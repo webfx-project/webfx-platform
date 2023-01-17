@@ -126,6 +126,11 @@
         <module>webfx-platform-storagelocation-java</module>
         <module>webfx-platform-uischeduler</module>
         <module>webfx-platform-uischeduler-gwt</module>
+        <module>webfx-platform-useragent</module>
+        <module>webfx-platform-useragent-gluon</module>
+        <module>webfx-platform-useragent-gwt</module>
+        <module>webfx-platform-useragent-java-client</module>
+        <module>webfx-platform-useragent-java-server</module>
         <module>webfx-platform-util</module>
         <module>webfx-platform-vertx-common</module>
         <module>webfx-platform-visibility</module>

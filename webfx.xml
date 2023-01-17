@@ -334,6 +334,11 @@
                 <module>webfx-platform-storagelocation-java</module>
                 <module>webfx-platform-uischeduler</module>
                 <module>webfx-platform-uischeduler-gwt</module>
+                <module>webfx-platform-useragent</module>
+                <module>webfx-platform-useragent-gluon</module>
+                <module>webfx-platform-useragent-gwt</module>
+                <module>webfx-platform-useragent-java-client</module>
+                <module>webfx-platform-useragent-java-server</module>
                 <module>webfx-platform-util</module>
                 <module>webfx-platform-vertx-common</module>
                 <module>webfx-platform-visibility</module>
@@ -1854,6 +1859,130 @@
                 <module>webfx-platform-console</module>
                 <module>webfx-platform-scheduler</module>
                 <module>webfx-platform-uischeduler</module>
+            </used-by-source-modules>
+
+        </project>
+
+        <project name="webfx-platform-useragent">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <dependencies>
+                <used-by-source-modules/>
+            </dependencies>
+
+            <source-packages>
+                <package>dev.webfx.platform.useragent</package>
+                <package>dev.webfx.platform.useragent.spi</package>
+                <package>dev.webfx.platform.useragent.spi.impl</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>java.base</module>
+                <module>webfx-platform-util</module>
+            </used-by-source-modules>
+
+            <used-services>
+                <required-service>dev.webfx.platform.useragent.spi.UserAgentProvider</required-service>
+            </used-services>
+
+        </project>
+
+        <project name="webfx-platform-useragent-gluon">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <dependencies>
+                <used-by-source-modules/>
+            </dependencies>
+
+            <providers>
+                <provider interface="dev.webfx.platform.useragent.spi.UserAgentProvider">dev.webfx.platform.useragent.spi.impl.gluon.GluonUserAgentProvider</provider>
+            </providers>
+
+            <source-packages>
+                <package>dev.webfx.platform.useragent.spi.impl.gluon</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>webfx-platform-useragent</module>
+            </used-by-source-modules>
+
+        </project>
+
+        <project name="webfx-platform-useragent-gwt">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <dependencies>
+                <used-by-source-modules/>
+            </dependencies>
+
+            <providers>
+                <provider interface="dev.webfx.platform.useragent.spi.UserAgentProvider">dev.webfx.platform.useragent.spi.impl.gwt.GwtUserAgentProvider</provider>
+            </providers>
+
+            <source-packages>
+                <package>dev.webfx.platform.useragent.spi.impl.gwt</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>elemental2-dom</module>
+                <module>webfx-platform-useragent</module>
+            </used-by-source-modules>
+
+        </project>
+
+        <project name="webfx-platform-useragent-java-client">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <dependencies>
+                <used-by-source-modules/>
+            </dependencies>
+
+            <providers>
+                <provider interface="dev.webfx.platform.useragent.spi.UserAgentProvider">dev.webfx.platform.useragent.spi.impl.java.client.JavaClientUserAgentProvider</provider>
+            </providers>
+
+            <source-packages>
+                <package>dev.webfx.platform.useragent.spi.impl.java.client</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>webfx-platform-useragent</module>
+            </used-by-source-modules>
+
+        </project>
+
+        <project name="webfx-platform-useragent-java-server">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <dependencies>
+                <used-by-source-modules/>
+            </dependencies>
+
+            <providers>
+                <provider interface="dev.webfx.platform.useragent.spi.UserAgentProvider">dev.webfx.platform.useragent.spi.impl.java.server.JavaServerUserAgentProvider</provider>
+            </providers>
+
+            <source-packages>
+                <package>dev.webfx.platform.useragent.spi.impl.java.server</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>webfx-platform-useragent</module>
             </used-by-source-modules>
 
         </project>
