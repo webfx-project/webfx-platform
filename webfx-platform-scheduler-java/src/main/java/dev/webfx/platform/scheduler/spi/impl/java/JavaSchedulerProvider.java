@@ -30,7 +30,7 @@ import java.util.concurrent.*;
 public final class JavaSchedulerProvider implements SchedulerProvider {
 
     //private final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-    private final ScheduledExecutorService executor = Executors.newScheduledThreadPool(availableProcessors());
+    private final ScheduledExecutorService executor = Executors.newScheduledThreadPool(Runtime.getRuntime().availableProcessors());
 
     public JavaSchedulerProvider() {
 /* Commented as this scheduler may still be used by other shutdown tasks (avoiding a RejectedExecutionException)
@@ -98,8 +98,4 @@ public final class JavaSchedulerProvider implements SchedulerProvider {
         return System.nanoTime();
     }
 
-    @Override
-    public int availableProcessors() {
-        return Runtime.getRuntime().availableProcessors();
-    }
 }

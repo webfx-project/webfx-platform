@@ -2,7 +2,6 @@ package dev.webfx.platform.uischeduler.spi.impl.gwt;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.Timer;
-import elemental2.dom.DomGlobal;
 import dev.webfx.platform.console.Console;
 import dev.webfx.platform.uischeduler.spi.impl.UiSchedulerProviderBase;
 
@@ -14,13 +13,6 @@ public final class GwtUiSchedulerProvider extends UiSchedulerProviderBase {
 
     private static final long MILLIS_IN_NANO = 1_000_000;
     private static final long START_NANO = System.currentTimeMillis() * MILLIS_IN_NANO - performanceNano();
-
-    @Override
-    public int availableProcessors() {
-        int hardwareConcurrency = DomGlobal.navigator.hardwareConcurrency; // Note: may be undefined if privacy settings refuse to reveal it
-        boolean defined = Character.isDigit(("" + hardwareConcurrency /* should return "undefined" or "NaN" if not defined */).charAt(0));
-        return defined ? hardwareConcurrency : -1; // returning -1 when undefined
-    }
 
     @Override
     public boolean isUiThread() {

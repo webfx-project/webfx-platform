@@ -65,5 +65,4 @@ public interface SchedulerProvider {
 
     long nanoTime(); // because System.nanoTime() raises a compilation error with GWT
 
-    int availableProcessors(); // because Runtime.getRuntime().availableProcessors()) raises a compilation error with GWT
 }

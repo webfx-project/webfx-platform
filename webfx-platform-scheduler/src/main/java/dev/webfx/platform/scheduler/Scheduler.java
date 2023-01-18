@@ -57,8 +57,4 @@ public class Scheduler {
         return getProvider().nanoTime();
     }
 
-    public static int availableProcessors() {
-        return getProvider().availableProcessors();
-    }
-
 }
