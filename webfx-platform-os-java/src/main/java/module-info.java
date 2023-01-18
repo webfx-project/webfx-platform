@@ -9,6 +9,6 @@ module webfx.platform.os.java {
     exports dev.webfx.platform.os.spi.impl.java;
 
     // Provided services
-    provides dev.webfx.platform.os.spi.OSProvider with dev.webfx.platform.os.spi.impl.java.JavaOSProvider;
+    provides dev.webfx.platform.os.spi.OperatingSystemProvider with dev.webfx.platform.os.spi.impl.java.JavaOperatingSystemProvider;
 
 }

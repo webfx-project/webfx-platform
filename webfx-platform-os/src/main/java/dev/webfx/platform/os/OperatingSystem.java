@@ -1,6 +1,6 @@
 package dev.webfx.platform.os;
 
-import dev.webfx.platform.os.spi.OSProvider;
+import dev.webfx.platform.os.spi.OperatingSystemProvider;
 import dev.webfx.platform.util.serviceloader.SingleServiceProvider;
 
 import java.util.ServiceLoader;
@@ -8,10 +8,14 @@ import java.util.ServiceLoader;
 /**
  * @author Bruno Salmon
  */
-public final class OS {
+public final class OperatingSystem {
 
-    private static OSProvider getProvider() {
-        return SingleServiceProvider.getProvider(OSProvider.class, () -> ServiceLoader.load(OSProvider.class));
+    private static OperatingSystemProvider getProvider() {
+        return SingleServiceProvider.getProvider(OperatingSystemProvider.class, () -> ServiceLoader.load(OperatingSystemProvider.class));
+    }
+
+    public static String getOSName() {
+        return getProvider().getOSName();
     }
 
     public static OSFamily getOSFamily() {

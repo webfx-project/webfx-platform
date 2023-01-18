@@ -12,6 +12,6 @@ module webfx.platform.os {
     exports dev.webfx.platform.os.spi.impl;
 
     // Used services
-    uses dev.webfx.platform.os.spi.OSProvider;
+    uses dev.webfx.platform.os.spi.OperatingSystemProvider;
 
 }

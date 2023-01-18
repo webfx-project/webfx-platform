@@ -1,21 +1,28 @@
 package dev.webfx.platform.os.spi.impl;
 
 import dev.webfx.platform.os.OSFamily;
-import dev.webfx.platform.os.spi.OSProvider;
+import dev.webfx.platform.os.spi.OperatingSystemProvider;
 
 /**
  * @author Bruno Salmon
  */
-public class OSProviderBase implements OSProvider {
+public class OperatingSystemProviderBase implements OperatingSystemProvider {
 
+    private final String osName;
     private final OSFamily osFamily;
 
-    public OSProviderBase(String textContainingOSName) {
-        this(parseOSFamily(textContainingOSName));
+    public OperatingSystemProviderBase(String osName) {
+        this(osName, guessOSFamily(osName));
     }
 
-    public OSProviderBase(OSFamily osFamily) {
+    public OperatingSystemProviderBase(String osName, OSFamily osFamily) {
+        this.osName = osName;
         this.osFamily = osFamily;
+    }
+
+    @Override
+    public String getOSName() {
+        return osName;
     }
 
     @Override
@@ -23,7 +30,7 @@ public class OSProviderBase implements OSProvider {
         return osFamily;
     }
 
-    private static OSFamily parseOSFamily(String osName) {
+    private static OSFamily guessOSFamily(String osName) {
         osName = osName.toLowerCase().replaceAll(" ", "");
         if (osName.contains("windows"))
             return OSFamily.WINDOWS;

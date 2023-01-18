@@ -10,7 +10,7 @@
     </dependencies>
 
     <providers>
-        <provider interface="dev.webfx.platform.os.spi.OSProvider">dev.webfx.platform.os.spi.impl.gwt.GwtOSProvider</provider>
+        <provider interface="dev.webfx.platform.os.spi.OperatingSystemProvider">dev.webfx.platform.os.spi.impl.gwt.GwtOperatingSystemProvider</provider>
     </providers>
 
 </project>

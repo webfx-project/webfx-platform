@@ -10,7 +10,7 @@
     </dependencies>
 
     <providers>
-        <provider interface="dev.webfx.platform.os.spi.OSProvider">dev.webfx.platform.os.spi.impl.java.JavaOSProvider</provider>
+        <provider interface="dev.webfx.platform.os.spi.OperatingSystemProvider">dev.webfx.platform.os.spi.impl.java.JavaOperatingSystemProvider</provider>
     </providers>
 
 </project>
