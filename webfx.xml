@@ -288,6 +288,9 @@
         <project name="webfx-platform">
 
             <modules>
+                <module>webfx-platform-arch</module>
+                <module>webfx-platform-arch-gwt</module>
+                <module>webfx-platform-arch-java</module>
                 <module>webfx-platform-async</module>
                 <module>webfx-platform-audio</module>
                 <module>webfx-platform-audio-gluon</module>
@@ -568,6 +571,81 @@
                 </library>
 
             </required-libraries>
+
+        </project>
+
+        <project name="webfx-platform-arch">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <dependencies>
+                <used-by-source-modules/>
+            </dependencies>
+
+            <source-packages>
+                <package>dev.webfx.platform.arch</package>
+                <package>dev.webfx.platform.arch.spi</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>java.base</module>
+                <module>webfx-platform-util</module>
+            </used-by-source-modules>
+
+            <used-services>
+                <required-service>dev.webfx.platform.arch.spi.ArchProvider</required-service>
+            </used-services>
+
+        </project>
+
+        <project name="webfx-platform-arch-gwt">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <dependencies>
+                <used-by-source-modules/>
+            </dependencies>
+
+            <providers>
+                <provider interface="dev.webfx.platform.arch.spi.ArchProvider">dev.webfx.platform.arch.spi.impl.gwt.GwtArchProvider</provider>
+            </providers>
+
+            <source-packages>
+                <package>dev.webfx.platform.arch.spi.impl.gwt</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>elemental2-dom</module>
+                <module>webfx-platform-arch</module>
+            </used-by-source-modules>
+
+        </project>
+
+        <project name="webfx-platform-arch-java">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <dependencies>
+                <used-by-source-modules/>
+            </dependencies>
+
+            <providers>
+                <provider interface="dev.webfx.platform.arch.spi.ArchProvider">dev.webfx.platform.arch.spi.impl.java.JavaArchProvider</provider>
+            </providers>
+
+            <source-packages>
+                <package>dev.webfx.platform.arch.spi.impl.java</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>webfx-platform-arch</module>
+            </used-by-source-modules>
 
         </project>
 
@@ -1272,7 +1350,7 @@
             </used-by-source-modules>
 
             <used-services>
-                <required-service>dev.webfx.platform.os.spi.OSProvider</required-service>
+                <required-service>dev.webfx.platform.os.spi.OperatingSystemProvider</required-service>
             </used-services>
 
         </project>
@@ -1288,7 +1366,7 @@
             </dependencies>
 
             <providers>
-                <provider interface="dev.webfx.platform.os.spi.OSProvider">dev.webfx.platform.os.spi.impl.gwt.GwtOSProvider</provider>
+                <provider interface="dev.webfx.platform.os.spi.OperatingSystemProvider">dev.webfx.platform.os.spi.impl.gwt.GwtOperatingSystemProvider</provider>
             </providers>
 
             <source-packages>
@@ -1313,7 +1391,7 @@
             </dependencies>
 
             <providers>
-                <provider interface="dev.webfx.platform.os.spi.OSProvider">dev.webfx.platform.os.spi.impl.java.JavaOSProvider</provider>
+                <provider interface="dev.webfx.platform.os.spi.OperatingSystemProvider">dev.webfx.platform.os.spi.impl.java.JavaOperatingSystemProvider</provider>
             </providers>
 
             <source-packages>
@@ -1854,7 +1932,6 @@
             </source-packages>
 
             <used-by-source-modules>
-                <module>elemental2-dom</module>
                 <module>gwt-user</module>
                 <module>webfx-platform-console</module>
                 <module>webfx-platform-scheduler</module>

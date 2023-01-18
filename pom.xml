@@ -80,6 +80,9 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>webfx-platform-arch</module>
+        <module>webfx-platform-arch-gwt</module>
+        <module>webfx-platform-arch-java</module>
         <module>webfx-platform-async</module>
         <module>webfx-platform-audio</module>
         <module>webfx-platform-audio-gluon</module>
