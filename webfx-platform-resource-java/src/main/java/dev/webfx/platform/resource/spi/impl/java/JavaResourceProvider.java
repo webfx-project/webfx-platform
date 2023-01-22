@@ -17,8 +17,13 @@ public class JavaResourceProvider implements ResourceProvider {
         if (resourcePath == null)
             return null;
         URL resource = null;
-        if (loadingClass != null)
+        if (loadingClass != null) {
             resource = loadingClass.getResource(resourcePath); // if the resource is in the same module as the loading class
+            if (resource == null && !resourcePath.startsWith("/")) {
+                resourcePath = "/" + loadingClass.getPackageName().replace('.', '/') + "/" + resourcePath;
+                resource = loadingClass.getResource(resourcePath);
+            }
+        }
         if (resource == null) {
             String path = resourcePath.startsWith("/") ? resourcePath.substring(1) : resourcePath; // removing initial "/" (otherwise doesn't work)
             resource = ClassLoader.getSystemResource(path); // if the resource is in a different module
