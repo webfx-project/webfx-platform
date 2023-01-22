@@ -20,11 +20,16 @@ public final class GwtResourceProvider implements ResourceProvider {
     @Override
     public String toUrl(String resourcePath, Class<?> loadingClass) {
         if (resourcePath != null) {
-            if (resourcePath.startsWith("/"))
-                resourcePath = resourcePath.substring(1);
-            else {
-                String className = loadingClass.getName();
-                resourcePath = className.replace(".", "/").substring(0, className.length() - loadingClass.getSimpleName().length()) + resourcePath;
+            // We need to return the absolute path of the resource from index.html file (the resource packages are located beside index.html)
+            if (resourcePath.startsWith("/")) // If the path provided is already absolute,
+                resourcePath = resourcePath.substring(1); // we just remove the first / to make that path relative to index.html
+            else if (loadingClass != null) { // If the path is relative to the loading class,
+                // We need to prefix the path with the location of the package at the same level of the loadingClass
+                // Getting the class package name
+                String fullClassName = loadingClass.getName(); // GWT doesn't support Class.getPackageName() so we get the fully qualified class name
+                String packageName = fullClassName.substring(0, fullClassName.length() - loadingClass.getSimpleName().length() - 1); // and remove the class name as well as the last '.'
+                // We replace all the '.' with '/' and append the relative resource path
+                resourcePath = packageName.replace('.', '/') + "/" + resourcePath;
             }
         }
         return resourcePath;
