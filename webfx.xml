@@ -316,6 +316,7 @@
                 <module>webfx-platform-json-vertx</module>
                 <module>webfx-platform-meta</module>
                 <module>webfx-platform-os</module>
+                <module>webfx-platform-os-gluon</module>
                 <module>webfx-platform-os-gwt</module>
                 <module>webfx-platform-os-java</module>
                 <module>webfx-platform-resource</module>
@@ -1352,6 +1353,31 @@
             <used-services>
                 <required-service>dev.webfx.platform.os.spi.OperatingSystemProvider</required-service>
             </used-services>
+
+        </project>
+
+        <project name="webfx-platform-os-gluon">
+
+            <exported-packages>
+                <source-packages/>
+            </exported-packages>
+
+            <dependencies>
+                <used-by-source-modules/>
+            </dependencies>
+
+            <providers>
+                <provider interface="dev.webfx.platform.os.spi.OperatingSystemProvider">dev.webfx.platform.os.spi.impl.gluon.GluonOperatingSystemProvider</provider>
+            </providers>
+
+            <source-packages>
+                <package>dev.webfx.platform.os.spi.impl.gluon</package>
+            </source-packages>
+
+            <used-by-source-modules>
+                <module>com.gluonhq.attach.util</module>
+                <module>webfx-platform-os</module>
+            </used-by-source-modules>
 
         </project>
 

@@ -108,6 +108,7 @@
         <module>webfx-platform-json-vertx</module>
         <module>webfx-platform-meta</module>
         <module>webfx-platform-os</module>
+        <module>webfx-platform-os-gluon</module>
         <module>webfx-platform-os-gwt</module>
         <module>webfx-platform-os-java</module>
         <module>webfx-platform-resource</module>
