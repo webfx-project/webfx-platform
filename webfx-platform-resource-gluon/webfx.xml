@@ -7,6 +7,12 @@
 
     <dependencies>
         <used-by-source-modules/>
+        <!--
+        The Gluon attach storage needs to be added to the dependencies (even if the code to load resources doesn't
+        explicitly use the Gluon StorageService class). When the WebFX CLI will detect that Gluon storage dependency,
+        it will automatically add <attachList>storage</attachList> in the GluonFX Maven plugin configuration of the
+        final executable gluon module, which is necessary to activate it.
+        -->
         <plugin-module>com.gluonhq.attach.storage</plugin-module>
     </dependencies>
 
