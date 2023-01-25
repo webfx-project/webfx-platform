@@ -29,6 +29,10 @@ final class GluonAudio implements Audio {
     public void play() {
         audio.play();
         startTime = System.currentTimeMillis();
+        // It has been observed on an Android tablet (for the DemoFX demo) that the music doesn't actually start
+        // immediately but about 200ms later. So we add this estimated delay to startTime, so the DemoFX animation
+        // is correctly synced with the music.
+        startTime += 200;
     }
 
     @Override
@@ -53,7 +57,7 @@ final class GluonAudio implements Audio {
 
     @Override
     public long getCurrentTimeMillis() {
-        return System.currentTimeMillis() - startTime;
+        return Math.max(0, System.currentTimeMillis() - startTime);
     }
 
     @Override
