@@ -24,6 +24,6 @@ public final class JavaShutdownProvider extends ShutdownProviderBase<Thread> {
 
     @Override
     protected void exit(int exitStatus) {
-        System.exit(0);
+        System.exit(exitStatus);
     }
 }
