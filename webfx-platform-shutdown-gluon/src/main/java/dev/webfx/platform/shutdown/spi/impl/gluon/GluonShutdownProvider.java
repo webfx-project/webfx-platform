@@ -1,15 +1,25 @@
 package dev.webfx.platform.shutdown.spi.impl.gluon;
 
-import dev.webfx.platform.shutdown.spi.impl.ShutdownProviderBase;
-
 import com.gluonhq.attach.lifecycle.LifecycleService;
+import dev.webfx.platform.console.Console;
+import dev.webfx.platform.shutdown.spi.impl.ShutdownProviderBase;
+import dev.webfx.platform.uischeduler.UiScheduler;
 
 /**
  * @author Bruno Salmon
  */
 public final class GluonShutdownProvider extends ShutdownProviderBase<Thread> {
 
-    private final LifecycleService lifecycleService = LifecycleService.create().get();
+    private LifecycleService lifecycleService;
+
+    public GluonShutdownProvider() {
+        // Note: All Gluon servies must be created in UI thread, otherwise the application crashes
+        UiScheduler.runInUiThread(() -> {
+            lifecycleService = LifecycleService.create().orElse(null);
+            if (lifecycleService == null)
+                Console.log("WARNING [WebFX Platform]: Unable to load Gluon Lifecycle Service");
+        });
+    }
 
     @Override
     protected Thread createPlatformShutdownHook(Runnable hook) {
@@ -28,6 +38,12 @@ public final class GluonShutdownProvider extends ShutdownProviderBase<Thread> {
 
     @Override
     protected void exit(int exitStatus) {
-        lifecycleService.shutdown();
+        if (lifecycleService != null) {
+            Console.log("INFO [WebFX Platform]: Calling Gluon service shutdown");
+            lifecycleService.shutdown(); // Doesn't seem to do anything on iOS
+        }
+        // Also calling System.exit() for iOS
+        Console.log("INFO [WebFX Platform]: Calling System.exit()");
+        System.exit(exitStatus);
     }
 }

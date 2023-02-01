@@ -4,6 +4,8 @@ module webfx.platform.visibility.gluon {
 
     // Direct dependencies modules
     requires com.gluonhq.attach.lifecycle;
+    requires webfx.platform.console;
+    requires webfx.platform.uischeduler;
     requires webfx.platform.visibility;
 
     // Exported packages

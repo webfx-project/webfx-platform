@@ -7,6 +7,7 @@ module webfx.platform.audio.gluon {
     requires java.base;
     requires webfx.platform.audio;
     requires webfx.platform.console;
+    requires webfx.platform.uischeduler;
 
     // Exported packages
     exports dev.webfx.platform.audio.spi.impl.gluon;
