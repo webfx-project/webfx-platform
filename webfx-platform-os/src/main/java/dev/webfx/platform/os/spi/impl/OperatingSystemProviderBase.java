@@ -32,16 +32,16 @@ public class OperatingSystemProviderBase implements OperatingSystemProvider {
 
     private static OSFamily guessOSFamily(String osName) {
         osName = osName.toLowerCase().replaceAll(" ", "");
-        if (osName.contains("windows"))
-            return OSFamily.WINDOWS;
-        if (osName.contains("linux"))
-            return OSFamily.LINUX;
-        if (osName.contains("mac") || osName.contains("darwin"))
-            return OSFamily.MACOS;
         if (osName.contains("android"))
             return OSFamily.ANDROID;
-        if (osName.contains("ios"))
+        if (osName.contains("ios") || osName.contains("iphone") || osName.contains("ipad"))
             return OSFamily.IOS;
+        if (osName.contains("windows"))
+            return OSFamily.WINDOWS;
+        if (osName.contains("mac") || osName.contains("darwin"))
+            return OSFamily.MACOS;
+        if (osName.contains("linux"))
+            return OSFamily.LINUX;
         return OSFamily.OTHER;
     }
 }
