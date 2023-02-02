@@ -9,10 +9,6 @@
         <used-by-source-modules/>
     </dependencies>
 
-    <required-libraries>
-        <library name="com.gluonhq.attach.util" artifact="com.gluonhq.attach:util:4.0.16"/>
-    </required-libraries>
-
     <providers>
         <provider interface="dev.webfx.platform.os.spi.OperatingSystemProvider">dev.webfx.platform.os.spi.impl.gluon.GluonOperatingSystemProvider</provider>
     </providers>

@@ -203,6 +203,35 @@
         </group>
 
         <group>
+            <groupId>com.gluonhq.attach</groupId>
+
+            <library artifactId="audio" name="com.gluonhq.attach.audio">
+                <exported-packages>
+                    <package>com.gluonhq.attach.audio</package>
+                </exported-packages>
+            </library>
+
+            <library artifactId="lifecycle" name="com.gluonhq.attach.lifecycle">
+                <exported-packages>
+                    <package>com.gluonhq.attach.lifecycle</package>
+                </exported-packages>
+            </library>
+
+            <library artifactId="storage" name="com.gluonhq.attach.storage">
+                <exported-packages>
+                    <package>com.gluonhq.attach.storage</package>
+                </exported-packages>
+            </library>
+
+            <library artifactId="util" name="com.gluonhq.attach.util">
+                <exported-packages>
+                    <package>com.gluonhq.attach.util</package>
+                </exported-packages>
+            </library>
+
+        </group>
+
+        <group>
             <groupId>io.vertx</groupId>
 
             <library name="io-vertx-core">
@@ -509,6 +538,35 @@
                 </group>
 
                 <group>
+                    <groupId>com.gluonhq.attach</groupId>
+
+                    <library artifactId="audio" name="com.gluonhq.attach.audio">
+                        <exported-packages>
+                            <package>com.gluonhq.attach.audio</package>
+                        </exported-packages>
+                    </library>
+
+                    <library artifactId="lifecycle" name="com.gluonhq.attach.lifecycle">
+                        <exported-packages>
+                            <package>com.gluonhq.attach.lifecycle</package>
+                        </exported-packages>
+                    </library>
+
+                    <library artifactId="storage" name="com.gluonhq.attach.storage">
+                        <exported-packages>
+                            <package>com.gluonhq.attach.storage</package>
+                        </exported-packages>
+                    </library>
+
+                    <library artifactId="util" name="com.gluonhq.attach.util">
+                        <exported-packages>
+                            <package>com.gluonhq.attach.util</package>
+                        </exported-packages>
+                    </library>
+
+                </group>
+
+                <group>
                     <groupId>io.vertx</groupId>
 
                     <library name="io-vertx-core">
@@ -709,17 +767,6 @@
             <dependencies>
                 <used-by-source-modules/>
             </dependencies>
-
-            <required-libraries>
-                <library artifact="com.gluonhq.attach:audio:4.0.16" name="com.gluonhq.attach.audio">
-
-                    <exported-packages>
-                        <package>com.gluonhq.attach.audio</package>
-                        <package>com.gluonhq.attach.audio.impl</package>
-                    </exported-packages>
-
-                </library>
-            </required-libraries>
 
             <providers>
                 <provider interface="dev.webfx.platform.audio.spi.AudioServiceProvider">dev.webfx.platform.audio.spi.impl.gluon.GluonAudioServiceProvider</provider>
@@ -1367,17 +1414,6 @@
                 <used-by-source-modules/>
             </dependencies>
 
-            <required-libraries>
-                <library artifact="com.gluonhq.attach:util:4.0.16" name="com.gluonhq.attach.util">
-
-                    <exported-packages>
-                        <package>com.gluonhq.attach.util</package>
-                        <package>com.gluonhq.attach.util.impl</package>
-                    </exported-packages>
-
-                </library>
-            </required-libraries>
-
             <providers>
                 <provider interface="dev.webfx.platform.os.spi.OperatingSystemProvider">dev.webfx.platform.os.spi.impl.gluon.GluonOperatingSystemProvider</provider>
             </providers>
@@ -1674,17 +1710,6 @@
                 <used-by-source-modules/>
             </dependencies>
 
-            <required-libraries>
-                <library artifact="com.gluonhq.attach:lifecycle:4.0.16" name="com.gluonhq.attach.lifecycle">
-
-                    <exported-packages>
-                        <package>com.gluonhq.attach.lifecycle</package>
-                        <package>com.gluonhq.attach.lifecycle.impl</package>
-                    </exported-packages>
-
-                </library>
-            </required-libraries>
-
             <providers>
                 <provider interface="dev.webfx.platform.shutdown.spi.ShutdownProvider">dev.webfx.platform.shutdown.spi.impl.gluon.GluonShutdownProvider</provider>
             </providers>
@@ -1869,25 +1894,6 @@
             <dependencies>
                 <used-by-source-modules/>
             </dependencies>
-
-            <required-libraries>
-                <library artifact="com.gluonhq.attach:storage:4.0.16" name="com.gluonhq.attach.storage">
-
-                    <exported-packages>
-                        <package>com.gluonhq.attach.storage</package>
-                        <package>com.gluonhq.attach.storage.impl</package>
-                    </exported-packages>
-
-                </library>
-                <library artifact="com.gluonhq.attach:util:4.0.16" name="com.gluonhq.attach.util">
-
-                    <exported-packages>
-                        <package>com.gluonhq.attach.util</package>
-                        <package>com.gluonhq.attach.util.impl</package>
-                    </exported-packages>
-
-                </library>
-            </required-libraries>
 
             <providers>
                 <provider interface="dev.webfx.platform.storagelocation.spi.StorageLocationProvider">dev.webfx.platform.storagelocation.spi.impl.gluon.GluonStorageLocationProvider</provider>
@@ -2212,17 +2218,6 @@
             <dependencies>
                 <used-by-source-modules/>
             </dependencies>
-
-            <required-libraries>
-                <library artifact="com.gluonhq.attach:lifecycle:4.0.16" name="com.gluonhq.attach.lifecycle">
-
-                    <exported-packages>
-                        <package>com.gluonhq.attach.lifecycle</package>
-                        <package>com.gluonhq.attach.lifecycle.impl</package>
-                    </exported-packages>
-
-                </library>
-            </required-libraries>
 
             <providers>
                 <provider interface="dev.webfx.platform.visibility.spi.VisibilityProvider">dev.webfx.platform.visibility.spi.impl.gluon.GluonVisibilityProvider</provider>

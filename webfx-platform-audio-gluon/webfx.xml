@@ -9,10 +9,6 @@
         <used-by-source-modules/>
     </dependencies>
 
-    <required-libraries>
-        <library name="com.gluonhq.attach.audio" artifact="com.gluonhq.attach:audio:4.0.16"/>
-    </required-libraries>
-
     <providers>
         <provider interface="dev.webfx.platform.audio.spi.AudioServiceProvider">dev.webfx.platform.audio.spi.impl.gluon.GluonAudioServiceProvider</provider>
     </providers>

@@ -18,7 +18,6 @@
         <dependency>
             <groupId>com.gluonhq.attach</groupId>
             <artifactId>storage</artifactId>
-            <version>4.0.16</version>
             <scope>runtime</scope>
         </dependency>
 
