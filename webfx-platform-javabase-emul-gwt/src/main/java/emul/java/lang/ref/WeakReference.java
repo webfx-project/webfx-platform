@@ -15,27 +15,46 @@
  */
 package emul.java.lang.ref;
 
+import com.google.gwt.core.client.JavaScriptObject;
+
 /**
  * @author Bruno Salmon
  */
 public class WeakReference<T> extends Reference<T> {
-    private T value;
+    private JavaScriptObject weakRef;
 
     public WeakReference(T value) {
-        this.value = value;
+        weakRef = createWeakRef(value);
     }
 
     public WeakReference(T value, @SuppressWarnings("unused") ReferenceQueue<T> queue) {
-        this.value = value;
+        weakRef = createWeakRef(value);
     }
 
     @Override
     public T get() {
-        return value;
+        return weakRef == null ? null : (T) getWeakRefValue(weakRef);
     }
 
     @Override
     public void clear() {
-        value = null;
+        weakRef = null;
     }
+
+    public static native JavaScriptObject createWeakRef(Object value) /*-{
+        try {
+            return new WeakRef(value);
+        } catch (err) { // For browsers that don't support WeakRef
+            return value; // we just return the direct value instead
+        }
+    }-*/;
+
+    public static native Object getWeakRefValue(JavaScriptObject weakRef) /*-{
+        try {
+            return weakRef.deref();
+        } catch (err) { // For browsers that don't support WeakRef
+            return weakRef; // the passed object was actually the value
+        }
+    }-*/;
+
 }
