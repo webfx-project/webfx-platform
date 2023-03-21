@@ -113,13 +113,13 @@ public abstract class UiSchedulerProviderBase implements UiSchedulerProvider {
 
     protected void executeAnimationPipe() {
         animationFrame.set(Boolean.TRUE);
-        long uiPassStart = nanoTime();
+        long uiPassStart = System.nanoTime();
         executeAnimations(uiAnimations);
-        long propertiesPassStart = nanoTime();
+        long propertiesPassStart = System.nanoTime();
         executeAnimations(propertiesAnimations);
-        long pulsePassStart = nanoTime();
+        long pulsePassStart = System.nanoTime();
         executeAnimations(pulseAnimations);
-        long nanoEnd = nanoTime();
+        long nanoEnd = System.nanoTime();
         long animationDuration = nanoEnd - uiPassStart;
         animationFrame.set(Boolean.FALSE);
 

@@ -63,6 +63,4 @@ public interface SchedulerProvider {
         scheduleDeferred(runnable);
     }
 
-    long nanoTime(); // because System.nanoTime() raises a compilation error with GWT
-
 }

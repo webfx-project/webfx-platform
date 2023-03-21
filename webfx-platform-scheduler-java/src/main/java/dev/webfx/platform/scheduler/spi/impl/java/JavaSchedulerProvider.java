@@ -93,9 +93,4 @@ public final class JavaSchedulerProvider implements SchedulerProvider {
         }
     }
 
-    @Override
-    public long nanoTime() {
-        return System.nanoTime();
-    }
-
 }

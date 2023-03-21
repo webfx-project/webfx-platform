@@ -53,8 +53,4 @@ public class Scheduler {
         getProvider().runInBackground(runnable);
     }
 
-    public static long nanoTime() { // because System.nanoTime() is not GWT compatible
-        return getProvider().nanoTime();
-    }
-
 }

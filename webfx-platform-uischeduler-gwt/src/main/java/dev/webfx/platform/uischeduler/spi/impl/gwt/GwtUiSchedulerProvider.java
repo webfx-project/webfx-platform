@@ -11,26 +11,10 @@ import dev.webfx.platform.uischeduler.spi.impl.UiSchedulerProviderBase;
  */
 public final class GwtUiSchedulerProvider extends UiSchedulerProviderBase {
 
-    private static final long MILLIS_IN_NANO = 1_000_000;
-    private static final long START_NANO = System.currentTimeMillis() * MILLIS_IN_NANO - performanceNano();
-
     @Override
     public boolean isUiThread() {
         return true;
     }
-
-    @Override
-    public long nanoTime() {
-        return START_NANO + performanceNano();
-    }
-
-    private static long performanceNano() {
-        return (long) (performanceNow() * MILLIS_IN_NANO);
-    }
-
-    private static native double performanceNow() /*-{
-        return performance.now();
-    }-*/;
 
     private static JavaScriptObject animationFrameId;
     private static Timer checkTimer;

@@ -171,8 +171,4 @@ public final class UiScheduler extends Scheduler {
         getProvider().runInBackground(runnable);
     }
 
-    public static long nanoTime() { // because System.nanoTime() is not GWT compatible
-        return getProvider().nanoTime();
-    }
-
 }

@@ -27,11 +27,6 @@ public final class VertxSchedulerProvider implements SchedulerProvider {
         return new VertxScheduled(vertx.setPeriodic(delayMs, event -> runnable.run()));
     }
 
-    @Override
-    public long nanoTime() {
-        return System.nanoTime();
-    }
-
     private final class VertxScheduled implements Scheduled {
         private final long timerId;
 
