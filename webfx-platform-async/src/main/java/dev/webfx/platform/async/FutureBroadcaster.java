@@ -31,7 +31,7 @@ public final class FutureBroadcaster<T> {
     private void onSourceCompleted() {
         synchronized (this) {
             for (Promise<T> destination : clients)
-                destination.complete(source.result());
+                destination.handle(source);
             clients.clear();
             if (sourceProducer != null)
                 source = null;
