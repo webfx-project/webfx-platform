@@ -105,6 +105,8 @@ public abstract class UiSchedulerProviderBase implements UiSchedulerProvider {
     private final static long SECOND_IN_NANO = 1_000 * MILLIS_IN_NANO;
     private final static long MAX_ANIMATION_FRAME_DURATION_NANO = SECOND_IN_NANO / 60;
 
+    private final static boolean LOG_LONG_ANIMATIONS = false;
+
     private final ThreadLocal<Boolean> animationFrame = new ThreadLocal<>();
     @Override
     public boolean isAnimationFrameNow() {
@@ -123,11 +125,12 @@ public abstract class UiSchedulerProviderBase implements UiSchedulerProvider {
         long animationDuration = nanoEnd - uiPassStart;
         animationFrame.set(Boolean.FALSE);
 
-        if (animationDuration > MAX_ANIMATION_FRAME_DURATION_NANO)
+        if (LOG_LONG_ANIMATIONS && animationDuration > MAX_ANIMATION_FRAME_DURATION_NANO) {
             log("Long animation: " + animationDuration / MILLIS_IN_NANO + "ms (60 FPS = 16ms) = "
-                    + (propertiesPassStart - uiPassStart) / MILLIS_IN_NANO + "ms ui + " +
+                    + (propertiesPassStart - uiPassStart) / MILLIS_IN_NANO + "ms ui + "
                     + (pulsePassStart - propertiesPassStart) / MILLIS_IN_NANO + "ms properties + "
-                    + (nanoEnd - pulsePassStart) / MILLIS_IN_NANO  + "ms layout/pulse");
+                    + (nanoEnd - pulsePassStart) / MILLIS_IN_NANO + "ms layout/pulse");
+        }
 
         boolean noMoreAnimationScheduled = propertiesAnimations.isEmpty() && uiAnimations.isEmpty(); // && pulseAnimations.isEmpty(); // periodic pulse animations can actually pause and be restarted by requestNextScenePulse() (otherwise Lighthouse downgrade)
         onExecuteAnimationPipeFinished(noMoreAnimationScheduled);
