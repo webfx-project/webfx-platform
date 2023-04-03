@@ -62,12 +62,13 @@ final class TeaVmWebAssemblyModule implements WebAssemblyModule {
             "            isinf: function(n) { return !isFinite(n) },\n" +
             "            isfinite: isFinite,\n" +
             "            putwchar: putwchar,\n" +
+            "            putwcharsErr: function() { },\n" + // Added to fix LinkError, but not sure what this function (signature) is
             "            towlower: function (code) { return String.fromCharCode(code).toLowerCase().charCodeAt(0); },\n" +
             "            towupper: function (code) { return String.fromCharCode(code).toUpperCase().charCodeAt(0); },\n" +
             "            getNativeOffset: function (instant) { return new Date(instant).getTimezoneOffset(); },\n" +
             "            logString: console.log,\n" +
             "            logInt: console.log,\n" +
-            "            logOutOfMemory: function() { console.log(\"Out of memory\") }\n" +
+            "            logOutOfMemory: function() { console.log('Out of memory') }\n" +
             "        }, teavmMath: {\n" +
             "            sqrt: Math.sqrt,\n" +
             "            pow: Math.pow,\n" +
