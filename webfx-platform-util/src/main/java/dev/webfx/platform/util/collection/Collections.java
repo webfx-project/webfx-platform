@@ -29,6 +29,10 @@ public final class Collections {
         return list;
     }
 
+    public static <T> List<T> listOfRemoveNulls(T... elements) {
+        return removeNulls(listOf(elements));
+    }
+
     public static <T> List<T> listOf(Iterable<T> iterable) {
         List<T> list = newList();
         forEach(iterable, list::add);
@@ -138,6 +142,11 @@ public final class Collections {
             }
         }
         return removed;
+    }
+
+    public static <T> List<T> removeNulls(List<T> list) {
+        removeIf(list, Objects::isNull);
+        return list;
     }
 
     public static <T> void sort(List<T> list, Comparator<? super T> c) {
