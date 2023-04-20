@@ -1,9 +1,15 @@
 package dev.webfx.platform.util;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Predicate;
+
 /**
  * @author Bruno Salmon
  */
 public final class Objects {
+
+    private static Map<Class, Predicate> INSTANCE_OF_PREDICATES = null; // used by registerInstanceOf() and InstanceOf()
 
     public static <T> T coalesce(T... ts) {
         for (T t : ts)
@@ -42,8 +48,8 @@ public final class Objects {
         return o1.equals(o2);
     }
 
-// This isAssignableFrom() method is compatible with GWT. Please note that it is a simplified version of
-// Class.isAssignableFrom() that doesn't consider interfaces.
+    // isAssignableFrom() is a GWT compatible version but simplified version of Class.isAssignableFrom() as it considers
+    // only super classes (doesn't work with interfaces).
 
     public static boolean isAssignableFrom(Class<?> leftClass, Class<?> rightClass) {
         if (leftClass != null)
@@ -53,5 +59,26 @@ public final class Objects {
                 rightClass = rightClass.getSuperclass();
             }
         return false;
+    }
+
+    // isInstanceOf() is a GWT compatible version but simplified version of Class.isInstance() as it considers
+    // only super classes (doesn't work with interfaces). However, it's possible to register instanceOf predicates
+    // make it work with interfaces.
+
+    public static boolean isInstanceOf(Object object, Class<?> clazz) {
+        if (object == null)
+            return false;
+        Predicate<Object> predicate = INSTANCE_OF_PREDICATES.get(clazz);
+        if (predicate != null)
+            return predicate.test(object);
+        return isAssignableFrom(clazz, object.getClass());
+    }
+
+    // Usage: Objects.registerInstanceOf(MyInterface.class, o -> o instanceof MyInterface);
+
+    public static <T> void registerInstanceOf(Class<T> clazz, Predicate predicate) {
+        if (INSTANCE_OF_PREDICATES == null)
+            INSTANCE_OF_PREDICATES = new HashMap<>();
+        INSTANCE_OF_PREDICATES.put(clazz, predicate);
     }
 }
