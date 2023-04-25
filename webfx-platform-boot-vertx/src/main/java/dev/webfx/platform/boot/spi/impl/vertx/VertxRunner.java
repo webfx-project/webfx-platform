@@ -3,6 +3,7 @@ package dev.webfx.platform.boot.spi.impl.vertx;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Vertx;
 import io.vertx.core.VertxOptions;
+import io.vertx.core.impl.VertxBuilder;
 import io.vertx.core.spi.cluster.ClusterManager;
 
 import java.util.function.Consumer;
@@ -75,7 +76,10 @@ public final class VertxRunner {
                 }
             });
         } else {
-            Vertx vertx = Vertx.vertx(options);
+            //Vertx vertx = Vertx.vertx(options);
+            Vertx vertx = new VertxBuilder(options).init()
+                    .fileResolver(new ZipFileResolver())
+                    .vertx();
             runner.accept(vertx);
         }
     }

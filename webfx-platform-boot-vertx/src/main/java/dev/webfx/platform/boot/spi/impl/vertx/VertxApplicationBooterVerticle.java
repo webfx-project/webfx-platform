@@ -13,10 +13,10 @@ import java.util.Collection;
 
 /**
  * There are 2 possible entry points:
- *   1) one initiated by the ApplicationBooter (this includes the main() method of this class)
+ *   1) one initiated by the ApplicationBooter (eventually through the main() method of this class)
  *   2) one initiated by Vertx when deploying this verticle
  *
- *   In case 1), the verticle is not yet deployed so the container need to deploy it (this will create a second instance of this class)
+ *   In case 1), the verticle is not yet deployed so the container need to deploy it (the container will actually create a second instance of this class)
  *   In case 2), the verticle is deployed but the container is not started
  *
  * @author Bruno Salmon
@@ -72,7 +72,7 @@ public final class VertxApplicationBooterVerticle extends AbstractVerticle imple
                 .ifPresent(v -> VertxInstance.getVertx().undeploy(v.deploymentId));
     }
 
-    private final class ApplicationJobVerticle implements Verticle {
+    private static final class ApplicationJobVerticle implements Verticle {
 
         private final ApplicationJob applicationJob;
         private String deploymentId;

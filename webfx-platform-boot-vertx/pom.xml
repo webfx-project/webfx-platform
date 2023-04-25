@@ -13,6 +13,12 @@
 
     <artifactId>webfx-platform-boot-vertx</artifactId>
 
+
+    <properties>
+        <!-- ZipFileResolver is using Java 13 API FileSystems.newFileSystem() -->
+        <java.version>13</java.version>
+    </properties>
+
     <dependencies>
 
         <dependency>

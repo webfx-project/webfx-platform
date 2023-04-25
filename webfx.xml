@@ -240,11 +240,15 @@
                     <package>io.vertx.core</package>
                     <package>io.vertx.core.eventbus</package>
                     <package>io.vertx.core.eventbus.impl</package>
+                    <package>io.vertx.core.file.impl</package>
                     <package>io.vertx.core.http</package>
                     <package>io.vertx.core.http.impl.headers</package>
+                    <package>io.vertx.core.impl</package>
+                    <package>io.vertx.core.impl.logging</package>
                     <package>io.vertx.core.json</package>
                     <package>io.vertx.core.net</package>
                     <package>io.vertx.core.spi.cluster</package>
+                    <package>io.vertx.core.spi.file</package>
                 </exported-packages>
             </library>
 

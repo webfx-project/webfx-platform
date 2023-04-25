@@ -13,4 +13,11 @@
         <used-by-source-modules/>
     </dependencies>
 
+    <maven-pom-manual>
+        <properties>
+            <!-- ZipFileResolver is using Java 13 API FileSystems.newFileSystem() -->
+            <java.version>13</java.version>
+        </properties>
+    </maven-pom-manual>
+
 </project>
