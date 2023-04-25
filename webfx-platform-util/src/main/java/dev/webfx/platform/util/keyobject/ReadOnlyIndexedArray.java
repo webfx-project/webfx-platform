@@ -25,6 +25,22 @@ public interface ReadOnlyIndexedArray {
      */
     <V> V getElement(int index);
 
+    default boolean isNull(int index) {
+        return getElement(index) == null;
+    }
+
+    default boolean isObject(int index) {
+        return getElement(index) instanceof ReadOnlyKeyObject;
+    }
+
+    default boolean isArray(int index) {
+        return getElement(index) instanceof ReadOnlyIndexedArray;
+    }
+
+    default boolean isScalar(int index) {
+        return !isNull(index) && !isObject(index) && !isArray(index);
+    }
+
     /**
      * Return the ith element of the array as a JsonObject. If the type is not an object, this can result in runtime errors.
      */

@@ -26,6 +26,18 @@ public interface ReadOnlyKeyObject {
      */
     <T> T get(String key);
 
+    default boolean isObject(String key) {
+        return get(key) instanceof ReadOnlyKeyObject;
+    }
+
+    default boolean isArray(String key) {
+        return get(key) instanceof ReadOnlyIndexedArray;
+    }
+
+    default boolean isScalar(String key) {
+        return has(key) && !isObject(key) && !isArray(key);
+    }
+
     /**
      * Return the element as a JsonObject. If the type is not an object, this can result in runtime errors.
      */
@@ -68,12 +80,12 @@ public interface ReadOnlyKeyObject {
     default String getString(String key, String defaultValue) { return Strings.toString(getScalar(key, defaultValue)); }
 
     /**
-     * Return the element as a int. If the type is not a int, this can result in runtime errors.
+     * Return the element as an int. If the type is not a int, this can result in runtime errors.
      */
     default Integer getInteger(String key) { return Numbers.toInteger(getScalar(key)); }
 
     /**
-     * Return the element as a int. If the type is not a int, this can result in runtime errors.
+     * Return the element as an int. If the type is not a int, this can result in runtime errors.
      */
     default Integer getInteger(String key, Integer defaultValue) { return Numbers.toInteger(getScalar(key, defaultValue)); }
 
