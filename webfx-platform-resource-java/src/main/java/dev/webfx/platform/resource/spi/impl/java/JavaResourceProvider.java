@@ -41,12 +41,18 @@ public class JavaResourceProvider implements ResourceProvider {
     }
 
     private InputStream getResourceInputStream(String resourcePath) {
-        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(resourcePath);
+        InputStream inputStream = null;
+        try {
+            // trying directly with the provided resourcePath
+            // Note: this may fail if resourcePath is actually a URL path such as file:/... => raises an exception on
+            // Windows, but just return null on other platforms
+            inputStream = getClass().getClassLoader().getResourceAsStream(resourcePath);
+        } catch (Exception e) { }
         if (inputStream == null) {
             try {
+                // Now trying with a URL path
                 inputStream = new URL(resourcePath).openStream();
-            } catch (Exception e) {
-            }
+            } catch (Exception e) { }
         }
         return inputStream;
     }
