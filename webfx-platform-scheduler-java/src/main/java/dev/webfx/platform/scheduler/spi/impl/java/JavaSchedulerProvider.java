@@ -18,16 +18,14 @@
 package dev.webfx.platform.scheduler.spi.impl.java;
 
 
-import dev.webfx.platform.console.Console;
-import dev.webfx.platform.scheduler.Scheduled;
-import dev.webfx.platform.scheduler.spi.SchedulerProvider;
+import dev.webfx.platform.scheduler.spi.SchedulerProviderBase;
 
 import java.util.concurrent.*;
 
 /*
  * @author Bruno Salmon
  */
-public final class JavaSchedulerProvider implements SchedulerProvider {
+public final class JavaSchedulerProvider extends SchedulerProviderBase {
 
     //private final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
     private final ScheduledExecutorService executor = Executors.newScheduledThreadPool(Runtime.getRuntime().availableProcessors());
@@ -51,45 +49,28 @@ public final class JavaSchedulerProvider implements SchedulerProvider {
     }
 
     @Override
-    public void scheduleDeferred(Runnable runnable) {
-        executor.execute(caughtRunnable(runnable));
+    protected ScheduledBase scheduledImpl(WrappedRunnable wrappedRunnable, long delayMs) {
+        ScheduledFuture<?> scheduledFuture = null;
+        if (wrappedRunnable.isPeriodic())
+            scheduledFuture = executor.scheduleAtFixedRate(wrappedRunnable, delayMs, delayMs, TimeUnit.MILLISECONDS);
+        else if (delayMs > 0)
+            scheduledFuture = executor.schedule(wrappedRunnable, delayMs, TimeUnit.MILLISECONDS);
+        else
+            executor.execute(wrappedRunnable);
+        return new JavaScheduled(wrappedRunnable, scheduledFuture);
     }
 
-    @Override
-    public JavaScheduled scheduleDelay(long delayMs, Runnable runnable) {
-        return new JavaScheduled(executor.schedule(caughtRunnable(runnable), delayMs, TimeUnit.MILLISECONDS));
-    }
+    private final class JavaScheduled extends ScheduledBase {
+        private final ScheduledFuture<?> scheduledFuture;
 
-    @Override
-    public JavaScheduled schedulePeriodic(long delayMs, Runnable runnable) {
-        return new JavaScheduled(executor.scheduleAtFixedRate(caughtRunnable(runnable), delayMs, delayMs, TimeUnit.MILLISECONDS));
-    }
-
-    private static Runnable caughtRunnable(Runnable runnable) {
-        return () -> {
-            try {
-                runnable.run();
-            } catch (Throwable t) {
-                Console.log("Uncaught exception in scheduled runnable " + runnable, t);
-            }
-        };
-    }
-
-    @Override
-    public void runInBackground(Runnable runnable) {
-        executor.execute(caughtRunnable(runnable));
-    }
-
-    private static final class JavaScheduled implements Scheduled {
-        private final ScheduledFuture scheduledFuture;
-
-        private JavaScheduled(ScheduledFuture scheduledFuture) {
+        public JavaScheduled(WrappedRunnable wrappedRunnable, ScheduledFuture<?> scheduledFuture) {
+            super(wrappedRunnable);
             this.scheduledFuture = scheduledFuture;
         }
 
         @Override
-        public boolean cancel() {
-            return scheduledFuture.cancel(false);
+        protected boolean cancelImpl() {
+            return scheduledFuture == null || scheduledFuture.cancel(false);
         }
     }
 

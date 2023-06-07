@@ -136,8 +136,8 @@ public final class UiScheduler extends Scheduler {
     /**
      * A deferred command is executed not now but as soon as possible (ex: after the event loop returns).
      */
-    public static void scheduleDeferred(Runnable runnable) {
-        getProvider().scheduleDeferred(runnable);
+    public static Scheduled scheduleDeferred(Runnable runnable) {
+        return getProvider().scheduleDeferred(runnable);
     }
 
     /**

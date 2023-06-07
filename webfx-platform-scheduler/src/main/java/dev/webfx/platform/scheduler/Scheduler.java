@@ -18,8 +18,8 @@ public class Scheduler {
     /**
      * A deferred command is executed not now but as soon as possible (ex: after the event loop returns).
      */
-    public static void scheduleDeferred(Runnable runnable) {
-        getProvider().scheduleDeferred(runnable);
+    public static Scheduled scheduleDeferred(Runnable runnable) {
+        return getProvider().scheduleDeferred(runnable);
     }
 
     /**
@@ -51,6 +51,14 @@ public class Scheduler {
 
     public static void runInBackground(Runnable runnable) {
         getProvider().runInBackground(runnable);
+    }
+
+    public static int tasksCount(boolean includeDeferred, boolean includePeriodic, boolean includeBackground, boolean includePending, boolean includeRunning) {
+        return getProvider().tasksCount(includeDeferred, includePeriodic, includeBackground, includePending, includeRunning);
+    }
+
+    public static int tasksCount() {
+        return tasksCount(true, true, true, true, true);
     }
 
 }

@@ -4,7 +4,6 @@ module webfx.platform.scheduler.java {
 
     // Direct dependencies modules
     requires java.base;
-    requires webfx.platform.console;
     requires webfx.platform.scheduler;
 
     // Exported packages

@@ -1,41 +1,36 @@
 package dev.webfx.platform.scheduler.spi.impl.vertx;
 
-import io.vertx.core.Vertx;
-import dev.webfx.platform.scheduler.Scheduled;
+import dev.webfx.platform.scheduler.spi.SchedulerProviderBase;
 import dev.webfx.platform.vertx.common.VertxInstance;
-import dev.webfx.platform.scheduler.spi.SchedulerProvider;
+import io.vertx.core.Vertx;
 
 /**
  * @author Bruno Salmon
  */
-public final class VertxSchedulerProvider implements SchedulerProvider {
+public final class VertxSchedulerProvider extends SchedulerProviderBase {
 
     private final Vertx vertx = VertxInstance.getVertx();
 
     @Override
-    public void scheduleDeferred(Runnable runnable) {
-        scheduleDelay(1, runnable);
+    protected ScheduledBase scheduledImpl(WrappedRunnable wrappedRunnable, long delayMs) {
+        long timerId;
+        if (wrappedRunnable.isPeriodic())
+            timerId = vertx.setPeriodic(delayMs, event -> wrappedRunnable.run());
+        else
+            timerId = vertx.setTimer(delayMs, event -> wrappedRunnable.run());
+        return new VertxScheduled(wrappedRunnable, timerId);
     }
 
-    @Override
-    public VertxScheduled scheduleDelay(long delayMs, Runnable runnable) {
-        return new VertxScheduled(vertx.setTimer(delayMs, event -> runnable.run()));
-    }
-
-    @Override
-    public VertxScheduled schedulePeriodic(long delayMs, Runnable runnable) {
-        return new VertxScheduled(vertx.setPeriodic(delayMs, event -> runnable.run()));
-    }
-
-    private final class VertxScheduled implements Scheduled {
+    private final class VertxScheduled extends ScheduledBase {
         private final long timerId;
 
-        private VertxScheduled(long timerId) {
+        public VertxScheduled(WrappedRunnable wrappedRunnable, long timerId) {
+            super(wrappedRunnable);
             this.timerId = timerId;
         }
 
         @Override
-        public boolean cancel() {
+        public boolean cancelImpl() {
             return vertx.cancelTimer(timerId);
         }
     }

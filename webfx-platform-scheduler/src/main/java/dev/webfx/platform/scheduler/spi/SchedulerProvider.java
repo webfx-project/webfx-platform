@@ -31,7 +31,7 @@ public interface SchedulerProvider {
     /**
      * A deferred command is executed not now but as soon as possible (ex: after the event loop returns).
      */
-    void scheduleDeferred(Runnable runnable);
+    Scheduled scheduleDeferred(Runnable runnable);
 
     /**
      * Set a one-shot timer to fire after {@code delayMs} milliseconds, at which point {@code handler}
@@ -59,8 +59,8 @@ public interface SchedulerProvider {
         return scheduled;
     }
 
-    default void runInBackground(Runnable runnable) {
-        scheduleDeferred(runnable);
-    }
+    Scheduled runInBackground(Runnable runnable);
+
+    int tasksCount(boolean includeDeferred, boolean includePeriodic, boolean includeBackground, boolean includePending, boolean includeRunning);
 
 }

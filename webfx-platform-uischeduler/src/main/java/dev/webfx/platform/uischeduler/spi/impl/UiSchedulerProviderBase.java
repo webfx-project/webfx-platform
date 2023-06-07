@@ -1,6 +1,7 @@
 package dev.webfx.platform.uischeduler.spi.impl;
 
 import dev.webfx.platform.scheduler.Scheduled;
+import dev.webfx.platform.scheduler.spi.SchedulerProviderBase;
 import dev.webfx.platform.uischeduler.AnimationFramePass;
 import dev.webfx.platform.uischeduler.spi.UiSchedulerProvider;
 
@@ -10,21 +11,11 @@ import java.util.List;
 /**
  * @author Bruno Salmon
  */
-public abstract class UiSchedulerProviderBase implements UiSchedulerProvider {
-
-    @Override
-    public void scheduleDeferred(Runnable runnable) {
-        scheduleInAnimationFrameImpl(0, runnable, 0, AnimationFramePass.UI_UPDATE_PASS, false);
-    }
-
-    @Override
-    public Scheduled scheduleDelay(long delayMs, Runnable runnable) {
-        return scheduleInAnimationFrameImpl(delayMs, runnable, 1, AnimationFramePass.UI_UPDATE_PASS, false);
-    }
+public abstract class UiSchedulerProviderBase extends SchedulerProviderBase implements UiSchedulerProvider {
 
     @Override
     public Scheduled scheduleDelayInAnimationFrame(long delayMs, Runnable animationTask, int afterFrameCount, AnimationFramePass pass) {
-        return scheduleInAnimationFrameImpl(delayMs, animationTask, afterFrameCount, pass, false);
+        return scheduleInAnimationFrameImpl(delayMs, animationTask, afterFrameCount, pass, true, false, false);
     }
 
     @Override
@@ -34,11 +25,20 @@ public abstract class UiSchedulerProviderBase implements UiSchedulerProvider {
 
     @Override
     public Scheduled schedulePeriodicInAnimationFrame(long delayMs, Runnable animationTask, AnimationFramePass pass) {
-        return scheduleInAnimationFrameImpl(delayMs, animationTask, 0, pass, true);
+        return scheduleInAnimationFrameImpl(delayMs, animationTask, 0, pass, false, true, false);
     }
 
-    private Scheduled scheduleInAnimationFrameImpl(long delayMs, Runnable animationTask, int afterFrameCount, AnimationFramePass pass, boolean periodic) {
-        return new AnimationScheduled(delayMs, animationTask, afterFrameCount, pass, periodic);
+    private Scheduled scheduleInAnimationFrameImpl(long delayMs, Runnable animationTask, int afterFrameCount, AnimationFramePass pass, boolean deferred, boolean periodic, boolean background) {
+        return scheduleInAnimationFrameImpl(delayMs, new WrappedRunnable(animationTask, deferred, periodic, background), afterFrameCount, pass);
+    }
+
+    private ScheduledBase scheduleInAnimationFrameImpl(long delayMs, WrappedRunnable wrappedRunnable, int afterFrameCount, AnimationFramePass pass) {
+        return new AnimationScheduled(delayMs, wrappedRunnable, afterFrameCount, pass);
+    }
+
+    @Override
+    protected ScheduledBase scheduledImpl(WrappedRunnable wrappedRunnable, long delayMs) {
+        return scheduleInAnimationFrameImpl(delayMs, wrappedRunnable, 0, AnimationFramePass.UI_UPDATE_PASS);
     }
 
     @Override
@@ -46,19 +46,15 @@ public abstract class UiSchedulerProviderBase implements UiSchedulerProvider {
         checkExecuteAnimationPipeIsScheduledForNextAnimationFrame();
     }
 
-    public class AnimationScheduled implements Scheduled {
+    public class AnimationScheduled extends ScheduledBase {
         private final long delayMs;
-        private final Runnable runnable;
         private int futureFrameCount;
-        private final boolean periodic;
         private long nextExecutionTime;
-        private boolean cancelled;
 
-        private AnimationScheduled(long delayMs, Runnable runnable, int afterFrameCount, AnimationFramePass pass, boolean periodic) {
+        private AnimationScheduled(long delayMs, WrappedRunnable wrappedRunnable, int afterFrameCount, AnimationFramePass pass) {
+            super(wrappedRunnable);
             this.delayMs = delayMs;
-            this.runnable = runnable;
             this.futureFrameCount = afterFrameCount;
-            this.periodic = periodic;
             nextExecutionTime = delayMs == 0 ? 0 : System.currentTimeMillis() + delayMs;
             switch (pass) {
                 case UI_UPDATE_PASS: uiAnimations.add(this); break;
@@ -69,8 +65,16 @@ public abstract class UiSchedulerProviderBase implements UiSchedulerProvider {
         }
 
         @Override
-        public boolean cancel() {
-            return cancelled = true; // will be removed on next animation frame
+        public boolean cancelImpl() {
+            return true; // will be removed on next animation frame
+        }
+
+        private boolean isCancelled() {
+            return wrappedRunnable.isCancelled();
+        }
+
+        private boolean isPeriodic() {
+            return wrappedRunnable.isPeriodic();
         }
 
         private boolean shouldExecuteNow() {
@@ -82,12 +86,8 @@ public abstract class UiSchedulerProviderBase implements UiSchedulerProvider {
         }
 
         private void execute() {
-            try {
-                runnable.run();
-            } catch (Throwable throwable) {
-                log(throwable);
-            }
-            if (nextExecutionTime != 0 && periodic)
+            wrappedRunnable.run();
+            if (nextExecutionTime != 0 && wrappedRunnable.isPeriodic())
                 nextExecutionTime += delayMs;
         }
     }
@@ -149,22 +149,15 @@ public abstract class UiSchedulerProviderBase implements UiSchedulerProvider {
     private void executeAnimations(List<AnimationScheduled> animations) {
         for (int i = 0; i < animations.size(); i++) {
             AnimationScheduled scheduled = animations.get(i);
-            if (scheduled.cancelled)
+            if (scheduled.isCancelled())
                 animations.remove(i--);
             else if (scheduled.shouldExecuteNow()) {
                 scheduled.execute();
-                if (!scheduled.periodic || scheduled.cancelled)
+                if (!scheduled.isPeriodic() || scheduled.isCancelled())
                     animations.remove(i--);
             }
         }
     }
 
-/* Deprecated
-    public void runLikeInAnimationFrame(Runnable runnable) {
-        Boolean af = animationFrame.get();
-        animationFrame.set(Boolean.TRUE);
-        runnable.run();
-        animationFrame.set(af);
-    }
-*/
+
 }
