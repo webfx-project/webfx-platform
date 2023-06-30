@@ -16,6 +16,10 @@ public interface Audio {
 
     void stop();
 
+    void setCycleCount(int cycleCount);
+
+    boolean isPlaying();
+
     void dispose();
 
     boolean isDisposed();

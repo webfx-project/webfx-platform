@@ -10,6 +10,7 @@ final class GluonAudio implements Audio {
 
     private final com.gluonhq.attach.audio.Audio audio;
     private long startTime;
+    private boolean playing;
 
     public GluonAudio(com.gluonhq.attach.audio.Audio audio) {
         this.audio = audio;
@@ -27,6 +28,7 @@ final class GluonAudio implements Audio {
 
     @Override
     public void play() {
+        playing = true;
         audio.play();
         startTime = System.currentTimeMillis();
         // It has been observed on an Android tablet (for the DemoFX demo) that the music doesn't actually start
@@ -37,11 +39,13 @@ final class GluonAudio implements Audio {
 
     @Override
     public void pause() {
+        playing = false;
         audio.pause();
     }
 
     @Override
     public void stop() {
+        playing = false;
         audio.stop();
     }
 
@@ -53,6 +57,16 @@ final class GluonAudio implements Audio {
     @Override
     public boolean isDisposed() {
         return audio.isDisposed();
+    }
+
+    @Override
+    public boolean isPlaying() {
+        return playing;
+    }
+
+    @Override
+    public void setCycleCount(int cycleCount) {
+        audio.setLooping(cycleCount == -1);
     }
 
     @Override
