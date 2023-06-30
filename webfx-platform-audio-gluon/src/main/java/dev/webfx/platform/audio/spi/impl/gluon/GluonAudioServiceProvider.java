@@ -36,9 +36,11 @@ public final class GluonAudioServiceProvider implements AudioServiceProvider {
     }
 
     private Audio loadAudio(String urlString, boolean music) {
-        if (audioService == null)
-            return null;
         Console.log("INFO [WebFX Platform]: Loading " + (music ? "music" : "sound") + " from url " + urlString);
+        if (audioService == null) {
+            Console.log("WARNING [WebFX Platform]: failed as Gluon audio service is not loaded");
+            return null;
+        }
         try {
             URL url = new URL(urlString);
             Optional<com.gluonhq.attach.audio.Audio> audio = music ? audioService.loadMusic(url) : audioService.loadSound(url);
