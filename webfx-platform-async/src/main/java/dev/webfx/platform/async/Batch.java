@@ -26,6 +26,9 @@ public final class Batch<A> {
     public <R> Future<Batch<R>> executeParallel(Promise<Batch<R>> promise, IntFunction<R[]> arrayGenerator, AsyncFunction<A, R> asyncFunction) {
         int n = array.length, i = 0;
         R[] results = arrayGenerator.apply(n);
+        Batch<R> resultsBatch = new Batch<>(results);
+        if (n == 0)
+            return Future.succeededFuture(resultsBatch);
         Unit<Integer> responseCounter = new Unit<>(0);
         for (A argument : getArray()) {
             int index = i++;
@@ -37,7 +40,7 @@ public final class Batch<A> {
                         results[index] = asyncResult.result();
                         responseCounter.set(responseCounter.get() + 1);
                         if (responseCounter.get() == n)
-                            promise.complete(new Batch<>(results));
+                            promise.complete(resultsBatch);
                     }
                 }
             });
@@ -52,6 +55,9 @@ public final class Batch<A> {
     public <R> Future<Batch<R>> executeSerial(Promise<Batch<R>> promise, IntFunction<R[]> arrayGenerator, AsyncFunction<A, R> asyncFunction) {
         int n = array.length;
         R[] results = arrayGenerator.apply(n);
+        Batch<R> resultsBatch = new Batch<>(results);
+        if (n == 0)
+            return Future.succeededFuture(resultsBatch);
         Unit<Integer> responseCounter = new Unit<>(0);
         Unit<Handler<AsyncResult<R>>> handlerUnit = new Unit<>();
         handlerUnit.set(asyncResult -> {
@@ -65,7 +71,7 @@ public final class Batch<A> {
                     if (count < n)
                         asyncFunction.apply(getArray()[count]).onComplete(handlerUnit.get());
                     else
-                        promise.complete(new Batch<>(results));
+                        promise.complete(resultsBatch);
                 }
             }
         });
