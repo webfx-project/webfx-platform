@@ -40,10 +40,7 @@ public final class GluonShutdownProvider extends ShutdownProviderBase<Thread> {
     protected void exit(int exitStatus) {
         if (lifecycleService != null) {
             Console.log("INFO [WebFX Platform]: Calling Gluon service shutdown");
-            lifecycleService.shutdown(); // Doesn't seem to do anything on iOS
+            lifecycleService.shutdown(); // Note that it doesn't do anything on iOS as Apple prohibits applications to self exit
         }
-        // Also calling System.exit() for iOS
-        Console.log("INFO [WebFX Platform]: Calling System.exit()");
-        System.exit(exitStatus);
     }
 }
