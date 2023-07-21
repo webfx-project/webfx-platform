@@ -94,7 +94,7 @@ public final class Strings {
                 tokens.add(s.substring(p0, p1));
                 p0 = p1 + separator.length();
             }
-        return tokens.toArray(new String[tokens.size()]);
+        return tokens.toArray(new String[0]);
     }
 
     public static String concat(String... strings) {
