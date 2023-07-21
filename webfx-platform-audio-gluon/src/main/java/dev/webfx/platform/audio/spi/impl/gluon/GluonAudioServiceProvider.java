@@ -5,7 +5,7 @@ import dev.webfx.platform.audio.spi.AudioServiceProvider;
 import dev.webfx.platform.console.Console;
 import dev.webfx.platform.uischeduler.UiScheduler;
 
-import java.net.MalformedURLException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 
@@ -48,7 +48,8 @@ public final class GluonAudioServiceProvider implements AudioServiceProvider {
             if (gluonAudio == null)
                 Console.log("WARNING [WebFX Platform]: Unable to load " + urlString);
             return gluonAudio;
-        } catch (MalformedURLException e) {
+        } catch (IOException  e) {
+            Console.log("ERROR [WebFX Platform]: while loading " + urlString, e);
             throw new RuntimeException(e);
         }
     }
