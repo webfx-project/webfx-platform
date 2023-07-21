@@ -158,25 +158,6 @@
             </exported-packages>
         </library>
 
-        <library name="com-zaxxer-hikari">
-            <groupId>com.zaxxer</groupId>
-            <artifactId>HikariCP</artifactId>
-            <exported-packages>
-                <package>com.zaxxer.hikari</package>
-            </exported-packages>
-        </library>
-
-        <library name="Java-WebSocket">
-            <groupId>org.java-websocket</groupId>
-            <exported-packages>
-                <package>org.java_websocket</package>
-                <package>org.java_websocket.client</package>
-                <package>org.java_websocket.drafts</package>
-                <package>org.java_websocket.enums</package>
-                <package>org.java_websocket.handshake</package>
-            </exported-packages>
-        </library>
-
         <group>
             <groupId>org.teavm</groupId>
 
@@ -252,34 +233,6 @@
                 </exported-packages>
             </library>
 
-            <library name="io-vertx-eventbusbridge-common">
-                <artifactId>vertx-bridge-common</artifactId>
-                <exported-packages>
-                    <package>io.vertx.ext.bridge</package>
-                </exported-packages>
-            </library>
-
-            <library name="io-vertx-client-jdbc">
-                <artifactId>vertx-jdbc-client</artifactId>
-                <exported-packages>
-                    <package>io.vertx.jdbcclient</package>
-                </exported-packages>
-            </library>
-
-            <library name="io-vertx-client-sql">
-                <artifactId>vertx-sql-client</artifactId>
-                <exported-packages>
-                    <package>io.vertx.sqlclient</package>
-                </exported-packages>
-            </library>
-
-            <library name="io-vertx-client-sql-pg">
-                <artifactId>vertx-pg-client</artifactId>
-                <exported-packages>
-                    <package>io.vertx.pgclient</package>
-                </exported-packages>
-            </library>
-
             <library name="io-vertx-web">
                 <artifactId>vertx-web</artifactId>
                 <exported-packages>
@@ -291,12 +244,6 @@
             </library>
 
         </group>
-
-        <!-- Additional library required at runtime when authenticating to a postgres database in a docker container -->
-        <library name="com-ongres-scram-client">
-            <artifactId>client</artifactId>
-            <groupId>com.ongres.scram</groupId>
-        </library>
 
     </required-libraries>
 
