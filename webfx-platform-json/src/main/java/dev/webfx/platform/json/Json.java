@@ -2,6 +2,7 @@ package dev.webfx.platform.json;
 
 import dev.webfx.platform.json.spi.JsonProvider;
 import dev.webfx.platform.json.spi.impl.listmap.MapJsonObject;
+import dev.webfx.platform.util.Strings;
 import dev.webfx.platform.util.keyobject.ReadOnlyIndexedArray;
 import dev.webfx.platform.util.keyobject.ReadOnlyKeyObject;
 import dev.webfx.platform.util.serviceloader.SingleServiceProvider;
@@ -130,4 +131,32 @@ public final class Json {
         }
         return dst;
     }
+
+    public static String lookupString(ReadOnlyJsonObject json, String jsonPath) {
+        if (json == null)
+            return null;
+        String[] paths = Strings.split(jsonPath, ".");
+        json = lookupObject(json, paths, true);
+        return json == null ? null : json.getString(paths[paths.length - 1]);
+    }
+
+    public static ReadOnlyJsonObject lookupObject(ReadOnlyJsonObject json, String jsonPath) {
+        if (json == null)
+            return null;
+        String[] paths = Strings.split(jsonPath, ".");
+        return lookupObject(json, paths, false);
+    }
+
+    private static ReadOnlyJsonObject lookupObject(ReadOnlyJsonObject json, String[] paths, boolean ignoreLastPath) {
+        int n = paths.length;
+        if (ignoreLastPath)
+            n--;
+        for (int i = 0; i < n; i++) {
+            json = json.getObject(paths[i]);
+            if (json == null)
+                return null;
+        }
+        return json;
+    }
+
 }
