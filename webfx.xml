@@ -198,6 +198,12 @@
                 </exported-packages>
             </library>
 
+            <library artifactId="statusbar" name="com.gluonhq.attach.statusbar">
+                <exported-packages>
+                    <package>com.gluonhq.attach.statusbar</package>
+                </exported-packages>
+            </library>
+
             <library artifactId="storage" name="com.gluonhq.attach.storage">
                 <exported-packages>
                     <package>com.gluonhq.attach.storage</package>
