@@ -23,6 +23,11 @@ public final class JavaShutdownProvider extends ShutdownProviderBase<Thread> {
     }
 
     @Override
+    public boolean supportsExit() {
+        return true;
+    }
+
+    @Override
     protected void exit(int exitStatus) {
         System.exit(exitStatus);
     }

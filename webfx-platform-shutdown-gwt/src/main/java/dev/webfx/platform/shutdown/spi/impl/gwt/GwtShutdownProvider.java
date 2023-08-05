@@ -25,11 +25,13 @@ public final class GwtShutdownProvider extends ShutdownProviderBase<EventListene
     }
 
     @Override
-    protected void exit(int exitStatus) {
-        exit();
+    public boolean supportsExit() {
+        // This is apparently the condition that browsers check to allow closing the window:
+        return DomGlobal.window.opener != null || DomGlobal.window.history.length == 1;
     }
 
-    public native void exit() /*-{
-        $wnd.close();
-    }-*/;
+    @Override
+    protected void exit(int exitStatus) {
+        DomGlobal.window.close();
+    }
 }

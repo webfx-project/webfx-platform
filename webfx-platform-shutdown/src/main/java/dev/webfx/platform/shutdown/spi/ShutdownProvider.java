@@ -11,6 +11,8 @@ public interface ShutdownProvider {
 
     void softwareShutdown(boolean exit, int exitStatus);
 
+    boolean supportsExit();
+
     boolean isShuttingDown();
 
     boolean isSoftwareShutdown();

@@ -22,6 +22,10 @@ public final class Shutdown {
         getProvider().removeShutdownHook(hook);
     }
 
+    public static boolean supportsExit() {
+        return getProvider().supportsExit();
+    }
+
     public static void softwareShutdown(boolean exit, int exitStatus) {
         getProvider().softwareShutdown(exit, exitStatus);
     }

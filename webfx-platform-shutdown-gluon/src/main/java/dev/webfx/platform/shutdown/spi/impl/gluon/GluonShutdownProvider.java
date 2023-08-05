@@ -2,6 +2,7 @@ package dev.webfx.platform.shutdown.spi.impl.gluon;
 
 import com.gluonhq.attach.lifecycle.LifecycleService;
 import dev.webfx.platform.console.Console;
+import dev.webfx.platform.os.OperatingSystem;
 import dev.webfx.platform.shutdown.spi.impl.ShutdownProviderBase;
 import dev.webfx.platform.uischeduler.UiScheduler;
 
@@ -34,6 +35,11 @@ public final class GluonShutdownProvider extends ShutdownProviderBase<Thread> {
     @Override
     protected void removePlatformShutdownHook(Thread platformHook) {
         Runtime.getRuntime().removeShutdownHook(platformHook);
+    }
+
+    @Override
+    public boolean supportsExit() {
+        return !OperatingSystem.isIOS();
     }
 
     @Override
