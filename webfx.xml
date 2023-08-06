@@ -255,4 +255,8 @@
 
     </required-libraries>
 
+    <maven-repositories>
+        <snapshot-repository id="webfx-snapshots">https://oss.sonatype.org/content/repositories/snapshots/</snapshot-repository>
+    </maven-repositories>
+
 </project>
