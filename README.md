@@ -1,3 +1,11 @@
+![Deploy to Sonatype](https://github.com/webfx-project/webfx-platform/actions/workflows/build-and-deploy-to-sonatype.yml/badge.svg)
+![Scc Code Count Badge](https://sloc.xyz/github/webfx-project/webfx-platform/?category=code)
+![Scc Blanks Count Badge](https://sloc.xyz/github/webfx-project/webfx-platform/?category=blanks)
+![Scc Lines Count Badge](https://sloc.xyz/github/webfx-project/webfx-platform/?category=lines)
+![Scc Comments Count Badge](https://sloc.xyz/github/webfx-project/webfx-platform/?category=comments)
+![Scc COCOMO Badge](https://sloc.xyz/github/webfx-project/webfx-platform/?category=cocomo)
+![Discover Vulnerabilities Using CodeQL](https://github.com/webfx-project/webfx-platform/actions/workflows/discover-vulnerabilities.yml/badge.svg)
+
 # The WebFX Platform
 
 The WebFX Platform is the foundation layer & API for cross-platform development with [WebFX](https://github.com/webfx-project/webfx).
