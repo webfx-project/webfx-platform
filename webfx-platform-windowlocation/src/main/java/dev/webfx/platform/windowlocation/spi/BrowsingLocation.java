@@ -31,17 +31,17 @@ public interface BrowsingLocation extends HostLocation, PathLocation {
         return Strings.isEmpty(getPort()) ? getHostname() : Strings.concat(getHostname(), ":", getPort());
     }
 
-    /**
+    /*
      * @return A String containing the username specified before the domain name.
      */
     //String getUsername();
 
-    /**
+    /*
      * @return A String containing the password specified before the domain name.
      */
     //String getPassword();
 
-    /**
+    /*
      * Ex: https://developer.mozilla.org in https://developer.mozilla.org/en-US/search?q=URL#search-results-close-container
      * @return A String containing the canonical form of the origin of the specific location.
      */

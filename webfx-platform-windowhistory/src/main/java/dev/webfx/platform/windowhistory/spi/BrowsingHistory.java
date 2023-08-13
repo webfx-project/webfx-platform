@@ -133,7 +133,7 @@ public interface BrowsingHistory {
 
     /********************************************* Creating URLs *******************************************************
      *
-     * Additionally, history objects can be used to create URL paths and/or hrefs for <a> tags that link to various
+     * Additionally, history objects can be used to create URL paths and/or hrefs for {@code<a>} tags that link to various
      * places in your app. This is useful when using hash history to prefix URLs with a # or when using query support
      * to automatically build query strings.
      *      String href = history.createHref('/the/path')

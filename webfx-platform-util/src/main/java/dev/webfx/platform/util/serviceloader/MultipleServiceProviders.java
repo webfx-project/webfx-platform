@@ -16,12 +16,12 @@ import java.util.function.Supplier;
  * the guarantee to have the same unique instances each time. By using this utility class, you spare the declaration
  * of a field for storing your providers, and it can therefore be used even in interface default methods.
  *
- * Typical usage:
+ * Typical usage: {@code
  *
  *     private static List<MyProvider> getMyProviders() {
  *         return MultipleServiceProviders.getProviders(MyProvider.class, () -> ServiceLoader.load(MyProvider.class));
  *     }
- *
+ *}
  * Note: the reason why ServiceLoader.load() is written in the caller code and not in this utility class is to be
  * compliant with the Java Platform Module System. The caller module has to declare in module-info.java that it's using
  * this service, and only the caller code can ask the ServiceLoader to load this service, this utility class can't.
