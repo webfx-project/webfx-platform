@@ -16,6 +16,14 @@ public final class Arch {
         return SingleServiceProvider.getProvider(ArchProvider.class, () -> ServiceLoader.load(ArchProvider.class));
     }
 
+    public static boolean is32Bit() {
+        return getProvider().is32Bit();
+    }
+
+    public static boolean is64Bit() {
+        return getProvider().is64Bit();
+    }
+
     public static int availableProcessors() {
         return getProvider().availableProcessors();
     }
