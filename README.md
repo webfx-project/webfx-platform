@@ -5,7 +5,7 @@
 ![Scc Lines Count Badge](https://sloc.xyz/github/webfx-project/webfx-platform/?category=lines)
 ![Scc COCOMO Badge](https://sloc.xyz/github/webfx-project/webfx-platform/?category=cocomo)
 ![Discover Vulnerabilities Using CodeQL](https://github.com/webfx-project/webfx-platform/actions/workflows/discover-vulnerabilities.yml/badge.svg)
-[![Generic badge](https://img.shields.io/badge/Read-JavaDoc-blue.svg)](https://javadoc.webfx.dev)
+[![Generic badge](https://img.shields.io/badge/Read-JavaDoc-blue.svg)](https://javadoc-platform.webfx.dev)
 
 # The WebFX Platform
 
