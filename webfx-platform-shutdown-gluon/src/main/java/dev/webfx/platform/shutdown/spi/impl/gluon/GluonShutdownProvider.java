@@ -38,7 +38,7 @@ public final class GluonShutdownProvider extends ShutdownProviderBase<Thread> {
     }
 
     @Override
-    public boolean supportsExit() {
+    public boolean canExit() {
         return !OperatingSystem.isIOS();
     }
 

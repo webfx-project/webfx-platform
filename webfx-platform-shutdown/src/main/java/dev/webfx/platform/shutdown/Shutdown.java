@@ -22,8 +22,8 @@ public final class Shutdown {
         getProvider().removeShutdownHook(hook);
     }
 
-    public static boolean supportsExit() {
-        return getProvider().supportsExit();
+    public static boolean canExit() {
+        return getProvider().canExit();
     }
 
     public static void softwareShutdown(boolean exit, int exitStatus) {

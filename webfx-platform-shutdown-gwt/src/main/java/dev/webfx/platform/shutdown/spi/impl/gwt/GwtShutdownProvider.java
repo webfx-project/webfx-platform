@@ -25,7 +25,7 @@ public final class GwtShutdownProvider extends ShutdownProviderBase<EventListene
     }
 
     @Override
-    public boolean supportsExit() {
+    public boolean canExit() {
         // This is apparently the condition that browsers check to allow closing the window:
         return DomGlobal.window.opener != null || DomGlobal.window.history.length == 1;
     }
