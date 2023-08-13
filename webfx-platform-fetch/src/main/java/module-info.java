@@ -1,5 +1,8 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
+/**
+ * Cross-platform API for querying web services (see {@link dev.webfx.platform.fetch.Fetch Fetch})
+ */
 module webfx.platform.fetch {
 
     // Direct dependencies modules

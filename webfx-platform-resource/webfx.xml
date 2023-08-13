@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
 
+    <description>Cross-platform API for accessing resources files  (see {@link dev.webfx.platform.resource.Resource Resource})</description>
+
     <exported-packages>
         <source-packages/>
     </exported-packages>

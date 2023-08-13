@@ -1,5 +1,8 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
+/**
+ * Cross-platform API for getting information about the host architecture (see {@link dev.webfx.platform.arch.Arch Arch})
+ */
 module webfx.platform.arch {
 
     // Direct dependencies modules

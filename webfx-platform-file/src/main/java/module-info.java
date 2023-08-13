@@ -1,5 +1,8 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
+/**
+ * Cross-platform API for accessing local files
+ */
 module webfx.platform.file {
 
     // Direct dependencies modules

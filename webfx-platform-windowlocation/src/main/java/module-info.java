@@ -1,5 +1,8 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
+/**
+ * Cross-platform API for accessing the window location (see {@link dev.webfx.platform.windowlocation.WindowLocation WindowLocation})
+ */
 module webfx.platform.windowlocation {
 
     // Direct dependencies modules

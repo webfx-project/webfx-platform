@@ -1,5 +1,8 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
+/**
+ * Cross-platform API for booting WebFX applications (see {@link dev.webfx.platform.boot.ApplicationBooter ApplicationBooter})
+ */
 module webfx.platform.boot {
 
     // Direct dependencies modules

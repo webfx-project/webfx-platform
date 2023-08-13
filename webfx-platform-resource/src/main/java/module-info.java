@@ -1,5 +1,8 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
+/**
+ * Cross-platform API for accessing resources files  (see {@link dev.webfx.platform.resource.Resource Resource})
+ */
 module webfx.platform.resource {
 
     // Direct dependencies modules

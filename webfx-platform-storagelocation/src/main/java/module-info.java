@@ -1,5 +1,8 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
+/**
+ * Cross-platform API for locating application storage (see {@link dev.webfx.platform.storagelocation.StorageLocation StorageLocation})
+ */
 module webfx.platform.storagelocation {
 
     // Direct dependencies modules
