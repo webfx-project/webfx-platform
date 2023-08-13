@@ -15,7 +15,7 @@ public final class Resource {
 
     private static ResourceProvider PROVIDER;
 
-    private static ResourceProvider getProvider() {
+    public static ResourceProvider getProvider() {
         if (PROVIDER == null)
             registerProvider(SingleServiceProvider.getProvider(ResourceProvider.class, () -> ServiceLoader.load(ResourceProvider.class)));
         return PROVIDER;
