@@ -10,6 +10,8 @@ import java.util.ServiceLoader;
  */
 public final class UserAgent {
 
+    private UserAgent() {}
+
     private static UserAgentProvider getProvider() {
         return SingleServiceProvider.getProvider(UserAgentProvider.class, () -> ServiceLoader.load(UserAgentProvider.class));
     }

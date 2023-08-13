@@ -11,6 +11,8 @@ import java.util.function.Consumer;
  */
 public class Scheduler {
 
+    protected Scheduler() {}
+
     public static SchedulerProvider getProvider() {
         return SingleServiceProvider.getProvider(SchedulerProvider.class, () -> ServiceLoader.load(SchedulerProvider.class));
     }

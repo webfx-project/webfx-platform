@@ -11,7 +11,9 @@ import java.util.ServiceLoader;
  */
 public final class WindowLocation {
 
-    public static WindowLocationProvider getProvider() { // Returns the browser window location
+    private WindowLocation() {}
+
+    private static WindowLocationProvider getProvider() { // Returns the browser window location
         return SingleServiceProvider.getProvider(WindowLocationProvider.class, () -> ServiceLoader.load(WindowLocationProvider.class));
     }
 

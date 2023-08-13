@@ -10,7 +10,9 @@ import java.util.ServiceLoader;
  */
 public final class Shutdown {
 
-    public static ShutdownProvider getProvider() {
+    private Shutdown() {}
+
+    private static ShutdownProvider getProvider() {
         return SingleServiceProvider.getProvider(ShutdownProvider.class, () -> ServiceLoader.load(ShutdownProvider.class));
     }
 

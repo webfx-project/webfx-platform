@@ -11,7 +11,9 @@ import java.util.ServiceLoader;
  */
 public class WebWorkerService {
 
-    public static WorkerServiceProvider getProvider() {
+    private WebWorkerService() {}
+
+    private static WorkerServiceProvider getProvider() {
         return SingleServiceProvider.getProvider(WorkerServiceProvider.class, () -> ServiceLoader.load(WorkerServiceProvider.class));
     }
 

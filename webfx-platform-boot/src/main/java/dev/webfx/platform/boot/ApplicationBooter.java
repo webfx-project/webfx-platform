@@ -11,7 +11,7 @@ import java.util.ServiceLoader;
  */
 public final class ApplicationBooter {
 
-    public static ApplicationBooterProvider getProvider() {
+    private static ApplicationBooterProvider getProvider() {
         return SingleServiceProvider.getProvider(ApplicationBooterProvider.class, () -> ServiceLoader.load(ApplicationBooterProvider.class));
     }
 

@@ -11,7 +11,9 @@ import java.util.ServiceLoader;
  */
 public final class LocalStorage {
 
-    public static LocalStorageProvider getProvider() {
+    private LocalStorage() {}
+
+    private static LocalStorageProvider getProvider() {
         return SingleServiceProvider.getProvider(LocalStorageProvider.class, () -> ServiceLoader.load(LocalStorageProvider.class));
     }
 

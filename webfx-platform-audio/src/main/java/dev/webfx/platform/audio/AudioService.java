@@ -10,7 +10,9 @@ import java.util.ServiceLoader;
  */
 public final class AudioService {
 
-    public static AudioServiceProvider getProvider() {
+    private AudioService() {}
+
+    private static AudioServiceProvider getProvider() {
         return SingleServiceProvider.getProvider(AudioServiceProvider.class, () -> ServiceLoader.load(AudioServiceProvider.class));
     }
 

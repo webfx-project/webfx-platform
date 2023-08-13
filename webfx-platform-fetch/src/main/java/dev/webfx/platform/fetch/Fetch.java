@@ -11,7 +11,9 @@ import java.util.ServiceLoader;
  */
 public class Fetch {
 
-    public static FetchProvider getProvider() {
+    private Fetch() {}
+
+    private static FetchProvider getProvider() {
         return SingleServiceProvider.getProvider(FetchProvider.class, () -> ServiceLoader.load(FetchProvider.class));
     }
 

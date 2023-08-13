@@ -10,6 +10,8 @@ import java.util.ServiceLoader;
  */
 public final class StorageLocation {
 
+    private StorageLocation() {}
+
     private static StorageLocationProvider getProvider() {
         return SingleServiceProvider.getProvider(StorageLocationProvider.class, () -> ServiceLoader.load(StorageLocationProvider.class));
     }

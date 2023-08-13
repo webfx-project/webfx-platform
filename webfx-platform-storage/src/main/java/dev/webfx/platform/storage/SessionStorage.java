@@ -11,7 +11,9 @@ import java.util.ServiceLoader;
  */
 public final class SessionStorage {
 
-    public static SessionStorageProvider getProvider() {
+    private SessionStorage() {}
+
+    private static SessionStorageProvider getProvider() {
         return SingleServiceProvider.getProvider(SessionStorageProvider.class, () -> ServiceLoader.load(SessionStorageProvider.class));
     }
 

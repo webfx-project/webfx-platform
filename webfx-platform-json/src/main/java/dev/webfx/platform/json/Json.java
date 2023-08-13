@@ -14,6 +14,8 @@ import java.util.ServiceLoader;
  */
 public final class Json {
 
+    private Json() {}
+
     /***************************
      * Factory methods helpers *
      **************************/
@@ -81,7 +83,7 @@ public final class Json {
         PROVIDER = provider;
     }
 
-    public static JsonProvider getProvider() {
+    private static JsonProvider getProvider() {
         if (PROVIDER == null) {
             registerProvider(SingleServiceProvider.getProvider(JsonProvider.class, () -> ServiceLoader.load(JsonProvider.class), SingleServiceProvider.NotFoundPolicy.TRACE_AND_RETURN_NULL));
             if (PROVIDER == null) {

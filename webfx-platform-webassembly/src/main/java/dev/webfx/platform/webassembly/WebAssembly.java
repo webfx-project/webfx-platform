@@ -11,7 +11,9 @@ import java.util.ServiceLoader;
  */
 public final class WebAssembly {
 
-    public static WebAssemblyProvider getProvider() {
+    private WebAssembly() {}
+
+    private static WebAssemblyProvider getProvider() {
         return SingleServiceProvider.getProvider(WebAssemblyProvider.class, () -> ServiceLoader.load(WebAssemblyProvider.class), SingleServiceProvider.NotFoundPolicy.RETURN_NULL);
     }
 

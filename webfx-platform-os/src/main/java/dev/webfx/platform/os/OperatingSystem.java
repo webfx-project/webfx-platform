@@ -10,6 +10,8 @@ import java.util.ServiceLoader;
  */
 public final class OperatingSystem {
 
+    private OperatingSystem() {}
+
     private static OperatingSystemProvider getProvider() {
         return SingleServiceProvider.getProvider(OperatingSystemProvider.class, () -> ServiceLoader.load(OperatingSystemProvider.class));
     }

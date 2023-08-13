@@ -10,6 +10,8 @@ import java.util.ServiceLoader;
  */
 public class Visibility {
 
+    private Visibility() {}
+
     private static VisibilityProvider getProvider() {
         return SingleServiceProvider.getProvider(VisibilityProvider.class, () -> ServiceLoader.load(VisibilityProvider.class));
     }

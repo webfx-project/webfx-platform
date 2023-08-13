@@ -11,9 +11,11 @@ import java.util.function.Consumer;
  */
 public final class Resource {
 
+    private Resource() {}
+
     private static ResourceProvider PROVIDER;
 
-    public static ResourceProvider getProvider() {
+    private static ResourceProvider getProvider() {
         if (PROVIDER == null)
             registerProvider(SingleServiceProvider.getProvider(ResourceProvider.class, () -> ServiceLoader.load(ResourceProvider.class)));
         return PROVIDER;

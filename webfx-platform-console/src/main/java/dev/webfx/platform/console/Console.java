@@ -10,7 +10,9 @@ import java.util.ServiceLoader;
  */
 public final class Console {
 
-    public static ConsoleProvider getProvider() {
+    private Console() {}
+
+    private static ConsoleProvider getProvider() {
         return SingleServiceProvider.getProvider(ConsoleProvider.class, () -> ServiceLoader.load(ConsoleProvider.class));
     }
 

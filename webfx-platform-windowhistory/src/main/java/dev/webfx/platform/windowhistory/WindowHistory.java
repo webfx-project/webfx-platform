@@ -11,6 +11,8 @@ import java.util.ServiceLoader;
  */
 public final class WindowHistory {
 
+    private WindowHistory() {}
+
     public static WindowHistoryProvider getProvider() { // returns the browser history
         return SingleServiceProvider.getProvider(WindowHistoryProvider.class, () -> ServiceLoader.load(WindowHistoryProvider.class));
     }

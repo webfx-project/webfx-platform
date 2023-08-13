@@ -14,6 +14,8 @@ import java.util.function.Consumer;
  */
 public final class UiScheduler extends Scheduler {
 
+    private UiScheduler() {}
+
     static {
         SchedulerProvider schedulerProvider = Scheduler.getProvider();
         if (schedulerProvider instanceof UiSchedulerProvider)

@@ -10,6 +10,8 @@ import java.util.ServiceLoader;
  */
 public final class Arch {
 
+    private Arch() {}
+
     private static ArchProvider getProvider() {
         return SingleServiceProvider.getProvider(ArchProvider.class, () -> ServiceLoader.load(ArchProvider.class));
     }
