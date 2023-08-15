@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
 
-    <description>Cross-platform API for Json (see {@link dev.webfx.platform.json.Json Json})</description>
+    <description>Cross-platform API for Json{@javadoc (see {@link dev.webfx.platform.json.Json Json})}.</description>
 
     <exported-packages>
         <source-packages/>

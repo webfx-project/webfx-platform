@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-storage</artifactId>
 
+    <description>Cross-platform API for client-side storage.</description>
+
     <dependencies>
 
         <dependency>

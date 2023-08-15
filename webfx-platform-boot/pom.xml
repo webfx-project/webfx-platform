@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-boot</artifactId>
 
+    <description>Cross-platform API &amp; SPI for booting WebFX applications.</description>
+
     <dependencies>
 
         <dependency>

@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-storagelocation</artifactId>
 
+    <description>Cross-platform API for locating application storage.</description>
+
     <dependencies>
 
         <dependency>

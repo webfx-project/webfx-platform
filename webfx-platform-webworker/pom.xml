@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-webworker</artifactId>
 
+    <description>Cross-platform API for working with web workers.</description>
+
     <dependencies>
 
         <dependency>

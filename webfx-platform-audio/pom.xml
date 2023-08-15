@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-audio</artifactId>
 
+    <description>Cross-platform API for playing audio.</description>
+
     <dependencies>
 
         <dependency>

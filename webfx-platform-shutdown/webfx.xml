@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
 
-    <description>Cross-platform API for shutting down WebFX applications (see {@link dev.webfx.platform.shutdown.Shutdown Shutdown})</description>
+    <description>Cross-platform API for shutting down WebFX applications{@javadoc (see {@link dev.webfx.platform.shutdown.Shutdown Shutdown})}.</description>
 
     <exported-packages>
         <source-packages/>

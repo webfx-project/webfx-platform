@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-arch</artifactId>
 
+    <description>Cross-platform API for getting information about the host architecture.</description>
+
     <dependencies>
 
         <dependency>

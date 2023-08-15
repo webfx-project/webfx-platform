@@ -1,7 +1,7 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
 /**
- * Cross-platform API for getting information about the host operating system (see {@link dev.webfx.platform.os.OperatingSystem OperatingSystem})
+ * Cross-platform API for getting information about the host operating system (see {@link dev.webfx.platform.os.OperatingSystem OperatingSystem}).
  */
 module webfx.platform.os {
 

@@ -1,7 +1,7 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
 /**
- * Cross-platform API for logging in the console (see {@link dev.webfx.platform.console.Console Console})
+ * Cross-platform API for logging in the console (see {@link dev.webfx.platform.console.Console Console}).
  */
 module webfx.platform.console {
 

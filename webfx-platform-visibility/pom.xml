@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-visibility</artifactId>
 
+    <description>Cross-platform API for visibility.</description>
+
     <dependencies>
 
         <dependency>

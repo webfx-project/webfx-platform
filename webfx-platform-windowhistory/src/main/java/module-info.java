@@ -1,7 +1,7 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
 /**
- * Cross-platform API for accessing the window history (see {@link dev.webfx.platform.windowhistory.WindowHistory WindowHistory})
+ * Cross-platform API for accessing the window history (see {@link dev.webfx.platform.windowhistory.WindowHistory WindowHistory}).
  */
 module webfx.platform.windowhistory {
 

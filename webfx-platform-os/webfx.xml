@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
 
-    <description>Cross-platform API for getting information about the host operating system (see {@link dev.webfx.platform.os.OperatingSystem OperatingSystem})</description>
+    <description>Cross-platform API for getting information about the host operating system{@javadoc (see {@link dev.webfx.platform.os.OperatingSystem OperatingSystem})}.</description>
 
     <exported-packages>
         <source-packages/>

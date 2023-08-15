@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-windowlocation</artifactId>
 
+    <description>Cross-platform API for accessing the window location.</description>
+
     <dependencies>
 
         <dependency>

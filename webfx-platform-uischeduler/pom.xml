@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-uischeduler</artifactId>
 
+    <description>Cross-platform API for scheduling UI tasks.</description>
+
     <dependencies>
 
         <dependency>

@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-async</artifactId>
 
+    <description>Cross-platform API for async operations.</description>
+
     <dependencies>
 
         <dependency>

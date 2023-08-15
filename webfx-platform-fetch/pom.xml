@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-fetch</artifactId>
 
+    <description>Cross-platform API for querying web services.</description>
+
     <dependencies>
 
         <dependency>

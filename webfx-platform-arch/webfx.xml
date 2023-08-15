@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
 
-    <description>Cross-platform API for getting information about the host architecture (see {@link dev.webfx.platform.arch.Arch Arch})</description>
+    <description>Cross-platform API for getting information about the host architecture{@javadoc (see {@link dev.webfx.platform.arch.Arch Arch})}.</description>
 
     <exported-packages>
         <source-packages/>

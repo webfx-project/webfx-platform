@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-windowhistory</artifactId>
 
+    <description>Cross-platform API for accessing the window history.</description>
+
     <dependencies>
 
         <dependency>

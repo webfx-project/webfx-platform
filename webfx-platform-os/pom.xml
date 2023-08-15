@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-os</artifactId>
 
+    <description>Cross-platform API for getting information about the host operating system.</description>
+
     <dependencies>
 
         <dependency>

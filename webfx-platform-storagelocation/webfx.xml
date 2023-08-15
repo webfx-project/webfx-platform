@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
 
-    <description>Cross-platform API for locating application storage (see {@link dev.webfx.platform.storagelocation.StorageLocation StorageLocation})</description>
+    <description>Cross-platform API for locating application storage{@javadoc (see {@link dev.webfx.platform.storagelocation.StorageLocation StorageLocation})}.</description>
 
     <exported-packages>
         <source-packages/>

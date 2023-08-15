@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
 
-    <description>Cross-platform API for playing audio (see {@link dev.webfx.platform.audio.AudioService AudioService})</description>
+    <description>Cross-platform API for playing audio{@javadoc (see {@link dev.webfx.platform.audio.AudioService AudioService})}.</description>
 
     <exported-packages>
         <source-packages/>

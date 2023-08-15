@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-resource</artifactId>
 
+    <description>Cross-platform API for accessing resources files.</description>
+
     <dependencies>
 
         <dependency>

@@ -1,7 +1,7 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
 /**
- * Cross-platform API for scheduling non-UI tasks (see {@link dev.webfx.platform.scheduler.Scheduler Scheduler})
+ * Cross-platform API for scheduling non-UI tasks (see {@link dev.webfx.platform.scheduler.Scheduler Scheduler}).
  */
 module webfx.platform.scheduler {
 

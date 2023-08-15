@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
 
-    <description>Cross-platform API for querying web services (see {@link dev.webfx.platform.fetch.Fetch Fetch})</description>
+    <description>Cross-platform API for querying web services{@javadoc (see {@link dev.webfx.platform.fetch.Fetch Fetch})}.</description>
 
     <exported-packages>
         <source-packages/>

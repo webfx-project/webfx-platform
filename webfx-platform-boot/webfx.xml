@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
 
-    <description>Cross-platform API &amp; SPI for booting WebFX applications (see {@link dev.webfx.platform.boot.spi.ApplicationModuleBooter ApplicationModuleBooter} &amp; {@link dev.webfx.platform.boot.spi.ApplicationJob ApplicationJob})</description>
+    <description>Cross-platform API &amp; SPI for booting WebFX applications{@javadoc (see {@link dev.webfx.platform.boot.spi.ApplicationModuleBooter ApplicationModuleBooter} &amp; {@link dev.webfx.platform.boot.spi.ApplicationJob ApplicationJob})}.</description>
 
     <exported-packages>
         <source-packages/>

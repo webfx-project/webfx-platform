@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-console</artifactId>
 
+    <description>Cross-platform API for logging in the console.</description>
+
     <dependencies>
 
         <dependency>

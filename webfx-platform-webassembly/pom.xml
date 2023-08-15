@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-webassembly</artifactId>
 
+    <description>Cross-platform API for working with WebAssembly.</description>
+
     <dependencies>
 
         <dependency>

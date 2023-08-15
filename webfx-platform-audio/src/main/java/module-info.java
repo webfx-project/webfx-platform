@@ -1,7 +1,7 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
 /**
- * Cross-platform API for playing audio (see {@link dev.webfx.platform.audio.AudioService AudioService})
+ * Cross-platform API for playing audio (see {@link dev.webfx.platform.audio.AudioService AudioService}).
  */
 module webfx.platform.audio {
 

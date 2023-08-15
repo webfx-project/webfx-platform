@@ -1,7 +1,7 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
 /**
- * Cross-platform API for user agent (see {@link dev.webfx.platform.useragent.UserAgent UserAgent})
+ * Cross-platform API for user agent (see {@link dev.webfx.platform.useragent.UserAgent UserAgent}).
  */
 module webfx.platform.useragent {
 

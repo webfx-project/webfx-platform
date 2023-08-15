@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
 
-    <description>Cross-platform API for logging in the console (see {@link dev.webfx.platform.console.Console Console})</description>
+    <description>Cross-platform API for logging in the console{@javadoc (see {@link dev.webfx.platform.console.Console Console})}.</description>
 
     <exported-packages>
         <source-packages/>

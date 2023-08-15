@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
 
-    <description>Cross-platform API for scheduling non-UI tasks (see {@link dev.webfx.platform.scheduler.Scheduler Scheduler})</description>
+    <description>Cross-platform API for scheduling non-UI tasks{@javadoc (see {@link dev.webfx.platform.scheduler.Scheduler Scheduler})}.</description>
 
     <exported-packages>
         <source-packages/>

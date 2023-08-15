@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-file</artifactId>
 
+    <description>Cross-platform API for accessing local files</description>
+
     <dependencies>
 
         <dependency>

@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-useragent</artifactId>
 
+    <description>Cross-platform API for user agent.</description>
+
     <dependencies>
 
         <dependency>
