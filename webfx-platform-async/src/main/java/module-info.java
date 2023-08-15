@@ -1,7 +1,7 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
 /**
- * Cross-platform API for async operations (see {@link dev.webfx.platform.async.Future Future} & {@link dev.webfx.platform.async.Promise Promise}).
+ * Cross-platform API for async operations (see {@link dev.webfx.platform.async.Future Future} &amp; {@link dev.webfx.platform.async.Promise Promise}).
  */
 module webfx.platform.async {
 

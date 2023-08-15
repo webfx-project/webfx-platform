@@ -1,7 +1,7 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
 /**
- * Cross-platform API & SPI for booting WebFX applications (see {@link dev.webfx.platform.boot.spi.ApplicationModuleBooter ApplicationModuleBooter} & {@link dev.webfx.platform.boot.spi.ApplicationJob ApplicationJob}).
+ * Cross-platform API &amp; SPI for booting WebFX applications (see {@link dev.webfx.platform.boot.spi.ApplicationModuleBooter ApplicationModuleBooter} &amp; {@link dev.webfx.platform.boot.spi.ApplicationJob ApplicationJob}).
  */
 module webfx.platform.boot {
 
