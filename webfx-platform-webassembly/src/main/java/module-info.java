@@ -1,7 +1,7 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
 /**
- * Cross-platform API for working with WebAssembly (see {@link dev.webfx.platform.webassembly.WebAssembly WebAssembly}).
+ * Cross-platform WebAssembly API for working with WebAssembly (see {@link dev.webfx.platform.webassembly.WebAssembly WebAssembly}).
  */
 module webfx.platform.webassembly {
 

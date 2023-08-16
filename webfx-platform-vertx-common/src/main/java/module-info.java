@@ -1,5 +1,8 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
+/**
+ * A set of common classes used by Vert.x implementation modules.
+ */
 module webfx.platform.vertx.common {
 
     // Direct dependencies modules

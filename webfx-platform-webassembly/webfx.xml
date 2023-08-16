@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
 
-    <description>Cross-platform API for working with WebAssembly{@javadoc (see {@link dev.webfx.platform.webassembly.WebAssembly WebAssembly})}.</description>
+    <description>Cross-platform WebAssembly API for working with WebAssembly{@javadoc (see {@link dev.webfx.platform.webassembly.WebAssembly WebAssembly})}.</description>
 
     <exported-packages>
         <source-packages/>

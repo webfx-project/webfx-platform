@@ -1,5 +1,8 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
+/**
+ * Java headless implementation of the Visibility API.
+ */
 module webfx.platform.visibility.java.headless {
 
     // Direct dependencies modules

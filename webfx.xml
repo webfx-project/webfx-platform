@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="webfx-platform">
 
+    <description>
+        The WebFX Platform is a set of low-level APIs designed for Java-based cross-platform development.
+    </description>
+
     <parent name="webfx-parent"/>
 
     <update-options>

@@ -1,5 +1,8 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
+/**
+ * Gluon implementation of the OS API (for mobiles).
+ */
 module webfx.platform.os.gluon {
 
     // Direct dependencies modules

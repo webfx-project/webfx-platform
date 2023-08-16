@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
 
+    <description>Java client-side implementation of the UserAgent API (for desktops).</description>
+
     <exported-packages>
         <source-packages/>
     </exported-packages>

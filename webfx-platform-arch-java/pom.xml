@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-arch-java</artifactId>
 
+    <description>Java implementation of the Arch API (for all platforms other than browser).</description>
+
     <dependencies>
 
         <dependency>

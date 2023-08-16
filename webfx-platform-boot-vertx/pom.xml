@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-boot-vertx</artifactId>
 
+    <description>Vert.x implementation of the Boot API (for the server).</description>
+
 
     <properties>
         <!-- ZipFileResolver is using Java 13 API FileSystems.newFileSystem() -->

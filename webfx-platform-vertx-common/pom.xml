@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-vertx-common</artifactId>
 
+    <description>A set of common classes used by Vert.x implementation modules.</description>
+
     <dependencies>
 
         <dependency>

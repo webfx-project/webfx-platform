@@ -1,5 +1,8 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
+/**
+ * Java client-side implementation of the UserAgent API (for desktops).
+ */
 module webfx.platform.useragent.java.client {
 
     // Direct dependencies modules

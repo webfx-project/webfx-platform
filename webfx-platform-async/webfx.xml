@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
 
-    <description>Cross-platform API for async operations{@javadoc (see {@link dev.webfx.platform.async.Future Future} &amp; {@link dev.webfx.platform.async.Promise Promise})}.</description>
+    <description>
+        Platform-independent API for asynchronous operations (such as the Fetch API provided by the webfx-platform-fetch
+        module){@javadoc (see {@link dev.webfx.platform.async.Future Future} &amp;
+        {@link dev.webfx.platform.async.Promise Promise})}.
+    </description>
 
     <exported-packages>
         <source-packages/>

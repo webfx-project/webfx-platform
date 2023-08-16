@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-resource-gwt</artifactId>
 
+    <description>GWT implementation of the Resource API (for the browser).</description>
+
     <dependencies>
 
         <dependency>

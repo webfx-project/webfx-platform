@@ -14,6 +14,10 @@
 
     <artifactId>webfx-platform</artifactId>
 
+    <description>
+        The WebFX Platform is a set of low-level APIs designed for Java-based cross-platform development.
+    </description>
+
     <repositories>
         <repository>
             <id>webfx-snapshots</id>

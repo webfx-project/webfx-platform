@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-resource-gluon</artifactId>
 
+    <description>Gluon implementation of the Resource API (for mobiles).</description>
+
     <dependencies>
 
         <dependency>

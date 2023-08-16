@@ -1,5 +1,8 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
+/**
+ * Gluon implementation of the Shutdown API (for mobiles).
+ */
 module webfx.platform.shutdown.gluon {
 
     // Direct dependencies modules

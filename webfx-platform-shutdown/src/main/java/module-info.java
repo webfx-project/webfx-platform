@@ -1,7 +1,7 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
 /**
- * Cross-platform API for shutting down WebFX applications (see {@link dev.webfx.platform.shutdown.Shutdown Shutdown}).
+ * Cross-platform Shutdown API for shutting down WebFX applications (see {@link dev.webfx.platform.shutdown.Shutdown Shutdown}).
  */
 module webfx.platform.shutdown {
 

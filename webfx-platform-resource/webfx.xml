@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
 
-    <description>Cross-platform API for accessing resources files{@javadoc (see {@link dev.webfx.platform.resource.Resource Resource})}.</description>
+    <description>Cross-platform Resource API for accessing local resources{@javadoc (see {@link dev.webfx.platform.resource.Resource Resource})}.</description>
 
     <exported-packages>
         <source-packages/>

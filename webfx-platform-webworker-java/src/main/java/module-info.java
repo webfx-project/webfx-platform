@@ -1,5 +1,8 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
+/**
+ * Java implementation (based in Java Threads) of the WebWorker API (for platforms other than the browser).
+ */
 module webfx.platform.webworker.java {
 
     // Direct dependencies modules

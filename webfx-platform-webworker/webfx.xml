@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
 
-    <description>Cross-platform API for working with web workers{@javadoc (see {@link dev.webfx.platform.webworker.WebWorkerService WebWorkerService})}.</description>
+    <description>Cross-platform WebWorker API for working with web workers{@javadoc (see {@link dev.webfx.platform.webworker.WebWorkerService WebWorkerService})}.</description>
 
     <exported-packages>
         <source-packages/>

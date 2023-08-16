@@ -1,5 +1,8 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
+/**
+ * Gluon implementation of the StorageLocation API (for mobiles).
+ */
 module webfx.platform.storagelocation.gluon {
 
     // Direct dependencies modules

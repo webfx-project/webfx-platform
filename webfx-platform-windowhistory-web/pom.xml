@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-windowhistory-web</artifactId>
 
+    <description>Abstract Web implementation of the WindowHistory API (for the browser).</description>
+
     <dependencies>
 
         <dependency>

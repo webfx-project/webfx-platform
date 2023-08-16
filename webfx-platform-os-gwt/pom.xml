@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-os-gwt</artifactId>
 
+    <description>GWT implementation of the OS API (for the browser).</description>
+
     <dependencies>
 
         <dependency>

@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-useragent-java-client</artifactId>
 
+    <description>Java client-side implementation of the UserAgent API (for desktops).</description>
+
     <dependencies>
 
         <dependency>

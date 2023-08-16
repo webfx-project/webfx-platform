@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
 
-    <description>Cross-platform API for client-side storage{@javadoc (see {@link dev.webfx.platform.storage.LocalStorage LocalStorage} &amp; {@link dev.webfx.platform.storage.SessionStorage SessionStorage})}.</description>
+    <description>Cross-platform Storage API for client-side storage{@javadoc (see {@link dev.webfx.platform.storage.LocalStorage LocalStorage} &amp; {@link dev.webfx.platform.storage.SessionStorage SessionStorage})}.</description>
 
     <exported-packages>
         <source-packages/>

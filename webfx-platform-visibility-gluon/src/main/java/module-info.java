@@ -1,5 +1,8 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
+/**
+ * Gluon implementation of the Visibility API (for mobiles).
+ */
 module webfx.platform.visibility.gluon {
 
     // Direct dependencies modules

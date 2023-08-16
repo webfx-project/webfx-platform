@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-file-gwt</artifactId>
 
+    <description>GWT implementation of the File API (for the browser).</description>
+
     <dependencies>
 
         <dependency>

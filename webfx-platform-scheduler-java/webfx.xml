@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
 
+    <description>Java implementation of the Scheduler API (for platforms other than browser adn server).</description>
+
     <exported-packages>
         <source-packages/>
     </exported-packages>

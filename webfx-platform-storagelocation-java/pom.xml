@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-storagelocation-java</artifactId>
 
+    <description>Java implementation of the StorageLocation API (for platforms other than mobiles &amp; browser).</description>
+
     <dependencies>
 
         <dependency>

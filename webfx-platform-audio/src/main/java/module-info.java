@@ -1,7 +1,14 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
 /**
- * Cross-platform API for playing audio (see {@link dev.webfx.platform.audio.AudioService AudioService}).
+ * 
+        Cross-platform Audio API.
+        Most users will use the JavaFX Media API instead, which runs on desktops (via OpenJFX) and in the browser
+        (via a GWT implementation provided by the WebFX Kit). Gluon doesn't support the JavaFX Media API, but the WebFX
+        Kit does (for the audio) through mapping the JavaFX Media API to this Audio API (which has a Gluon implementation).
+        A backward mapping is also supported for WebFX applications that may use this Audio API directly: in this case,
+        the WebFX Kit will map this Audio API back to the JavaFX Media API for platforms other than mobiles.
+    
  */
 module webfx.platform.audio {
 

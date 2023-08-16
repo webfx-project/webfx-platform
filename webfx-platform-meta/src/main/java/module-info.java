@@ -1,5 +1,11 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
+/**
+ * 
+        Platform-independent Meta API for getting information about the WebFX application itself
+        (see {@link dev.webfx.platform.json.Json Json}).
+    
+ */
 module webfx.platform.meta {
 
     // Direct dependencies modules

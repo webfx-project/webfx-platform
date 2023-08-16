@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-fetch-gwt</artifactId>
 
+    <description>GWT implementation of the Fetch API (for the browser).</description>
+
     <dependencies>
 
         <dependency>

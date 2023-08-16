@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-json-vertx</artifactId>
 
+    <description>Vert.x implementation of the Json API (for the server).</description>
+
     <dependencies>
 
         <dependency>

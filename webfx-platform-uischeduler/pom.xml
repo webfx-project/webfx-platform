@@ -13,7 +13,11 @@
 
     <artifactId>webfx-platform-uischeduler</artifactId>
 
-    <description>Cross-platform API for scheduling UI tasks.</description>
+    <description>
+        Cross-platform UiScheduler API for scheduling UI tasks.
+        It's an extension of the Scheduler API with additional methods for handling UI tasks.
+        The WebFX Platform provides only the GWT implementation. The WebFX Kit provides the OpenJFX implementation.
+    </description>
 
     <dependencies>
 

@@ -1,5 +1,8 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
+/**
+ * Java implementation of the StorageLocation API (for platforms other than mobiles &amp; browser).
+ */
 module webfx.platform.storagelocation.java {
 
     // Direct dependencies modules

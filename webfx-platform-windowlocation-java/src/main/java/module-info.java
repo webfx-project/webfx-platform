@@ -1,5 +1,8 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
+/**
+ * Java implementation of the WindowLocation API (for platforms other than the browser).
+ */
 module webfx.platform.windowlocation.java {
 
     // Direct dependencies modules

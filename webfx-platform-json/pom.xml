@@ -13,7 +13,7 @@
 
     <artifactId>webfx-platform-json</artifactId>
 
-    <description>Cross-platform API for Json.</description>
+    <description>Cross-platform Json API.</description>
 
 
     <build>

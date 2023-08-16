@@ -1,5 +1,8 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
+/**
+ * Gluon implementation of the Audio API (for mobiles).
+ */
 module webfx.platform.audio.gluon {
 
     // Direct dependencies modules

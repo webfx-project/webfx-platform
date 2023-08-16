@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-audio-gluon</artifactId>
 
+    <description>Gluon implementation of the Audio API (for mobiles).</description>
+
     <dependencies>
 
         <dependency>

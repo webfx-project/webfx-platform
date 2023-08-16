@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
 
+    <description>
+        Set of GWT super sources to emulate some JDK classes not emulated by default by GWT but required by WebFX.
+    </description>
+
     <exported-packages>
         <source-packages/>
     </exported-packages>

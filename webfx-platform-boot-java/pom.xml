@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-boot-java</artifactId>
 
+    <description>Java implementation of the Boot API (for all platforms other than browser and server).</description>
+
     <dependencies>
 
         <dependency>

@@ -13,4 +13,6 @@
 
     <artifactId>webfx-platform-util</artifactId>
 
+    <description>A set of utility classes.</description>
+
 </project>

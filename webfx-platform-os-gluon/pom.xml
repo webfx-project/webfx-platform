@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-os-gluon</artifactId>
 
+    <description>Gluon implementation of the OS API (for mobiles).</description>
+
     <dependencies>
 
         <dependency>

@@ -1,5 +1,8 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
+/**
+ * Java implementation of the Fetch API (for platforms other than browser and server).
+ */
 module webfx.platform.fetch.java {
 
     // Direct dependencies modules

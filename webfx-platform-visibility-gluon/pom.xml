@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-visibility-gluon</artifactId>
 
+    <description>Gluon implementation of the Visibility API (for mobiles).</description>
+
     <dependencies>
 
         <dependency>

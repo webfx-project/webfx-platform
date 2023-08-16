@@ -1,5 +1,8 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
+/**
+ * Java implementation of the Boot API (for all platforms other than browser and server).
+ */
 module webfx.platform.boot.java {
 
     // Direct dependencies modules

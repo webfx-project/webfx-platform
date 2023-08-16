@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-storage-gwt</artifactId>
 
+    <description>GWT implementation of the Storage API (for the browser).</description>
+
     <dependencies>
 
         <dependency>

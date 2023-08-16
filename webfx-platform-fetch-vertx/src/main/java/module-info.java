@@ -1,5 +1,8 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
+/**
+ * Vert.x implementation of the Fetch API (for the server).
+ */
 module webfx.platform.fetch.vertx {
 
     // Direct dependencies modules

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
 
-    <description>Cross-platform API for accessing the window location{@javadoc (see {@link dev.webfx.platform.windowlocation.WindowLocation WindowLocation})}.</description>
+    <description>Cross-platform WindowLocation API for accessing the window location{@javadoc (see {@link dev.webfx.platform.windowlocation.WindowLocation WindowLocation})}.</description>
 
     <exported-packages>
         <source-packages/>

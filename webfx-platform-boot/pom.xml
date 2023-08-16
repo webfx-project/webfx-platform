@@ -13,7 +13,13 @@
 
     <artifactId>webfx-platform-boot</artifactId>
 
-    <description>Cross-platform API &amp; SPI for booting WebFX applications.</description>
+    <description>
+        Cross-platform API &amp; SPI for booting WebFX applications. It defines a single entry point for all
+        WebFX applications and
+        sequences the application boot. If necessary, an application module such as a plugin module can be called
+        during the boot sequence by implementing the SPI.
+        An alternative SPI allows WebFX applications to start jobs at the end of the boot sequence.
+    </description>
 
     <dependencies>
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
 
-    <description>Cross-platform API for accessing the window history{@javadoc (see {@link dev.webfx.platform.windowhistory.WindowHistory WindowHistory})}.</description>
+    <description>Cross-platform WindowHistory API for accessing the window history{@javadoc (see {@link dev.webfx.platform.windowhistory.WindowHistory WindowHistory})}.</description>
 
     <exported-packages>
         <source-packages/>

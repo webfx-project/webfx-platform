@@ -1,7 +1,7 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
 /**
- * Cross-platform API for visibility (see {@link dev.webfx.platform.visibility.Visibility Visibility}).
+ * Cross-platform Visibility API to know and react to the application visibility state (see {@link dev.webfx.platform.visibility.Visibility Visibility}).
  */
 module webfx.platform.visibility {
 

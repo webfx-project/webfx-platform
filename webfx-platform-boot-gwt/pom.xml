@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-boot-gwt</artifactId>
 
+    <description>GWT implementation of the Boot API (for the browser).</description>
+
     <dependencies>
 
         <dependency>

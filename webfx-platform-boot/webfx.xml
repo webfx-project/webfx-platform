@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
 
-    <description>Cross-platform API &amp; SPI for booting WebFX applications{@javadoc (see {@link dev.webfx.platform.boot.spi.ApplicationModuleBooter ApplicationModuleBooter} &amp; {@link dev.webfx.platform.boot.spi.ApplicationJob ApplicationJob})}.</description>
+    <description>
+        Cross-platform API &amp; SPI for booting WebFX applications. It defines a single entry point for all
+        WebFX applications{@javadoc (see {@link dev.webfx.platform.boot.ApplicationBooter ApplicationBooter})} and
+        sequences the application boot. If necessary, an application module such as a plugin module can be called
+        during the boot sequence by implementing the SPI{@javadoc
+        (see {@link dev.webfx.platform.boot.spi.ApplicationModuleBooter ApplicationModuleBooter})}.
+        An alternative SPI allows WebFX applications to start jobs at the end of the boot sequence{@javadoc
+        (see {@link dev.webfx.platform.boot.spi.ApplicationJob ApplicationJob})}.
+    </description>
 
     <exported-packages>
         <source-packages/>

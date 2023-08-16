@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
 
-    <description>Cross-platform API for accessing local files</description>
+    <description>
+        <![CDATA[
+        Cross-platform API for accessing local files (mock of the Web File API). Files can't be created programmatically,
+        but they can be instantiated by some other APIs such as the FilePicker provided as part of WebFX Extras.
+        More info can be found in this <a href="https://blog.webfx.dev/2022/10/19/accessing-local-files/">post</a>.
+        ]]>
+    </description>
 
     <exported-packages>
         <source-packages/>
     </exported-packages>
-
-    <providers>
-     </providers>
 
     <dependencies>
         <used-by-source-modules>

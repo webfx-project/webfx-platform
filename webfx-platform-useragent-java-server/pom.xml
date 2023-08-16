@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-useragent-java-server</artifactId>
 
+    <description>Java server-side implementation of the UserAgent API (for servers).</description>
+
     <dependencies>
 
         <dependency>

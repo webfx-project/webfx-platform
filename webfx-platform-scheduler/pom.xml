@@ -13,7 +13,12 @@
 
     <artifactId>webfx-platform-scheduler</artifactId>
 
-    <description>Cross-platform API for scheduling non-UI tasks.</description>
+    <description>
+        Cross-platform Scheduler API for scheduling non-UI tasks.
+        The GWT implementation is indirectly provided by the UiScheduler API (an extension of the Scheduler API with
+        additional methods for UI tasks), because there is no distinction in terms of implementation between these 2
+        APIs for the browser (due to its mono-thread nature).
+    </description>
 
     <dependencies>
 

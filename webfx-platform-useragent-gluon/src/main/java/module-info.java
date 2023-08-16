@@ -1,5 +1,8 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
+/**
+ * Gluon implementation of the UserAgent API (for mobiles).
+ */
 module webfx.platform.useragent.gluon {
 
     // Direct dependencies modules

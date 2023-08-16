@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-console-gwt</artifactId>
 
+    <description>GWT implementation of the Console API (for the browser).</description>
+
     <dependencies>
 
         <dependency>

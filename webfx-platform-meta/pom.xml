@@ -13,6 +13,10 @@
 
     <artifactId>webfx-platform-meta</artifactId>
 
+    <description>
+        Platform-independent Meta API for getting information about the WebFX application itself.
+    </description>
+
     <dependencies>
 
         <dependency>

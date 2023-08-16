@@ -1,5 +1,8 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
+/**
+ * Java implementation of the Arch API (for all platforms other than browser).
+ */
 module webfx.platform.arch.java {
 
     // Direct dependencies modules

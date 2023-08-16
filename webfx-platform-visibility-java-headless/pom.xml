@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-visibility-java-headless</artifactId>
 
+    <description>Java headless implementation of the Visibility API.</description>
+
     <dependencies>
 
         <dependency>

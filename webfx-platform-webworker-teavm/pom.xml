@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-webworker-teavm</artifactId>
 
+    <description>TeaVM implementation of the WebWorker API (for the browser).</description>
+
     <dependencies>
 
         <dependency>

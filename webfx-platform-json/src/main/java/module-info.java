@@ -1,7 +1,7 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
 /**
- * Cross-platform API for Json (see {@link dev.webfx.platform.json.Json Json}).
+ * Cross-platform Json API (see {@link dev.webfx.platform.json.Json Json}).
  */
 module webfx.platform.json {
 

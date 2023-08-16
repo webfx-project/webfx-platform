@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-json-teavm</artifactId>
 
+    <description>TeaVM implementation of the Json API (for the browser).</description>
+
     <dependencies>
 
         <dependency>

@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-scheduler-vertx</artifactId>
 
+    <description>Vert.x implementation of the Scheduler API (for the server).</description>
+
     <dependencies>
 
         <dependency>

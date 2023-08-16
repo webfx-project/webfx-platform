@@ -1,7 +1,10 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
 /**
- * Cross-platform API for querying web services (see {@link dev.webfx.platform.fetch.Fetch Fetch}).
+ * 
+        Cross-platform Fetch API (mock of the Web Fetch API) for fetching remote resources such as Json web
+        services (see {@link dev.webfx.platform.fetch.Fetch Fetch}).
+    
  */
 module webfx.platform.fetch {
 

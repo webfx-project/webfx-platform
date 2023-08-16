@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
 
-    <description>Cross-platform API for locating application storage{@javadoc (see {@link dev.webfx.platform.storagelocation.StorageLocation StorageLocation})}.</description>
+    <description>Cross-platform StorageLocation API for locating application internal file storage{@javadoc (see {@link dev.webfx.platform.storagelocation.StorageLocation StorageLocation})}. There is no GWT implementation because file storage is not supported by browsers. This API is mainly designed for mobiles and desktops.</description>
 
     <exported-packages>
         <source-packages/>

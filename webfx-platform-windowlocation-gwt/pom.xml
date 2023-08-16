@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-windowlocation-gwt</artifactId>
 
+    <description>GWT implementation of the WindowLocation API (for the browser).</description>
+
     <dependencies>
 
         <dependency>

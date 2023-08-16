@@ -1,5 +1,8 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
+/**
+ * Vert.x implementation of the Scheduler API (for the server).
+ */
 module webfx.platform.scheduler.vertx {
 
     // Direct dependencies modules

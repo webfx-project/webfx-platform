@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
 
+    <description>
+        Platform-independent Meta API for getting information about the WebFX application itself{@javadoc
+        (see {@link dev.webfx.platform.json.Json Json})}.
+    </description>
+
     <exported-packages>
         <source-packages/>
     </exported-packages>

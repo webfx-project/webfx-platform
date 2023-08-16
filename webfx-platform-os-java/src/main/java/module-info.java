@@ -1,5 +1,8 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
+/**
+ * Java implementation of the OS API (for platforms other than browser and mobiles).
+ */
 module webfx.platform.os.java {
 
     // Direct dependencies modules

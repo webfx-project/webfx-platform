@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-arch-gwt</artifactId>
 
+    <description>GWT implementation of the Arch API (for the browser).</description>
+
     <dependencies>
 
         <dependency>

@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-storagelocation-gluon</artifactId>
 
+    <description>Gluon implementation of the StorageLocation API (for mobiles).</description>
+
     <dependencies>
 
         <dependency>

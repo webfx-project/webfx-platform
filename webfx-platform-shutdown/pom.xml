@@ -13,7 +13,7 @@
 
     <artifactId>webfx-platform-shutdown</artifactId>
 
-    <description>Cross-platform API for shutting down WebFX applications.</description>
+    <description>Cross-platform Shutdown API for shutting down WebFX applications.</description>
 
     <dependencies>
 

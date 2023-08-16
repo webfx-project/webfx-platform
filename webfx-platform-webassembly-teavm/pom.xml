@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-webassembly-teavm</artifactId>
 
+    <description>TeaVM implementation of the WebAssembly API.</description>
+
     <dependencies>
 
         <dependency>

@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-shutdown-gwt</artifactId>
 
+    <description>GWT implementation of the Shutdown API (for the browser).</description>
+
     <dependencies>
 
         <dependency>

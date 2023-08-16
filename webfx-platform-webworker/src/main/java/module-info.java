@@ -1,7 +1,7 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
 /**
- * Cross-platform API for working with web workers (see {@link dev.webfx.platform.webworker.WebWorkerService WebWorkerService}).
+ * Cross-platform WebWorker API for working with web workers (see {@link dev.webfx.platform.webworker.WebWorkerService WebWorkerService}).
  */
 module webfx.platform.webworker {
 

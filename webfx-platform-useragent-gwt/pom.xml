@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-useragent-gwt</artifactId>
 
+    <description>GWT implementation of the UserAgent API (for the browser).</description>
+
     <dependencies>
 
         <dependency>

@@ -1,5 +1,8 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
+/**
+ * A set of utility classes.
+ */
 module webfx.platform.util {
 
     // Direct dependencies modules

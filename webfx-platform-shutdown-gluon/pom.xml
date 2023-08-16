@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-shutdown-gluon</artifactId>
 
+    <description>Gluon implementation of the Shutdown API (for mobiles).</description>
+
     <dependencies>
 
         <dependency>

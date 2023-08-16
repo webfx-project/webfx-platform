@@ -13,7 +13,10 @@
 
     <artifactId>webfx-platform-async</artifactId>
 
-    <description>Cross-platform API for async operations.</description>
+    <description>
+        Platform-independent API for asynchronous operations (such as the Fetch API provided by the webfx-platform-fetch
+        module).
+    </description>
 
     <dependencies>
 

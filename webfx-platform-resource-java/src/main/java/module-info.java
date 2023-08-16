@@ -1,5 +1,8 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
+/**
+ * Java implementation of the Resource API (for platforms other than browser).
+ */
 module webfx.platform.resource.java {
 
     // Direct dependencies modules

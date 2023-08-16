@@ -1,5 +1,8 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
+/**
+ * Java implementation of the File API (for platforms other than the browser).
+ */
 module webfx.platform.file.java {
 
     // Direct dependencies modules

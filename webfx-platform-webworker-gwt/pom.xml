@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-webworker-gwt</artifactId>
 
+    <description>GWT implementation of the WebWorker API (for the browser).</description>
+
     <dependencies>
 
         <dependency>

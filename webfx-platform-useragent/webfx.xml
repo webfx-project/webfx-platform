@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
 
-    <description>Cross-platform API for user agent{@javadoc (see {@link dev.webfx.platform.useragent.UserAgent UserAgent})}.</description>
+    <description>Cross-platform UserAgent API for getting information about the user agent{@javadoc (see {@link dev.webfx.platform.useragent.UserAgent UserAgent})}.</description>
 
     <exported-packages>
         <source-packages/>

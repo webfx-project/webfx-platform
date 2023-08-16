@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-shutdown-java</artifactId>
 
+    <description>Java implementation of the Shutdown API (for platforms other than browser and mobiles).</description>
+
     <dependencies>
 
         <dependency>

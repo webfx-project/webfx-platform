@@ -1,5 +1,8 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
+/**
+ * Gluon implementation of the Resource API (for mobiles).
+ */
 module webfx.platform.resource.gluon {
 
     // Direct dependencies modules

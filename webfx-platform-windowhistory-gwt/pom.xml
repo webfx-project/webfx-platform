@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-windowhistory-gwt</artifactId>
 
+    <description>GWT implementation of the WindowHistory API (for the browser).</description>
+
     <dependencies>
 
         <dependency>

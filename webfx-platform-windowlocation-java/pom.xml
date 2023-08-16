@@ -13,6 +13,8 @@
 
     <artifactId>webfx-platform-windowlocation-java</artifactId>
 
+    <description>Java implementation of the WindowLocation API (for platforms other than the browser).</description>
+
     <dependencies>
 
         <dependency>

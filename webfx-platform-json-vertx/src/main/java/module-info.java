@@ -1,5 +1,8 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 
+/**
+ * Vert.x implementation of the Json API (for the server).
+ */
 module webfx.platform.json.vertx {
 
     // Direct dependencies modules
