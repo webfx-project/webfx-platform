@@ -21,6 +21,7 @@ module webfx.platform.file {
     exports dev.webfx.platform.file.spi;
 
     // Used services
+    uses dev.webfx.platform.file.spi.BlobProvider;
     uses dev.webfx.platform.file.spi.FileProvider;
 
 }

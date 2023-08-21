@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 /**
  * @author Bruno Salmon
  */
-public class JavaFileProvider implements FileProvider {
+public final class JavaFileProvider implements FileProvider {
 
     @Override
     public File createFile(Object platformFile) {

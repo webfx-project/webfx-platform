@@ -14,6 +14,7 @@ module webfx.platform.file.java {
     exports dev.webfx.platform.file.spi.impl.java;
 
     // Provided services
+    provides dev.webfx.platform.file.spi.BlobProvider with dev.webfx.platform.file.spi.impl.java.JavaBlobProvider;
     provides dev.webfx.platform.file.spi.FileProvider with dev.webfx.platform.file.spi.impl.java.JavaFileProvider;
 
 }

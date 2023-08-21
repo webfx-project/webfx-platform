@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 /**
  * @author Bruno Salmon
  */
-public class GwtFileProvider implements FileProvider {
+public final class GwtFileProvider implements FileProvider {
 
     @Override
     public File createFile(Object platformFile) {
