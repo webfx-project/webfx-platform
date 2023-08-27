@@ -1,7 +1,7 @@
-package dev.webfx.platform.file.spi.impl.gwt;
+package dev.webfx.platform.blob.spi.impl.gwt;
 
-import dev.webfx.platform.file.Blob;
-import dev.webfx.platform.file.spi.BlobProvider;
+import dev.webfx.platform.blob.Blob;
+import dev.webfx.platform.blob.spi.BlobProvider;
 import elemental2.dom.Blob.ConstructorBlobPartsArrayUnionType;
 import elemental2.dom.BlobPropertyBag;
 import elemental2.dom.DomGlobal;

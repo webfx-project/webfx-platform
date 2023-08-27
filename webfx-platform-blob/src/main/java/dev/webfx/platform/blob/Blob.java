@@ -1,6 +1,6 @@
-package dev.webfx.platform.file;
+package dev.webfx.platform.blob;
 
-import dev.webfx.platform.file.spi.BlobProvider;
+import dev.webfx.platform.blob.spi.BlobProvider;
 
 /**
  * @author Bruno Salmon

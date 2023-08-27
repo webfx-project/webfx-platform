@@ -9,9 +9,9 @@ module webfx.platform.fetch.java {
     requires java.base;
     requires java.net.http;
     requires webfx.platform.async;
+    requires webfx.platform.blob;
+    requires webfx.platform.blob.java;
     requires webfx.platform.fetch;
-    requires webfx.platform.file;
-    requires webfx.platform.file.java;
     requires webfx.platform.json;
     requires webfx.platform.scheduler;
     requires webfx.platform.scheduler.java;

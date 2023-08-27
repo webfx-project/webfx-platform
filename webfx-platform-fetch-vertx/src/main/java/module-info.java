@@ -9,8 +9,8 @@ module webfx.platform.fetch.vertx {
     requires io.vertx.core;
     requires java.base;
     requires webfx.platform.async;
+    requires webfx.platform.blob;
     requires webfx.platform.fetch;
-    requires webfx.platform.file;
     requires webfx.platform.json;
     requires webfx.platform.vertx.common;
 

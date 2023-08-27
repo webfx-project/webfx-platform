@@ -4,7 +4,6 @@
     <description>GWT implementation of the File API (for the browser).</description>
 
     <providers>
-        <provider interface="dev.webfx.platform.file.spi.BlobProvider">dev.webfx.platform.file.spi.impl.gwt.GwtBlobProvider</provider>
         <provider interface="dev.webfx.platform.file.spi.FileProvider">dev.webfx.platform.file.spi.impl.gwt.GwtFileProvider</provider>
     </providers>
 

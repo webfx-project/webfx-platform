@@ -1,6 +1,6 @@
-package dev.webfx.platform.file.spi.impl.java;
+package dev.webfx.platform.blob.spi.impl.java;
 
-import dev.webfx.platform.file.Blob;
+import dev.webfx.platform.blob.Blob;
 
 import java.net.MalformedURLException;
 import java.net.URI;

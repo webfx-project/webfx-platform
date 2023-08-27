@@ -1,7 +1,7 @@
 package dev.webfx.platform.fetch;
 
 import dev.webfx.platform.async.Future;
-import dev.webfx.platform.file.Blob;
+import dev.webfx.platform.blob.Blob;
 import dev.webfx.platform.json.JsonArray;
 import dev.webfx.platform.json.JsonObject;
 import dev.webfx.platform.json.JsonElement;
