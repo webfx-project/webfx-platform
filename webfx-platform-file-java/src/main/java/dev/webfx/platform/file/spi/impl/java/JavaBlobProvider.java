@@ -9,6 +9,11 @@ import dev.webfx.platform.file.spi.BlobProvider;
 public final class JavaBlobProvider implements BlobProvider {
 
     @Override
+    public Blob createBlob(Object platformBlob) {
+        return null;
+    }
+
+    @Override
     public Blob createTextBlob(String text) {
         return null;
     }

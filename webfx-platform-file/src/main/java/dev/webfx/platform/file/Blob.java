@@ -1,5 +1,7 @@
 package dev.webfx.platform.file;
 
+import dev.webfx.platform.file.spi.BlobProvider;
+
 /**
  * @author Bruno Salmon
  */
@@ -12,5 +14,9 @@ public interface Blob {
     String getMimeType();
 
     String getObjectURL();
+
+    static Blob create(Object platformBlob) {
+        return BlobProvider.get().createBlob(platformBlob);
+    }
 
 }

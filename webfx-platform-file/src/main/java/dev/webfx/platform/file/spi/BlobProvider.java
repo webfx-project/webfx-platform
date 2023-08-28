@@ -14,6 +14,8 @@ public interface BlobProvider {
         return SingleServiceProvider.getProvider(BlobProvider.class, () -> ServiceLoader.load(BlobProvider.class));
     }
 
+    Blob createBlob(Object platformBlob);
+
     Blob createTextBlob(String text);
 
     void exportBlob(Blob blob, String fileName);

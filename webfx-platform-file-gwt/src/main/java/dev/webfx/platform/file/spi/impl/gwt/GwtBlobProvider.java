@@ -13,6 +13,11 @@ import elemental2.dom.HTMLLinkElement;
 public final class GwtBlobProvider implements BlobProvider {
 
     @Override
+    public Blob createBlob(Object platformBlob) {
+        return new GwtBlob((elemental2.dom.Blob) platformBlob);
+    }
+
+    @Override
     public Blob createTextBlob(String text) {
         ConstructorBlobPartsArrayUnionType[] parts = { ConstructorBlobPartsArrayUnionType.of(text) };
         BlobPropertyBag bag = BlobPropertyBag.create();
