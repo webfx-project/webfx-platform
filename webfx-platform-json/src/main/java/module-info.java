@@ -21,4 +21,7 @@ module webfx.platform.json {
     // Used services
     uses dev.webfx.platform.json.spi.JsonProvider;
 
+    // Provided services
+    provides dev.webfx.platform.util.keyobject.parser.spi.TreeParserProvider with dev.webfx.platform.json.JsonTreeParserProvider;
+
 }

@@ -85,7 +85,7 @@ public class Matcher {
     }
 
     public StringBuilder appendTail(StringBuilder sb) {
-        return sb.append(input.substring(findMatchStartPos));
+        return sb.append(input.substring(findMatchStartPos + findMatchLength));
     }
 
     public int groupCount() {
