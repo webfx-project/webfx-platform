@@ -13,6 +13,10 @@
         </used-by-source-modules>
     </dependencies>
 
+    <providers>
+        <provider interface="dev.webfx.platform.util.keyobject.parser.spi.TreeParserProvider">dev.webfx.platform.json.JsonTreeParserProvider</provider>
+    </providers>
+
     <maven-pom-manual>
         <build>
             <plugins>
