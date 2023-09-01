@@ -5,10 +5,12 @@ import dev.webfx.platform.util.Numbers;
 import dev.webfx.platform.util.Objects;
 import dev.webfx.platform.util.Strings;
 
+import java.util.Iterator;
+
 /**
  * @author Bruno Salmon
  */
-public interface ReadOnlyIndexedArray {
+public interface ReadOnlyIndexedArray extends Iterable<Object> {
 
     /**
      * Length of the array or number of keys of the object
@@ -109,5 +111,22 @@ public interface ReadOnlyIndexedArray {
      */
     default Double getDouble(int index, Double defaultValue) { return Numbers.toDouble(getScalar(index, defaultValue)); }
 
+
+    @Override
+    default Iterator<Object> iterator() {
+        return new Iterator<>() {
+            private int index = 0;
+
+            @Override
+            public boolean hasNext() {
+                return index < size();
+            }
+
+            @Override
+            public Object next() {
+                return getElement(index++);
+            }
+        };
+    }
 
 }
