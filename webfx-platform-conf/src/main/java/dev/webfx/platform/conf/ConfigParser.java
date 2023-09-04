@@ -23,7 +23,7 @@ public class ConfigParser {
         return new RootConfig(keyObject);
     }
 
-    public static Config parseFileConfig(String fileContent, String filePath) {
+    public static Config parseConfigFile(String fileContent, String filePath) {
         // We determine the format and the prefixPath from the filePath and then call parsePrefixedConfig()
         // So, first, we just keep the short file name
         int lastSlashIndex = filePath.lastIndexOf('/');

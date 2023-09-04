@@ -33,7 +33,7 @@ public class JavaFileConfigLoader implements ConfigLoaderProvider {
                 for (int i = 0; i < n; i++) {
                     Path path = files[i].toPath();
                     String fileContent = new String(Files.readAllBytes(path));
-                    configs[i] = ConfigParser.parseFileConfig(fileContent, path.toString());
+                    configs[i] = ConfigParser.parseConfigFile(fileContent, path.toString());
                 }
                 config = ConfigMerger.mergeConfigs(configs);
             }
