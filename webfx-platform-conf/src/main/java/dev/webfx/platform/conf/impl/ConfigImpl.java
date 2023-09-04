@@ -1,10 +1,10 @@
 package dev.webfx.platform.conf.impl;
 
 import dev.webfx.platform.conf.Config;
-import dev.webfx.platform.util.keyobject.ReadOnlyDelegatedKeyObject;
+import dev.webfx.platform.util.keyobject.ReadOnlyKeyObjectWrapper;
 import dev.webfx.platform.util.keyobject.ReadOnlyIndexedArray;
 import dev.webfx.platform.util.keyobject.ReadOnlyKeyObject;
-import dev.webfx.platform.util.keyobject.util.TreeUtil;
+import dev.webfx.platform.util.keyobject.AST;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,7 +12,7 @@ import java.util.Map;
 /**
  * @author Bruno Salmon
  */
-public abstract class ConfigImpl extends ReadOnlyDelegatedKeyObject implements Config {
+public abstract class ConfigImpl extends ReadOnlyKeyObjectWrapper implements Config {
 
     private final Map<String, Config> childConfigs = new HashMap<>();
     private final Map<String, ConfigArray> configArrays = new HashMap<>();
@@ -23,7 +23,7 @@ public abstract class ConfigImpl extends ReadOnlyDelegatedKeyObject implements C
 
     @Override
     public Config childConfigAt(String path) {
-        return (Config) TreeUtil.lookupObject(this, path);
+        return (Config) AST.lookupObject(this, path);
         /*
         if (path == null || path.isEmpty())
             return this;

@@ -1,14 +1,14 @@
 package dev.webfx.platform.conf.impl;
 
 import dev.webfx.platform.conf.Config;
-import dev.webfx.platform.util.keyobject.ReadOnlyDelegatedIndexedArray;
+import dev.webfx.platform.util.keyobject.ReadOnlyIndexedArrayWrapper;
 import dev.webfx.platform.util.keyobject.ReadOnlyIndexedArray;
 import dev.webfx.platform.util.keyobject.ReadOnlyKeyObject;
 
 /**
  * @author Bruno Salmon
  */
-public class ConfigArray extends ReadOnlyDelegatedIndexedArray {
+public class ConfigArray extends ReadOnlyIndexedArrayWrapper {
 
     private final ConfigImpl parentConfig;
     private final Config[] childConfigs;

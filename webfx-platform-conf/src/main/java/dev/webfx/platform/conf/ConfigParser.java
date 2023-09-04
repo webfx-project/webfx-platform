@@ -2,8 +2,8 @@ package dev.webfx.platform.conf;
 
 import dev.webfx.platform.conf.impl.RootConfig;
 import dev.webfx.platform.util.keyobject.ReadOnlyKeyObject;
-import dev.webfx.platform.util.keyobject.parser.TreeParser;
-import dev.webfx.platform.util.keyobject.util.TreeUtil;
+import dev.webfx.platform.util.keyobject.parser.AstParser;
+import dev.webfx.platform.util.keyobject.AST;
 
 /**
  * @author Bruno Salmon
@@ -16,9 +16,9 @@ public class ConfigParser {
 
     public static Config parsePrefixedConfig(String prefixPath, String configText, String format) {
         // Parsing the object with the format given by the extension
-        ReadOnlyKeyObject keyObject = TreeParser.parseObject(configText, format);
+        ReadOnlyKeyObject keyObject = AstParser.parseObject(configText, format);
         if (prefixPath != null) {
-            keyObject = TreeUtil.prefixObject(prefixPath, keyObject);
+            keyObject = AST.prefixObject(prefixPath, keyObject);
         }
         return new RootConfig(keyObject);
     }
