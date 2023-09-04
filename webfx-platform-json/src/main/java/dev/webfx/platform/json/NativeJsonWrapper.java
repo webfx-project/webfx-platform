@@ -3,7 +3,7 @@ package dev.webfx.platform.json;
 /**
  * @author Bruno Salmon
  */
-public interface JsonWrapper {
+public interface NativeJsonWrapper {
 
     ElementType getNativeElementType(Object nativeElement);
 

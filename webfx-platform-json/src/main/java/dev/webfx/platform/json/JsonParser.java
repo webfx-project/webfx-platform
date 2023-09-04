@@ -5,7 +5,7 @@ import dev.webfx.platform.json.parser.BuiltInJsonParser;
 /**
  * @author Bruno Salmon
  */
-public interface JsonParser extends JsonWrapper {
+public interface JsonParser extends NativeJsonWrapper {
 
     /**
      * Parse a text into a native object.

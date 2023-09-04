@@ -14,7 +14,8 @@
     </dependencies>
 
     <providers>
-        <provider interface="dev.webfx.platform.util.keyobject.parser.spi.TreeParserProvider">dev.webfx.platform.json.JsonTreeParserProvider</provider>
+        <provider interface="dev.webfx.platform.util.keyobject.parser.spi.AstParserProvider">dev.webfx.platform.json.tree.JsonAstParserProvider</provider>
+        <provider interface="dev.webfx.platform.util.keyobject.formatter.spi.AstFormatterProvider">dev.webfx.platform.json.tree.JsonTreeFormatterProvider</provider>
     </providers>
 
     <maven-pom-manual>

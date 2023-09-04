@@ -1,11 +1,12 @@
 package dev.webfx.platform.json;
 
+import dev.webfx.platform.util.Numbers;
 import dev.webfx.platform.util.Strings;
 
 /**
  * @author Bruno Salmon
  */
-public interface JsonFormatter extends JsonWrapper {
+public interface JsonFormatter extends NativeJsonWrapper {
 
     Object getNativeElement();
 
@@ -90,7 +91,7 @@ public interface JsonFormatter extends JsonWrapper {
      *  with <code>}</code>&nbsp;<small>(right brace)</small>.
      * @throws IllegalArgumentException If the element is or contains an invalid number.
      */
-    static StringBuilder appendNativeElement(Object element, JsonWrapper parent, StringBuilder sb) {
+    static StringBuilder appendNativeElement(Object element, NativeJsonWrapper parent, StringBuilder sb) {
         switch (parent.getNativeElementType(element)) {
             case NULL:    return sb.append("null");
             case OBJECT:  return appendJsonObject(parent.nativeToJavaJsonObject(element), sb);
@@ -136,14 +137,14 @@ public interface JsonFormatter extends JsonWrapper {
     static void testValidity(Object o) throws IllegalArgumentException {
         if (o != null) {
             if (o instanceof Double) {
-                if ( new Double(0.0).equals(o)){
+                if ( Numbers.ZERO_DOUBLE.equals(o)){
                     // workaround for xmlvm bug that returns true to new Double(0.0).isInfinite()
                 } else if (((Double)o).isInfinite() || ((Double)o).isNaN()) {
                     throw new IllegalArgumentException(
                             "JSON does not allow non-finite numbers");
                 }
             } else if (o instanceof Float) {
-                if ( new Float(0.0).equals(o) ){
+                if ( Numbers.ZERO_FLOAT.equals(o) ){
                     // workaround for xmlvm bug that returns true to new Float(0.0).isInfinite()
                 } else if (((Float)o).isInfinite() || ((Float)o).isNaN()) {
                     throw new IllegalArgumentException(

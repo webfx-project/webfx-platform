@@ -1,11 +1,12 @@
 package dev.webfx.platform.json;
 
 import dev.webfx.platform.json.spi.JsonProvider;
+import dev.webfx.platform.util.keyobject.ReadOnlyAstNode;
 
 /**
  * @author Bruno Salmon
  */
-public interface ReadOnlyJsonElement extends JsonProvider {
+public interface ReadOnlyJsonElement extends JsonProvider, ReadOnlyAstNode {
 
     Object getNativeElement();
 
@@ -22,7 +23,7 @@ public interface ReadOnlyJsonElement extends JsonProvider {
     /**
      * Length of the array or number of keys of the object
      */
-    int size();
+    //int size();
 
     default ReadOnlyJsonObject asJsonObject() {
         return (ReadOnlyJsonObject) this;

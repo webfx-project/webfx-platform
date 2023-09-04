@@ -17,11 +17,13 @@ module webfx.platform.json {
     exports dev.webfx.platform.json.parser.jflex;
     exports dev.webfx.platform.json.spi;
     exports dev.webfx.platform.json.spi.impl.listmap;
+    exports dev.webfx.platform.json.tree;
 
     // Used services
     uses dev.webfx.platform.json.spi.JsonProvider;
 
     // Provided services
-    provides dev.webfx.platform.util.keyobject.parser.spi.TreeParserProvider with dev.webfx.platform.json.JsonTreeParserProvider;
+    provides dev.webfx.platform.util.keyobject.formatter.spi.AstFormatterProvider with dev.webfx.platform.json.tree.JsonTreeFormatterProvider;
+    provides dev.webfx.platform.util.keyobject.parser.spi.AstParserProvider with dev.webfx.platform.json.tree.JsonAstParserProvider;
 
 }

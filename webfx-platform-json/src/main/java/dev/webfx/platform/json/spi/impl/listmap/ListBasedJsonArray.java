@@ -1,14 +1,15 @@
 package dev.webfx.platform.json.spi.impl.listmap;
 
 import dev.webfx.platform.json.JsonArray;
+import dev.webfx.platform.util.keyobject.impl.listmap.ListBasedIndexedArray;
+import dev.webfx.platform.util.keyobject.impl.listmap.ListMapUtil;
 
 import java.util.List;
 
 /**
  * @author Bruno Salmon
  */
-public abstract class ListBasedJsonArray implements JsonArray, ListMapBasedJsonElement {
-    protected boolean isShallowCopy;
+public abstract class ListBasedJsonArray extends ListBasedIndexedArray implements JsonArray, ListMapBasedJsonElement {
 
     protected ListBasedJsonArray() {
         recreateEmptyNativeArray();
@@ -18,9 +19,6 @@ public abstract class ListBasedJsonArray implements JsonArray, ListMapBasedJsonE
         setList(list);
     }
 
-    public abstract List<Object> getList();
-
-    protected abstract void setList(List<Object> list);
 
     protected void recreateEmptyNativeArray() {
         setList((List) createNativeArray());
@@ -46,11 +44,6 @@ public abstract class ListBasedJsonArray implements JsonArray, ListMapBasedJsonE
     @Override
     public int indexOfNativeElement(Object element) {
         return getList().indexOf(element);
-    }
-
-    @Override
-    public int size() {
-        return getList().size();
     }
 
     @Override
@@ -92,31 +85,4 @@ public abstract class ListBasedJsonArray implements JsonArray, ListMapBasedJsonE
     public String toString() {
         return toJsonString();
     }*/
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-
-        if (o == null || getClass() != o.getClass())
-            return false;
-
-        ListBasedJsonArray that = (ListBasedJsonArray) o;
-
-        List thisList = this.getList();
-        List thatList = that.getList();
-        if (thisList.size() != thatList.size())
-            return false;
-
-        java.util.Iterator<?> iter = thatList.iterator();
-        for (Object entry : thisList) {
-            Object other = iter.next();
-            if (entry == null) {
-                if (other != null)
-                    return false;
-            } else if (!entry.equals(other))
-                return false;
-        }
-        return true;
-    }
 }

@@ -1,7 +1,8 @@
 package dev.webfx.platform.json.spi.impl.listmap;
 
-import dev.webfx.platform.json.ReadOnlyJsonArray;
 import dev.webfx.platform.json.JsonObject;
+import dev.webfx.platform.json.ReadOnlyJsonArray;
+import dev.webfx.platform.util.keyobject.impl.listmap.MapBasedKeyObject;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -9,8 +10,7 @@ import java.util.Map;
 /**
  * @author Bruno Salmon
  */
-public abstract class MapBasedJsonObject implements JsonObject, ListMapBasedJsonElement {
-    protected boolean isShallowCopy;
+public abstract class MapBasedJsonObject extends MapBasedKeyObject implements JsonObject, ListMapBasedJsonElement {
 
     protected MapBasedJsonObject() {
         recreateEmptyNativeObject();
@@ -20,35 +20,13 @@ public abstract class MapBasedJsonObject implements JsonObject, ListMapBasedJson
         setMap(map);
     }
 
-    public abstract Map<String, Object> getMap();
-
-    protected abstract void setMap(Map<String, Object> map);
-
     protected void recreateEmptyNativeObject() {
         setMap((Map) createNativeObject());
-    }
-
-    protected void deepCopyNativeObject() {
-        setMap(ListMapUtil.convertMap(getMap()));
-    }
-
-    @Override
-    public int size() {
-        return getMap().size();
-    }
-
-    @Override
-    public boolean has(String key) {
-        return getMap().containsKey(key);
     }
 
     @Override
     public ReadOnlyJsonArray keys() {
         return nativeToJavaJsonArray(new ArrayList(getMap().keySet()));
-    }
-
-    public Object getNativeElement(String key) {
-        return getMap().get(key);
     }
 
     @Override
@@ -94,29 +72,4 @@ public abstract class MapBasedJsonObject implements JsonObject, ListMapBasedJson
         return toJsonString();
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-
-        if (o == null || getClass() != o.getClass())
-            return false;
-
-        MapBasedJsonObject that = (MapBasedJsonObject) o;
-
-        Map<String, Object> thisMap = getMap();
-        Map<String, Object> thatMap = that.getMap();
-        if (thisMap.size() != thatMap.size())
-            return false;
-
-        for (Map.Entry<String, Object> entry : thisMap.entrySet()) {
-            Object val = entry.getValue();
-            if (val == null) {
-                if (thatMap.get(entry.getKey()) != null)
-                    return false;
-            } else if (!entry.getValue().equals(thatMap.get(entry.getKey())))
-                return false;
-        }
-        return true;
-    }
 }

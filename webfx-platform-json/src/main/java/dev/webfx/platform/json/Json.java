@@ -2,9 +2,9 @@ package dev.webfx.platform.json;
 
 import dev.webfx.platform.json.spi.JsonProvider;
 import dev.webfx.platform.json.spi.impl.listmap.MapJsonObject;
+import dev.webfx.platform.json.tree.JsonAstFactory;
 import dev.webfx.platform.util.Strings;
-import dev.webfx.platform.util.keyobject.ReadOnlyIndexedArray;
-import dev.webfx.platform.util.keyobject.ReadOnlyKeyObject;
+import dev.webfx.platform.util.keyobject.*;
 import dev.webfx.platform.util.serviceloader.SingleServiceProvider;
 
 import java.util.ServiceLoader;
@@ -19,6 +19,12 @@ public final class Json {
     /***************************
      * Factory methods helpers *
      **************************/
+
+    private final static JsonAstFactory JSON_TREE_FACTORY = new JsonAstFactory();
+
+    public static NativeAstFactory getJsonAstFactory() {
+        return JSON_TREE_FACTORY;
+    }
 
     public static JsonObject createObject() {
         return getProvider().createJsonObject();
