@@ -5,12 +5,12 @@ package dev.webfx.platform.util;
  */
 public final class Numbers {
 
-    private static final Byte ZERO_BYTE = 0;
-    private static final Short ZERO_SHORT = 0;
-    private static final Integer ZERO_INTEGER = 0;
-    private static final Long ZERO_LONG = 0L;
-    private static final Float ZERO_FLOAT = 0f;
-    private static final Double ZERO_DOUBLE = 0d;
+    public static final Byte ZERO_BYTE = 0;
+    public static final Short ZERO_SHORT = 0;
+    public static final Integer ZERO_INTEGER = 0;
+    public static final Long ZERO_LONG = 0L;
+    public static final Float ZERO_FLOAT = 0f;
+    public static final Double ZERO_DOUBLE = 0d;
 
     public static boolean isZero(Object value) {
         return value != null && (

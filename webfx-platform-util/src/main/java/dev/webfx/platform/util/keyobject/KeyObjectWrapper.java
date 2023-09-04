@@ -3,25 +3,25 @@ package dev.webfx.platform.util.keyobject;
 /**
  * @author Bruno Salmon
  */
-public class DelegatedKeyObject extends ReadOnlyDelegatedKeyObject implements KeyObject {
+public class KeyObjectWrapper extends ReadOnlyKeyObjectWrapper implements KeyObject {
     
-    public DelegatedKeyObject(KeyObject delegate) {
+    public KeyObjectWrapper(KeyObject delegate) {
         super(delegate);
     }
 
     @Override
-    public KeyObject getDelegate() {
-        return (KeyObject) super.getDelegate();
+    public KeyObject getWrappedObject() {
+        return (KeyObject) super.getWrappedObject();
     }
 
     @Override
     public <V> V remove(String key) {
-        return getDelegate().remove(key);
+        return getWrappedObject().remove(key);
     }
 
     @Override
     public <T extends KeyObject> T set(String key, Object value) {
-        return getDelegate().set(key, value);
+        return getWrappedObject().set(key, value);
     }
 /*
     @Override

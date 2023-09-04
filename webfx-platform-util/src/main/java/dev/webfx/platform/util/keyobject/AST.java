@@ -1,10 +1,8 @@
-package dev.webfx.platform.util.keyobject.util;
+package dev.webfx.platform.util.keyobject;
 
 import dev.webfx.platform.util.Arrays;
 import dev.webfx.platform.util.Strings;
-import dev.webfx.platform.util.keyobject.ReadOnlyIndexedArray;
-import dev.webfx.platform.util.keyobject.ReadOnlyKeyObject;
-import dev.webfx.platform.util.keyobject.ReadOnlyMergedKeyObject;
+import dev.webfx.platform.util.keyobject.impl.CloneVisitor;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,7 +12,16 @@ import java.util.Map;
 /**
  * @author Bruno Salmon
  */
-public final class TreeUtil {
+public final class AST {
+
+    public static KeyObject createObject() {
+        return AstFactory.get().createObject();
+    }
+
+    public static IndexedArray createArray() {
+        return AstFactory.get().createArray();
+    }
+
 
     public static ReadOnlyKeyObject lookupObject(ReadOnlyKeyObject keyObject, String path) {
         if (keyObject == null)
@@ -64,7 +71,7 @@ public final class TreeUtil {
             @Override
             public ReadOnlyIndexedArray keys() {
                 if (keysArray == null) {
-                    keysArray = TreeUtil.createReadOnlyIndexedArrayFromList(new ArrayList<>(finalMap.keySet()));
+                    keysArray = AST.createReadOnlyIndexedArrayFromList(new ArrayList<>(finalMap.keySet()));
                 }
                 return keysArray;
             }
@@ -115,7 +122,7 @@ public final class TreeUtil {
             @Override
             public ReadOnlyIndexedArray keys() {
                 if (keysArray == null) {
-                    keysArray = TreeUtil.createReadOnlyIndexedArrayFromObjects(singleKey);
+                    keysArray = AST.createReadOnlyIndexedArrayFromObjects(singleKey);
                 }
                 return keysArray;
             }
@@ -171,6 +178,44 @@ public final class TreeUtil {
         if (keyObjects.length == 1)
             return keyObjects[0];
         return new ReadOnlyMergedKeyObject(true, keyObjects);
+    }
+
+    public static KeyObject cloneObject(ReadOnlyKeyObject keyObject, AstFactory factory) {
+        return (KeyObject) new CloneVisitor(factory, false).visitTreeObject(keyObject);
+    }
+
+    public static IndexedArray cloneArray(ReadOnlyIndexedArray array, AstFactory factory) {
+        return (IndexedArray) new CloneVisitor(factory, false).visitTreeArray(array);
+    }
+
+    public static KeyObject nativeObject(ReadOnlyKeyObject keyObject, NativeAstFactory factory) {
+        return (KeyObject) new CloneVisitor(factory, true).visitTreeObject(keyObject);
+    }
+
+    public static IndexedArray nativeArray(ReadOnlyIndexedArray array, NativeAstFactory factory) {
+        return (IndexedArray) new CloneVisitor(factory, true).visitTreeArray(array);
+    }
+
+    public static Object unwrapNativeObject(ReadOnlyKeyObject keyObject, NativeAstFactory factory) {
+        if (!factory.isNativeObject(keyObject)) {
+            keyObject = nativeObject(keyObject, factory);
+        }
+        return factory.unwrapNativeObject(keyObject);
+    }
+
+    public static Object unwrapNativeArray(ReadOnlyIndexedArray array, NativeAstFactory factory) {
+        if (!factory.isNativeArray(array)) {
+            array = nativeArray(array, factory);
+        }
+        return factory.unwrapNativeArray(array);
+    }
+
+    public static Object nativePlatformObject(ReadOnlyKeyObject keyObject, NativeAstFactory factory) {
+        return null;
+    }
+
+    public static Object nativePlatformArray(ReadOnlyIndexedArray array, NativeAstFactory factory) {
+        return null;
     }
 
 }

@@ -3,26 +3,26 @@ package dev.webfx.platform.util.keyobject;
 /**
  * @author Bruno Salmon
  */
-public class ReadOnlyDelegatedKeyObject implements ReadOnlyKeyObject {
+public class ReadOnlyKeyObjectWrapper implements ReadOnlyKeyObject {
     
-    private final ReadOnlyKeyObject delegate;
+    private final ReadOnlyKeyObject wrappedObject;
 
-    public ReadOnlyDelegatedKeyObject(ReadOnlyKeyObject delegate) {
-        this.delegate = delegate;
+    public ReadOnlyKeyObjectWrapper(ReadOnlyKeyObject wrappedObject) {
+        this.wrappedObject = wrappedObject;
     }
 
-    protected ReadOnlyKeyObject getDelegate() {
-        return delegate;
+    protected ReadOnlyKeyObject getWrappedObject() {
+        return wrappedObject;
     }
 
     @Override
     public ReadOnlyIndexedArray keys() {
-        return getDelegate().keys();
+        return getWrappedObject().keys();
     }
 
     @Override
     public <T> T get(String key) {
-        return getDelegate().get(key);
+        return getWrappedObject().get(key);
     }
 
     /*

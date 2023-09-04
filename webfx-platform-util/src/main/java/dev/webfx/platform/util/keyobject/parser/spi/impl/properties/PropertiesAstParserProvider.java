@@ -2,8 +2,9 @@ package dev.webfx.platform.util.keyobject.parser.spi.impl.properties;
 
 import dev.webfx.platform.util.keyobject.ReadOnlyIndexedArray;
 import dev.webfx.platform.util.keyobject.ReadOnlyKeyObject;
-import dev.webfx.platform.util.keyobject.util.TreeUtil;
-import dev.webfx.platform.util.keyobject.parser.spi.TreeParserProvider;
+import dev.webfx.platform.util.keyobject.ReadOnlyAstNode;
+import dev.webfx.platform.util.keyobject.AST;
+import dev.webfx.platform.util.keyobject.parser.spi.AstParserProvider;
 
 import java.io.ByteArrayInputStream;
 import java.util.Properties;
@@ -11,7 +12,7 @@ import java.util.Properties;
 /**
  * @author Bruno Salmon
  */
-public class PropertiesTreeParserProvider implements TreeParserProvider {
+public class PropertiesAstParserProvider implements AstParserProvider {
 
     @Override
     public String format() {
@@ -31,11 +32,16 @@ public class PropertiesTreeParserProvider implements TreeParserProvider {
     @Override
     public ReadOnlyKeyObject parseObject(String text) {
         Properties properties = parseProperties(text);
-        return TreeUtil.createReadOnlyKeyObjectFromMap(properties, true, true);
+        return AST.createReadOnlyKeyObjectFromMap(properties, true, true);
     }
 
     @Override
     public ReadOnlyIndexedArray parseArray(String text) {
         return null;
+    }
+
+    @Override
+    public ReadOnlyAstNode parseNode(String text) {
+        return parseObject(text);
     }
 }

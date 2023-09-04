@@ -10,7 +10,7 @@ import java.util.Iterator;
 /**
  * @author Bruno Salmon
  */
-public interface ReadOnlyIndexedArray extends Iterable<Object> {
+public interface ReadOnlyIndexedArray extends ReadOnlyAstNode, Iterable<Object> {
 
     /**
      * Length of the array or number of keys of the object

@@ -7,7 +7,7 @@ import java.time.Instant;
 /**
  * @author Bruno Salmon
  */
-public interface ReadOnlyKeyObject {
+public interface ReadOnlyKeyObject extends ReadOnlyAstNode {
 
     /**
      * Test whether a given key has present.
@@ -20,6 +20,11 @@ public interface ReadOnlyKeyObject {
      * All keys of the object.
      */
     ReadOnlyIndexedArray keys();
+
+    @Override
+    default int size() {
+        return keys().size();
+    }
 
     /**
      * Return the element as a value or wrapped object/array.

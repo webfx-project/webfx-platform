@@ -1,7 +1,6 @@
 package dev.webfx.platform.util.keyobject;
 
 import dev.webfx.platform.util.collection.HashList;
-import dev.webfx.platform.util.keyobject.util.TreeUtil;
 
 import java.util.*;
 
@@ -19,8 +18,8 @@ public final class ReadOnlyMergedKeyObject implements ReadOnlyKeyObject {
     public ReadOnlyMergedKeyObject(boolean deepMerge, ReadOnlyKeyObject... keyObjectsToMerge) {
         this.deepMerge = deepMerge;
         this.originalKeyObjects = keyObjectsToMerge;
-        Arrays.stream(keyObjectsToMerge).forEach(keyObjects -> keysList.add(keyObjects.keys()));
-        this.keys = TreeUtil.createReadOnlyIndexedArrayFromList(keysList);
+        Arrays.stream(keyObjectsToMerge).forEach(keyObjects -> keyObjects.keys().forEach(keysList::add));
+        this.keys = AST.createReadOnlyIndexedArrayFromList(keysList);
     }
 
     @Override
