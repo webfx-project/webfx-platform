@@ -109,6 +109,7 @@
         <module>webfx-platform-fetch</module>
         <module>webfx-platform-fetch-gwt</module>
         <module>webfx-platform-fetch-java</module>
+        <module>webfx-platform-fetch-json</module>
         <module>webfx-platform-fetch-vertx</module>
         <module>webfx-platform-file</module>
         <module>webfx-platform-file-gwt</module>

@@ -32,12 +32,33 @@ public interface Response {
 
     Future<Blob> blob();
 
+    /**
+     * @deprecated
+     *
+     * Use {@code dev.webfx.platform.fetch.json.JsonFetch.fetchJsonNode()} instead.
+     *
+     */
+    @Deprecated(forRemoval = true)
     Future<JsonElement> json();
 
+    /**
+     * @deprecated
+     *
+     * Use {@code dev.webfx.platform.fetch.json.JsonFetch.fetchJsonObject()} instead.
+     *
+     */
+    @Deprecated(forRemoval = true)
     default Future<JsonObject> jsonObject() {
         return json().map(JsonElement::asJsonObject);
     }
 
+    /**
+     * @deprecated
+     *
+     * Use {@code dev.webfx.platform.fetch.json.JsonFetch.fetchJsonArray()} instead.
+     *
+     */
+    @Deprecated(forRemoval = true)
     default Future<JsonArray> jsonArray() {
         return json().map(JsonElement::asJsonArray);
     }
