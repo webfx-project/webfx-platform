@@ -12,7 +12,6 @@ module webfx.platform.fetch.java {
     requires webfx.platform.fetch;
     requires webfx.platform.file;
     requires webfx.platform.file.java;
-    requires webfx.platform.json;
     requires webfx.platform.scheduler;
     requires webfx.platform.scheduler.java;
 

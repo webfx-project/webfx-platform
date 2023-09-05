@@ -20,6 +20,7 @@ public class GwtFetchProvider implements FetchProvider {
     public Future<Response> fetch(String url, FetchOptions options) {
         RequestInit requestInit = null;
         if (options != null) {
+            // TODO: Should this Json be replaced with generic AST code?
             JsonObject js = Json.createObject();
             js.set("method", options.getMethod());
             js.set("mode", options.getMode());

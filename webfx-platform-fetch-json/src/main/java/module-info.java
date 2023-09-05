@@ -3,7 +3,7 @@
 module webfx.platform.fetch.json {
 
     // Direct dependencies modules
-    requires webfx.platform.async;
+    requires transitive webfx.platform.async;
     requires webfx.platform.fetch;
     requires webfx.platform.json;
     requires webfx.platform.util;

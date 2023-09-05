@@ -11,7 +11,6 @@ module webfx.platform.fetch.vertx {
     requires webfx.platform.async;
     requires webfx.platform.fetch;
     requires webfx.platform.file;
-    requires webfx.platform.json;
     requires webfx.platform.vertx.common;
 
     // Exported packages
