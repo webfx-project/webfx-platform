@@ -20,12 +20,12 @@ public final class FutureBroadcaster<T> {
 
     public FutureBroadcaster(Future<T> source) {
         sourceProducer = null;
-        this.source = armSource(source);
+        armSource(source);
     }
 
-    private Future<T> armSource(Future<T> s) {
-        s.onComplete(ar -> onSourceCompleted());
-        return s;
+    private void armSource(Future<T> source) {
+        this.source = source;
+        source.onComplete(ar -> onSourceCompleted());
     }
 
     private void onSourceCompleted() {
@@ -43,8 +43,8 @@ public final class FutureBroadcaster<T> {
             Promise<T> newClient = Promise.promise();
             clients.add(newClient);
             if (source == null)
-                source = armSource(sourceProducer.call());
-            if (source.isComplete())
+                armSource(sourceProducer.call());
+            if (source != null && source.isComplete())
                 onSourceCompleted();
             return newClient.future();
         }

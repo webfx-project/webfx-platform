@@ -14,8 +14,15 @@ module webfx.platform.util {
     exports dev.webfx.platform.util.collection;
     exports dev.webfx.platform.util.function;
     exports dev.webfx.platform.util.keyobject;
+    exports dev.webfx.platform.util.keyobject.parser;
+    exports dev.webfx.platform.util.keyobject.parser.spi;
+    exports dev.webfx.platform.util.keyobject.parser.spi.impl.properties;
+    exports dev.webfx.platform.util.keyobject.util;
     exports dev.webfx.platform.util.serviceloader;
     exports dev.webfx.platform.util.tuples;
     exports dev.webfx.platform.util.uuid;
+
+    // Used services
+    uses dev.webfx.platform.util.keyobject.parser.spi.TreeParserProvider;
 
 }
