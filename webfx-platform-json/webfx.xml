@@ -9,13 +9,13 @@
 
     <dependencies>
         <used-by-source-modules>
-            <module transitive="true">webfx-platform-util</module> <!-- for use of dev.webfx.platform.util.keyobject.* -->
+            <module transitive="true">webfx-platform-util</module> <!-- for use of dev.webfx.platform.util.ast.* -->
         </used-by-source-modules>
     </dependencies>
 
     <providers>
-        <provider interface="dev.webfx.platform.util.keyobject.parser.spi.AstParserProvider">dev.webfx.platform.json.tree.JsonAstParserProvider</provider>
-        <provider interface="dev.webfx.platform.util.keyobject.formatter.spi.AstFormatterProvider">dev.webfx.platform.json.tree.JsonTreeFormatterProvider</provider>
+        <provider interface="dev.webfx.platform.ast.parser.spi.AstParserProvider">dev.webfx.platform.json.tree.JsonAstParserProvider</provider>
+        <provider interface="dev.webfx.platform.ast.formatter.spi.AstFormatterProvider">dev.webfx.platform.json.tree.JsonTreeFormatterProvider</provider>
     </providers>
 
     <maven-pom-manual>

@@ -1,11 +1,11 @@
 package dev.webfx.platform.json;
 
-import dev.webfx.platform.util.keyobject.ReadOnlyIndexedArray;
+import dev.webfx.platform.ast.ReadOnlyAstArray;
 
 /**
  * @author Bruno Salmon
  */
-public interface ReadOnlyJsonArray extends ReadOnlyJsonElement, ReadOnlyIndexedArray {
+public interface ReadOnlyJsonArray extends ReadOnlyJsonElement, ReadOnlyAstArray {
 
     /**
      * Returns the first index of the given element, or -1 if it cannot be found.

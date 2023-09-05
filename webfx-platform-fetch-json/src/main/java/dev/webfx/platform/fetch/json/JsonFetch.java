@@ -4,20 +4,20 @@ import dev.webfx.platform.async.Future;
 import dev.webfx.platform.fetch.Fetch;
 import dev.webfx.platform.fetch.Response;
 import dev.webfx.platform.json.Json;
-import dev.webfx.platform.util.keyobject.ReadOnlyIndexedArray;
-import dev.webfx.platform.util.keyobject.ReadOnlyKeyObject;
-import dev.webfx.platform.util.keyobject.ReadOnlyAstNode;
+import dev.webfx.platform.ast.ReadOnlyAstArray;
+import dev.webfx.platform.ast.ReadOnlyAstObject;
+import dev.webfx.platform.ast.ReadOnlyAstNode;
 
 /**
  * @author Bruno Salmon
  */
 public final class JsonFetch {
 
-    public static Future<ReadOnlyKeyObject> fetchJsonObject(String url) {
+    public static Future<ReadOnlyAstObject> fetchJsonObject(String url) {
         return Fetch.fetch(url).compose(Response::text).map(Json::parseObject);
     }
 
-    public static Future<ReadOnlyIndexedArray> fetchJsonArray(String url) {
+    public static Future<ReadOnlyAstArray> fetchJsonArray(String url) {
         return Fetch.fetch(url).compose(Response::text).map(Json::parseArray);
     }
 

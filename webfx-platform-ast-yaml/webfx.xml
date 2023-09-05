@@ -11,8 +11,8 @@
     </dependencies>
 
     <providers>
-        <provider interface="dev.webfx.platform.util.keyobject.formatter.spi.AstFormatterProvider">dev.webfx.platform.ast.yaml.formatter.YamlFormatterProvider</provider>
-        <provider interface="dev.webfx.platform.util.keyobject.parser.spi.AstParserProvider">dev.webfx.platform.ast.yaml.parser.YamlParserProvider</provider>
+        <provider interface="dev.webfx.platform.ast.formatter.spi.AstFormatterProvider">dev.webfx.platform.ast.yaml.formatter.YamlFormatterProvider</provider>
+        <provider interface="dev.webfx.platform.ast.parser.spi.AstParserProvider">dev.webfx.platform.ast.yaml.parser.YamlParserProvider</provider>
     </providers>
 
     <maven-pom-manual>

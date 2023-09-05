@@ -1,15 +1,15 @@
 package dev.webfx.platform.json.spi.impl.listmap;
 
 import dev.webfx.platform.json.JsonArray;
-import dev.webfx.platform.util.keyobject.impl.listmap.ListBasedIndexedArray;
-import dev.webfx.platform.util.keyobject.impl.listmap.ListMapUtil;
+import dev.webfx.platform.ast.impl.listmap.ListBasedAstArray;
+import dev.webfx.platform.ast.impl.listmap.ListMapUtil;
 
 import java.util.List;
 
 /**
  * @author Bruno Salmon
  */
-public abstract class ListBasedJsonArray extends ListBasedIndexedArray implements JsonArray, ListMapBasedJsonElement {
+public abstract class ListBasedJsonArray extends ListBasedAstArray implements JsonArray, ListMapBasedJsonElement {
 
     protected ListBasedJsonArray() {
         recreateEmptyNativeArray();

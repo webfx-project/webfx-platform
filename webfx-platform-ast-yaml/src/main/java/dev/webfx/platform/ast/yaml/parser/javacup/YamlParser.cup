@@ -1,8 +1,8 @@
 package dev.webfx.platform.ast.yaml.parser.javacup;
 
-import dev.webfx.platform.util.keyobject.AST;
-import dev.webfx.platform.util.keyobject.KeyObject;
-import dev.webfx.platform.util.keyobject.IndexedArray;
+import dev.webfx.platform.util.ast.AST;
+import dev.webfx.platform.util.ast.AstObject;
+import dev.webfx.platform.util.ast.AstArray;
 import dev.webfx.platform.util.Numbers;
 import dev.webfx.platform.util.tuples.Pair;
 
@@ -79,10 +79,10 @@ terminal String   STRING, IDENTIFIER;
 /* Non terminals used in the grammar section.*/
 non terminal Object                     yaml_element;
 non terminal Object                     yaml_native_scalar, yaml_java_scalar;
-non terminal IndexedArray               yaml_array;
-non terminal IndexedArray               yaml_array_body;
-non terminal KeyObject                  yaml_object;
-non terminal KeyObject                  yaml_object_body;
+non terminal AstArray                   yaml_array;
+non terminal AstArray                   yaml_array_body;
+non terminal AstObject                  yaml_object;
+non terminal AstObject                  yaml_object_body;
 non terminal Pair<String, Object>       yaml_object_entry;
 
 /* -------------Precedence and Associatively of Terminals Section----------- */

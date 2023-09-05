@@ -1,9 +1,9 @@
 package dev.webfx.platform.ast.yaml.parser;
 
-import dev.webfx.platform.util.keyobject.ReadOnlyIndexedArray;
-import dev.webfx.platform.util.keyobject.ReadOnlyKeyObject;
-import dev.webfx.platform.util.keyobject.ReadOnlyAstNode;
-import dev.webfx.platform.util.keyobject.parser.spi.AstParserProvider;
+import dev.webfx.platform.ast.ReadOnlyAstArray;
+import dev.webfx.platform.ast.ReadOnlyAstObject;
+import dev.webfx.platform.ast.ReadOnlyAstNode;
+import dev.webfx.platform.ast.parser.spi.AstParserProvider;
 
 /**
  * @author Bruno Salmon
@@ -16,12 +16,12 @@ public final class YamlParserProvider implements AstParserProvider {
     }
 
     @Override
-    public ReadOnlyKeyObject parseObject(String text) {
+    public ReadOnlyAstObject parseObject(String text) {
         return YamlParser.parseObject(text);
     }
 
     @Override
-    public ReadOnlyIndexedArray parseArray(String text) {
+    public ReadOnlyAstArray parseArray(String text) {
         return YamlParser.parseArray(text);
     }
 

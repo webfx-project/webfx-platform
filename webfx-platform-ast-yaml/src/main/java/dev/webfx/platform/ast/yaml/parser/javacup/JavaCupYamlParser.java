@@ -5,12 +5,11 @@
 
 package dev.webfx.platform.ast.yaml.parser.javacup;
 
-import dev.webfx.platform.util.keyobject.AST;
-import dev.webfx.platform.util.keyobject.KeyObject;
-import dev.webfx.platform.util.keyobject.IndexedArray;
+import dev.webfx.platform.ast.AST;
+import dev.webfx.platform.ast.AstArray;
+import dev.webfx.platform.ast.AstObject;
 import dev.webfx.platform.util.Numbers;
 import dev.webfx.platform.util.tuples.Pair;
-import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
   */
@@ -245,7 +244,7 @@ class CUP$JavaCupYamlParser$actions {
               Object RESULT =null;
 		int oleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
 		int oright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
-		KeyObject o = (KeyObject)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
+		AstObject o = (AstObject)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
 		 RESULT = o; 
               CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_element",0, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
             }
@@ -257,7 +256,7 @@ class CUP$JavaCupYamlParser$actions {
               Object RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
-		IndexedArray a = (IndexedArray)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
+		AstArray a = (AstArray)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
 		 RESULT = a; 
               CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_element",0, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
             }
@@ -347,10 +346,10 @@ class CUP$JavaCupYamlParser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 11: // yaml_array ::= LBRACK yaml_array_body RBRACK 
             {
-              IndexedArray RESULT =null;
+              AstArray RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).right;
-		IndexedArray a = (IndexedArray)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).value;
+		AstArray a = (AstArray)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).value;
 		 RESULT = a ; 
               CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_array",3, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
             }
@@ -359,7 +358,7 @@ class CUP$JavaCupYamlParser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 12: // yaml_array ::= LBRACK RBRACK 
             {
-              IndexedArray RESULT =null;
+              AstArray RESULT =null;
 		 RESULT = AST.createArray() ; 
               CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_array",3, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
             }
@@ -368,10 +367,10 @@ class CUP$JavaCupYamlParser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 13: // yaml_array_body ::= yaml_array_body COMMA yaml_element 
             {
-              IndexedArray RESULT =null;
+              AstArray RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)).right;
-		IndexedArray a = (IndexedArray)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)).value;
+		AstArray a = (AstArray)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)).value;
 		int eleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
 		int eright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
@@ -383,7 +382,7 @@ class CUP$JavaCupYamlParser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 14: // yaml_array_body ::= yaml_element 
             {
-              IndexedArray RESULT =null;
+              AstArray RESULT =null;
 		int eleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
 		int eright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
@@ -395,10 +394,10 @@ class CUP$JavaCupYamlParser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 15: // yaml_object ::= LCURLY yaml_object_body RCURLY 
             {
-              KeyObject RESULT =null;
+              AstObject RESULT =null;
 		int oleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).left;
 		int oright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).right;
-		KeyObject o = (KeyObject)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).value;
+		AstObject o = (AstObject)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).value;
 		 RESULT = o ; 
               CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_object",5, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
             }
@@ -407,7 +406,7 @@ class CUP$JavaCupYamlParser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 16: // yaml_object ::= LCURLY RCURLY 
             {
-              KeyObject RESULT =null;
+              AstObject RESULT =null;
 		 RESULT =  AST.createObject() ; 
               CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_object",5, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
             }
@@ -416,10 +415,10 @@ class CUP$JavaCupYamlParser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 17: // yaml_object_body ::= yaml_object_body COMMA yaml_object_entry 
             {
-              KeyObject RESULT =null;
+              AstObject RESULT =null;
 		int oleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)).left;
 		int oright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)).right;
-		KeyObject o = (KeyObject)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)).value;
+		AstObject o = (AstObject)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)).value;
 		int eleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
 		int eright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
 		Pair<String,Object> e = (Pair<String,Object>)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
@@ -431,7 +430,7 @@ class CUP$JavaCupYamlParser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 18: // yaml_object_body ::= yaml_object_entry 
             {
-              KeyObject RESULT =null;
+              AstObject RESULT =null;
 		int eleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
 		int eright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
 		Pair<String,Object> e = (Pair<String,Object>)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;

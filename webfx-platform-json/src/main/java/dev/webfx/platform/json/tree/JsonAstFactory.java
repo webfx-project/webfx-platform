@@ -1,10 +1,10 @@
 package dev.webfx.platform.json.tree;
 
+import dev.webfx.platform.ast.*;
 import dev.webfx.platform.json.Json;
 import dev.webfx.platform.json.JsonObject;
 import dev.webfx.platform.json.ReadOnlyJsonArray;
 import dev.webfx.platform.json.ReadOnlyJsonObject;
-import dev.webfx.platform.util.keyobject.*;
 
 /**
  * @author Bruno Salmon
@@ -12,32 +12,32 @@ import dev.webfx.platform.util.keyobject.*;
 public final class JsonAstFactory implements NativeAstFactory {
 
     @Override
-    public KeyObject createObject() {
+    public AstObject createObject() {
         return Json.createObject();
     }
 
     @Override
-    public IndexedArray createArray() {
+    public AstArray createArray() {
         return Json.createArray();
     }
 
     @Override
-    public boolean isNativeObject(ReadOnlyKeyObject keyObject) {
-        return keyObject instanceof ReadOnlyJsonObject;
+    public boolean isNativeObject(ReadOnlyAstObject astObject) {
+        return astObject instanceof ReadOnlyJsonObject;
     }
 
     @Override
-    public boolean isNativeArray(ReadOnlyIndexedArray array) {
+    public boolean isNativeArray(ReadOnlyAstArray array) {
         return array instanceof ReadOnlyJsonArray;
     }
 
     @Override
-    public Object unwrapNativeObject(ReadOnlyKeyObject nativeObject) {
+    public Object unwrapNativeObject(ReadOnlyAstObject nativeObject) {
         return ((JsonObject) nativeObject).getNativeElement();
     }
 
     @Override
-    public Object unwrapNativeArray(ReadOnlyIndexedArray nativeArray) {
+    public Object unwrapNativeArray(ReadOnlyAstArray nativeArray) {
         return ((JsonObject) nativeArray).getNativeElement();
     }
 }

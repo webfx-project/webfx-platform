@@ -5,6 +5,7 @@ module webfx.platform.ast.yaml {
     // Direct dependencies modules
     requires java.base;
     requires webfx.lib.javacupruntime;
+    requires webfx.platform.ast;
     requires webfx.platform.util;
 
     // Exported packages
@@ -14,7 +15,7 @@ module webfx.platform.ast.yaml {
     exports dev.webfx.platform.ast.yaml.parser.jflex;
 
     // Provided services
-    provides dev.webfx.platform.util.keyobject.formatter.spi.AstFormatterProvider with dev.webfx.platform.ast.yaml.formatter.YamlFormatterProvider;
-    provides dev.webfx.platform.util.keyobject.parser.spi.AstParserProvider with dev.webfx.platform.ast.yaml.parser.YamlParserProvider;
+    provides dev.webfx.platform.ast.formatter.spi.AstFormatterProvider with dev.webfx.platform.ast.yaml.formatter.YamlFormatterProvider;
+    provides dev.webfx.platform.ast.parser.spi.AstParserProvider with dev.webfx.platform.ast.yaml.parser.YamlParserProvider;
 
 }

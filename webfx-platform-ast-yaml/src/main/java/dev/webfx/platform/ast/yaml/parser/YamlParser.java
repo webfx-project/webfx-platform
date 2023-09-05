@@ -2,8 +2,8 @@ package dev.webfx.platform.ast.yaml.parser;
 
 import dev.webfx.platform.ast.yaml.parser.javacup.JavaCupYamlParser;
 import dev.webfx.platform.ast.yaml.parser.jflex.YamlLexer;
-import dev.webfx.platform.util.keyobject.ReadOnlyIndexedArray;
-import dev.webfx.platform.util.keyobject.ReadOnlyKeyObject;
+import dev.webfx.platform.ast.ReadOnlyAstArray;
+import dev.webfx.platform.ast.ReadOnlyAstObject;
 
 import java.io.StringReader;
 
@@ -12,11 +12,11 @@ import java.io.StringReader;
  */
 public final class YamlParser {
 
-    public static ReadOnlyKeyObject parseObject(String text) {
+    public static ReadOnlyAstObject parseObject(String text) {
         return parseWithJavaCup(text);
     }
 
-    public static ReadOnlyIndexedArray parseArray(String text) {
+    public static ReadOnlyAstArray parseArray(String text) {
         return parseWithJavaCup(text);
     }
 

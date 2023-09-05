@@ -1,11 +1,11 @@
 package dev.webfx.platform.json;
 
-import dev.webfx.platform.util.keyobject.ReadOnlyKeyObject;
+import dev.webfx.platform.ast.ReadOnlyAstObject;
 
 /**
  * @author Bruno Salmon
  */
-public interface ReadOnlyJsonObject extends ReadOnlyKeyObject, ReadOnlyJsonElement {
+public interface ReadOnlyJsonObject extends ReadOnlyAstObject, ReadOnlyJsonElement {
 
     /**
      * All keys of the object.

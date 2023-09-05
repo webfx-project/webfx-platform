@@ -2,7 +2,7 @@ package dev.webfx.platform.json.spi.impl.listmap;
 
 import dev.webfx.platform.json.JsonObject;
 import dev.webfx.platform.json.ReadOnlyJsonArray;
-import dev.webfx.platform.util.keyobject.impl.listmap.MapBasedKeyObject;
+import dev.webfx.platform.ast.impl.listmap.MapBasedAstObject;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * @author Bruno Salmon
  */
-public abstract class MapBasedJsonObject extends MapBasedKeyObject implements JsonObject, ListMapBasedJsonElement {
+public abstract class MapBasedJsonObject extends MapBasedAstObject implements JsonObject, ListMapBasedJsonElement {
 
     protected MapBasedJsonObject() {
         recreateEmptyNativeObject();

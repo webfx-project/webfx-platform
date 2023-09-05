@@ -1,15 +1,15 @@
 package dev.webfx.platform.json;
 
-import dev.webfx.platform.util.keyobject.ReadOnlyIndexedArray;
-import dev.webfx.platform.util.keyobject.ReadOnlyKeyObject;
-import dev.webfx.platform.util.keyobject.KeyObject;
+import dev.webfx.platform.ast.ReadOnlyAstArray;
+import dev.webfx.platform.ast.ReadOnlyAstObject;
+import dev.webfx.platform.ast.AstObject;
 
 import java.time.Instant;
 
 /**
  * @author Bruno Salmon
  */
-public interface JsonObject extends ReadOnlyJsonObject, JsonElement, KeyObject {
+public interface JsonObject extends ReadOnlyJsonObject, JsonElement, AstObject {
 
     @Override
     default JsonObject getObject(String key) {
@@ -31,12 +31,12 @@ public interface JsonObject extends ReadOnlyJsonObject, JsonElement, KeyObject {
     /**
      * Set a given key to the given object.
      */
-    default JsonObject setObject(String key, ReadOnlyKeyObject object) { return setNativeElement(key, javaToNativeJsonObject((ReadOnlyJsonObject) object)); }
+    default JsonObject setObject(String key, ReadOnlyAstObject object) { return setNativeElement(key, javaToNativeJsonObject((ReadOnlyJsonObject) object)); }
 
     /**
      * Set a given key to the given array.
      */
-    default JsonObject setArray(String key, ReadOnlyIndexedArray array) { return setNativeElement(key, javaToNativeJsonArray((ReadOnlyJsonArray) array)); }
+    default JsonObject setArray(String key, ReadOnlyAstArray array) { return setNativeElement(key, javaToNativeJsonArray((ReadOnlyJsonArray) array)); }
 
     /**
      * Set a given key to the given element.
@@ -45,31 +45,31 @@ public interface JsonObject extends ReadOnlyJsonObject, JsonElement, KeyObject {
 
     @Override
     default JsonObject set(String key, Boolean value) {
-        return KeyObject.super.set(key, value);
+        return AstObject.super.set(key, value);
     }
 
     @Override
     default JsonObject set(String key, Integer value) {
-        return KeyObject.super.set(key, value);
+        return AstObject.super.set(key, value);
     }
 
     @Override
     default JsonObject set(String key, Long value) {
-        return KeyObject.super.set(key, value);
+        return AstObject.super.set(key, value);
     }
 
     @Override
     default JsonObject set(String key, Double value) {
-        return KeyObject.super.set(key, value);
+        return AstObject.super.set(key, value);
     }
 
     @Override
     default JsonObject set(String key, String value) {
-        return KeyObject.super.set(key, value);
+        return AstObject.super.set(key, value);
     }
 
     @Override
     default JsonObject set(String key, Instant value) {
-        return KeyObject.super.set(key, value);
+        return AstObject.super.set(key, value);
     }
 }

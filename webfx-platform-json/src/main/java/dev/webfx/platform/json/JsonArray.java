@@ -1,13 +1,13 @@
 package dev.webfx.platform.json;
 
-import dev.webfx.platform.util.keyobject.ReadOnlyIndexedArray;
-import dev.webfx.platform.util.keyobject.ReadOnlyKeyObject;
-import dev.webfx.platform.util.keyobject.IndexedArray;
+import dev.webfx.platform.ast.ReadOnlyAstArray;
+import dev.webfx.platform.ast.ReadOnlyAstObject;
+import dev.webfx.platform.ast.AstArray;
 
 /**
  * @author Bruno Salmon
  */
-public interface JsonArray extends ReadOnlyJsonArray, JsonElement, IndexedArray {
+public interface JsonArray extends ReadOnlyJsonArray, JsonElement, AstArray {
 
     /**
      * Pushes the given element onto the end of the array. Fluent API (return this).
@@ -24,12 +24,12 @@ public interface JsonArray extends ReadOnlyJsonArray, JsonElement, IndexedArray 
     /**
      * Set a given index to the given object.
      */
-    default JsonArray push(ReadOnlyKeyObject object) { return pushNativeElement(javaToNativeJsonObject((ReadOnlyJsonObject) object)); }
+    default JsonArray push(ReadOnlyAstObject object) { return pushNativeElement(javaToNativeJsonObject((ReadOnlyJsonObject) object)); }
 
     /**
      * Set a given index to the given array.
      */
-    default JsonArray push(ReadOnlyIndexedArray array) { return pushNativeElement(javaToNativeJsonArray((ReadOnlyJsonArray) array)); }
+    default JsonArray push(ReadOnlyAstArray array) { return pushNativeElement(javaToNativeJsonArray((ReadOnlyJsonArray) array)); }
 
     /**
      * Set a given index to the given element.

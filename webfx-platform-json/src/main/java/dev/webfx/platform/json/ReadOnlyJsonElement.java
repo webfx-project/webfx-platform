@@ -1,7 +1,7 @@
 package dev.webfx.platform.json;
 
 import dev.webfx.platform.json.spi.JsonProvider;
-import dev.webfx.platform.util.keyobject.ReadOnlyAstNode;
+import dev.webfx.platform.ast.ReadOnlyAstNode;
 
 /**
  * @author Bruno Salmon

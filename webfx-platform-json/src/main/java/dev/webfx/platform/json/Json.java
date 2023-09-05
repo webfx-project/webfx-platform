@@ -1,10 +1,12 @@
 package dev.webfx.platform.json;
 
+import dev.webfx.platform.ast.NativeAstFactory;
+import dev.webfx.platform.ast.ReadOnlyAstArray;
+import dev.webfx.platform.ast.ReadOnlyAstObject;
 import dev.webfx.platform.json.spi.JsonProvider;
 import dev.webfx.platform.json.spi.impl.listmap.MapJsonObject;
 import dev.webfx.platform.json.tree.JsonAstFactory;
 import dev.webfx.platform.util.Strings;
-import dev.webfx.platform.util.keyobject.*;
 import dev.webfx.platform.util.serviceloader.SingleServiceProvider;
 
 import java.util.ServiceLoader;
@@ -131,7 +133,7 @@ public final class Json {
         return mergeInto(src, dst, src.keys());
     }
 
-    public static JsonObject mergeInto(ReadOnlyKeyObject src, JsonObject dst, ReadOnlyIndexedArray keys) {
+    public static JsonObject mergeInto(ReadOnlyAstObject src, JsonObject dst, ReadOnlyAstArray keys) {
         for (int i = 0, size = keys.size(); i < size; i++) {
             String key = keys.getString(i);
             Object value = src.get(key);
