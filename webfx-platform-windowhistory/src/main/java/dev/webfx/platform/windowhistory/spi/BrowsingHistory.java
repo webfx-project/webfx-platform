@@ -3,7 +3,7 @@ package dev.webfx.platform.windowhistory.spi;
 import dev.webfx.platform.windowlocation.spi.PathStateLocation;
 import dev.webfx.platform.async.Future;
 import dev.webfx.platform.async.Handler;
-import dev.webfx.platform.json.ReadOnlyJsonObject;
+import dev.webfx.platform.ast.json.ReadOnlyJsonObject;
 
 import java.util.function.Function;
 

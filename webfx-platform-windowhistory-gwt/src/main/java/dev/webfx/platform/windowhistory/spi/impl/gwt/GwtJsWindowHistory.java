@@ -1,8 +1,8 @@
 package dev.webfx.platform.windowhistory.spi.impl.gwt;
 
 import dev.webfx.platform.windowhistory.spi.impl.gwt.jsinterop.Window;
-import dev.webfx.platform.json.spi.impl.gwt.GwtJsonObject;
-import dev.webfx.platform.json.ReadOnlyJsonObject;
+import dev.webfx.platform.ast.json.spi.impl.gwt.GwtJsonObject;
+import dev.webfx.platform.ast.json.ReadOnlyJsonObject;
 import dev.webfx.platform.windowhistory.spi.impl.web.JsWindowHistory;
 import dev.webfx.platform.async.Handler;
 import java.util.function.Function;

@@ -6,7 +6,7 @@ import org.teavm.jso.typedarrays.*;
 import dev.webfx.platform.webassembly.WebAssemblyInstance;
 import dev.webfx.platform.webassembly.WebAssemblyMemoryBufferReader;
 import dev.webfx.platform.webassembly.WebAssemblyMemoryBufferWriter;
-import dev.webfx.platform.json.Json;
+import dev.webfx.platform.ast.json.Json;
 
 /**
  * @author Bruno Salmon
