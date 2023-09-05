@@ -1,6 +1,6 @@
-package dev.webfx.platform.file.spi;
+package dev.webfx.platform.blob.spi;
 
-import dev.webfx.platform.file.Blob;
+import dev.webfx.platform.blob.Blob;
 import dev.webfx.platform.util.serviceloader.SingleServiceProvider;
 
 import java.util.ServiceLoader;

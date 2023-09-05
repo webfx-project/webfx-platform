@@ -3,8 +3,8 @@ package dev.webfx.platform.fetch.spi.impl.gwt;
 import dev.webfx.platform.async.Future;
 import dev.webfx.platform.fetch.Headers;
 import dev.webfx.platform.fetch.Response;
-import dev.webfx.platform.file.Blob;
-import dev.webfx.platform.file.spi.impl.gwt.GwtBlob;
+import dev.webfx.platform.blob.Blob;
+import dev.webfx.platform.blob.spi.impl.gwt.GwtBlob;
 import dev.webfx.platform.streams.ReadableStream;
 import dev.webfx.platform.streams.spi.impl.gwt.GwtReadableStream;
 

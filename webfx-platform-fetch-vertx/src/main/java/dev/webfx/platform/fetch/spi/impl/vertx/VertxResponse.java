@@ -4,7 +4,7 @@ import dev.webfx.platform.async.Future;
 import dev.webfx.platform.async.Promise;
 import dev.webfx.platform.fetch.Headers;
 import dev.webfx.platform.fetch.Response;
-import dev.webfx.platform.file.Blob;
+import dev.webfx.platform.blob.Blob;
 import dev.webfx.platform.streams.ReadableStream;
 import io.vertx.core.http.HttpClientResponse;
 

@@ -1,5 +1,6 @@
 package dev.webfx.platform.file;
 
+import dev.webfx.platform.blob.Blob;
 import dev.webfx.platform.file.spi.FileProvider;
 
 import java.util.List;

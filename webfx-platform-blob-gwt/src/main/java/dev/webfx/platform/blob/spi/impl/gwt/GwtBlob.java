@@ -1,6 +1,6 @@
-package dev.webfx.platform.file.spi.impl.gwt;
+package dev.webfx.platform.blob.spi.impl.gwt;
 
-import dev.webfx.platform.file.Blob;
+import dev.webfx.platform.blob.Blob;
 import elemental2.dom.URL;
 
 /**

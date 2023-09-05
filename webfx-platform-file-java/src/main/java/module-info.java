@@ -8,13 +8,13 @@ module webfx.platform.file.java {
     // Direct dependencies modules
     requires java.base;
     requires webfx.platform.async;
+    requires webfx.platform.blob.java;
     requires webfx.platform.file;
 
     // Exported packages
     exports dev.webfx.platform.file.spi.impl.java;
 
     // Provided services
-    provides dev.webfx.platform.file.spi.BlobProvider with dev.webfx.platform.file.spi.impl.java.JavaBlobProvider;
     provides dev.webfx.platform.file.spi.FileProvider with dev.webfx.platform.file.spi.impl.java.JavaFileProvider;
 
 }
