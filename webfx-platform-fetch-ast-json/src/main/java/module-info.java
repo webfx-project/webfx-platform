@@ -4,7 +4,7 @@ module webfx.platform.fetch.ast.json {
 
     // Direct dependencies modules
     requires webfx.platform.ast;
-    requires webfx.platform.ast.json;
+    requires webfx.platform.ast.json.plugin;
     requires transitive webfx.platform.async;
     requires webfx.platform.fetch;
 

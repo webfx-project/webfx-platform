@@ -13,7 +13,7 @@
     <dependencies>
         <used-by-source-modules>
             <module transitive="true">webfx-platform-async</module>
-            <module transitive="true">webfx-platform-ast-json</module>
+            <module transitive="true">webfx-platform-ast-json-plugin</module>
         </used-by-source-modules>
     </dependencies>
 

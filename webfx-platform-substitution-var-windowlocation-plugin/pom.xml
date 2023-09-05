@@ -11,31 +11,25 @@
         <version>0.1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>webfx-platform-fetch-ast-json</artifactId>
+    <artifactId>webfx-platform-substitution-var-windowlocation-plugin</artifactId>
 
     <dependencies>
 
         <dependency>
             <groupId>dev.webfx</groupId>
-            <artifactId>webfx-platform-ast</artifactId>
+            <artifactId>webfx-platform-console</artifactId>
             <version>0.1.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>dev.webfx</groupId>
-            <artifactId>webfx-platform-ast-json-plugin</artifactId>
+            <artifactId>webfx-platform-substitution-var</artifactId>
             <version>0.1.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>dev.webfx</groupId>
-            <artifactId>webfx-platform-async</artifactId>
-            <version>0.1.0-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>dev.webfx</groupId>
-            <artifactId>webfx-platform-fetch</artifactId>
+            <artifactId>webfx-platform-windowlocation</artifactId>
             <version>0.1.0-SNAPSHOT</version>
         </dependency>
 

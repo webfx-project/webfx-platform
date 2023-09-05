@@ -8,7 +8,7 @@ module webfx.platform.ast.json.vertx {
     // Direct dependencies modules
     requires io.vertx.core;
     requires java.base;
-    requires webfx.platform.ast.json;
+    requires webfx.platform.ast.json.plugin;
     requires webfx.platform.util;
 
     // Exported packages

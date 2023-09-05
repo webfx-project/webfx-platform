@@ -6,7 +6,7 @@
 module webfx.platform.ast.json.java {
 
     // Direct dependencies modules
-    requires webfx.platform.ast.json;
+    requires webfx.platform.ast.json.plugin;
 
     // Exported packages
     exports dev.webfx.platform.ast.json.spi.impl.java;
