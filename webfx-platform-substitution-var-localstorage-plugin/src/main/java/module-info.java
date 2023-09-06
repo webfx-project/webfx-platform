@@ -4,7 +4,6 @@ module webfx.platform.substitution.var.localstorage.plugin {
 
     // Direct dependencies modules
     requires java.base;
-    requires webfx.platform.console;
     requires webfx.platform.storage;
     requires webfx.platform.substitution.var;
 

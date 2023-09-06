@@ -38,7 +38,7 @@ public class JavaFileConfigLoader implements ConfigLoaderProvider {
                 } else if (!configDirectory.isDirectory()) {
                     Console.log("⚠️ Specified configuration directory is actually not a directory: " + configDirPath);
                 } else {
-                    Console.log("INFO: Configuration directory location: " + configDirPath);
+                    Console.log("✓ Configuration directory location: " + configDirPath);
                     readConfigDirectory(configDirectory, fileConfigs);
                     config = ConfigMerger.mergeConfigs(fileConfigs.toArray(Config[]::new));
                 }

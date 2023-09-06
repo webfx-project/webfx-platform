@@ -1,7 +1,6 @@
 package dev.webfx.platform.substitution.var.spi.impl.windowlocation;
 
-import dev.webfx.platform.console.Console;
-import dev.webfx.platform.substitution.var.spi.VariablesResolver;
+import dev.webfx.platform.substitution.var.spi.impl.VariablesResolverBase;
 import dev.webfx.platform.windowlocation.WindowLocation;
 
 import java.util.Optional;
@@ -9,7 +8,7 @@ import java.util.Optional;
 /**
  * @author Bruno Salmon
  */
-public class WindowLocationVariablesResolver implements VariablesResolver {
+public class WindowLocationVariablesResolver extends VariablesResolverBase {
 
     @Override
     public Optional<String> resolveVariable(String variableName) {
@@ -34,9 +33,7 @@ public class WindowLocationVariablesResolver implements VariablesResolver {
                 value = String.valueOf(WindowLocation.getProtocol().equalsIgnoreCase("https"));
                 break;
         }
-        if (value != null)
-            Console.log("INFO: " + variableName + " was resolved from window location");
-        return value != null ? Optional.of(value) : Optional.empty();
+        return passVariableSearchResult(variableName, value, "window location");
     }
 
 }

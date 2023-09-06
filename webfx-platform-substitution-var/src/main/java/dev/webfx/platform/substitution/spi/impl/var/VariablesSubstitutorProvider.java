@@ -1,8 +1,8 @@
 package dev.webfx.platform.substitution.spi.impl.var;
 
-import dev.webfx.platform.console.Console;
 import dev.webfx.platform.substitution.spi.SubstitutorProvider;
 import dev.webfx.platform.substitution.var.spi.VariablesResolver;
+import dev.webfx.platform.substitution.var.spi.impl.SkipRepeatLogger;
 import dev.webfx.platform.util.serviceloader.MultipleServiceProviders;
 
 import java.util.Optional;
@@ -29,7 +29,7 @@ public class VariablesSubstitutorProvider implements SubstitutorProvider {
             Optional<String> variableValue = resolveVariableToken(variableToken);
             // If we can't, we don't do any replacement, but we log a warning reporting the variable couldn't be resolved
             if (variableValue.isEmpty())
-                Console.log("⚠️ WARNING: Configuration variable " + variableToken + " couldn't be resolved");
+                SkipRepeatLogger.skipRepeatLog("⚠️ Configuration variable ‹ " + variableToken + " › couldn't be resolved");
             else {
                 // The variable has been resolved. Note that the variable value may be another expression composed of
                 // other variables, so we resolve it to cover this case.

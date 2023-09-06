@@ -4,7 +4,6 @@ module webfx.platform.substitution.var.windowlocation.plugin {
 
     // Direct dependencies modules
     requires java.base;
-    requires webfx.platform.console;
     requires webfx.platform.substitution.var;
     requires webfx.platform.windowlocation;
 
