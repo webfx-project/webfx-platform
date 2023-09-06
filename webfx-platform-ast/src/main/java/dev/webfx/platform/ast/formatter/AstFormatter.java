@@ -26,7 +26,11 @@ public final class AstFormatter {
     }
 
     private static AstFormatterProvider getProvider(String format) {
-        return PROVIDERS.get(format);
+        AstFormatterProvider provider = PROVIDERS.get(format);
+        if (provider == null) {
+            throw new IllegalArgumentException("Unknown or unloaded format: " + format);
+        }
+        return provider;
     }
 
     public static String formatObject(ReadOnlyAstObject astObject, String format) {
