@@ -5,6 +5,7 @@ import dev.webfx.platform.ast.ReadOnlyAstObjectWrapper;
 import dev.webfx.platform.ast.ReadOnlyAstArray;
 import dev.webfx.platform.ast.ReadOnlyAstObject;
 import dev.webfx.platform.ast.AST;
+import dev.webfx.platform.substitution.Substitutor;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -52,16 +53,17 @@ public abstract class ConfigImpl extends ReadOnlyAstObjectWrapper implements Con
             value = configArrays.get(key);
             if (value == null) {
                 value = super.get(key);
-                if (value instanceof ReadOnlyAstObject) { // A key object will be wrapped into a child config
+                if (AST.isObject(value)) { // A key object will be wrapped into a child config
                     ChildConfig childConfig = new ChildConfig(getRoot(), (ReadOnlyAstObject) value);
                     childConfigs.put(key, childConfig);
                     value = childConfig;
-                } else if (value instanceof ReadOnlyAstArray) { // An indexed array will be wrapped into a child array
+                } else if (AST.isArray(value)) { // An indexed array will be wrapped into a child array
                     ConfigArray configArray = new ConfigArray(this, (ReadOnlyAstArray) value);
                     configArrays.put(key, configArray);
                     value = configArray;
                 } else if (value instanceof String) {
-                    value = dev.webfx.platform.substitution.Substitutor.substitute((String) value);
+                    // TODO: Should be substitution optional?
+                    value = Substitutor.substitute((String) value);
                 }
             }
         }

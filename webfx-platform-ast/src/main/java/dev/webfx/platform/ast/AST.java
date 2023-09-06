@@ -28,6 +28,26 @@ public final class AST {
         return AstParser.parseObject(text, format);
     }
 
+    public static boolean isNode(Object value) {
+        return value instanceof ReadOnlyAstNode;
+    }
+
+    public static boolean isObject(Object value) {
+        return isNode(value) && isObject((ReadOnlyAstNode) value);
+    }
+
+    public static boolean isObject(ReadOnlyAstNode value) {
+        return value.isObject();
+    }
+
+    public static boolean isArray(Object value) {
+        return isNode(value) && isArray((ReadOnlyAstNode) value);
+    }
+
+    public static boolean isArray(ReadOnlyAstNode value) {
+        return value.isArray();
+    }
+
     public static ReadOnlyAstArray parseArray(String text, String format) {
         return AstParser.parseArray(text, format);
     }
@@ -206,19 +226,19 @@ public final class AST {
     }
 
     public static AstObject cloneObject(ReadOnlyAstObject astObject, AstFactory factory) {
-        return (AstObject) new AstCloneVisitor(factory, false).visitTreeObject(astObject);
+        return (AstObject) new AstCloneVisitor(factory, false).visitAstObject(astObject);
     }
 
     public static AstArray cloneArray(ReadOnlyAstArray array, AstFactory factory) {
-        return (AstArray) new AstCloneVisitor(factory, false).visitTreeArray(array);
+        return (AstArray) new AstCloneVisitor(factory, false).visitAstArray(array);
     }
 
     public static AstObject nativeObject(ReadOnlyAstObject astObject, NativeAstFactory factory) {
-        return (AstObject) new AstCloneVisitor(factory, true).visitTreeObject(astObject);
+        return (AstObject) new AstCloneVisitor(factory, true).visitAstObject(astObject);
     }
 
     public static AstArray nativeArray(ReadOnlyAstArray array, NativeAstFactory factory) {
-        return (AstArray) new AstCloneVisitor(factory, true).visitTreeArray(array);
+        return (AstArray) new AstCloneVisitor(factory, true).visitAstArray(array);
     }
 
     public static Object unwrapNativeObject(ReadOnlyAstObject astObject, NativeAstFactory factory) {

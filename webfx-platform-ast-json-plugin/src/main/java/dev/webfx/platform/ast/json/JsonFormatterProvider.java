@@ -22,16 +22,16 @@ public class JsonFormatterProvider implements AstFormatterProvider {
         //if (treeNode instanceof JsonElement)
         //    return ((JsonElement) treeNode).toJsonString();
         // For Java Json elements
-        return new FormatterVisitor().visitTreeNode(treeNode).toString();
+        return new FormatterVisitor().visitAstNode(treeNode).toString();
     }
 
     static class FormatterVisitor extends AstVisitor {
         private final StringBuilder sb = new StringBuilder();
 
         @Override
-        public Object visitTreeObject(ReadOnlyAstObject astObject) {
+        public Object visitAstObject(ReadOnlyAstObject astObject) {
             sb.append('{');
-            super.visitTreeObject(astObject);
+            super.visitAstObject(astObject);
             return sb.append('}');
         }
 
@@ -44,9 +44,9 @@ public class JsonFormatterProvider implements AstFormatterProvider {
         }
 
         @Override
-        public Object visitTreeArray(ReadOnlyAstArray array) {
+        public Object visitAstArray(ReadOnlyAstArray array) {
             sb.append('[');
-            super.visitTreeArray(array);
+            super.visitAstArray(array);
             return sb.append(']');
         }
 

@@ -20,10 +20,10 @@ public final class AstCloneVisitor extends AstVisitor {
     }
 
     @Override
-    public Object visitTreeObject(ReadOnlyAstObject astObject) {
+    public Object visitAstObject(ReadOnlyAstObject astObject) {
         AstObject oldCloningObject = cloningObject;
         AstObject newCloningObject = cloningObject = platform && nativeFactory.isNativeObject(astObject) && astObject instanceof AstObject ? (AstObject) astObject : factory.createObject();
-        super.visitTreeObject(astObject);
+        super.visitAstObject(astObject);
         cloningObject = oldCloningObject;
         return newCloningObject;
     }
@@ -36,10 +36,10 @@ public final class AstCloneVisitor extends AstVisitor {
     }
 
     @Override
-    public Object visitTreeArray(ReadOnlyAstArray array) {
+    public Object visitAstArray(ReadOnlyAstArray array) {
         AstArray oldCloningArray = cloningArray;
         AstArray newCloningArray = cloningArray = platform && nativeFactory.isNativeArray(array) && array instanceof AstArray ? (AstArray) array : factory.createArray();
-        super.visitTreeArray(array);
+        super.visitAstArray(array);
         cloningArray = oldCloningArray;
         return newCloningArray;
     }

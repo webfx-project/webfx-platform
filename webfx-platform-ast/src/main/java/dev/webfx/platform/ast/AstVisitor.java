@@ -5,25 +5,25 @@ package dev.webfx.platform.ast;
  */
 public abstract class AstVisitor {
 
-    public Object visitTreeElement(Object element) {
-        if (element instanceof ReadOnlyAstNode)
-            return visitTreeNode((ReadOnlyAstNode) element);
+    public Object visitAstElement(Object element) {
+        if (AST.isNode(element))
+            return visitAstNode((ReadOnlyAstNode) element);
         else
             return visitScalar(element);
     }
 
-    public Object visitTreeNode(ReadOnlyAstNode treeNode) {
-        if (treeNode != null) {
-            if (treeNode.isObject()) {
-                return visitTreeObject((ReadOnlyAstObject) treeNode);
-            } else if (treeNode.isArray()) {
-                return visitTreeArray((ReadOnlyAstArray) treeNode);
+    public Object visitAstNode(ReadOnlyAstNode astNode) {
+        if (astNode != null) {
+            if (astNode.isObject()) {
+                return visitAstObject((ReadOnlyAstObject) astNode);
+            } else if (astNode.isArray()) {
+                return visitAstArray((ReadOnlyAstArray) astNode);
             }
         }
         return null;
     }
 
-    public Object visitTreeObject(ReadOnlyAstObject astObject) {
+    public Object visitAstObject(ReadOnlyAstObject astObject) {
         ReadOnlyAstArray keys = astObject.keys();
         for (int i = 0, size = keys.size(); i < size; i++) {
             String key = keys.getString(i);
@@ -33,10 +33,10 @@ public abstract class AstVisitor {
     }
 
     protected Object visitKeyValue(String key, Object value, int keyIndex, int keyCount, ReadOnlyAstObject astObject) {
-        return visitTreeElement(value);
+        return visitAstElement(value);
     }
 
-    public Object visitTreeArray(ReadOnlyAstArray array) {
+    public Object visitAstArray(ReadOnlyAstArray array) {
         for (int i = 0, size = array.size(); i < size; i++) {
             Object element = array.getElement(i);
             visitIndexedValue(element, i, size, array);
@@ -45,7 +45,7 @@ public abstract class AstVisitor {
     }
 
     protected Object visitIndexedValue(Object value, int keyIndex, int keyCount, ReadOnlyAstArray array) {
-        return visitTreeElement(value);
+        return visitAstElement(value);
     }
 
     protected Object visitScalar(Object scalar) {

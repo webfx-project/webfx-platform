@@ -32,11 +32,11 @@ public interface ReadOnlyAstObject extends ReadOnlyAstNode {
     <T> T get(String key);
 
     default boolean isObject(String key) {
-        return get(key) instanceof ReadOnlyAstObject;
+        return AST.isObject(get(key));
     }
 
     default boolean isArray(String key) {
-        return get(key) instanceof ReadOnlyAstArray;
+        return AST.isArray(get(key));
     }
 
     default boolean isScalar(String key) {

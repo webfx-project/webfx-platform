@@ -41,7 +41,7 @@ public final class ReadOnlyMergedAstObject implements ReadOnlyAstObject {
             for (ReadOnlyAstObject astObject : originalAstObjects) {
                 value = astObject.get(key);
                 if (value != null) {
-                    if (!deepMerge || !(value instanceof ReadOnlyAstObject))
+                    if (!deepMerge || !AST.isObject(value))
                         break;
                     if (childAstObject == null)
                         childAstObject = (ReadOnlyAstObject) value;
