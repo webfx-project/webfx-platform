@@ -1,7 +1,7 @@
 package dev.webfx.platform.webworker.spi.impl.java;
 
 import dev.webfx.platform.uischeduler.UiScheduler;
-import dev.webfx.platform.json.ReadOnlyJsonObject;
+import dev.webfx.platform.ast.json.ReadOnlyJsonObject;
 import dev.webfx.platform.console.Console;
 import dev.webfx.platform.webworker.spi.base.JavaCodedWebWorkerBase;
 import dev.webfx.platform.webworker.spi.base.PlatformWebWorkerBase;

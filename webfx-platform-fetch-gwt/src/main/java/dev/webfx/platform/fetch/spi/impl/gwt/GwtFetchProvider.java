@@ -5,8 +5,8 @@ import dev.webfx.platform.fetch.FetchOptions;
 import dev.webfx.platform.fetch.Headers;
 import dev.webfx.platform.fetch.Response;
 import dev.webfx.platform.fetch.spi.FetchProvider;
-import dev.webfx.platform.json.Json;
-import dev.webfx.platform.json.JsonObject;
+import dev.webfx.platform.ast.json.Json;
+import dev.webfx.platform.ast.json.JsonObject;
 import elemental2.dom.DomGlobal;
 import elemental2.dom.RequestInit;
 import jsinterop.base.Js;
@@ -20,6 +20,7 @@ public class GwtFetchProvider implements FetchProvider {
     public Future<Response> fetch(String url, FetchOptions options) {
         RequestInit requestInit = null;
         if (options != null) {
+            // TODO: Should this Json be replaced with generic AST code?
             JsonObject js = Json.createObject();
             js.set("method", options.getMethod());
             js.set("mode", options.getMode());

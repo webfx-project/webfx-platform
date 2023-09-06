@@ -94,33 +94,37 @@
         <module>webfx-platform-arch</module>
         <module>webfx-platform-arch-gwt</module>
         <module>webfx-platform-arch-java</module>
-        <module>webfx-platform-ast-yaml</module>
+        <module>webfx-platform-ast</module>
+        <module>webfx-platform-ast-json-gwt</module>
+        <module>webfx-platform-ast-json-java</module>
+        <module>webfx-platform-ast-json-plugin</module>
+        <module>webfx-platform-ast-json-teavm</module>
+        <module>webfx-platform-ast-json-vertx</module>
+        <module>webfx-platform-ast-yaml-plugin</module>
         <module>webfx-platform-async</module>
         <module>webfx-platform-audio</module>
         <module>webfx-platform-audio-gluon</module>
+        <module>webfx-platform-blob</module>
+        <module>webfx-platform-blob-gwt</module>
+        <module>webfx-platform-blob-java</module>
         <module>webfx-platform-boot</module>
         <module>webfx-platform-boot-gwt</module>
         <module>webfx-platform-boot-java</module>
         <module>webfx-platform-boot-vertx</module>
         <module>webfx-platform-conf</module>
-        <module>webfx-platform-conf-file-java</module>
+        <module>webfx-platform-conf-file-java-plugin</module>
         <module>webfx-platform-console</module>
         <module>webfx-platform-console-gwt</module>
         <module>webfx-platform-console-java</module>
         <module>webfx-platform-fetch</module>
+        <module>webfx-platform-fetch-ast-json</module>
         <module>webfx-platform-fetch-gwt</module>
         <module>webfx-platform-fetch-java</module>
-        <module>webfx-platform-fetch-json</module>
         <module>webfx-platform-fetch-vertx</module>
         <module>webfx-platform-file</module>
         <module>webfx-platform-file-gwt</module>
         <module>webfx-platform-file-java</module>
         <module>webfx-platform-javabase-emul-gwt</module>
-        <module>webfx-platform-json</module>
-        <module>webfx-platform-json-gwt</module>
-        <module>webfx-platform-json-java</module>
-        <module>webfx-platform-json-teavm</module>
-        <module>webfx-platform-json-vertx</module>
         <module>webfx-platform-meta</module>
         <module>webfx-platform-os</module>
         <module>webfx-platform-os-gluon</module>
@@ -145,11 +149,11 @@
         <module>webfx-platform-storagelocation-java</module>
         <module>webfx-platform-substitution</module>
         <module>webfx-platform-substitution-var</module>
-        <module>webfx-platform-substitution-var-conf</module>
-        <module>webfx-platform-substitution-var-env</module>
-        <module>webfx-platform-substitution-var-localstorage</module>
-        <module>webfx-platform-substitution-var-sysprop</module>
-        <module>webfx-platform-substitution-var-windowlocation</module>
+        <module>webfx-platform-substitution-var-conf-plugin</module>
+        <module>webfx-platform-substitution-var-env-plugin</module>
+        <module>webfx-platform-substitution-var-localstorage-plugin</module>
+        <module>webfx-platform-substitution-var-sysprop-plugin</module>
+        <module>webfx-platform-substitution-var-windowlocation-plugin</module>
         <module>webfx-platform-uischeduler</module>
         <module>webfx-platform-uischeduler-gwt</module>
         <module>webfx-platform-useragent</module>

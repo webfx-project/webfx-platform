@@ -6,7 +6,7 @@ import dev.webfx.platform.windowhistory.spi.BrowsingHistoryLocation;
 import dev.webfx.platform.windowlocation.spi.PathStateLocation;
 import dev.webfx.platform.windowlocation.spi.impl.PathLocationImpl;
 import dev.webfx.platform.windowlocation.spi.impl.PathStateLocationImpl;
-import dev.webfx.platform.json.ReadOnlyJsonObject;
+import dev.webfx.platform.ast.json.ReadOnlyJsonObject;
 import dev.webfx.platform.util.Strings;
 import dev.webfx.platform.async.Future;
 import dev.webfx.platform.async.Handler;

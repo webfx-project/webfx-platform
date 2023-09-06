@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+
+    <exported-packages>
+        <source-packages/>
+        <resource-packages/>
+    </exported-packages>
+
+    <dependencies>
+        <used-by-source-modules/>
+    </dependencies>
+
+    <providers>
+        <provider interface="dev.webfx.platform.ast.formatter.spi.AstFormatterProvider">dev.webfx.platform.ast.yaml.formatter.YamlFormatterProvider</provider>
+        <provider interface="dev.webfx.platform.ast.parser.spi.AstParserProvider">dev.webfx.platform.ast.yaml.parser.YamlParserProvider</provider>
+    </providers>
+
+    <maven-pom-manual>
+        <build>
+            <plugins>
+
+                <!-- Calling the Java CUP plugin to generate JavaCupYamlParser.java and YamlSymbols.java from the YamlParser.cup grammar file -->
+                <plugin>
+                    <groupId>com.github.vbmacher</groupId>
+                    <artifactId>cup-maven-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>yaml-parser</id>
+                            <goals>
+                                <goal>generate</goal>
+                            </goals>
+                            <configuration>
+                                <cupDefinition>src/main/java/dev/webfx/platform/ast/yaml/parser/javacup/YamlParser.cup</cupDefinition>
+                                <outputDirectory>src/main/java</outputDirectory>
+                                <className>JavaCupYamlParser</className>
+                                <symbolsName>YamlSymbols</symbolsName>
+                                <packageName>dev.webfx.platform.ast.yaml.parser.javacup</packageName>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <!-- Calling the JFlex plugin to generate YamlLexer.java from the YamlLexer.flex lexical file -->
+                <plugin>
+                    <groupId>de.jflex</groupId>
+                    <artifactId>jflex-maven-plugin</artifactId>
+                    <configuration>
+                        <outputDirectory>src/main/java</outputDirectory>
+                        <lexDefinitions>
+                            <lexDefinition>src/main/java/dev/webfx/platform/ast/yaml/parser/jflex/YamlLexer.flex</lexDefinition>
+                        </lexDefinitions>
+                    </configuration>
+                </plugin>
+
+            </plugins>
+        </build>
+    </maven-pom-manual>
+
+</project>

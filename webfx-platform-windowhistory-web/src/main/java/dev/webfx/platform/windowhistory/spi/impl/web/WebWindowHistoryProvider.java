@@ -1,6 +1,6 @@
 package dev.webfx.platform.windowhistory.spi.impl.web;
 
-import dev.webfx.platform.json.ReadOnlyJsonObject;
+import dev.webfx.platform.ast.json.ReadOnlyJsonObject;
 import dev.webfx.platform.uischeduler.UiScheduler;
 import dev.webfx.platform.util.Objects;
 import dev.webfx.platform.util.Strings;

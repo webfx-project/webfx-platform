@@ -1,5 +1,6 @@
 package dev.webfx.platform.file.spi.impl.gwt;
 
+import dev.webfx.platform.blob.spi.impl.gwt.GwtBlob;
 import dev.webfx.platform.file.File;
 
 /**

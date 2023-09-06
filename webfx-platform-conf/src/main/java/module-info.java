@@ -4,6 +4,7 @@ module webfx.platform.conf {
 
     // Direct dependencies modules
     requires java.base;
+    requires webfx.platform.ast;
     requires webfx.platform.async;
     requires webfx.platform.resource;
     requires webfx.platform.substitution;

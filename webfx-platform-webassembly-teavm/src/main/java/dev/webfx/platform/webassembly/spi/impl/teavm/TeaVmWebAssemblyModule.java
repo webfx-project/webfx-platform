@@ -1,10 +1,10 @@
 package dev.webfx.platform.webassembly.spi.impl.teavm;
 
-import dev.webfx.platform.json.JsonObject;
+import dev.webfx.platform.ast.json.JsonObject;
 import dev.webfx.platform.webassembly.WebAssemblyImport;
 import dev.webfx.platform.webassembly.WebAssemblyInstance;
 import dev.webfx.platform.webassembly.WebAssemblyModule;
-import dev.webfx.platform.json.Json;
+import dev.webfx.platform.ast.json.Json;
 import dev.webfx.platform.async.Future;
 import dev.webfx.platform.async.Promise;
 import org.teavm.jso.JSBody;
