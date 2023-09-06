@@ -6,6 +6,7 @@ module webfx.platform.conf.file.java.plugin {
     requires java.base;
     requires webfx.platform.async;
     requires webfx.platform.conf;
+    requires webfx.platform.console;
 
     // Exported packages
     exports dev.webfx.platform.conf.spi.impl.file.java;
