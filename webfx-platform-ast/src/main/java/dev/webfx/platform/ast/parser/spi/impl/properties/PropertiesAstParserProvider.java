@@ -44,4 +44,9 @@ public class PropertiesAstParserProvider implements AstParserProvider {
     public ReadOnlyAstNode parseNode(String text) {
         return parseObject(text);
     }
+
+    @Override
+    public <T> T parseAny(String text) {
+        return null;
+    }
 }

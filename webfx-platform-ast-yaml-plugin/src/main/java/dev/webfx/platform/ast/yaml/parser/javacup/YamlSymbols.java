@@ -8,35 +8,49 @@ package dev.webfx.platform.ast.yaml.parser.javacup;
 /** CUP generated interface containing symbol constants. */
 public interface YamlSymbols {
   /* terminals */
-  public static final int MINUS = 10;
-  public static final int COLON = 6;
-  public static final int NUMBER = 9;
-  public static final int BOOLEAN = 11;
-  public static final int NULL = 8;
-  public static final int STRING = 12;
+  public static final int RBRACK = 7;
+  public static final int INDENT_OPEN = 18;
+  public static final int PIPE = 10;
+  public static final int DOCSTART = 2;
+  public static final int LBRACK = 6;
+  public static final int RCURLY = 5;
+  public static final int INDENT_SAME = 19;
+  public static final int DASH_ARRAY = 13;
+  public static final int COLON = 8;
+  public static final int UNQUOTED_KEY = 17;
+  public static final int LCURLY = 4;
+  public static final int BOOLEAN = 14;
+  public static final int UNQUOTED_STRING = 16;
+  public static final int COMMA = 9;
   public static final int EOF = 0;
-  public static final int RBRACK = 5;
+  public static final int NUMBER = 12;
+  public static final int DOCEND = 3;
+  public static final int INDENT_CLOSE = 20;
   public static final int error = 1;
-  public static final int COMMA = 7;
-  public static final int RCURLY = 3;
-  public static final int IDENTIFIER = 13;
-  public static final int LBRACK = 4;
-  public static final int LCURLY = 2;
+  public static final int NULL = 11;
+  public static final int QUOTED_STRING = 15;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
+  "DOCSTART",
+  "DOCEND",
   "LCURLY",
   "RCURLY",
   "LBRACK",
   "RBRACK",
   "COLON",
   "COMMA",
+  "PIPE",
   "NULL",
   "NUMBER",
-  "MINUS",
+  "DASH_ARRAY",
   "BOOLEAN",
-  "STRING",
-  "IDENTIFIER"
+  "QUOTED_STRING",
+  "UNQUOTED_STRING",
+  "UNQUOTED_KEY",
+  "INDENT_OPEN",
+  "INDENT_SAME",
+  "INDENT_CLOSE"
   };
 }
 

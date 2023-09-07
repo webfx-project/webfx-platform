@@ -29,4 +29,9 @@ public final class YamlParserProvider implements AstParserProvider {
     public ReadOnlyAstNode parseNode(String text) {
         return parseObject(text);
     }
+
+    @Override
+    public <T> T parseAny(String text) {
+        return YamlParser.parseAny(text);
+    }
 }

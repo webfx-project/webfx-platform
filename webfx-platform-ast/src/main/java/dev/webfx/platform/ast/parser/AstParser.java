@@ -44,4 +44,8 @@ public final class AstParser {
         return getProvider(format).parseNode(text);
     }
 
+    public static <T> T parseAny(String text, String format) {
+        return getProvider(format).parseAny(text);
+    }
+
 }

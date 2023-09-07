@@ -8,10 +8,18 @@ public interface AstParserProvider {
 
     String format();
 
-    ReadOnlyAstObject parseObject(String text);
+    default ReadOnlyAstObject parseObject(String text) {
+        return parseAny(text);
+    }
 
-    ReadOnlyAstArray parseArray(String text);
+    default ReadOnlyAstArray parseArray(String text) {
+        return parseAny(text);
+    }
 
-    ReadOnlyAstNode parseNode(String text);
+    default ReadOnlyAstNode parseNode(String text) {
+        return parseAny(text);
+    }
+
+    <T> T parseAny(String text);
 
 }

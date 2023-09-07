@@ -20,9 +20,15 @@ public final class YamlParser {
         return parseWithJavaCup(text);
     }
 
+    public static <T> T parseAny(String text) {
+        return parseWithJavaCup(text);
+    }
+
     private static <T> T parseWithJavaCup(String text) {
         if (text == null)
             return null;
+        if (!text.endsWith("\n"))
+            text = text + "\n";
         try {
             return (T) new JavaCupYamlParser(new YamlLexer(new StringReader(text))).parse().value;
         } catch (Throwable e) {

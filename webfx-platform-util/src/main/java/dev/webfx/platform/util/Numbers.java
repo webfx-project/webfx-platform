@@ -141,7 +141,10 @@ public final class Numbers {
     }
 
     public static Number parseShortestNumber(String s) {
-        return toShortestNumber(parseLong(s));
+        Long longValue = parseLong(s);
+        if (longValue == null)
+            return Double.valueOf(s);
+        return toShortestNumber(longValue);
     }
 
     public static Integer toInteger(Object value) {

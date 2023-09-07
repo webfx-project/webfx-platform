@@ -8,7 +8,6 @@ package dev.webfx.platform.ast.yaml.parser.javacup;
 import dev.webfx.platform.ast.AST;
 import dev.webfx.platform.ast.AstArray;
 import dev.webfx.platform.ast.AstObject;
-import dev.webfx.platform.util.Numbers;
 import dev.webfx.platform.util.tuples.Pair;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
@@ -34,13 +33,24 @@ public class JavaCupYamlParser extends java_cup.runtime.lr_parser {
   /** Production table. */
   protected static final short _production_table[][] = 
     unpackFromStrings(new String[] {
-    "\000\024\000\002\002\004\000\002\002\003\000\002\002" +
-    "\003\000\002\002\003\000\002\003\003\000\002\004\003" +
-    "\000\002\004\004\000\002\004\003\000\002\004\003\000" +
-    "\002\004\003\000\002\004\003\000\002\005\005\000\002" +
-    "\005\004\000\002\006\005\000\002\006\003\000\002\007" +
-    "\005\000\002\007\004\000\002\010\005\000\002\010\003" +
-    "\000\002\011\005" });
+    "\000\071\000\002\002\004\000\002\002\003\000\002\002" +
+    "\004\000\002\002\005\000\002\002\004\000\002\002\004" +
+    "\000\002\002\003\000\002\003\003\000\002\003\003\000" +
+    "\002\003\003\000\002\003\003\000\002\004\003\000\002" +
+    "\004\003\000\002\004\003\000\002\004\003\000\002\005" +
+    "\003\000\002\005\003\000\002\006\003\000\002\006\003" +
+    "\000\002\007\003\000\002\007\003\000\002\010\003\000" +
+    "\002\010\003\000\002\011\005\000\002\011\004\000\002" +
+    "\012\005\000\002\012\003\000\002\013\005\000\002\013" +
+    "\004\000\002\014\005\000\002\014\004\000\002\015\005" +
+    "\000\002\015\003\000\002\021\003\000\002\021\003\000" +
+    "\002\020\004\000\002\022\005\000\002\022\003\000\002" +
+    "\023\004\000\002\023\003\000\002\024\005\000\002\025" +
+    "\004\000\002\026\003\000\002\026\003\000\002\026\005" +
+    "\000\002\026\005\000\002\026\005\000\002\027\005\000" +
+    "\002\030\004\000\002\030\003\000\002\031\006\000\002" +
+    "\031\007\000\002\031\010\000\002\032\004\000\002\033" +
+    "\003\000\002\033\003\000\002\033\003" });
 
   /** Access to production table. */
   public short[][] production_table() {return _production_table;}
@@ -48,33 +58,84 @@ public class JavaCupYamlParser extends java_cup.runtime.lr_parser {
   /** Parse-action table. */
   protected static final short[][] _action_table = 
     unpackFromStrings(new String[] {
-    "\000\037\000\022\004\017\006\014\012\010\013\005\014" +
-    "\004\015\006\016\011\017\013\001\002\000\004\013\041" +
-    "\001\002\000\012\002\ufffc\005\ufffc\007\ufffc\011\ufffc\001" +
-    "\002\000\012\002\ufffa\005\ufffa\007\ufffa\011\ufffa\001\002" +
-    "\000\012\002\ufffe\005\ufffe\007\ufffe\011\ufffe\001\002\000" +
-    "\012\002\ufff9\005\ufff9\007\ufff9\011\ufff9\001\002\000\012" +
-    "\002\ufff8\005\ufff8\007\ufff8\011\ufff8\001\002\000\004\002" +
-    "\040\001\002\000\012\002\ufff7\005\ufff7\007\ufff7\011\ufff7" +
-    "\001\002\000\024\004\017\006\014\007\033\012\010\013" +
-    "\005\014\004\015\006\016\011\017\013\001\002\000\012" +
-    "\002\uffff\005\uffff\007\uffff\011\uffff\001\002\000\012\002" +
-    "\000\005\000\007\000\011\000\001\002\000\006\005\024" +
-    "\017\021\001\002\000\012\002\ufffd\005\ufffd\007\ufffd\011" +
-    "\ufffd\001\002\000\004\010\030\001\002\000\006\005\026" +
-    "\011\025\001\002\000\006\005\uffef\011\uffef\001\002\000" +
-    "\012\002\ufff1\005\ufff1\007\ufff1\011\ufff1\001\002\000\004" +
-    "\017\021\001\002\000\012\002\ufff2\005\ufff2\007\ufff2\011" +
-    "\ufff2\001\002\000\006\005\ufff0\011\ufff0\001\002\000\022" +
-    "\004\017\006\014\012\010\013\005\014\004\015\006\016" +
-    "\011\017\013\001\002\000\006\005\uffee\011\uffee\001\002" +
-    "\000\006\007\ufff3\011\ufff3\001\002\000\012\002\ufff5\005" +
-    "\ufff5\007\ufff5\011\ufff5\001\002\000\006\007\035\011\036" +
-    "\001\002\000\012\002\ufff6\005\ufff6\007\ufff6\011\ufff6\001" +
-    "\002\000\022\004\017\006\014\012\010\013\005\014\004" +
-    "\015\006\016\011\017\013\001\002\000\006\007\ufff4\011" +
-    "\ufff4\001\002\000\004\002\001\001\002\000\012\002\ufffb" +
-    "\005\ufffb\007\ufffb\011\ufffb\001\002" });
+    "\000\127\000\030\004\014\006\020\010\015\014\010\015" +
+    "\032\016\023\020\017\021\034\022\022\023\021\024\011" +
+    "\001\002\000\010\002\uffdc\005\uffdc\025\071\001\002\000" +
+    "\020\002\uffee\005\uffee\007\uffee\011\uffee\013\uffee\025\uffee" +
+    "\026\uffee\001\002\000\006\002\ufffb\005\131\001\002\000" +
+    "\006\002\ufffa\005\ufffa\001\002\000\004\022\130\001\002" +
+    "\000\010\017\047\021\073\023\021\001\002\000\020\002" +
+    "\ufff3\005\ufff3\007\ufff3\011\ufff3\013\ufff3\025\ufff3\026\ufff3" +
+    "\001\002\000\004\002\123\001\002\000\032\002\000\005" +
+    "\121\006\020\010\015\014\010\015\032\016\023\020\017" +
+    "\021\034\022\022\023\021\024\011\001\002\000\022\006" +
+    "\020\010\015\011\113\015\032\016\023\020\017\021\040" +
+    "\022\022\001\002\000\006\002\ufff8\005\ufff8\001\002\000" +
+    "\020\002\ufff5\005\ufff5\007\ufff5\011\ufff5\013\ufff5\025\ufff5" +
+    "\026\ufff5\001\002\000\010\007\104\021\073\023\021\001" +
+    "\002\000\004\012\uffef\001\002\000\020\002\ufff1\005\ufff1" +
+    "\007\ufff1\011\ufff1\013\ufff1\025\ufff1\026\ufff1\001\002\000" +
+    "\020\002\ufff6\005\ufff6\007\ufff6\011\ufff6\013\ufff6\025\ufff6" +
+    "\026\ufff6\001\002\000\006\002\ufff9\005\ufff9\001\002\000" +
+    "\006\002\uffe0\005\uffe0\001\002\000\006\002\ufff7\005\ufff7" +
+    "\001\002\000\012\002\uffda\005\uffda\025\uffda\026\uffda\001" +
+    "\002\000\006\002\uffdf\005\uffdf\001\002\000\004\012\035" +
+    "\001\002\000\020\002\ufff4\005\ufff4\007\ufff4\011\ufff4\013" +
+    "\ufff4\025\ufff4\026\ufff4\001\002\000\020\002\uffed\005\uffed" +
+    "\007\uffed\011\uffed\013\uffed\025\uffed\026\uffed\001\002\000" +
+    "\012\002\ufff2\005\ufff2\012\ufff0\026\ufff2\001\002\000\024" +
+    "\006\020\010\015\014\010\015\032\016\023\020\017\021" +
+    "\040\022\022\024\036\001\002\000\030\006\020\010\015" +
+    "\014\010\015\032\016\023\017\047\020\017\021\034\022" +
+    "\022\023\021\024\036\001\002\000\020\002\uffec\005\uffec" +
+    "\007\uffec\011\uffec\013\uffec\025\uffec\026\uffec\001\002\000" +
+    "\020\002\ufff2\005\ufff2\007\ufff2\011\ufff2\013\ufff2\025\ufff2" +
+    "\026\ufff2\001\002\000\012\002\uffd7\005\uffd7\025\uffd7\026" +
+    "\uffd7\001\002\000\012\002\uffd9\005\uffd9\025\uffd9\026\uffd9" +
+    "\001\002\000\020\002\uffeb\005\uffeb\007\uffeb\011\uffeb\013" +
+    "\uffeb\025\uffeb\026\uffeb\001\002\000\012\002\uffd6\005\uffd6" +
+    "\025\uffd6\026\uffd6\001\002\000\006\025\071\026\100\001" +
+    "\002\000\006\025\076\026\074\001\002\000\004\024\053" +
+    "\001\002\000\004\026\052\001\002\000\006\025\uffd0\026" +
+    "\uffd0\001\002\000\012\002\uffd3\005\uffd3\025\uffd3\026\uffd3" +
+    "\001\002\000\030\006\020\010\015\014\010\015\032\016" +
+    "\023\020\017\021\034\022\022\023\021\024\055\025\056" +
+    "\001\002\000\006\025\071\026\uffc9\001\002\000\024\006" +
+    "\020\010\015\014\010\015\032\016\023\020\017\021\034" +
+    "\022\022\023\021\001\002\000\024\006\020\010\015\014" +
+    "\010\015\032\016\023\020\017\021\034\022\022\023\021" +
+    "\001\002\000\004\026\uffcb\001\002\000\004\026\062\001" +
+    "\002\000\004\026\uffca\001\002\000\006\025\uffcf\026\uffcf" +
+    "\001\002\000\004\026\064\001\002\000\006\025\uffce\026" +
+    "\uffce\001\002\000\004\026\066\001\002\000\004\026\067" +
+    "\001\002\000\006\025\uffcd\026\uffcd\001\002\000\012\002" +
+    "\uffdb\005\uffdb\025\uffdb\026\uffdb\001\002\000\006\021\073" +
+    "\023\021\001\002\000\012\002\uffd8\005\uffd8\025\uffd8\026" +
+    "\uffd8\001\002\000\004\012\ufff0\001\002\000\012\002\uffd4" +
+    "\005\uffd4\025\uffd4\026\uffd4\001\002\000\006\025\uffd1\026" +
+    "\uffd1\001\002\000\004\017\047\001\002\000\006\025\uffcc" +
+    "\026\uffcc\001\002\000\012\002\uffd5\005\uffd5\025\uffd5\026" +
+    "\uffd5\001\002\000\006\007\110\013\107\001\002\000\004" +
+    "\012\105\001\002\000\006\007\uffe7\013\uffe7\001\002\000" +
+    "\020\002\uffe9\005\uffe9\007\uffe9\011\uffe9\013\uffe9\025\uffe9" +
+    "\026\uffe9\001\002\000\024\006\020\007\uffe5\010\015\013" +
+    "\uffe5\015\032\016\023\020\017\021\040\022\022\001\002" +
+    "\000\006\007\uffe6\013\uffe6\001\002\000\006\021\073\023" +
+    "\021\001\002\000\020\002\uffea\005\uffea\007\uffea\011\uffea" +
+    "\013\uffea\025\uffea\026\uffea\001\002\000\006\007\uffe8\013" +
+    "\uffe8\001\002\000\006\011\uffe1\013\uffe1\001\002\000\020" +
+    "\002\uffe3\005\uffe3\007\uffe3\011\uffe3\013\uffe3\025\uffe3\026" +
+    "\uffe3\001\002\000\006\011\116\013\115\001\002\000\020" +
+    "\006\020\010\015\015\032\016\023\020\017\021\040\022" +
+    "\022\001\002\000\020\002\uffe4\005\uffe4\007\uffe4\011\uffe4" +
+    "\013\uffe4\025\uffe4\026\uffe4\001\002\000\006\011\uffe2\013" +
+    "\uffe2\001\002\000\006\002\ufffd\005\122\001\002\000\004" +
+    "\002\uffff\001\002\000\004\002\ufffe\001\002\000\004\002" +
+    "\001\001\002\000\006\025\071\026\127\001\002\000\006" +
+    "\025\076\026\126\001\002\000\006\002\uffd2\005\uffd2\001" +
+    "\002\000\006\002\uffdd\005\uffdd\001\002\000\012\002\uffde" +
+    "\005\uffde\025\uffde\026\uffde\001\002\000\004\002\ufffc\001" +
+    "\002" });
 
   /** Access to parse-action table. */
   public short[][] action_table() {return _action_table;}
@@ -82,20 +143,52 @@ public class JavaCupYamlParser extends java_cup.runtime.lr_parser {
   /** <code>reduce_goto</code> table. */
   protected static final short[][] _reduce_table = 
     unpackFromStrings(new String[] {
-    "\000\037\000\014\002\011\003\015\004\017\005\006\007" +
-    "\014\001\001\000\002\001\001\000\002\001\001\000\002" +
+    "\000\127\000\036\002\012\003\005\004\006\005\011\006" +
+    "\030\007\015\011\004\014\032\020\023\021\025\022\024" +
+    "\023\003\024\026\027\027\001\001\000\004\025\067\001" +
+    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
+    "\000\002\001\001\000\014\006\030\023\123\024\026\030" +
+    "\124\031\050\001\001\000\002\001\001\000\002\001\001" +
+    "\000\034\003\117\004\006\005\011\006\030\007\015\011" +
+    "\004\014\032\020\023\021\025\022\024\023\003\024\026" +
+    "\027\027\001\001\000\020\004\036\005\011\007\042\010" +
+    "\111\011\004\014\032\015\113\001\001\000\002\001\001" +
+    "\000\002\001\001\000\010\006\101\012\100\013\102\001" +
+    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
+    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
+    "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
+    "\001\001\000\002\001\001\000\002\001\001\000\022\004" +
+    "\036\005\011\007\042\010\040\011\004\014\032\020\043" +
+    "\026\041\001\001\000\034\004\036\005\011\006\030\007" +
+    "\042\010\040\011\004\014\032\020\043\023\044\024\026" +
+    "\026\047\030\045\031\050\001\001\000\002\001\001\000" +
+    "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
+    "\001\001\000\002\001\001\000\004\025\067\001\001\000" +
+    "\004\032\074\001\001\000\002\001\001\000\002\001\001" +
+    "\000\002\001\001\000\002\001\001\000\030\004\036\005" +
+    "\011\006\030\007\042\010\056\011\004\014\032\020\060" +
+    "\023\053\024\026\033\057\001\001\000\004\025\067\001" +
+    "\001\000\030\004\036\005\011\006\030\007\042\010\056" +
+    "\011\004\014\032\020\060\023\053\024\026\033\064\001" +
+    "\001\000\030\004\036\005\011\006\030\007\042\010\056" +
+    "\011\004\014\032\020\060\023\053\024\026\033\062\001" +
+    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
+    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
+    "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
+    "\001\001\000\006\006\030\024\071\001\001\000\002\001" +
+    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
+    "\000\004\031\076\001\001\000\002\001\001\000\002\001" +
+    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
+    "\000\002\001\001\000\016\004\036\005\011\007\042\010" +
+    "\105\011\004\014\032\001\001\000\002\001\001\000\006" +
+    "\006\101\013\110\001\001\000\002\001\001\000\002\001" +
+    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
+    "\000\016\004\036\005\011\007\042\010\116\011\004\014" +
+    "\032\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
-    "\001\000\002\001\001\000\002\001\001\000\016\002\031" +
-    "\003\015\004\017\005\006\006\033\007\014\001\001\000" +
-    "\002\001\001\000\002\001\001\000\006\010\021\011\022" +
-    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
-    "\001\000\002\001\001\000\002\001\001\000\004\011\026" +
-    "\001\001\000\002\001\001\000\002\001\001\000\014\002" +
-    "\030\003\015\004\017\005\006\007\014\001\001\000\002" +
-    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
-    "\001\000\002\001\001\000\014\002\036\003\015\004\017" +
-    "\005\006\007\014\001\001\000\002\001\001\000\002\001" +
-    "\001\000\002\001\001" });
+    "\001\000\004\025\067\001\001\000\004\032\074\001\001" +
+    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
+    "\002\001\001" });
 
   /** Access to <code>reduce_goto</code> table. */
   public short[][] reduce_table() {return _reduce_table;}
@@ -213,7 +306,7 @@ class CUP$JavaCupYamlParser$actions {
       switch (CUP$JavaCupYamlParser$act_num)
         {
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 0: // $START ::= yaml_element EOF 
+          case 0: // $START ::= yaml_document EOF 
             {
               Object RESULT =null;
 		int start_valleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).left;
@@ -227,193 +320,283 @@ class CUP$JavaCupYamlParser$actions {
           return CUP$JavaCupYamlParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 1: // yaml_element ::= yaml_native_scalar 
+          case 1: // yaml_document ::= DOCSTART 
+            {
+              Object RESULT =null;
+		 RESULT = null; 
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_document",0, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+            }
+          return CUP$JavaCupYamlParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 2: // yaml_document ::= DOCSTART DOCEND 
+            {
+              Object RESULT =null;
+		 RESULT = null; 
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_document",0, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+            }
+          return CUP$JavaCupYamlParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 3: // yaml_document ::= DOCSTART yaml_element DOCEND 
+            {
+              Object RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).value;
+		 RESULT = e; 
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_document",0, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+            }
+          return CUP$JavaCupYamlParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 4: // yaml_document ::= DOCSTART yaml_element 
+            {
+              Object RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
+		 RESULT = e; 
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_document",0, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+            }
+          return CUP$JavaCupYamlParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 5: // yaml_document ::= yaml_element DOCEND 
+            {
+              Object RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).value;
+		 RESULT = e; 
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_document",0, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+            }
+          return CUP$JavaCupYamlParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 6: // yaml_document ::= yaml_element 
+            {
+              Object RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
+		 RESULT = e; 
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_document",0, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+            }
+          return CUP$JavaCupYamlParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 7: // yaml_element ::= yaml_global_scalar 
             {
               Object RESULT =null;
 		int sleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
 		int sright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
 		Object s = (Object)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
 		 RESULT = s; 
-              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_element",0, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_element",1, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
             }
           return CUP$JavaCupYamlParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 2: // yaml_element ::= yaml_object 
+          case 8: // yaml_element ::= yaml_indent_additionalstring 
             {
               Object RESULT =null;
 		int oleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
 		int oright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
-		AstObject o = (AstObject)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
+		String o = (String)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
 		 RESULT = o; 
-              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_element",0, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_element",1, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
             }
           return CUP$JavaCupYamlParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 3: // yaml_element ::= yaml_array 
+          case 9: // yaml_element ::= yaml_json_node 
             {
               Object RESULT =null;
-		int aleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
-		int aright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
-		AstArray a = (AstArray)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
-		 RESULT = a; 
-              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_element",0, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+		int eleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
+		 RESULT = e; 
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_element",1, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
             }
           return CUP$JavaCupYamlParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 4: // yaml_native_scalar ::= yaml_java_scalar 
+          case 10: // yaml_element ::= yaml_indent_node 
             {
               Object RESULT =null;
-		int sleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
-		int sright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
-		Object s = (Object)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
-		 RESULT = s; 
-              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_native_scalar",1, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+		int oleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
+		int oright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
+		Object o = (Object)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
+		 RESULT = o; 
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_element",1, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
             }
           return CUP$JavaCupYamlParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 5: // yaml_java_scalar ::= NUMBER 
+          case 11: // yaml_global_scalar ::= NUMBER 
             {
               Object RESULT =null;
 		int nleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
 		int nright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
 		Object n = (Object)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
 		 RESULT = n; 
-              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_java_scalar",2, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_global_scalar",2, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
             }
           return CUP$JavaCupYamlParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 6: // yaml_java_scalar ::= MINUS NUMBER 
-            {
-              Object RESULT =null;
-		int nleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
-		int nright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
-		Object n = (Object)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
-		 RESULT = Numbers.negate(n); 
-              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_java_scalar",2, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
-            }
-          return CUP$JavaCupYamlParser$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 7: // yaml_java_scalar ::= BOOLEAN 
+          case 12: // yaml_global_scalar ::= BOOLEAN 
             {
               Object RESULT =null;
 		int bleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
 		int bright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
 		Boolean b = (Boolean)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
 		 RESULT = b; 
-              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_java_scalar",2, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_global_scalar",2, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
             }
           return CUP$JavaCupYamlParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 8: // yaml_java_scalar ::= NULL 
+          case 13: // yaml_global_scalar ::= NULL 
             {
               Object RESULT =null;
 		 RESULT = null; 
-              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_java_scalar",2, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_global_scalar",2, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
             }
           return CUP$JavaCupYamlParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 9: // yaml_java_scalar ::= STRING 
+          case 14: // yaml_global_scalar ::= yaml_global_string 
             {
               Object RESULT =null;
 		int sleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
 		int sright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
 		String s = (String)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
 		 RESULT = s; 
-              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_java_scalar",2, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_global_scalar",2, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
             }
           return CUP$JavaCupYamlParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 10: // yaml_java_scalar ::= IDENTIFIER 
+          case 15: // yaml_global_string ::= QUOTED_STRING 
             {
-              Object RESULT =null;
+              String RESULT =null;
 		int sleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
 		int sright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
 		String s = (String)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
 		 RESULT = s; 
-              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_java_scalar",2, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_global_string",3, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
             }
           return CUP$JavaCupYamlParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 11: // yaml_array ::= LBRACK yaml_array_body RBRACK 
+          case 16: // yaml_global_string ::= UNQUOTED_STRING 
             {
-              AstArray RESULT =null;
-		int aleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).left;
-		int aright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).right;
-		AstArray a = (AstArray)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).value;
-		 RESULT = a ; 
-              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_array",3, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+              String RESULT =null;
+		int sleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
+		int sright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
+		String s = (String)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
+		 RESULT = YamlCupUnquotedStrings.format(s); 
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_global_string",3, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
             }
           return CUP$JavaCupYamlParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 12: // yaml_array ::= LBRACK RBRACK 
+          case 17: // yaml_global_key ::= QUOTED_STRING 
             {
-              AstArray RESULT =null;
-		 RESULT = AST.createArray() ; 
-              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_array",3, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+              String RESULT =null;
+		int sleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
+		int sright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
+		String s = (String)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
+		 RESULT = s; 
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_global_key",4, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
             }
           return CUP$JavaCupYamlParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 13: // yaml_array_body ::= yaml_array_body COMMA yaml_element 
+          case 18: // yaml_global_key ::= UNQUOTED_KEY 
             {
-              AstArray RESULT =null;
-		int aleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)).left;
-		int aright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)).right;
-		AstArray a = (AstArray)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)).value;
-		int eleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
-		int eright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
-		Object e = (Object)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
-		 RESULT = a.push(e); 
-              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_array_body",4, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+              String RESULT =null;
+		int sleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
+		int sright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
+		String s = (String)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
+		 RESULT = s; 
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_global_key",4, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
             }
           return CUP$JavaCupYamlParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 14: // yaml_array_body ::= yaml_element 
+          case 19: // yaml_json_node ::= yaml_json_object 
             {
-              AstArray RESULT =null;
-		int eleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
-		int eright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
-		Object e = (Object)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
-		 RESULT =  AST.createArray().push(e); 
-              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_array_body",4, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+              Object RESULT =null;
+		int oleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
+		int oright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
+		AstObject o = (AstObject)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
+		 RESULT = o; 
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_json_node",5, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
             }
           return CUP$JavaCupYamlParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 15: // yaml_object ::= LCURLY yaml_object_body RCURLY 
+          case 20: // yaml_json_node ::= yaml_json_array 
+            {
+              Object RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
+		AstArray a = (AstArray)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
+		 RESULT = a; 
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_json_node",5, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+            }
+          return CUP$JavaCupYamlParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 21: // yaml_json_element ::= yaml_global_scalar 
+            {
+              Object RESULT =null;
+		int sleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
+		int sright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
+		Object s = (Object)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
+		 RESULT = s ; 
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_json_element",6, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+            }
+          return CUP$JavaCupYamlParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 22: // yaml_json_element ::= yaml_json_node 
+            {
+              Object RESULT =null;
+		int nleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
+		int nright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
+		Object n = (Object)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
+		 RESULT = n ; 
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_json_element",6, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+            }
+          return CUP$JavaCupYamlParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 23: // yaml_json_object ::= LCURLY yaml_json_object_body RCURLY 
             {
               AstObject RESULT =null;
 		int oleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).left;
 		int oright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).right;
 		AstObject o = (AstObject)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).value;
 		 RESULT = o ; 
-              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_object",5, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_json_object",7, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
             }
           return CUP$JavaCupYamlParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 16: // yaml_object ::= LCURLY RCURLY 
+          case 24: // yaml_json_object ::= LCURLY RCURLY 
             {
               AstObject RESULT =null;
 		 RESULT =  AST.createObject() ; 
-              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_object",5, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_json_object",7, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
             }
           return CUP$JavaCupYamlParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 17: // yaml_object_body ::= yaml_object_body COMMA yaml_object_entry 
+          case 25: // yaml_json_object_body ::= yaml_json_object_body COMMA yaml_json_object_entry 
             {
               AstObject RESULT =null;
 		int oleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)).left;
@@ -423,34 +606,391 @@ class CUP$JavaCupYamlParser$actions {
 		int eright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
 		Pair<String,Object> e = (Pair<String,Object>)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
 		 RESULT = o.set(e.get1(), e.get2()); 
-              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_object_body",6, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_json_object_body",8, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
             }
           return CUP$JavaCupYamlParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 18: // yaml_object_body ::= yaml_object_entry 
+          case 26: // yaml_json_object_body ::= yaml_json_object_entry 
             {
               AstObject RESULT =null;
 		int eleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
 		int eright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
 		Pair<String,Object> e = (Pair<String,Object>)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
 		 RESULT =  AST.createObject().set(e.get1(), e.get2()); 
-              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_object_body",6, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_json_object_body",8, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
             }
           return CUP$JavaCupYamlParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 19: // yaml_object_entry ::= IDENTIFIER COLON yaml_element 
+          case 27: // yaml_json_object_entry ::= yaml_global_key COLON yaml_json_element 
             {
               Pair<String,Object> RESULT =null;
-		int idleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)).left;
-		int idright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)).right;
-		String id = (String)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)).value;
+		int keyleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)).left;
+		int keyright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)).right;
+		String key = (String)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)).value;
 		int eleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
 		int eright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
-		 RESULT = new Pair(id, e) ; 
-              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_object_entry",7, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+		 RESULT = new Pair(key, e) ; 
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_json_object_entry",9, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+            }
+          return CUP$JavaCupYamlParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 28: // yaml_json_object_entry ::= yaml_global_key COLON 
+            {
+              Pair<String,Object> RESULT =null;
+		int keyleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).left;
+		int keyright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).right;
+		String key = (String)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).value;
+		 RESULT = new Pair(key, null) ; 
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_json_object_entry",9, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+            }
+          return CUP$JavaCupYamlParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 29: // yaml_json_array ::= LBRACK yaml_json_array_body RBRACK 
+            {
+              AstArray RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).right;
+		AstArray a = (AstArray)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).value;
+		 RESULT = a ; 
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_json_array",10, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+            }
+          return CUP$JavaCupYamlParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 30: // yaml_json_array ::= LBRACK RBRACK 
+            {
+              AstArray RESULT =null;
+		 RESULT = AST.createArray() ; 
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_json_array",10, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+            }
+          return CUP$JavaCupYamlParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 31: // yaml_json_array_body ::= yaml_json_array_body COMMA yaml_json_element 
+            {
+              AstArray RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)).right;
+		AstArray a = (AstArray)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)).value;
+		int eleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
+		 RESULT = a.push(e); 
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_json_array_body",11, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+            }
+          return CUP$JavaCupYamlParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 32: // yaml_json_array_body ::= yaml_json_element 
+            {
+              AstArray RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
+		 RESULT = AST.createArray().push(e); 
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_json_array_body",11, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+            }
+          return CUP$JavaCupYamlParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 33: // yaml_indent_node ::= yaml_indent_object 
+            {
+              Object RESULT =null;
+		int oleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
+		int oright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
+		AstObject o = (AstObject)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
+		 RESULT = o; 
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_indent_node",15, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+            }
+          return CUP$JavaCupYamlParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 34: // yaml_indent_node ::= yaml_indent_array 
+            {
+              Object RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
+		AstArray a = (AstArray)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
+		 RESULT = a; 
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_indent_node",15, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+            }
+          return CUP$JavaCupYamlParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 35: // yaml_indent_additionalstring ::= PIPE UNQUOTED_STRING 
+            {
+              String RESULT =null;
+		int sleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
+		int sright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
+		String s = (String)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
+		 RESULT = YamlCupUnquotedStrings.formatPipe(s); 
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_indent_additionalstring",14, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+            }
+          return CUP$JavaCupYamlParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 36: // yaml_indent_object ::= INDENT_OPEN yaml_indent_object_body INDENT_CLOSE 
+            {
+              AstObject RESULT =null;
+		int oleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).left;
+		int oright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).right;
+		AstObject o = (AstObject)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).value;
+		 RESULT = o ; 
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_indent_object",16, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+            }
+          return CUP$JavaCupYamlParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 37: // yaml_indent_object ::= yaml_indent_object_body 
+            {
+              AstObject RESULT =null;
+		int oleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
+		int oright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
+		AstObject o = (AstObject)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
+		 RESULT = o ; 
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_indent_object",16, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+            }
+          return CUP$JavaCupYamlParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 38: // yaml_indent_object_body ::= yaml_indent_object_body yaml_indent_object_subsequent_entry 
+            {
+              AstObject RESULT =null;
+		int oleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).left;
+		int oright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).right;
+		AstObject o = (AstObject)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).value;
+		int eleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
+		Pair<String,Object> e = (Pair<String,Object>)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
+		 RESULT = o.set(e.get1(), e.get2()); 
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_indent_object_body",17, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+            }
+          return CUP$JavaCupYamlParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 39: // yaml_indent_object_body ::= yaml_indent_object_first_entry 
+            {
+              AstObject RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
+		Pair<String,Object> e = (Pair<String,Object>)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
+		 RESULT =  AST.createObject().set(e.get1(), e.get2()); 
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_indent_object_body",17, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+            }
+          return CUP$JavaCupYamlParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 40: // yaml_indent_object_first_entry ::= yaml_global_key COLON yaml_indent_object_entry_element 
+            {
+              Pair<String,Object> RESULT =null;
+		int keyleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)).left;
+		int keyright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)).right;
+		String key = (String)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)).value;
+		int eleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
+		 RESULT = new Pair(key, e) ; 
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_indent_object_first_entry",18, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+            }
+          return CUP$JavaCupYamlParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 41: // yaml_indent_object_subsequent_entry ::= INDENT_SAME yaml_indent_object_first_entry 
+            {
+              Pair<String,Object> RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
+		Pair<String,Object> e = (Pair<String,Object>)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
+		 RESULT = e ; 
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_indent_object_subsequent_entry",19, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+            }
+          return CUP$JavaCupYamlParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 42: // yaml_indent_object_entry_element ::= yaml_json_element 
+            {
+              Object RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
+		 RESULT = e; 
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_indent_object_entry_element",20, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+            }
+          return CUP$JavaCupYamlParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 43: // yaml_indent_object_entry_element ::= yaml_indent_additionalstring 
+            {
+              Object RESULT =null;
+		int sleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
+		int sright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
+		String s = (String)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
+		 RESULT = s; 
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_indent_object_entry_element",20, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+            }
+          return CUP$JavaCupYamlParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 44: // yaml_indent_object_entry_element ::= INDENT_OPEN yaml_indent_object_body INDENT_CLOSE 
+            {
+              Object RESULT =null;
+		int oleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).left;
+		int oright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).right;
+		AstObject o = (AstObject)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).value;
+		 RESULT = o; 
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_indent_object_entry_element",20, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+            }
+          return CUP$JavaCupYamlParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 45: // yaml_indent_object_entry_element ::= INDENT_OPEN yaml_indent_array_body INDENT_CLOSE 
+            {
+              Object RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).right;
+		AstArray a = (AstArray)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).value;
+		 RESULT = a; 
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_indent_object_entry_element",20, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+            }
+          return CUP$JavaCupYamlParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 46: // yaml_indent_object_entry_element ::= INDENT_OPEN yaml_indent_object_entry_element INDENT_CLOSE 
+            {
+              Object RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).value;
+		 RESULT = e; 
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_indent_object_entry_element",20, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+            }
+          return CUP$JavaCupYamlParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 47: // yaml_indent_array ::= INDENT_OPEN yaml_indent_array_body INDENT_CLOSE 
+            {
+              AstArray RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).right;
+		AstArray a = (AstArray)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).value;
+		 RESULT = a; 
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_indent_array",21, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+            }
+          return CUP$JavaCupYamlParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 48: // yaml_indent_array_body ::= yaml_indent_array_body yaml_indent_array_subsequent_element 
+            {
+              AstArray RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).right;
+		AstArray a = (AstArray)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).value;
+		int eleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
+		 RESULT = a.push(e); 
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_indent_array_body",22, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+            }
+          return CUP$JavaCupYamlParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 49: // yaml_indent_array_body ::= yaml_indent_array_first_element 
+            {
+              AstArray RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
+		 RESULT = AST.createArray().push(e); 
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_indent_array_body",22, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+            }
+          return CUP$JavaCupYamlParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 50: // yaml_indent_array_first_element ::= DASH_ARRAY INDENT_OPEN yaml_indent_array_value_element INDENT_CLOSE 
+            {
+              Object RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).value;
+		 RESULT = e; 
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_indent_array_first_element",23, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-3)), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+            }
+          return CUP$JavaCupYamlParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 51: // yaml_indent_array_first_element ::= DASH_ARRAY INDENT_OPEN INDENT_SAME yaml_indent_array_value_element INDENT_CLOSE 
+            {
+              Object RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)).value;
+		 RESULT = e; 
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_indent_array_first_element",23, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-4)), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+            }
+          return CUP$JavaCupYamlParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 52: // yaml_indent_array_first_element ::= DASH_ARRAY INDENT_OPEN INDENT_OPEN yaml_indent_array_value_element INDENT_CLOSE INDENT_CLOSE 
+            {
+              Object RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-2)).value;
+		 RESULT = e; 
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_indent_array_first_element",23, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-5)), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+            }
+          return CUP$JavaCupYamlParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 53: // yaml_indent_array_subsequent_element ::= INDENT_SAME yaml_indent_array_first_element 
+            {
+              Object RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
+		 RESULT = e; 
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_indent_array_subsequent_element",24, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.elementAt(CUP$JavaCupYamlParser$top-1)), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+            }
+          return CUP$JavaCupYamlParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 54: // yaml_indent_array_value_element ::= yaml_json_element 
+            {
+              Object RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
+		 RESULT = e; 
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_indent_array_value_element",25, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+            }
+          return CUP$JavaCupYamlParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 55: // yaml_indent_array_value_element ::= yaml_indent_additionalstring 
+            {
+              Object RESULT =null;
+		int sleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
+		int sright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
+		String s = (String)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
+		 RESULT = s; 
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_indent_array_value_element",25, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
+            }
+          return CUP$JavaCupYamlParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 56: // yaml_indent_array_value_element ::= yaml_indent_object_body 
+            {
+              Object RESULT =null;
+		int oleft = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).left;
+		int oright = ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()).right;
+		AstObject o = (AstObject)((java_cup.runtime.Symbol) CUP$JavaCupYamlParser$stack.peek()).value;
+		 RESULT = o; 
+              CUP$JavaCupYamlParser$result = parser.getSymbolFactory().newSymbol("yaml_indent_array_value_element",25, ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$JavaCupYamlParser$stack.peek()), RESULT);
             }
           return CUP$JavaCupYamlParser$result;
 

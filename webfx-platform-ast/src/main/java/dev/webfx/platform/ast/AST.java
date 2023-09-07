@@ -28,6 +28,10 @@ public final class AST {
         return AstParser.parseObject(text, format);
     }
 
+    public static <T> T parseAny(String text, String format) {
+        return AstParser.parseAny(text, format);
+    }
+
     public static boolean isNode(Object value) {
         return value instanceof ReadOnlyAstNode;
     }

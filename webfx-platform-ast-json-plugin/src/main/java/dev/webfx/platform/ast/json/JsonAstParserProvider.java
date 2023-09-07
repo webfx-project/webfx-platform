@@ -29,4 +29,9 @@ public class JsonAstParserProvider implements AstParserProvider {
     public ReadOnlyAstNode parseNode(String text) {
         return Json.parseElement(text);
     }
+
+    @Override
+    public <T> T parseAny(String text) {
+        return null;
+    }
 }
