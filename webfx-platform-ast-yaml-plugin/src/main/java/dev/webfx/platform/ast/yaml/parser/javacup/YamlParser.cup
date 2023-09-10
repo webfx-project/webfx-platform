@@ -6,6 +6,7 @@ import dev.webfx.platform.ast.AstArray;
 import dev.webfx.platform.util.Numbers;
 import dev.webfx.platform.util.tuples.Pair;
 import dev.webfx.platform.util.tuples.Triplet;
+import java_cup.runtime.Symbol;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -66,6 +67,28 @@ parser code {:
 
         return m.toString();
     }
+
+    private MultipleSymbol multipleSymbol;
+
+    public Symbol scan() throws Exception {
+        Symbol symbol = null;
+        if (multipleSymbol == null) {
+            symbol = super.scan();
+            if (symbol instanceof MultipleSymbol)
+                multipleSymbol = (MultipleSymbol) symbol;
+        }
+        if (multipleSymbol != null) {
+            symbol = multipleSymbol.nextSymbol();
+            if (symbol == null) {
+                multipleSymbol = null;
+                symbol = scan();
+            }
+        }
+        // Uncomment for debug
+        // System.out.println("-".repeat(((dev.webfx.platform.ast.yaml.parser.jflex.YamlLexer) getScanner()).indentCounter.openIndentCount()) +  "> Symbol " + YamlSymbols.terminalNames[symbol.sym] + (symbol.value == null ? "" : "(" + symbol.value + ")"));
+        return symbol;
+    }
+
 :};
    
 
@@ -254,6 +277,8 @@ yaml_indent_object_body
 yaml_indent_object_first_entry
             ::= yaml_global_key:key COLON yaml_indent_object_entry_element:e
                {: RESULT = new Pair(key, e) ; :}
+            | yaml_global_key:key COLON
+               {: RESULT = new Pair(key, null) ; :}
             ;
 
 yaml_indent_object_subsequent_entry

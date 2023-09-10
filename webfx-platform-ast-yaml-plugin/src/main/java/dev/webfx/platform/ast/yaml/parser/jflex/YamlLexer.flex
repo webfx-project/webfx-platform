@@ -3,10 +3,12 @@
 
 package dev.webfx.platform.ast.yaml.parser.jflex;
 
-import java_cup.runtime.*;
 import        dev.webfx.platform.ast.yaml.parser.javacup.YamlSymbols;
 import static dev.webfx.platform.ast.yaml.parser.javacup.YamlSymbols.*;
+import        dev.webfx.platform.ast.yaml.parser.javacup.MultipleSymbol;
 import        dev.webfx.platform.util.Numbers;
+import java_cup.runtime.*;
+import java.util.List;
 
 %%
    
@@ -23,19 +25,15 @@ import        dev.webfx.platform.util.Numbers;
   Declarations
 */
 %{   
-    StringBuilder sb = new StringBuilder();
-    IndentCounter indentCounter = new IndentCounter();
-    int lastUnquotedKeyLine = -1;
-    int minusArrayPostIndent;
-    int minusArrayPostNextState;
+    private StringBuilder sb = new StringBuilder();
+    public IndentCounter indentCounter = new IndentCounter();
+    private int lastUnquotedKeyLine = -1;
 
     private Symbol symbol(int type) {
         return symbol(type, null);
     }
     
     private Symbol symbol(int type, Object value) {
-        // uncomment the following line for debugging:
-        System.out.println("-".repeat(indentCounter.openIndentCount()) +  "> Symbol " + YamlSymbols.terminalNames[type] + (value == null ? "" : "(" + value + ")"));
         return new Symbol(type, yyline, yycolumn, value);
     }
 
@@ -81,7 +79,7 @@ True = "y" | "Y" | "yes" | "Yes" | "YES" | "true" | "True" | "TRUE" | "on" | "On
 False = "n" | "N" | "no" | "No" | "NO" | "false" | "False" | "FALSE" | "off" | "Off" | "OFF"
 Null = "null" | "~"
 Boolean = {True} | {False}
-%state SUBSEQUENT_CLOSING_INDENT, DOCUMENT_CLOSING_INDENT, AFTER_INDENT, DASH_ARRAY_POST_INDENT, SINGLE_QUOTE_STRING, DOUBLE_QUOTE_STRING, GRAVE_ACCENT_STRING, UNQUOTED_STRING, UNQUOTED_JSON_STRING
+%state YYFINAL, AFTER_INDENT, SINGLE_QUOTE_STRING, DOUBLE_QUOTE_STRING, GRAVE_ACCENT_STRING, UNQUOTED_INDENT_STRING, UNQUOTED_JSON_STRING
 
 %%
 /* ------------------------Lexical Rules Section---------------------- */
@@ -98,73 +96,52 @@ Boolean = {True} | {False}
     {DocumentStart}                 |
     {DocumentEnd}                   {
                                         // Checking if it's an actual document start/end
-                                        if (!yyatEOF() && !Character.isWhitespace(yycharat(3))) { // No: probably a string starting with same characters
+                                        if (!yyatEOF() && !Character.isWhitespace(yycharat(3))) { // => It's a string starting with same characters!
                                             yypushback(3);
                                             yybegin(AFTER_INDENT);
                                         } else { // Yes, actual document start/end
+                                            Symbol symbol = symbol(yycharat(1) == '-' ? DOCSTART : DOCEND);
                                             int openIndentCount = indentCounter.openIndentCount();
                                             if (openIndentCount == 0) // No open indent to close => we return DOCSTART/DOCEND
-                                                return symbol(yycharat(1) == '-' ? DOCSTART : DOCEND);
-                                            if (openIndentCount > 1) {
-                                                String s = "X".repeat(openIndentCount - 1);
-                                                yyreset(new java.io.StringReader(s));
-                                                yybegin(DOCUMENT_CLOSING_INDENT);
-                                            }
-                                            // Note: DOCSTART or DOCEND won't be emitted in that case, but doesn't really matter
-                                            return symbol(INDENT_CLOSE);
+                                                return symbol;
+                                            // At this point, we have reached the end of the first document we are scanning
+                                            yyclose();
+                                            indentCounter.clear();
+                                            return MultipleSymbol.repeatedSymbolThenSymbol(openIndentCount, INDENT_CLOSE, symbol);
                                         }
                                     }
 
     /* Other line with possible indent */
     {IndentPlusChar}                {
-                                        // The last character needs to be put back for AFTER_INDENT
+                                        // The last character needs to be put back so it will be process by AFTER_INDENT
                                         yypushback(1);
-                                        if (indentCounter.isInsideJsonSequence()) {
-                                            yybegin(AFTER_INDENT);
-                                        } else {
+                                        yybegin(AFTER_INDENT);
+                                        // Ignoring indents symbols in Json sequences => We go straightway to AFTER_INDENT
+                                        if (!indentCounter.isInsideJsonSequence()) {
                                             // How is this new indent compared to the previous one?
                                             int indentSymbol = indentCounter.indentSymbolOnNewLine(yylength());
-                                            // If same (INDENT_SAME) or higher (INDENT_OPEN), we move to AFTER_INDENT
+                                            // If same (INDENT_SAME) or higher (INDENT_OPEN), we return that single symbol
                                             if (indentSymbol != INDENT_CLOSE) {
-                                                yybegin(AFTER_INDENT);
-                                                return symbol(indentSymbol, yylength()); // INDENT_SAME or INDENT_OPEN
-                                            } else {
-                                                if (yylength() > 0) {
-                                                   yypushback(1);
-                                                   yybegin(SUBSEQUENT_CLOSING_INDENT);
-                                                } else {
-                                                   yybegin(YYINITIAL);
-                                                }
-                                                return symbol(indentSymbol);
+                                                return symbol(indentSymbol, indentCounter.currentIndent()); // INDENT_SAME or INDENT_OPEN
+                                            } else { // INDENT_CLOSE may eventually be followed by other INDENT_EVENTS
+                                                List<Symbol> symbols = indentCounter.closingAndFurtherIndentsForNewLine();
+                                                return MultipleSymbol.ofList(symbols);
                                             }
                                          }
                                      }
 
     <<EOF>> {
+        yybegin(YYFINAL);
         int count = indentCounter.openIndentCount();
         if (count > 0) {
-            String s = "X".repeat(count);
-            yyreset(new java.io.StringReader(s));
-            yybegin(DOCUMENT_CLOSING_INDENT);
+            return MultipleSymbol.repeatedSymbol(count, INDENT_CLOSE);
         }
     }
 
 }
 
-<DOCUMENT_CLOSING_INDENT> {
-    .                               { return symbol(INDENT_CLOSE); }
-}
-
-<SUBSEQUENT_CLOSING_INDENT> {
-    .                               {
-                                        int indentSymbol = indentCounter.nextIndentSymbolAfterClose();
-                                        if (indentSymbol != INDENT_CLOSE)
-                                            yybegin(AFTER_INDENT);
-                                        else {
-                                            yypushback(1);
-                                        }
-                                        return symbol(indentSymbol);
-                                    }
+<YYFINAL> {
+    . { }
 }
 
 <AFTER_INDENT> {
@@ -178,25 +155,23 @@ Boolean = {True} | {False}
     {LineTerminator}                { yybegin(YYINITIAL); }
 
     /* Dash array entry */
-    "-" {WhiteSpace}* {LineTerminator} {
-                                        minusArrayPostIndent = indentCounter.currentIndent() + yylength();
-                                        minusArrayPostNextState = YYINITIAL;
-                                        yypushback(1);
-                                        yybegin(DASH_ARRAY_POST_INDENT);
-                                        return symbol(DASH_ARRAY);
-                                    }
-
+    "-" {WhiteSpace}* {LineTerminator} |
     "-" {WhiteSpace}+               {
-                                        minusArrayPostIndent = indentCounter.currentIndent() + yylength();
-                                        minusArrayPostNextState = AFTER_INDENT;
-                                        yypushback(1);
-                                        yybegin(DASH_ARRAY_POST_INDENT);
-                                        return symbol(DASH_ARRAY);
+                                        // The only difference between this 2 cases is the next state: YYINITIAL with LF, AFTER_INDENT otherwise
+                                        yybegin(yycharat(yylength() -1) == '\n' ? YYINITIAL : AFTER_INDENT);
+                                        int indentSymbol = indentCounter.indentSymbolOnNewLine(indentCounter.currentIndent() + yylength());
+                                        if (indentSymbol != INDENT_CLOSE) // INDENT_SAME or INDENT_OPEN
+                                            return new MultipleSymbol(symbol(DASH_ARRAY), symbol(indentSymbol));
+                                        // At least 1 - maybe several - INDENT_CLOSE possibly followed by INDENT_SAME
+                                        List<Symbol> symbols = indentCounter.closingAndFurtherIndentsForNewLine();
+                                        // The DASH_ARRAY happens before
+                                        symbols.add(0, symbol(DASH_ARRAY));
+                                        return MultipleSymbol.ofList(symbols);
                                     }
 
     /* Not number but string starting with digits! */
     /*
-    {NumberLiteral} {UnquotedStringCharacterButNotDigit} { yypushback(yylength()); sb.setLength(0); yybegin(UNQUOTED_STRING); }
+    {NumberLiteral} {UnquotedStringCharacterButNotDigit} { yypushback(yylength()); sb.setLength(0); yybegin(UNQUOTED_INDENT_STRING); }
     */
 
     /* Actual number */
@@ -205,7 +180,7 @@ Boolean = {True} | {False}
 
     /* Not boolean but string starting with boolean! */
     /*
-    {Boolean} {UnquotedStringCharacterButNotDigit} { yypushback(yylength()); sb.setLength(0); yybegin(UNQUOTED_STRING); }
+    {Boolean} {UnquotedStringCharacterButNotDigit} { yypushback(yylength()); sb.setLength(0); yybegin(UNQUOTED_INDENT_STRING); }
     */
 
     /* Actual boolean */
@@ -214,7 +189,7 @@ Boolean = {True} | {False}
 
     /* Not null but string starting with null! */
     /*
-    {Null} {UnquotedStringCharacterButNotDigit} { yypushback(yylength()); sb.setLength(0); yybegin(UNQUOTED_STRING); }
+    {Null} {UnquotedStringCharacterButNotDigit} { yypushback(yylength()); sb.setLength(0); yybegin(UNQUOTED_INDENT_STRING); }
     */
 
     /* Actual null */
@@ -224,7 +199,7 @@ Boolean = {True} | {False}
                                       if (yyline == lastUnquotedKeyLine && !indentCounter.isInsideJsonSequence()) {
                                           yypushback(yylength());
                                           sb.setLength(0);
-                                          yybegin(UNQUOTED_STRING);
+                                          yybegin(UNQUOTED_INDENT_STRING);
                                       } else {
                                           lastUnquotedKeyLine = yyline;
                                           yypushback(1); // COLON needs to be emitted after that key
@@ -244,7 +219,7 @@ Boolean = {True} | {False}
     ":"                            { return symbol(COLON); }
     "|"                            {
                                         sb.setLength(0);
-                                        yybegin(UNQUOTED_STRING);
+                                        yybegin(UNQUOTED_INDENT_STRING);
                                         return symbol(PIPE);
                                    }
 
@@ -258,22 +233,9 @@ Boolean = {True} | {False}
                                       if (indentCounter.isInsideJsonSequence())
                                           yybegin(UNQUOTED_JSON_STRING);
                                       else
-                                          yybegin(UNQUOTED_STRING);
+                                          yybegin(UNQUOTED_INDENT_STRING);
                                     }
 
-}
-
-<DASH_ARRAY_POST_INDENT> {
-    . | {LineTerminator}           {
-                                        int indentSymbol = indentCounter.indentSymbolOnNewLine(minusArrayPostIndent);
-                                        if (indentSymbol != INDENT_CLOSE)
-                                            yybegin(minusArrayPostNextState);
-                                        else {
-                                            yypushback(1);
-                                            yybegin(SUBSEQUENT_CLOSING_INDENT);
-                                        }
-                                        return symbol(indentSymbol, minusArrayPostIndent);
-                                    }
 }
 
 
@@ -346,7 +308,7 @@ Boolean = {True} | {False}
                                  }
 }
 
-<UNQUOTED_STRING> {
+<UNQUOTED_INDENT_STRING> {
   {InputCharacter}* {LineTerminator} {
                                     if (sb.length() == 0 || indentCounter.isSubsequentUnquotedStringLine(yytext())) {
                                         sb.append(yytext());

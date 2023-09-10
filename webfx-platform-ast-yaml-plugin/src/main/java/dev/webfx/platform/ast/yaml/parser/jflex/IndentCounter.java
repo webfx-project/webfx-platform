@@ -1,15 +1,20 @@
 package dev.webfx.platform.ast.yaml.parser.jflex;
 
+import java_cup.runtime.Symbol;
+
 import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.List;
 
 import static dev.webfx.platform.ast.yaml.parser.javacup.YamlSymbols.*;
 
 /**
  * @author Bruno Salmon
  */
-final class IndentCounter {
+public final class IndentCounter {
 
-    private final ArrayDeque<Integer> indentDeque = new ArrayDeque<>();
+    private final Deque<Integer> indentDeque = new ArrayDeque<>();
     private int lastIndentCausingIndentClose;
 
     Integer currentIndent() {
@@ -36,16 +41,27 @@ final class IndentCounter {
         return INDENT_CLOSE;
     }
 
-    int nextIndentSymbolAfterClose() {
-        int nextIndentToPotentiallyClose = currentIndent();
-        if (nextIndentToPotentiallyClose == lastIndentCausingIndentClose)
-            return INDENT_SAME;
-        indentDeque.removeFirst();
-        return INDENT_CLOSE;
+    List<Symbol> closingAndFurtherIndentsForNewLine() {
+        List<Symbol> symbols = new ArrayList<>();
+        symbols.add(new Symbol(INDENT_CLOSE));
+        while (!indentDeque.isEmpty()) {
+            int currentIndent = currentIndent();
+            if (currentIndent == lastIndentCausingIndentClose) {
+                symbols.add(new Symbol(INDENT_SAME));
+                break;
+            }
+            symbols.add(new Symbol(INDENT_CLOSE));
+            indentDeque.removeFirst();
+        }
+        return symbols;
     }
 
-    int openIndentCount() {
+    public int openIndentCount() {
         return indentDeque.size();
+    }
+
+    void clear() {
+        indentDeque.clear();
     }
 
     boolean isSubsequentUnquotedStringLine(String line) {
@@ -59,14 +75,10 @@ final class IndentCounter {
     }
 
 
-    int jsonOpenCurlyBracketCount;
+    private int jsonOpenCurlyBracketCount;
 
     boolean isInsideJsonSequence() {
         return jsonOpenCurlyBracketCount > 0;
-    }
-
-    int getJsonOpenCurlyBracketCount() {
-        return jsonOpenCurlyBracketCount;
     }
 
     int incJsonOpenCurlyBracketCount() {
