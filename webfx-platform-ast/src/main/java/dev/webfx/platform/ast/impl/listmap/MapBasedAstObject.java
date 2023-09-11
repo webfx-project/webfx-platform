@@ -1,11 +1,11 @@
 package dev.webfx.platform.ast.impl.listmap;
 
-import dev.webfx.platform.ast.ReadOnlyAstArray;
 import dev.webfx.platform.ast.AST;
 import dev.webfx.platform.ast.AstObject;
+import dev.webfx.platform.ast.ReadOnlyAstArray;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -15,7 +15,7 @@ public abstract class MapBasedAstObject implements AstObject {
     protected boolean isShallowCopy;
 
     protected MapBasedAstObject() {
-        this(new HashMap<>());
+        this(new LinkedHashMap<>());
     }
 
     protected MapBasedAstObject(Map<String, Object> map) {
