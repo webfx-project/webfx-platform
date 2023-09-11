@@ -288,7 +288,7 @@ public class JavaCupYamlParser extends java_cup.runtime.lr_parser {
     public Symbol scan() throws Exception {
         Symbol symbol = scanImpl();
         // Uncomment for debug
-        System.out.println("-".repeat(((dev.webfx.platform.ast.yaml.parser.jflex.YamlLexer) getScanner()).indentCounter.openIndentCount()) +  "> Symbol " + YamlSymbols.terminalNames[symbol.sym] + (symbol.value == null ? "" : "(" + symbol.value + ")"));
+        // System.out.println("-".repeat(((dev.webfx.platform.ast.yaml.parser.jflex.YamlLexer) getScanner()).indentCounter.openIndentCount()) +  "> Symbol " + YamlSymbols.terminalNames[symbol.sym] + (symbol.value == null ? "" : "(" + symbol.value + ")"));
         return symbol;
     }
 
