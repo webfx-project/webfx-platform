@@ -132,16 +132,17 @@ Boolean = {True} | {False}
 
     <<EOF>> {
         yybegin(YYFINAL);
-        int count = indentCounter.openIndentCount();
-        if (count > 0) {
-            return MultipleSymbol.repeatedSymbol(count, INDENT_CLOSE);
+        int indentSymbol = indentCounter.indentSymbolOnNewLine(-1);
+        if (indentSymbol == INDENT_CLOSE) {
+            List<Symbol> symbols = indentCounter.closingAndFurtherIndentsForNewLine();
+            return MultipleSymbol.ofList(symbols);
         }
     }
 
 }
 
 <YYFINAL> {
-    . { }
+    . { yyclose(); }
 }
 
 <AFTER_INDENT> {
@@ -155,7 +156,7 @@ Boolean = {True} | {False}
     {LineTerminator}                { yybegin(YYINITIAL); }
 
     /* Dash array entry */
-    "-" {WhiteSpace}* {LineTerminator} |
+    "-" {WhiteSpace}* {LineTerminator} { yybegin(YYINITIAL);  return symbol(DASH_ARRAY); }
     "-" {WhiteSpace}+               {
                                         // The only difference between this 2 cases is the next state: YYINITIAL with LF, AFTER_INDENT otherwise
                                         yybegin(yycharat(yylength() -1) == '\n' ? YYINITIAL : AFTER_INDENT);
@@ -240,6 +241,8 @@ Boolean = {True} | {False}
 
 
 <SINGLE_QUOTE_STRING> {
+  "''"                           { sb.append( '\'' ); }
+
   "'"                            { yybegin(AFTER_INDENT); return symbol(QUOTED_STRING, sb.toString()); }
 
   {SingleQuoteStringCharacter}+  { sb.append( yytext() ); }
@@ -319,8 +322,14 @@ Boolean = {True} | {False}
                                      }
                                  }
    <<EOF>> {
-        yybegin(YYINITIAL);
-        return symbol(UNQUOTED_STRING, sb.toString());
+        yybegin(YYFINAL);
+        Symbol symbol = symbol(UNQUOTED_STRING, sb.toString());
+        int indentSymbol = indentCounter.indentSymbolOnNewLine(-1);
+        if (indentSymbol != INDENT_CLOSE)
+            return symbol;
+        List<Symbol> symbols = indentCounter.closingAndFurtherIndentsForNewLine();
+        symbols.add(0, symbol);
+        return MultipleSymbol.ofList(symbols);
    }
 }
 

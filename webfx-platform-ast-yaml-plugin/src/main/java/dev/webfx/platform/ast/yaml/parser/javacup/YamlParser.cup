@@ -69,23 +69,41 @@ parser code {:
     }
 
     private MultipleSymbol multipleSymbol;
+    private Symbol pushbackSymbol;
 
     public Symbol scan() throws Exception {
-        Symbol symbol = null;
-        if (multipleSymbol == null) {
-            symbol = super.scan();
-            if (symbol instanceof MultipleSymbol)
-                multipleSymbol = (MultipleSymbol) symbol;
-        }
-        if (multipleSymbol != null) {
-            symbol = multipleSymbol.nextSymbol();
-            if (symbol == null) {
-                multipleSymbol = null;
-                symbol = scan();
+        Symbol symbol = scanImpl();
+        // Uncomment for debug
+        System.out.println("-".repeat(((dev.webfx.platform.ast.yaml.parser.jflex.YamlLexer) getScanner()).indentCounter.openIndentCount()) +  "> Symbol " + YamlSymbols.terminalNames[symbol.sym] + (symbol.value == null ? "" : "(" + symbol.value + ")"));
+        return symbol;
+    }
+
+    private Symbol scanImpl() throws Exception {
+        Symbol symbol = pushbackSymbol;
+        if (symbol != null) {
+            pushbackSymbol = null;
+        } else {
+            if (multipleSymbol == null) {
+                symbol = super.scan();
+                if (symbol instanceof MultipleSymbol)
+                    multipleSymbol = (MultipleSymbol) symbol;
+            }
+            if (multipleSymbol != null) {
+                symbol = multipleSymbol.nextSymbol();
+                if (symbol == null) {
+                    multipleSymbol = null;
+                    symbol = scanImpl();
+                }
             }
         }
-        // Uncomment for debug
-        // System.out.println("-".repeat(((dev.webfx.platform.ast.yaml.parser.jflex.YamlLexer) getScanner()).indentCounter.openIndentCount()) +  "> Symbol " + YamlSymbols.terminalNames[symbol.sym] + (symbol.value == null ? "" : "(" + symbol.value + ")"));
+        while (symbol.sym == YamlSymbols.INDENT_OPEN) {
+            Symbol nextSymbol = scanImpl();
+            if (nextSymbol.sym != YamlSymbols.INDENT_CLOSE) {
+                pushbackSymbol = nextSymbol;
+                break;
+            }
+            symbol = scanImpl();
+        }
         return symbol;
     }
 
@@ -106,7 +124,7 @@ terminal Integer  INDENT_OPEN,INDENT_SAME,INDENT_CLOSE;
 
 /* Non terminals used in the grammar section.*/
 non terminal Object                     yaml_document;
-non terminal Object                     yaml_element;
+non terminal Object                     yaml_root_element;
 non terminal Object                     yaml_global_scalar;
 non terminal String                     yaml_global_string;
 non terminal String                     yaml_global_key;
@@ -119,8 +137,6 @@ non terminal Pair<String, Object>       yaml_json_object_entry;
 non terminal AstArray                   yaml_json_array;
 non terminal AstArray                   yaml_json_array_body;
 
-non terminal Object                     yaml_indent_element;
-non terminal String                     yaml_indent_scalar;
 non terminal String                     yaml_indent_additionalstring;
 non terminal Object                     yaml_indent_node;
 non terminal AstObject                  yaml_indent_object;
@@ -147,20 +163,20 @@ yaml_document
               {: RESULT = null; :}
             | DOCSTART DOCEND
               {: RESULT = null; :}
-            | DOCSTART yaml_element:e DOCEND
+            | DOCSTART yaml_root_element:e DOCEND
               {: RESULT = e; :}
-            | DOCSTART yaml_element:e
+            | DOCSTART yaml_root_element:e
               {: RESULT = e; :}
-            | yaml_element:e DOCEND
+            | yaml_root_element:e DOCEND
               {: RESULT = e; :}
-            | yaml_element:e
+            | yaml_root_element:e
               {: RESULT = e; :}
             ;
 
-yaml_element
-            ::= yaml_global_scalar:s
+yaml_root_element
+            ::= INDENT_OPEN yaml_global_scalar:s INDENT_CLOSE
               {: RESULT = s; :}
-            | yaml_indent_additionalstring:o
+            | INDENT_OPEN yaml_indent_additionalstring:o INDENT_CLOSE
               {: RESULT = o; :}
             | yaml_json_node:e
               {: RESULT = e; :}

@@ -15,16 +15,18 @@ public class YamlFormatterProvider implements AstFormatterProvider {
 
     @Override
     public String formatNode(ReadOnlyAstNode astNode) {
-        return new YamlFormatterVisitor().visitAstNode(astNode).toString();
+        StringBuilder sb = (StringBuilder) new YamlFormatterVisitor().visitAstNode(astNode);
+        return sb.append('\n').toString();
     }
 
     static class YamlFormatterVisitor extends AstVisitor {
         private final static String INDENT = "  ";
-        private final StringBuilder sb = new StringBuilder("---\n");
+        private final StringBuilder sb = new StringBuilder(/*"---\n"*/);
         private int indentLevel = -1;
         private boolean firstKeyNewLineRequired;
         private StringBuilder newIndentLine() {
-            sb.append('\n');
+            if (sb.length() > 0)
+                sb.append('\n');
             // Note: String.repeat() not supported by GWT, so we just do a loop
             for (int i = 0; i < indentLevel; i++)
                 sb.append(INDENT);
