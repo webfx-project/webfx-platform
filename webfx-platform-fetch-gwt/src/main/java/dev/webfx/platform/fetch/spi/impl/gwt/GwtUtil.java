@@ -15,16 +15,17 @@ final class GwtUtil {
 
     static <J, T> Future<T> jsPromiseToWebFXFuture(elemental2.promise.Promise<J> jsPromise, Function<J, T> onSuccessFunction) {
         Promise<T> promise = Promise.promise();
+        // Not sure about if then() and catch() are exclusive so using tryComplete() and tryFail() to avoid additional exceptions
         jsPromise
                 .then(obj -> {
-                    promise.complete(onSuccessFunction.apply(obj));
+                    promise.tryComplete(onSuccessFunction.apply(obj));
                     return null;
                 })
                 .catch_(error -> {
                     if (error instanceof Throwable)
-                        promise.fail((Throwable) error);
+                        promise.tryFail((Throwable) error);
                     else
-                        promise.fail(error.toString());
+                        promise.tryFail(error.toString());
                     return null;
                 });
         return promise.future();
