@@ -38,7 +38,7 @@ public interface Response {
      * Use {@code dev.webfx.platform.fetch.json.JsonFetch.fetchJsonNode()} instead.
      *
      */
-    @Deprecated(forRemoval = true)
+    @Deprecated
     Future<JsonElement> json();
 
     /**
@@ -47,7 +47,7 @@ public interface Response {
      * Use {@code dev.webfx.platform.fetch.json.JsonFetch.fetchJsonObject()} instead.
      *
      */
-    @Deprecated(forRemoval = true)
+    @Deprecated
     default Future<JsonObject> jsonObject() {
         return json().map(JsonElement::asJsonObject);
     }
@@ -58,7 +58,7 @@ public interface Response {
      * Use {@code dev.webfx.platform.fetch.json.JsonFetch.fetchJsonArray()} instead.
      *
      */
-    @Deprecated(forRemoval = true)
+    @Deprecated
     default Future<JsonArray> jsonArray() {
         return json().map(JsonElement::asJsonArray);
     }
