@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+
+    <module-auto-injection-conditions>
+        <if-uses-java-package>dev.webfx.platform.conf</if-uses-java-package>
+        <if-uses-java-package>dev.webfx.platform.conf.zero</if-uses-java-package>
+    </module-auto-injection-conditions>
+
+    <implements>
+        <module>webfx-platform-conf-zero</module>
+    </implements>
+
+    <exported-packages>
+        <source-packages/>
+        <resource-packages/>
+    </exported-packages>
+
+    <dependencies>
+        <used-by-source-modules/>
+    </dependencies>
+
+</project>
