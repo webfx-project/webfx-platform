@@ -6,7 +6,7 @@ import dev.webfx.platform.windowhistory.spi.BrowsingHistoryLocation;
 import dev.webfx.platform.windowlocation.spi.PathStateLocation;
 import dev.webfx.platform.windowlocation.spi.impl.PathLocationImpl;
 import dev.webfx.platform.windowlocation.spi.impl.PathStateLocationImpl;
-import dev.webfx.platform.ast.json.ReadOnlyJsonObject;
+import dev.webfx.platform.ast.ReadOnlyAstObject;
 import dev.webfx.platform.util.Strings;
 import dev.webfx.platform.async.Future;
 import dev.webfx.platform.async.Handler;
@@ -103,13 +103,13 @@ public abstract class BrowsingHistoryBase implements BrowsingHistory {
     }
 
     @Override
-    public PathStateLocation createPathStateLocation(String path, ReadOnlyJsonObject state) {
+    public PathStateLocation createPathStateLocation(String path, ReadOnlyAstObject state) {
         path = mountToFullPath(path);
         return new PathStateLocationImpl(new PathLocationImpl(path), state);
     }
 
     @Override
-    public BrowsingHistoryLocation createHistoryLocation(String path, ReadOnlyJsonObject state) {
+    public BrowsingHistoryLocation createHistoryLocation(String path, ReadOnlyAstObject state) {
         return createHistoryLocation(createPathStateLocation(path, state), null);
     }
 

@@ -95,11 +95,11 @@
         <module>webfx-platform-arch-gwt</module>
         <module>webfx-platform-arch-java</module>
         <module>webfx-platform-ast</module>
-        <module>webfx-platform-ast-json-gwt</module>
-        <module>webfx-platform-ast-json-java</module>
+        <module>webfx-platform-ast-factory-generic</module>
+        <module>webfx-platform-ast-factory-gwt</module>
+        <module>webfx-platform-ast-factory-teavm</module>
+        <module>webfx-platform-ast-factory-vertx</module>
         <module>webfx-platform-ast-json-plugin</module>
-        <module>webfx-platform-ast-json-teavm</module>
-        <module>webfx-platform-ast-json-vertx</module>
         <module>webfx-platform-ast-yaml-plugin</module>
         <module>webfx-platform-async</module>
         <module>webfx-platform-audio</module>

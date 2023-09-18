@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
 
-    <description>Cross-platform Json API{@javadoc (see {@link dev.webfx.platform.ast.json.Json Json})}.</description>
-
     <exported-packages>
         <source-packages/>
+        <resource-packages/>
     </exported-packages>
 
     <dependencies>
-        <used-by-source-modules>
-            <module transitive="true">webfx-platform-util</module> <!-- for use of dev.webfx.platform.util.ast.* -->
-        </used-by-source-modules>
+        <used-by-source-modules/>
     </dependencies>
 
     <providers>
-        <provider interface="dev.webfx.platform.ast.parser.spi.AstParserProvider">dev.webfx.platform.ast.json.JsonAstParserProvider</provider>
-        <provider interface="dev.webfx.platform.ast.formatter.spi.AstFormatterProvider">dev.webfx.platform.ast.json.JsonFormatterProvider</provider>
+        <provider interface="dev.webfx.platform.ast.spi.parser.AstParserProvider">dev.webfx.platform.ast.json.parser.JsonParserProvider</provider>
+        <provider interface="dev.webfx.platform.ast.spi.formatter.AstFormatterProvider">dev.webfx.platform.ast.json.formatter.JsonFormatterProvider</provider>
     </providers>
 
     <maven-pom-manual>

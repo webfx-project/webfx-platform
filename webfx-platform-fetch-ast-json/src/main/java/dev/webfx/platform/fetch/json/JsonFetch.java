@@ -22,7 +22,7 @@ public final class JsonFetch {
     }
 
     public static Future<ReadOnlyAstNode> fetchJsonNode(String url) {
-        return Fetch.fetch(url).compose(Response::text).map(Json::parseElement);
+        return Fetch.fetch(url).compose(Response::text).map(Json::parseNode);
     }
 
 }

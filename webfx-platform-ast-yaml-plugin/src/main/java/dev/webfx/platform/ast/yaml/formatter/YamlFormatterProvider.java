@@ -1,7 +1,7 @@
 package dev.webfx.platform.ast.yaml.formatter;
 
 import dev.webfx.platform.ast.*;
-import dev.webfx.platform.ast.formatter.spi.AstFormatterProvider;
+import dev.webfx.platform.ast.spi.formatter.AstFormatterProvider;
 
 /**
  * @author Bruno Salmon

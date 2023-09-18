@@ -1,8 +1,8 @@
 package dev.webfx.platform.ast.json.parser.javacup;
 
-import dev.webfx.platform.ast.json.Json;
-import dev.webfx.platform.ast.json.JsonArray;
-import dev.webfx.platform.ast.json.JsonObject;
+import dev.webfx.platform.ast.AST;
+import dev.webfx.platform.ast.AstArray;
+import dev.webfx.platform.ast.AstObject;
 import dev.webfx.platform.util.Numbers;
 import dev.webfx.platform.util.tuples.Pair;
 
@@ -78,11 +78,11 @@ terminal String   STRING, IDENTIFIER;
 
 /* Non terminals used in the grammar section.*/
 non terminal Object                     json_element;
-non terminal Object                     json_native_scalar, json_java_scalar;
-non terminal JsonArray                  json_array;
-non terminal JsonArray                  json_array_body;
-non terminal JsonObject                 json_object;
-non terminal JsonObject                 json_object_body;
+non terminal Object                     json_scalar;
+non terminal AstArray                   json_array;
+non terminal AstArray                   json_array_body;
+non terminal AstObject                  json_object;
+non terminal AstObject                  json_object_body;
 non terminal Pair<String, Object>       json_object_entry;
 
 /* -------------Precedence and Associatively of Terminals Section----------- */
@@ -95,16 +95,11 @@ json_element ::= json_object:o
               {: RESULT = o; :}
             | json_array:a
               {: RESULT = a; :}
-            | json_native_scalar:s
+            | json_scalar:s
               {: RESULT = s; :}
             ;
 
-json_native_scalar
-            ::= json_java_scalar:s
-              {: RESULT = Json.javaToNativeScalar(s); :}
-            ;
-
-json_java_scalar
+json_scalar
             ::= NUMBER:n
               {: RESULT = n; :}
             | MINUS NUMBER:n
@@ -120,25 +115,25 @@ json_java_scalar
 json_array  ::= LBRACK json_array_body:a RBRACK
                {: RESULT = a ; :}
             | LBRACK RBRACK
-               {: RESULT = Json.createArray() ; :}
+               {: RESULT = AST.createArray() ; :}
             ;
 
 json_array_body ::= json_array_body:a COMMA json_element:e
               {: RESULT = a.push(e); :}
             | json_element:e
-              {: RESULT = Json.createArray().push(e); :}
+              {: RESULT = AST.createArray().push(e); :}
             ;
 
 json_object ::= LCURLY json_object_body:o RCURLY
                {: RESULT = o ; :}
             | LCURLY RCURLY
-               {: RESULT = Json.createObject() ; :}
+               {: RESULT = AST.createObject() ; :}
             ;
 
 json_object_body ::= json_object_body:o COMMA json_object_entry:e
               {: RESULT = o.set(e.get1(), e.get2()); :}
             | json_object_entry:e
-              {: RESULT = Json.createObject().set(e.get1(), e.get2()); :}
+              {: RESULT = AST.createObject().set(e.get1(), e.get2()); :}
             ;
 
 json_object_entry ::= STRING:id COLON json_element:e

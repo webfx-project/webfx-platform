@@ -3,7 +3,7 @@ package dev.webfx.platform.ast;
 /**
  * @author Bruno Salmon
  */
-public interface AstArray extends ReadOnlyAstArray {
+public interface AstArray extends ReadOnlyAstArray, AstNode {
 
     /**
      * Remove a given index and associated value from the object.

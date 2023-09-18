@@ -1,9 +1,8 @@
 package dev.webfx.platform.conf;
 
-import dev.webfx.platform.conf.impl.RootConfig;
-import dev.webfx.platform.ast.ReadOnlyAstObject;
-import dev.webfx.platform.ast.parser.AstParser;
 import dev.webfx.platform.ast.AST;
+import dev.webfx.platform.ast.ReadOnlyAstObject;
+import dev.webfx.platform.conf.impl.RootConfig;
 
 /**
  * @author Bruno Salmon
@@ -16,7 +15,7 @@ public class ConfigParser {
 
     public static Config parsePrefixedConfig(String prefixPath, String configText, String format) {
         // Parsing the object with the format given by the extension
-        ReadOnlyAstObject astObject = AstParser.parseObject(configText, format);
+        ReadOnlyAstObject astObject = AST.parseObject(configText, format);
         if (prefixPath != null) {
             astObject = AST.prefixObject(prefixPath, astObject);
         }

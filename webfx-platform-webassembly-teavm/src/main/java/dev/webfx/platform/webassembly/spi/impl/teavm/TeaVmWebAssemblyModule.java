@@ -1,10 +1,10 @@
 package dev.webfx.platform.webassembly.spi.impl.teavm;
 
-import dev.webfx.platform.ast.json.JsonObject;
+import dev.webfx.platform.ast.AstObject;
 import dev.webfx.platform.webassembly.WebAssemblyImport;
 import dev.webfx.platform.webassembly.WebAssemblyInstance;
 import dev.webfx.platform.webassembly.WebAssemblyModule;
-import dev.webfx.platform.ast.json.Json;
+import dev.webfx.platform.ast.AST;
 import dev.webfx.platform.async.Future;
 import dev.webfx.platform.async.Promise;
 import org.teavm.jso.JSBody;
@@ -25,15 +25,15 @@ final class TeaVmWebAssemblyModule implements WebAssemblyModule {
     @Override
     public Future<WebAssemblyInstance> instantiate(WebAssemblyImport... imports) {
         Promise<WebAssemblyInstance> promise = Promise.promise();
-        JsonObject json = Json.createObject();
+        AstObject json = AST.createObject();
         for (WebAssemblyImport i : imports) {
-            JsonObject mod = json.getObject(i.getModuleName());
+            AstObject mod = json.getObject(i.getModuleName());
             if (mod == null)
-                json.set(i.getModuleName(), mod = Json.createObject());
+                json.set(i.getModuleName(), mod = AST.createObject());
             BiIntHandler ih = (x, count) -> i.getMethod().handle(x, count);
-            setImportFunction((JSObject) mod.getNativeElement(), i.getFunctionName(), ih);
+            setImportFunction((JSObject) AST.NATIVE_FACTORY.astToNativeObject(mod), i.getFunctionName(), ih);
         }
-        instantiateModule(jsModule, (JSObject) json.getNativeElement(), instance -> promise.complete(new TeaVmWebAssemblyInstance(instance)), this::putwchar);
+        instantiateModule(jsModule, (JSObject) AST.NATIVE_FACTORY.astToNativeObject(json), instance -> promise.complete(new TeaVmWebAssemblyInstance(instance)), this::putwchar);
         return promise.future();
     }
 

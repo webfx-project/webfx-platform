@@ -1,6 +1,6 @@
 package dev.webfx.platform.windowhistory.spi.impl.web;
 
-import dev.webfx.platform.ast.json.ReadOnlyJsonObject;
+import dev.webfx.platform.ast.ReadOnlyAstObject;
 import dev.webfx.platform.uischeduler.UiScheduler;
 import dev.webfx.platform.util.Objects;
 import dev.webfx.platform.util.Strings;
@@ -73,7 +73,7 @@ public final class WebWindowHistoryProvider extends MemoryBrowsingHistory implem
         return super.getCurrentLocation();
     }
 
-    private void onPopState(ReadOnlyJsonObject state) {
+    private void onPopState(ReadOnlyAstObject state) {
         //Console.log("Entering onPopState");
         // Transforming the current window location into a history location descriptor
         String path = fullToMountPath(WindowLocation.getPath());

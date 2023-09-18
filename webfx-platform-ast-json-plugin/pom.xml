@@ -13,8 +13,6 @@
 
     <artifactId>webfx-platform-ast-json-plugin</artifactId>
 
-    <description>Cross-platform Json API.</description>
-
 
     <build>
         <plugins>

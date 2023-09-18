@@ -7,7 +7,7 @@ import java.time.Instant;
 /**
  * @author Bruno Salmon
  */
-public interface AstObject extends ReadOnlyAstObject {
+public interface AstObject extends ReadOnlyAstObject, AstNode {
 
     @Override
     default AstObject getObject(String key) {

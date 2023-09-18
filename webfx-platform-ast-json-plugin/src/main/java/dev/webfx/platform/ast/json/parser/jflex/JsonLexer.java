@@ -7,10 +7,11 @@
 
 package dev.webfx.platform.ast.json.parser.jflex;
 
-import java_cup.runtime.*;
-import        dev.webfx.platform.ast.json.parser.javacup.JsonSymbols;
+import dev.webfx.platform.ast.json.parser.javacup.JsonSymbols;
+import dev.webfx.platform.util.Numbers;
+import java_cup.runtime.Symbol;
+
 import static dev.webfx.platform.ast.json.parser.javacup.JsonSymbols.*;
-import        dev.webfx.platform.util.Numbers;
 
 
 @SuppressWarnings("fallthrough")

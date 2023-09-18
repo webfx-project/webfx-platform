@@ -1,12 +1,12 @@
 package dev.webfx.platform.webassembly.spi.impl.teavm;
 
-import org.teavm.jso.JSBody;
-import org.teavm.jso.JSObject;
-import org.teavm.jso.typedarrays.*;
+import dev.webfx.platform.ast.AST;
 import dev.webfx.platform.webassembly.WebAssemblyInstance;
 import dev.webfx.platform.webassembly.WebAssemblyMemoryBufferReader;
 import dev.webfx.platform.webassembly.WebAssemblyMemoryBufferWriter;
-import dev.webfx.platform.ast.json.Json;
+import org.teavm.jso.JSBody;
+import org.teavm.jso.JSObject;
+import org.teavm.jso.typedarrays.*;
 
 /**
  * @author Bruno Salmon
@@ -48,7 +48,7 @@ final class TeaVmWebAssemblyInstance implements WebAssemblyInstance {
 
     @Override
     public Object call(String webAssemblyMethod, Object... args) {
-        return Json.nativeToJavaScalar(callJS(webAssemblyMethod, args));
+        return AST.NATIVE_FACTORY.nativeScalarToJavaScalar(callJS(webAssemblyMethod, args));
     }
 
     public JSObject callJS(String webAssemblyMethod, Object... args) {
@@ -68,7 +68,7 @@ final class TeaVmWebAssemblyInstance implements WebAssemblyInstance {
     }
 
     private static JSObject toJSObject(Object javaObject) {
-        return (JSObject) Json.javaToNativeScalar(javaObject);
+        return (JSObject) AST.NATIVE_FACTORY.javaScalarToNativeScalar(javaObject);
     }
 
     @JSBody(params = {"instance", "method"}, script = "return instance.exports[method]()")

@@ -1,8 +1,9 @@
 package dev.webfx.platform.windowhistory.spi.impl.gwt;
 
+import com.google.gwt.core.client.JavaScriptObject;
 import dev.webfx.platform.windowhistory.spi.impl.gwt.jsinterop.Window;
-import dev.webfx.platform.ast.json.spi.impl.gwt.GwtJsonObject;
-import dev.webfx.platform.ast.json.ReadOnlyJsonObject;
+
+import dev.webfx.platform.ast.ReadOnlyAstObject;
 import dev.webfx.platform.windowhistory.spi.impl.web.JsWindowHistory;
 import dev.webfx.platform.async.Handler;
 import java.util.function.Function;
@@ -31,28 +32,28 @@ public final class GwtJsWindowHistory implements JsWindowHistory {
     }-*/;
 
     @Override
-    public ReadOnlyJsonObject state() {
+    public ReadOnlyAstObject state() {
         return Window.history.state.cast();
     }
 
     @Override
     public void pushState(Object stateObj, String title, String url) {
-        Window.history.pushState((GwtJsonObject) stateObj, title, url);
+        Window.history.pushState((JavaScriptObject) stateObj, title, url);
     }
 
     @Override
     public void replaceState(Object stateObj, String title, String url) {
-        Window.history.replaceState((GwtJsonObject) stateObj, title, url);
+        Window.history.replaceState((JavaScriptObject) stateObj, title, url);
     }
 
     @Override
-    public void onPopState(Handler<ReadOnlyJsonObject> stateListener) {
-        Window.onpopstate = event -> stateListener.handle((GwtJsonObject) event.state);
+    public void onPopState(Handler<ReadOnlyAstObject> stateListener) {
+        Window.onpopstate = event -> stateListener.handle((ReadOnlyAstObject) event.state);
     }
 
     @Override
-    public void onBeforeUnload(Function<ReadOnlyJsonObject, String> listener) {
-        Window.onbeforeunload = event -> listener.apply((GwtJsonObject) event);
+    public void onBeforeUnload(Function<ReadOnlyAstObject, String> listener) {
+        Window.onbeforeunload = event -> listener.apply((ReadOnlyAstObject) event);
     }
 
 }

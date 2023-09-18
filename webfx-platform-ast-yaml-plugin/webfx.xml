@@ -8,11 +8,15 @@
 
     <dependencies>
         <used-by-source-modules/>
+        <!-- for testing only: -->
+<!--
+        <plugin-module scope="test">webfx-platform-ast-factory-generic</plugin-module>
+-->
     </dependencies>
 
     <providers>
-        <provider interface="dev.webfx.platform.ast.formatter.spi.AstFormatterProvider">dev.webfx.platform.ast.yaml.formatter.YamlFormatterProvider</provider>
-        <provider interface="dev.webfx.platform.ast.parser.spi.AstParserProvider">dev.webfx.platform.ast.yaml.parser.YamlParserProvider</provider>
+        <provider interface="dev.webfx.platform.ast.spi.formatter.AstFormatterProvider">dev.webfx.platform.ast.yaml.formatter.YamlFormatterProvider</provider>
+        <provider interface="dev.webfx.platform.ast.spi.parser.AstParserProvider">dev.webfx.platform.ast.yaml.parser.YamlParserProvider</provider>
     </providers>
 
     <maven-pom-manual>

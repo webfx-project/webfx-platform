@@ -8,16 +8,15 @@ module webfx.platform.ast {
 
     // Exported packages
     exports dev.webfx.platform.ast;
-    exports dev.webfx.platform.ast.formatter;
-    exports dev.webfx.platform.ast.formatter.spi;
-    exports dev.webfx.platform.ast.impl;
-    exports dev.webfx.platform.ast.impl.listmap;
-    exports dev.webfx.platform.ast.parser;
-    exports dev.webfx.platform.ast.parser.spi;
-    exports dev.webfx.platform.ast.parser.spi.impl.properties;
+    exports dev.webfx.platform.ast.spi.factory;
+    exports dev.webfx.platform.ast.spi.factory.nativeast;
+    exports dev.webfx.platform.ast.spi.formatter;
+    exports dev.webfx.platform.ast.spi.parser;
+    exports dev.webfx.platform.ast.spi.parser.impl.properties;
 
     // Used services
-    uses dev.webfx.platform.ast.formatter.spi.AstFormatterProvider;
-    uses dev.webfx.platform.ast.parser.spi.AstParserProvider;
+    uses dev.webfx.platform.ast.spi.factory.AstFactoryProvider;
+    uses dev.webfx.platform.ast.spi.formatter.AstFormatterProvider;
+    uses dev.webfx.platform.ast.spi.parser.AstParserProvider;
 
 }

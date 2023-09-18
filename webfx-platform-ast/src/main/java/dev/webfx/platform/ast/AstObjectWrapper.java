@@ -15,6 +15,11 @@ public class AstObjectWrapper extends ReadOnlyAstObjectWrapper implements AstObj
     }
 
     @Override
+    public void clear() {
+        getWrappedObject().clear();
+    }
+
+    @Override
     public <V> V remove(String key) {
         return getWrappedObject().remove(key);
     }

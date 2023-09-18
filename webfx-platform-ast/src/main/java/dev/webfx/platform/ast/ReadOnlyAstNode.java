@@ -8,6 +8,12 @@ package dev.webfx.platform.ast;
  */
 public interface ReadOnlyAstNode {
 
+    int size();
+
+    default boolean isEmpty() {
+        return size() == 0;
+    }
+
     default boolean isObject() {
         return this instanceof ReadOnlyAstObject;
     }
@@ -16,10 +22,11 @@ public interface ReadOnlyAstNode {
         return this instanceof ReadOnlyAstArray;
     }
 
-    int size();
-
-    default boolean isEmpty() {
-        return size() == 0;
+    default ReadOnlyAstObject asObject() {
+        return (ReadOnlyAstObject) this;
     }
 
+    default ReadOnlyAstArray asArray() {
+        return (ReadOnlyAstArray) this;
+    }
 }
