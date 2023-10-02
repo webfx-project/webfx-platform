@@ -10,6 +10,7 @@ import dev.webfx.platform.ast.AstArray;
 import dev.webfx.platform.ast.AstObject;
 import dev.webfx.platform.util.tuples.Pair;
 import java_cup.runtime.Symbol;
+import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
   */

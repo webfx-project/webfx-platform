@@ -1,14 +1,10 @@
 package dev.webfx.platform.ast.yaml.parser.javacup;
 
 import dev.webfx.platform.ast.AST;
-import dev.webfx.platform.ast.AstObject;
 import dev.webfx.platform.ast.AstArray;
-import dev.webfx.platform.util.Numbers;
+import dev.webfx.platform.ast.AstObject;
 import dev.webfx.platform.util.tuples.Pair;
-import dev.webfx.platform.util.tuples.Triplet;
 import java_cup.runtime.Symbol;
-import java.util.List;
-import java.util.ArrayList;
 
 /* ----------------------Preliminary Declarations Section--------------------*/
    
@@ -74,7 +70,7 @@ parser code {:
     public Symbol scan() throws Exception {
         Symbol symbol = scanImpl();
         // Uncomment for debug
-        System.out.println("-".repeat(((dev.webfx.platform.ast.yaml.parser.jflex.YamlLexer) getScanner()).indentCounter.openIndentCount()) +  "> Symbol " + YamlSymbols.terminalNames[symbol.sym] + (symbol.value == null ? "" : "(" + symbol.value + ")"));
+        // System.out.println("-".repeat(((dev.webfx.platform.ast.yaml.parser.jflex.YamlLexer) getScanner()).indentCounter.openIndentCount()) +  "> Symbol " + YamlSymbols.terminalNames[symbol.sym] + (symbol.value == null ? "" : "(" + symbol.value + ")"));
         return symbol;
     }
 
