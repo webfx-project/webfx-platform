@@ -41,12 +41,12 @@ public class VertxAstFactoryProvider implements NativeAstFactoryProvider {
 
     @Override
     public Object astToNativeObject(ReadOnlyAstObject astObjectFromThisFactory) {
-        return ((VertxAstObject) astObjectFromThisFactory).getVertxObject();
+        return astObjectFromThisFactory == null ? null : ((VertxAstObject) astObjectFromThisFactory).getVertxObject();
     }
 
     @Override
     public Object astToNativeArray(ReadOnlyAstArray astArrayFromThisFactory) {
-        return ((VertxAstArray) astArrayFromThisFactory).getVertxArray();
+        return astArrayFromThisFactory == null ? null : ((VertxAstArray) astArrayFromThisFactory).getVertxArray();
     }
 
     @Override
