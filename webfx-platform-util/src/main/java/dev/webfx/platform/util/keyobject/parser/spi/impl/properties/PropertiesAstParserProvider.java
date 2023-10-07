@@ -1,12 +1,12 @@
 package dev.webfx.platform.util.keyobject.parser.spi.impl.properties;
 
+import dev.webfx.platform.util.keyobject.AST;
+import dev.webfx.platform.util.keyobject.ReadOnlyAstNode;
 import dev.webfx.platform.util.keyobject.ReadOnlyIndexedArray;
 import dev.webfx.platform.util.keyobject.ReadOnlyKeyObject;
-import dev.webfx.platform.util.keyobject.ReadOnlyAstNode;
-import dev.webfx.platform.util.keyobject.AST;
 import dev.webfx.platform.util.keyobject.parser.spi.AstParserProvider;
 
-import java.io.ByteArrayInputStream;
+import java.io.StringReader;
 import java.util.Properties;
 
 /**
@@ -22,7 +22,7 @@ public class PropertiesAstParserProvider implements AstParserProvider {
     private Properties parseProperties(String text) {
         Properties properties = new Properties();
         try {
-            properties.load(new ByteArrayInputStream(text.getBytes()));
+            properties.load(new StringReader(text));
         } catch (Exception e) {
             //Console.log("WARNING: Ignoring wrong format configuration file " + filePath, e);
         }

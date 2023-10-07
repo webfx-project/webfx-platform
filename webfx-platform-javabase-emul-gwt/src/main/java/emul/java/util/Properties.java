@@ -33,6 +33,7 @@ package emul.java.util;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.io.Reader;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.BiConsumer;
@@ -372,12 +373,12 @@ public class Properties extends HashMap<Object,Object> {
      * @throws  NullPointerException if {@code reader} is null.
      * @since   1.6
      */
-/*
+
     public synchronized void load(Reader reader) throws IOException {
         Objects.requireNonNull(reader, "reader parameter is null");
         load0(new LineReader(reader));
     }
-*/
+
 
     /**
      * Reads a property list (key and element pairs) from the input
@@ -467,12 +468,10 @@ public class Properties extends HashMap<Object,Object> {
             inByteBuf = new byte[8192];
         }
 
-/*
         LineReader(Reader reader) {
             this.reader = reader;
             inCharBuf = new char[8192];
         }
-*/
 
         char[] lineBuf = new char[1024];
         private byte[] inByteBuf;
@@ -480,7 +479,7 @@ public class Properties extends HashMap<Object,Object> {
         private int inLimit = 0;
         private int inOff = 0;
         private InputStream inStream;
-//        private Reader reader;
+        private Reader reader;
 
         int readLine() throws IOException {
             // use locals to optimize for interpreted performance
@@ -500,7 +499,7 @@ public class Properties extends HashMap<Object,Object> {
             while (true) {
                 if (off >= limit) {
                     inLimit = limit = fromStream ? inStream.read(byteBuf, 0, byteBuf.length)
-                            : 0; //reader.read(charBuf, 0, charBuf.length);
+                            : reader.read(charBuf, 0, charBuf.length);
                     if (limit <= 0) {
                         if (len == 0) {
                             return -1;
@@ -546,7 +545,7 @@ public class Properties extends HashMap<Object,Object> {
                                     }
                                     off = 0;
                                 }
-                            } /*else {
+                            } else {
                                 while (off < limit) {
                                     c = charBuf[off++];
                                     if (c <= '\r' && (c == '\r' || c == '\n'))
@@ -559,7 +558,7 @@ public class Properties extends HashMap<Object,Object> {
                                     }
                                     off = 0;
                                 }
-                            }*/
+                            }
                         }
                         skipWhiteSpace = true;
                         continue;
@@ -583,7 +582,7 @@ public class Properties extends HashMap<Object,Object> {
                     }
                     if (off >= limit) {
                         inLimit = limit = fromStream ? inStream.read(byteBuf, 0, byteBuf.length)
-                                : 0; //reader.read(charBuf, 0, charBuf.length);
+                                : reader.read(charBuf, 0, charBuf.length);
                         off = 0;
                         if (limit <= 0) { // EOF
                             return precedingBackslash ? len - 1 : len;
@@ -623,7 +622,7 @@ public class Properties extends HashMap<Object,Object> {
 
         int newLength = Math.max(minGrowth, prefGrowth) + oldLength;
         //if (newLength - MAX_ARRAY_LENGTH <= 0) {
-            return newLength;
+        return newLength;
         //}
         //return hugeLength(oldLength, minGrowth);
     }
@@ -950,9 +949,9 @@ public class Properties extends HashMap<Object,Object> {
                 String val = (String)e.getValue();
                 key = saveConvert(key, true, escUnicode);
                 */
-/* No need to escape embedded and trailing spaces for value, hence
-                 * pass false to flag.
-                 *//*
+    /* No need to escape embedded and trailing spaces for value, hence
+     * pass false to flag.
+     *//*
 
                 val = saveConvert(val, false, escUnicode);
                 bw.write(key + "=" + val);
@@ -1531,7 +1530,7 @@ public class Properties extends HashMap<Object,Object> {
 /*
     @Override
     protected void rehash() { */
-/* no-op *//*
+    /* no-op *//*
  }
 */
 
