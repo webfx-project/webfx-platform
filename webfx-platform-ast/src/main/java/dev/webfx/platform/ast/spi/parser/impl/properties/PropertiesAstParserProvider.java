@@ -6,7 +6,7 @@ import dev.webfx.platform.ast.ReadOnlyAstObject;
 import dev.webfx.platform.ast.ReadOnlyAstNode;
 import dev.webfx.platform.ast.AST;
 
-import java.io.ByteArrayInputStream;
+import java.io.StringReader;
 import java.util.Properties;
 
 /**
@@ -22,7 +22,7 @@ public class PropertiesAstParserProvider implements AstParserProvider {
     private Properties parseProperties(String text) {
         Properties properties = new Properties();
         try {
-            properties.load(new ByteArrayInputStream(text.getBytes()));
+            properties.load(new StringReader(text));
         } catch (Exception e) {
             //Console.log("WARNING: Ignoring wrong format configuration file " + filePath, e);
         }

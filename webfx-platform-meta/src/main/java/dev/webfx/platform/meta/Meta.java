@@ -3,7 +3,7 @@ package dev.webfx.platform.meta;
 import dev.webfx.platform.console.Console;
 import dev.webfx.platform.resource.Resource;
 
-import java.io.ByteArrayInputStream;
+import java.io.StringReader;
 import java.util.Properties;
 
 /**
@@ -26,7 +26,7 @@ public final class Meta {
             META_PROPERTIES = new Properties();
             try {
                 String content = Resource.getText(META_EXE_RESOURCE_FILE_PATH);
-                META_PROPERTIES.load(new ByteArrayInputStream(content.getBytes()));
+                META_PROPERTIES.load(new StringReader(content));
             } catch (Exception e) {
                 Console.log("Failed to read meta resource file " + META_EXE_RESOURCE_FILE_PATH, e);
             }
