@@ -16,10 +16,9 @@ import java.util.function.Predicate;
 
 public final class Arrays {
 
-    private Arrays() {
-    }
+    private Arrays() {}
 
-    public static <T> T[] toArray(T... a) {
+    public static <T> T[] of(T... a) {
         return a;
     }
 
@@ -42,6 +41,14 @@ public final class Arrays {
     public static <T> T last(T[] list) {
         int length = length(list);
         return length == 0 ? null : list[length - 1];
+    }
+
+    public static <T> T[] subArray(IntFunction<T[]> generator, int i0, int i1, T... a) {
+        int n = i1 - i0;
+        T[] subArray = generator.apply(n);
+        for (int i = 0; i < n; i++)
+            subArray[i] = a[i0 + i];
+        return subArray;
     }
 
     public static <A, B> B[] map(A[] aArray, Converter<A, B> aToBConverter, IntFunction<B[]> generator) {
