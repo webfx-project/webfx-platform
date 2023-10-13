@@ -79,8 +79,11 @@ public class ZipFileResolver implements FileResolver {
             }
             // Returning the temporary file
             return tempFile;
+        } catch (NoSuchFileException e) {
+            LOGGER.warn("Unable to find zip entry " + fileName);
+            return new File(fileName); // returning a non-null but non-existing file
         } catch (IOException e) {
-            LOGGER.warn("Unable to extract zip entry " + fileName, e);
+            LOGGER.warn("Error while trying to extract zip entry " + fileName, e);
             return new File(fileName); // returning a non-null but non-existing file
         }
     }
