@@ -1,6 +1,7 @@
 package dev.webfx.platform.ast.spi.factory.impl.vertx;
 
 
+import dev.webfx.platform.ast.AST;
 import dev.webfx.platform.ast.spi.factory.impl.generic.ListBasedAstArray;
 import dev.webfx.platform.ast.spi.factory.nativeast.NativeAstArray;
 import dev.webfx.platform.ast.spi.factory.nativeast.NativeAstFactoryProvider;
@@ -72,4 +73,8 @@ final class VertxAstArray extends ListBasedAstArray implements NativeAstArray {
         vertxArray.set(index, value);
     }
 
+    @Override
+    public String toString() {
+        return AST.formatArray(this, "json");
+    }
 }

@@ -1,5 +1,6 @@
 package dev.webfx.platform.ast.spi.factory.impl.vertx;
 
+import dev.webfx.platform.ast.AST;
 import dev.webfx.platform.ast.spi.factory.impl.generic.MapBasedAstObject;
 import dev.webfx.platform.ast.spi.factory.nativeast.NativeAstFactoryProvider;
 import dev.webfx.platform.ast.spi.factory.nativeast.NativeAstObject;
@@ -60,5 +61,9 @@ final class VertxAstObject extends MapBasedAstObject implements NativeAstObject 
         setVertxObject(vertxObject.copy());
     }
 
+    @Override
+    public String toString() {
+        return AST.formatObject(this, "json");
+    }
 }
 
