@@ -15,6 +15,7 @@ public final class VertxInstance {
     private static Vertx VERTX;
     private static Router HTTP_ROUTER;
     private static SessionStore SESSION_STORE;
+    private static Runnable BRIDGE_INSTALLER;
     private static Handler<BridgeEvent> BRIDGE_EVENT_HANDLER;
 
     public static void setVertx(Vertx vertx) {
@@ -43,6 +44,14 @@ public final class VertxInstance {
 
     public static SessionStore getSessionStore() {
         return SESSION_STORE;
+    }
+
+    public static Runnable getBridgeInstaller() {
+        return BRIDGE_INSTALLER;
+    }
+
+    public static void setBridgeInstaller(Runnable bridgeInstaller) {
+        BRIDGE_INSTALLER = bridgeInstaller;
     }
 
     public static void setBridgeEventHandler(Handler<BridgeEvent> bridgeEventHandler) {
