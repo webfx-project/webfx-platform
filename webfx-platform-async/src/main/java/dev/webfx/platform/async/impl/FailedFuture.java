@@ -42,8 +42,6 @@ public final class FailedFuture<T> extends FutureBase<T> {
     public FailedFuture(String failureMessage) {
         //this(null, failureMessage);
         this(new NoStackTraceThrowable(failureMessage));
-        if ("Connection reset".equals(failureMessage))
-            new Exception("Stacktrace for AWS").printStackTrace();
     }
 
     /**
