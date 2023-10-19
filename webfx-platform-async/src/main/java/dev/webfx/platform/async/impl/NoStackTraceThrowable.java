@@ -9,5 +9,7 @@ public class NoStackTraceThrowable extends Throwable {
 
     public NoStackTraceThrowable(String message) {
         super(message, null, false, false);
+        // Added stack trace to watch "Connection reset" issue on AWS
+        new Exception("NoStackTraceThrowable stack trace:").printStackTrace();
     }
 }
