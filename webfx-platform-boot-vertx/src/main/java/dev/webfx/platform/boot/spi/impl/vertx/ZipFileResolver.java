@@ -19,6 +19,7 @@ public class ZipFileResolver implements FileResolver {
 
     // Keeping zip archives open for better performance, but this behaviour can be turned off below.
     private static final boolean KEEP_ZIP_ARCHIVES_OPEN = true;
+    private static final boolean REMEMBER_EXTRACTED_FILES = true;
 
     // Logger to report issues with zip operations
     private static final Logger LOGGER = LoggerFactory.getLogger(ZipFileResolver.class);
@@ -28,6 +29,9 @@ public class ZipFileResolver implements FileResolver {
 
     // When keeping zip archives open, this map memorize the zip file system (still open) associated to each archive path
     private final Map<String, FileSystem> openZipFileSystems = new HashMap<>();
+    private final Map<String, Long> zipDates = new HashMap<>();
+
+    private final Map<Path /* zipFsEntryPath */, File> extractedFiles = new HashMap<>();
 
     public ZipFileResolver() {
         this(new FileResolverImpl());
@@ -52,9 +56,11 @@ public class ZipFileResolver implements FileResolver {
         if (zipFs == null) { // If not, we create it
             try {
                 // Note: this call to FileSystems.newFileSystem() requires Java >= 13
-                zipFs = FileSystems.newFileSystem(Path.of(archivePath));
+                Path zipPath = Path.of(archivePath);
+                zipFs = FileSystems.newFileSystem(zipPath);
                 // We memorize that file system in the map
                 openZipFileSystems.put(archivePath, zipFs);
+                zipDates.put(archivePath, zipPath.toFile().lastModified());
             } catch (IOException e) {
                 LOGGER.warn("Unable to open zip archive " + archivePath, e);
                 return new File(fileName); // returning a non-null but non-existing file
@@ -64,14 +70,23 @@ public class ZipFileResolver implements FileResolver {
         String zipEntry = fileName.substring(exclamationIndex + 1);
         // We transform it to a path for the zip file system
         Path zipFsEntryPath = zipFs.getPath(zipEntry);
+        File tempFile = extractedFiles.get(zipFsEntryPath);
+        if (tempFile != null)
+            return tempFile;
         try {
             // Copying the zip entry to a temporary file that will finally be served
             Path tempPath = Files.createTempFile(null, null);
             Files.copy(zipFsEntryPath, tempPath, StandardCopyOption.REPLACE_EXISTING);
             // We need to return a file instance of that temporary file
-            File tempFile = tempPath.toFile();
+            tempFile = tempPath.toFile();
+            // Setting last modified on the extracted file, as this is the value Vert.x will report to the browser
+            Long zipDate = zipDates.get(archivePath);
+            if (zipDate != null)
+                tempFile.setLastModified(zipDate);
             // We mark that file to be deleted on server exit
             tempFile.deleteOnExit();
+            if (REMEMBER_EXTRACTED_FILES)
+                extractedFiles.put(zipFsEntryPath, tempFile);
             // Closing the zip file system
             if (!KEEP_ZIP_ARCHIVES_OPEN) {
                 openZipFileSystems.remove(archivePath);
