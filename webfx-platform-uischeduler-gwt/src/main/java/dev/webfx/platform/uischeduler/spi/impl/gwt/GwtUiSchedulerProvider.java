@@ -3,6 +3,7 @@ package dev.webfx.platform.uischeduler.spi.impl.gwt;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.Timer;
 import dev.webfx.platform.console.Console;
+import dev.webfx.platform.scheduler.Scheduled;
 import dev.webfx.platform.uischeduler.spi.impl.UiSchedulerProviderBase;
 
 
@@ -16,35 +17,38 @@ public final class GwtUiSchedulerProvider extends UiSchedulerProviderBase {
         return true;
     }
 
-    private static JavaScriptObject animationFrameId;
-    private static Timer checkTimer;
+    private JavaScriptObject animationFrameId;
+
     @Override
-    protected void checkExecuteAnimationPipeIsScheduledForNextAnimationFrame() {
-        if (animationFrameId == null) {
-            animationFrameId = requestAnimationFrame(this::executeAnimationPipe);
-            // Additional checker in case the animation frame is not honored anymore (this can happen when the browser
-            // window is viewed again after having being minimized or when switching back from another browser tab)
-            checkTimer = new Timer() {
-                @Override
-                public void run() {
-                    executeAnimationPipe(); // This will execute not honored animations
-                }
-            };
-            checkTimer.scheduleRepeating(1000); // checking every 1s should be enough
-        }
+    protected void requestAnimationFrame(Runnable runnable) {
+        animationFrameId = jsRequestAnimationFrame(runnable);
     }
 
     @Override
-    protected void onExecuteAnimationPipeFinished(boolean noMoreAnimationScheduled) {
-        animationFrameId = null;
-        if (checkTimer != null) {
-            checkTimer.cancel();
-            checkTimer = null;
-        }
+    protected void cancelAnimationFrame() {
+        jsCancelAnimationFrame(animationFrameId);
     }
 
-    private static native JavaScriptObject requestAnimationFrame(Runnable runnable) /*-{
+    protected Scheduled scheduleLongTermAnimation(long delayMillis, Runnable runnable) {
+        Timer timer = new Timer() {
+            @Override
+            public void run() {
+                runnable.run();
+            }
+        };
+        timer.schedule((int) delayMillis);
+        return () -> {
+            timer.cancel();
+            return true;
+        };
+    }
+
+    private static native JavaScriptObject jsRequestAnimationFrame(Runnable runnable) /*-{
         return $wnd.requestAnimationFrame(runnable.@java.lang.Runnable::run().bind(runnable));
+    }-*/;
+
+    private static native void jsCancelAnimationFrame(JavaScriptObject id) /*-{
+        return $wnd.cancelAnimationFrame(id);
     }-*/;
 
     @Override
