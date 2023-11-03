@@ -172,4 +172,12 @@ public final class Arrays {
         }
         return array;
     }
+
+    public static double sum(double... values) {
+        double sum = 0;
+        for (double value : values) {
+            sum += value;
+        }
+        return sum;
+    }
 }
