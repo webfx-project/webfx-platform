@@ -36,6 +36,10 @@ public final class Strings {
         return !isEmpty(s);
     }
 
+    public static boolean isBlank(String s) {
+        return isEmpty(trim(s));
+    }
+
     public static String trim(String s) {
         return s == null ? null : s.trim();
     }
