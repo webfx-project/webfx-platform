@@ -97,14 +97,11 @@ public abstract class UiSchedulerProviderBase extends SchedulerProviderBase impl
         }
 
         private void execute() {
-            long nowMillis = System.currentTimeMillis();
-            if (nextExecutionTimeMillis > 0 && nowMillis > nextExecutionTimeMillis + 16)
-                log("🥵 Late by " + (nowMillis - nextExecutionTimeMillis) + "ms");
             wrappedRunnable.run();
             if (nextExecutionTimeMillis != 0 && wrappedRunnable.isPeriodic()) {
                 nextExecutionTimeMillis += delayMs;
+                long nowMillis = System.currentTimeMillis();
                 if (nextExecutionTimeMillis < nowMillis) {
-                    log("🤷");
                     nextExecutionTimeMillis = nowMillis + delayMs;
                 }
             }
@@ -209,7 +206,7 @@ public abstract class UiSchedulerProviderBase extends SchedulerProviderBase impl
     protected Scheduled scheduleLongTermAnimation(long delayMillis, Runnable runnable) {
         // This default implementation assumes Scheduler.scheduleDelay() has its own independent implementation (so it
         // doesn't loop back to this UiScheduler). If not, it needs to be overridden.
-        return Scheduler.scheduleDelay(delayMillis, runnable);
+        return Scheduler.scheduleDelay(delayMillis, () -> runInUiThread(runnable));
     }
 
     protected void log(String message) {
