@@ -122,4 +122,21 @@ public final class Strings {
         return s + separator + token;
     }
 
+    public static String repeat(String s, int count) {
+        if (count < 0) {
+            throw new IllegalArgumentException("count is negative: " + count);
+        }
+        if (count == 1) {
+            return s;
+        }
+        final int len = s.length();
+        if (len == 0 || count == 0) {
+            return "";
+        }
+        StringBuilder sb = new StringBuilder(s);
+        while (--count > 0)
+            sb.append(s);
+        return sb.toString();
+    }
+
 }
