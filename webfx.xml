@@ -264,6 +264,13 @@
                 </exported-packages>
             </library>
 
+            <library name="io-vertx-web-client">
+                <artifactId>vertx-web-client</artifactId>
+                <exported-packages>
+                    <package>io.vertx.ext.web.client</package>
+                </exported-packages>
+            </library>
+
         </group>
 
     </required-libraries>
