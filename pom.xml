@@ -56,7 +56,7 @@
                                     <filter>
                                         <artifact>*:*</artifact>
                                         <includes>
-                                            <include>emul/java/**</include>
+                                            <include>emul/**</include>
                                             <include>public/**</include>
                                             <include>META-INF/maven/**</include>
                                         </includes>
@@ -66,6 +66,10 @@
                                     <relocation>
                                         <pattern>emul.java</pattern>
                                         <shadedPattern>java</shadedPattern>
+                                    </relocation>
+                                    <relocation>
+                                        <pattern>emul.netscape</pattern>
+                                        <shadedPattern>netscape</shadedPattern>
                                     </relocation>
                                 </relocations>
                                 <createSourcesJar>true</createSourcesJar>
