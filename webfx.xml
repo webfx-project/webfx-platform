@@ -24,7 +24,7 @@
         <build>
             <pluginManagement>
                 <plugins>
-                    <!-- Relocating the emul.java package to java for both classes and sources -->
+                    <!-- Relocating the emul.xxx.* packages to xxx.* for both classes and sources -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-shade-plugin</artifactId>
@@ -40,7 +40,7 @@
                                         <filter>
                                             <artifact>*:*</artifact>
                                             <includes>
-                                                <include>emul/java/**</include>
+                                                <include>emul/**</include>
                                                 <include>public/**</include>
                                                 <include>META-INF/maven/**</include>
                                             </includes>
@@ -50,6 +50,10 @@
                                         <relocation>
                                             <pattern>emul.java</pattern>
                                             <shadedPattern>java</shadedPattern>
+                                        </relocation>
+                                        <relocation>
+                                            <pattern>emul.netscape</pattern>
+                                            <shadedPattern>netscape</shadedPattern>
                                         </relocation>
                                     </relocations>
                                     <createSourcesJar>true</createSourcesJar>
