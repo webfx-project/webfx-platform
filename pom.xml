@@ -115,6 +115,9 @@
         <module>webfx-platform-boot-gwt</module>
         <module>webfx-platform-boot-java</module>
         <module>webfx-platform-boot-vertx</module>
+        <module>webfx-platform-browser</module>
+        <module>webfx-platform-browser-gluon</module>
+        <module>webfx-platform-browser-gwt</module>
         <module>webfx-platform-conf</module>
         <module>webfx-platform-conf-file-java-plugin</module>
         <module>webfx-platform-conf-zero</module>

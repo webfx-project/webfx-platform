@@ -211,6 +211,12 @@
                 </exported-packages>
             </library>
 
+            <library artifactId="browser" name="com.gluonhq.attach.browser">
+                <exported-packages>
+                    <package>com.gluonhq.attach.browser</package>
+                </exported-packages>
+            </library>
+
             <library artifactId="lifecycle" name="com.gluonhq.attach.lifecycle">
                 <exported-packages>
                     <package>com.gluonhq.attach.lifecycle</package>
