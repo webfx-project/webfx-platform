@@ -154,6 +154,8 @@
         <module>webfx-platform-substitution-var-localstorage</module>
         <module>webfx-platform-substitution-var-sysprop</module>
         <module>webfx-platform-substitution-var-windowlocation</module>
+        <module>webfx-platform-typedarray</module>
+        <module>webfx-platform-typedarray-gwt</module>
         <module>webfx-platform-uischeduler</module>
         <module>webfx-platform-uischeduler-gwt</module>
         <module>webfx-platform-useragent</module>
