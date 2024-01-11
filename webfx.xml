@@ -140,6 +140,12 @@
                 </exported-packages>
             </library>
 
+            <library name="elemental2-webgl">
+                <exported-packages>
+                    <package>elemental2.webgl</package>
+                </exported-packages>
+            </library>
+
         </group>
 
         <group>
