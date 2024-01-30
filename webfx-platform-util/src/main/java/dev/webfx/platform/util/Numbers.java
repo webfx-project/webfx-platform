@@ -5,21 +5,21 @@ package dev.webfx.platform.util;
  */
 public final class Numbers {
 
-    public static final Byte ZERO_BYTE = 0;
-    public static final Short ZERO_SHORT = 0;
-    public static final Integer ZERO_INTEGER = 0;
-    public static final Long ZERO_LONG = 0L;
-    public static final Float ZERO_FLOAT = 0f;
     public static final Double ZERO_DOUBLE = 0d;
+    public static final Float ZERO_FLOAT = 0f;
+    public static final Long ZERO_LONG = 0L;
+    public static final Integer ZERO_INTEGER = 0;
+    public static final Short ZERO_SHORT = 0;
+    public static final Byte ZERO_BYTE = 0;
 
     public static boolean isZero(Object value) {
         return value != null && (
-                value == ZERO_BYTE ||
-                value == ZERO_SHORT ||
-                value == ZERO_INTEGER ||
-                value == ZERO_LONG ||
+                value.equals(ZERO_DOUBLE) ||
                 value.equals(ZERO_FLOAT) ||
-                value.equals(ZERO_DOUBLE));
+                value == ZERO_LONG ||
+                value == ZERO_INTEGER ||
+                value == ZERO_SHORT ||
+                value == ZERO_BYTE);
     }
 
     public static boolean isNotZero(Object value) {
@@ -30,6 +30,10 @@ public final class Numbers {
         return number != null && number.intValue() >= 0;
     }
 
+    public static boolean isNegative(Number number) {
+        return number != null && number.intValue() < 0;
+    }
+
     public static Object negate(Object value) {
         return negate((Number) value);
     }
@@ -37,18 +41,18 @@ public final class Numbers {
     public static Number negate(Number value) {
         if (value == null)
             return null;
-        if (value instanceof Byte)
-            return -(Byte) value;
-        if (value instanceof Short)
-            return -(Short) value;
-        if (value instanceof Integer)
-            return -(Integer) value;
-        if (value instanceof Long)
-            return -(Long) value;
-        if (value instanceof Float)
-            return -(Float) value;
         if (value instanceof Double)
             return -(Double) value;
+        if (value instanceof Float)
+            return -(Float) value;
+        if (value instanceof Long)
+            return -(Long) value;
+        if (value instanceof Integer)
+            return -(Integer) value;
+        if (value instanceof Short)
+            return -(Short) value;
+        if (value instanceof Byte)
+            return -(Byte) value;
         return null;
     }
 
@@ -56,45 +60,53 @@ public final class Numbers {
         return value instanceof Number;
     }
 
-    public static Integer asInteger(Object value) {
-        return value == null ? null : value instanceof Integer ? (Integer) value : value instanceof Number ? ((Number) value).intValue() : null;
+    public static boolean isMathematicalInteger(float value) {
+        return Float.isFinite(value) && value % 1 == 0;
     }
 
-    public static Long asLong(Object value) {
-        return value == null ? null : value instanceof Long ? (Long) value : value instanceof Number ? ((Number) value).longValue() : null;
+    public static boolean isMathematicalInteger(double value) {
+        return Double.isFinite(value) && value % 1 == 0;
     }
 
-    public static Float asFloat(Object value) {
-        return value == null ? null : value instanceof Float ? (Float) value : value instanceof Number ? ((Number) value).floatValue() : null;
+    public static boolean isMathematicalInteger(Number value) {
+        if (value == null)
+            return false;
+        if (value instanceof Double)
+            return isMathematicalInteger(value.doubleValue());
+        if (value instanceof Float)
+            return isMathematicalInteger(value.floatValue());
+        return true; // for Long, Integer, Short & Byte
     }
 
     public static Double asDouble(Object value) {
         return value == null ? null : value instanceof Double ? (Double) value : value instanceof Number ? ((Number) value).doubleValue() : null;
     }
 
-    public static Byte asByte(Object value){
-        return value == null ? null : value instanceof Byte ? (Byte) value : value instanceof Number ? ((Number) value).byteValue() : null;
+    public static Float asFloat(Object value) {
+        return value == null ? null : value instanceof Float ? (Float) value : value instanceof Number ? ((Number) value).floatValue() : null;
+    }
+
+    public static Long asLong(Object value) {
+        return value == null ? null : value instanceof Long ? (Long) value : value instanceof Number ? ((Number) value).longValue() : null;
     }
 
     public static Short asShort(Object value){
         return value == null ? null : value instanceof Short ? (Short) value : value instanceof Number ? ((Number) value).shortValue() : null;
     }
 
-    public static Integer parseInteger(String s) {
-        if (s == null)
-            return null;
-        try {
-            return Integer.parseInt(s);
-        } catch (NumberFormatException e) {
-            return null;
-        }
+    public static Integer asInteger(Object value) {
+        return value == null ? null : value instanceof Integer ? (Integer) value : value instanceof Number ? ((Number) value).intValue() : null;
     }
 
-    public static Long parseLong(String s) {
+    public static Byte asByte(Object value){
+        return value == null ? null : value instanceof Byte ? (Byte) value : value instanceof Number ? ((Number) value).byteValue() : null;
+    }
+
+    public static Double parseDouble(String s) {
         if (s == null)
             return null;
         try {
-            return Long.parseLong(s);
+            return Double.parseDouble(s);
         } catch (NumberFormatException e) {
             return null;
         }
@@ -110,21 +122,21 @@ public final class Numbers {
         }
     }
 
-    public static Double parseDouble(String s) {
+    public static Long parseLong(String s) {
         if (s == null)
             return null;
         try {
-            return Double.parseDouble(s);
+            return Long.parseLong(s);
         } catch (NumberFormatException e) {
             return null;
         }
     }
 
-    public static Byte parseByte(String s) {
+    public static Integer parseInteger(String s) {
         if (s == null)
             return null;
         try {
-            return Byte.parseByte(s);
+            return Integer.parseInt(s);
         } catch (NumberFormatException e) {
             return null;
         }
@@ -140,8 +152,36 @@ public final class Numbers {
         }
     }
 
+    public static Byte parseByte(String s) {
+        if (s == null)
+            return null;
+        try {
+            return Byte.parseByte(s);
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
+
     public static Number parseShortestNumber(String s) {
-        return toShortestNumber(parseLong(s));
+        Long longValue = parseLong(s);
+        if (longValue == null)
+            return Double.valueOf(s);
+        return toShortestNumber(longValue);
+    }
+
+
+    public static Double toDouble(Object value) {
+        Double number = asDouble(value);
+        if (number != null || value == null)
+            return number;
+        return parseDouble(value.toString());
+    }
+
+    public static Float toFloat(Object value) {
+        Float number = asFloat(value);
+        if (number != null || value == null)
+            return number;
+        return parseFloat(value.toString());
     }
 
     public static Integer toInteger(Object value) {
@@ -158,18 +198,11 @@ public final class Numbers {
         return parseLong(value.toString());
     }
 
-    public static Float toFloat(Object value) {
-        Float number = asFloat(value);
+    public static Short toShort(Object value) {
+        Short number = asShort(value);
         if (number != null || value == null)
             return number;
-        return parseFloat(value.toString());
-    }
-
-    public static Double toDouble(Object value) {
-        Double number = asDouble(value);
-        if (number != null || value == null)
-            return number;
-        return parseDouble(value.toString());
+        return parseShort(value.toString());
     }
 
     public static Byte toByte(Object value) {
@@ -179,11 +212,27 @@ public final class Numbers {
         return parseByte(value.toString());
     }
 
-    public static Short toShort(Object value) {
-        Short number = asShort(value);
-        if (number != null || value == null)
-            return number;
-        return parseShort(value.toString());
+
+    public static Number toShortestNumber(Double value) {
+        if (value == null)
+            return null;
+        if (isMathematicalInteger(value)) {
+            long l = value.longValue();
+            if (value == l)
+                return toShortestNumber(l);
+        }
+        return value;
+    }
+
+    public static Number toShortestNumber(Float value) {
+        if (value == null)
+            return null;
+        if (isMathematicalInteger(value)) {
+            long l = value.longValue();
+            if (value == l)
+                return toShortestNumber(l);
+        }
+        return value;
     }
 
     public static Number toShortestNumber(Long value) {
@@ -217,13 +266,23 @@ public final class Numbers {
         return value;
     }
 
-    public static int intValue(Object value) {
-        Integer number = toInteger(value);
-        return number == null ? 0 : number;
+    public static Number toShortestNumber(Number value) {
+        if (value instanceof Double)
+            return toShortestNumber((Double) value);
+        if (value instanceof Float)
+            return toShortestNumber((Float) value);
+        if (value instanceof Long)
+            return toShortestNumber((Long) value);
+        if (value instanceof Integer)
+            return toShortestNumber((Integer) value);
+        if (value instanceof Short)
+            return toShortestNumber((Short) value);
+        return value;
     }
 
-    public static long longValue(Object value) {
-        Long number = toLong(value);
+
+    public static double doubleValue(Object value) {
+        Double number = toDouble(value);
         return number == null ? 0 : number;
     }
 
@@ -232,8 +291,18 @@ public final class Numbers {
         return number == null ? 0 : number;
     }
 
-    public static double doubleValue(Object value) {
-        Double number = toDouble(value);
+    public static long longValue(Object value) {
+        Long number = toLong(value);
+        return number == null ? 0 : number;
+    }
+
+    public static int intValue(Object value) {
+        Integer number = toInteger(value);
+        return number == null ? 0 : number;
+    }
+
+    public static short shortValue(Object value) {
+        Short number = toShort(value);
         return number == null ? 0 : number;
     }
 
@@ -242,9 +311,12 @@ public final class Numbers {
         return number == null ? 0 : number;
     }
 
-    public static short shortValue(Object value) {
-        Short number = toShort(value);
-        return number == null ? 0 : number;
+    public static boolean identicalValues(Number n1, Number n2) {
+        if (java.util.Objects.equals(n1, n2))
+            return true;
+        if (!isMathematicalInteger(n1) || !isMathematicalInteger(n2))
+            return false;
+        return java.util.Objects.equals(toShortestNumber(n1), toShortestNumber(n2));
     }
 
     public static String twoDigits(int i) {
