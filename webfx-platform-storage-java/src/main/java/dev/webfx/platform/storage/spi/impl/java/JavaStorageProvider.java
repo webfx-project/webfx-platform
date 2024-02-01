@@ -11,10 +11,12 @@ import java.util.Properties;
 class JavaStorageProvider implements StorageProvider {
 
     protected final Properties properties = new Properties();
+    protected boolean hasUnsavedChanges;
 
     @Override
     public void setItem(String key, String value) {
         properties.setProperty(key, value);
+        markAsChanged();
     }
 
     @Override
@@ -24,7 +26,8 @@ class JavaStorageProvider implements StorageProvider {
 
     @Override
     public void removeItem(String key) {
-        properties.remove(key);
+        if (properties.remove(key) != null)
+            markAsChanged();
     }
 
     @Override
@@ -39,6 +42,18 @@ class JavaStorageProvider implements StorageProvider {
 
     @Override
     public void clear() {
-        properties.clear();
+        if (!properties.isEmpty()) {
+            properties.clear();
+            markAsChanged();
+        }
     }
+
+    protected void markAsChanged() {
+        hasUnsavedChanges = true;
+    }
+
+    protected void markAsSaved() {
+        hasUnsavedChanges = true;
+    }
+
 }

@@ -4,12 +4,12 @@
 
 /*
  * Copyright 2014 Goodow.com
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -55,8 +55,17 @@ public final class JavaSchedulerProvider extends SchedulerProviderBase {
             scheduledFuture = executor.scheduleAtFixedRate(wrappedRunnable, delayMs, delayMs, TimeUnit.MILLISECONDS);
         else if (delayMs > 0)
             scheduledFuture = executor.schedule(wrappedRunnable, delayMs, TimeUnit.MILLISECONDS);
-        else
+        else if (!wrappedRunnable.isIdle())
             executor.execute(wrappedRunnable);
+        else { // idle
+            ScheduledFuture<?>[] scheduledIdleFuture = { null };
+            scheduledFuture = scheduledIdleFuture[0] = executor.scheduleAtFixedRate(() -> {
+                if (tasksCount(false, false, false, false, true) == 0) {
+                    scheduledIdleFuture[0].cancel(false);
+                    wrappedRunnable.run();
+                }
+            }, 5, 5, TimeUnit.SECONDS);
+        }
         return new JavaScheduled(wrappedRunnable, scheduledFuture);
     }
 

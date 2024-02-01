@@ -1,10 +1,10 @@
 package dev.webfx.platform.uischeduler.spi.impl.gwt;
 
-import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.Timer;
 import dev.webfx.platform.console.Console;
-import dev.webfx.platform.scheduler.Scheduled;
+import dev.webfx.platform.scheduler.Cancellable;
 import dev.webfx.platform.uischeduler.spi.impl.UiSchedulerProviderBase;
+import elemental2.dom.DomGlobal;
 
 
 /**
@@ -17,19 +17,19 @@ public final class GwtUiSchedulerProvider extends UiSchedulerProviderBase {
         return true;
     }
 
-    private JavaScriptObject animationFrameId;
+    private int animationFrameId;
 
     @Override
     protected void requestAnimationFrame(Runnable runnable) {
-        animationFrameId = jsRequestAnimationFrame(runnable);
+        animationFrameId = DomGlobal.requestAnimationFrame(timestamp -> runnable.run());
     }
 
     @Override
     protected void cancelAnimationFrame() {
-        jsCancelAnimationFrame(animationFrameId);
+        DomGlobal.cancelAnimationFrame(animationFrameId);
     }
 
-    protected Scheduled scheduleLongTermAnimation(long delayMillis, Runnable runnable) {
+    protected Cancellable scheduleLongTermAnimation(long delayMillis, Runnable runnable) {
         Timer timer = new Timer() {
             @Override
             public void run() {
@@ -42,14 +42,6 @@ public final class GwtUiSchedulerProvider extends UiSchedulerProviderBase {
             return true;
         };
     }
-
-    private static native JavaScriptObject jsRequestAnimationFrame(Runnable runnable) /*-{
-        return $wnd.requestAnimationFrame(runnable.@java.lang.Runnable::run().bind(runnable));
-    }-*/;
-
-    private static native void jsCancelAnimationFrame(JavaScriptObject id) /*-{
-        return $wnd.cancelAnimationFrame(id);
-    }-*/;
 
     @Override
     protected void log(String message) {

@@ -1,5 +1,8 @@
 package dev.webfx.platform.storage.spi.impl.java;
 
+import dev.webfx.platform.console.Console;
+import dev.webfx.platform.scheduler.Scheduled;
+import dev.webfx.platform.scheduler.Scheduler;
 import dev.webfx.platform.storage.spi.LocalStorageProvider;
 import dev.webfx.platform.storagelocation.StorageLocation;
 import dev.webfx.platform.visibility.Visibility;
@@ -14,6 +17,7 @@ import java.nio.file.Paths;
 public final class JavaLocalStorageProvider extends JavaStorageProvider implements LocalStorageProvider {
 
     private final File locateStorageFile = Paths.get(StorageLocation.getInternalStorageLocation() , "localStorage.properties").toFile();
+    private Scheduled saveScheduled;
 
     public JavaLocalStorageProvider() {
         loadProperties();
@@ -27,23 +31,44 @@ public final class JavaLocalStorageProvider extends JavaStorageProvider implemen
     private void loadProperties() {
         try (InputStream is = new FileInputStream(locateStorageFile)) {
             properties.load(is);
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException ignored) {
         } catch (Exception e) {
-            e.printStackTrace();
+            Console.log("Exception while loading local storage file: " + e.getMessage());
         }
     }
 
     private void storeProperties() {
-        try {
-            locateStorageFile.getParentFile().mkdirs();
-            locateStorageFile.createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (hasUnsavedChanges) {
+            try {
+                locateStorageFile.getParentFile().mkdirs();
+                locateStorageFile.createNewFile();
+            } catch (IOException e) {
+                Console.log("Exception while creating local storage file: " + e.getMessage());
+            }
+            try (OutputStream os = new FileOutputStream(locateStorageFile)) {
+                Console.log("Saving local storage file");
+                properties.store(os, null);
+                markAsSaved();
+            } catch (Exception e) {
+                Console.log("Exception while saving local storage file: " + e.getMessage());
+            }
         }
-        try (OutputStream os = new FileOutputStream(locateStorageFile)) {
-            properties.store(os, null);
-        } catch (Exception e) {
-            e.printStackTrace();
+    }
+
+    @Override
+    protected void markAsChanged() {
+        super.markAsChanged();
+        if (saveScheduled == null) {
+            saveScheduled = Scheduler.runOnIdle(this::storeProperties);
+        }
+    }
+
+    @Override
+    protected void markAsSaved() {
+        super.markAsSaved();
+        if (saveScheduled != null) {
+            saveScheduled.cancel();
+            saveScheduled = null;
         }
     }
 }
