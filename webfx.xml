@@ -171,17 +171,23 @@
             </exported-packages>
         </library>
 
-        <library name="jsinterop-annotations">
-            <exported-packages>
-                <package>jsinterop.annotations</package>
-            </exported-packages>
-        </library>
+        <group>
+            <groupId>com.google.jsinterop</groupId>
 
-        <library name="jsinterop-base">
-            <exported-packages>
-                <package>jsinterop.base</package>
-            </exported-packages>
-        </library>
+            <library name="jsinterop-annotations">
+                <exported-packages>
+                    <package>jsinterop.annotations</package>
+                </exported-packages>
+            </library>
+
+            <library name="jsinterop-base">
+                <artifactId>base</artifactId>
+                <exported-packages>
+                    <package>jsinterop.base</package>
+                </exported-packages>
+            </library>
+
+        </group>
 
         <group>
             <groupId>org.teavm</groupId>
@@ -214,6 +220,12 @@
             <library artifactId="audio" name="com.gluonhq.attach.audio">
                 <exported-packages>
                     <package>com.gluonhq.attach.audio</package>
+                </exported-packages>
+            </library>
+
+            <library artifactId="browser" name="com.gluonhq.attach.browser">
+                <exported-packages>
+                    <package>com.gluonhq.attach.browser</package>
                 </exported-packages>
             </library>
 
@@ -271,6 +283,13 @@
                     <package>io.vertx.ext.web.handler</package>
                     <package>io.vertx.ext.web.handler.sockjs</package>
                     <package>io.vertx.ext.web.sstore</package>
+                </exported-packages>
+            </library>
+
+            <library name="io-vertx-web-client">
+                <artifactId>vertx-web-client</artifactId>
+                <exported-packages>
+                    <package>io.vertx.ext.web.client</package>
                 </exported-packages>
             </library>
 
