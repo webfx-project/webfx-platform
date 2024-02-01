@@ -1,11 +1,12 @@
 package dev.webfx.platform.windowhistory.spi.impl.gwt;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import dev.webfx.platform.windowhistory.spi.impl.gwt.jsinterop.Window;
-
 import dev.webfx.platform.ast.ReadOnlyAstObject;
-import dev.webfx.platform.windowhistory.spi.impl.web.JsWindowHistory;
 import dev.webfx.platform.async.Handler;
+import dev.webfx.platform.windowhistory.spi.impl.gwt.jsinterop.Window;
+import dev.webfx.platform.windowhistory.spi.impl.web.JsWindowHistory;
+import jsinterop.base.Js;
+
 import java.util.function.Function;
 
 /**
@@ -27,9 +28,9 @@ public final class GwtJsWindowHistory implements JsWindowHistory {
     }
 
     @Override
-    public final native boolean supportsStates() /*-{
-        return typeof window.history.pushState === 'function';
-    }-*/;
+    public boolean supportsStates() {
+        return Js.typeof(Js.asPropertyMap(Window.history).get("pushState")).equals("function");
+    }
 
     @Override
     public ReadOnlyAstObject state() {

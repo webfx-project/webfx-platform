@@ -1,7 +1,8 @@
 package dev.webfx.platform.windowlocation.spi.impl.gwt;
 
-import dev.webfx.platform.windowlocation.spi.WindowLocationProvider;
 import dev.webfx.platform.util.Strings;
+import dev.webfx.platform.windowlocation.spi.WindowLocationProvider;
+import elemental2.dom.DomGlobal;
 
 /**
  * @author Bruno Salmon
@@ -9,42 +10,42 @@ import dev.webfx.platform.util.Strings;
 public final class GwtWindowLocationProvider implements WindowLocationProvider {
 
     @Override
-    public native String getHref() /*-{
-        return $wnd.location.href;
-    }-*/;
+    public String getHref() {
+        return DomGlobal.window.location.href;
+    };
 
     @Override
     public String getProtocol() {
         return Strings.removeSuffix(getWindowProtocol(), ":");
     }
 
-    private native String getWindowProtocol() /*-{
-        return $wnd.location.protocol;
-    }-*/;
+    private String getWindowProtocol() {
+        return DomGlobal.window.location.protocol;
+    };
 
     @Override
-    public native String getHost() /*-{
-        return $wnd.location.host;
-    }-*/;
+    public String getHost() {
+        return DomGlobal.window.location.host;
+    };
 
     @Override
-    public native String getHostname() /*-{
-        return $wnd.location.hostname;
-    }-*/;
+    public String getHostname() {
+        return DomGlobal.window.location.hostname;
+    };
 
     @Override
-    public native String getPort() /*-{
-        return $wnd.location.port;
-    }-*/;
+    public String getPort() {
+        return DomGlobal.window.location.port;
+    };
 
-    public native String getPathname() /*-{
-        return $wnd.location.pathname;
-    }-*/;
+    public String getPathname() {
+        return DomGlobal.window.location.pathname;
+    };
 
     @Override
-    public native String getSearch() /*-{
-        return $wnd.location.search;
-    }-*/;
+    public String getSearch() {
+        return DomGlobal.window.location.search;
+    };
 
     @Override
     public String getQueryString() {
@@ -52,9 +53,9 @@ public final class GwtWindowLocationProvider implements WindowLocationProvider {
     }
 
     @Override
-    public native String getHash() /*-{
-        return $wnd.location.hash;
-    }-*/;
+    public String getHash() {
+        return DomGlobal.window.location.hash;
+    };
 
     @Override
     public String getFragment() {
@@ -62,12 +63,12 @@ public final class GwtWindowLocationProvider implements WindowLocationProvider {
     }
 
     @Override
-    public native void assignHref(String href) /*-{
-        $wnd.location.assign(href);
-    }-*/;
+    public void assignHref(String href) {
+        DomGlobal.window.location.assign(href);
+    };
 
     @Override
-    public native void replaceHref(String href) /*-{
-        $wnd.location.replace(href);
-    }-*/;
+    public void replaceHref(String href) {
+        DomGlobal.window.location.replace(href);
+    };
 }
