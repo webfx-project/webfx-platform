@@ -171,17 +171,23 @@
             </exported-packages>
         </library>
 
-        <library name="jsinterop-annotations">
-            <exported-packages>
-                <package>jsinterop.annotations</package>
-            </exported-packages>
-        </library>
+        <group>
+            <groupId>com.google.jsinterop</groupId>
 
-        <library name="jsinterop-base">
-            <exported-packages>
-                <package>jsinterop.base</package>
-            </exported-packages>
-        </library>
+            <library name="jsinterop-annotations">
+                <exported-packages>
+                    <package>jsinterop.annotations</package>
+                </exported-packages>
+            </library>
+
+            <library name="jsinterop-base">
+                <artifactId>base</artifactId>
+                <exported-packages>
+                    <package>jsinterop.base</package>
+                </exported-packages>
+            </library>
+
+        </group>
 
         <group>
             <groupId>org.teavm</groupId>
