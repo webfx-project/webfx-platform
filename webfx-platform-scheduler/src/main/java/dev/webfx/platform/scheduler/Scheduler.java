@@ -51,8 +51,12 @@ public class Scheduler {
         return getProvider().schedulePeriodic(delayMs, runnable);
     }
 
-    public static void runInBackground(Runnable runnable) {
-        getProvider().runInBackground(runnable);
+    public static Scheduled runInBackground(Runnable runnable) {
+        return getProvider().runInBackground(runnable);
+    }
+
+    public static Scheduled runOnIdle(Runnable runnable) {
+        return getProvider().runOnIdle(runnable);
     }
 
     public static int tasksCount(boolean includeDeferred, boolean includePeriodic, boolean includeBackground, boolean includePending, boolean includeRunning) {

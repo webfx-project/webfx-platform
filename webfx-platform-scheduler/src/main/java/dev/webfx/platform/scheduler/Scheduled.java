@@ -3,9 +3,24 @@ package dev.webfx.platform.scheduler;
 /**
  * @author Bruno Salmon
  */
-public interface Scheduled {
-    /**
-     * Cancel the scheduled task. Returns {@code} true if the task was successfully cancelled.
-     */
-    boolean cancel();
+public interface Scheduled extends Cancellable {
+
+    boolean isDeferred();
+
+    boolean isPeriodic();
+
+    boolean isBackground();
+
+    boolean isIdle();
+
+    boolean isStarted();
+
+    boolean isFinished();
+
+    boolean isPending();
+
+    boolean isRunning();
+
+    boolean isCancelled();
+
 }
