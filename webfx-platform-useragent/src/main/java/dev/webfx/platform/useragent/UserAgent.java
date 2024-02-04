@@ -40,4 +40,33 @@ public final class UserAgent {
         return getProvider().isNative();
     }
 
+    public static boolean isChrome() {
+        return getProvider().isChrome();
+    }
+
+    public static boolean isFireFox() {
+        return getProvider().isFireFox();
+    }
+
+    public static boolean isSafari() {
+        return getProvider().isSafari();
+    }
+
+    public static boolean isEdge() {
+        return getProvider().isEdge();
+    }
+
+    public static boolean isOtherBrowser() {
+        return getProvider().isOtherBrowser();
+    }
+
+    public static String getBrowserVersion() {
+        return getProvider().getBrowserVersion();
+    }
+
+    public static int getBrowserMajorVersion() {
+        return getProvider().getBrowserMajorVersion();
+    }
+
 }
+
