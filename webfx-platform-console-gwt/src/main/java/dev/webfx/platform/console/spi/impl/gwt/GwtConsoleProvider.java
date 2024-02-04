@@ -1,6 +1,7 @@
 package dev.webfx.platform.console.spi.impl.gwt;
 
 import dev.webfx.platform.console.spi.ConsoleProvider;
+import elemental2.dom.DomGlobal;
 
 /**
  * @author Bruno Salmon
@@ -20,6 +21,8 @@ public class GwtConsoleProvider implements ConsoleProvider {
         logConsole(nativeObject);
     }
 
-    private static native void logConsole(Object message) /*-{ $wnd.console.log(message); }-*/;
+    private static void logConsole(Object message) {
+        DomGlobal.console.log(message);
+    }
 
 }
