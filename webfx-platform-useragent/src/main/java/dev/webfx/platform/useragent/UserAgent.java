@@ -40,24 +40,8 @@ public final class UserAgent {
         return getProvider().isNative();
     }
 
-    public static boolean isChrome() {
-        return getProvider().isChrome();
-    }
-
-    public static boolean isFireFox() {
-        return getProvider().isFireFox();
-    }
-
-    public static boolean isSafari() {
-        return getProvider().isSafari();
-    }
-
-    public static boolean isEdge() {
-        return getProvider().isEdge();
-    }
-
-    public static boolean isOtherBrowser() {
-        return getProvider().isOtherBrowser();
+    public static BrowserType getBrowserType() {
+        return getProvider().getBrowserType();
     }
 
     public static String getBrowserVersion() {
@@ -66,6 +50,30 @@ public final class UserAgent {
 
     public static int getBrowserMajorVersion() {
         return getProvider().getBrowserMajorVersion();
+    }
+
+    public static boolean isChrome() {
+        return getBrowserType() == BrowserType.CHROME;
+    }
+
+    public static boolean isFireFox() {
+        return getBrowserType() == BrowserType.FIREFOX;
+    }
+
+    public static boolean isSafari() {
+        return getBrowserType() == BrowserType.SAFARI;
+    }
+
+    public static boolean isEdge() {
+        return getBrowserType() == BrowserType.EDGE;
+    }
+
+    public static boolean isOpera() {
+        return getBrowserType() == BrowserType.OPERA;
+    }
+
+    public static boolean isUnknownBrowser() {
+        return getBrowserType() == BrowserType.UNKNOWN;
     }
 
 }

@@ -1,5 +1,7 @@
 package dev.webfx.platform.useragent.spi.impl;
 
+import dev.webfx.platform.useragent.BrowserType;
+
 /**
  * @author Bruno Salmon
  */
@@ -10,82 +12,65 @@ public class BrowserUserAgentProvider extends ClientUserAgentProvider {
     private static final String SAFARI_TAG = "safari/";
     private static final String EDGE_TAG1 = "edge/";
     private static final String EDGE_TAG2 = "edg/";
+    private static final String OPERA_TAG1 = "opera/";
+    private static final String OPERA_TAG2 = "opr/";
 
-    private static boolean IS_CHROME;
-    private static boolean IS_FIREFOX;
-    private static boolean IS_SAFARI;
-    private static boolean IS_EDGE;
-    private static boolean IS_OTHER;
-    private static String BROWSER_VERSION;
-    private static int BROWSER_MAJOR_VERSION = -1;
+    private final BrowserType browserType;
+    private final String browserVersion;
+    private final int browserMajorVersion;
 
     public BrowserUserAgentProvider(String userAgentName) {
         super(userAgentName, true, false);
+        String userAgent = userAgentName.toLowerCase();
+        boolean isOpera1 = userAgent.contains(OPERA_TAG1);
+        boolean isOpera2 = userAgent.contains(OPERA_TAG2);
+        boolean isEdge1 = userAgent.contains(EDGE_TAG1);
+        boolean isEdge2 = userAgent.contains(EDGE_TAG2);
+        String browserTag;
+        if (isOpera1 || isOpera2) {
+            browserType = BrowserType.OPERA;
+            browserTag = isOpera1 ? OPERA_TAG1 : OPERA_TAG2;
+        } else if (isEdge1 || isEdge2) {
+            browserType = BrowserType.EDGE;
+            browserTag = isEdge1 ? EDGE_TAG1 : EDGE_TAG2;
+        } else if (userAgent.contains(FIREFOX_TAG)) {
+            browserType = BrowserType.FIREFOX;
+            browserTag = FIREFOX_TAG;
+        } else if (userAgent.contains(SAFARI_TAG) && !userAgent.contains(CHROME_TAG) && !userAgent.contains("android")) {
+            browserType = BrowserType.SAFARI;
+            browserTag = SAFARI_TAG;
+        } else if (userAgent.contains(CHROME_TAG)) {
+            browserType = BrowserType.CHROME;
+            browserTag = CHROME_TAG;
+        } else {
+            browserType = BrowserType.UNKNOWN;
+            browserTag = null;
+        }
+        int versionPos = browserTag == null ? -1 : userAgent.indexOf(browserTag);
+        if (versionPos < 0) {
+            browserVersion = "Unknown";
+            browserMajorVersion = -1;
+        } else {
+            String versionAndSoOn = userAgent.substring(versionPos + browserTag.length());
+            int nextSpacePos = versionAndSoOn.indexOf(' ');
+            browserVersion = nextSpacePos == -1 ? versionAndSoOn : versionAndSoOn.substring(0, nextSpacePos);
+            browserMajorVersion = Integer.parseInt(browserVersion.substring(0, browserVersion.indexOf('.')));
+        }
+        //dev.webfx.platform.console.Console.log("browserType = " + browserType + ", browserVersion = " + browserVersion);
     }
 
     @Override
-    public boolean isChrome() {
-        checkBrowserDetectionIsDone();
-        return IS_CHROME;
-    }
-
-    @Override
-    public boolean isFireFox() {
-        checkBrowserDetectionIsDone();
-        return IS_FIREFOX;
-    }
-
-    @Override
-    public boolean isSafari() {
-        checkBrowserDetectionIsDone();
-        return IS_SAFARI;
-    }
-
-    @Override
-    public boolean isEdge() {
-        checkBrowserDetectionIsDone();
-        return IS_EDGE;
-    }
-
-    @Override
-    public boolean isOtherBrowser() {
-        checkBrowserDetectionIsDone();
-        return IS_OTHER;
+    public BrowserType getBrowserType() {
+        return browserType;
     }
 
     @Override
     public String getBrowserVersion() {
-        checkBrowserDetectionIsDone();
-        return BROWSER_VERSION;
+        return browserVersion;
     }
 
     @Override
     public int getBrowserMajorVersion() {
-        checkBrowserDetectionIsDone();
-        return BROWSER_MAJOR_VERSION;
-    }
-
-    private void checkBrowserDetectionIsDone() {
-        if (BROWSER_VERSION == null) {
-            String userAgent = getUserAgentName().toLowerCase();
-            boolean isEdge1 = userAgent.contains(EDGE_TAG1);
-            boolean isEdge2 = userAgent.contains(EDGE_TAG2);
-            IS_EDGE = isEdge1 || isEdge2;
-            IS_FIREFOX = !IS_EDGE && userAgent.contains(FIREFOX_TAG);
-            IS_SAFARI = !IS_EDGE && !IS_FIREFOX && userAgent.contains(SAFARI_TAG) && !userAgent.contains(CHROME_TAG) && !userAgent.contains("android");
-            IS_CHROME = !IS_EDGE && !IS_FIREFOX && !IS_SAFARI && userAgent.contains(CHROME_TAG);
-            IS_OTHER = !IS_EDGE && !IS_FIREFOX && !IS_SAFARI && !IS_CHROME;
-            String browserTag = IS_CHROME ? CHROME_TAG : IS_FIREFOX ? FIREFOX_TAG : IS_SAFARI ? SAFARI_TAG : isEdge1 ? EDGE_TAG1 : isEdge2 ? EDGE_TAG2 : null;
-            int versionPos = browserTag == null ? -1 : userAgent.indexOf(browserTag);
-            if (versionPos < 0) {
-                BROWSER_VERSION = "Unknown";
-                BROWSER_MAJOR_VERSION = -1;
-            } else {
-                String versionAndSoOn = userAgent.substring(versionPos + browserTag.length());
-                int nextSpacePos = versionAndSoOn.indexOf(' ');
-                BROWSER_VERSION = nextSpacePos == -1 ? versionAndSoOn : versionAndSoOn.substring(0, nextSpacePos);
-                BROWSER_MAJOR_VERSION = Integer.parseInt(BROWSER_VERSION.substring(0, BROWSER_VERSION.indexOf('.')));
-            }
-        }
+        return browserMajorVersion;
     }
 }
