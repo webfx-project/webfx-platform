@@ -1,5 +1,7 @@
 package dev.webfx.platform.useragent.spi;
 
+import dev.webfx.platform.useragent.BrowserType;
+
 public interface UserAgentProvider {
 
     String getUserAgentName();
@@ -18,15 +20,7 @@ public interface UserAgentProvider {
 
     boolean isNative();
 
-    default boolean isChrome() { return false; }
-
-    default boolean isFireFox() { return false; }
-
-    default boolean isSafari() { return false; }
-
-    default boolean isEdge() { return false; }
-
-    default boolean isOtherBrowser() { return false; }
+    default BrowserType getBrowserType() { return null; }
 
     default String getBrowserVersion() { return null; }
 
