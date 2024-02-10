@@ -2,6 +2,7 @@ package dev.webfx.platform.arch.spi.impl.gwt;
 
 import dev.webfx.platform.arch.spi.ArchProvider;
 import elemental2.dom.DomGlobal;
+import jsinterop.base.Js;
 
 /**
  * @author Bruno Salmon
@@ -16,12 +17,12 @@ public final class GwtArchProvider implements ArchProvider {
          */
         var userAgent = DomGlobal.navigator.userAgent;
         if (userAgent.contains("x86_64") ||
-                userAgent.contains("Win64") ||
-                userAgent.contains("x64;") ||
-                userAgent.contains("amd64") ||
-                userAgent.contains("AMD64") ||
-                userAgent.contains("WOW64") ||
-                userAgent.contains("x64_64")) {
+            userAgent.contains("Win64") ||
+            userAgent.contains("x64;") ||
+            userAgent.contains("amd64") ||
+            userAgent.contains("AMD64") ||
+            userAgent.contains("WOW64") ||
+            userAgent.contains("x64_64")) {
             return true;
         }
 
@@ -48,9 +49,9 @@ public final class GwtArchProvider implements ArchProvider {
         return false;
     }
 
-    private static native String getCpuClass() /*-{
-        return navigator.cpuClass;
-    }-*/;
+    private static String getCpuClass() {
+        return (String) Js.asPropertyMap(DomGlobal.navigator).get("cpuClass");
+    }
 
     @Override
     public int availableProcessors() {
