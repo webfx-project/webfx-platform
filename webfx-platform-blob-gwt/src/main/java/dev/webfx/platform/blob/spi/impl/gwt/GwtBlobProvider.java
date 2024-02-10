@@ -32,11 +32,8 @@ public final class GwtBlobProvider implements BlobProvider {
         a.setAttribute("download", fileName);
         a.style.display = "none";
         DomGlobal.document.body.appendChild(a);
-        click(a);
+        a.click();
         DomGlobal.document.body.removeChild(a);
     }
 
-    private static native void click(HTMLLinkElement a) /*-{
-        a.click();
-    }-*/;
 }
