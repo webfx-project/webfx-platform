@@ -1,6 +1,5 @@
 package dev.webfx.platform.uischeduler.spi.impl.gwt;
 
-import com.google.gwt.user.client.Timer;
 import dev.webfx.platform.console.Console;
 import dev.webfx.platform.scheduler.Cancellable;
 import dev.webfx.platform.uischeduler.spi.impl.UiSchedulerProviderBase;
@@ -30,15 +29,9 @@ public final class GwtUiSchedulerProvider extends UiSchedulerProviderBase {
     }
 
     protected Cancellable scheduleLongTermAnimation(long delayMillis, Runnable runnable) {
-        Timer timer = new Timer() {
-            @Override
-            public void run() {
-                runnable.run();
-            }
-        };
-        timer.schedule((int) delayMillis);
+        double timeoutId = DomGlobal.setTimeout(ignored -> runnable.run(), delayMillis);
         return () -> {
-            timer.cancel();
+            DomGlobal.clearTimeout(timeoutId);
             return true;
         };
     }
@@ -52,4 +45,5 @@ public final class GwtUiSchedulerProvider extends UiSchedulerProviderBase {
     protected void log(Throwable throwable) {
         Console.log(throwable);
     }
+
 }
