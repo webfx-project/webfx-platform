@@ -1,6 +1,6 @@
 package dev.webfx.platform.storage.spi.impl.gwt;
 
-import com.google.gwt.storage.client.Storage;
+import elemental2.webstorage.Storage;
 import dev.webfx.platform.storage.spi.StorageProvider;
 
 import java.util.Iterator;
