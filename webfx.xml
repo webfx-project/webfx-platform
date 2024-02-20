@@ -122,12 +122,6 @@
                 </exported-packages>
             </library>
 
-            <library name="elemental2-svg">
-                <exported-packages>
-                    <package>elemental2.svg</package>
-                </exported-packages>
-            </library>
-
             <library name="elemental2-media">
                 <exported-packages>
                     <package>elemental2.media</package>
@@ -140,9 +134,21 @@
                 </exported-packages>
             </library>
 
+            <library name="elemental2-svg">
+                <exported-packages>
+                    <package>elemental2.svg</package>
+                </exported-packages>
+            </library>
+
             <library name="elemental2-webgl">
                 <exported-packages>
                     <package>elemental2.webgl</package>
+                </exported-packages>
+            </library>
+
+            <library name="elemental2-webstorage">
+                <exported-packages>
+                    <package>elemental2.webstorage</package>
                 </exported-packages>
             </library>
 
