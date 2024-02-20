@@ -54,9 +54,11 @@ public final class ApplicationModuleBooterManager {
 
     public static void log(String message) {
         // First stage: we buffer the logs
-        if (logBuffer != null) // non-null at the beginning until logHeaderAndBuffer() is called (=> set logBuffer to null)
+        if (logBuffer != null) { // non-null at the beginning until logHeaderAndBuffer() is called (=> set logBuffer to null)
+            if (logBuffer.length() > 0)
+                logBuffer.append("\n");
             logBuffer.append(message);
-        else // Second stage: we print the logs directly to the console
+        } else // Second stage: we print the logs directly to the console
             Console.log(message);
     }
 
