@@ -26,9 +26,12 @@ public final class Meta {
             META_PROPERTIES = new Properties();
             try {
                 String content = Resource.getText(META_EXE_RESOURCE_FILE_PATH);
-                META_PROPERTIES.load(new StringReader(content));
+                if (content != null)
+                    META_PROPERTIES.load(new StringReader(content));
+                else
+                    Console.log("[WARNING] Absent meta resource file " + META_EXE_RESOURCE_FILE_PATH);
             } catch (Exception e) {
-                Console.log("Failed to read meta resource file " + META_EXE_RESOURCE_FILE_PATH, e);
+                Console.log("[ERROR] Failed to read meta resource file " + META_EXE_RESOURCE_FILE_PATH, e);
             }
         }
         return META_PROPERTIES;

@@ -24,13 +24,14 @@ public class GwtResourceModuleBooter implements ApplicationModuleBooter {
 
     @Override
     public void bootModule() {
-        List<GwtResourceBundle> gwtResourceBundles = Collections.listOf(ServiceLoader.load(GwtResourceBundle.class));
-        log(gwtResourceBundles.size() + " gwt resource bundles provided");
-        for (GwtResourceBundle gwtResourceBundle : gwtResourceBundles) {
-            ((GwtResourceProvider) Resource.getProvider()).register(gwtResourceBundle);
+        List<GwtResourceBundle> bundles = Collections.listOf(ServiceLoader.load(GwtResourceBundle.class));
+        int count = bundles.size();
+        log((count == 0 ? "No" : count) + " gwt resource bundle" + (count > 1 ? "s" : "") + " provided");
+        for (GwtResourceBundle bundle : bundles) {
+            ((GwtResourceProvider) Resource.getProvider()).register(bundle);
             StringBuilder sb = new StringBuilder();
-            for (String resourcePath : gwtResourceBundle.resourcePathsForLogging())
-                sb.append(sb.length() == 0 ? gwtResourceBundle.getClass().getName() + " registered the following resources:\n" : "\n").append(resourcePath);
+            for (String resourcePath : bundle.resourcePathsForLogging())
+                sb.append(sb.length() == 0 ? bundle.getClass().getName() + " registered the following resources:\n" : "\n").append(resourcePath);
             log(sb.toString());
         }
     }

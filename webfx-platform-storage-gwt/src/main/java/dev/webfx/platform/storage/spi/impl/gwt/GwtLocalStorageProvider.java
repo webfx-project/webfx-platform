@@ -1,7 +1,9 @@
 package dev.webfx.platform.storage.spi.impl.gwt;
 
-import com.google.gwt.storage.client.Storage;
+
 import dev.webfx.platform.storage.spi.LocalStorageProvider;
+import elemental2.dom.DomGlobal;
+import elemental2.webstorage.WebStorageWindow;
 
 
 /**
@@ -10,6 +12,6 @@ import dev.webfx.platform.storage.spi.LocalStorageProvider;
 public final class GwtLocalStorageProvider extends GwtStorageProvider implements LocalStorageProvider {
 
     public GwtLocalStorageProvider() {
-        super(Storage.getLocalStorageIfSupported());
+        super(WebStorageWindow.of(DomGlobal.window).localStorage);
     }
 }

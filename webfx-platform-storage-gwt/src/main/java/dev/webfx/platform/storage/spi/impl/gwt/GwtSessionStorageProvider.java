@@ -1,7 +1,8 @@
 package dev.webfx.platform.storage.spi.impl.gwt;
 
-import com.google.gwt.storage.client.Storage;
 import dev.webfx.platform.storage.spi.SessionStorageProvider;
+import elemental2.dom.DomGlobal;
+import elemental2.webstorage.WebStorageWindow;
 
 
 /**
@@ -10,6 +11,6 @@ import dev.webfx.platform.storage.spi.SessionStorageProvider;
 public final class GwtSessionStorageProvider extends GwtStorageProvider implements SessionStorageProvider {
 
     public GwtSessionStorageProvider() {
-        super(Storage.getSessionStorageIfSupported());
+        super(WebStorageWindow.of(DomGlobal.window).sessionStorage);
     }
 }
