@@ -178,6 +178,20 @@
         </library>
 
         <group>
+            <groupId>org.treblereel.j2cl.processors</groupId>
+            <version>0.6.4</version>
+
+            <library name="j2cl-annotations">
+                <artifactId>annotations</artifactId>
+            </library>
+
+            <library name="j2cl-processors">
+                <artifactId>processors</artifactId>
+            </library>
+
+        </group>
+
+        <group>
             <groupId>com.google.jsinterop</groupId>
 
             <library name="jsinterop-annotations">
