@@ -120,6 +120,7 @@
         <module>webfx-platform-file-gwt</module>
         <module>webfx-platform-file-java</module>
         <module>webfx-platform-javabase-emul-gwt</module>
+        <module>webfx-platform-javabase-emul-j2cl</module>
         <module>webfx-platform-json</module>
         <module>webfx-platform-json-gwt</module>
         <module>webfx-platform-json-java</module>
