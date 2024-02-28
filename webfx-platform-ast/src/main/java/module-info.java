@@ -5,6 +5,7 @@ module webfx.platform.ast {
     // Direct dependencies modules
     requires java.base;
     requires webfx.platform.util;
+    requires webfx.platform.util.time;
 
     // Exported packages
     exports dev.webfx.platform.ast;

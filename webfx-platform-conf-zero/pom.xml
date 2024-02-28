@@ -13,4 +13,15 @@
 
     <artifactId>webfx-platform-conf-zero</artifactId>
 
+    <dependencies>
+
+        <dependency>
+            <groupId>org.treblereel.gwt.gwtproject.time</groupId>
+            <artifactId>gwt-time</artifactId>
+            <version>202203291</version>
+            <scope>runtime</scope>
+        </dependency>
+
+    </dependencies>
+
 </project>

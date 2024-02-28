@@ -1,5 +1,6 @@
 package dev.webfx.platform.ast.spi.factory.impl.generic;
 
+import dev.webfx.platform.ast.AST;
 import dev.webfx.platform.ast.AstObject;
 
 import java.util.Map;
@@ -43,5 +44,10 @@ public class MapAstObject extends MapBasedAstObject {
     @Override
     public <T> T get(String key) {
         return (T) map.get(key);
+    }
+
+    @Override
+    public String toString() {
+        return AST.formatObject(this, "json");
     }
 }

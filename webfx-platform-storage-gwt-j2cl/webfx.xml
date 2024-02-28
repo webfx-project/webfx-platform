@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+
+    <description>GWT implementation of the Storage API (for the browser).</description>
+
+    <exported-packages>
+        <source-packages/>
+    </exported-packages>
+
+    <providers>
+        <provider interface="dev.webfx.platform.storage.spi.LocalStorageProvider">dev.webfx.platform.storage.spi.impl.gwtj2cl.GwtJ2clLocalStorageProvider</provider>
+        <provider interface="dev.webfx.platform.storage.spi.SessionStorageProvider">dev.webfx.platform.storage.spi.impl.gwtj2cl.GwtJ2clSessionStorageProvider</provider>
+    </providers>
+
+    <dependencies>
+        <used-by-source-modules/>
+    </dependencies>
+
+</project>

@@ -106,7 +106,7 @@ public class JsonFormatterProvider implements AstFormatterProvider {
                 case NUMBER:  return sb.append(numberToString(AST.NATIVE_FACTORY.nativeScalarToJavaScalar(element)));
                 case BOOLEAN: return sb.append((Boolean) AST.NATIVE_FACTORY.nativeScalarToJavaScalar(element));
                 case STRING:  return appendQuoted(AST.NATIVE_FACTORY.nativeScalarToJavaScalar(element), sb);
-                default:      return sb; // ignored when undefined
+                default:      return sb.append(element); // ignored when undefined
             }
         } else {
             if (element == null)

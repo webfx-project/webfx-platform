@@ -1,6 +1,7 @@
 package dev.webfx.platform.ast;
 
 import dev.webfx.platform.util.*;
+import dev.webfx.platform.util.time.Times;
 
 import java.time.Instant;
 
@@ -117,11 +118,11 @@ public interface ReadOnlyAstObject extends ReadOnlyAstNode {
     /**
      * Return the element as an instant. If the type is not an instant, this can result in runtime errors.
      */
-    default Instant getInstant(String key) { return Dates.toInstant(getScalar(key)); }
+    default Instant getInstant(String key) { return Times.toInstant(getScalar(key)); }
 
     /**
      * Return the element as an instant. If the type is not an instant, this can result in runtime errors.
      */
-    default Instant getInstant(String key, Instant defaultValue) { return Dates.toInstant(getScalar(key, defaultValue)); }
+    default Instant getInstant(String key, Instant defaultValue) { return Times.toInstant(getScalar(key, defaultValue)); }
 }
 

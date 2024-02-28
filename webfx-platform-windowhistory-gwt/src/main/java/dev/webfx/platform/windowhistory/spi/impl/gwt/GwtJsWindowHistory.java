@@ -1,10 +1,9 @@
 package dev.webfx.platform.windowhistory.spi.impl.gwt;
 
-import com.google.gwt.core.client.JavaScriptObject;
 import dev.webfx.platform.ast.ReadOnlyAstObject;
 import dev.webfx.platform.async.Handler;
-import dev.webfx.platform.windowhistory.spi.impl.gwt.jsinterop.Window;
 import dev.webfx.platform.windowhistory.spi.impl.web.JsWindowHistory;
+import elemental2.dom.DomGlobal;
 import jsinterop.base.Js;
 
 import java.util.function.Function;
@@ -19,42 +18,45 @@ public final class GwtJsWindowHistory implements JsWindowHistory {
 
     @Override
     public int length() {
-        return Window.history.length;
+        return DomGlobal.window.history.length;
     }
 
     @Override
     public void go(int offset) {
-        Window.history.go(offset);
+        DomGlobal.window.history.go(offset);
     }
 
     @Override
     public boolean supportsStates() {
-        return Js.typeof(Js.asPropertyMap(Window.history).get("pushState")).equals("function");
+        return Js.typeof(Js.asPropertyMap(DomGlobal.window.history).get("pushState")).equals("function");
     }
 
     @Override
     public ReadOnlyAstObject state() {
-        return Window.history.state.cast();
+        return Js.cast(DomGlobal.window.history.state);
     }
 
     @Override
     public void pushState(Object stateObj, String title, String url) {
-        Window.history.pushState((JavaScriptObject) stateObj, title, url);
+        DomGlobal.window.history.pushState(stateObj, title, url);
     }
 
     @Override
     public void replaceState(Object stateObj, String title, String url) {
-        Window.history.replaceState((JavaScriptObject) stateObj, title, url);
+        DomGlobal.window.history.replaceState(stateObj, title, url);
     }
 
     @Override
     public void onPopState(Handler<ReadOnlyAstObject> stateListener) {
-        Window.onpopstate = event -> stateListener.handle((ReadOnlyAstObject) event.state);
+        DomGlobal.window.onpopstate = event -> {
+            stateListener.handle(Js.cast(Js.asPropertyMap(event).get("state")));
+            return null;
+        };
     }
 
     @Override
     public void onBeforeUnload(Function<ReadOnlyAstObject, String> listener) {
-        Window.onbeforeunload = event -> listener.apply((ReadOnlyAstObject) event);
+        DomGlobal.window.onbeforeunload = event -> listener.apply(Js.cast(event));
     }
 
 }

@@ -3,7 +3,6 @@
 module webfx.platform.conf.zero {
 
     // Direct dependencies modules
-    requires java.base;
     requires webfx.platform.conf;
 
     // Exported packages

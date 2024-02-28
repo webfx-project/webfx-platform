@@ -1,6 +1,6 @@
 package dev.webfx.platform.ast;
 
-import dev.webfx.platform.util.Dates;
+import dev.webfx.platform.util.time.Times;
 
 import java.time.Instant;
 
@@ -49,6 +49,6 @@ public interface AstObject extends ReadOnlyAstObject, AstNode {
 
     default <T extends AstObject> T set(String key, String value) { return setScalar(key, value); }
 
-    default <T extends AstObject> T set(String key, Instant value) { return setScalar(key, Dates.formatIso(value)); }
+    default <T extends AstObject> T set(String key, Instant value) { return setScalar(key, Times.formatIso(value)); }
 
 }
