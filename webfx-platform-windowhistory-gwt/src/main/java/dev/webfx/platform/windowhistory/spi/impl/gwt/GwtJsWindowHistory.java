@@ -1,10 +1,11 @@
 package dev.webfx.platform.windowhistory.spi.impl.gwt;
 
-import dev.webfx.platform.windowhistory.spi.impl.gwt.jsinterop.Window;
-import dev.webfx.platform.json.spi.impl.gwt.GwtJsonObject;
-import dev.webfx.platform.json.ReadOnlyJsonObject;
-import dev.webfx.platform.windowhistory.spi.impl.web.JsWindowHistory;
+import dev.webfx.platform.ast.ReadOnlyAstObject;
 import dev.webfx.platform.async.Handler;
+import dev.webfx.platform.windowhistory.spi.impl.web.JsWindowHistory;
+import elemental2.dom.DomGlobal;
+import jsinterop.base.Js;
+
 import java.util.function.Function;
 
 /**
@@ -17,42 +18,45 @@ public final class GwtJsWindowHistory implements JsWindowHistory {
 
     @Override
     public int length() {
-        return Window.history.length;
+        return DomGlobal.window.history.length;
     }
 
     @Override
     public void go(int offset) {
-        Window.history.go(offset);
+        DomGlobal.window.history.go(offset);
     }
 
     @Override
-    public final native boolean supportsStates() /*-{
-        return typeof window.history.pushState === 'function';
-    }-*/;
+    public boolean supportsStates() {
+        return Js.typeof(Js.asPropertyMap(DomGlobal.window.history).get("pushState")).equals("function");
+    }
 
     @Override
-    public ReadOnlyJsonObject state() {
-        return Window.history.state.cast();
+    public ReadOnlyAstObject state() {
+        return Js.cast(DomGlobal.window.history.state);
     }
 
     @Override
     public void pushState(Object stateObj, String title, String url) {
-        Window.history.pushState((GwtJsonObject) stateObj, title, url);
+        DomGlobal.window.history.pushState(stateObj, title, url);
     }
 
     @Override
     public void replaceState(Object stateObj, String title, String url) {
-        Window.history.replaceState((GwtJsonObject) stateObj, title, url);
+        DomGlobal.window.history.replaceState(stateObj, title, url);
     }
 
     @Override
-    public void onPopState(Handler<ReadOnlyJsonObject> stateListener) {
-        Window.onpopstate = event -> stateListener.handle((GwtJsonObject) event.state);
+    public void onPopState(Handler<ReadOnlyAstObject> stateListener) {
+        DomGlobal.window.onpopstate = event -> {
+            stateListener.handle(Js.cast(Js.asPropertyMap(event).get("state")));
+            return null;
+        };
     }
 
     @Override
-    public void onBeforeUnload(Function<ReadOnlyJsonObject, String> listener) {
-        Window.onbeforeunload = event -> listener.apply((GwtJsonObject) event);
+    public void onBeforeUnload(Function<ReadOnlyAstObject, String> listener) {
+        DomGlobal.window.onbeforeunload = event -> listener.apply(Js.cast(event));
     }
 
 }

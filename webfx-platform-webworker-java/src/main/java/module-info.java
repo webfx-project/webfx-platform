@@ -7,8 +7,8 @@ module webfx.platform.webworker.java {
 
     // Direct dependencies modules
     requires java.base;
+    requires webfx.platform.ast;
     requires webfx.platform.console;
-    requires webfx.platform.json;
     requires webfx.platform.uischeduler;
     requires webfx.platform.webworker;
 

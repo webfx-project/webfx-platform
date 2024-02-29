@@ -154,11 +154,31 @@
 
         </group>
 
+        <library name="j2cl-time">
+            <groupId>org.treblereel.gwt.gwtproject.time</groupId>
+            <artifactId>gwt-time</artifactId>
+            <version>202203291</version>
+            <exported-packages>
+                <package>java.time</package>
+                <package>java.time.chrono</package>
+                <package>java.time.format</package>
+                <package>java.time.temporal</package>
+                <package>java.time.zone</package>
+            </exported-packages>
+        </library>
+
         <group>
             <groupId>org.jresearch.gwt.time</groupId>
 
             <library name="gwt-time">
                 <artifactId>org.jresearch.gwt.time</artifactId>
+                <exported-packages>
+                    <package>java.time</package>
+                    <package>java.time.chrono</package>
+                    <package>java.time.format</package>
+                    <package>java.time.temporal</package>
+                    <package>java.time.zone</package>
+                </exported-packages>
             </library>
 
             <library name="org.jresearch.gwt.time.tzdb"/>

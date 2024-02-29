@@ -4,9 +4,7 @@ import dev.webfx.platform.async.Future;
 import dev.webfx.platform.async.Promise;
 import dev.webfx.platform.fetch.Headers;
 import dev.webfx.platform.fetch.Response;
-import dev.webfx.platform.file.Blob;
-import dev.webfx.platform.json.Json;
-import dev.webfx.platform.json.JsonElement;
+import dev.webfx.platform.blob.Blob;
 import dev.webfx.platform.streams.ReadableStream;
 import io.vertx.core.http.HttpClientResponse;
 
@@ -44,11 +42,6 @@ final class VertxResponse implements Response {
     @Override
     public Future<Blob> blob() {
         return Future.failedFuture("Not yet implemented");
-    }
-
-    @Override
-    public Future<JsonElement> json() {
-        return text().map(Json::parseElement);
     }
 
     @Override

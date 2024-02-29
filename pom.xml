@@ -85,7 +85,7 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
                     <configuration>
-                        <skippedModules>webfx-platform-arch-gwt,webfx-platform-arch-java,webfx-platform-audio-gluon,webfx-platform-boot-gwt,webfx-platform-boot-java,webfx-platform-boot-vertx,webfx-platform-console-gwt,webfx-platform-console-java,webfx-platform-fetch-gwt,webfx-platform-fetch-java,webfx-platform-fetch-vertx,webfx-platform-file-gwt,webfx-platform-file-java,webfx-platform-javabase-emul-gwt,webfx-platform-json-gwt,webfx-platform-json-java,webfx-platform-json-teavm,webfx-platform-json-vertx,webfx-platform-meta,webfx-platform-os-gluon,webfx-platform-os-gwt,webfx-platform-os-java,webfx-platform-resource-gluon,webfx-platform-resource-gwt,webfx-platform-resource-java,webfx-platform-typedarray-gwt,webfx-platform-scheduler-java,webfx-platform-scheduler-vertx,webfx-platform-shutdown-gluon,webfx-platform-shutdown-gwt,webfx-platform-shutdown-java,webfx-platform-storage-gwt,webfx-platform-storage-java,webfx-platform-storagelocation-gluon,webfx-platform-storagelocation-java,webfx-platform-uischeduler-gwt,webfx-platform-useragent-gluon,webfx-platform-useragent-gwt,webfx-platform-useragent-java-client,webfx-platform-useragent-java-server,webfx-platform-visibility-gluon,webfx-platform-visibility-gwt,webfx-platform-visibility-java-headless,webfx-platform-webassembly-teavm,webfx-platform-webworker-gwt,webfx-platform-webworker-java,webfx-platform-webworker-teavm,webfx-platform-windowhistory-gwt,webfx-platform-windowhistory-java,webfx-platform-windowhistory-web,webfx-platform-windowlocation-gwt,webfx-platform-windowlocation-java,webfx-platform-util,webfx-platform-vertx-common</skippedModules>
+                        <skippedModules>webfx-platform-arch-gwt,webfx-platform-arch-java,webfx-platform-audio-gluon,webfx-platform-boot-gwt,webfx-platform-boot-java,webfx-platform-boot-vertx,webfx-platform-console-gwt,webfx-platform-console-java,webfx-platform-fetch-gwt,webfx-platform-fetch-java,webfx-platform-fetch-vertx,webfx-platform-file-gwt,webfx-platform-file-java,webfx-platform-javabase-emul-gwt,webfx-platform-json-gwt,webfx-platform-json-java,webfx-platform-json-teavm,webfx-platform-json-vertx,webfx-platform-meta,webfx-platform-os-gluon,webfx-platform-os-gwt,webfx-platform-os-java,webfx-platform-resource-gluon,webfx-platform-resource-gwt,webfx-platform-resource-java,webfx-platform-scheduler-java,webfx-platform-scheduler-vertx,webfx-platform-shutdown-gluon,webfx-platform-shutdown-gwt,webfx-platform-shutdown-java,webfx-platform-storage-gwt,webfx-platform-storage-java,webfx-platform-storagelocation-gluon,webfx-platform-storagelocation-java,webfx-platform-uischeduler-gwt,webfx-platform-useragent-gluon,webfx-platform-useragent-gwt,webfx-platform-useragent-java-client,webfx-platform-useragent-java-server,webfx-platform-visibility-gluon,webfx-platform-visibility-gwt,webfx-platform-visibility-java-headless,webfx-platform-webassembly-teavm,webfx-platform-webworker-gwt,webfx-platform-webworker-java,webfx-platform-webworker-teavm,webfx-platform-windowhistory-gwt,webfx-platform-windowhistory-java,webfx-platform-windowhistory-web,webfx-platform-windowlocation-gwt,webfx-platform-windowlocation-java,webfx-platform-util,webfx-platform-vertx-common</skippedModules>
                     </configuration>
                 </plugin>
             </plugins>
@@ -96,84 +96,97 @@
 
     <modules>
         <module>webfx-platform-arch</module>
-        <module>webfx-platform-arch-gwt</module>
+        <module>webfx-platform-arch-gwt-j2cl</module>
         <module>webfx-platform-arch-java</module>
-        <module>webfx-platform-ast-yaml</module>
+        <module>webfx-platform-ast</module>
+        <module>webfx-platform-ast-factory-generic</module>
+        <module>webfx-platform-ast-factory-gwt</module>
+        <module>webfx-platform-ast-factory-teavm</module>
+        <module>webfx-platform-ast-factory-vertx</module>
+        <module>webfx-platform-ast-json-plugin</module>
+        <module>webfx-platform-ast-yaml-plugin</module>
         <module>webfx-platform-async</module>
         <module>webfx-platform-audio</module>
         <module>webfx-platform-audio-gluon</module>
+        <module>webfx-platform-blob</module>
+        <module>webfx-platform-blob-gwt-j2cl</module>
+        <module>webfx-platform-blob-java</module>
         <module>webfx-platform-boot</module>
         <module>webfx-platform-boot-gwt</module>
+        <module>webfx-platform-boot-j2cl</module>
         <module>webfx-platform-boot-java</module>
         <module>webfx-platform-boot-vertx</module>
+        <module>webfx-platform-browser</module>
+        <module>webfx-platform-browser-gluon</module>
+        <module>webfx-platform-browser-gwt-j2cl</module>
         <module>webfx-platform-conf</module>
-        <module>webfx-platform-conf-file-java</module>
+        <module>webfx-platform-conf-file-java-plugin</module>
+        <module>webfx-platform-conf-zero</module>
+        <module>webfx-platform-conf-zero-impl</module>
         <module>webfx-platform-console</module>
-        <module>webfx-platform-console-gwt</module>
+        <module>webfx-platform-console-gwt-j2cl</module>
         <module>webfx-platform-console-java</module>
+        <module>webfx-platform-console-teavm</module>
         <module>webfx-platform-fetch</module>
-        <module>webfx-platform-fetch-gwt</module>
+        <module>webfx-platform-fetch-ast-json</module>
+        <module>webfx-platform-fetch-gwt-j2cl</module>
         <module>webfx-platform-fetch-java</module>
-        <module>webfx-platform-fetch-json</module>
         <module>webfx-platform-fetch-vertx</module>
         <module>webfx-platform-file</module>
-        <module>webfx-platform-file-gwt</module>
+        <module>webfx-platform-file-gwt-j2cl</module>
         <module>webfx-platform-file-java</module>
         <module>webfx-platform-javabase-emul-gwt</module>
         <module>webfx-platform-javabase-emul-j2cl</module>
-        <module>webfx-platform-json</module>
-        <module>webfx-platform-json-gwt</module>
-        <module>webfx-platform-json-java</module>
-        <module>webfx-platform-json-teavm</module>
-        <module>webfx-platform-json-vertx</module>
         <module>webfx-platform-meta</module>
         <module>webfx-platform-os</module>
         <module>webfx-platform-os-gluon</module>
-        <module>webfx-platform-os-gwt</module>
+        <module>webfx-platform-os-gwt-j2cl</module>
         <module>webfx-platform-os-java</module>
         <module>webfx-platform-resource</module>
         <module>webfx-platform-resource-gluon</module>
         <module>webfx-platform-resource-gwt</module>
+        <module>webfx-platform-resource-j2cl</module>
         <module>webfx-platform-resource-java</module>
         <module>webfx-platform-scheduler</module>
         <module>webfx-platform-scheduler-java</module>
         <module>webfx-platform-scheduler-vertx</module>
         <module>webfx-platform-shutdown</module>
         <module>webfx-platform-shutdown-gluon</module>
-        <module>webfx-platform-shutdown-gwt</module>
+        <module>webfx-platform-shutdown-gwt-j2cl</module>
         <module>webfx-platform-shutdown-java</module>
         <module>webfx-platform-storage</module>
-        <module>webfx-platform-storage-gwt</module>
+        <module>webfx-platform-storage-gwt-j2cl</module>
         <module>webfx-platform-storage-java</module>
         <module>webfx-platform-storagelocation</module>
         <module>webfx-platform-storagelocation-gluon</module>
         <module>webfx-platform-storagelocation-java</module>
         <module>webfx-platform-substitution</module>
         <module>webfx-platform-substitution-var</module>
-        <module>webfx-platform-substitution-var-conf</module>
-        <module>webfx-platform-substitution-var-env</module>
-        <module>webfx-platform-substitution-var-localstorage</module>
-        <module>webfx-platform-substitution-var-sysprop</module>
-        <module>webfx-platform-substitution-var-windowlocation</module>
+        <module>webfx-platform-substitution-var-conf-plugin</module>
+        <module>webfx-platform-substitution-var-env-plugin</module>
+        <module>webfx-platform-substitution-var-localstorage-plugin</module>
+        <module>webfx-platform-substitution-var-sysprop-plugin</module>
+        <module>webfx-platform-substitution-var-windowlocation-plugin</module>
         <module>webfx-platform-typedarray</module>
-        <module>webfx-platform-typedarray-gwt</module>
+        <module>webfx-platform-typedarray-gwt-j2cl</module>
         <module>webfx-platform-uischeduler</module>
-        <module>webfx-platform-uischeduler-gwt</module>
+        <module>webfx-platform-uischeduler-gwt-j2cl</module>
         <module>webfx-platform-useragent</module>
         <module>webfx-platform-useragent-gluon</module>
-        <module>webfx-platform-useragent-gwt</module>
+        <module>webfx-platform-useragent-gwt-j2cl</module>
         <module>webfx-platform-useragent-java-client</module>
         <module>webfx-platform-useragent-java-server</module>
         <module>webfx-platform-util</module>
+        <module>webfx-platform-util-time</module>
         <module>webfx-platform-vertx-common</module>
         <module>webfx-platform-visibility</module>
         <module>webfx-platform-visibility-gluon</module>
-        <module>webfx-platform-visibility-gwt</module>
+        <module>webfx-platform-visibility-gwt-j2cl</module>
         <module>webfx-platform-visibility-java-headless</module>
         <module>webfx-platform-webassembly</module>
         <module>webfx-platform-webassembly-teavm</module>
         <module>webfx-platform-webworker</module>
-        <module>webfx-platform-webworker-gwt</module>
+        <module>webfx-platform-webworker-gwt-j2cl</module>
         <module>webfx-platform-webworker-java</module>
         <module>webfx-platform-webworker-teavm</module>
         <module>webfx-platform-windowhistory</module>
@@ -181,7 +194,7 @@
         <module>webfx-platform-windowhistory-java</module>
         <module>webfx-platform-windowhistory-web</module>
         <module>webfx-platform-windowlocation</module>
-        <module>webfx-platform-windowlocation-gwt</module>
+        <module>webfx-platform-windowlocation-gwt-j2cl</module>
         <module>webfx-platform-windowlocation-java</module>
     </modules>
 

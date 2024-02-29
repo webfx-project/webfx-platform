@@ -1,10 +1,7 @@
 package dev.webfx.platform.fetch;
 
 import dev.webfx.platform.async.Future;
-import dev.webfx.platform.file.Blob;
-import dev.webfx.platform.json.JsonArray;
-import dev.webfx.platform.json.JsonObject;
-import dev.webfx.platform.json.JsonElement;
+import dev.webfx.platform.blob.Blob;
 import dev.webfx.platform.streams.ReadableStream;
 
 /**
@@ -30,40 +27,9 @@ public interface Response {
 
     Headers headers();
 
-    Future<Blob> blob();
-
-    /**
-     * @deprecated
-     *
-     * Use {@code dev.webfx.platform.fetch.json.JsonFetch.fetchJsonNode()} instead.
-     *
-     */
-    @Deprecated
-    Future<JsonElement> json();
-
-    /**
-     * @deprecated
-     *
-     * Use {@code dev.webfx.platform.fetch.json.JsonFetch.fetchJsonObject()} instead.
-     *
-     */
-    @Deprecated
-    default Future<JsonObject> jsonObject() {
-        return json().map(JsonElement::asJsonObject);
-    }
-
-    /**
-     * @deprecated
-     *
-     * Use {@code dev.webfx.platform.fetch.json.JsonFetch.fetchJsonArray()} instead.
-     *
-     */
-    @Deprecated
-    default Future<JsonArray> jsonArray() {
-        return json().map(JsonElement::asJsonArray);
-    }
-
     Future<String> text();
+
+    Future<Blob> blob();
 
     ReadableStream body();
 }

@@ -64,10 +64,21 @@ public final class Collections {
     }
 
     public static <T> void forEach(Iterable<T> iterable, Consumer<T> consumer) {
-        // iterable.forEach(consumer); // Not GWT compilable for now
-        if (iterable != null)
-            for (T element : iterable)
-                consumer.accept(element);
+        if (iterable != null) {
+            // Safe loop version (not causing ConcurrentModificationException)
+            for (Iterator<T> it = iterable.iterator(); it.hasNext(); ) {
+                consumer.accept(it.next());
+            }
+        }
+    }
+
+    public static <T> void forEach(List<T> list, Consumer<T> consumer) {
+        if (list != null) {
+            // Safe loop version (not causing ConcurrentModificationException)
+            for (int i = 0; i < list.size(); i++) {
+                consumer.accept(list.get(i));
+            }
+        }
     }
 
     public static <A, B> List<B> map(Collection<A> aCollection, Converter<A, B> aToBConverter) {

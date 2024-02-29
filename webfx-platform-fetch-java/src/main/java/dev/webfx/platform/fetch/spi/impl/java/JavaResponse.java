@@ -3,10 +3,8 @@ package dev.webfx.platform.fetch.spi.impl.java;
 import dev.webfx.platform.async.Future;
 import dev.webfx.platform.fetch.Headers;
 import dev.webfx.platform.fetch.Response;
-import dev.webfx.platform.file.Blob;
-import dev.webfx.platform.file.spi.impl.java.JavaBlob;
-import dev.webfx.platform.json.Json;
-import dev.webfx.platform.json.JsonElement;
+import dev.webfx.platform.blob.Blob;
+import dev.webfx.platform.blob.spi.impl.java.JavaBlob;
 import dev.webfx.platform.streams.ReadableStream;
 import dev.webfx.platform.streams.spi.impl.java.JavaReadableStreams;
 
@@ -147,11 +145,6 @@ public class JavaResponse implements Response {
                 return javaResponse.uri();
             }
         });
-    }
-
-    @Override
-    public Future<JsonElement> json() {
-        return text().map(Json::parseElement);
     }
 
     @Override

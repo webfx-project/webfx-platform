@@ -1,5 +1,7 @@
 package dev.webfx.platform.file.spi.impl.java;
 
+import dev.webfx.platform.blob.spi.impl.java.JavaBlob;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;

@@ -1,0 +1,354 @@
+package dev.webfx.platform.ast.yaml.parser.javacup;
+
+import dev.webfx.platform.ast.AST;
+import dev.webfx.platform.ast.AstArray;
+import dev.webfx.platform.ast.AstObject;
+import dev.webfx.platform.util.tuples.Pair;
+import java_cup.runtime.Symbol;
+
+/* ----------------------Preliminary Declarations Section--------------------*/
+   
+/* Parser code to change the way the parser reports errors (include
+   line and column number of the error). */
+parser code {:
+
+    /* Change the method report_error so it will display the line and
+       column of where the error occurred in the input as well as the
+       reason for the error which is passed into the method in the
+       String 'message'. */
+    public void report_error(String message, Object info) {
+        System.err.println(generateErrorMessage(message, info));
+    }
+   
+    /* Change the method report_fatal_error so when it reports a fatal
+       error it will display the line and column number of where the
+       fatal error occurred in the input as well as the reason for the
+       fatal error which is passed into the method in the object
+       'message' and then exit.*/
+    public void report_fatal_error(String message, Object info) {
+        throw new IllegalArgumentException(generateErrorMessage(message, info));
+    }
+
+    private String generateErrorMessage(String message, Object info) {
+
+        /* Create a StringBuffer called 'm' with the string 'Error' in it. */
+        StringBuilder m = new StringBuilder("Error");
+
+        /* Check if the information passed to the method is the same
+           type as the type java_cup.runtime.Symbol. */
+        if (info instanceof java_cup.runtime.Symbol) {
+            /* Declare a java_cup.runtime.Symbol object 's' with the
+               information in the object info that is being typecasted
+               as a java_cup.runtime.Symbol object. */
+            java_cup.runtime.Symbol s = ((java_cup.runtime.Symbol) info);
+
+            /* Check if the line number in the input is greater or
+               equal to zero. */
+            if (s.left >= 0) {
+                /* Add to the end of the StringBuffer error message
+                   the line number of the error in the input. */
+                m.append(" in line "+(s.left+1));
+                /* Check if the column number in the input is greater
+                   or equal to zero. */
+                if (s.right >= 0)
+                    /* Add to the end of the StringBuffer error message
+                       the column number of the error in the input. */
+                    m.append(", column "+(s.right+1));
+            }
+        }
+
+        /* Add to the end of the StringBuffer error message created in
+           this method the message that was passed into this method. */
+        m.append(" : "+message);
+
+        return m.toString();
+    }
+
+    private MultipleSymbol multipleSymbol;
+    private Symbol pushbackSymbol;
+
+    public Symbol scan() throws Exception {
+        Symbol symbol = scanImpl();
+        // Uncomment for debug
+        // System.out.println("-".repeat(((dev.webfx.platform.ast.yaml.parser.jflex.YamlLexer) getScanner()).indentCounter.openIndentCount()) +  "> Symbol " + YamlSymbols.terminalNames[symbol.sym] + (symbol.value == null ? "" : "(" + symbol.value + ")"));
+        return symbol;
+    }
+
+    private Symbol scanImpl() throws Exception {
+        Symbol symbol = pushbackSymbol;
+        if (symbol != null) {
+            pushbackSymbol = null;
+        } else {
+            if (multipleSymbol == null) {
+                symbol = super.scan();
+                if (symbol instanceof MultipleSymbol)
+                    multipleSymbol = (MultipleSymbol) symbol;
+            }
+            if (multipleSymbol != null) {
+                symbol = multipleSymbol.nextSymbol();
+                if (symbol == null) {
+                    multipleSymbol = null;
+                    symbol = scanImpl();
+                }
+            }
+        }
+        while (symbol.sym == YamlSymbols.INDENT_OPEN) {
+            Symbol nextSymbol = scanImpl();
+            if (nextSymbol.sym != YamlSymbols.INDENT_CLOSE) {
+                pushbackSymbol = nextSymbol;
+                break;
+            }
+            symbol = scanImpl();
+        }
+        return symbol;
+    }
+
+:};
+   
+
+   
+/* ------------Declaration of Terminals and Non Terminals Section----------- */
+   
+/* Terminals (tokens returned by the scanner).*/
+terminal          DOCSTART, DOCEND;
+terminal          LCURLY, RCURLY, LBRACK, RBRACK, COLON, COMMA, PIPE;
+terminal          NULL;
+terminal Object   NUMBER, DASH_ARRAY;
+terminal Boolean  BOOLEAN;
+terminal String   QUOTED_STRING, UNQUOTED_STRING, UNQUOTED_KEY;
+terminal Integer  INDENT_OPEN,INDENT_SAME,INDENT_CLOSE;
+
+/* Non terminals used in the grammar section.*/
+non terminal Object                     yaml_document;
+non terminal Object                     yaml_root_element;
+non terminal Object                     yaml_global_scalar;
+non terminal String                     yaml_global_string;
+non terminal String                     yaml_global_key;
+
+non terminal Object                     yaml_json_node;
+non terminal Object                     yaml_json_element;
+non terminal AstObject                  yaml_json_object;
+non terminal AstObject                  yaml_json_object_body;
+non terminal Pair<String, Object>       yaml_json_object_entry;
+non terminal AstArray                   yaml_json_array;
+non terminal AstArray                   yaml_json_array_body;
+
+non terminal String                     yaml_indent_additionalstring;
+non terminal Object                     yaml_indent_node;
+non terminal AstObject                  yaml_indent_object;
+non terminal AstObject                  yaml_indent_object_body;
+non terminal Pair<String, Object>       yaml_indent_object_first_entry;
+non terminal Pair<String, Object>       yaml_indent_object_subsequent_entry;
+non terminal Object                     yaml_indent_object_entry_element;
+
+non terminal AstArray                   yaml_indent_array;
+non terminal AstArray                   yaml_indent_array_body;
+non terminal Object                     yaml_indent_array_first_element;
+non terminal Object                     yaml_indent_array_subsequent_element;
+non terminal Object                     yaml_indent_array_value_element;
+
+
+/* -------------Precedence and Associatively of Terminals Section----------- */
+
+start with yaml_document;
+
+/* ----------------------------Grammar Section-------------------- */
+
+yaml_document
+            ::= DOCSTART
+              {: RESULT = null; :}
+            | DOCSTART DOCEND
+              {: RESULT = null; :}
+            | DOCSTART yaml_root_element:e DOCEND
+              {: RESULT = e; :}
+            | DOCSTART yaml_root_element:e
+              {: RESULT = e; :}
+            | yaml_root_element:e DOCEND
+              {: RESULT = e; :}
+            | yaml_root_element:e
+              {: RESULT = e; :}
+            ;
+
+yaml_root_element
+            ::= INDENT_OPEN yaml_global_scalar:s INDENT_CLOSE
+              {: RESULT = s; :}
+            | INDENT_OPEN yaml_indent_additionalstring:o INDENT_CLOSE
+              {: RESULT = o; :}
+            | yaml_json_node:e
+              {: RESULT = e; :}
+            | yaml_indent_node:o
+              {: RESULT = o; :}
+            ;
+
+yaml_global_scalar
+            ::= NUMBER:n
+              {: RESULT = n; :}
+            | BOOLEAN:b
+              {: RESULT = b; :}
+            | NULL
+              {: RESULT = null; :}
+            | yaml_global_string:s
+              {: RESULT = s; :}
+            ;
+
+yaml_global_string
+            ::= QUOTED_STRING:s
+              {: RESULT = s; :}
+            | UNQUOTED_STRING:s
+              {: RESULT = YamlCupUnquotedStrings.format(s); :}
+            ;
+
+yaml_global_key
+            ::= QUOTED_STRING:s
+              {: RESULT = s; :}
+            | UNQUOTED_KEY:s
+              {: RESULT = s; :}
+            ;
+
+/******************************** YAML JSON SET *****************************************/
+
+yaml_json_node
+            ::= yaml_json_object:o
+              {: RESULT = o; :}
+            | yaml_json_array:a
+              {: RESULT = a; :}
+            ;
+
+yaml_json_element
+            ::= yaml_global_scalar:s
+               {: RESULT = s ; :}
+            | yaml_json_node:n
+               {: RESULT = n ; :}
+            ;
+
+yaml_json_object
+             ::= LCURLY yaml_json_object_body:o RCURLY
+               {: RESULT = o ; :}
+            | LCURLY RCURLY
+               {: RESULT =  AST.createObject() ; :}
+            ;
+
+yaml_json_object_body
+            ::= yaml_json_object_body:o COMMA yaml_json_object_entry:e
+              {: RESULT = o.set(e.get1(), e.get2()); :}
+            | yaml_json_object_entry:e
+              {: RESULT =  AST.createObject().set(e.get1(), e.get2()); :}
+            ;
+
+yaml_json_object_entry
+            ::= yaml_global_key:key COLON yaml_json_element:e
+               {: RESULT = new Pair(key, e) ; :}
+            | yaml_global_key:key COLON
+               {: RESULT = new Pair(key, null) ; :}
+            ;
+
+yaml_json_array
+            ::= LBRACK yaml_json_array_body:a RBRACK
+               {: RESULT = a ; :}
+            | LBRACK RBRACK
+               {: RESULT = AST.createArray() ; :}
+            ;
+
+yaml_json_array_body
+            ::= yaml_json_array_body:a COMMA yaml_json_element:e
+                {: RESULT = a.push(e); :}
+            | yaml_json_element:e
+                {: RESULT = AST.createArray().push(e); :}
+            ;
+
+
+/* ================================YAML INDENT SUPERSET ================================ */
+
+yaml_indent_node /* Here this is for exclusive indent element (excludes json at first level) */
+            ::= yaml_indent_object:o
+              {: RESULT = o; :}
+            | yaml_indent_array:a
+              {: RESULT = a; :}
+            ;
+
+yaml_indent_additionalstring
+            ::= PIPE UNQUOTED_STRING:s
+              {: RESULT = YamlCupUnquotedStrings.formatPipe(s); :}
+            ;
+
+
+yaml_indent_object
+            ::= INDENT_OPEN yaml_indent_object_body:o INDENT_CLOSE
+               {: RESULT = o ; :}
+            | yaml_indent_object_body:o
+               {: RESULT = o ; :}
+            ;
+
+yaml_indent_object_body
+            ::= yaml_indent_object_body:o yaml_indent_object_subsequent_entry:e
+              {: RESULT = o.set(e.get1(), e.get2()); :}
+            | yaml_indent_object_first_entry:e
+              {: RESULT =  AST.createObject().set(e.get1(), e.get2()); :}
+            ;
+
+yaml_indent_object_first_entry
+            ::= yaml_global_key:key COLON yaml_indent_object_entry_element:e
+               {: RESULT = new Pair(key, e) ; :}
+            | yaml_global_key:key COLON
+               {: RESULT = new Pair(key, null) ; :}
+            ;
+
+yaml_indent_object_subsequent_entry
+            ::= INDENT_SAME yaml_indent_object_first_entry:e
+               {: RESULT = e ; :}
+            ;
+
+yaml_indent_object_entry_element
+            ::= yaml_json_element:e
+              {: RESULT = e; :}
+            | yaml_indent_additionalstring:s
+              {: RESULT = s; :}
+            | INDENT_OPEN yaml_indent_object_body:o INDENT_CLOSE
+              {: RESULT = o; :}
+            | INDENT_OPEN yaml_indent_array_body:a INDENT_CLOSE
+              {: RESULT = a; :}
+            | INDENT_OPEN yaml_indent_object_entry_element:e INDENT_CLOSE
+              {: RESULT = e; :}
+            ;
+
+yaml_indent_array
+            ::= INDENT_OPEN yaml_indent_array_body:a INDENT_CLOSE
+                {: RESULT = a; :}
+            ;
+
+yaml_indent_array_body
+            ::= yaml_indent_array_body:a yaml_indent_array_subsequent_element:e
+                {: RESULT = a.push(e); :}
+            | yaml_indent_array_first_element:e
+                {: RESULT = AST.createArray().push(e); :}
+            ;
+
+yaml_indent_array_first_element
+            /* Note: DASH_ARRAY is always followed by INDENT_OPEN (to mark the next indent after minus array) */
+            /* Case when the element is on the same line as DASH_ARRAY */
+            ::= DASH_ARRAY INDENT_OPEN yaml_indent_array_value_element:e INDENT_CLOSE
+                {: RESULT = e; :}
+            /* Case when the element is on the next line, with same indent */
+            | DASH_ARRAY INDENT_OPEN INDENT_SAME yaml_indent_array_value_element:e INDENT_CLOSE
+                {: RESULT = e; :}
+            /* Case when the element is on the next line, with higher indent */
+            | DASH_ARRAY INDENT_OPEN INDENT_OPEN yaml_indent_array_value_element:e INDENT_CLOSE INDENT_CLOSE
+                {: RESULT = e; :}
+            ;
+
+yaml_indent_array_subsequent_element
+            /* Excact same cases as first indent, but preceeded by same indent */
+            ::= INDENT_SAME yaml_indent_array_first_element:e
+                {: RESULT = e; :}
+            ;
+
+
+yaml_indent_array_value_element
+            ::= yaml_json_element:e
+              {: RESULT = e; :}
+            | yaml_indent_additionalstring:s
+              {: RESULT = s; :}
+            | yaml_indent_object_body:o
+              {: RESULT = o; :}
+            /* What else? */
+            ;
