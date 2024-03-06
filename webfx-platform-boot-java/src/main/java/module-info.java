@@ -6,7 +6,9 @@
 module webfx.platform.boot.java {
 
     // Direct dependencies modules
+    requires java.base;
     requires webfx.platform.boot;
+    requires webfx.platform.reflect;
 
     // Exported packages
     exports dev.webfx.platform.boot.spi.impl.java;
