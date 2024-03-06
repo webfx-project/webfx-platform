@@ -1,5 +1,4 @@
-package emul.java.util.regex;
-
+package java.util.regex;
 public final class Pattern {
 
     public Matcher matcher(CharSequence input) {

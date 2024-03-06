@@ -1,4 +1,4 @@
-package emul.java.util.regex;
+package java.util.regex;
 
 
 import elemental2.core.JsArray;
