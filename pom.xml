@@ -190,7 +190,7 @@
         <module>webfx-platform-webworker-java</module>
         <module>webfx-platform-webworker-teavm</module>
         <module>webfx-platform-windowhistory</module>
-        <module>webfx-platform-windowhistory-gwt</module>
+        <module>webfx-platform-windowhistory-gwt-j2cl</module>
         <module>webfx-platform-windowhistory-java</module>
         <module>webfx-platform-windowhistory-web</module>
         <module>webfx-platform-windowlocation</module>

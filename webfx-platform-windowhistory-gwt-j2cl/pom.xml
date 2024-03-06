@@ -11,7 +11,7 @@
         <version>0.1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>webfx-platform-windowhistory-gwt</artifactId>
+    <artifactId>webfx-platform-windowhistory-gwt-j2cl</artifactId>
 
     <description>GWT implementation of the WindowHistory API (for the browser).</description>
 

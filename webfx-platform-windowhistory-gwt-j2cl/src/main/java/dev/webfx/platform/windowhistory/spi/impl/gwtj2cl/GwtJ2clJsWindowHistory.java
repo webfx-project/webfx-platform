@@ -1,4 +1,4 @@
-package dev.webfx.platform.windowhistory.spi.impl.gwt;
+package dev.webfx.platform.windowhistory.spi.impl.gwtj2cl;
 
 import dev.webfx.platform.ast.ReadOnlyAstObject;
 import dev.webfx.platform.async.Handler;
@@ -11,9 +11,9 @@ import java.util.function.Function;
 /**
  * @author Bruno Salmon
  */
-public final class GwtJsWindowHistory implements JsWindowHistory {
+public final class GwtJ2clJsWindowHistory implements JsWindowHistory {
 
-    public GwtJsWindowHistory() {
+    public GwtJ2clJsWindowHistory() {
     }
 
     @Override
