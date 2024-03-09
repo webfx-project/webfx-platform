@@ -250,7 +250,7 @@ public class JavaCupYamlParser extends java_cup.runtime.lr_parser {
 
     private String generateErrorMessage(String message, Object info) {
 
-        /* Create a StringBuffer called 'm' with the string 'Error' in it. */
+        /* Create a StringBuilder called 'm' with the string 'Error' in it. */
         StringBuilder m = new StringBuilder("Error");
 
         /* Check if the information passed to the method is the same
@@ -264,19 +264,19 @@ public class JavaCupYamlParser extends java_cup.runtime.lr_parser {
             /* Check if the line number in the input is greater or
                equal to zero. */
             if (s.left >= 0) {
-                /* Add to the end of the StringBuffer error message
+                /* Add to the end of the StringBuilder error message
                    the line number of the error in the input. */
                 m.append(" in line "+(s.left+1));
                 /* Check if the column number in the input is greater
                    or equal to zero. */
                 if (s.right >= 0)
-                    /* Add to the end of the StringBuffer error message
+                    /* Add to the end of the StringBuilder error message
                        the column number of the error in the input. */
                     m.append(", column "+(s.right+1));
             }
         }
 
-        /* Add to the end of the StringBuffer error message created in
+        /* Add to the end of the StringBuilder error message created in
            this method the message that was passed into this method. */
         m.append(" : "+message);
 
