@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- File managed by WebFX (DO NOT EDIT MANUALLY) -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>dev.webfx</groupId>
+        <artifactId>webfx-platform</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>webfx-platform-javatime-emul-j2cl</artifactId>
+
+    <properties>
+        <walkingkooka.version>1.0-SNAPSHOT</walkingkooka.version>
+    </properties>
+
+    <repositories>
+
+        <repository>
+            <id>github-mp1-appengine-repo</id>
+            <name>github.com/mP1 repository</name>
+            <url>https://maven-repo-254709.appspot.com</url>
+        </repository>
+
+    </repositories>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>dev.webfx</groupId>
+            <artifactId>webfx-platform-javabase-emul-j2cl</artifactId>
+            <version>0.1.0-SNAPSHOT</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>walkingkooka</groupId>
+                            <artifactId>j2cl-java-util-Locale-annotation-processor</artifactId>
+                            <version>${walkingkooka.version}</version>
+                        </path>
+                        <path>
+                            <groupId>walkingkooka</groupId>
+                            <artifactId>j2cl-java-util-TimeZone-annotation-processor</artifactId>
+                            <version>${walkingkooka.version}</version>
+                        </path>
+                        <path>
+                            <groupId>walkingkooka</groupId>
+                            <artifactId>j2cl-java-text-annotation-processor</artifactId>
+                            <version>${walkingkooka.version}</version>
+                        </path>
+                        <path>
+                            <groupId>walkingkooka</groupId>
+                            <artifactId>j2cl-java-util-currency-annotation-processor</artifactId>
+                            <version>1.0-SNAPSHOT</version>
+                        </path>
+                    </annotationProcessorPaths>
+                    <compilerArgs>
+                        <arg>-Awalkingkooka.j2cl.java.util.Locale=en-AU</arg>
+                        <arg>-Awalkingkooka.j2cl.java.util.Locale.DEFAULT=en-AU</arg>
+                        <arg>-Awalkingkooka.j2cl.java.util.TimeZone=America/*,Europe/*,Asia/*,Australia/*,Etc/GMT,GMT,UTC</arg>
+                        <arg>-Awalkingkooka.j2cl.java.util.TimeZone.DEFAULT=Australia/Sydney</arg>
+                        <arg>-Awalkingkooka.j2cl.locale.Logging=SLASH_SLASH_COMMENTS</arg>
+                        <arg>-Awalkingkooka.j2cl.java.util.Currency=EUR</arg>
+                    </compilerArgs>
+                    <showWarnings>true</showWarnings>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <shadedArtifactAttached>false</shadedArtifactAttached>
+                            <artifactSet>
+                                <includes><include>dev.webfx:webfx-platform-javatime-emul-j2cl</include></includes>
+                                <excludes>
+                                    <exclude>org.junit:*</exclude>
+                                    <exclude>org.apiguardian:*</exclude>
+                                    <exclude>org.opentest4j:*</exclude>
+                                </excludes>
+                            </artifactSet>
+                            <filters>
+                                <filter>
+                                    <includes>
+                                        <include>org/threeten/bp/**/*.*</include>
+                                        <include>walkingkooka/**/*.*</include>
+                                        <include>javaemul/**/*.*</include>
+                                        <include>java/**/*.*</include>
+<!--
+                                        <include>META-INF/**/*.*</include>
+-->
+                                        <!-- Includes for j2cl-java-util-locale - see https://github.com/mP1/j2cl-java-util-Locale/blob/master/src/main/java/.walkingkooka-j2cl-maven-plugin-public-files.txt -->
+                                        <include>public/**/*.js</include>
+                                    </includes>
+                                    <excludes>
+                                        <!-- Excludes for j2cl-java-time - see https://github.com/mP1/j2cl-java-time/blob/master/src/main/java/.walkingkooka-j2cl-maven-plugin-ignored-files.txt -->
+                                        <exclude>**/TzdbZoneRulesCompiler.*</exclude>
+                                        <exclude>**/Ser.*</exclude>
+                                        <!-- Excludes for walkingkooka-text-printer - see https://github.com/mP1/walkingkooka-text-printer/blob/master/src/main/java/.walkingkooka-j2cl-maven-plugin-ignored-files.txt -->
+                                        <exclude>**/*Testing*</exclude>
+                                        <exclude>**/PrinterPrintStream.*</exclude>
+                                        <exclude>**/WriterPrinter.*</exclude>
+                                        <exclude>**/PrinterWriter.*</exclude>
+                                        <!-- Excludes for walkingkooka - see https://github.com/mP1/walkingkooka/blob/master/src/main/java/.walkingkooka-j2cl-maven-plugin-ignored-files.txt -->
+                                        <exclude>*/reflect/Class*</exclude>
+                                        <exclude>*/reflect/Fake*</exclude>
+                                        <exclude>*/reflect/Field*</exclude>
+                                        <exclude>*/reflect/Java*</exclude>
+                                        <exclude>*/reflect/Method*</exclude>
+                                        <exclude>*/reflect/PackageName*</exclude>
+                                        <exclude>*/text/*ReaderConsumingCharSequence*</exclude>
+                                        <exclude>**/*Testing.*</exclude>
+                                        <exclude>**/*Testing2.*</exclude>
+                                        <exclude>**/Properties*</exclude>
+                                        <exclude>**/MissingSystemProperty*</exclude>
+                                        <exclude>**/SystemProperty*</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
+                            <relocations>
+                                <!-- Relocations from j2cl-java-time - see https://github.com/mP1/j2cl-java-time/blob/master/src/main/java/.walkingkooka-j2cl-maven-plugin-shade.txt -->
+                                <relocation>
+                                    <pattern>org.threeten.bp</pattern>
+                                    <shadedPattern>java.time</shadedPattern>
+                                </relocation>
+
+                                <!-- relocations from j2cl-java-util-locale - see https://github.com/mP1/j2cl-java-util-Locale/blob/master/src/main/java/.walkingkooka-j2cl-maven-plugin-shade.txt  -->
+                                <!-- Ensures the next entry does not re-write this package. -->
+                                <relocation>
+                                    <pattern>walkingkooka.j2cl.java.util.locale.annotationprocessor</pattern>
+                                    <shadedPattern>walkingkooka.j2cl.java.util.locale.annotationprocessor
+                                    </shadedPattern>
+                                </relocation>
+                                <!-- Don't shade the generated & support sub-packages -->
+                                <relocation>
+                                    <pattern>walkingkooka.j2cl.java.util.locale.generated</pattern>
+                                    <shadedPattern>walkingkooka.j2cl.java.util.locale.generated</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>walkingkooka.j2cl.java.util.locale.support</pattern>
+                                    <shadedPattern>walkingkooka.j2cl.java.util.locale.support</shadedPattern>
+                                </relocation>
+                                <!-- Shade emulated java.util.Locale & java.util.LocaleProvider (internal) -->
+<!--
+                                <relocation>
+                                    <pattern>walkingkooka.j2cl.java.util.locale</pattern>
+                                    <shadedPattern>java.util</shadedPattern>
+                                </relocation>
+-->
+
+                                <!-- Relocations from j2cl-java-io - see https://github.com/mP1/j2cl-java-io/blob/master/src/main/java/.walkingkooka-j2cl-maven-plugin-shade.txt -->
+                                <!-- Leave StringDataInput, StringDataOutput, StringDataInputDataOutput in their original package. -->
+                                <relocation>
+                                    <pattern>walkingkooka.j2cl.java.io.string</pattern>
+                                    <shadedPattern>walkingkooka.j2cl.java.io.string</shadedPattern>
+                                </relocation>
+                                <!-- Shade walkingkooka.j2cl.java.io.* to java.io -->
+                                <relocation>
+                                    <pattern>walkingkooka.j2cl.java.io</pattern>
+                                    <shadedPattern>java.io</shadedPattern>
+                                </relocation>
+
+                                <!-- Relocations for j2cl-java-text - see https://github.com/mP1/j2cl-java-text/blob/master/src/main/java/.walkingkooka-j2cl-maven-plugin-shade.txt -->
+                                <relocation>
+                                    <pattern>walkingkooka.j2cl.java.text.generated</pattern>
+                                    <shadedPattern>walkingkooka.j2cl.java.text.generated</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>walkingkooka.j2cl.java.text</pattern>
+                                    <shadedPattern>java.text</shadedPattern>
+                                </relocation>
+
+                                <!-- Relocations for j2cl-java-util-Calendar - see https://github.com/mP1/j2cl-java-util-Calendar/blob/master/src/main/java/.walkingkooka-j2cl-maven-plugin-shade.txt -->
+                                <relocation>
+                                    <pattern>walkingkooka.j2cl.java.util.calendar</pattern>
+                                    <shadedPattern>java.util</shadedPattern>
+                                </relocation>
+
+                                <!-- Relocations for j2cl-java-util-TimeZone - see https://github.com/mP1/j2cl-java-util-TimeZone/blob/master/src/main/java/.walkingkooka-j2cl-maven-plugin-shade.txt -->
+                                <!-- Don't shade TimeZoneProvider and TimeZoneProviderReader. The later will be used in j2cl-java-time -->
+                                <relocation>
+                                    <pattern>walkingkooka.j2cl.java.util.timezone.generated</pattern>
+                                    <shadedPattern>walkingkooka.j2cl.java.util.timezone.generated</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>walkingkooka.j2cl.java.util.timezone.support</pattern>
+                                    <shadedPattern>walkingkooka.j2cl.java.util.timezone.support</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>walkingkooka.j2cl.java.util.timezone.zonerulesreader</pattern>
+                                    <shadedPattern>walkingkooka.j2cl.java.util.timezone.zonerulesreader</shadedPattern>
+                                </relocation>
+
+                                <!-- Shade TimeZone to java.util -->
+                                <relocation>
+                                    <pattern>walkingkooka.j2cl.java.util.timezone</pattern>
+                                    <shadedPattern>java.util</shadedPattern>
+                                </relocation>
+
+                                <!-- Relocations for j2cl-java-util-Currency - see https://github.com/mP1/j2cl-java-util-Currency/blob/master/src/main/java/.walkingkooka-j2cl-maven-plugin-shade.txt -->
+                                <relocation>
+                                    <pattern>walkingkooka.j2cl.java.util.currency.generated</pattern>
+                                    <shadedPattern>walkingkooka.j2cl.java.util.currency.generated</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>walkingkooka.j2cl.java.util.currency</pattern>
+                                    <shadedPattern>java.util</shadedPattern>
+                                </relocation>
+
+                                <!-- Relocations for walkingkooka - see https://github.com/mP1/walkingkooka/blob/master/src/main/java/.walkingkooka-j2cl-maven-plugin-shade.txt -->
+                                <relocation>
+                                    <pattern>walkingkooka.collect.list.j2cl.java.util.concurrent</pattern>
+                                    <shadedPattern>java.util.concurrent</shadedPattern>
+                                </relocation>
+                            </relocations>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.DontIncludeResourceTransformer">
+                                    <resource>.java</resource>
+                                </transformer>
+                            </transformers>
+                            <createSourcesJar>true</createSourcesJar>
+                            <shadeSourcesContent>true</shadeSourcesContent>
+                            <createDependencyReducedPom>false</createDependencyReducedPom>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-shaded-sources-back-to-main-artifact</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <unzip src="${project.build.directory}/${project.artifactId}-${project.version}-sources.jar" dest="${project.build.directory}/shaded-sources/"/>
+                                <zip update="true" destfile="${project.build.directory}/${project.artifactId}-${project.version}.jar" basedir="${project.build.directory}/shaded-sources/"/>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+
+    </build>
+    <profiles>
+        <profile>
+            <id>j2cl-javatime-copy-walkingkooka-sources</id>
+
+            <dependencies>
+
+                <dependency>
+                    <groupId>walkingkooka</groupId>
+                    <artifactId>j2cl-java-time</artifactId>
+                    <version>${walkingkooka.version}</version>
+                </dependency>
+
+                <!-- must be first to help guarantee overriding JRE's Locale -->
+                <dependency>
+                    <groupId>walkingkooka</groupId>
+                    <artifactId>j2cl-java-util-Locale</artifactId>
+                    <version>${walkingkooka.version}</version>
+                </dependency>
+
+                <dependency>
+                    <groupId>walkingkooka</groupId>
+                    <artifactId>j2cl-java-io</artifactId>
+                    <version>${walkingkooka.version}</version>
+                </dependency>
+
+                <dependency>
+                    <groupId>walkingkooka</groupId>
+                    <artifactId>j2cl-java-text</artifactId>
+                    <version>${walkingkooka.version}</version>
+                </dependency>
+
+                <dependency>
+                    <groupId>walkingkooka</groupId>
+                    <artifactId>j2cl-java-util-Calendar</artifactId>
+                    <version>${walkingkooka.version}</version>
+                </dependency>
+
+                <dependency>
+                    <groupId>walkingkooka</groupId>
+                    <artifactId>j2cl-java-util-TimeZone</artifactId>
+                    <version>${walkingkooka.version}</version>
+                </dependency>
+
+                <dependency>
+                    <groupId>walkingkooka</groupId>
+                    <artifactId>walkingkooka-text-printer</artifactId>
+                    <version>${walkingkooka.version}</version>
+                </dependency>
+
+                <dependency>
+                    <groupId>walkingkooka</groupId>
+                    <artifactId>j2cl-java-util-Currency</artifactId>
+                    <version>${walkingkooka.version}</version>
+                </dependency>
+
+                <dependency>
+                    <groupId>walkingkooka</groupId>
+                    <artifactId>j2cl-locale</artifactId>
+                    <version>${walkingkooka.version}</version>
+                </dependency>
+
+                <dependency>
+                    <groupId>walkingkooka</groupId>
+                    <artifactId>walkingkooka</artifactId>
+                    <version>${walkingkooka.version}</version>
+                </dependency>
+
+            </dependencies>
+
+            <build>
+
+                <plugins>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>unpack</id>
+                                <goals>
+                                    <goal>unpack-dependencies</goal>
+                                </goals>
+                                <configuration>
+                                    <!-- excluding  -->
+                                    <excludeGroupIds>dev.webfx</excludeGroupIds>
+                                    <excludeTransitive>true</excludeTransitive>
+                                    <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
+                                    <includes>**/*.java</includes>
+                                    <excludes>**/*Testing*, **/annotationprocessor/**</excludes>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>unpack-dependencies</id>
+                                <goals>
+                                    <goal>unpack</goal>
+                                </goals>
+                                <configuration>
+                                    <skip>true</skip>
+                                    <artifactItems>
+                                        <artifactItem>
+                                            <groupId>walkingkooka</groupId>
+                                            <artifactId>j2cl-java-time</artifactId>
+                                            <version>${walkingkooka.version}</version>
+                                            <includes>**/*.java</includes>
+                                            <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
+                                            <!-- Excludes for j2cl-java-time - see https://github.com/mP1/j2cl-java-time/blob/master/src/main/java/.walkingkooka-j2cl-maven-plugin-ignored-files.txt -->
+                                            <!--<excludes>**/TzdbZoneRulesCompiler.* , **/Ser.*</excludes>-->
+                                        </artifactItem>
+                                        <artifactItem>
+                                            <groupId>walkingkooka</groupId>
+                                            <artifactId>j2cl-java-util-locale</artifactId>
+                                            <version>${walkingkooka.version}</version>
+                                            <includes>**/*.java, **/*.js</includes>
+                                            <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
+                                        </artifactItem>
+                                        <artifactItem>
+                                            <groupId>walkingkooka</groupId>
+                                            <artifactId>j2cl-java-io</artifactId>
+                                            <version>${walkingkooka.version}</version>
+                                            <includes>**/*.*</includes>
+                                            <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
+                                        </artifactItem>
+                                        <artifactItem>
+                                            <groupId>walkingkooka</groupId>
+                                            <artifactId>j2cl-java-text</artifactId>
+                                            <version>${walkingkooka.version}</version>
+                                            <includes>**/*.java</includes>
+                                            <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
+                                        </artifactItem>
+                                        <artifactItem>
+                                            <groupId>walkingkooka</groupId>
+                                            <artifactId>j2cl-java-util-Calendar</artifactId>
+                                            <version>${walkingkooka.version}</version>
+                                            <includes>**/*.java</includes>
+                                            <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
+                                        </artifactItem>
+                                        <artifactItem>
+                                            <groupId>walkingkooka</groupId>
+                                            <artifactId>j2cl-java-util-TimeZone</artifactId>
+                                            <version>${walkingkooka.version}</version>
+                                            <includes>**/*.java</includes>
+                                            <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
+                                        </artifactItem>
+                                        <artifactItem>
+                                            <groupId>walkingkooka</groupId>
+                                            <artifactId>j2cl-java-util-Currency</artifactId>
+                                            <version>${walkingkooka.version}</version>
+                                            <includes>**/*.java</includes>
+                                            <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
+                                        </artifactItem>
+                                        <artifactItem>
+                                            <groupId>walkingkooka</groupId>
+                                            <artifactId>j2cl-locale</artifactId>
+                                            <version>${walkingkooka.version}</version>
+                                            <includes>**/*.java</includes>
+                                            <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
+                                        </artifactItem>
+                                        <artifactItem>
+                                            <groupId>walkingkooka</groupId>
+                                            <artifactId>j2cl-gwt-internal-annotations</artifactId>
+                                            <version>${walkingkooka.version}</version>
+                                            <includes>**/*.java</includes>
+                                            <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
+                                        </artifactItem>
+                                        <artifactItem>
+                                            <groupId>walkingkooka</groupId>
+                                            <artifactId>walkingkooka</artifactId>
+                                            <version>${walkingkooka.version}</version>
+                                            <includes>**/*.java</includes>
+                                            <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
+                                            <!-- Excludes for walkingkooka - see https://github.com/mP1/walkingkooka/blob/master/src/main/java/.walkingkooka-j2cl-maven-plugin-ignored-files.txt -->
+                                            <!--<excludes>*/reflect/Class* , */reflect/Fake* , */reflect/Field* , */reflect/Java* , */reflect/Method* , */reflect/PackageName* , */text/*ReaderConsumingCharSequence* , **/*Testing.* , **/*Testing2.* , **/Properties* , **/MissingSystemProperty* , **/SystemProperty*</excludes>-->
+                                            <excludes>**/*Testing.* , **/*Testing2.*</excludes>
+                                        </artifactItem>
+                                        <artifactItem>
+                                            <groupId>walkingkooka</groupId>
+                                            <artifactId>walkingkooka-text-printer</artifactId>
+                                            <version>${walkingkooka.version}</version>
+                                            <includes>**/*.java</includes>
+                                            <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
+                                            <!-- Excludes for walkingkooka-text-printer - see https://github.com/mP1/walkingkooka-text-printer/blob/master/src/main/java/.walkingkooka-j2cl-maven-plugin-ignored-files.txt -->
+                                            <!--<excludes>**/*Testing* , **/PrinterPrintStream.* , **/WriterPrinter.* , **/PrinterWriter.*</excludes>-->
+                                            <excludes>**/*Testing*</excludes>
+                                        </artifactItem>
+                                    </artifactItems>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                </plugins>
+            </build>
+
+        </profile>
+    </profiles>
+
+</project>

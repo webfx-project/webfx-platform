@@ -137,6 +137,7 @@
         <module>webfx-platform-file-java</module>
         <module>webfx-platform-javabase-emul-gwt</module>
         <module>webfx-platform-javabase-emul-j2cl</module>
+        <module>webfx-platform-javatime-emul-j2cl</module>
         <module>webfx-platform-meta</module>
         <module>webfx-platform-os</module>
         <module>webfx-platform-os-gluon</module>
