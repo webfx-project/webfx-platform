@@ -29,6 +29,7 @@
 
     <dependencies>
 
+        <!-- Some classes (ex: java.text.ParseException) are declared in the java base emulation -->
         <dependency>
             <groupId>dev.webfx</groupId>
             <artifactId>webfx-platform-javabase-emul-j2cl</artifactId>
@@ -44,22 +45,30 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
+                    <!-- These annotation processors will generate some missing classes in the source code (in
+                      target/generated-sources), unless they have been copied back to the source code (which is the case
+                      at the moment because the timezone annotation processor use illegal reflection access (works
+                      only with Java 11, not over) -->
                     <annotationProcessorPaths>
+                        <!-- Will generate walkingkooka.j2cl.java.util.locale.generated.LocaleProvider -->
                         <path>
                             <groupId>walkingkooka</groupId>
                             <artifactId>j2cl-java-util-Locale-annotation-processor</artifactId>
                             <version>${walkingkooka.version}</version>
                         </path>
+                        <!-- Will generate walkingkooka.j2cl.java.util.timezone.generated.TimeZoneProvider -->
                         <path>
                             <groupId>walkingkooka</groupId>
                             <artifactId>j2cl-java-util-TimeZone-annotation-processor</artifactId>
                             <version>${walkingkooka.version}</version>
                         </path>
+                        <!-- Will generate walkingkooka.j2cl.java.text.generated.* classes -->
                         <path>
                             <groupId>walkingkooka</groupId>
                             <artifactId>j2cl-java-text-annotation-processor</artifactId>
                             <version>${walkingkooka.version}</version>
                         </path>
+                        <!-- Will generate walkingkooka.j2cl.java.util.currency.generated.CurrencyProvider -->
                         <path>
                             <groupId>walkingkooka</groupId>
                             <artifactId>j2cl-java-util-currency-annotation-processor</artifactId>
@@ -159,7 +168,7 @@
                                     <shadedPattern>walkingkooka.j2cl.java.util.locale.support</shadedPattern>
                                 </relocation>
                                 <!-- Shade emulated java.util.Locale & java.util.LocaleProvider (internal) -->
-<!--
+<!-- Commented for now as the vertispan plugin doesn't support jre classes overrides (or requires new jre without the class)
                                 <relocation>
                                     <pattern>walkingkooka.j2cl.java.util.locale</pattern>
                                     <shadedPattern>java.util</shadedPattern>
