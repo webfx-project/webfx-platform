@@ -16,9 +16,9 @@
     <dependencies>
 
         <dependency>
-            <groupId>org.treblereel.gwt.gwtproject.time</groupId>
-            <artifactId>gwt-time</artifactId>
-            <version>202203291</version>
+            <groupId>dev.webfx</groupId>
+            <artifactId>webfx-platform-javatime-emul-j2cl</artifactId>
+            <version>${webfx.version}</version>
             <scope>runtime</scope>
         </dependency>
 

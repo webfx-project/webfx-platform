@@ -155,9 +155,19 @@
         </group>
 
         <library name="j2cl-time">
+            <groupId>dev.webfx</groupId>
+            <artifactId>webfx-platform-javatime-emul-j2cl</artifactId>
+            <version>${webfx.version}</version>
+            <!--
+                        <groupId>walkingkooka</groupId>
+                        <artifactId>j2cl-java-time</artifactId>
+                        <version>1.0-SNAPSHOT</version>
+-->
+<!--
             <groupId>org.treblereel.gwt.gwtproject.time</groupId>
             <artifactId>gwt-time</artifactId>
             <version>202203291</version>
+-->
             <exported-packages>
                 <package>java.time</package>
                 <package>java.time.chrono</package>

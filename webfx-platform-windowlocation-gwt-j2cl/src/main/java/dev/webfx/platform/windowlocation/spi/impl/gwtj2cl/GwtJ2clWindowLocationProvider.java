@@ -12,7 +12,7 @@ public final class GwtJ2clWindowLocationProvider implements WindowLocationProvid
     @Override
     public String getHref() {
         return DomGlobal.window.location.href;
-    };
+    }
 
     @Override
     public String getProtocol() {
@@ -21,26 +21,26 @@ public final class GwtJ2clWindowLocationProvider implements WindowLocationProvid
 
     private String getWindowProtocol() {
         return DomGlobal.window.location.protocol;
-    };
+    }
 
     @Override
     public String getHost() {
         return DomGlobal.window.location.host;
-    };
+    }
 
     @Override
     public String getHostname() {
         return DomGlobal.window.location.hostname;
-    };
+    }
 
     @Override
     public String getPort() {
         return DomGlobal.window.location.port;
-    };
+    }
 
     public String getPathname() {
         return DomGlobal.window.location.pathname;
-    };
+    }
 
     @Override
     public String getSearch() {

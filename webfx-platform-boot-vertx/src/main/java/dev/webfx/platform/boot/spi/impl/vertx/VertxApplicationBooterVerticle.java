@@ -4,10 +4,12 @@ import dev.webfx.platform.boot.ApplicationBooter;
 import dev.webfx.platform.boot.spi.ApplicationBooterProvider;
 import dev.webfx.platform.boot.spi.ApplicationJob;
 import dev.webfx.platform.boot.spi.impl.ApplicationModuleBooterManager;
+import dev.webfx.platform.reflect.RArray;
 import dev.webfx.platform.shutdown.Shutdown;
 import dev.webfx.platform.vertx.common.VertxInstance;
 import io.vertx.core.*;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -22,6 +24,10 @@ import java.util.Collection;
  * @author Bruno Salmon
  */
 public final class VertxApplicationBooterVerticle extends AbstractVerticle implements ApplicationBooterProvider {
+
+    static {
+        RArray.injectJavaArrayNewInstanceMethod(Array::newInstance);
+    }
 
     private static VertxApplicationBooterVerticle containerInstance;
     private static VertxApplicationBooterVerticle verticleInstance;

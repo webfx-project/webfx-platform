@@ -13,4 +13,18 @@
 
     <artifactId>webfx-platform-javabase-emul-j2cl</artifactId>
 
+    <dependencies>
+
+        <dependency>
+            <groupId>com.google.jsinterop</groupId>
+            <artifactId>base</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.elemental2</groupId>
+            <artifactId>elemental2-core</artifactId>
+        </dependency>
+
+    </dependencies>
+
 </project>
