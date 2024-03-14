@@ -11,6 +11,7 @@ module webfx.platform.substitution.var {
     // Exported packages
     exports dev.webfx.platform.substitution.spi.impl.var;
     exports dev.webfx.platform.substitution.var.spi;
+    exports dev.webfx.platform.substitution.var.spi.impl;
 
     // Used services
     uses dev.webfx.platform.substitution.var.spi.VariablesResolver;

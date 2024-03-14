@@ -1,52 +1,24 @@
 package emul.java.util.regex;
 
-import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.regexp.shared.RegExp;
 
-/** Emulation of the {@link Matcher} class, uses {@link RegExp} as internal implementation.
- * @author hneuer */
+import elemental2.core.JsArray;
+import elemental2.core.JsObject;
+import jsinterop.base.Js;
+import jsinterop.base.JsPropertyMap;
 
 public class Matcher {
 
     private final String input;
-    /* Implementation using standard JavaScript RegExp
-     Commented as not all browsers implement named groups (only Chrome 64 for now)
-
-        private final RegExp regExp;
-        private final MatchResult matchResult;
-
-        Matcher (Pattern pattern, CharSequence input) {
-            this.input = String.valueOf(input);
-            this.regExp = pattern.regExp;
-            matchResult = regExp.exec(this.input);
-        }
-
-        public boolean matches() {
-            return regExp.test(input);
-        }
-
-        public int groupCount() {
-            return matchResult.getGroupCount();
-        }
-
-        public String group(int group) {
-            return matchResult.getGroup(group);
-        }
-
-        public String group(String name) {
-            return getMatchResultGroup((JavaScriptObject) (Object) matchResult, name);
-        }
-
-    */
-
-    private static native String getMatchResultGroup(JavaScriptObject mr, String name) /*-{
-        return mr.groups ? mr.groups[name] : null;
-    }-*/;
-
-    private final JavaScriptObject xRegExp;
-    private JavaScriptObject matchResult;
+    private final XRegExp xRegExp;
+    private Object matchResult;
     private boolean findConsumed;
     private int findStartPos, findMatchStartPos, findMatchLength;
+
+    private static String getMatchResultGroup(Object mr, String name) {
+        // return mr.groups ? mr.groups[name] : null;
+        Object groups = Js.asPropertyMap(mr).get("groups");
+        return groups == null ? null : Js.asString(Js.asPropertyMap(groups).get(name));
+    }
 
     Matcher (Pattern pattern, CharSequence input) {
         this.input = String.valueOf(input);
@@ -88,8 +60,17 @@ public class Matcher {
         return sb.append(input.substring(findMatchStartPos + findMatchLength));
     }
 
+    public Matcher appendReplacement(StringBuffer sb, String replacement) {
+        sb.append(input, findStartPos, findMatchStartPos).append(replacement);
+        return this;
+    }
+
+    public StringBuffer appendTail(StringBuffer sb) {
+        return sb.append(input.substring(findMatchStartPos + findMatchLength));
+    }
+
     public int groupCount() {
-        return matchResultLength(matchResult);
+        return matchResultLength(matchResult) - 1;
     }
 
     public String group(int group) {
@@ -100,25 +81,35 @@ public class Matcher {
         return getMatchResultGroup(matchResult, name);
     }
 
-    private static native JavaScriptObject newMatchResult(JavaScriptObject xRegExp, String input, int pos) /*-{
-        return $wnd.XRegExp.exec(input, xRegExp, pos);
-    }-*/;
+    private static Object newMatchResult(XRegExp xRegExp, String input, int pos) {
+        //return $wnd.XRegExp.exec(input, xRegExp, pos);
+        return XRegExp.exec(input, xRegExp, pos);
+    }
 
-    private static native int matchIndex(JavaScriptObject mr) /*-{
-        return mr.index;
-    }-*/;
+    private static int matchIndex(Object mr) {
+        // return mr.index;
+        return Js.asInt(Js.asPropertyMap(mr).get("index"));
+    }
 
-    private static native int matchLength(JavaScriptObject mr) /*-{
-        return mr[0].length;
-    }-*/;
+    private static int matchLength(Object mr) {
+        // return mr[0].length;
+        return Js.asString(Js.asArray(mr)[0]).length();
+    }
 
+    private static int matchResultLength(Object mr) {
+        // return mr.length
+        JsPropertyMap<Object> map = Js.asPropertyMap(mr);
+        Object length = map.get("length");
+        return Js.asInt(length);
+    }
 
-    private static native int matchResultLength(JavaScriptObject mr) /*-{
-        return mr.length;
-    }-*/;
-
-    private static native String matchValue(JavaScriptObject mr, int pos) /*-{
+    private static String matchValue(Object mr, int pos) {
         //return Object.values(mr)[pos]; // not supported by IE
-        return mr[Object.keys(mr)[pos]];
-    }-*/;
+        //return mr[Object.keys(mr)[pos]];
+        JsArray<String> keys = JsObject.keys(mr);
+        String key = keys.at(pos);
+        Object value = Js.asPropertyMap(mr).get(key);
+        return value == null ? null : Js.asString(value);
+    }
+
 }

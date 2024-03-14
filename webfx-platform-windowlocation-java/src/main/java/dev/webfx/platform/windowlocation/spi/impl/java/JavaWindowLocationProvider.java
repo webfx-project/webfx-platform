@@ -1,6 +1,6 @@
 package dev.webfx.platform.windowlocation.spi.impl.java;
 
-import dev.webfx.platform.conf.ConfigLoader;
+import dev.webfx.platform.conf.zero.ZeroConfig;
 import dev.webfx.platform.windowlocation.spi.WindowLocationProvider;
 
 /**
@@ -8,24 +8,15 @@ import dev.webfx.platform.windowlocation.spi.WindowLocationProvider;
  */
 public final class JavaWindowLocationProvider implements WindowLocationProvider {
 
-    // TODO: See how this class should interact with WindowHistory
-    private String protocol;
-    private String hostname;
-    private String port;
-    private String pathname;
-    private String queryString;
-    private String fragment;
+    // TODO: See how this class should interact with JavaWindowHistoryProvider
 
-    public JavaWindowLocationProvider() {
-        ConfigLoader.onConfigLoaded("webfx.platform.windowlocation.java", config -> {
-            protocol = config.getString("initialProtocol");
-            hostname = config.getString("initialHostname");
-            port = config.getString("initialPort");
-            pathname = config.getString("initialPathname");
-            queryString = config.getString("initialQueryString");
-            fragment = config.getString("initialFragment");
-        });
-    }
+    private final static String CONFIG_PATH = "webfx.platform.windowlocation.java";
+    private String protocol = ZeroConfig.lookupString(CONFIG_PATH, "initialProtocol");
+    private String hostname = ZeroConfig.lookupString(CONFIG_PATH, "initialHostname", "localhost");
+    private String port = ZeroConfig.lookupString(CONFIG_PATH, "initialPort", "80");
+    private String pathname = ZeroConfig.lookupString(CONFIG_PATH, "initialPathname", "/");
+    private String queryString = ZeroConfig.lookupString(CONFIG_PATH, "initialQueryString");
+    private String fragment = ZeroConfig.lookupString(CONFIG_PATH, "initialFragment");
 
     @Override
     public String getProtocol() {

@@ -1,9 +1,8 @@
 package dev.webfx.platform.conf;
 
+import dev.webfx.platform.ast.AST;
+import dev.webfx.platform.ast.ReadOnlyAstObject;
 import dev.webfx.platform.conf.impl.RootConfig;
-import dev.webfx.platform.util.keyobject.ReadOnlyKeyObject;
-import dev.webfx.platform.util.keyobject.parser.AstParser;
-import dev.webfx.platform.util.keyobject.AST;
 
 /**
  * @author Bruno Salmon
@@ -16,11 +15,11 @@ public class ConfigParser {
 
     public static Config parsePrefixedConfig(String prefixPath, String configText, String format) {
         // Parsing the object with the format given by the extension
-        ReadOnlyKeyObject keyObject = AstParser.parseObject(configText, format);
+        ReadOnlyAstObject astObject = AST.parseObject(configText, format);
         if (prefixPath != null) {
-            keyObject = AST.prefixObject(prefixPath, keyObject);
+            astObject = AST.prefixObject(prefixPath, astObject);
         }
-        return new RootConfig(keyObject);
+        return new RootConfig(astObject);
     }
 
     public static Config parseConfigFile(String fileContent, String filePath) {

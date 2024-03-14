@@ -1,10 +1,11 @@
 package dev.webfx.platform.conf.impl;
 
 import dev.webfx.platform.conf.Config;
-import dev.webfx.platform.util.keyobject.ReadOnlyKeyObjectWrapper;
-import dev.webfx.platform.util.keyobject.ReadOnlyIndexedArray;
-import dev.webfx.platform.util.keyobject.ReadOnlyKeyObject;
-import dev.webfx.platform.util.keyobject.AST;
+import dev.webfx.platform.ast.ReadOnlyAstObjectWrapper;
+import dev.webfx.platform.ast.ReadOnlyAstArray;
+import dev.webfx.platform.ast.ReadOnlyAstObject;
+import dev.webfx.platform.ast.AST;
+import dev.webfx.platform.substitution.Substitutor;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,13 +13,13 @@ import java.util.Map;
 /**
  * @author Bruno Salmon
  */
-public abstract class ConfigImpl extends ReadOnlyKeyObjectWrapper implements Config {
+public abstract class ConfigImpl extends ReadOnlyAstObjectWrapper implements Config {
 
     private final Map<String, Config> childConfigs = new HashMap<>();
     private final Map<String, ConfigArray> configArrays = new HashMap<>();
 
-    public ConfigImpl(ReadOnlyKeyObject configKeyObject) {
-        super(configKeyObject);
+    public ConfigImpl(ReadOnlyAstObject configAstObject) {
+        super(configAstObject);
     }
 
     @Override
@@ -31,10 +32,10 @@ public abstract class ConfigImpl extends ReadOnlyKeyObjectWrapper implements Con
         String firstToken = dotIndex < 0 ? path : path.substring(0, dotIndex);
         Config childConfig = childConfigs.get(firstToken);
         if (childConfig == null) {
-            ReadOnlyKeyObject childKeyObject = getObject(firstToken);
-            if (childKeyObject == null)
+            ReadOnlyAstObject childAstObject = getObject(firstToken);
+            if (childAstObject == null)
                 return null;
-            childConfigs.put(firstToken, childConfig = new ChildConfig(getRoot(), childKeyObject));
+            childConfigs.put(firstToken, childConfig = new ChildConfig(getRoot(), childAstObject));
         }
         if (dotIndex < 0)
             return childConfig;
@@ -52,16 +53,17 @@ public abstract class ConfigImpl extends ReadOnlyKeyObjectWrapper implements Con
             value = configArrays.get(key);
             if (value == null) {
                 value = super.get(key);
-                if (value instanceof ReadOnlyKeyObject) { // A key object will be wrapped into a child config
-                    ChildConfig childConfig = new ChildConfig(getRoot(), (ReadOnlyKeyObject) value);
+                if (AST.isObject(value)) { // A key object will be wrapped into a child config
+                    ChildConfig childConfig = new ChildConfig(getRoot(), (ReadOnlyAstObject) value);
                     childConfigs.put(key, childConfig);
                     value = childConfig;
-                } else if (value instanceof ReadOnlyIndexedArray) { // An indexed array will be wrapped into a child array
-                    ConfigArray configArray = new ConfigArray(this, (ReadOnlyIndexedArray) value);
+                } else if (AST.isArray(value)) { // An indexed array will be wrapped into a child array
+                    ConfigArray configArray = new ConfigArray(this, (ReadOnlyAstArray) value);
                     configArrays.put(key, configArray);
                     value = configArray;
                 } else if (value instanceof String) {
-                    value = dev.webfx.platform.substitution.Substitutor.substitute((String) value);
+                    // TODO: Should be substitution optional?
+                    value = Substitutor.substitute((String) value);
                 }
             }
         }

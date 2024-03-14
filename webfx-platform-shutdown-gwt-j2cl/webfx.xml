@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+
+    <description>GWT implementation of the Shutdown API (for the browser).</description>
+
+    <exported-packages>
+        <source-packages/>
+    </exported-packages>
+
+    <providers>
+        <provider interface="dev.webfx.platform.shutdown.spi.ShutdownProvider">dev.webfx.platform.shutdown.spi.impl.gwtj2cl.GwtJ2clShutdownProvider</provider>
+    </providers>
+
+    <dependencies>
+        <used-by-source-modules/>
+    </dependencies>
+
+</project>

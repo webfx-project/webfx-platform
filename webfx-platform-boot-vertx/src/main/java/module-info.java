@@ -9,6 +9,7 @@ module webfx.platform.boot.vertx {
     requires io.vertx.core;
     requires java.base;
     requires webfx.platform.boot;
+    requires webfx.platform.reflect;
     requires webfx.platform.shutdown;
     requires webfx.platform.vertx.common;
 

@@ -1,14 +1,14 @@
 package dev.webfx.platform.conf.impl;
 
-import dev.webfx.platform.util.keyobject.ReadOnlyKeyObject;
+import dev.webfx.platform.ast.ReadOnlyAstObject;
 
 /**
  * @author Bruno Salmon
  */
 public final class RootConfig extends ConfigImpl {
 
-    public RootConfig(ReadOnlyKeyObject rootKeyObject) {
-        super(rootKeyObject);
+    public RootConfig(ReadOnlyAstObject rootAstObject) {
+        super(rootAstObject);
     }
 
     @Override

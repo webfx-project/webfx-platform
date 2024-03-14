@@ -13,9 +13,9 @@ public interface ApplicationModuleBooter {
     int COMMUNICATION_OPEN_BOOT_LEVEL = 4;
     int COMMUNICATION_REGISTER_BOOT_LEVEL = 5;
     int COMMUNICATION_ALL_BOOT_LEVEL = 6;
-    int JOBS_START_BOOT_LEVEL = 7;
-    int APPLICATION_BOOT_LEVEL = 8;
-    int APPLICATION_LAUNCH_LEVEL = 9;
+    int APPLICATION_BOOT_LEVEL = 7;
+    int APPLICATION_LAUNCH_LEVEL = 8;
+    int JOBS_START_BOOT_LEVEL = 9;
 
     String getModuleName();
 
