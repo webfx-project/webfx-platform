@@ -15,31 +15,32 @@
  *
  */
 
-package walkingkooka.j2cl.java.util.currency.generated;
+package walkingkooka.j2cl.java.text.generated;
 
-public final class CurrencyProvider {
+public final class DecimalFormatSymbolsProvider {
 
-  public final static String ANNOTATION_PROCESSOR_LOCALES_FILTER = preventInlining("en-AU");
+  public final static String ANNOTATION_PROCESSOR_LOCALES_FILTER = preventInlining("en-US");
 
-  public final static String SELECTED_LOCALES = preventInlining("en-AU");
+  public final static String SELECTED_LOCALES = preventInlining("en-US");
 
-// currencyCode=AUD
-//   defaultFractionDigits=2
-//   numericCode=36
-//   defaultSymbol=A$
-//   locales=en-AU
-//   $=en-AU
+// locales=en-US
+//   decimalSeparator=.
+//   digit=#
+//   exponentSeparator=E
+//   groupingSeparator=,
+//   infinity=∞
+//   internationalCurrencySymbol=USD
+//   minusSign=-
+//   monetaryDecimalSeparator=.
+//   nan=NaN
+//   patternSeparator=;
+//   percent=%
+//   perMill=‰
+//   zeroDigit=0
 // 
-// currencyCode=XXX
-//   defaultFractionDigits=-1
-//   numericCode=999
-//   defaultSymbol=XXX
-//   locales=
-//   ¤=en-AU
-// 
 
 
-  public final static String DATA = preventInlining("2,AUD,2,36,A$,1,en-AU,1,$,1,en-AU,XXX,-1,999,XXX,0,1,¤,1,en-AU");
+  public final static String DATA = preventInlining("1,1,en-US,.#E,,∞,USD,-.NaN,;%‰0");
 
   private static String preventInlining(final String string){
     return string;
