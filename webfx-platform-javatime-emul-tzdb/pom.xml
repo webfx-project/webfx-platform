@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- File managed by WebFX (DO NOT EDIT MANUALLY) -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>dev.webfx</groupId>
+        <artifactId>webfx-platform</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>webfx-platform-javatime-emul-tzdb</artifactId>
+
+    <properties>
+        <walkingkooka.version>1.0-SNAPSHOT</walkingkooka.version>
+    </properties>
+
+    <repositories>
+
+        <repository>
+            <id>github-mp1-appengine-repo</id>
+            <name>github.com/mP1 repository</name>
+            <url>https://maven-repo-254709.appspot.com</url>
+        </repository>
+
+    </repositories>
+
+    <build>
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <!-- These annotation processors will generate some missing classes in the source code (in
+                      target/generated-sources), unless they have been copied back to the source code (which is the case
+                      at the moment because the timezone annotation processor use illegal reflection access (works
+                      only with Java 11, not over) -->
+                    <annotationProcessorPaths>
+                        <!-- Will generate walkingkooka.j2cl.java.util.locale.generated.LocaleProvider -->
+                        <path>
+                            <groupId>walkingkooka</groupId>
+                            <artifactId>j2cl-java-util-Locale-annotation-processor</artifactId>
+                            <version>${walkingkooka.version}</version>
+                        </path>
+                        <!-- Will generate walkingkooka.j2cl.java.util.timezone.generated.TimeZoneProvider -->
+                        <path>
+                            <groupId>walkingkooka</groupId>
+                            <artifactId>j2cl-java-util-TimeZone-annotation-processor</artifactId>
+                            <version>${walkingkooka.version}</version>
+                        </path>
+                        <!-- Will generate walkingkooka.j2cl.java.text.generated.* classes -->
+                        <path>
+                            <groupId>walkingkooka</groupId>
+                            <artifactId>j2cl-java-text-annotation-processor</artifactId>
+                            <version>${walkingkooka.version}</version>
+                        </path>
+                        <!-- Will generate walkingkooka.j2cl.java.util.currency.generated.CurrencyProvider -->
+                        <path>
+                            <groupId>walkingkooka</groupId>
+                            <artifactId>j2cl-java-util-currency-annotation-processor</artifactId>
+                            <version>1.0-SNAPSHOT</version>
+                        </path>
+                    </annotationProcessorPaths>
+                    <compilerArgs>
+                        <arg>-Awalkingkooka.j2cl.java.util.Locale=en-US</arg>
+                        <arg>-Awalkingkooka.j2cl.java.util.Locale.DEFAULT=en-US</arg>
+                        <arg>
+                            -Awalkingkooka.j2cl.java.util.TimeZone=America/*,Europe/*,Asia/*,Australia/*,Etc/GMT,GMT,UTC
+                        </arg>
+                        <arg>-Awalkingkooka.j2cl.java.util.TimeZone.DEFAULT=America/New_York</arg>
+                        <arg>-Awalkingkooka.j2cl.locale.Logging=SLASH_SLASH_COMMENTS</arg>
+                        <arg>-Awalkingkooka.j2cl.java.util.Currency=US</arg>
+                    </compilerArgs>
+                    <showWarnings>true</showWarnings>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>

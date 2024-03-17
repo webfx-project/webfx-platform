@@ -25,11 +25,11 @@ public final class DecimalFormatProvider {
   public final static int PARSE_INTEGER_ONLY = 1;
   public final static int PARSE_BIG_DECIMAL = 2;
 
-  public final static String ANNOTATION_PROCESSOR_LOCALES_FILTER = preventInlining("en-AU");
+  public final static String ANNOTATION_PROCESSOR_LOCALES_FILTER = preventInlining("en-US");
 
-  public final static String SELECTED_LOCALES = preventInlining("en-AU");
+  public final static String SELECTED_LOCALES = preventInlining("en-US");
 
-// locales=en-AU
+// locales=en-US
 //   
 //   Currency decimalSeparatorAlwaysShown=false
 //   Currency groupingSize=3
@@ -113,7 +113,7 @@ public final class DecimalFormatProvider {
 //   
 
 
-  public final static String DATA = preventInlining("1,1,en-AU,03,12,2,2147483647,1,1,-$,,0,¤#\\,##0.00,$,,HALF_EVEN,03,13,0,2147483647,1,1,-,,0,#\\,##0.###,,,HALF_EVEN,03,10,0,2147483647,1,1,-,,1,#\\,##0,,,HALF_EVEN,03,13,0,2147483647,1,1,-,,0,#\\,##0.###,,,HALF_EVEN,03,10,0,2147483647,1,100,-,%,0,#\\,##0%,,%,HALF_EVEN");
+  public final static String DATA = preventInlining("1,1,en-US,03,12,2,2147483647,1,1,-$,,0,¤#\\,##0.00,$,,HALF_EVEN,03,13,0,2147483647,1,1,-,,0,#\\,##0.###,,,HALF_EVEN,03,10,0,2147483647,1,1,-,,1,#\\,##0,,,HALF_EVEN,03,13,0,2147483647,1,1,-,,0,#\\,##0.###,,,HALF_EVEN,03,10,0,2147483647,1,100,-,%,0,#\\,##0%,,%,HALF_EVEN");
 
   private static String preventInlining(final String string){
     return string;

@@ -29,6 +29,12 @@
 
     <dependencies>
 
+        <dependency>
+            <groupId>dev.webfx</groupId>
+            <artifactId>webfx-platform-javatime-emul-tzdb</artifactId>
+            <version>0.1.0-SNAPSHOT</version>
+        </dependency>
+
         <!-- Some classes (ex: java.text.ParseException) are declared in the java base emulation -->
         <dependency>
             <groupId>dev.webfx</groupId>
@@ -40,52 +46,6 @@
 
     <build>
         <plugins>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <!-- These annotation processors will generate some missing classes in the source code (in
-                      target/generated-sources), unless they have been copied back to the source code (which is the case
-                      at the moment because the timezone annotation processor use illegal reflection access (works
-                      only with Java 11, not over) -->
-                    <annotationProcessorPaths>
-                        <!-- Will generate walkingkooka.j2cl.java.util.locale.generated.LocaleProvider -->
-                        <path>
-                            <groupId>walkingkooka</groupId>
-                            <artifactId>j2cl-java-util-Locale-annotation-processor</artifactId>
-                            <version>${walkingkooka.version}</version>
-                        </path>
-                        <!-- Will generate walkingkooka.j2cl.java.util.timezone.generated.TimeZoneProvider -->
-                        <path>
-                            <groupId>walkingkooka</groupId>
-                            <artifactId>j2cl-java-util-TimeZone-annotation-processor</artifactId>
-                            <version>${walkingkooka.version}</version>
-                        </path>
-                        <!-- Will generate walkingkooka.j2cl.java.text.generated.* classes -->
-                        <path>
-                            <groupId>walkingkooka</groupId>
-                            <artifactId>j2cl-java-text-annotation-processor</artifactId>
-                            <version>${walkingkooka.version}</version>
-                        </path>
-                        <!-- Will generate walkingkooka.j2cl.java.util.currency.generated.CurrencyProvider -->
-                        <path>
-                            <groupId>walkingkooka</groupId>
-                            <artifactId>j2cl-java-util-currency-annotation-processor</artifactId>
-                            <version>1.0-SNAPSHOT</version>
-                        </path>
-                    </annotationProcessorPaths>
-                    <compilerArgs>
-                        <arg>-Awalkingkooka.j2cl.java.util.Locale=en-AU</arg>
-                        <arg>-Awalkingkooka.j2cl.java.util.Locale.DEFAULT=en-AU</arg>
-                        <arg>-Awalkingkooka.j2cl.java.util.TimeZone=America/*,Europe/*,Asia/*,Australia/*,Etc/GMT,GMT,UTC</arg>
-                        <arg>-Awalkingkooka.j2cl.java.util.TimeZone.DEFAULT=Australia/Sydney</arg>
-                        <arg>-Awalkingkooka.j2cl.locale.Logging=SLASH_SLASH_COMMENTS</arg>
-                        <arg>-Awalkingkooka.j2cl.java.util.Currency=EUR</arg>
-                    </compilerArgs>
-                    <showWarnings>true</showWarnings>
-                </configuration>
-            </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -152,13 +112,14 @@
                                 </relocation>
 
                                 <!-- relocations from j2cl-java-util-locale - see https://github.com/mP1/j2cl-java-util-Locale/blob/master/src/main/java/.walkingkooka-j2cl-maven-plugin-shade.txt  -->
-                                <!-- Ensures the next entry does not re-write this package. -->
+<!-- Commented for now as the vertispan plugin doesn't support jre classes overrides (or requires new jre without the class)
+                                &lt;!&ndash; Ensures the next entry does not re-write this package. &ndash;&gt;
                                 <relocation>
                                     <pattern>walkingkooka.j2cl.java.util.locale.annotationprocessor</pattern>
                                     <shadedPattern>walkingkooka.j2cl.java.util.locale.annotationprocessor
                                     </shadedPattern>
                                 </relocation>
-                                <!-- Don't shade the generated & support sub-packages -->
+                                &lt;!&ndash; Don't shade the generated & support sub-packages &ndash;&gt;
                                 <relocation>
                                     <pattern>walkingkooka.j2cl.java.util.locale.generated</pattern>
                                     <shadedPattern>walkingkooka.j2cl.java.util.locale.generated</shadedPattern>
@@ -167,8 +128,7 @@
                                     <pattern>walkingkooka.j2cl.java.util.locale.support</pattern>
                                     <shadedPattern>walkingkooka.j2cl.java.util.locale.support</shadedPattern>
                                 </relocation>
-                                <!-- Shade emulated java.util.Locale & java.util.LocaleProvider (internal) -->
-<!-- Commented for now as the vertispan plugin doesn't support jre classes overrides (or requires new jre without the class)
+                                &lt;!&ndash; Shade emulated java.util.Locale & java.util.LocaleProvider (internal) &ndash;&gt;
                                 <relocation>
                                     <pattern>walkingkooka.j2cl.java.util.locale</pattern>
                                     <shadedPattern>java.util</shadedPattern>
@@ -176,25 +136,25 @@
 -->
 
                                 <!-- Relocations from j2cl-java-io - see https://github.com/mP1/j2cl-java-io/blob/master/src/main/java/.walkingkooka-j2cl-maven-plugin-shade.txt -->
-                                <!-- Leave StringDataInput, StringDataOutput, StringDataInputDataOutput in their original package. -->
-                                <relocation>
-                                    <pattern>walkingkooka.j2cl.java.io.string</pattern>
-                                    <shadedPattern>walkingkooka.j2cl.java.io.string</shadedPattern>
-                                </relocation>
                                 <!-- Shade walkingkooka.j2cl.java.io.* to java.io -->
                                 <relocation>
                                     <pattern>walkingkooka.j2cl.java.io</pattern>
                                     <shadedPattern>java.io</shadedPattern>
                                 </relocation>
+                                <!-- Leave StringDataInput, StringDataOutput, StringDataInputDataOutput in their original package. -->
+                                <relocation>
+                                    <pattern>java.io.string</pattern>
+                                    <shadedPattern>walkingkooka.j2cl.java.io.string</shadedPattern>
+                                </relocation>
 
                                 <!-- Relocations for j2cl-java-text - see https://github.com/mP1/j2cl-java-text/blob/master/src/main/java/.walkingkooka-j2cl-maven-plugin-shade.txt -->
                                 <relocation>
-                                    <pattern>walkingkooka.j2cl.java.text.generated</pattern>
-                                    <shadedPattern>walkingkooka.j2cl.java.text.generated</shadedPattern>
-                                </relocation>
-                                <relocation>
                                     <pattern>walkingkooka.j2cl.java.text</pattern>
                                     <shadedPattern>java.text</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>java.text.generated</pattern>
+                                    <shadedPattern>walkingkooka.j2cl.java.text.generated</shadedPattern>
                                 </relocation>
 
                                 <!-- Relocations for j2cl-java-util-Calendar - see https://github.com/mP1/j2cl-java-util-Calendar/blob/master/src/main/java/.walkingkooka-j2cl-maven-plugin-shade.txt -->
@@ -204,34 +164,35 @@
                                 </relocation>
 
                                 <!-- Relocations for j2cl-java-util-TimeZone - see https://github.com/mP1/j2cl-java-util-TimeZone/blob/master/src/main/java/.walkingkooka-j2cl-maven-plugin-shade.txt -->
-                                <!-- Don't shade TimeZoneProvider and TimeZoneProviderReader. The later will be used in j2cl-java-time -->
-                                <relocation>
-                                    <pattern>walkingkooka.j2cl.java.util.timezone.generated</pattern>
-                                    <shadedPattern>walkingkooka.j2cl.java.util.timezone.generated</shadedPattern>
-                                </relocation>
-                                <relocation>
-                                    <pattern>walkingkooka.j2cl.java.util.timezone.support</pattern>
-                                    <shadedPattern>walkingkooka.j2cl.java.util.timezone.support</shadedPattern>
-                                </relocation>
-                                <relocation>
-                                    <pattern>walkingkooka.j2cl.java.util.timezone.zonerulesreader</pattern>
-                                    <shadedPattern>walkingkooka.j2cl.java.util.timezone.zonerulesreader</shadedPattern>
-                                </relocation>
-
                                 <!-- Shade TimeZone to java.util -->
                                 <relocation>
                                     <pattern>walkingkooka.j2cl.java.util.timezone</pattern>
                                     <shadedPattern>java.util</shadedPattern>
                                 </relocation>
+                                <!-- Don't shade TimeZoneProvider and TimeZoneProviderReader. The later will be used in j2cl-java-time -->
+                                <relocation>
+                                    <pattern>java.util.generated</pattern>
+                                    <shadedPattern>walkingkooka.j2cl.java.util.timezone.generated</shadedPattern>
+                                    <includes><include>java.util.generated.TimeZoneProvider*</include></includes>
+                                </relocation>
+                                <relocation>
+                                    <pattern>java.util.support</pattern>
+                                    <shadedPattern>walkingkooka.j2cl.java.util.timezone.support</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>java.util.zonerulesreader</pattern>
+                                    <shadedPattern>walkingkooka.j2cl.java.util.timezone.zonerulesreader</shadedPattern>
+                                </relocation>
 
                                 <!-- Relocations for j2cl-java-util-Currency - see https://github.com/mP1/j2cl-java-util-Currency/blob/master/src/main/java/.walkingkooka-j2cl-maven-plugin-shade.txt -->
                                 <relocation>
-                                    <pattern>walkingkooka.j2cl.java.util.currency.generated</pattern>
-                                    <shadedPattern>walkingkooka.j2cl.java.util.currency.generated</shadedPattern>
-                                </relocation>
-                                <relocation>
                                     <pattern>walkingkooka.j2cl.java.util.currency</pattern>
                                     <shadedPattern>java.util</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>java.util.generated</pattern>
+                                    <shadedPattern>walkingkooka.j2cl.java.util.currency.generated</shadedPattern>
+                                    <includes><include>java.util.generated.CurrencyProvider*</include></includes>
                                 </relocation>
 
                                 <!-- Relocations for walkingkooka - see https://github.com/mP1/walkingkooka/blob/master/src/main/java/.walkingkooka-j2cl-maven-plugin-shade.txt -->
