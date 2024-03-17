@@ -6,7 +6,6 @@
 module webfx.platform.storagelocation.java {
 
     // Direct dependencies modules
-    requires java.base;
     requires webfx.platform.meta;
     requires webfx.platform.storagelocation;
 

@@ -2,9 +2,6 @@
 
 module webfx.platform.reflect {
 
-    // Direct dependencies modules
-    requires java.base;
-
     // Exported packages
     exports dev.webfx.platform.reflect;
 

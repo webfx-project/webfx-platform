@@ -6,7 +6,6 @@
 module webfx.platform.webassembly {
 
     // Direct dependencies modules
-    requires java.base;
     requires webfx.platform.async;
     requires webfx.platform.util;
 

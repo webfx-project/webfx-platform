@@ -6,7 +6,6 @@
 module webfx.platform.windowhistory {
 
     // Direct dependencies modules
-    requires java.base;
     requires webfx.platform.ast;
     requires webfx.platform.async;
     requires webfx.platform.util;

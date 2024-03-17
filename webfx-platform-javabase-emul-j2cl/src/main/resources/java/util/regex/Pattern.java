@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Description of the file.
+ * @suppress {checkTypes}
+ */
+
 package java.util.regex;
 public final class Pattern {
 

@@ -3,7 +3,6 @@
 module webfx.platform.ast.json.plugin {
 
     // Direct dependencies modules
-    requires java.base;
     requires webfx.lib.javacupruntime;
     requires webfx.platform.ast;
     requires webfx.platform.util;

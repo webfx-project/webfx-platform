@@ -11,7 +11,6 @@
 module webfx.platform.uischeduler {
 
     // Direct dependencies modules
-    requires java.base;
     requires transitive webfx.platform.scheduler;
     requires webfx.platform.util;
 

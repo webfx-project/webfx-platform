@@ -9,7 +9,6 @@
 module webfx.platform.os {
 
     // Direct dependencies modules
-    requires java.base;
     requires webfx.platform.util;
 
     // Exported packages

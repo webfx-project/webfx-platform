@@ -6,7 +6,6 @@
 module webfx.platform.file.java {
 
     // Direct dependencies modules
-    requires java.base;
     requires webfx.platform.async;
     requires webfx.platform.blob.java;
     requires webfx.platform.file;

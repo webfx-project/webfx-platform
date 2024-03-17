@@ -10,7 +10,6 @@
 module webfx.platform.async {
 
     // Direct dependencies modules
-    requires java.base;
     requires java.logging;
     requires webfx.platform.util;
 

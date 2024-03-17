@@ -6,7 +6,6 @@
 module webfx.platform.useragent {
 
     // Direct dependencies modules
-    requires java.base;
     requires webfx.platform.util;
 
     // Exported packages
