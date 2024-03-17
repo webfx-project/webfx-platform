@@ -118,8 +118,8 @@ public class JsonFormatterProvider implements AstFormatterProvider {
             if (element instanceof ReadOnlyAstNode) {
                 ReadOnlyAstNode node = (ReadOnlyAstNode) element;
                 if (node.isObject())
-                    return appendJsonObject((AstObject) node, sb);
-                return appendJsonArray((AstArray) node, sb);
+                    return appendJsonObject((ReadOnlyAstObject) node, sb);
+                return appendJsonArray((ReadOnlyAstArray) node, sb);
             }
             return sb.append(element);
         }
