@@ -6,7 +6,6 @@
 module webfx.platform.storage.java {
 
     // Direct dependencies modules
-    requires java.base;
     requires webfx.platform.console;
     requires webfx.platform.scheduler;
     requires webfx.platform.storage;

@@ -3,7 +3,6 @@
 module webfx.platform.ast.factory.generic {
 
     // Direct dependencies modules
-    requires java.base;
     requires webfx.platform.ast;
 
     // Exported packages

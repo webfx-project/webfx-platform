@@ -12,7 +12,6 @@
 module webfx.platform.file {
 
     // Direct dependencies modules
-    requires java.base;
     requires transitive webfx.platform.async;
     requires webfx.platform.blob;
     requires webfx.platform.util;

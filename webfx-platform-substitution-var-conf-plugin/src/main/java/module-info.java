@@ -3,7 +3,6 @@
 module webfx.platform.substitution.var.conf.plugin {
 
     // Direct dependencies modules
-    requires java.base;
     requires webfx.platform.conf;
     requires webfx.platform.substitution.var;
 

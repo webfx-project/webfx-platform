@@ -3,7 +3,6 @@
 module webfx.platform.typedarray {
 
     // Direct dependencies modules
-    requires java.base;
     requires webfx.platform.util;
 
     // Exported packages

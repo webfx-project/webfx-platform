@@ -142,10 +142,12 @@
                                     <shadedPattern>java.io</shadedPattern>
                                 </relocation>
                                 <!-- Leave StringDataInput, StringDataOutput, StringDataInputDataOutput in their original package. -->
+<!--
                                 <relocation>
                                     <pattern>java.io.string</pattern>
                                     <shadedPattern>walkingkooka.j2cl.java.io.string</shadedPattern>
                                 </relocation>
+-->
 
                                 <!-- Relocations for j2cl-java-text - see https://github.com/mP1/j2cl-java-text/blob/master/src/main/java/.walkingkooka-j2cl-maven-plugin-shade.txt -->
                                 <relocation>
@@ -175,6 +177,7 @@
                                     <shadedPattern>walkingkooka.j2cl.java.util.timezone.generated</shadedPattern>
                                     <includes><include>java.util.generated.TimeZoneProvider*</include></includes>
                                 </relocation>
+<!--
                                 <relocation>
                                     <pattern>java.util.support</pattern>
                                     <shadedPattern>walkingkooka.j2cl.java.util.timezone.support</shadedPattern>
@@ -183,6 +186,7 @@
                                     <pattern>java.util.zonerulesreader</pattern>
                                     <shadedPattern>walkingkooka.j2cl.java.util.timezone.zonerulesreader</shadedPattern>
                                 </relocation>
+-->
 
                                 <!-- Relocations for j2cl-java-util-Currency - see https://github.com/mP1/j2cl-java-util-Currency/blob/master/src/main/java/.walkingkooka-j2cl-maven-plugin-shade.txt -->
                                 <relocation>

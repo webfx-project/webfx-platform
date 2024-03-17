@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Description of the file.
+ * @suppress {checkTypes|uselessCode|missingProperties|suspiciousCode}
+ */
+
 /*!
  * XRegExp 3.2.0
  * <xregexp.com>

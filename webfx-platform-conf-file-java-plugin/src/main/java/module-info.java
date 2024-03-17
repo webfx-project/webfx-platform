@@ -3,7 +3,6 @@
 module webfx.platform.conf.file.java.plugin {
 
     // Direct dependencies modules
-    requires java.base;
     requires webfx.platform.async;
     requires webfx.platform.conf;
     requires webfx.platform.console;

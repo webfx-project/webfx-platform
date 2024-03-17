@@ -3,7 +3,6 @@
 module webfx.platform.blob.java {
 
     // Direct dependencies modules
-    requires java.base;
     requires webfx.platform.blob;
 
     // Exported packages

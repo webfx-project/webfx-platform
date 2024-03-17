@@ -7,7 +7,6 @@ module webfx.platform.audio.gluon {
 
     // Direct dependencies modules
     requires com.gluonhq.attach.audio;
-    requires java.base;
     requires webfx.platform.audio;
     requires webfx.platform.console;
     requires webfx.platform.uischeduler;

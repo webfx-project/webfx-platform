@@ -3,7 +3,6 @@
 module webfx.platform.substitution {
 
     // Direct dependencies modules
-    requires java.base;
     requires webfx.platform.util;
 
     // Exported packages

@@ -6,7 +6,6 @@
 module webfx.platform.fetch.java {
 
     // Direct dependencies modules
-    requires java.base;
     requires java.net.http;
     requires webfx.platform.async;
     requires webfx.platform.blob;

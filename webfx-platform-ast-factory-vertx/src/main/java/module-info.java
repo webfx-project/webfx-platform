@@ -4,7 +4,6 @@ module webfx.platform.ast.factory.vertx {
 
     // Direct dependencies modules
     requires io.vertx.core;
-    requires java.base;
     requires webfx.platform.ast;
     requires webfx.platform.ast.factory.generic;
 

@@ -6,7 +6,6 @@
 module webfx.platform.resource.java {
 
     // Direct dependencies modules
-    requires java.base;
     requires webfx.platform.resource;
 
     // Exported packages

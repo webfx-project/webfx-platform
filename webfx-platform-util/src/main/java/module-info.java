@@ -6,7 +6,6 @@
 module webfx.platform.util {
 
     // Direct dependencies modules
-    requires java.base;
     requires java.logging;
 
     // Exported packages
