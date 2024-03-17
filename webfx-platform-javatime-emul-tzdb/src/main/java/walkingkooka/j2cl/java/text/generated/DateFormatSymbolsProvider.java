@@ -19,21 +19,21 @@ package walkingkooka.j2cl.java.text.generated;
 
 public final class DateFormatSymbolsProvider {
 
-  public final static String ANNOTATION_PROCESSOR_LOCALES_FILTER = preventInlining("en-AU");
+  public final static String ANNOTATION_PROCESSOR_LOCALES_FILTER = preventInlining("en-US");
 
-  public final static String SELECTED_LOCALES = preventInlining("en-AU");
+  public final static String SELECTED_LOCALES = preventInlining("en-US");
 
-// locales=en-AU
-//   ampm=am, pm
+// locales=en-US
+//   ampm=AM, PM
 //   eras=BC, AD
 //   months=January, February, March, April, May, June, July, August, September, October, November, December, 
-//   shortMonths=Jan, Feb, Mar, Apr, May, June, July, Aug, Sept, Oct, Nov, Dec, 
+//   shortMonths=Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec, 
 //   shortWeekdays=Sun, Mon, Tue, Wed, Thu, Fri, Sat
 //   weekdays=Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday
 // 
 
 
-  public final static String DATA = preventInlining("1,1,en-AU,2,am,pm,2,BC,AD,13,January,February,March,April,May,June,July,August,September,October,November,December,,13,Jan,Feb,Mar,Apr,May,June,July,Aug,Sept,Oct,Nov,Dec,,7,Sun,Mon,Tue,Wed,Thu,Fri,Sat,7,Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday");
+  public final static String DATA = preventInlining("1,1,en-US,2,AM,PM,2,BC,AD,13,January,February,March,April,May,June,July,August,September,October,November,December,,13,Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec,,7,Sun,Mon,Tue,Wed,Thu,Fri,Sat,7,Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday");
 
   private static String preventInlining(final String string){
     return string;
