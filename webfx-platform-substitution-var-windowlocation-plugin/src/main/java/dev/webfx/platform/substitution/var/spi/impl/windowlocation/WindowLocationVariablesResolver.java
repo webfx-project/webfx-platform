@@ -30,7 +30,7 @@ public class WindowLocationVariablesResolver extends VariablesResolverBase {
                 value = WindowLocation.getOrigin();
                 break;
             case "WINDOW_LOCATION_SSL":
-                value = String.valueOf(WindowLocation.getProtocol().equalsIgnoreCase("https"));
+                value = String.valueOf("https".equalsIgnoreCase(WindowLocation.getProtocol()));
                 break;
         }
         return passVariableSearchResult(variableName, value, "window location");
