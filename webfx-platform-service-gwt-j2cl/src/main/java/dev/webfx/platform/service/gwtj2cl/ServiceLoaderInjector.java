@@ -1,4 +1,4 @@
-package dev.webfx.platform.j2cl;
+package dev.webfx.platform.service.gwtj2cl;
 
 import java.util.function.Function;
 import java.util.function.Supplier;

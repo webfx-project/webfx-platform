@@ -10,6 +10,7 @@
             <undetected-module>jsinterop-base</undetected-module>
             <undetected-module>elemental2-core</undetected-module>
         </used-by-source-modules>
+        <resource-module>webfx-platform-service-gwt-j2cl</resource-module>
     </dependencies>
 
 </project>

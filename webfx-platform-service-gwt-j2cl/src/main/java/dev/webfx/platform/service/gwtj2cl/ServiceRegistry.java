@@ -1,4 +1,4 @@
-package dev.webfx.platform.javabase.emul.j2cl;
+package dev.webfx.platform.service.gwtj2cl;
 
 import java.util.HashMap;
 import java.util.Map;
