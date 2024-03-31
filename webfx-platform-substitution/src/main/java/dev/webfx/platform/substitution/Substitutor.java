@@ -1,7 +1,7 @@
 package dev.webfx.platform.substitution;
 
 import dev.webfx.platform.substitution.spi.SubstitutorProvider;
-import dev.webfx.platform.util.serviceloader.SingleServiceProvider;
+import dev.webfx.platform.service.SingleServiceProvider;
 
 import java.util.ServiceLoader;
 

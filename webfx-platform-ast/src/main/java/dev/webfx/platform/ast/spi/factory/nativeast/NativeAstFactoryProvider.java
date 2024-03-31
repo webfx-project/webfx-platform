@@ -41,6 +41,18 @@ public interface NativeAstFactoryProvider extends AstFactoryProvider {
 
     AstArray nativeToAstArray(Object nativeArray);
 
+    default ReadOnlyAstObject nativeToReadOnlyAstObject(Object nativeObject) {
+        if (nativeObject instanceof ReadOnlyAstObject)
+            return (ReadOnlyAstObject) nativeObject;
+        return nativeToAstObject(nativeObject);
+    }
+
+    default ReadOnlyAstArray nativeToReadOnlyAstArray(Object nativeArray) {
+        if (nativeArray instanceof ReadOnlyAstArray)
+            return (ReadOnlyAstArray) nativeArray;
+        return nativeToAstArray(nativeArray);
+    }
+
     default AstType getNativeElementAstType(Object nativeElement) {
         if (nativeElement == null)
             return AstType.NULL;

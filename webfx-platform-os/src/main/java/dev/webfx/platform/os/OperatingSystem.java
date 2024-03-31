@@ -1,7 +1,7 @@
 package dev.webfx.platform.os;
 
 import dev.webfx.platform.os.spi.OperatingSystemProvider;
-import dev.webfx.platform.util.serviceloader.SingleServiceProvider;
+import dev.webfx.platform.service.SingleServiceProvider;
 
 import java.util.ServiceLoader;
 

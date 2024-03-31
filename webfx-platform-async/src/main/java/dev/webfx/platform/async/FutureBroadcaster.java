@@ -1,25 +1,24 @@
 package dev.webfx.platform.async;
 
-import dev.webfx.platform.util.function.Callable;
-
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.function.Supplier;
 
 /**
  * @author Bruno Salmon
  */
 public final class FutureBroadcaster<T> {
 
-    private final Callable<Future<T>> sourceProducer;
+    private final Supplier<Future<T>> sourceSpplier;
     private Future<T> source;
     private final Collection<Promise<T>> clients = new ArrayList<>();
 
-    public FutureBroadcaster(Callable<Future<T>> sourceProducer) {
-        this.sourceProducer = sourceProducer;
+    public FutureBroadcaster(Supplier<Future<T>> sourceSpplier) {
+        this.sourceSpplier = sourceSpplier;
     }
 
     public FutureBroadcaster(Future<T> source) {
-        sourceProducer = null;
+        sourceSpplier = null;
         armSource(source);
     }
 
@@ -33,7 +32,7 @@ public final class FutureBroadcaster<T> {
             for (Promise<T> destination : clients)
                 destination.handle(source);
             clients.clear();
-            if (sourceProducer != null)
+            if (sourceSpplier != null)
                 source = null;
         }
     }
@@ -43,7 +42,7 @@ public final class FutureBroadcaster<T> {
             Promise<T> newClient = Promise.promise();
             clients.add(newClient);
             if (source == null)
-                armSource(sourceProducer.call());
+                armSource(sourceSpplier.get());
             if (source != null && source.isComplete())
                 onSourceCompleted();
             return newClient.future();

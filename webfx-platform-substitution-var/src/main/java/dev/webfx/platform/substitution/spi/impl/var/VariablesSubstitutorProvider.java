@@ -3,7 +3,7 @@ package dev.webfx.platform.substitution.spi.impl.var;
 import dev.webfx.platform.substitution.spi.SubstitutorProvider;
 import dev.webfx.platform.substitution.var.spi.VariablesResolver;
 import dev.webfx.platform.substitution.var.spi.impl.SkipRepeatLogger;
-import dev.webfx.platform.util.serviceloader.MultipleServiceProviders;
+import dev.webfx.platform.service.MultipleServiceProviders;
 
 import java.util.Optional;
 import java.util.ServiceLoader;

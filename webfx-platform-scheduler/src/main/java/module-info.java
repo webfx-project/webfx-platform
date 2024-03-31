@@ -13,6 +13,7 @@ module webfx.platform.scheduler {
 
     // Direct dependencies modules
     requires webfx.platform.console;
+    requires webfx.platform.service;
     requires webfx.platform.util;
 
     // Exported packages

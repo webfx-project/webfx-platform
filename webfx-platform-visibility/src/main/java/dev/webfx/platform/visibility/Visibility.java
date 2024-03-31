@@ -1,7 +1,7 @@
 package dev.webfx.platform.visibility;
 
 import dev.webfx.platform.visibility.spi.VisibilityProvider;
-import dev.webfx.platform.util.serviceloader.SingleServiceProvider;
+import dev.webfx.platform.service.SingleServiceProvider;
 
 import java.util.ServiceLoader;
 

@@ -1,7 +1,7 @@
 package dev.webfx.platform.shutdown;
 
 import dev.webfx.platform.shutdown.spi.ShutdownProvider;
-import dev.webfx.platform.util.serviceloader.SingleServiceProvider;
+import dev.webfx.platform.service.SingleServiceProvider;
 
 import java.util.ServiceLoader;
 

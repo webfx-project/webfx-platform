@@ -7,7 +7,7 @@ import dev.webfx.platform.ast.spi.parser.AstParserProvider;
 import dev.webfx.platform.ast.spi.parser.impl.properties.PropertiesAstParserProvider;
 import dev.webfx.platform.util.Arrays;
 import dev.webfx.platform.util.Strings;
-import dev.webfx.platform.util.serviceloader.SingleServiceProvider;
+import dev.webfx.platform.service.SingleServiceProvider;
 
 import java.util.*;
 

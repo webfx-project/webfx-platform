@@ -6,7 +6,7 @@
 module webfx.platform.useragent {
 
     // Direct dependencies modules
-    requires webfx.platform.util;
+    requires webfx.platform.service;
 
     // Exported packages
     exports dev.webfx.platform.useragent;

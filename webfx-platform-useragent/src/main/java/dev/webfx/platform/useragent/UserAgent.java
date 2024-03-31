@@ -1,7 +1,7 @@
 package dev.webfx.platform.useragent;
 
 import dev.webfx.platform.useragent.spi.UserAgentProvider;
-import dev.webfx.platform.util.serviceloader.SingleServiceProvider;
+import dev.webfx.platform.service.SingleServiceProvider;
 
 import java.util.ServiceLoader;
 

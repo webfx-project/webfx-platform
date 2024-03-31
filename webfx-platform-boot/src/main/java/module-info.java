@@ -16,6 +16,7 @@ module webfx.platform.boot {
     // Direct dependencies modules
     requires webfx.platform.console;
     requires webfx.platform.meta;
+    requires webfx.platform.service;
     requires webfx.platform.shutdown;
     requires webfx.platform.util;
 

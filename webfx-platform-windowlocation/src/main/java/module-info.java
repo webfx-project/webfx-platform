@@ -6,6 +6,7 @@
 module webfx.platform.windowlocation {
 
     // Direct dependencies modules
+    requires webfx.platform.service;
     requires webfx.platform.util;
 
     // Exported packages

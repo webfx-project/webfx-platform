@@ -112,8 +112,6 @@
         <module>webfx-platform-blob-gwt-j2cl</module>
         <module>webfx-platform-blob-java</module>
         <module>webfx-platform-boot</module>
-        <module>webfx-platform-boot-gwt</module>
-        <module>webfx-platform-boot-j2cl</module>
         <module>webfx-platform-boot-java</module>
         <module>webfx-platform-boot-vertx</module>
         <module>webfx-platform-browser</module>
@@ -153,6 +151,8 @@
         <module>webfx-platform-scheduler</module>
         <module>webfx-platform-scheduler-java</module>
         <module>webfx-platform-scheduler-vertx</module>
+        <module>webfx-platform-service</module>
+        <module>webfx-platform-service-gwt-j2cl</module>
         <module>webfx-platform-shutdown</module>
         <module>webfx-platform-shutdown-gluon</module>
         <module>webfx-platform-shutdown-gwt-j2cl</module>

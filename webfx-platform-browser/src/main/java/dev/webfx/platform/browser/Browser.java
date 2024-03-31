@@ -1,7 +1,7 @@
 package dev.webfx.platform.browser;
 
 import dev.webfx.platform.browser.spi.BrowserProvider;
-import dev.webfx.platform.util.serviceloader.SingleServiceProvider;
+import dev.webfx.platform.service.SingleServiceProvider;
 
 import java.util.ServiceLoader;
 

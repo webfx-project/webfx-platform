@@ -7,7 +7,7 @@ import dev.webfx.platform.async.Promise;
 import dev.webfx.platform.conf.impl.ConfigMerger;
 import dev.webfx.platform.conf.spi.ConfigLoaderProvider;
 import dev.webfx.platform.util.Arrays;
-import dev.webfx.platform.util.serviceloader.MultipleServiceProviders;
+import dev.webfx.platform.service.MultipleServiceProviders;
 
 import java.util.List;
 import java.util.ServiceLoader;

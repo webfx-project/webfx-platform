@@ -1,7 +1,7 @@
 package dev.webfx.platform.resource;
 
 import dev.webfx.platform.resource.spi.ResourceProvider;
-import dev.webfx.platform.util.serviceloader.SingleServiceProvider;
+import dev.webfx.platform.service.SingleServiceProvider;
 
 import java.util.ServiceLoader;
 import java.util.function.Consumer;

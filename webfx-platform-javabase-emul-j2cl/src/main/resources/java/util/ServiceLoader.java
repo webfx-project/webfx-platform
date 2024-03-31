@@ -1,12 +1,9 @@
 // File managed by WebFX (DO NOT EDIT MANUALLY)
 package java.util;
 
-import dev.webfx.platform.javabase.emul.j2cl.ServiceRegistry;
+import dev.webfx.platform.service.gwtj2cl.ServiceRegistry;
 
-import java.util.function.Function;
 import java.util.function.Supplier;
-import java.util.Iterator;
-import java.util.logging.Logger;
 
 public final class ServiceLoader<S> implements Iterable<S> {
 

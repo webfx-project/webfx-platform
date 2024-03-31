@@ -70,11 +70,13 @@ public class VertxAstFactoryProvider implements NativeAstFactoryProvider {
 
     @Override
     public AstArray nativeToAstArray(Object nativeArray) {
+        if (nativeArray instanceof AstArray)
+            return (AstArray) nativeArray;
         if (nativeArray instanceof JsonArray)
             return new VertxAstArray((JsonArray) nativeArray);
         if (nativeArray instanceof List)
             return new VertxAstArray((List) nativeArray);
-        return (AstArray) nativeArray;
+        return (AstArray) nativeArray; // will throw a ClassCast exception
     }
 
 }

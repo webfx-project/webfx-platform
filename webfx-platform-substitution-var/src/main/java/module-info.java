@@ -4,8 +4,8 @@ module webfx.platform.substitution.var {
 
     // Direct dependencies modules
     requires webfx.platform.console;
+    requires webfx.platform.service;
     requires webfx.platform.substitution;
-    requires webfx.platform.util;
 
     // Exported packages
     exports dev.webfx.platform.substitution.spi.impl.var;
