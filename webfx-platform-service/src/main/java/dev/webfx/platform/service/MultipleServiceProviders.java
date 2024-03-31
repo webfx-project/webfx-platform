@@ -1,4 +1,4 @@
-package dev.webfx.platform.util.serviceloader;
+package dev.webfx.platform.service;
 
 import dev.webfx.platform.util.collection.Collections;
 
@@ -31,6 +31,7 @@ import java.util.function.Supplier;
 public final class MultipleServiceProviders {
 
     private final static Map<Class<?>, List<?>> PROVIDERS_MAP = new HashMap<>();
+
     public static <S> List<S> getProviders(Class<S> serviceClass, Supplier<ServiceLoader<S>> serviceLoaderSupplier) {
         List<S> providers = (List<S>) PROVIDERS_MAP.get(serviceClass);
         if (providers == null)

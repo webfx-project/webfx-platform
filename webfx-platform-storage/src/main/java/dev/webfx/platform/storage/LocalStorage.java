@@ -1,7 +1,7 @@
 package dev.webfx.platform.storage;
 
 import dev.webfx.platform.storage.spi.LocalStorageProvider;
-import dev.webfx.platform.util.serviceloader.SingleServiceProvider;
+import dev.webfx.platform.service.SingleServiceProvider;
 
 import java.util.Iterator;
 import java.util.ServiceLoader;

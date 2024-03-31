@@ -11,7 +11,7 @@ module webfx.platform.fetch {
     // Direct dependencies modules
     requires transitive webfx.platform.async;
     requires webfx.platform.blob;
-    requires webfx.platform.util;
+    requires webfx.platform.service;
 
     // Exported packages
     exports dev.webfx.platform.fetch;

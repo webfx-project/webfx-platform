@@ -12,6 +12,7 @@ module webfx.platform.uischeduler {
 
     // Direct dependencies modules
     requires transitive webfx.platform.scheduler;
+    requires webfx.platform.service;
     requires webfx.platform.util;
 
     // Exported packages

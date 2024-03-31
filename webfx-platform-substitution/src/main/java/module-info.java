@@ -3,7 +3,7 @@
 module webfx.platform.substitution {
 
     // Direct dependencies modules
-    requires webfx.platform.util;
+    requires webfx.platform.service;
 
     // Exported packages
     exports dev.webfx.platform.substitution;

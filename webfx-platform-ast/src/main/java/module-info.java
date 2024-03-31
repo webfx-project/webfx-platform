@@ -3,6 +3,7 @@
 module webfx.platform.ast {
 
     // Direct dependencies modules
+    requires webfx.platform.service;
     requires webfx.platform.util;
     requires webfx.platform.util.time;
 

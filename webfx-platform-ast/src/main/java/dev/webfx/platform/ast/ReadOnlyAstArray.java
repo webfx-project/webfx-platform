@@ -114,7 +114,7 @@ public interface ReadOnlyAstArray extends ReadOnlyAstNode, Iterable<Object> {
 
     @Override
     default Iterator<Object> iterator() {
-        return new Iterator<>() {
+        return new Iterator<Object/*J2CL*/>() {
             private int index = 0;
 
             @Override

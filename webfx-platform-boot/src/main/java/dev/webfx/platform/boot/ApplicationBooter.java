@@ -2,7 +2,7 @@ package dev.webfx.platform.boot;
 
 import dev.webfx.platform.boot.spi.ApplicationBooterProvider;
 import dev.webfx.platform.boot.spi.ApplicationJob;
-import dev.webfx.platform.util.serviceloader.SingleServiceProvider;
+import dev.webfx.platform.service.SingleServiceProvider;
 
 import java.util.ServiceLoader;
 

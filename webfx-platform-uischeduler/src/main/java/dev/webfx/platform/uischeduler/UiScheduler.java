@@ -4,7 +4,7 @@ import dev.webfx.platform.uischeduler.spi.UiSchedulerProvider;
 import dev.webfx.platform.scheduler.Scheduled;
 import dev.webfx.platform.scheduler.Scheduler;
 import dev.webfx.platform.scheduler.spi.SchedulerProvider;
-import dev.webfx.platform.util.serviceloader.SingleServiceProvider;
+import dev.webfx.platform.service.SingleServiceProvider;
 
 import java.util.ServiceLoader;
 import java.util.function.Consumer;

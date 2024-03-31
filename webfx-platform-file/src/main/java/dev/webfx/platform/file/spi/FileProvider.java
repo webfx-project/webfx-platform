@@ -2,7 +2,7 @@ package dev.webfx.platform.file.spi;
 
 import dev.webfx.platform.file.File;
 import dev.webfx.platform.file.FileReader;
-import dev.webfx.platform.util.serviceloader.SingleServiceProvider;
+import dev.webfx.platform.service.SingleServiceProvider;
 
 import java.util.List;
 import java.util.ServiceLoader;

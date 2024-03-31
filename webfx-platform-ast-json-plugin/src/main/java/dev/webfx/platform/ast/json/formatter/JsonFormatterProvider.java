@@ -101,8 +101,8 @@ public class JsonFormatterProvider implements AstFormatterProvider {
         if (AST.NATIVE_FACTORY != null) {
             switch (AST.NATIVE_FACTORY.getNativeElementAstType(element)) {
                 case NULL:    return sb.append("null");
-                case OBJECT:  return appendJsonObject(AST.NATIVE_FACTORY.nativeToAstObject(element), sb);
-                case ARRAY:   return appendJsonArray(AST.NATIVE_FACTORY.nativeToAstArray(element), sb);
+                case OBJECT:  return appendJsonObject(AST.NATIVE_FACTORY.nativeToReadOnlyAstObject(element), sb);
+                case ARRAY:   return appendJsonArray(AST.NATIVE_FACTORY.nativeToReadOnlyAstArray(element), sb);
                 case NUMBER:  return sb.append(numberToString(AST.NATIVE_FACTORY.nativeScalarToJavaScalar(element)));
                 case BOOLEAN: return sb.append((Boolean) AST.NATIVE_FACTORY.nativeScalarToJavaScalar(element));
                 case STRING:  return appendQuoted(AST.NATIVE_FACTORY.nativeScalarToJavaScalar(element), sb);

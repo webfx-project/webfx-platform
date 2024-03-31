@@ -2,7 +2,7 @@ package dev.webfx.platform.fetch;
 
 import dev.webfx.platform.async.Future;
 import dev.webfx.platform.fetch.spi.FetchProvider;
-import dev.webfx.platform.util.serviceloader.SingleServiceProvider;
+import dev.webfx.platform.service.SingleServiceProvider;
 
 import java.util.ServiceLoader;
 

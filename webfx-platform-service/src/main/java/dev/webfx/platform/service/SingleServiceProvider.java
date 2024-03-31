@@ -1,4 +1,4 @@
-package dev.webfx.platform.util.serviceloader;
+package dev.webfx.platform.service;
 
 import java.util.*;
 import java.util.function.Function;

@@ -1,7 +1,7 @@
 package dev.webfx.platform.arch;
 
 import dev.webfx.platform.arch.spi.ArchProvider;
-import dev.webfx.platform.util.serviceloader.SingleServiceProvider;
+import dev.webfx.platform.service.SingleServiceProvider;
 
 import java.util.ServiceLoader;
 

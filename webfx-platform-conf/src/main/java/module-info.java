@@ -6,6 +6,7 @@ module webfx.platform.conf {
     requires webfx.platform.ast;
     requires webfx.platform.async;
     requires webfx.platform.resource;
+    requires webfx.platform.service;
     requires webfx.platform.substitution;
     requires webfx.platform.util;
 
