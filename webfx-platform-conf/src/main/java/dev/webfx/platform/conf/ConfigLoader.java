@@ -23,7 +23,7 @@ public class ConfigLoader {
     }
 
     public static void onConfigLoadedOrChanged(Consumer<Config> configConsumer) {
-        onConfigLoaded(configConsumer, false);
+        onConfigLoaded(configConsumer, true);
     }
 
     public static void onConfigLoaded(Consumer<Config> configConsumer, boolean onChangesToo) {
