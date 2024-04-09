@@ -13,6 +13,7 @@ module webfx.platform.fetch.java {
     requires webfx.platform.fetch;
     requires webfx.platform.scheduler;
     requires webfx.platform.scheduler.java;
+    requires webfx.platform.util;
 
     // Exported packages
     exports dev.webfx.platform.fetch.spi.impl.java;

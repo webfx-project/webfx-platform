@@ -7,6 +7,7 @@
 
     <dependencies>
         <used-by-source-modules>
+            <module transitive="true">webfx-platform-ast</module>
             <module transitive="true">webfx-platform-async</module>
         </used-by-source-modules>
     </dependencies>

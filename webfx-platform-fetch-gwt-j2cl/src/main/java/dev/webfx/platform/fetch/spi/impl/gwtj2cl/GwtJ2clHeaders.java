@@ -1,6 +1,7 @@
 package dev.webfx.platform.fetch.spi.impl.gwtj2cl;
 
 import dev.webfx.platform.fetch.Headers;
+import elemental2.dom.DomGlobal;
 
 import java.util.Iterator;
 
@@ -47,6 +48,7 @@ final class GwtJ2clHeaders implements Headers {
 
     @Override
     public Headers set(String name, String value) {
+        DomGlobal.console.log("Headers." + name + " = " + value);
         jsHeaders.set(name, value);
         return this;
     }
