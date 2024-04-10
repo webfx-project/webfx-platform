@@ -32,7 +32,7 @@ public class PropertiesAstParserProvider implements AstParserProvider {
     @Override
     public ReadOnlyAstObject parseObject(String text) {
         Properties properties = parseProperties(text);
-        return AST.createReadOnlyAstObjectFromMap(properties, true, true);
+        return AST.mapToReadOnlyAstObject(properties, true, true);
     }
 
     @Override

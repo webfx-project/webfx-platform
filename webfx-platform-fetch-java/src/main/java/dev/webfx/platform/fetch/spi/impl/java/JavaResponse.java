@@ -15,7 +15,7 @@ import java.net.http.HttpResponse;
 /**
  * @author Bruno Salmon
  */
-public class JavaResponse implements Response {
+final class JavaResponse implements Response {
 
     private final HttpResponse<?> javaResponse;
     private Headers headers;

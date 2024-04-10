@@ -19,7 +19,7 @@ public final class ReadOnlyMergedAstObject implements ReadOnlyAstObject {
         this.deepMerge = deepMerge;
         this.originalAstObjects = astObjectsToMerge;
         Arrays.stream(astObjectsToMerge).forEach(astObjects -> astObjects.keys().forEach(keysList::add));
-        this.keys = AST.createReadOnlyAstArrayFromList(keysList);
+        this.keys = AST.listToReadOnlyAstArray(keysList);
     }
 
     @Override
