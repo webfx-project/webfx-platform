@@ -42,7 +42,7 @@ public abstract class MapBasedAstObject implements AstObject {
 
     @Override
     public ReadOnlyAstArray keys() {
-        return AST.createReadOnlyAstArrayFromList(new ArrayList(getMap().keySet()));
+        return AST.listToReadOnlyAstArray(new ArrayList(getMap().keySet()));
     }
 
     public Object getNativeElement(String key) {

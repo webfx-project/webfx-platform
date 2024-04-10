@@ -178,30 +178,20 @@ public final class AST {
         return astObject;
     }
 
-    public static ReadOnlyAstObject createReadOnlyAstObjectFromMap(Map<Object, Object> map, boolean dotKeys, boolean convertMapsToObjects) {
-        Map<Object, Object> finalMap;
-        if (!dotKeys)
-            finalMap = map;
-        else {
-            finalMap = interpretDotKeys(map);
-        }
+    public static ReadOnlyAstObject createReadOnlySingleKeyAstObject(String singleKey, Object singleValue) {
         return new ReadOnlyAstObject() {
             private ReadOnlyAstArray keysArray;
             @Override
             public ReadOnlyAstArray keys() {
                 if (keysArray == null) {
-                    keysArray = AST.createReadOnlyAstArrayFromList(new ArrayList<>(finalMap.keySet()));
+                    keysArray = AST.objectsToReadOnlyAstArray(singleKey);
                 }
                 return keysArray;
             }
 
             @Override
             public <T> T get(String key) {
-                Object value = finalMap.get(key);
-                if (convertMapsToObjects && value instanceof Map) {
-                    finalMap.put(key, value = createReadOnlyAstObjectFromMap((Map<Object, Object>) value, false, true));
-                }
-                return (T) value;
+                return key.equals(singleKey) ? (T) singleValue : null;
             }
         };
     }
@@ -225,7 +215,7 @@ public final class AST {
                 objectMap.put(valueKey, entry.getValue());
             }
         }
-        // Second pass: moving back ditKeysMap objects to finalMap after recursive interpretation (necessary when the
+        // Second pass: moving back dotKeysMap objects to finalMap after recursive interpretation (necessary when the
         // map contains keys with several dots)
         if (dotKeysMap != null) {
             for (Map.Entry<String, Map<Object, Object>> entry : dotKeysMap.entrySet()) {
@@ -235,25 +225,60 @@ public final class AST {
         return finalMap;
     }
 
-    public static ReadOnlyAstObject createReadOnlySingleKeyAstObject(String singleKey, Object singleValue) {
+    public static ReadOnlyAstObject mapToReadOnlyAstObject(Map<Object, Object> map, boolean dotKeys, boolean convertMapsToObjects) {
+        Map<Object, Object> finalMap;
+        if (!dotKeys)
+            finalMap = map;
+        else {
+            finalMap = interpretDotKeys(map);
+        }
         return new ReadOnlyAstObject() {
             private ReadOnlyAstArray keysArray;
             @Override
             public ReadOnlyAstArray keys() {
                 if (keysArray == null) {
-                    keysArray = AST.createReadOnlyAstArrayFromObjects(singleKey);
+                    keysArray = AST.listToReadOnlyAstArray(new ArrayList<>(finalMap.keySet()));
                 }
                 return keysArray;
             }
 
             @Override
             public <T> T get(String key) {
-                return key.equals(singleKey) ? (T) singleValue : null;
+                Object value = finalMap.get(key);
+                if (convertMapsToObjects && value instanceof Map) {
+                    finalMap.put(key, value = mapToReadOnlyAstObject((Map<Object, Object>) value, false, true));
+                }
+                return (T) value;
             }
         };
     }
 
-    public static ReadOnlyAstArray createReadOnlyAstArrayFromList(List<?> keys) {
+    public static Map astObjectToMap(ReadOnlyAstObject o) {
+        Map map = new HashMap();
+        for (Object key : o.keys()) {
+            Object value = o.get((String) key);
+            map.put(key, astValueToMapList(value));
+        }
+        return map;
+    }
+
+    private static Object astValueToMapList(Object value) {
+        if (isObject(value))
+            return astObjectToMap((ReadOnlyAstObject) value);
+        if (isArray(value))
+            return astArrayToList((ReadOnlyAstArray) value);
+        return value;
+    }
+
+    public static List astArrayToList(ReadOnlyAstArray a) {
+        List list = new ArrayList();
+        for (Object value : a) {
+            list.add(astValueToMapList(value));
+        }
+        return list;
+    }
+
+    public static ReadOnlyAstArray listToReadOnlyAstArray(List<?> keys) {
         return new ReadOnlyAstArray() {
             @Override
             public int size() {
@@ -272,7 +297,7 @@ public final class AST {
         };
     }
 
-    public static ReadOnlyAstArray createReadOnlyAstArrayFromObjects(Object... objects) {
+    public static ReadOnlyAstArray objectsToReadOnlyAstArray(Object... objects) {
         return new ReadOnlyAstArray() {
             @Override
             public int size() {
