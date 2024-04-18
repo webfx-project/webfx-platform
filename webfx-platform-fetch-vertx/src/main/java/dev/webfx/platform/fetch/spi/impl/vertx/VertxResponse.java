@@ -2,41 +2,43 @@ package dev.webfx.platform.fetch.spi.impl.vertx;
 
 import dev.webfx.platform.async.Future;
 import dev.webfx.platform.async.Promise;
+import dev.webfx.platform.blob.Blob;
 import dev.webfx.platform.fetch.Headers;
 import dev.webfx.platform.fetch.Response;
-import dev.webfx.platform.blob.Blob;
 import dev.webfx.platform.streams.ReadableStream;
-import io.vertx.core.http.HttpClientResponse;
+import io.vertx.ext.web.client.HttpResponse;
 
 /**
  * @author Bruno Salmon
  */
 final class VertxResponse implements Response {
 
-    private final HttpClientResponse httpClientResponse;
+    private final String url;
+    private final HttpResponse httpResponse;
 
-    public VertxResponse(HttpClientResponse httpClientResponse) {
-        this.httpClientResponse = httpClientResponse;
+    public VertxResponse(String url, HttpResponse httpResponse) {
+        this.url = url;
+        this.httpResponse = httpResponse;
     }
 
     @Override
     public int status() {
-        return httpClientResponse.statusCode();
+        return httpResponse.statusCode();
     }
 
     @Override
     public String statusText() {
-        return httpClientResponse.statusMessage();
+        return httpResponse.statusMessage();
     }
 
     @Override
     public String url() {
-        return httpClientResponse.request().absoluteURI();
+        return url;
     }
 
     @Override
     public Headers headers() {
-        return new VertxHeaders(httpClientResponse.headers());
+        return new VertxHeaders(httpResponse.headers());
     }
 
     @Override
@@ -46,11 +48,10 @@ final class VertxResponse implements Response {
 
     @Override
     public Future<String> text() {
-        Promise<String> promise = Promise.promise();
-        httpClientResponse.body()
-                .onFailure(promise::fail)
-                .onSuccess(buffer -> promise.complete(buffer.toString()));
-        return promise.future();
+        // Note: as we use WebClient (not HttpClient), HttpResponse has already the full content in memory.
+        // Vert.x note: Keep in mind that using this HttpResponse impose to fully buffer the response body and should be
+        // used for payload that can fit in memory.
+        return Future.succeededFuture(httpResponse.bodyAsString());
     }
 
     @Override

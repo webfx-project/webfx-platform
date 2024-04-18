@@ -25,6 +25,14 @@ public class Fetch {
         return getProvider().fetch(url, options);
     }
 
+    public static Future<String> fetchText(String url) {
+        return fetch(url).compose(Response::text);
+    }
+
+    public static Future<String> fetchText(String url, FetchOptions options) {
+        return fetch(url, options).compose(Response::text);
+    }
+
     public static Headers createHeaders() {
         return getProvider().createHeaders();
     }

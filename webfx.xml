@@ -291,8 +291,10 @@
                 <artifactId>vertx-core</artifactId>
                 <exported-packages>
                     <package>io.vertx.core</package>
+                    <package>io.vertx.core.buffer</package>
                     <package>io.vertx.core.eventbus</package>
                     <package>io.vertx.core.eventbus.impl</package>
+                    <package>io.vertx.core.file</package>
                     <package>io.vertx.core.file.impl</package>
                     <package>io.vertx.core.http</package>
                     <package>io.vertx.core.http.impl.headers</package>
@@ -319,6 +321,13 @@
                 <artifactId>vertx-web-client</artifactId>
                 <exported-packages>
                     <package>io.vertx.ext.web.client</package>
+                </exported-packages>
+            </library>
+
+            <library name="io-vertx-web-common">
+                <artifactId>vertx-web-common</artifactId>
+                <exported-packages>
+                    <package>io.vertx.ext.web.multipart</package>
                 </exported-packages>
             </library>
 
