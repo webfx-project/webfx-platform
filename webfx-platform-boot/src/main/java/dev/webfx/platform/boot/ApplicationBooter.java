@@ -15,6 +15,10 @@ public final class ApplicationBooter {
         return SingleServiceProvider.getProvider(ApplicationBooterProvider.class, () -> ServiceLoader.load(ApplicationBooterProvider.class));
     }
 
+    public static void initApplicationJob(ApplicationJob applicationJob) {
+        getProvider().initApplicationJob(applicationJob);
+    }
+
     public static void startApplicationJob(ApplicationJob applicationJob) {
         getProvider().startApplicationJob(applicationJob);
     }

@@ -16,7 +16,8 @@
     </exported-packages>
 
     <providers>
-        <provider interface="dev.webfx.platform.boot.spi.ApplicationModuleBooter">dev.webfx.platform.boot.spi.impl.ApplicationJobsBooter</provider>
+        <provider interface="dev.webfx.platform.boot.spi.ApplicationModuleBooter">dev.webfx.platform.boot.spi.impl.ApplicationJobsInitializer</provider>
+        <provider interface="dev.webfx.platform.boot.spi.ApplicationModuleBooter">dev.webfx.platform.boot.spi.impl.ApplicationJobsStarter</provider>
     </providers>
 
     <dependencies>

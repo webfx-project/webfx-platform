@@ -31,6 +31,6 @@ module webfx.platform.boot {
     uses dev.webfx.platform.boot.spi.ApplicationModuleBooter;
 
     // Provided services
-    provides dev.webfx.platform.boot.spi.ApplicationModuleBooter with dev.webfx.platform.boot.spi.impl.ApplicationJobsBooter;
+    provides dev.webfx.platform.boot.spi.ApplicationModuleBooter with dev.webfx.platform.boot.spi.impl.ApplicationJobsInitializer, dev.webfx.platform.boot.spi.impl.ApplicationJobsStarter;
 
 }
