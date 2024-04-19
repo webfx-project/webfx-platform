@@ -84,7 +84,14 @@ public final class AST {
     }
 
     private static AstParserProvider getParserProvider(String format) {
-        return PARSER_PROVIDERS.get(format);
+        AstParserProvider parserProvider = PARSER_PROVIDERS.get(format);
+        if (parserProvider == null) {
+            String error = "No AST parser registered for format: " + format;
+            if ("json".equals(format) || "yaml".equals(format))
+                error += ". Please add <plugin-module>webfx-platform-ast-" + format + "-plugin</plugin-module> under <dependencies/> in your webfx.xml";
+            throw new IllegalArgumentException(error);
+        }
+        return parserProvider;
     }
 
     public static ReadOnlyAstObject parseObject(String text, String format) {
