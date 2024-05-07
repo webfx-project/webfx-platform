@@ -280,6 +280,13 @@ public final class Numbers {
         return value;
     }
 
+    public static Number toShortestNumber(Object value) {
+        if (value == null)
+            return null;
+        if (value instanceof Number)
+            return toShortestNumber((Number) value);
+        return parseShortestNumber(value.toString());
+    }
 
     public static double doubleValue(Object value) {
         Double number = toDouble(value);
