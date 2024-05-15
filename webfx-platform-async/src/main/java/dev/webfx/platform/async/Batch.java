@@ -19,6 +19,10 @@ public final class Batch<A> {
         return array;
     }
 
+    public A get(int index) {
+        return array[index];
+    }
+
     public <R> Future<Batch<R>> executeParallel(IntFunction<R[]> arrayGenerator, AsyncFunction<A, R> asyncFunction) {
         return executeParallel(Promise.promise(), arrayGenerator, asyncFunction);
     }
