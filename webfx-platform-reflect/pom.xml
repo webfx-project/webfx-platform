@@ -13,4 +13,14 @@
 
     <artifactId>webfx-platform-reflect</artifactId>
 
+    <dependencies>
+
+        <dependency>
+            <groupId>dev.webfx</groupId>
+            <artifactId>webfx-platform-console</artifactId>
+            <version>0.1.0-SNAPSHOT</version>
+        </dependency>
+
+    </dependencies>
+
 </project>
