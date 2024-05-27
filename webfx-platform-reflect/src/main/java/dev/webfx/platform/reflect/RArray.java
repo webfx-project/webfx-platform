@@ -1,5 +1,7 @@
 package dev.webfx.platform.reflect;
 
+import dev.webfx.platform.console.Console;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiFunction;
@@ -28,6 +30,20 @@ public class RArray {
         Function<Integer, Object> arrayConstructor = ARRAY_CONSTRUCTORS.get(componentType);
         if (arrayConstructor != null)
             return arrayConstructor.apply(length);
+        Console.log("⚠️ WARNING: No array constructor found for " + componentType + ", using new Object[] instead");
         return new Object[length];
+    }
+
+    static {
+        // Registering array constructors for primitive types for GWT/J2CL (not necessary for Java but doesn't matter)
+        register(Object.class,  Object[]::new);
+        register(String.class,  String[]::new);
+        register(Boolean.class, Boolean[]::new);
+        register(Integer.class, Integer[]::new);
+        register(Long.class,    Long[]::new);
+        register(Short.class,   Short[]::new);
+        register(Byte.class,    Byte[]::new);
+        register(Double.class,  Double[]::new);
+        register(Float.class,   Float[]::new);
     }
 }

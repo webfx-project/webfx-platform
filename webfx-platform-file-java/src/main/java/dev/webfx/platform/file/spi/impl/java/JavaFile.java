@@ -14,6 +14,10 @@ public final class JavaFile extends JavaPathBasedBlob implements File {
         super(javaPlatformFile);
     }
 
+    public JavaFile(Object platformBlob, String mimeType) {
+        super(platformBlob, mimeType);
+    }
+
     @Override
     public java.io.File getPlatformBlob() {
         return (java.io.File) super.getPlatformBlob();

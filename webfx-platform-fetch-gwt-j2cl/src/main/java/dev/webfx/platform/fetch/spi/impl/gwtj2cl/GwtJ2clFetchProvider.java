@@ -2,10 +2,11 @@ package dev.webfx.platform.fetch.spi.impl.gwtj2cl;
 
 import dev.webfx.platform.async.Future;
 import dev.webfx.platform.blob.Blob;
+import dev.webfx.platform.blob.NamedBlob;
 import dev.webfx.platform.blob.spi.impl.gwtj2cl.GwtJ2clBlob;
-import dev.webfx.platform.console.Console;
 import dev.webfx.platform.fetch.*;
 import dev.webfx.platform.fetch.spi.FetchProvider;
+import dev.webfx.platform.util.Strings;
 import elemental2.dom.DomGlobal;
 import elemental2.dom.RequestInit;
 
@@ -58,14 +59,12 @@ public class GwtJ2clFetchProvider implements FetchProvider {
                 filename = namedBlob.getName();
             }
 
-            if (value instanceof String) {
-                jsFormData.set(entry.getKey(), (String ) value);
-            } else if (value instanceof GwtJ2clBlob) {
+            if (value instanceof GwtJ2clBlob) {
                 GwtJ2clBlob gwtJ2clBlob = (GwtJ2clBlob) value;
                 Blob blob = (Blob) gwtJ2clBlob.getPlatformBlob();
                 jsFormData.set(entry.getKey(), elemental2.dom.FormData.SetValueUnionType.of(blob), filename);
             } else {
-                Console.log("Unknown form data type: " + value);
+                jsFormData.set(entry.getKey(), Strings.toString(value));
             }
         }
 

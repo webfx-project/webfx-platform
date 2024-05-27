@@ -1,19 +1,12 @@
 package dev.webfx.platform.boot.spi.impl;
 
 import dev.webfx.platform.boot.ApplicationBooter;
-import dev.webfx.platform.boot.spi.ApplicationJob;
 import dev.webfx.platform.boot.spi.ApplicationModuleBooter;
-import dev.webfx.platform.util.collection.Collections;
-
-import java.util.List;
-import java.util.ServiceLoader;
 
 /**
  * @author Bruno Salmon
  */
-public class ApplicationJobsBooter implements ApplicationModuleBooter {
-
-    private List<ApplicationJob> providedJobs; // Not initialized here as it's not the good time (calling lower module initializer before)
+public class ApplicationJobsStarter implements ApplicationModuleBooter {
 
     @Override
     public String getModuleName() {
@@ -27,9 +20,7 @@ public class ApplicationJobsBooter implements ApplicationModuleBooter {
 
     @Override
     public void bootModule() {
-        providedJobs = Collections.listOf(ServiceLoader.load(ApplicationJob.class));
-        log(providedJobs.size() + " provided application jobs:");
-        providedJobs.forEach(job -> {
+        ApplicationJobsInitializer.PROVIDED_JOBS.forEach(job -> {
             log("- Starting " + job.getClass().getSimpleName());
             ApplicationBooter.startApplicationJob(job);
         });
@@ -37,7 +28,7 @@ public class ApplicationJobsBooter implements ApplicationModuleBooter {
 
     @Override
     public void exitModule() {
-        providedJobs.forEach(job -> {
+        ApplicationJobsInitializer.PROVIDED_JOBS.forEach(job -> {
             log("Stopping " + job.getClass().getSimpleName());
             ApplicationBooter.stopApplicationJob(job);
         });

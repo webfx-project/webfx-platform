@@ -17,7 +17,11 @@ public final class Json {
     private Json() {}
 
     public static ReadOnlyAstObject parseObjectSilently(String text) {
-        return parseObject(text);
+        try {
+            return parseObject(text);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public static ReadOnlyAstObject parseObject(String text) {
@@ -26,7 +30,11 @@ public final class Json {
 
 
     public static ReadOnlyAstArray parseArraySilently(String text) {
-        return parseArray(text);
+        try {
+            return parseArray(text);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public static ReadOnlyAstArray parseArray(String text) {
@@ -49,10 +57,7 @@ public final class Json {
         try {
             return (T) new JavaCupJsonParser(new JsonLexer(new StringReader(text))).parse().value;
         } catch (Throwable e) {
-            if (e instanceof RuntimeException)
-                throw (RuntimeException) e;
-            else
-                throw new RuntimeException(e);
+            throw new RuntimeException("Json parsing error: '" +  e.getMessage() + "' while parsing following text:\n" + text);
         }
     }
 

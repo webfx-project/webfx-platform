@@ -8,7 +8,7 @@ import dev.webfx.platform.ast.ReadOnlyAstObject;
 public final class RootConfig extends ConfigImpl {
 
     public RootConfig(ReadOnlyAstObject rootAstObject) {
-        super(rootAstObject);
+        super(rootAstObject, null);
     }
 
     @Override

@@ -360,7 +360,11 @@ public final class Collections {
                 if (lineFeeds)
                     sb.append('\n');
             }
-            sb.append(it.next());
+            Object value = it.next();
+            if (value instanceof Object[])
+                sb.append(Arrays.toString((Object[]) value));
+            else
+                sb.append(value);
         }
         if (brackets) {
             if (lineFeeds)

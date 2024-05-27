@@ -19,7 +19,13 @@ public final class JsonFetch {
     }
 
     public static Future<ReadOnlyAstObject> fetchJsonObject(String url, FetchOptions fetchOptions) {
-        return Fetch.fetch(url, fetchOptions).compose(Response::text).map(Json::parseObject);
+        return Fetch.fetchText(url, fetchOptions).compose(text -> {
+            try {
+                return Future.succeededFuture(Json.parseObject(text));
+            } catch (Exception e) {
+                return Future.failedFuture(e);
+            }
+        });
     }
 
     public static Future<ReadOnlyAstArray> fetchJsonArray(String url) {
@@ -27,7 +33,13 @@ public final class JsonFetch {
     }
 
     public static Future<ReadOnlyAstArray> fetchJsonArray(String url, FetchOptions fetchOptions) {
-        return Fetch.fetch(url, fetchOptions).compose(Response::text).map(Json::parseArray);
+        return Fetch.fetchText(url, fetchOptions).compose(text -> {
+            try {
+                return Future.succeededFuture(Json.parseArray(text));
+            } catch (Exception e) {
+                return Future.failedFuture(e);
+            }
+        });
     }
 
     public static Future<ReadOnlyAstNode> fetchJsonNode(String url) {
@@ -35,7 +47,13 @@ public final class JsonFetch {
     }
 
     public static Future<ReadOnlyAstNode> fetchJsonNode(String url, FetchOptions fetchOptions) {
-        return Fetch.fetch(url, fetchOptions).compose(Response::text).map(Json::parseNode);
+        return Fetch.fetchText(url, fetchOptions).compose(text -> {
+            try {
+                return Future.succeededFuture(Json.parseNode(text));
+            } catch (Exception e) {
+                return Future.failedFuture(e);
+            }
+        });
     }
 
 }

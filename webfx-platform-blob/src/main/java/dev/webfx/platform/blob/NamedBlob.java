@@ -1,6 +1,4 @@
-package dev.webfx.platform.fetch;
-
-import dev.webfx.platform.blob.Blob;
+package dev.webfx.platform.blob;
 
 /**
  * @author Bruno Salmon

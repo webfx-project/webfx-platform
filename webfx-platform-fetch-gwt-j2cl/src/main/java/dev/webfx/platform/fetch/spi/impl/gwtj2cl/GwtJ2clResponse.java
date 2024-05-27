@@ -1,10 +1,10 @@
 package dev.webfx.platform.fetch.spi.impl.gwtj2cl;
 
 import dev.webfx.platform.async.Future;
-import dev.webfx.platform.fetch.Headers;
-import dev.webfx.platform.fetch.Response;
 import dev.webfx.platform.blob.Blob;
 import dev.webfx.platform.blob.spi.impl.gwtj2cl.GwtJ2clBlob;
+import dev.webfx.platform.fetch.Headers;
+import dev.webfx.platform.fetch.Response;
 import dev.webfx.platform.streams.ReadableStream;
 import dev.webfx.platform.streams.spi.impl.gwtj2cl.GwtJ2clReadableStream;
 

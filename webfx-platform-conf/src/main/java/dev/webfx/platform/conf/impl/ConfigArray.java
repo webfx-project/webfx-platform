@@ -34,7 +34,7 @@ public class ConfigArray extends ReadOnlyAstArrayWrapper {
             if (value == null) {
                 value = super.getElement(index);
                 if (AST.isObject(value)) { // A key object will be wrapped into a child config
-                    ChildConfig childConfig = new ChildConfig(parentConfig.getRoot(), (ReadOnlyAstObject) value);
+                    ChildConfig childConfig = new ChildConfig(parentConfig, (ReadOnlyAstObject) value);
                     childConfigs[index] = childConfig;
                     value = childConfig;
                 } else if (AST.isArray(value)) { // An indexed array will be wrapped into a child array
@@ -43,7 +43,9 @@ public class ConfigArray extends ReadOnlyAstArrayWrapper {
                     value = configArray;
                 } else if (value instanceof String) {
                     // TODO: Should be substitution optional?
-                    value = Substitutor.substitute((String) value);
+                    try (ThreadLocalConfigContext context = ThreadLocalConfigContext.open(parentConfig)) {
+                        value = Substitutor.substitute((String) value);
+                    }
                 }
             }
         }

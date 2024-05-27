@@ -2,6 +2,7 @@ package dev.webfx.platform.fetch.spi.impl.java;
 
 import dev.webfx.platform.async.Future;
 import dev.webfx.platform.async.Promise;
+import dev.webfx.platform.blob.NamedBlob;
 import dev.webfx.platform.blob.spi.impl.java.JavaBlob;
 import dev.webfx.platform.fetch.*;
 import dev.webfx.platform.fetch.spi.FetchProvider;
@@ -18,6 +19,8 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Map;
+
+import static dev.webfx.platform.util.http.HttpHeaders.*;
 
 /**
  * @author Bruno Salmon
@@ -47,7 +50,7 @@ public final class JavaFetchProvider implements FetchProvider {
                     MultiPartBodyPublisher multiPartBodyPublisher = buildMultipartBody((FormData) body);
                     if (headers == null)
                         headers = createHeaders();
-                    headers.set(Headers.CONTENT_TYPE, Headers.multipartFormDataWithBoundary(multiPartBodyPublisher.getBoundary()));
+                    headers.set(CONTENT_TYPE, multipartFormDataWithBoundary(multiPartBodyPublisher.getBoundary()));
                     bodyPublisher = multiPartBodyPublisher.build();
                 }
                 builder.method(options.getMethod(), bodyPublisher);
@@ -97,9 +100,9 @@ public final class JavaFetchProvider implements FetchProvider {
                 if (filename == null)
                     filename = file.getName();
                 FileInputStream fileInputStream = new FileInputStream(file);
-                builder.addPart(entry.getKey(), () -> fileInputStream, filename, null);
+                builder.addPart(entry.getKey(), () -> fileInputStream, filename, javaBlob.getMimeType());
             } else {
-                builder.addPart(entry.getKey(), Strings.asString(value));
+                builder.addPart(entry.getKey(), Strings.toString(value));
             }
         }
 
