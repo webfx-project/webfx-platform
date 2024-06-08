@@ -52,7 +52,6 @@ public class Matcher {
             return true;
         }
         nextMatchResult(findMatchStartPos + findMatchLength);
-        findConsumed = false;
         return matchResult != null;
     }
 

@@ -1,6 +1,7 @@
 package dev.webfx.platform.fetch;
 
 import dev.webfx.platform.blob.Blob;
+import dev.webfx.platform.blob.NamedBlob;
 
 import java.util.*;
 

@@ -15,11 +15,18 @@ import java.util.Map;
  */
 public abstract class ConfigImpl extends ReadOnlyAstObjectWrapper implements Config {
 
+    private final Config parentConfig;
     private final Map<String, Config> childConfigs = new HashMap<>();
     private final Map<String, ConfigArray> configArrays = new HashMap<>();
 
-    public ConfigImpl(ReadOnlyAstObject configAstObject) {
+    public ConfigImpl(ReadOnlyAstObject configAstObject, Config parentConfig) {
         super(configAstObject);
+        this.parentConfig = parentConfig;
+    }
+
+    @Override
+    public Config parentConfig() {
+        return parentConfig;
     }
 
     @Override
@@ -54,7 +61,7 @@ public abstract class ConfigImpl extends ReadOnlyAstObjectWrapper implements Con
             if (value == null) {
                 value = super.get(key);
                 if (AST.isObject(value)) { // A key object will be wrapped into a child config
-                    ChildConfig childConfig = new ChildConfig(getRoot(), (ReadOnlyAstObject) value);
+                    ChildConfig childConfig = new ChildConfig(this, (ReadOnlyAstObject) value);
                     childConfigs.put(key, childConfig);
                     value = childConfig;
                 } else if (AST.isArray(value)) { // An indexed array will be wrapped into a child array
@@ -63,7 +70,9 @@ public abstract class ConfigImpl extends ReadOnlyAstObjectWrapper implements Con
                     value = configArray;
                 } else if (value instanceof String) {
                     // TODO: Should be substitution optional?
-                    value = Substitutor.substitute((String) value);
+                    try (ThreadLocalConfigContext context = ThreadLocalConfigContext.open(this)) {
+                        value = Substitutor.substitute((String) value);
+                    }
                 }
             }
         }

@@ -7,9 +7,13 @@ module webfx.platform.fetch.vertx {
 
     // Direct dependencies modules
     requires io.vertx.core;
+    requires io.vertx.web.client;
+    requires io.vertx.web.common;
     requires webfx.platform.async;
     requires webfx.platform.blob;
     requires webfx.platform.fetch;
+    requires webfx.platform.file.java;
+    requires webfx.platform.util;
     requires webfx.platform.vertx.common;
 
     // Exported packages

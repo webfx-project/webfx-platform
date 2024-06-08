@@ -1,1 +1,2 @@
-dev.webfx.platform.boot.spi.impl.ApplicationJobsBooter
+dev.webfx.platform.boot.spi.impl.ApplicationJobsInitializer
+dev.webfx.platform.boot.spi.impl.ApplicationJobsStarter

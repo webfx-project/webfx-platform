@@ -7,7 +7,10 @@ import dev.webfx.platform.boot.spi.impl.ApplicationModuleBooterManager;
 import dev.webfx.platform.reflect.RArray;
 import dev.webfx.platform.shutdown.Shutdown;
 import dev.webfx.platform.vertx.common.VertxInstance;
-import io.vertx.core.*;
+import io.vertx.core.AbstractVerticle;
+import io.vertx.core.Context;
+import io.vertx.core.Verticle;
+import io.vertx.core.Vertx;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -64,6 +67,11 @@ public final class VertxApplicationBooterVerticle extends AbstractVerticle imple
     }
 
     @Override
+    public void initApplicationJob(ApplicationJob applicationJob) {
+        // Nothing to do as the onBoot() method will be called during Verticle.init() when starting the application job
+    }
+
+    @Override
     public void startApplicationJob(ApplicationJob applicationJob) {
         ApplicationJobVerticle applicationJobVerticle = new ApplicationJobVerticle(applicationJob);
         applicationJobVerticles.add(applicationJobVerticle);
@@ -94,16 +102,17 @@ public final class VertxApplicationBooterVerticle extends AbstractVerticle imple
 
         @Override
         public void init(Vertx vertx, Context context) {
+            applicationJob.onInit();
         }
 
         @Override
-        public void start(Promise<Void> startPromise) {
+        public void start(io.vertx.core.Promise<Void> startPromise) {
             applicationJob.onStart();
             startPromise.complete();
         }
 
         @Override
-        public void stop(Promise<Void> stopPromise) {
+        public void stop(io.vertx.core.Promise<Void> stopPromise) {
             applicationJob.onStop();
             stopPromise.complete();
         }

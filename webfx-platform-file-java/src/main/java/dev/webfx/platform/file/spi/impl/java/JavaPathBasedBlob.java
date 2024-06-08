@@ -11,18 +11,26 @@ import java.nio.file.Path;
  */
 public abstract class JavaPathBasedBlob extends JavaBlob {
 
+    private String mimeType;
+
     public JavaPathBasedBlob(Object platformBlob) {
+        this(platformBlob, null);
+    }
+
+    public JavaPathBasedBlob(Object platformBlob, String mimeType) {
         super(platformBlob);
+        this.mimeType = mimeType;
     }
 
     protected abstract Path toPath();
 
     public String getMimeType() {
-        try {
-            return Files.probeContentType(toPath());
-        } catch (IOException e) {
-            return null;
+        if (mimeType == null) {
+            try {
+                mimeType = Files.probeContentType(toPath());
+            } catch (IOException ignored) { }
         }
+        return mimeType;
     }
 
 }

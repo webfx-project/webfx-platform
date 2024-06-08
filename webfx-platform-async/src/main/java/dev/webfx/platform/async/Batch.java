@@ -1,6 +1,6 @@
 package dev.webfx.platform.async;
 
-import dev.webfx.platform.util.tuples.Unit;
+import dev.webfx.platform.util.Arrays;
 
 import java.util.function.IntFunction;
 
@@ -19,6 +19,10 @@ public final class Batch<A> {
         return array;
     }
 
+    public A get(int index) {
+        return array[index];
+    }
+
     public <R> Future<Batch<R>> executeParallel(IntFunction<R[]> arrayGenerator, AsyncFunction<A, R> asyncFunction) {
         return executeParallel(Promise.promise(), arrayGenerator, asyncFunction);
     }
@@ -29,7 +33,7 @@ public final class Batch<A> {
         Batch<R> resultsBatch = new Batch<>(results);
         if (n == 0)
             return Future.succeededFuture(resultsBatch);
-        Unit<Integer> responseCounter = new Unit<>(0);
+        int[] responseCount = { 0 };
         for (A argument : getArray()) {
             int index = i++;
             asyncFunction.apply(argument).onComplete(asyncResult -> {
@@ -38,8 +42,8 @@ public final class Batch<A> {
                         promise.fail(asyncResult.cause());
                     else {
                         results[index] = asyncResult.result();
-                        responseCounter.set(responseCounter.get() + 1);
-                        if (responseCounter.get() == n)
+                        responseCount[0]++;
+                        if (responseCount[0] == n)
                             promise.complete(resultsBatch);
                     }
                 }
@@ -58,24 +62,24 @@ public final class Batch<A> {
         Batch<R> resultsBatch = new Batch<>(results);
         if (n == 0)
             return Future.succeededFuture(resultsBatch);
-        Unit<Integer> responseCounter = new Unit<>(0);
-        Unit<Handler<AsyncResult<R>>> handlerUnit = new Unit<>();
-        handlerUnit.set(asyncResult -> {
+        int[] responseCount = { 0 };
+        Handler<AsyncResult<R>>[] handlerHolder = new Handler[] { null };
+        Handler<AsyncResult<R>> handler = asyncResult -> {
             if (!promise.future().isComplete()) {
                 if (asyncResult.failed())
                     promise.fail(asyncResult.cause());
                 else {
-                    int count = responseCounter.get();
+                    int count = responseCount[0];
                     results[count] = asyncResult.result();
-                    responseCounter.set(++count);
+                    responseCount[0] = ++count;
                     if (count < n)
-                        asyncFunction.apply(getArray()[count]).onComplete(handlerUnit.get());
+                        asyncFunction.apply(getArray()[count]).onComplete(handlerHolder[0]);
                     else
                         promise.complete(resultsBatch);
                 }
             }
-        });
-        asyncFunction.apply(getArray()[0]).onComplete(handlerUnit.get());
+        };
+        asyncFunction.apply(getArray()[0]).onComplete(handlerHolder[0] = handler);
         return promise.future();
     }
 
@@ -106,5 +110,10 @@ public final class Batch<A> {
                 }
             });
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Batch[" + Arrays.toString(array) + "]";
     }
 }

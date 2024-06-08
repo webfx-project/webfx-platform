@@ -1,16 +1,18 @@
 package dev.webfx.platform.fetch.spi.impl.java;
 
 import dev.webfx.platform.async.Future;
-import dev.webfx.platform.fetch.Headers;
-import dev.webfx.platform.fetch.Response;
 import dev.webfx.platform.blob.Blob;
 import dev.webfx.platform.blob.spi.impl.java.JavaBlob;
+import dev.webfx.platform.fetch.Headers;
+import dev.webfx.platform.fetch.Response;
 import dev.webfx.platform.streams.ReadableStream;
 import dev.webfx.platform.streams.spi.impl.java.JavaReadableStreams;
 
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.http.HttpResponse;
+
+import static dev.webfx.platform.util.http.HttpResponseStatus.*;
 
 /**
  * @author Bruno Salmon
@@ -35,77 +37,77 @@ final class JavaResponse implements Response {
         int status = status();
         switch (status) {
             // 1xx Informational
-            case 100: return "Continue";
-            case 101: return "Switching protocols";
-            case 102: return "Processing";
-            case 103: return "Early Hints";
+            case CONTINUE_100: return "Continue";
+            case SWITCHING_PROCOLOLS_101: return "Switching protocols";
+            case PROCESSING_102: return "Processing";
+            case EARLY_HINTS_103: return "Early Hints";
 
             // 2xx Successful
-            case 200: return "OK";
-            case 201: return "Created";
-            case 202: return "Accepted";
-            case 203: return "Non-Authoritative Information";
-            case 204: return "No Content";
-            case 205: return "Reset Content";
-            case 206: return "Partial Content";
-            case 207: return "Multi-Status";
-            case 208: return "Already Reported";
-            case 226: return "IM Used";
+            case OK_200: return "OK";
+            case CREATED_201: return "Created";
+            case ACCEPTED_202: return "Accepted";
+            case NON_AUTHORITATIVE_INFORMATION_203: return "Non-Authoritative Information";
+            case NO_CONTENT_204: return "No Content";
+            case RESET_CONTENT_205: return "Reset Content";
+            case PARTIAL_CONTENT_206: return "Partial Content";
+            case MULTI_STATUS_207: return "Multi-Status";
+            case ALREADY_REPORTED_208: return "Already Reported";
+            case IM_USED_226: return "IM Used";
 
             // 3xx Redirection
-            case 300: return "Multiple Choices";
-            case 301: return "Moved Permanently";
-            case 302: return "Found (Previously \"Moved Temporarily\")";
-            case 303: return "See Other";
-            case 304: return "Not Modified";
-            case 305: return "Use Proxy";
-            case 306: return "Switch Proxy";
-            case 307: return "Temporary Redirect";
-            case 308: return "Permanent Redirect";
+            case MULTIPLE_CHOICES_300: return "Multiple Choices";
+            case MOVED_PERMANENTLY_301: return "Moved Permanently";
+            case FOUND_302: return "Found (Previously \"Moved Temporarily\")";
+            case SEE_OTHER_303: return "See Other";
+            case NOT_MODIFIED_304: return "Not Modified";
+            case USE_PROXY_305: return "Use Proxy";
+            case SWITCH_PROXY_306: return "Switch Proxy";
+            case TEMPORARY_REDIRECT_307: return "Temporary Redirect";
+            case PERMANENT_REDIRECT_308: return "Permanent Redirect";
 
             // 4xx Client Error
-            case 400: return "Bad Request";
-            case 401: return "Unauthorized";
-            case 402: return "Payment Required";
-            case 403: return "Forbidden";
-            case 404: return "Not Found";
-            case 405: return "Method Not Allowed";
-            case 406: return "Not Acceptable";
-            case 407: return "Proxy Authentication Required";
-            case 408: return "Request Timeout";
-            case 409: return "Conflict";
-            case 410: return "Gone";
-            case 411: return "Length Required";
-            case 412: return "Precondition Failed";
-            case 413: return "Payload Too Large";
-            case 414: return "URI Too Long";
-            case 415: return "Unsupported Media Type";
-            case 416: return "Range Not Satisfiable";
-            case 417: return "Expectation Failed";
-            case 418: return "I'm a Teapot";
-            case 421: return "Misdirected Request";
-            case 422: return "Unprocessable Entity";
-            case 423: return "Locked";
-            case 424: return "Failed Dependency";
-            case 425: return "Too Early";
-            case 426: return "Upgrade Required";
-            case 428: return "Precondition Required";
-            case 429: return "Too Many Requests";
-            case 431: return "Request Header Fields Too Large";
-            case 451: return "Unavailable For Legal Reasons";
+            case BAD_REQUEST_400: return "Bad Request";
+            case UNAUTHORIZED_401: return "Unauthorized";
+            case PAYMENT_REQUIRED_402: return "Payment Required";
+            case FORBIDDEN_403: return "Forbidden";
+            case NOT_FOUND_404: return "Not Found";
+            case METHOD_NOT_ALLOWED_405: return "Method Not Allowed";
+            case NOT_ACCEPTABLE_406: return "Not Acceptable";
+            case PROXY_AUTHENTICATION_REQUIRED_407: return "Proxy Authentication Required";
+            case REQUEST_TIMEOUT_408: return "Request Timeout";
+            case CONFLICT_409: return "Conflict";
+            case GONE_410: return "Gone";
+            case LENGTH_REQUIRED_411: return "Length Required";
+            case PRECONDITION_FAILED_412: return "Precondition Failed";
+            case PAYLOAD_TO_LARGE_413: return "Payload Too Large";
+            case URI_TO_LONG_414: return "URI Too Long";
+            case UNSUPPORTED_MEDIA_TYPE_415: return "Unsupported Media Type";
+            case RANGE_NOT_SATISFIABLE_416: return "Range Not Satisfiable";
+            case EXPECTATION_FAILED_417: return "Expectation Failed";
+            case IM_A_TEAPOT_418: return "I'm a Teapot";
+            case MISDIRECTED_REQUEST_421: return "Misdirected Request";
+            case UNPROCESSABLE_ENTITY_422: return "Unprocessable Entity";
+            case LOCKED_423: return "Locked";
+            case FAILED_DEPENDENCY_424: return "Failed Dependency";
+            case TOO_EARLY_425: return "Too Early";
+            case UPGRADE_REQUIRED_426: return "Upgrade Required";
+            case PRECONDITION_REQUIRED_428: return "Precondition Required";
+            case TOO_MANY_REQUESTS_429: return "Too Many Requests";
+            case REQUEST_HEADER_FIELDS_TOO_LARGE_431: return "Request Header Fields Too Large";
+            case UNAVAILABLE_FOR_LEGAL_REASONS_451: return "Unavailable For Legal Reasons";
 
             //5xx Server Error
-            case 500: return "Internal Server Error";
-            case 501: return "Not Implemented";
-            case 502: return "Bad Gateway";
-            case 503: return "Service Unavailable";
-            case 504: return "Gateway Timeout";
-            case 505: return "HTTP Version Not Supported";
-            case 506: return "Variant Also Negotiates";
-            case 507: return "Insufficient Storage";
-            case 508: return "Loop Detected";
-            case 510: return "Not Extended";
-            case 511: return "Network Authentication Required";
+            case INTERNAL_SERVER_ERROR_500: return "Internal Server Error";
+            case NOT_IMPLEMENTED_501: return "Not Implemented";
+            case BAD_GATEWAY_502: return "Bad Gateway";
+            case SERVICE_UNAVAILABLE_503: return "Service Unavailable";
+            case GATEWAY_TIMEOUT_504: return "Gateway Timeout";
+            case HTTP_VERSION_NOT_SUPPORTED_505: return "HTTP Version Not Supported";
+            case VARIANT_ALSO_NEGOTIATES_506: return "Variant Also Negotiates";
+            case INSUFFICIENT_STORAGE_507: return "Insufficient Storage";
+            case LOOP_DETECTED_508: return "Loop Detected";
+            case NOT_EXTENDED_510: return "Not Extended";
+            case NETWORK_ATHENTICATION_REQUIRED_511: return "Network Authentication Required";
         }
         return "Status code: " + status;
     }

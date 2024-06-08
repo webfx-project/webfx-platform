@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
  */
 public class VariablesSubstitutorProvider implements SubstitutorProvider {
 
-    private static final Pattern VARIABLE_PATTERN = Pattern.compile("\\$?\\{\\{(.+)}}");
+    private static final Pattern VARIABLE_PATTERN = Pattern.compile("\\$?\\{\\{(.+?(?=}}))}}");
 
     @Override
     public String substitute(String text) {

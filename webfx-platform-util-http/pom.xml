@@ -11,16 +11,6 @@
         <version>0.1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>webfx-platform-reflect</artifactId>
-
-    <dependencies>
-
-        <dependency>
-            <groupId>dev.webfx</groupId>
-            <artifactId>webfx-platform-console</artifactId>
-            <version>0.1.0-SNAPSHOT</version>
-        </dependency>
-
-    </dependencies>
+    <artifactId>webfx-platform-util-http</artifactId>
 
 </project>

@@ -10,6 +10,8 @@ public interface Config extends ReadOnlyAstObject {
 
     RootConfig getRoot();
 
+    Config parentConfig();
+
     Config childConfigAt(String path);
 
 }
