@@ -1,8 +1,9 @@
 package dev.webfx.platform.shutdown.spi.impl.gwtj2cl;
 
-import elemental2.dom.DomGlobal;
-import elemental2.dom.EventListener;
 import dev.webfx.platform.shutdown.spi.impl.ShutdownProviderBase;
+import elemental2.dom.DomGlobal;
+import elemental2.dom.Event;
+import elemental2.dom.EventListener;
 
 /**
  * @author Bruno Salmon
@@ -11,17 +12,30 @@ public final class GwtJ2clShutdownProvider extends ShutdownProviderBase<EventLis
 
     @Override
     protected EventListener createPlatformShutdownHook(Runnable hook) {
-        return evt -> hook.run();
+        return new EventListener() {
+            boolean executed; // ensures it is executed only once if both beforeunload and unload are fired
+            @Override
+            public void handleEvent(Event evt) {
+                if (!executed) {
+                    executed = true;
+                    hook.run();
+                }
+            }
+        };
     }
 
     @Override
     protected void addPlatformShutdownHook(EventListener platformHook) {
         DomGlobal.window.addEventListener("beforeunload", platformHook);
+        // Note: beforeunload doesn't work on iOS, so we use unload instead (deprecated but seems to work)
+        DomGlobal.window.addEventListener("unload", platformHook);
     }
 
     @Override
     protected void removePlatformShutdownHook(EventListener platformHook) {
         DomGlobal.window.removeEventListener("beforeunload", platformHook);
+        // Note: beforeunload doesn't work on iOS, so we use unload instead (deprecated but seems to work)
+        DomGlobal.window.removeEventListener("unload", platformHook);
     }
 
     @Override
