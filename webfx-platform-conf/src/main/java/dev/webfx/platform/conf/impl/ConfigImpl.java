@@ -68,12 +68,19 @@ public abstract class ConfigImpl extends ReadOnlyAstObjectWrapper implements Con
                     ConfigArray configArray = new ConfigArray(this, (ReadOnlyAstArray) value);
                     configArrays.put(key, configArray);
                     value = configArray;
-                } else if (value instanceof String) {
-                    // TODO: Should be substitution optional?
-                    try (ThreadLocalConfigContext context = ThreadLocalConfigContext.open(this)) {
-                        value = Substitutor.substitute((String) value);
-                    }
                 }
+            }
+        }
+        if (value == null) {
+            try (ThreadLocalConfigContext context = ThreadLocalConfigContext.open(this)) {
+                value = Substitutor.substitute(key);
+                if (value == key)
+                    value = null;
+            }
+        } else if (value instanceof String) {
+            // TODO: Should be substitution optional?
+            try (ThreadLocalConfigContext context = ThreadLocalConfigContext.open(this)) {
+                value = Substitutor.substitute((String) value);
             }
         }
         return (T) value;
