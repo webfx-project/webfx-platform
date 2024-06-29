@@ -9,16 +9,16 @@ import java.util.function.Supplier;
  */
 public final class FutureBroadcaster<T> {
 
-    private final Supplier<Future<T>> sourceSpplier;
+    private final Supplier<Future<T>> sourceSupplier;
     private Future<T> source;
     private final Collection<Promise<T>> clients = new ArrayList<>();
 
-    public FutureBroadcaster(Supplier<Future<T>> sourceSpplier) {
-        this.sourceSpplier = sourceSpplier;
+    public FutureBroadcaster(Supplier<Future<T>> sourceSupplier) {
+        this.sourceSupplier = sourceSupplier;
     }
 
     public FutureBroadcaster(Future<T> source) {
-        sourceSpplier = null;
+        sourceSupplier = null;
         armSource(source);
     }
 
@@ -32,7 +32,7 @@ public final class FutureBroadcaster<T> {
             for (Promise<T> destination : clients)
                 destination.handle(source);
             clients.clear();
-            if (sourceSpplier != null)
+            if (sourceSupplier != null)
                 source = null;
         }
     }
@@ -42,7 +42,7 @@ public final class FutureBroadcaster<T> {
             Promise<T> newClient = Promise.promise();
             clients.add(newClient);
             if (source == null)
-                armSource(sourceSpplier.get());
+                armSource(sourceSupplier.get());
             if (source != null && source.isComplete())
                 onSourceCompleted();
             return newClient.future();

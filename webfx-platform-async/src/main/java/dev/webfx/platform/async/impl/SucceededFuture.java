@@ -34,8 +34,8 @@ public final class SucceededFuture<T> extends FutureBase<T> {
 
     /**
      * Create a future that has already succeeded
-     * //@param context the context
-     * //@param result the result
+     * @param context the context
+     * @param result the result
      */
     /*public SucceededFuture(ContextInternal context, T result) {
         super(context);
@@ -80,6 +80,10 @@ public final class SucceededFuture<T> extends FutureBase<T> {
     }
 
     @Override
+    public void removeListener(Listener<T> listener) {
+    }
+
+    @Override
     public T result() {
         return result;
     }
@@ -120,4 +124,3 @@ public final class SucceededFuture<T> extends FutureBase<T> {
         return "Future{result=" + result + "}";
     }
 }
-

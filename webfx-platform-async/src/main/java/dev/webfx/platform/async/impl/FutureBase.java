@@ -1,7 +1,7 @@
 package dev.webfx.platform.async.impl;
 
-import dev.webfx.platform.async.Future;
 import dev.webfx.platform.async.AsyncResult;
+import dev.webfx.platform.async.Future;
 
 import java.util.Objects;
 import java.util.function.Function;
@@ -20,18 +20,18 @@ abstract class FutureBase<T> implements FutureInternal<T> {
     /**
      * Create a future that hasn't completed yet
      */
-    /*FutureBase() {
-        this(null);
-    }*/
+    FutureBase() {
+        //this(null);
+    }
 
     /**
      * Create a future that hasn't completed yet
      */
     /*FutureBase(ContextInternal context) {
         this.context = context;
-    }*/
+    }
 
-    /*public final ContextInternal context() {
+    public final ContextInternal context() {
         return context;
     }*/
 
@@ -119,4 +119,47 @@ abstract class FutureBase<T> implements FutureInternal<T> {
         addListener(operation);
         return operation;
     }
+
+    /*@Override
+    public Future<T> expecting(Expectation<? super T> expectation) {
+        Expect<T> expect = new Expect<>(context, expectation);
+        addListener(expect);
+        return expect;
+    }*/
+
+    /*@Override
+    public Future<T> timeout(long delay, TimeUnit unit) {
+        if (isComplete()) {
+            return this;
+        }
+        OrderedEventExecutor instance;
+        Promise<T> promise;
+        if (context != null) {
+            instance = context.nettyEventLoop();
+            promise = context.promise();
+        } else {
+            instance = GlobalEventExecutor.INSTANCE;
+            promise = Promise.promise();
+        }
+        ScheduledFuture<?> task = instance.schedule(() -> {
+            String msg = "Timeout " + unit.toMillis(delay) + " (ms) fired";
+            promise.fail(new NoStackTraceTimeoutException(msg));
+        }, delay, unit);
+        addListener(new Listener<T>() {
+            @Override
+            public void onSuccess(T value) {
+                if (task.cancel(false)) {
+                    promise.complete(value);
+                }
+            }
+            @Override
+            public void onFailure(Throwable failure) {
+                if (task.cancel(false)) {
+                    promise.fail(failure);
+                }
+            }
+        });
+        return promise.future();
+    }*/
 }
+
