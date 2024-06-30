@@ -17,13 +17,10 @@
         Set of GWT super sources to emulate some JDK classes not emulated by default by GWT but required by WebFX.
     </description>
 
-
     <properties>
         <!-- Disabling the default behavior defined in the parent pom for the shade plugin -->
         <plugin.shade.param.fat.phase>none</plugin.shade.param.fat.phase>
-    </properties>
-
-    <build>
+    </properties>    <build>
         <plugins>
 
             <!-- Relocating the emul.java package to java for both classes and sources -->
