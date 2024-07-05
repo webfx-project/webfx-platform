@@ -38,7 +38,7 @@ final class JavaResponse implements Response {
         switch (status) {
             // 1xx Informational
             case CONTINUE_100: return "Continue";
-            case SWITCHING_PROCOLOLS_101: return "Switching protocols";
+            case SWITCHING_PROTOCOLS_101: return "Switching protocols";
             case PROCESSING_102: return "Processing";
             case EARLY_HINTS_103: return "Early Hints";
 
@@ -107,7 +107,7 @@ final class JavaResponse implements Response {
             case INSUFFICIENT_STORAGE_507: return "Insufficient Storage";
             case LOOP_DETECTED_508: return "Loop Detected";
             case NOT_EXTENDED_510: return "Not Extended";
-            case NETWORK_ATHENTICATION_REQUIRED_511: return "Network Authentication Required";
+            case NETWORK_AUTHENTICATION_REQUIRED_511: return "Network Authentication Required";
         }
         return "Status code: " + status;
     }
