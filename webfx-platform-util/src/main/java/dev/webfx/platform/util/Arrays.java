@@ -43,6 +43,10 @@ public final class Arrays {
         return length == 0 ? null : list[length - 1];
     }
 
+    public static <T> T[] filter(T[] array, Predicate<T> predicate, IntFunction<T[]> generator) {
+        return java.util.Arrays.stream(array).filter(predicate::test).toArray(generator);
+    }
+
     public static <T> T[] subArray(IntFunction<T[]> generator, int i0, int i1, T... a) {
         int n = i1 - i0;
         T[] subArray = generator.apply(n);
