@@ -31,13 +31,10 @@
         </repository>
     </repositories>
 
-
     <properties>
         <!-- Disabling the default behavior defined in the parent pom for the shade plugin -->
         <plugin.shade.param.fat.phase>none</plugin.shade.param.fat.phase>
-    </properties>
-
-    <build>
+    </properties>    <build>
         <pluginManagement>
             <plugins>
                 <!-- Relocating the emul.xxx.* packages to xxx.* for both classes and sources -->
