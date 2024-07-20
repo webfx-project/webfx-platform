@@ -14,7 +14,7 @@ import java.util.Objects;
  *
  * @author <a href="mailto:julien@julienviet.com">Julien Viet</a>
  */
-class FutureImpl<T> extends FutureBase<T> {
+public class FutureImpl<T> extends FutureBase<T> {
 
     private static final Object NULL_VALUE = new Object();
 
@@ -24,16 +24,16 @@ class FutureImpl<T> extends FutureBase<T> {
     /**
      * Create a future that hasn't completed yet
      */
-    /*FutureImpl() {
+    protected FutureImpl() {
         super();
-    }*/
+    }
 
     /**
      * Create a future that hasn't completed yet
      */
     /*FutureImpl(ContextInternal context) {
         super(context);
-    }*/
+    }
 
     /**
      * The result of the operation. This will be null if the operation failed.
@@ -117,6 +117,41 @@ class FutureImpl<T> extends FutureBase<T> {
     }
 
     @Override
+    public Future<T> onComplete(Handler<T> successHandler, Handler<Throwable> failureHandler) {
+        addListener(new Listener<T>() {
+            @Override
+            public void onSuccess(T value) {
+                try {
+                    if (successHandler != null) {
+                        successHandler.handle(value);
+                    }
+                } catch (Throwable t) {
+                    /*if (context != null) {
+                        context.reportException(t);
+                    } else */{
+                        throw t;
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Throwable failure) {
+                try {
+                    if (failureHandler != null) {
+                        failureHandler.handle(failure);
+                    }
+                } catch (Throwable t) {
+                    /*if (context != null) {
+                        context.reportException(t);
+                    } else*/ {
+                        throw t;
+                    }
+                }
+            }
+        });
+        return this;
+    }
+
+    @Override
     public Future<T> onComplete(Handler<AsyncResult<T>> handler) {
         Objects.requireNonNull(handler, "No null handler accepted");
         Listener<T> listener;
@@ -183,6 +218,19 @@ class FutureImpl<T> extends FutureBase<T> {
                 v = null;
             }
             emitSuccess((T) v, listener);
+        }
+    }
+
+    @Override
+    public void removeListener(Listener<T> l) {
+        synchronized (this) {
+            Object listener = this.listener;
+            if (listener == l) {
+                this.listener = null;
+            } else if (listener instanceof ListenerArray<?>) {
+                ListenerArray<?> listeners = (ListenerArray<?>) listener;
+                listeners.remove(l);
+            }
         }
     }
 

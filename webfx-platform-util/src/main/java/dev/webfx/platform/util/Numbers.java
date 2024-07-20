@@ -318,7 +318,15 @@ public final class Numbers {
         return number == null ? 0 : number;
     }
 
-    public static boolean identicalValues(Number n1, Number n2) {
+    public static boolean identicalObjectsOrNumberValues(Object o1, Object o2) {
+        if (java.util.Objects.equals(o1, o2))
+            return true;
+        if (o1 instanceof Number && o2 instanceof Number)
+            return identicalNumberValues((Number) o1, (Number) o2);
+        return false;
+    }
+
+    public static boolean identicalNumberValues(Number n1, Number n2) {
         if (java.util.Objects.equals(n1, n2))
             return true;
         if (!isMathematicalInteger(n1) || !isMathematicalInteger(n2))

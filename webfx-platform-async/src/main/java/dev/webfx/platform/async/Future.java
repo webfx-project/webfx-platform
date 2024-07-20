@@ -1,9 +1,13 @@
 package dev.webfx.platform.async;
 
+import dev.webfx.platform.async.impl.CompositeFutureImpl;
 import dev.webfx.platform.async.impl.FailedFuture;
 import dev.webfx.platform.async.impl.SucceededFuture;
 
+import java.util.List;
+import java.util.concurrent.CompletionStage;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 // Async API inspired from Vert.x (simplified, without Vert.x context and Netty dependency)
 
@@ -14,6 +18,156 @@ import java.util.function.Function;
  * @author <a href="http://tfox.org">Tim Fox</a>
  */
 public interface Future<T> extends AsyncResult<T> {
+
+    /**
+     * Return a composite future, succeeded when all futures are succeeded, failed when any future is failed.
+     * <p/>
+     * The returned future fails as soon as one of {@code f1} or {@code f2} fails.
+     *
+     * @param f1 future
+     * @param f2 future
+     * @return the composite future
+     */
+    static CompositeFuture all(Future<?> f1, Future<?> f2) {
+        return CompositeFutureImpl.all(f1, f2);
+    }
+
+    /**
+     * Like {@link #all(Future, Future)} but with 3 futures.
+     */
+    static CompositeFuture all(Future<?> f1, Future<?> f2, Future<?> f3) {
+        return CompositeFutureImpl.all(f1, f2, f3);
+    }
+
+    /**
+     * Like {@link #all(Future, Future)} but with 4 futures.
+     */
+    static CompositeFuture all(Future<?> f1, Future<?> f2, Future<?> f3, Future<?> f4) {
+        return CompositeFutureImpl.all(f1, f2, f3, f4);
+    }
+
+    /**
+     * Like {@link #all(Future, Future)} but with 5 futures.
+     */
+    static CompositeFuture all(Future<?> f1, Future<?> f2, Future<?> f3, Future<?> f4, Future<?> f5) {
+        return CompositeFutureImpl.all(f1, f2, f3, f4, f5);
+    }
+
+    /**
+     * Like {@link #all(Future, Future)} but with 6 futures.
+     */
+    static CompositeFuture all(Future<?> f1, Future<?> f2, Future<?> f3, Future<?> f4, Future<?> f5, Future<?> f6) {
+        return CompositeFutureImpl.all(f1, f2, f3, f4, f5, f6);
+    }
+
+    /**
+     * Like {@link #all(Future, Future)} but with a list of futures.<p>
+     *
+     * When the list is empty, the returned future will be already completed.
+     */
+    static CompositeFuture all(List<? extends Future<?>> futures) {
+        return CompositeFutureImpl.all(futures.toArray(new Future[0]));
+    }
+
+    /**
+     * Return a composite future, succeeded when any futures is succeeded, failed when all futures are failed.
+     * <p/>
+     * The returned future succeeds as soon as one of {@code f1} or {@code f2} succeeds.
+     *
+     * @param f1 future
+     * @param f2 future
+     * @return the composite future
+     */
+    static CompositeFuture any(Future<?> f1, Future<?> f2) {
+        return CompositeFutureImpl.any(f1, f2);
+    }
+
+    /**
+     * Like {@link #any(Future, Future)} but with 3 futures.
+     */
+    static CompositeFuture any(Future<?> f1, Future<?> f2, Future<?> f3) {
+        return CompositeFutureImpl.any(f1, f2, f3);
+    }
+
+    /**
+     * Like {@link #any(Future, Future)} but with 4 futures.
+     */
+    static CompositeFuture any(Future<?> f1, Future<?> f2, Future<?> f3, Future<?> f4) {
+        return CompositeFutureImpl.any(f1, f2, f3, f4);
+    }
+
+    /**
+     * Like {@link #any(Future, Future)} but with 5 futures.
+     */
+    static CompositeFuture any(Future<?> f1, Future<?> f2, Future<?> f3, Future<?> f4, Future<?> f5) {
+        return CompositeFutureImpl.any(f1, f2, f3, f4, f5);
+    }
+
+    /**
+     * Like {@link #any(Future, Future)} but with 6 futures.
+     */
+    static CompositeFuture any(Future<?> f1, Future<?> f2, Future<?> f3, Future<?> f4, Future<?> f5, Future<?> f6) {
+        return CompositeFutureImpl.any(f1, f2, f3, f4, f5, f6);
+    }
+
+    /**
+     * Like {@link #any(Future, Future)} but with a list of futures.<p>
+     *
+     * When the list is empty, the returned future will be already completed.
+     */
+    static CompositeFuture any(List<? extends Future<?>> futures) {
+        return CompositeFutureImpl.any(futures.toArray(new Future[0]));
+    }
+
+    /**
+     * Return a composite future, succeeded when all futures are succeeded, failed when any future is failed.
+     * <p/>
+     * It always wait until all its futures are completed and will not fail as soon as one of {@code f1} or {@code f2} fails.
+     *
+     * @param f1 future
+     * @param f2 future
+     * @return the composite future
+     */
+    static CompositeFuture join(Future<?> f1, Future<?> f2) {
+        return CompositeFutureImpl.join(f1, f2);
+    }
+
+    /**
+     * Like {@link #join(Future, Future)} but with 3 futures.
+     */
+    static CompositeFuture join(Future<?> f1, Future<?> f2, Future<?> f3) {
+        return CompositeFutureImpl.join(f1, f2, f3);
+    }
+
+    /**
+     * Like {@link #join(Future, Future)} but with 4 futures.
+     */
+    static CompositeFuture join(Future<?> f1, Future<?> f2, Future<?> f3, Future<?> f4) {
+        return CompositeFutureImpl.join(f1, f2, f3, f4);
+    }
+
+    /**
+     * Like {@link #join(Future, Future)} but with 5 futures.
+     */
+    static CompositeFuture join(Future<?> f1, Future<?> f2, Future<?> f3, Future<?> f4, Future<?> f5) {
+        return CompositeFutureImpl.join(f1, f2, f3, f4, f5);
+    }
+
+    /**
+     * Like {@link #join(Future, Future)} but with 6 futures.
+     */
+    static CompositeFuture join(Future<?> f1, Future<?> f2, Future<?> f3, Future<?> f4, Future<?> f5, Future<?> f6) {
+        return CompositeFutureImpl.join(f1, f2, f3, f4, f5, f6);
+    }
+
+    /**
+     * Like {@link #join(Future, Future)} but with a list of futures.<p>
+     *
+     * When the list is empty, the returned future will be already completed.
+     */
+    static CompositeFuture join(List<? extends Future<?>> futures) {
+        return CompositeFutureImpl.join(futures.toArray(new Future[0]));
+    }
 
     /**
      * Create a future that hasn't completed yet and that is passed to the {@code handler} before it is returned.
@@ -90,7 +244,10 @@ public interface Future<T> extends AsyncResult<T> {
 
     /**
      * Add a handler to be notified of the result.
-     * <br/>
+     * <p>
+     * <em><strong>WARNING</strong></em>: this is a terminal operation.
+     * If several {@code handler}s are registered, there is no guarantee that they will be invoked in order of registration.
+     *
      * @param handler the handler that will be called with the result
      * @return a reference to this, so it can be used fluently
      */
@@ -98,33 +255,51 @@ public interface Future<T> extends AsyncResult<T> {
     Future<T> onComplete(Handler<AsyncResult<T>> handler);
 
     /**
-     * Add a handler to be notified of the succeeded result.
-     * <br/>
-     * @param handler the handler that will be called with the succeeded result
+     * Add handlers to be notified on succeeded result and failed result.
+     * <p>
+     * <em><strong>WARNING</strong></em>: this is a terminal operation.
+     * If several {@code handler}s are registered, there is no guarantee that they will be invoked in order of registration.
+     *
+     * @param successHandler the handler that will be called with the succeeded result
+     * @param failureHandler the handler that will be called with the failed result
      * @return a reference to this, so it can be used fluently
      */
-    //@Fluent
-    default Future<T> onSuccess(Handler<T> handler) {
+    default Future<T> onComplete(Handler<T> successHandler, Handler<Throwable> failureHandler) {
         return onComplete(ar -> {
-            if (ar.succeeded()) {
-                handler.handle(ar.result());
+            if (successHandler != null && ar.succeeded()) {
+                successHandler.handle(ar.result());
+            } else if (failureHandler != null && ar.failed()) {
+                failureHandler.handle(ar.cause());
             }
         });
     }
 
     /**
+     * Add a handler to be notified of the succeeded result.
+     * <p>
+     * <em><strong>WARNING</strong></em>: this is a terminal operation.
+     * If several {@code handler}s are registered, there is no guarantee that they will be invoked in order of registration.
+     *
+     * @param handler the handler that will be called with the succeeded result
+     * @return a reference to this, so it can be used fluently
+     */
+    //@Fluent
+    default Future<T> onSuccess(Handler<T> handler) {
+        return onComplete(handler, null);
+    }
+
+    /**
      * Add a handler to be notified of the failed result.
-     * <br/>
+     * <p>
+     * <em><strong>WARNING</strong></em>: this is a terminal operation.
+     * If several {@code handler}s are registered, there is no guarantee that they will be invoked in order of registration.
+     *
      * @param handler the handler that will be called with the failed result
      * @return a reference to this, so it can be used fluently
      */
     //@Fluent
     default Future<T> onFailure(Handler<Throwable> handler) {
-        return onComplete(ar -> {
-            if (ar.failed()) {
-                handler.handle(ar.cause());
-            }
-        });
+        return onComplete(null, handler);
     }
 
     /**
@@ -230,19 +405,38 @@ public interface Future<T> extends AsyncResult<T> {
     <U> Future<U> transform(Function<AsyncResult<T>, Future<U>> mapper);
 
     /**
-     * Compose this future with a {@code mapper} that will be always be called.
+     * Compose this future with a {@code function} that will be always be called.
      *
-     * <p>When this future (the one on which {@code eventually} is called) completes, the {@code mapper} will be called
+     * <p>When this future (the one on which {@code eventually} is called) completes, the {@code function} will be called
      * and this mapper returns another future object. This returned future completion will complete the future returned
      * by this method call with the original result of the future.
      *
-     * <p>The outcome of the future returned by the {@code mapper} will not influence the nature
+     * <p>The outcome of the future returned by the {@code function} will not influence the nature
      * of the returned future.
      *
-     * @param mapper the function returning the future.
+     * @param function the function returning the future.
+     * @return the composed future
+     * @deprecated instead use {@link #eventually(Supplier)}, this method will be removed in Vert.x 5
+     */
+    @Deprecated
+    <U> Future<T> eventually(Function<Void, Future<U>> function);
+
+    /**
+     * Compose this future with a {@code supplier} that will be always be called.
+     *
+     * <p>When this future (the one on which {@code eventually} is called) completes, the {@code supplier} will be called
+     * and this mapper returns another future object. This returned future completion will complete the future returned
+     * by this method call with the original result of the future.
+     *
+     * <p>The outcome of the future returned by the {@code supplier} will not influence the nature
+     * of the returned future.
+     *
+     * @param supplier the function returning the future.
      * @return the composed future
      */
-    <U> Future<T> eventually(Function<Void, Future<U>> mapper);
+    default <U> Future<T> eventually(Supplier<Future<U>> supplier) {
+        return eventually(v -> supplier.get());
+    }
 
     /**
      * Apply a {@code mapper} function on this future.<p>
@@ -332,6 +526,52 @@ public interface Future<T> extends AsyncResult<T> {
     }
 
     /**
+     * Invokes the given {@code handler} upon completion.
+     * <p>
+     * If the {@code handler} throws an exception, the returned future will be failed with this exception.
+     *
+     * @param handler invoked upon completion of this future
+     * @return a future completed after the {@code handler} has been invoked
+     */
+    default Future<T> andThen(Handler<AsyncResult<T>> handler) {
+        return transform(ar -> {
+            handler.handle(ar);
+            return (Future<T>) ar;
+        });
+    }
+
+    /**
+     * Guard the control flow of this future with an expectation.
+     * <p/>
+     * When the future is completed with a success, the {@code expectation} is called with the result, when the expectation
+     * returns {@code false} the returned future is failed, otherwise the future is completed with the same result.
+     * <p/>
+     * Expectations are usually lambda expressions:
+     * <pre>
+     * return future.expecting(response -> response.statusCode() == 200);
+     * </pre>
+     * {@link Expectation} instances can also be used:
+     * <pre>
+     * future = future.expecting(HttpResponseExpectation.SC_OK);
+     * </pre>
+     *
+     * @param expectation the expectation
+     * @return a future succeeded with the result or failed when the expectation returns false
+     */
+    //Future<T> expecting(Expectation<? super T> expectation);
+
+    /**
+     * Returns a future succeeded or failed with the outcome of this future when it happens before the timeout fires. When
+     * the timeout fires before, the future is failed with a {@link java.util.concurrent.TimeoutException}, guaranteeing
+     * the returned future to complete within the specified {@code delay}.
+     *
+     * @param delay the delay
+     * @param unit the unit of the delay
+     * @return the timeout future
+     */
+    //Future<T> timeout(long delay, TimeUnit unit);
+
+    /**
      * Bridges this Vert.x future to a {@link CompletionStage} instance.
      * <p>
      * The {@link CompletionStage} handling methods will be called from the thread that resolves this future.
@@ -395,5 +635,37 @@ public interface Future<T> extends AsyncResult<T> {
         });
         return promise.future();
     }*/
-}
 
+    /**
+     * Park the current thread until the {@code future} is completed, when the future
+     * is completed the thread is un-parked and
+     *
+     * <ul>
+     *   <li>the result value is returned when the future was completed with a result</li>
+     *   <li>otherwise, the failure is thrown</li>
+     * </ul>
+     *
+     * This method must be called from a virtual thread.
+     *
+     * @param future the future to await
+     * @return the result
+     * @throws IllegalStateException when called from an event-loop thread or a non Vert.x thread
+     */
+    /*static <T> T await(Future<T> future) {
+        io.vertx.core.impl.WorkerExecutor executor = io.vertx.core.impl.WorkerExecutor.unwrapWorkerExecutor();
+        io.vertx.core.impl.WorkerExecutor.TaskController cont = executor.current();
+        future.onComplete(ar -> cont.resume());
+        try {
+            cont.suspendAndAwaitResume();
+        } catch (InterruptedException e) {
+            Utils.throwAsUnchecked(e);
+            return null;
+        }
+        if (future.succeeded()) {
+            return future.result();
+        } else {
+            Utils.throwAsUnchecked(future.cause());
+            return null;
+        }
+    }*/
+}

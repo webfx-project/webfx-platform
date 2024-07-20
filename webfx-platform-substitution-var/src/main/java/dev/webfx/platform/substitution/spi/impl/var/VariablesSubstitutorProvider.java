@@ -1,10 +1,12 @@
 package dev.webfx.platform.substitution.spi.impl.var;
 
+import dev.webfx.platform.service.MultipleServiceProviders;
 import dev.webfx.platform.substitution.spi.SubstitutorProvider;
 import dev.webfx.platform.substitution.var.spi.VariablesResolver;
 import dev.webfx.platform.substitution.var.spi.impl.SkipRepeatLogger;
-import dev.webfx.platform.service.MultipleServiceProviders;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
 import java.util.ServiceLoader;
 import java.util.regex.Matcher;
@@ -16,6 +18,27 @@ import java.util.regex.Pattern;
 public class VariablesSubstitutorProvider implements SubstitutorProvider {
 
     private static final Pattern VARIABLE_PATTERN = Pattern.compile("\\$?\\{\\{(.+?(?=}}))}}");
+    private static final String[] PROVIDERS_ORDER = {
+            "SystemProperties",
+            "Environment",
+            "LocalStorage",
+            "Config",
+            "WindowLocation",
+    };
+
+    private static final List<VariablesResolver> PROVIDERS = MultipleServiceProviders.getProviders(VariablesResolver.class, () -> ServiceLoader.load(VariablesResolver.class));
+    static {
+        PROVIDERS.sort(Comparator.comparingInt(VariablesSubstitutorProvider::getProviderOrder));
+    }
+
+    private static int getProviderOrder(VariablesResolver vr) {
+        String name = vr.getClass().getSimpleName();
+        for (int i = 0; i < PROVIDERS_ORDER.length; i++) {
+            if (name.contains(PROVIDERS_ORDER[i]))
+                return i;
+        }
+        return PROVIDERS_ORDER.length;
+    }
 
     @Override
     public String substitute(String text) {
@@ -78,7 +101,7 @@ public class VariablesSubstitutorProvider implements SubstitutorProvider {
         if (variableName.startsWith("'") && variableName.endsWith("'"))
             return Optional.of(variableName.substring(1, variableName.length() - 1));
         // For all other cases, we try to resolve the variable by searching in the suppliers
-        return MultipleServiceProviders.getProviders(VariablesResolver.class, () -> ServiceLoader.load(VariablesResolver.class)).stream()
+        return PROVIDERS.stream()
                 .map(s -> s.resolveVariable(variableName))
                 .filter(Optional::isPresent)
                 .map(Optional::get)

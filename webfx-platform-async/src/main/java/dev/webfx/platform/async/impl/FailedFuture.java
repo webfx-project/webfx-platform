@@ -46,7 +46,7 @@ public final class FailedFuture<T> extends FutureBase<T> {
 
     /**
      * Create a future that has already failed
-     * //@param failureMessage the failure message
+     * @param failureMessage the failure message
      */
     /*public FailedFuture(ContextInternal context, String failureMessage) {
         this(context, new NoStackTraceThrowable(failureMessage));
@@ -87,6 +87,10 @@ public final class FailedFuture<T> extends FutureBase<T> {
     @Override
     public void addListener(Listener<T> listener) {
         emitFailure(cause, listener);
+    }
+
+    @Override
+    public void removeListener(Listener<T> listener) {
     }
 
     @Override

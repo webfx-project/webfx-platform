@@ -13,7 +13,6 @@
 
     <artifactId>webfx-platform-ast-yaml-plugin</artifactId>
 
-
     <build>
         <plugins>
 
