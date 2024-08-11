@@ -19,6 +19,10 @@ public final class Batch<A> {
         return array;
     }
 
+    public int length() {
+        return array.length;
+    }
+
     public A get(int index) {
         return array[index];
     }
@@ -63,23 +67,26 @@ public final class Batch<A> {
         if (n == 0)
             return Future.succeededFuture(resultsBatch);
         int[] responseCount = { 0 };
-        Handler<AsyncResult<R>>[] handlerHolder = new Handler[] { null };
+        Handler<AsyncResult<R>>[] serialHandlerHolder = new Handler[] { null };
         Handler<AsyncResult<R>> handler = asyncResult -> {
-            if (!promise.future().isComplete()) {
+            //if (!promise.future().isComplete()) {
                 if (asyncResult.failed())
                     promise.fail(asyncResult.cause());
                 else {
+                    // Storing the result and incrementing the counter
                     int count = responseCount[0];
                     results[count] = asyncResult.result();
                     responseCount[0] = ++count;
-                    if (count < n)
-                        asyncFunction.apply(getArray()[count]).onComplete(handlerHolder[0]);
-                    else
+                    if (count == n) { // means it was the final result
                         promise.complete(resultsBatch);
+                    } else { // Not final result, so making the next call
+                        asyncFunction.apply(getArray()[count])
+                            .onComplete(serialHandlerHolder[0]); // Calling back this handler once complete
+                    }
                 }
-            }
+            //}
         };
-        asyncFunction.apply(getArray()[0]).onComplete(handlerHolder[0] = handler);
+        asyncFunction.apply(getArray()[0]).onComplete(serialHandlerHolder[0] = handler);
         return promise.future();
     }
 
@@ -99,16 +106,17 @@ public final class Batch<A> {
         if (n == 0)
             promise.complete(new Batch<>(results));
         else
-            asyncFunction.apply(array[0]).onComplete(asyncResult -> {
-                if (!promise.future().isComplete()) {
-                    if (asyncResult.failed())
-                        promise.fail(asyncResult.cause());
-                    else {
-                        results[0] = asyncResult.result();
-                        promise.complete(new Batch<>(results));
-                    }
-                }
-            });
+            asyncFunction.apply(array[0])
+                .onComplete(asyncResult -> {
+                    //if (!promise.future().isComplete()) {
+                        if (asyncResult.failed())
+                            promise.fail(asyncResult.cause());
+                        else {
+                            results[0] = asyncResult.result();
+                            promise.complete(new Batch<>(results));
+                        }
+                    //}
+                });
         return true;
     }
 
