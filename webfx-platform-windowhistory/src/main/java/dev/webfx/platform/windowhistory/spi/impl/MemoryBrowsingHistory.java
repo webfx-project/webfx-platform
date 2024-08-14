@@ -11,10 +11,16 @@ import java.util.Stack;
 public class MemoryBrowsingHistory extends BrowsingHistoryBase {
 
     protected final Stack<BrowsingHistoryLocationImpl> locationStack = new Stack<>();
-    protected int backOffset = 0; // offset that becomes > 0 during back navigation to indicate the current location from the top of the history stack
+    private int currentLocationIndex = -1;
 
-    private int getCurrentLocationIndex() {
-        return locationStack.size() - 1 - backOffset;
+    public int getCurrentLocationIndex() {
+        return currentLocationIndex;
+    }
+
+    public void setCurrentLocationIndex(int currentLocationIndex) {
+        setGoingBackward(currentLocationIndex < this.currentLocationIndex);
+        //Console.log("Setting currentLocationIndex to " + currentLocationIndex);
+        this.currentLocationIndex = currentLocationIndex;
     }
 
     @Override
@@ -26,37 +32,45 @@ public class MemoryBrowsingHistory extends BrowsingHistoryBase {
     @Override
     public void transitionTo(BrowsingHistoryLocation location) {
         int index = locationStack.indexOf(location);
-        if (index > 0)
+        if (index >= 0)
             go(index - getCurrentLocationIndex());
     }
 
     @Override
     public void go(int offset) {
-        int requestedBackOffset = backOffset - offset;
-        if (offset != 0 && requestedBackOffset >= 0 && requestedBackOffset < locationStack.size()) {
-            int previousBackOffset = backOffset;
-            backOffset = requestedBackOffset;
+        int previousLocationIndex = getCurrentLocationIndex();
+        int requestedLocationIndex = previousLocationIndex + offset;
+        if (offset != 0 && requestedLocationIndex >= 0 && requestedLocationIndex < locationStack.size()) {
+            setCurrentLocationIndex(requestedLocationIndex);
             BrowsingHistoryLocationImpl newLocation = getCurrentLocation();
             checkBeforeUnloadThenCheckBeforeThenTransit(newLocation, BrowsingHistoryEvent.POPPED)
-                    .onFailure(cause -> backOffset = previousBackOffset);
+                    .onFailure(cause -> setCurrentLocationIndex(previousLocationIndex));
         }
     }
 
     @Override
     protected void doAcceptedPush(BrowsingHistoryLocationImpl historyLocation) {
-        if (backOffset > 0)
-            do
-                locationStack.pop();
-            while (--backOffset != 0);
+        while (!locationStack.empty() && currentLocationIndex < locationStack.size() - 1)
+            locationStack.pop();
         locationStack.push(historyLocation);
+        setCurrentLocationIndex(locationStack.size() - 1);
+        //logLocationStack();
     }
 
     protected void doAcceptedReplace(BrowsingHistoryLocationImpl historyLocation) {
+        setGoingBackward(false);
         int index = getCurrentLocationIndex();
         if (index != -1)
             locationStack.set(index, historyLocation);
-        else
+        else {
             locationStack.push(historyLocation);
+            setCurrentLocationIndex(locationStack.size() - 1);
+        }
+        //logLocationStack();
     }
+
+    /*private void logLocationStack() {
+        Console.log("locationStack: " + Collections.toString(locationStack, true, true));
+    }*/
 
 }

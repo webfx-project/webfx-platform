@@ -32,4 +32,12 @@ public final class BrowsingHistoryLocationImpl extends PathStateLocationImpl imp
     public String getLocationKey() {
         return key;
     }
+
+    /*@Override
+    public String toString() {
+        return "BrowsingHistoryLocationImpl{" +
+               "event=" + event +
+               ", key='" + key + '\'' +
+               "} " + super.toString();
+    }*/
 }
