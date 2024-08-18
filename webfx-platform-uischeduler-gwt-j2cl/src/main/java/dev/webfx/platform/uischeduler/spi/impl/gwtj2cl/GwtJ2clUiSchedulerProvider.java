@@ -11,12 +11,25 @@ import elemental2.dom.DomGlobal;
  */
 public final class GwtJ2clUiSchedulerProvider extends UiSchedulerProviderBase {
 
+    {
+        DomGlobal.document.addEventListener("visibilitychange", evt -> {
+            executeAnimationPipe();
+        });
+    }
+
     @Override
     public boolean isUiThread() {
         return true;
     }
 
     private int animationFrameId;
+
+    @Override
+    protected boolean isSystemAnimationFrameRunning() {
+        // Usually the browsers stop honouring animation frames on hidden tabs
+        boolean isBrowserTabHidden = "hidden".equalsIgnoreCase(DomGlobal.document.visibilityState);
+        return !isBrowserTabHidden;
+    }
 
     @Override
     protected void requestAnimationFrame(Runnable runnable) {
