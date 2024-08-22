@@ -12,9 +12,9 @@ import elemental2.dom.DomGlobal;
 public final class GwtJ2clUiSchedulerProvider extends UiSchedulerProviderBase {
 
     {
-        DomGlobal.document.addEventListener("visibilitychange", evt -> {
-            executeAnimationPipe();
-        });
+        // The browser is stopping animation frames when the tab is hidden, so we ensure all pending animation tasks
+        // are executed as soon as the user goes back to the tab.
+        DomGlobal.document.addEventListener("visibilitychange", evt -> executeAnimationPipe());
     }
 
     @Override
@@ -47,6 +47,13 @@ public final class GwtJ2clUiSchedulerProvider extends UiSchedulerProviderBase {
             DomGlobal.clearTimeout(timeoutId);
             return true;
         };
+    }
+
+    @Override
+    public void wakeUp() {
+        if (!isSystemAnimationFrameRunning()) {
+            executeAnimationPipe();
+        }
     }
 
     @Override
