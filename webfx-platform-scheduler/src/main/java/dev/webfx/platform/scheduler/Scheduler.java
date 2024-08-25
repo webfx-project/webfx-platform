@@ -67,4 +67,8 @@ public class Scheduler {
         return tasksCount(true, true, true, true, true);
     }
 
+    public static void wakeUp() {
+        getProvider().wakeUp();
+    }
+
 }

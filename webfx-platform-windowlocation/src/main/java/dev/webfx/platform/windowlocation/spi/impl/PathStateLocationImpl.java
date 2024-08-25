@@ -28,4 +28,11 @@ public class PathStateLocationImpl extends PathLocationImpl implements PathState
     public Object getState() {
         return state;
     }
+
+    /*@Override
+    public String toString() {
+        return "PathStateLocationImpl{" +
+               "state=" + state +
+               "} " + super.toString();
+    }*/
 }

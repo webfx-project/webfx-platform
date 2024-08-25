@@ -83,6 +83,8 @@ public interface BrowsingHistory {
      */
     default void goForward() { go(1); }
 
+    boolean isGoingBackward();
+
 
     /**************************************** Transitions management ***************************************************
      *
