@@ -1,10 +1,10 @@
 package dev.webfx.platform.windowhistory.spi.impl.web;
 
 import dev.webfx.platform.ast.ReadOnlyAstObject;
-import dev.webfx.platform.async.Handler;
 import dev.webfx.platform.service.SingleServiceProvider;
 
 import java.util.ServiceLoader;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 /**
@@ -68,7 +68,7 @@ public interface JsWindowHistory {
      * a popstate event on page load, but Firefox doesn't.
      * @param stateListener
      */
-    void onPopState(Handler<ReadOnlyAstObject> stateListener);
+    void onPopState(Consumer<ReadOnlyAstObject> stateListener);
 
     void onBeforeUnload(Function<ReadOnlyAstObject, String> listener);
 }

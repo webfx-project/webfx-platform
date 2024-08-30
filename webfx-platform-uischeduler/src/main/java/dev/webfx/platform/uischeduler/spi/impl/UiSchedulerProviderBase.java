@@ -84,7 +84,8 @@ public abstract class UiSchedulerProviderBase extends SchedulerProviderBase impl
                 delayMs = 5000;
             this.delayMs = delayMs;
             this.futureFrameCount = afterFrameCount;
-            nextExecutionTimeMillis = delayMs == 0 ? 0 : System.currentTimeMillis() + delayMs;
+            long nowMillis = System.currentTimeMillis();
+            nextExecutionTimeMillis = nowMillis + delayMs;
             switch (pass) {
                 case UI_UPDATE_PASS: uiAnimations.add(this); break;
                 case PROPERTY_CHANGE_PASS: propertiesAnimations.add(this); break;
@@ -107,18 +108,21 @@ public abstract class UiSchedulerProviderBase extends SchedulerProviderBase impl
         }
 
         private boolean shouldExecuteNow() {
+            long nowMillis = System.currentTimeMillis();
             if (futureFrameCount > 0) {
                 futureFrameCount--;
                 return false;
             }
-            if (isIdle() && isBusy())
-                nextExecutionTimeMillis = System.currentTimeMillis() + 5000;
-            return nextExecutionTimeMillis == 0 || System.currentTimeMillis() >= nextExecutionTimeMillis;
+            boolean isScheduledIdle = isIdle();
+            boolean isSchedulerBusy = isBusy();
+            if (isScheduledIdle && isSchedulerBusy)
+                nextExecutionTimeMillis = nowMillis + 5000;
+            return nowMillis >= nextExecutionTimeMillis;
         }
 
         private void execute() {
             wrappedRunnable.run();
-            if (nextExecutionTimeMillis != 0 && wrappedRunnable.isPeriodic()) {
+            if (delayMs > 0 && wrappedRunnable.isPeriodic()) {
                 nextExecutionTimeMillis += delayMs;
                 long nowMillis = System.currentTimeMillis();
                 if (nextExecutionTimeMillis < nowMillis) {
@@ -182,8 +186,9 @@ public abstract class UiSchedulerProviderBase extends SchedulerProviderBase impl
                 // the first time). We eventually reschedule the next animation execution time for this.
                 if (animations == pulseAnimations)
                     continue;
-                if (nextAnimationExecutionTimeMillis == -1 || nextAnimationExecutionTimeMillis > scheduled.nextExecutionTimeMillis)
-                    nextAnimationExecutionTimeMillis = scheduled.nextExecutionTimeMillis;
+                long nextScheduledExecutionTimeMillis = Math.max(scheduled.nextExecutionTimeMillis, System.currentTimeMillis());
+                if (nextAnimationExecutionTimeMillis == -1 || nextAnimationExecutionTimeMillis > nextScheduledExecutionTimeMillis)
+                    nextAnimationExecutionTimeMillis = nextScheduledExecutionTimeMillis;
             }
         }
     }
@@ -193,7 +198,7 @@ public abstract class UiSchedulerProviderBase extends SchedulerProviderBase impl
             return;
         long nowMillis = System.currentTimeMillis();
         long delayMillis = nextAnimationExecutionTimeMillis - nowMillis;
-        boolean preferAnimationFrame = !stop && delayMillis < 50;
+        boolean preferAnimationFrame = !stop && delayMillis < 50 && isSystemAnimationFrameRunning();
         if (preferAnimationFrame) {
             if (longTermAnimationScheduled != null) {
                 longTermAnimationScheduled.cancel();
@@ -222,7 +227,10 @@ public abstract class UiSchedulerProviderBase extends SchedulerProviderBase impl
         }
     }
 
+    protected abstract boolean isSystemAnimationFrameRunning();
+
     protected abstract void requestAnimationFrame(Runnable runnable);
+
     protected abstract void cancelAnimationFrame();
 
     protected Cancellable scheduleLongTermAnimation(long delayMillis, Runnable runnable) {

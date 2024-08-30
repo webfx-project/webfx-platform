@@ -3,6 +3,8 @@ package dev.webfx.platform.windowlocation.spi.impl;
 import dev.webfx.platform.util.Strings;
 import dev.webfx.platform.windowlocation.spi.PathLocation;
 
+import java.util.Objects;
+
 /**
  * @author Bruno Salmon
  */
@@ -81,9 +83,9 @@ public class PathLocationImpl implements PathLocation {
 
         PathLocationImpl that = (PathLocationImpl) o;
 
-        if (pathname != null ? !pathname.equals(that.pathname) : that.pathname != null) return false;
-        if (queryString != null ? !queryString.equals(that.queryString) : that.queryString != null) return false;
-        return fragment != null ? fragment.equals(that.fragment) : that.fragment == null;
+        if (!Objects.equals(pathname, that.pathname)) return false;
+        if (!Objects.equals(queryString, that.queryString)) return false;
+        return Objects.equals(fragment, that.fragment);
 
     }
 
@@ -94,4 +96,13 @@ public class PathLocationImpl implements PathLocation {
         result = 31 * result + (fragment != null ? fragment.hashCode() : 0);
         return result;
     }
+
+    /*@Override
+    public String toString() {
+        return "PathLocationImpl{" +
+               "pathname='" + pathname + '\'' +
+               ", queryString='" + queryString + '\'' +
+               ", fragment='" + fragment + '\'' +
+               '}';
+    }*/
 }

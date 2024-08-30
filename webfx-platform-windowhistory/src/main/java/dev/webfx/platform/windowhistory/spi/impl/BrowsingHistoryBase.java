@@ -1,16 +1,16 @@
 package dev.webfx.platform.windowhistory.spi.impl;
 
+import dev.webfx.platform.ast.ReadOnlyAstObject;
+import dev.webfx.platform.async.Future;
+import dev.webfx.platform.async.Handler;
+import dev.webfx.platform.async.Promise;
+import dev.webfx.platform.util.Strings;
 import dev.webfx.platform.windowhistory.spi.BrowsingHistory;
 import dev.webfx.platform.windowhistory.spi.BrowsingHistoryEvent;
 import dev.webfx.platform.windowhistory.spi.BrowsingHistoryLocation;
 import dev.webfx.platform.windowlocation.spi.PathStateLocation;
 import dev.webfx.platform.windowlocation.spi.impl.PathLocationImpl;
 import dev.webfx.platform.windowlocation.spi.impl.PathStateLocationImpl;
-import dev.webfx.platform.ast.ReadOnlyAstObject;
-import dev.webfx.platform.util.Strings;
-import dev.webfx.platform.async.Future;
-import dev.webfx.platform.async.Handler;
-import dev.webfx.platform.async.Promise;
 
 import java.util.function.Function;
 
@@ -19,6 +19,7 @@ import java.util.function.Function;
  */
 public abstract class BrowsingHistoryBase implements BrowsingHistory {
 
+    private boolean goingBackward; // should be set by derived classes for isGoingForward/Backward() management
     private String mountPoint;
 
     public void setMountPoint(String mountPoint) {
@@ -68,6 +69,17 @@ public abstract class BrowsingHistoryBase implements BrowsingHistory {
             }
         } );
         return promise.future();
+    }
+
+    protected void setGoingBackward(boolean goingBackward) {
+        //Console.log("Setting goingBackward to " + goingBackward);
+        this.goingBackward = goingBackward;
+    }
+
+    @Override
+    public boolean isGoingBackward() {
+        //Console.log("isGoingBackward() returns " + goingBackward);
+        return goingBackward;
     }
 
     protected void transit(BrowsingHistoryLocationImpl newHistoryLocation) {

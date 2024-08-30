@@ -11,12 +11,25 @@ import elemental2.dom.DomGlobal;
  */
 public final class GwtJ2clUiSchedulerProvider extends UiSchedulerProviderBase {
 
+    {
+        // The browser is stopping animation frames when the tab is hidden, so we ensure all pending animation tasks
+        // are executed as soon as the user goes back to the tab.
+        DomGlobal.document.addEventListener("visibilitychange", evt -> executeAnimationPipe());
+    }
+
     @Override
     public boolean isUiThread() {
         return true;
     }
 
     private int animationFrameId;
+
+    @Override
+    protected boolean isSystemAnimationFrameRunning() {
+        // Usually the browsers stop honouring animation frames on hidden tabs
+        boolean isBrowserTabHidden = "hidden".equalsIgnoreCase(DomGlobal.document.visibilityState);
+        return !isBrowserTabHidden;
+    }
 
     @Override
     protected void requestAnimationFrame(Runnable runnable) {
@@ -34,6 +47,13 @@ public final class GwtJ2clUiSchedulerProvider extends UiSchedulerProviderBase {
             DomGlobal.clearTimeout(timeoutId);
             return true;
         };
+    }
+
+    @Override
+    public void wakeUp() {
+        if (!isSystemAnimationFrameRunning()) {
+            executeAnimationPipe();
+        }
     }
 
     @Override

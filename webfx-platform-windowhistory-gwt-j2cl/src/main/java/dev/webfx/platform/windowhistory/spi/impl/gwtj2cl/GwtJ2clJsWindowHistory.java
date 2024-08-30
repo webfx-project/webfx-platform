@@ -1,11 +1,11 @@
 package dev.webfx.platform.windowhistory.spi.impl.gwtj2cl;
 
 import dev.webfx.platform.ast.ReadOnlyAstObject;
-import dev.webfx.platform.async.Handler;
 import dev.webfx.platform.windowhistory.spi.impl.web.JsWindowHistory;
 import elemental2.dom.DomGlobal;
 import jsinterop.base.Js;
 
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 /**
@@ -13,8 +13,7 @@ import java.util.function.Function;
  */
 public final class GwtJ2clJsWindowHistory implements JsWindowHistory {
 
-    public GwtJ2clJsWindowHistory() {
-    }
+    public GwtJ2clJsWindowHistory() {}
 
     @Override
     public int length() {
@@ -47,9 +46,9 @@ public final class GwtJ2clJsWindowHistory implements JsWindowHistory {
     }
 
     @Override
-    public void onPopState(Handler<ReadOnlyAstObject> stateListener) {
+    public void onPopState(Consumer<ReadOnlyAstObject> stateListener) {
         DomGlobal.window.onpopstate = event -> {
-            stateListener.handle(Js.cast(Js.asPropertyMap(event).get("state")));
+            stateListener.accept(Js.cast(Js.asPropertyMap(event).get("state")));
             return null;
         };
     }

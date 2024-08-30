@@ -65,4 +65,5 @@ public interface SchedulerProvider {
 
     int tasksCount(boolean includeDeferred, boolean includePeriodic, boolean includeBackground, boolean includePending, boolean includeRunning);
 
+    default void wakeUp() {}
 }
