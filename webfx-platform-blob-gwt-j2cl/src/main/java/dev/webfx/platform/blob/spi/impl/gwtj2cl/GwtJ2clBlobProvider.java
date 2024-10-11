@@ -26,14 +26,14 @@ public final class GwtJ2clBlobProvider implements BlobProvider {
     }
 
     @Override
-    public void exportBlob(Blob blob, String fileName) {
+    public void downloadUrl(String url, String fileName) {
         HTMLLinkElement a = (HTMLLinkElement) DomGlobal.document.createElement("a");
-        a.href = blob.getObjectURL();
-        a.setAttribute("download", fileName);
+        a.href = url;
+        if (fileName != null)
+            a.setAttribute("download", fileName);
         a.style.display = "none";
         DomGlobal.document.body.appendChild(a);
         a.click();
         DomGlobal.document.body.removeChild(a);
     }
-
 }

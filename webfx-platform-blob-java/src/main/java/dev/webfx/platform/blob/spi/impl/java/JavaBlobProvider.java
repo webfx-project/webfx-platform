@@ -19,7 +19,7 @@ public final class JavaBlobProvider implements BlobProvider {
     }
 
     @Override
-    public void exportBlob(Blob blob, String fileName) {
+    public void downloadUrl(String url, String fileName) {
 
     }
 }

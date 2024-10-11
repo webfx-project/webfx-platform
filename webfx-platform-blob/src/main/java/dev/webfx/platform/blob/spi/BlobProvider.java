@@ -18,6 +18,18 @@ public interface BlobProvider {
 
     Blob createTextBlob(String text);
 
-    void exportBlob(Blob blob, String fileName);
+    default void exportBlob(Blob blob) {
+        exportBlob(blob, null);
+    }
+
+    default void exportBlob(Blob blob, String fileName) {
+        downloadUrl(blob.getObjectURL(), fileName);
+    }
+
+    default void downloadUrl(String url) {
+        downloadUrl(url, null);
+    }
+
+    void downloadUrl(String url, String fileName);
 
 }
