@@ -63,6 +63,12 @@ public final class Collections {
         return map;
     }
 
+    public static <T> List<T> setAll(List<T> list, Collection<? extends T> collection) {
+        list.clear();
+        list.addAll(collection);
+        return list;
+    }
+
     public static <T> void forEach(Iterable<T> iterable, Consumer<T> consumer) {
         if (iterable != null) {
             // Safe loop version (not causing ConcurrentModificationException)
