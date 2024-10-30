@@ -250,4 +250,20 @@ public final class Times {
         return s;
     }
 
+    public static boolean isPast(LocalDate date) {
+        return LocalDate.now().isAfter(date);
+    }
+
+    public static boolean isFuture(LocalDate date) {
+        return LocalDate.now().isBefore(date);
+    }
+
+    public static boolean isPast(LocalDateTime date) {
+        return LocalDateTime.now().isAfter(date);
+    }
+
+    public static boolean isFuture(LocalDateTime date) {
+        return LocalDateTime.now().isBefore(date);
+    }
+
 }
