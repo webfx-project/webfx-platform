@@ -241,7 +241,7 @@ public abstract class SchedulerProviderBase implements SchedulerProvider {
         }
 
         protected boolean cancelImpl() {
-            return true;
+            return true; // will be removed on next animation frame
         }
 
     }
