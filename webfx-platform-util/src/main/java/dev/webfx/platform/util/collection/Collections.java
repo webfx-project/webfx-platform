@@ -273,6 +273,13 @@ public final class Collections {
         return true;
     }
 
+    public static <T> boolean addIfNotContains(T element, Collection<T> collection) {
+        if (collection == null || collection.contains(element))
+            return false;
+        collection.add(element);
+        return true;
+    }
+
     public static <T> boolean allNonNulls(List<T> list) {
         return indexOf(list, (T) null) == -1;
     }
