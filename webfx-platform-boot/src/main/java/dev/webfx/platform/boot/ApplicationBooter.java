@@ -27,10 +27,10 @@ public final class ApplicationBooter {
         getProvider().stopApplicationJob(applicationJob);
     }
 
-    private static String[] mainArgs;
+    private static String[] MAIN_ARGS;
 
     public static String[] getMainArgs() {
-        return mainArgs;
+        return MAIN_ARGS;
     }
 
     public static void start(ApplicationBooterProvider provider, String[] mainArgs) {
@@ -40,11 +40,11 @@ public final class ApplicationBooter {
     }
 
     public static void start(String[] mainArgs) {
-        ApplicationBooter.mainArgs = mainArgs;
+        MAIN_ARGS = mainArgs;
         getProvider().boot();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] mainArgs) {
         start(mainArgs);
     }
 }
