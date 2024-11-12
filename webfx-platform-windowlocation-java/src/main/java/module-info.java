@@ -7,6 +7,7 @@ module webfx.platform.windowlocation.java {
 
     // Direct dependencies modules
     requires webfx.platform.conf.zero;
+    requires webfx.platform.windowhistory;
     requires webfx.platform.windowlocation;
 
     // Exported packages
