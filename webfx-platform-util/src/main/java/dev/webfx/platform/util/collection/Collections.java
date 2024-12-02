@@ -320,50 +320,25 @@ public final class Collections {
         return array;
     }
 
-    public static String toString(Iterable iterable) {
-        return toString(iterable, true, false);
+    public static String toString(Iterable iterable, ToStringOptions options) {
+        return toString(iterable != null ? iterable.iterator() : null, options);
     }
 
-    public static String toString(Iterator iterator) {
-        return toString(iterator, true, false);
+    public static String toString(Iterator it, ToStringOptions options) {
+        return toString(it, options.getOpening(), options.getSeparator(), options.isLineFeeds(), options.getStringQuote(), options.getArrayOpening(), options.getArrayClosing(), options.getClosing());
     }
 
-    public static String toStringWithLineFeeds(Iterable iterable) {
-        return toString(iterable, true, true);
-    }
-
-    public static String toStringWithLineFeeds(Iterator iterator) {
-        return toString(iterator, true, true);
-    }
-
-    public static String toStringWithNoBrackets(Iterable iterable) {
-        return toString(iterable, false, false);
-    }
-
-    public static String toStringWithNoBrackets(Iterator iterator) {
-        return toString(iterator, false, false);
-    }
-
-    public static String toString(Iterable iterable, boolean brackets, boolean lineFeeds) {
-        return toString(iterable, ", ", brackets, lineFeeds);
-    }
-
-    public static String toString(Iterable iterable, String separator, boolean brackets, boolean lineFeeds) {
-        return toString(iterable.iterator(), separator, brackets, lineFeeds);
-    }
-
-    private static String toString(Iterator it, boolean brackets, boolean lineFeeds) {
-        return toString(it, ", ", brackets, lineFeeds);
-    }
-
-    private static String toString(Iterator it, String separator, boolean brackets, boolean lineFeeds) {
+    private static String toString(Iterator it, CharSequence opening, CharSequence separator, boolean lineFeeds, CharSequence stringQuote, CharSequence arrayOpening, CharSequence arrayClosing, CharSequence closing) {
         if (it == null)
             return null;
-        if (!it.hasNext())
-            return brackets ? "[]" : "";
         StringBuilder sb = new StringBuilder();
-        if (brackets)
-            sb.append('[');
+        toString(it, sb, opening, separator, lineFeeds, stringQuote, arrayOpening, arrayClosing, closing);
+        return sb.toString();
+    }
+
+    private static void toString(Iterator it, StringBuilder sb, CharSequence opening, CharSequence separator, boolean lineFeeds, CharSequence stringQuote, CharSequence arrayOpening, CharSequence arrayClosing, CharSequence closing) {
+        if (opening != null)
+            sb.append(opening);
         int initialLength = sb.length();
         while (it.hasNext()) {
             int length = sb.length();
@@ -374,16 +349,58 @@ public final class Collections {
                     sb.append('\n');
             }
             Object value = it.next();
-            if (value instanceof Object[])
-                sb.append(Arrays.toString((Object[]) value));
+            if (value instanceof Object[]) {
+                toString(dev.webfx.platform.util.Arrays.asList(((Object[]) value)).iterator(), sb, arrayOpening, separator, lineFeeds, stringQuote, arrayOpening, arrayClosing, arrayClosing);
+            } else if (stringQuote != null && value instanceof String)
+                sb.append(stringQuote).append(value).append(stringQuote);
             else
                 sb.append(value);
         }
-        if (brackets) {
-            if (lineFeeds)
-                sb.append('\n');
-            sb.append(']');
+        if (closing != null) {
+            sb.append(closing);
         }
-        return sb.toString();
     }
+
+    // Some shortcut toString() methods
+
+    public static String toStringCommaSeparated(Iterable iterable) { // by default toString() is with comma separated
+        return toString(iterable, ToStringOptions.COMMA_SEPARATED_TO_STRING_OPTIONS);
+    }
+
+    public static String toStringCommaSeparated(Iterator iterator) { // by default toString() is with comma separated
+        return toString(iterator, ToStringOptions.COMMA_SEPARATED_TO_STRING_OPTIONS);
+    }
+
+    public static String toStringCommaSeparatedWithSingleQuotedStrings(Iterable iterable) {
+        return toString(iterable, ToStringOptions.SINGLE_QUOTE_TO_STRING_OPTIONS);
+    }
+
+    public static String toStringCommaSeparatedWithSingleQuotedStrings(Iterator iterator) {
+        return toString(iterator, ToStringOptions.SINGLE_QUOTE_TO_STRING_OPTIONS);
+    }
+
+    public static String toStringCommaSeparatedWithBrackets(Iterable iterable) {
+        return toString(iterable, ToStringOptions.BRACKETS_TO_STRING_OPTIONS);
+    }
+
+    public static String toStringCommaSeparatedWithBrackets(Iterator iterator) {
+        return toString(iterator, ToStringOptions.BRACKETS_TO_STRING_OPTIONS);
+    }
+
+    public static String toStringCommaSeparatedWithBracketsAndLineFeeds(Iterable iterable) {
+        return toString(iterable, ToStringOptions.BRACKETS_LINE_FEEDS_TO_STRING_OPTIONS);
+    }
+
+    public static String toStringCommaSeparatedWithBracketsAndLineFeeds(Iterator iterator) {
+        return toString(iterator, ToStringOptions.BRACKETS_LINE_FEEDS_TO_STRING_OPTIONS);
+    }
+
+    public static String toStringAmpersandSeparated(Iterable iterable) {
+        return toString(iterable, ToStringOptions.AMPERSAND_SEPARATED_TO_STRING_OPTIONS);
+    }
+
+    public static String toStringAmpersandSeparated(Iterator iterator) {
+        return toString(iterator, ToStringOptions.AMPERSAND_SEPARATED_TO_STRING_OPTIONS);
+    }
+
 }

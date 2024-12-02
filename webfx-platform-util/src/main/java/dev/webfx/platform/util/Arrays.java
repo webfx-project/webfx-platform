@@ -1,6 +1,7 @@
 package dev.webfx.platform.util;
 
 import dev.webfx.platform.util.collection.Collections;
+import dev.webfx.platform.util.collection.ToStringOptions;
 import dev.webfx.platform.util.function.Converter;
 
 import java.util.ArrayList;
@@ -23,6 +24,8 @@ public final class Arrays {
     }
 
     public static <T> List<T> asList(T... a) {
+        if (a == null)
+            return null;
         return java.util.Arrays.asList(a);
     }
 
@@ -74,12 +77,16 @@ public final class Arrays {
     }
 
 
+    public static <T> String toString(T[] array, ToStringOptions options) {
+        return Collections.toString(asList(array), options);
+    }
+
     public static <T> String toString(T[] array) {
-        return Collections.toString(asList(array));
+        return toString(array, ToStringOptions.BRACKETS_SINGLE_QUOTE_TO_STRING_OPTIONS);
     }
 
     public static <T> String toStringWithLineFeeds(T[] array) {
-        return Collections.toStringWithLineFeeds(asList(array));
+        return toString(array, ToStringOptions.BRACKETS_SINGLE_QUOTE_LINE_FEEDS_TO_STRING_OPTIONS);
     }
 
     public static <T> void forEach(T[] array, Consumer<T> consumer) {
