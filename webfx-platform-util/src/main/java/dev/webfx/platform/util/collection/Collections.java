@@ -280,6 +280,15 @@ public final class Collections {
         return true;
     }
 
+    public static <T> void addIfNotContainsOrRemove(Collection<T> collection, boolean add, T... elements) {
+        for (T element : elements) {
+            if (add)
+                addIfNotContains(element, collection);
+            else
+                collection.remove(element);
+        }
+    }
+
     public static <T> boolean allNonNulls(List<T> list) {
         return indexOf(list, (T) null) == -1;
     }
