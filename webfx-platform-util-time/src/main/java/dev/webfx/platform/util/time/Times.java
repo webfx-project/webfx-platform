@@ -258,12 +258,24 @@ public final class Times {
         return LocalDate.now().isBefore(date);
     }
 
+    public static boolean isBetween(LocalDate dateToCheck, LocalDate startDate, LocalDate endDate) {
+        return dateToCheck != null
+            && (startDate == null || dateToCheck.isAfter(startDate) || dateToCheck.isEqual(startDate))
+            && (endDate == null   || dateToCheck.isBefore(endDate)  || dateToCheck.isEqual(endDate));
+    }
+
     public static boolean isPast(LocalDateTime date) {
         return LocalDateTime.now().isAfter(date);
     }
 
     public static boolean isFuture(LocalDateTime date) {
         return LocalDateTime.now().isBefore(date);
+    }
+
+    public static boolean isBetween(LocalDateTime dateToCheck, LocalDateTime startDate, LocalDateTime endDate) {
+        return dateToCheck != null
+               && (startDate == null || dateToCheck.isAfter(startDate) || dateToCheck.isEqual(startDate))
+               && (endDate == null   || dateToCheck.isBefore(endDate)  || dateToCheck.isEqual(endDate));
     }
 
 }
