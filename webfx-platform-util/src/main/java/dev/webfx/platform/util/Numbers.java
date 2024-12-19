@@ -318,6 +318,43 @@ public final class Numbers {
         return number == null ? 0 : number;
     }
 
+    public static int compareObjectsOrNumbers(Object o1, Object o2) {
+        if (o1 == o2)
+            return 0;
+        if (o1 == null)
+            return 1;
+        if (o2 == null)
+            return -1;
+        if (o1.equals(o2))
+            return 0;
+        if (o1 instanceof Number && o2 instanceof Number)
+            return compareNumbers((Number) o1, (Number) o2);
+        if (o1 instanceof Comparable<?> && Objects.isInstanceOf(o2, o1.getClass()))
+            return ((Comparable) o1).compareTo(o2);
+        if (o2 instanceof Comparable<?> && Objects.isInstanceOf(o1, o2.getClass()))
+            return -((Comparable) o2).compareTo(o1);
+        return o1.hashCode() - o2.hashCode();
+    }
+
+    public static int compareNumbers(Number n1, Number n2) {
+        if (n1 == n2)
+            return 0;
+        if (n1 == null)
+            return 1;
+        if (n2 == null)
+            return -1;
+        if (n1.equals(n2))
+            return 0;
+        if (n1.getClass().equals(n2.getClass()))
+            return ((Comparable)n1).compareTo(n2); // All concrete Number classes implement Comparable
+        if (isMathematicalInteger(n1) && isMathematicalInteger(n2))
+            return toLong(n1).compareTo(toLong(n2));
+        // Can be only Double, Float or mixed
+        if (n1 instanceof Double || n2 instanceof Double)
+            return Double.compare(n1.doubleValue(), n2.doubleValue());
+        return Float.compare(n1.floatValue(), n2.floatValue());
+    }
+
     public static boolean identicalObjectsOrNumberValues(Object o1, Object o2) {
         if (java.util.Objects.equals(o1, o2))
             return true;
@@ -327,11 +364,7 @@ public final class Numbers {
     }
 
     public static boolean identicalNumberValues(Number n1, Number n2) {
-        if (java.util.Objects.equals(n1, n2))
-            return true;
-        if (!isMathematicalInteger(n1) || !isMathematicalInteger(n2))
-            return false;
-        return java.util.Objects.equals(toShortestNumber(n1), toShortestNumber(n2));
+        return compareNumbers(n1, n2) == 0;
     }
 
     public static String twoDigits(int i) {
