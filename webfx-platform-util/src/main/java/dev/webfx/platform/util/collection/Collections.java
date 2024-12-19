@@ -69,6 +69,16 @@ public final class Collections {
         return list;
     }
 
+    public static <T> List<T> setAll(List<T> list, T... elements) {
+        list.clear();
+        return addAll(list, elements);
+    }
+
+    public static <T> List<T> addAll(List<T> list, T... elements) {
+        dev.webfx.platform.util.Arrays.forEach(elements, list::add);
+        return list;
+    }
+
     public static <T> void forEach(Iterable<T> iterable, Consumer<T> consumer) {
         if (iterable != null) {
             // Safe loop version (not causing ConcurrentModificationException)
@@ -144,11 +154,36 @@ public final class Collections {
 
     public static <T> T findFirst(Iterable<T> iterable, Predicate<? super T> predicate) {
         //return collection.stream().filter(predicate::test).findFirst().get(); // Not GWT compilable for now
-        if (iterable != null)
-            for (T element : iterable) {
-                if (predicate.test(element))
-                    return element;
-            }
+        return findFirst(iterable, 0, predicate);
+    }
+
+    public static <T> T findFirst(Iterable<T> iterable, int fromIndex, Predicate<? super T> predicate) {
+        if (iterable == null)
+            return null;
+        if (iterable instanceof List<T>) {
+            return findFirst((List<T>) iterable, fromIndex, predicate);
+        }
+        for (T element : iterable) {
+            if (fromIndex > 0)
+                fromIndex--;
+            else if (predicate.test(element))
+                return element;
+        }
+        return null;
+    }
+
+    public static <T> T findFirst(List<T> list, Predicate<? super T> predicate) {
+        return findFirst(list, 0, predicate);
+    }
+
+    public static <T> T findFirst(List<T> list, int fromIndex, Predicate<? super T> predicate) {
+        if (list == null)
+            return null;
+        for (int i = fromIndex; i < list.size(); i++) {
+            T element = list.get(i);
+            if (predicate.test(element))
+                return element;
+        }
         return null;
     }
 
@@ -287,6 +322,12 @@ public final class Collections {
             else
                 collection.remove(element);
         }
+    }
+
+    public static <T> void swap(List<T> list, int index1, int index2) {
+        T swap = list.get(index1);
+        list.set(index1, list.get(index2));
+        list.set(index2, swap);
     }
 
     public static <T> boolean allNonNulls(List<T> list) {
