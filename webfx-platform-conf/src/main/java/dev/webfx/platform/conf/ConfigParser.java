@@ -38,6 +38,11 @@ public class ConfigParser {
         int atIndex = filePath.lastIndexOf('@');
         if (atIndex >= 0)
             filePath = filePath.substring(atIndex + 1);
+        else { // Same with '_' (the purpose is to make resource bundle files recognised by WebFX i18n).
+            int underscoreIndex = filePath.lastIndexOf('_');
+            if (underscoreIndex >= 0)
+                filePath = filePath.substring(underscoreIndex + 1);
+        }
         // Now this short file name without extension will act as the prefix path, unless it contains "-" (like for
         // "src-root") where in that case, it's considered to be a root configuration path (no prefix)
         String prefixPath = filePath.contains("-") ? null : filePath;
