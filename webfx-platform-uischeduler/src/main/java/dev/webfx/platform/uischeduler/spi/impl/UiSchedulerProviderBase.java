@@ -87,24 +87,20 @@ public abstract class UiSchedulerProviderBase extends SchedulerProviderBase impl
             long nowMillis = System.currentTimeMillis();
             nextExecutionTimeMillis = nowMillis + delayMs;
             switch (pass) {
-                case UI_UPDATE_PASS: uiAnimations.add(this); break;
-                case PROPERTY_CHANGE_PASS: propertiesAnimations.add(this); break;
-                case SCENE_PULSE_LAYOUT_PASS: pulseAnimations.add(this); break;
+                case UI_UPDATE_PASS: {
+                    uiAnimations.add(this);
+                    break;
+                }
+                case PROPERTY_CHANGE_PASS: {
+                    propertiesAnimations.add(this);
+                    break;
+                }
+                case SCENE_PULSE_LAYOUT_PASS: {
+                    pulseAnimations.add(this);
+                    break;
+                }
             }
             scheduleNextAnimationExecution(false, false, nextExecutionTimeMillis);
-        }
-
-        @Override
-        public boolean cancelImpl() {
-            return true; // will be removed on next animation frame
-        }
-
-        public boolean isCancelled() {
-            return wrappedRunnable.isCancelled();
-        }
-
-        public boolean isPeriodic() {
-            return wrappedRunnable.isPeriodic();
         }
 
         private boolean shouldExecuteNow() {

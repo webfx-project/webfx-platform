@@ -169,6 +169,18 @@ public final class UiScheduler extends Scheduler {
         return getProvider().schedulePeriodic(delayMs, runnable);
     }
 
+    public static Scheduled scheduleNowAndPeriodic(long delayMs, Runnable runnable) {
+        Scheduled scheduled = schedulePeriodic(delayMs, runnable);
+        runnable.run();
+        return scheduled;
+    }
+
+    public static Scheduled scheduleNowAndPeriodic(long delayMs, Consumer<Scheduled> runnable) {
+        Scheduled scheduled = schedulePeriodic(delayMs, runnable);
+        runnable.accept(scheduled);
+        return scheduled;
+    }
+
     public static Scheduled runInBackground(Runnable runnable) {
         return getProvider().runInBackground(runnable);
     }

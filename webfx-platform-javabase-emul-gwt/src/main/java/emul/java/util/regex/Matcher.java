@@ -35,6 +35,14 @@ public class Matcher {
         }
     }
 
+    public int start() {
+        return findMatchStartPos;
+    }
+
+    public int end() {
+        return findMatchStartPos + findMatchLength;
+    }
+
     public boolean matches() {
         return matchResult != null;
     }

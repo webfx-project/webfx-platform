@@ -1,22 +1,20 @@
 package dev.webfx.platform.windowlocation.spi.impl.java;
 
 import dev.webfx.platform.conf.zero.ZeroConfig;
+import dev.webfx.platform.windowhistory.WindowHistory;
+import dev.webfx.platform.windowhistory.spi.BrowsingHistoryLocation;
 import dev.webfx.platform.windowlocation.spi.WindowLocationProvider;
+import dev.webfx.platform.windowlocation.spi.impl.BrowsingLocationImpl;
 
 /**
  * @author Bruno Salmon
  */
 public final class JavaWindowLocationProvider implements WindowLocationProvider {
 
-    // TODO: See how this class should interact with JavaWindowHistoryProvider
-
     private final static String CONFIG_PATH = "webfx.platform.windowlocation.java";
     private String protocol = ZeroConfig.lookupString(CONFIG_PATH, "initialProtocol");
     private String hostname = ZeroConfig.lookupString(CONFIG_PATH, "initialHostname", "localhost");
     private String port = ZeroConfig.lookupString(CONFIG_PATH, "initialPort", "80");
-    private String pathname = ZeroConfig.lookupString(CONFIG_PATH, "initialPathname", "/");
-    private String queryString = ZeroConfig.lookupString(CONFIG_PATH, "initialQueryString");
-    private String fragment = ZeroConfig.lookupString(CONFIG_PATH, "initialFragment");
 
     @Override
     public String getProtocol() {
@@ -35,26 +33,43 @@ public final class JavaWindowLocationProvider implements WindowLocationProvider 
 
     @Override
     public String getPathname() {
+        BrowsingHistoryLocation currentLocation = WindowHistory.getCurrentLocation();
+        String pathname = currentLocation != null ? currentLocation.getPathname() : null;
+        if (!pathname.contains("/#"))
+            pathname = "/#" + pathname;
         return pathname;
     }
 
     @Override
     public String getQueryString() {
-        return queryString;
+        BrowsingHistoryLocation currentLocation = WindowHistory.getCurrentLocation();
+        return currentLocation != null ? currentLocation.getQueryString() : null;
     }
 
     @Override
     public String getFragment() {
-        return fragment;
+        BrowsingHistoryLocation currentLocation = WindowHistory.getCurrentLocation();
+        return currentLocation != null ? currentLocation.getFragment() : null;
     }
 
     @Override
     public void assignHref(String href) {
-        // TODO: recompute the fields from href
+        changeHref(href, false);
     }
 
     @Override
     public void replaceHref(String href) {
-        assignHref(href);
+        changeHref(href, true);
+    }
+
+    private void changeHref(String href, boolean replace) {
+        BrowsingLocationImpl browsingLocation = BrowsingLocationImpl.fromHref(href);
+        protocol = browsingLocation.getProtocol();
+        hostname = browsingLocation.getHostname();
+        port = browsingLocation.getPort();
+        if (replace)
+            WindowHistory.getProvider().replace(browsingLocation.getPath());
+        else
+            WindowHistory.getProvider().push(browsingLocation.getPath());
     }
 }

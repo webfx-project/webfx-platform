@@ -38,8 +38,13 @@ public class BrowsingLocationImpl extends PathLocationImpl implements BrowsingLo
     }
 
     public static BrowsingLocationImpl fromHref(String href) {
+        return fromHref(href, null);
+    }
+
+    public static BrowsingLocationImpl fromHref(String href, String protocol) {
         int protoEnd = href.indexOf("://");
-        String protocol = href.substring(0, protoEnd);
+        if (protocol == null)
+            protocol = href.substring(0, protoEnd);
         int hostStart = protoEnd + 3;
         int hostEnd = href.indexOf('/', hostStart);
         String host  = href.substring(hostStart, hostEnd);

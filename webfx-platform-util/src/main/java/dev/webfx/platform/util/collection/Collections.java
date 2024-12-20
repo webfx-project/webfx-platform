@@ -63,6 +63,22 @@ public final class Collections {
         return map;
     }
 
+    public static <T> List<T> setAll(List<T> list, Collection<? extends T> collection) {
+        list.clear();
+        list.addAll(collection);
+        return list;
+    }
+
+    public static <T> List<T> setAll(List<T> list, T... elements) {
+        list.clear();
+        return addAll(list, elements);
+    }
+
+    public static <T> List<T> addAll(List<T> list, T... elements) {
+        dev.webfx.platform.util.Arrays.forEach(elements, list::add);
+        return list;
+    }
+
     public static <T> void forEach(Iterable<T> iterable, Consumer<T> consumer) {
         if (iterable != null) {
             // Safe loop version (not causing ConcurrentModificationException)
@@ -138,11 +154,36 @@ public final class Collections {
 
     public static <T> T findFirst(Iterable<T> iterable, Predicate<? super T> predicate) {
         //return collection.stream().filter(predicate::test).findFirst().get(); // Not GWT compilable for now
-        if (iterable != null)
-            for (T element : iterable) {
-                if (predicate.test(element))
-                    return element;
-            }
+        return findFirst(iterable, 0, predicate);
+    }
+
+    public static <T> T findFirst(Iterable<T> iterable, int fromIndex, Predicate<? super T> predicate) {
+        if (iterable == null)
+            return null;
+        if (iterable instanceof List<T>) {
+            return findFirst((List<T>) iterable, fromIndex, predicate);
+        }
+        for (T element : iterable) {
+            if (fromIndex > 0)
+                fromIndex--;
+            else if (predicate.test(element))
+                return element;
+        }
+        return null;
+    }
+
+    public static <T> T findFirst(List<T> list, Predicate<? super T> predicate) {
+        return findFirst(list, 0, predicate);
+    }
+
+    public static <T> T findFirst(List<T> list, int fromIndex, Predicate<? super T> predicate) {
+        if (list == null)
+            return null;
+        for (int i = fromIndex; i < list.size(); i++) {
+            T element = list.get(i);
+            if (predicate.test(element))
+                return element;
+        }
         return null;
     }
 
@@ -267,6 +308,28 @@ public final class Collections {
         return true;
     }
 
+    public static <T> boolean addIfNotContains(T element, Collection<T> collection) {
+        if (collection == null || collection.contains(element))
+            return false;
+        collection.add(element);
+        return true;
+    }
+
+    public static <T> void addIfNotContainsOrRemove(Collection<T> collection, boolean add, T... elements) {
+        for (T element : elements) {
+            if (add)
+                addIfNotContains(element, collection);
+            else
+                collection.remove(element);
+        }
+    }
+
+    public static <T> void swap(List<T> list, int index1, int index2) {
+        T swap = list.get(index1);
+        list.set(index1, list.get(index2));
+        list.set(index2, swap);
+    }
+
     public static <T> boolean allNonNulls(List<T> list) {
         return indexOf(list, (T) null) == -1;
     }
@@ -307,50 +370,25 @@ public final class Collections {
         return array;
     }
 
-    public static String toString(Iterable iterable) {
-        return toString(iterable, true, false);
+    public static String toString(Iterable iterable, ToStringOptions options) {
+        return toString(iterable != null ? iterable.iterator() : null, options);
     }
 
-    public static String toString(Iterator iterator) {
-        return toString(iterator, true, false);
+    public static String toString(Iterator it, ToStringOptions options) {
+        return toString(it, options.getOpening(), options.getSeparator(), options.isLineFeeds(), options.getStringQuote(), options.getArrayOpening(), options.getArrayClosing(), options.getClosing());
     }
 
-    public static String toStringWithLineFeeds(Iterable iterable) {
-        return toString(iterable, true, true);
-    }
-
-    public static String toStringWithLineFeeds(Iterator iterator) {
-        return toString(iterator, true, true);
-    }
-
-    public static String toStringWithNoBrackets(Iterable iterable) {
-        return toString(iterable, false, false);
-    }
-
-    public static String toStringWithNoBrackets(Iterator iterator) {
-        return toString(iterator, false, false);
-    }
-
-    public static String toString(Iterable iterable, boolean brackets, boolean lineFeeds) {
-        return toString(iterable, ", ", brackets, lineFeeds);
-    }
-
-    public static String toString(Iterable iterable, String separator, boolean brackets, boolean lineFeeds) {
-        return toString(iterable.iterator(), separator, brackets, lineFeeds);
-    }
-
-    private static String toString(Iterator it, boolean brackets, boolean lineFeeds) {
-        return toString(it, ", ", brackets, lineFeeds);
-    }
-
-    private static String toString(Iterator it, String separator, boolean brackets, boolean lineFeeds) {
+    private static String toString(Iterator it, CharSequence opening, CharSequence separator, boolean lineFeeds, CharSequence stringQuote, CharSequence arrayOpening, CharSequence arrayClosing, CharSequence closing) {
         if (it == null)
             return null;
-        if (!it.hasNext())
-            return brackets ? "[]" : "";
         StringBuilder sb = new StringBuilder();
-        if (brackets)
-            sb.append('[');
+        toString(it, sb, opening, separator, lineFeeds, stringQuote, arrayOpening, arrayClosing, closing);
+        return sb.toString();
+    }
+
+    private static void toString(Iterator it, StringBuilder sb, CharSequence opening, CharSequence separator, boolean lineFeeds, CharSequence stringQuote, CharSequence arrayOpening, CharSequence arrayClosing, CharSequence closing) {
+        if (opening != null)
+            sb.append(opening);
         int initialLength = sb.length();
         while (it.hasNext()) {
             int length = sb.length();
@@ -361,16 +399,58 @@ public final class Collections {
                     sb.append('\n');
             }
             Object value = it.next();
-            if (value instanceof Object[])
-                sb.append(Arrays.toString((Object[]) value));
+            if (value instanceof Object[]) {
+                toString(dev.webfx.platform.util.Arrays.asList(((Object[]) value)).iterator(), sb, arrayOpening, separator, lineFeeds, stringQuote, arrayOpening, arrayClosing, arrayClosing);
+            } else if (stringQuote != null && value instanceof String)
+                sb.append(stringQuote).append(value).append(stringQuote);
             else
                 sb.append(value);
         }
-        if (brackets) {
-            if (lineFeeds)
-                sb.append('\n');
-            sb.append(']');
+        if (closing != null) {
+            sb.append(closing);
         }
-        return sb.toString();
     }
+
+    // Some shortcut toString() methods
+
+    public static String toStringCommaSeparated(Iterable iterable) { // by default toString() is with comma separated
+        return toString(iterable, ToStringOptions.COMMA_SEPARATED_TO_STRING_OPTIONS);
+    }
+
+    public static String toStringCommaSeparated(Iterator iterator) { // by default toString() is with comma separated
+        return toString(iterator, ToStringOptions.COMMA_SEPARATED_TO_STRING_OPTIONS);
+    }
+
+    public static String toStringCommaSeparatedWithSingleQuotedStrings(Iterable iterable) {
+        return toString(iterable, ToStringOptions.SINGLE_QUOTE_TO_STRING_OPTIONS);
+    }
+
+    public static String toStringCommaSeparatedWithSingleQuotedStrings(Iterator iterator) {
+        return toString(iterator, ToStringOptions.SINGLE_QUOTE_TO_STRING_OPTIONS);
+    }
+
+    public static String toStringCommaSeparatedWithBrackets(Iterable iterable) {
+        return toString(iterable, ToStringOptions.BRACKETS_TO_STRING_OPTIONS);
+    }
+
+    public static String toStringCommaSeparatedWithBrackets(Iterator iterator) {
+        return toString(iterator, ToStringOptions.BRACKETS_TO_STRING_OPTIONS);
+    }
+
+    public static String toStringCommaSeparatedWithBracketsAndLineFeeds(Iterable iterable) {
+        return toString(iterable, ToStringOptions.BRACKETS_LINE_FEEDS_TO_STRING_OPTIONS);
+    }
+
+    public static String toStringCommaSeparatedWithBracketsAndLineFeeds(Iterator iterator) {
+        return toString(iterator, ToStringOptions.BRACKETS_LINE_FEEDS_TO_STRING_OPTIONS);
+    }
+
+    public static String toStringAmpersandSeparated(Iterable iterable) {
+        return toString(iterable, ToStringOptions.AMPERSAND_SEPARATED_TO_STRING_OPTIONS);
+    }
+
+    public static String toStringAmpersandSeparated(Iterator iterator) {
+        return toString(iterator, ToStringOptions.AMPERSAND_SEPARATED_TO_STRING_OPTIONS);
+    }
+
 }
