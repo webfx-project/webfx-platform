@@ -36,28 +36,45 @@ public final class ReadOnlyMergedAstObject implements ReadOnlyAstObject {
     public <T> T get(String key) {
         Object value = lazyNewValues.get(key);
         if (value == null && !lazyNewValues.containsKey(key)) {
-            ReadOnlyAstObject childAstObject = null;
-            List<ReadOnlyAstObject> childAstObjects = null;
+            Object scalarValue = null;
+            ReadOnlyAstObject astObjectValue = null;
+            List<ReadOnlyAstObject> astObjectValues = null;
             for (ReadOnlyAstObject astObject : originalAstObjects) {
                 value = astObject.get(key);
                 if (value != null) {
-                    if (!deepMerge || !AST.isObject(value))
+                    if (!deepMerge)
                         break;
-                    if (childAstObject == null)
-                        childAstObject = (ReadOnlyAstObject) value;
-                    else {
-                        if (childAstObjects == null) {
-                            childAstObjects = new ArrayList<>();
-                            childAstObjects.add(childAstObject);
+                    if (!AST.isObject(value)) {
+                        if (scalarValue == null) // ignoring subsequent scalar values (keeping first found)
+                            scalarValue = value;
+                    } else {
+                        ReadOnlyAstObject valueObject = (ReadOnlyAstObject) value;
+                        if (astObjectValue == null)
+                            astObjectValue = valueObject;
+                        else {
+                            if (astObjectValues == null) {
+                                astObjectValues = new ArrayList<>();
+                                astObjectValues.add(astObjectValue);
+                            }
+                            astObjectValues.add(valueObject);
                         }
-                        childAstObjects.add((ReadOnlyAstObject) value);
                     }
                 }
             }
-            if (childAstObjects != null) {
-                value = new ReadOnlyMergedAstObject(true, childAstObjects.toArray(new ReadOnlyAstObject[0]));
-            } else if (childAstObject != null)
-                value = childAstObject;
+            // Case when we have both scalar and object values (ex: en.yaml for graphics + en.properties for text)
+            if (astObjectValue != null && scalarValue instanceof String) { // TODO: maybe make this optional as it's specific to i18n
+                if (astObjectValues == null) {
+                    astObjectValues = new ArrayList<>();
+                    astObjectValues.add(astObjectValue);
+                }
+                astObjectValues.add(AST.createReadOnlySingleKeyAstObject("text", scalarValue));
+            }
+            if (astObjectValues != null) {
+                value = new ReadOnlyMergedAstObject(true, astObjectValues.toArray(new ReadOnlyAstObject[0]));
+            } else if (astObjectValue != null)
+                value = astObjectValue;
+            else if (scalarValue != null)
+                value = scalarValue;
             lazyNewValues.put(key, value);
         }
         return (T) value;
