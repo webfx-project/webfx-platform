@@ -1,5 +1,6 @@
 package dev.webfx.platform.ast;
 
+import dev.webfx.platform.util.collection.Collections;
 import dev.webfx.platform.util.collection.HashList;
 
 import java.util.*;
@@ -37,6 +38,7 @@ public final class ReadOnlyMergedAstObject implements ReadOnlyAstObject {
         Object value = lazyNewValues.get(key);
         if (value == null && !lazyNewValues.containsKey(key)) {
             Object scalarValue = null;
+            int scalarValueIndex = -1;
             ReadOnlyAstObject astObjectValue = null;
             List<ReadOnlyAstObject> astObjectValues = null;
             for (ReadOnlyAstObject astObject : originalAstObjects) {
@@ -45,8 +47,10 @@ public final class ReadOnlyMergedAstObject implements ReadOnlyAstObject {
                     if (!deepMerge)
                         break;
                     if (!AST.isObject(value)) {
-                        if (scalarValue == null) // ignoring subsequent scalar values (keeping first found)
+                        if (scalarValue == null) { // ignoring subsequent scalar values (keeping first found)
                             scalarValue = value;
+                            scalarValueIndex = Collections.size(astObjectValues); // the insert position in the merged objects (if this value is mixed with other objects)
+                        }
                     } else {
                         ReadOnlyAstObject valueObject = (ReadOnlyAstObject) value;
                         if (astObjectValue == null)
@@ -67,7 +71,7 @@ public final class ReadOnlyMergedAstObject implements ReadOnlyAstObject {
                     astObjectValues = new ArrayList<>();
                     astObjectValues.add(astObjectValue);
                 }
-                astObjectValues.add(AST.createReadOnlySingleKeyAstObject("text", scalarValue));
+                astObjectValues.add(scalarValueIndex, AST.createReadOnlySingleKeyAstObject("text", scalarValue));
             }
             if (astObjectValues != null) {
                 value = new ReadOnlyMergedAstObject(true, astObjectValues.toArray(new ReadOnlyAstObject[0]));
