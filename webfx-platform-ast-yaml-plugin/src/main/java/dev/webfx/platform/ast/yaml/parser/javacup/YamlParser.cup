@@ -155,7 +155,9 @@ start with yaml_document;
 /* ----------------------------Grammar Section-------------------- */
 
 yaml_document
-            ::= DOCSTART
+            ::= /* an empty text is valid in yaml syntax */
+              {: RESULT = null; :}
+            | DOCSTART
               {: RESULT = null; :}
             | DOCSTART DOCEND
               {: RESULT = null; :}
