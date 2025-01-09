@@ -16,6 +16,9 @@ public class ConfigParser {
     public static Config parsePrefixedConfig(String prefixPath, String configText, String format) {
         // Parsing the object with the format given by the extension
         ReadOnlyAstObject astObject = AST.parseObject(configText, format);
+        // Returning null if the parsing object is null (ex: empty yaml file or with comments only)
+        if (astObject == null)
+            return null;
         if (prefixPath != null) {
             astObject = AST.prefixObject(prefixPath, astObject);
         }
