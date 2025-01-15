@@ -2,6 +2,7 @@ package dev.webfx.platform.async;
 
 import dev.webfx.platform.util.Arrays;
 
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.IntFunction;
 
 /**
@@ -37,7 +38,7 @@ public final class Batch<A> {
         Batch<R> resultsBatch = new Batch<>(results);
         if (n == 0)
             return Future.succeededFuture(resultsBatch);
-        int[] responseCount = { 0 };
+        AtomicInteger responseCount = new AtomicInteger();
         for (A argument : getArray()) {
             int index = i++;
             asyncFunction.apply(argument).onComplete(asyncResult -> {
@@ -46,8 +47,7 @@ public final class Batch<A> {
                         promise.fail(asyncResult.cause());
                     else {
                         results[index] = asyncResult.result();
-                        responseCount[0]++;
-                        if (responseCount[0] == n)
+                        if (responseCount.incrementAndGet() == n)
                             promise.complete(resultsBatch);
                     }
                 }
