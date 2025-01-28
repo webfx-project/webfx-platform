@@ -18,6 +18,7 @@ public final class Meta {
     public final static String META_EXE_EXECUTABLE_MODULE_NAME_KEY = "executableModuleName";
     public final static String META_EXE_EXECUTABLE_MODULE_VERSION_KEY = "executableModuleVersion";
     public final static String META_EXE_APPLICATION_MODULE_NAME_KEY = "applicationModuleName";
+    public final static String META_EXE_BACKOFFICE_NAME_KEY = "backoffice";
 
     private static Properties META_PROPERTIES;
 
@@ -37,16 +38,37 @@ public final class Meta {
         return META_PROPERTIES;
     }
 
+    private static String getMetaProperty(String key) {
+        return getMetaProperties().getProperty(key);
+    }
+
     public static String getExecutableModuleName() {
-        return getMetaProperties().getProperty(META_EXE_EXECUTABLE_MODULE_NAME_KEY);
+        return getMetaProperty(META_EXE_EXECUTABLE_MODULE_NAME_KEY);
     }
 
     public static String getExecutableModuleVersion() {
-        return getMetaProperties().getProperty(META_EXE_EXECUTABLE_MODULE_VERSION_KEY);
+        return getMetaProperty(META_EXE_EXECUTABLE_MODULE_VERSION_KEY);
     }
 
     public static String getApplicationModuleName() {
-        return getMetaProperties().getProperty(META_EXE_APPLICATION_MODULE_NAME_KEY);
+        return getMetaProperty(META_EXE_APPLICATION_MODULE_NAME_KEY);
+    }
+
+    public static Boolean getBackoffice() {
+        // Note: the WebFX CLI doesn't generate the backoffice property in the exe.properties file at this time, but
+        // it will eventually (when specified in webfx.xml).
+        String backofficeProperty = getMetaProperty(META_EXE_BACKOFFICE_NAME_KEY);
+        if (backofficeProperty != null)
+            return "true".equalsIgnoreCase(backofficeProperty);
+        // If not specified in the exe.properties file, we can guess it from the application module name
+        String applicationModuleName = getApplicationModuleName();
+        if (applicationModuleName != null && applicationModuleName.toLowerCase().contains("backoffice"))
+            return true;
+        return null; // meaning unspecified
+    }
+
+    public static boolean isBackoffice() {
+        return Boolean.TRUE.equals(getBackoffice());
     }
 
 }
