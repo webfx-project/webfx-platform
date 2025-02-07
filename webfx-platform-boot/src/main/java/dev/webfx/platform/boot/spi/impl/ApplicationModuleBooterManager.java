@@ -94,6 +94,7 @@ public final class ApplicationModuleBooterManager {
         int n = moduleBooters.size();
         String bootingOrExiting = boot ? "Booting " : "Exiting ";
         logInFrame(bootingOrExiting + Meta.getExecutableModuleName());
+        log("Maven build timestamp: " + Meta.getMavenBuildTimestamp());
         log(bootingOrExiting + n + " application modules in the following order:");
         for (int i = 0; i < n; i++) {
             int moduleIndex = boot ? i : n - i - 1;
