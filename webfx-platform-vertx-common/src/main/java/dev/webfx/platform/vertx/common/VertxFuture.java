@@ -6,9 +6,9 @@ import dev.webfx.platform.async.Promise;
 /**
  * @author Bruno Salmon
  */
-public final class VertxFutureUtil {
+public final class VertxFuture {
 
-    public static <T> Future<T> toWebFxFuture(io.vertx.core.Future<T> vertxFuture) {
+    public static <T> Future<T> toWebfxFuture(io.vertx.core.Future<T> vertxFuture) {
         Promise<T> promise = Promise.promise();
         vertxFuture
                 .onFailure(promise::fail)
