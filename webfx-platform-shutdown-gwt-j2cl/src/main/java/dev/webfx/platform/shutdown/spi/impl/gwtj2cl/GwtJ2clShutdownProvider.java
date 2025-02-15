@@ -10,6 +10,12 @@ import elemental2.dom.EventListener;
  */
 public final class GwtJ2clShutdownProvider extends ShutdownProviderBase<EventListener> {
 
+    private static final String[] SHUTDOWN_EVENTS = {
+        "beforeunload", // not working on iOS
+        "unload", // not working on iOS
+        "pagehide" // working on iOS. But page may be stored in bfcache and restored later, so may be not a final shutdown...
+    };
+
     @Override
     protected EventListener createPlatformShutdownHook(Runnable hook) {
         return new EventListener() {
@@ -26,16 +32,14 @@ public final class GwtJ2clShutdownProvider extends ShutdownProviderBase<EventLis
 
     @Override
     protected void addPlatformShutdownHook(EventListener platformHook) {
-        DomGlobal.window.addEventListener("beforeunload", platformHook);
-        // Note: beforeunload doesn't work on iOS, so we use unload instead (deprecated but seems to work)
-        DomGlobal.window.addEventListener("unload", platformHook);
+        for (String event : SHUTDOWN_EVENTS)
+            DomGlobal.window.addEventListener(event, platformHook);
     }
 
     @Override
     protected void removePlatformShutdownHook(EventListener platformHook) {
-        DomGlobal.window.removeEventListener("beforeunload", platformHook);
-        // Note: beforeunload doesn't work on iOS, so we use unload instead (deprecated but seems to work)
-        DomGlobal.window.removeEventListener("unload", platformHook);
+        for (String event : SHUTDOWN_EVENTS)
+            DomGlobal.window.removeEventListener(event, platformHook);
     }
 
     @Override
