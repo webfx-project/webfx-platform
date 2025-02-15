@@ -254,8 +254,17 @@ public final class Times {
         return LocalDate.now().isAfter(date);
     }
 
+    public static boolean isPast(LocalDate date, Clock clock) {
+        return LocalDate.now(clock).isAfter(date);
+    }
+
+
     public static boolean isFuture(LocalDate date) {
         return LocalDate.now().isBefore(date);
+    }
+
+    public static boolean isFuture(LocalDate date, Clock clock) {
+        return LocalDate.now(clock).isBefore(date);
     }
 
     public static boolean isBetween(LocalDate dateToCheck, LocalDate startDate, LocalDate endDate) {
@@ -268,8 +277,16 @@ public final class Times {
         return LocalDateTime.now().isAfter(date);
     }
 
+    public static boolean isPast(LocalDateTime date, Clock clock) {
+        return LocalDateTime.now(clock).isAfter(date);
+    }
+
     public static boolean isFuture(LocalDateTime date) {
         return LocalDateTime.now().isBefore(date);
+    }
+
+    public static boolean isFuture(LocalDateTime date, Clock clock) {
+        return LocalDateTime.now(clock).isBefore(date);
     }
 
     public static boolean isBetween(LocalDateTime dateToCheck, LocalDateTime startDate, LocalDateTime endDate) {
