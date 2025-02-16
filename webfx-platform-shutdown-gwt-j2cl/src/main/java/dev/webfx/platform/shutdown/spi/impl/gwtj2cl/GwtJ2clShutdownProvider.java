@@ -1,41 +1,35 @@
 package dev.webfx.platform.shutdown.spi.impl.gwtj2cl;
 
+import dev.webfx.platform.shutdown.ShutdownEvent;
+import dev.webfx.platform.shutdown.ShutdownEventOrigin;
+import dev.webfx.platform.shutdown.ShutdownEventType;
 import dev.webfx.platform.shutdown.spi.impl.ShutdownProviderBase;
 import elemental2.dom.DomGlobal;
-import elemental2.dom.Event;
 import elemental2.dom.EventListener;
+import elemental2.dom.PageTransitionEvent;
 
 /**
  * @author Bruno Salmon
  */
-public final class GwtJ2clShutdownProvider extends ShutdownProviderBase<EventListener> {
+public final class GwtJ2clShutdownProvider extends ShutdownProviderBase {
 
-    @Override
-    protected EventListener createPlatformShutdownHook(Runnable hook) {
-        return new EventListener() {
-            boolean executed; // ensures it is executed only once if both beforeunload and unload are fired
-            @Override
-            public void handleEvent(Event evt) {
-                if (!executed) {
-                    executed = true;
-                    hook.run();
-                }
+    public GwtJ2clShutdownProvider() {
+        // Note: pagehide/pageshow are working on iOS Safari (but not "unload")
+        EventListener pageHideOrUnloadListener = e -> {
+            if (!isShuttingDown()) { // ensuring only one event is fired
+                boolean persisted = e instanceof PageTransitionEvent && ((PageTransitionEvent) e).persisted;
+                fireShutdownEvent(new ShutdownEvent(persisted ? ShutdownEventType.SUSPEND : ShutdownEventType.EXIT, ShutdownEventOrigin.USER_OR_SYSTEM));
             }
         };
-    }
-
-    @Override
-    protected void addPlatformShutdownHook(EventListener platformHook) {
-        DomGlobal.window.addEventListener("beforeunload", platformHook);
-        // Note: beforeunload doesn't work on iOS, so we use unload instead (deprecated but seems to work)
-        DomGlobal.window.addEventListener("unload", platformHook);
-    }
-
-    @Override
-    protected void removePlatformShutdownHook(EventListener platformHook) {
-        DomGlobal.window.removeEventListener("beforeunload", platformHook);
-        // Note: beforeunload doesn't work on iOS, so we use unload instead (deprecated but seems to work)
-        DomGlobal.window.removeEventListener("unload", platformHook);
+        DomGlobal.window.addEventListener("pagehide", pageHideOrUnloadListener);
+        DomGlobal.window.addEventListener("pageshow", e ->
+            fireShutdownEvent(new ShutdownEvent(ShutdownEventType.RESTORE, ShutdownEventOrigin.USER_OR_SYSTEM)));
+        // For old browsers that may not support pagehide/pageshow
+        DomGlobal.window.addEventListener("beforeunload", pageHideOrUnloadListener);
+        DomGlobal.window.addEventListener("unload", pageHideOrUnloadListener);
+        // Note: browser event sequence = beforeunload → pagehide → unload
+        // If the page is stored in Back/Forward Cache, only pagehide is fired with e.persisted = true
+        // Otherwise, all 3 events are fired, but our listener will fire only 1 ShutdownEvent
     }
 
     @Override
@@ -45,7 +39,7 @@ public final class GwtJ2clShutdownProvider extends ShutdownProviderBase<EventLis
     }
 
     @Override
-    protected void exit(int exitStatus) {
+    protected void finalExit(int exitStatus) { // exitStatus is ignored
         DomGlobal.window.close();
     }
 }

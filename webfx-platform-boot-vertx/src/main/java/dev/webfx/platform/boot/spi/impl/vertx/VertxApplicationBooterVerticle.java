@@ -43,7 +43,7 @@ public final class VertxApplicationBooterVerticle extends AbstractVerticle imple
         if (verticleInstance == null)
             VertxRunner.runVerticle(VertxApplicationBooterVerticle.class); // Uncomment to avoid trace when debugging: , new VertxOptions().setBlockedThreadCheckInterval(9999999999L));
         ApplicationModuleBooterManager.initialize();
-        Shutdown.addShutdownHook(() -> {
+        Shutdown.addShutdownHook(e -> {
             for (String deploymentId : VertxInstance.getVertx().deploymentIDs())
                 VertxInstance.getVertx().undeploy(deploymentId);
             ApplicationModuleBooterManager.shutdown();
@@ -63,7 +63,7 @@ public final class VertxApplicationBooterVerticle extends AbstractVerticle imple
     @Override
     public void stop() {
         if (this == containerInstance && !Shutdown.isShuttingDown())
-            Shutdown.softwareShutdown(false, 0);
+            Shutdown.suspend();
     }
 
     @Override

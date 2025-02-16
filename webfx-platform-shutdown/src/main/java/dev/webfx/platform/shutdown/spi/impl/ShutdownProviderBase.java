@@ -1,20 +1,22 @@
 package dev.webfx.platform.shutdown.spi.impl;
 
+import dev.webfx.platform.shutdown.ShutdownEvent;
+import dev.webfx.platform.shutdown.ShutdownEventOrigin;
+import dev.webfx.platform.shutdown.ShutdownEventType;
 import dev.webfx.platform.shutdown.spi.ShutdownProvider;
+import dev.webfx.platform.util.collection.Collections;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * @author Bruno Salmon
  */
-public abstract class ShutdownProviderBase<H> implements ShutdownProvider {
+public abstract class ShutdownProviderBase implements ShutdownProvider {
 
-    private final Map<Runnable, H> platformHooks = new HashMap<>();
+    private final List<Consumer<ShutdownEvent>> hooks = new ArrayList<>();
     private boolean shuttingDown;
-    private boolean softwareShutdown;
 
     @Override
     public boolean isShuttingDown() {
@@ -22,42 +24,29 @@ public abstract class ShutdownProviderBase<H> implements ShutdownProvider {
     }
 
     @Override
-    public boolean isSoftwareShutdown() {
-        return softwareShutdown;
+    public void addShutdownHook(Consumer<ShutdownEvent> hook) {
+        hooks.add(hook);
     }
 
     @Override
-    public void addShutdownHook(Runnable hook) {
-        H platformHook = createPlatformShutdownHook(() -> {
-            shuttingDown = true;
-            hook.run();
-        });
-        platformHooks.put(hook, platformHook);
-        addPlatformShutdownHook(platformHook);
+    public void removeShutdownHook(Consumer<ShutdownEvent> hook) {
+        hooks.remove(hook);
     }
 
-    protected abstract H createPlatformShutdownHook(Runnable hook);
+    protected void fireShutdownEvent(ShutdownEvent event) {
+        shuttingDown = event.getType() != ShutdownEventType.RESTORE;
+        Collections.forEach(hooks, hook -> hook.accept(event));
+    }
 
-    protected abstract void addPlatformShutdownHook(H platformHook);
+    public void exit(int exitStatus) {
+        fireShutdownEvent(new ShutdownEvent(ShutdownEventType.EXIT, ShutdownEventOrigin.APPLICATION));
+        finalExit(exitStatus);
+    }
+
+    protected abstract void finalExit(int exitStatus);
 
     @Override
-    public void removeShutdownHook(Runnable hook) {
-        removePlatformShutdownHook(platformHooks.remove(hook));
+    public void suspend() {
+        fireShutdownEvent(new ShutdownEvent(ShutdownEventType.SUSPEND, ShutdownEventOrigin.APPLICATION));
     }
-
-    protected abstract void removePlatformShutdownHook(H platformHook);
-
-    @Override
-    public void softwareShutdown(boolean exit, int exitStatus) {
-        softwareShutdown = shuttingDown = true;
-        Collection<Runnable> hooks = new ArrayList<>(platformHooks.keySet());
-        for (Runnable hook : hooks)
-            removeShutdownHook(hook);
-        for (Runnable hook : hooks)
-            hook.run();
-        if (exit)
-            exit(exitStatus);
-    }
-
-    protected abstract void exit(int exitStatus);
 }

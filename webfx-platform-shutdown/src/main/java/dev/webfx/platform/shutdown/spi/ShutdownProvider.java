@@ -1,20 +1,24 @@
 package dev.webfx.platform.shutdown.spi;
 
+import dev.webfx.platform.shutdown.ShutdownEvent;
+
+import java.util.function.Consumer;
+
 /**
  * @author Bruno Salmon
  */
 public interface ShutdownProvider {
 
-    void addShutdownHook(Runnable hook);
+    void addShutdownHook(Consumer<ShutdownEvent> hook);
 
-    void removeShutdownHook(Runnable hook);
-
-    void softwareShutdown(boolean exit, int exitStatus);
+    void removeShutdownHook(Consumer<ShutdownEvent> hook);
 
     boolean canExit();
 
     boolean isShuttingDown();
 
-    boolean isSoftwareShutdown();
+    void exit(int exitStatus);
+
+    void suspend();
 
 }

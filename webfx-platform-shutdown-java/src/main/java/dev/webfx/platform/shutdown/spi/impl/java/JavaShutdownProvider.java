@@ -1,25 +1,19 @@
 package dev.webfx.platform.shutdown.spi.impl.java;
 
+import dev.webfx.platform.shutdown.ShutdownEvent;
+import dev.webfx.platform.shutdown.ShutdownEventOrigin;
+import dev.webfx.platform.shutdown.ShutdownEventType;
 import dev.webfx.platform.shutdown.spi.impl.ShutdownProviderBase;
 
 /**
  * @author Bruno Salmon
  */
-public final class JavaShutdownProvider extends ShutdownProviderBase<Thread> {
+public final class JavaShutdownProvider extends ShutdownProviderBase {
 
-    @Override
-    protected Thread createPlatformShutdownHook(Runnable hook) {
-        return new Thread(hook);
-    }
+    private final Thread systemExitHook = new Thread(() -> fireShutdownEvent(new ShutdownEvent(ShutdownEventType.EXIT, ShutdownEventOrigin.SYSTEM)));
 
-    @Override
-    protected void addPlatformShutdownHook(Thread platformHook) {
-        Runtime.getRuntime().addShutdownHook(platformHook);
-    }
-
-    @Override
-    protected void removePlatformShutdownHook(Thread platformHook) {
-        Runtime.getRuntime().removeShutdownHook(platformHook);
+    public JavaShutdownProvider() {
+        Runtime.getRuntime().addShutdownHook(systemExitHook);
     }
 
     @Override
@@ -28,7 +22,8 @@ public final class JavaShutdownProvider extends ShutdownProviderBase<Thread> {
     }
 
     @Override
-    protected void exit(int exitStatus) {
+    protected void finalExit(int exitStatus) {
+        Runtime.getRuntime().removeShutdownHook(systemExitHook);
         System.exit(exitStatus);
     }
 }
