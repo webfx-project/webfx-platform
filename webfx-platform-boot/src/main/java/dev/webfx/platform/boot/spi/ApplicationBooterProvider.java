@@ -11,8 +11,10 @@ public interface ApplicationBooterProvider {
 
     default void boot() {
         ApplicationModuleBooterManager.initialize();
-        Shutdown.addShutdownHook(SimpleApplicationJobManager::shutdown);
-        Shutdown.addShutdownHook(ApplicationModuleBooterManager::shutdown);
+        Shutdown.addShutdownHook(e -> {
+            SimpleApplicationJobManager.shutdown();
+            ApplicationModuleBooterManager.shutdown();
+        });
     }
 
     default void initApplicationJob(ApplicationJob applicationJob) {

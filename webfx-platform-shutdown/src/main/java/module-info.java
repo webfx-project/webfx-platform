@@ -7,6 +7,7 @@ module webfx.platform.shutdown {
 
     // Direct dependencies modules
     requires webfx.platform.service;
+    requires webfx.platform.util;
 
     // Exported packages
     exports dev.webfx.platform.shutdown;

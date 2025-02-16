@@ -9,7 +9,7 @@ import dev.webfx.platform.uischeduler.UiScheduler;
 /**
  * @author Bruno Salmon
  */
-public final class GluonShutdownProvider extends ShutdownProviderBase<Thread> {
+public final class GluonShutdownProvider extends ShutdownProviderBase {
 
     private LifecycleService lifecycleService;
 
@@ -23,27 +23,12 @@ public final class GluonShutdownProvider extends ShutdownProviderBase<Thread> {
     }
 
     @Override
-    protected Thread createPlatformShutdownHook(Runnable hook) {
-        return new Thread(hook);
-    }
-
-    @Override
-    protected void addPlatformShutdownHook(Thread platformHook) {
-        Runtime.getRuntime().addShutdownHook(platformHook);
-    }
-
-    @Override
-    protected void removePlatformShutdownHook(Thread platformHook) {
-        Runtime.getRuntime().removeShutdownHook(platformHook);
-    }
-
-    @Override
     public boolean canExit() {
         return !OperatingSystem.isIOS();
     }
 
     @Override
-    protected void exit(int exitStatus) {
+    protected void finalExit(int exitStatus) {
         if (lifecycleService != null) {
             Console.log("INFO [WebFX Platform]: Calling Gluon service shutdown");
             lifecycleService.shutdown(); // Note that it doesn't do anything on iOS as Apple prohibits applications to self exit
