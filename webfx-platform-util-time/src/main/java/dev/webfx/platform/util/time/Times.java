@@ -250,31 +250,80 @@ public final class Times {
         return s;
     }
 
-    public static boolean isPast(LocalDate date) {
-        return LocalDate.now().isAfter(date);
+    public static boolean isBefore(LocalDate date, LocalDate otherDate, boolean orEquals) {
+        return date.isBefore(otherDate) || orEquals && date.equals(otherDate);
     }
 
-    public static boolean isPast(LocalDate date, Clock clock) {
-        return LocalDate.now(clock).isAfter(date);
+    public static boolean isBefore(LocalDate date, LocalDate otherDate) {
+        return isBefore(date, otherDate, false);
     }
 
-
-    public static boolean isFuture(LocalDate date) {
-        return LocalDate.now().isBefore(date);
+    public static boolean isBeforeOrEquals(LocalDate date, LocalDate otherDate) {
+        return isBefore(date, otherDate, true);
     }
 
-    public static boolean isFuture(LocalDate date, Clock clock) {
-        return LocalDate.now(clock).isBefore(date);
+    public static boolean isAfter(LocalDate date, LocalDate otherDate, boolean orEquals) {
+        return date.isAfter(otherDate) || orEquals && date.equals(otherDate);
+    }
+
+    public static boolean isAfter(LocalDate date, LocalDate otherDate) {
+        return isAfter(date, otherDate, false);
+    }
+
+    public static boolean isAfterOrEquals(LocalDate date, LocalDate otherDate) {
+        return isAfter(date, otherDate, true);
+    }
+
+    private static final Clock DEFAULT_CLOCK = Clock.systemDefaultZone();
+
+    public static boolean isPast(LocalDate dateToCheck) {
+        return isPast(dateToCheck, DEFAULT_CLOCK);
+    }
+
+    public static boolean isPast(LocalDate dateToCheck, Clock clock) {
+        return isPast(dateToCheck, clock, false);
+    }
+
+    public static boolean isPast(LocalDate dateToCheck, Clock clock, boolean orToday) {
+        return isBefore(dateToCheck, LocalDate.now(clock), orToday);
+    }
+
+    public static boolean isPastOrToday(LocalDate dateToCheck) {
+        return isPastOrToday(dateToCheck, DEFAULT_CLOCK);
+    }
+
+    public static boolean isPastOrToday(LocalDate dateToCheck, Clock clock) {
+        return isPast(dateToCheck, clock, true);
+    }
+    
+    public static boolean isFuture(LocalDate dateToCheck) {
+        return isFuture(dateToCheck, DEFAULT_CLOCK);
+    }
+
+    public static boolean isFuture(LocalDate dateToCheck, Clock clock) {
+        return isFuture(dateToCheck, clock, false);
+    }
+
+    public static boolean isFuture(LocalDate dateToCheck, Clock clock, boolean orToday) {
+        return isAfter(dateToCheck, LocalDate.now(clock), orToday);
+    }
+
+    public static boolean isFutureOrToday(LocalDate dateToCheck) {
+        return isFutureOrToday(dateToCheck, DEFAULT_CLOCK);
+    }
+
+    public static boolean isFutureOrToday(LocalDate dateToCheck, Clock clock) {
+        return isFuture(dateToCheck, clock, true);
     }
 
     public static boolean isBetween(LocalDate dateToCheck, LocalDate startDate, LocalDate endDate) {
         return dateToCheck != null
-            && (startDate == null || dateToCheck.isAfter(startDate) || dateToCheck.isEqual(startDate))
-            && (endDate == null   || dateToCheck.isBefore(endDate)  || dateToCheck.isEqual(endDate));
+            && (startDate == null || isAfterOrEquals(dateToCheck, startDate))
+            && (endDate == null   || isBeforeOrEquals(dateToCheck, endDate));
     }
 
     public static boolean isPast(LocalDateTime date) {
-        return LocalDateTime.now().isAfter(date);
+        return isPast(date, DEFAULT_CLOCK);
     }
 
     public static boolean isPast(LocalDateTime date, Clock clock) {
@@ -282,7 +331,7 @@ public final class Times {
     }
 
     public static boolean isFuture(LocalDateTime date) {
-        return LocalDateTime.now().isBefore(date);
+        return isFuture(date, DEFAULT_CLOCK);
     }
 
     public static boolean isFuture(LocalDateTime date, Clock clock) {
