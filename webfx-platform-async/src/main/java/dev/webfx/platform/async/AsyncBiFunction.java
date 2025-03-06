@@ -8,8 +8,10 @@ import java.util.function.BiFunction;
  * @author Bruno Salmon
  */
 
+@FunctionalInterface
 public interface AsyncBiFunction<T,U,R> extends BiFunction<T, U, Future<R>> {
 
+    @Override
     Future<R> apply(T arg1, U arg2);
 
 }
