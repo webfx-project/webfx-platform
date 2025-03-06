@@ -11,6 +11,7 @@ module webfx.platform.async {
 
     // Direct dependencies modules
     requires java.logging;
+    requires webfx.platform.console;
     requires webfx.platform.util;
 
     // Exported packages
