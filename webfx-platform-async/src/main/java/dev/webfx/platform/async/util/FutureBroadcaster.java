@@ -1,4 +1,7 @@
-package dev.webfx.platform.async;
+package dev.webfx.platform.async.util;
+
+import dev.webfx.platform.async.Future;
+import dev.webfx.platform.async.Promise;
 
 import java.util.ArrayList;
 import java.util.Collection;

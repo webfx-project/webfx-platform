@@ -1,5 +1,9 @@
-package dev.webfx.platform.async;
+package dev.webfx.platform.async.util;
 
+import dev.webfx.platform.async.AsyncResult;
+import dev.webfx.platform.async.Future;
+import dev.webfx.platform.async.Handler;
+import dev.webfx.platform.async.Promise;
 import dev.webfx.platform.util.tuples.Unit;
 
 import java.util.function.Consumer;

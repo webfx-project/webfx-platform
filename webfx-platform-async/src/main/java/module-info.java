@@ -16,5 +16,6 @@ module webfx.platform.async {
     // Exported packages
     exports dev.webfx.platform.async;
     exports dev.webfx.platform.async.impl;
+    exports dev.webfx.platform.async.util;
 
 }
