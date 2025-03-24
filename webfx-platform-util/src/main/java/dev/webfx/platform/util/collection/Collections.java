@@ -301,6 +301,20 @@ public final class Collections {
         return indexOf(iterable, element) != -1;
     }
 
+    public static boolean containsAny(Iterable iterable, Collection<?> elements) {
+        for (Object element : elements)
+            if (contains(iterable, element))
+                return true;
+        return false;
+    }
+
+    public static boolean containsAll(Iterable iterable, Collection<?> elements) {
+        for (Object element : elements)
+            if (!contains(iterable, element))
+                return false;
+        return true;
+    }
+
     public static <T> boolean addIfNotNull(T element, Collection<T> collection) {
         if (element == null || collection == null)
             return false;
