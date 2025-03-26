@@ -52,10 +52,12 @@ public final class AsyncQueue {
     }
 
     private void executeNext() {
-        if (executingOperations.size() < executingQueueMaxSize && !waitingOperations.isEmpty()) {
+        if (executingOperations.size() < executingQueueMaxSize) {
             WaitingOperation waitingOperation = waitingOperations.poll();
-            executeOperation(waitingOperation.argument, waitingOperation.executor)
-                .onComplete(waitingOperation.promise);
+            if (waitingOperation != null) {
+                executeOperation(waitingOperation.argument, waitingOperation.executor)
+                    .onComplete(waitingOperation.promise);
+            }
         }
     }
 
