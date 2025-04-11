@@ -1,5 +1,6 @@
-package dev.webfx.platform.async;
+package dev.webfx.platform.async.util;
 
+import dev.webfx.platform.async.*;
 import dev.webfx.platform.util.tuples.Unit;
 
 import java.util.function.Consumer;
@@ -18,6 +19,8 @@ public final class AsyncUtil {
      * @return  the future
      */
     public static <R> Future<R> runAsync(Runnable runnable) {
+        if (runnable == null)
+            return null;
         try {
             runnable.run();
             return Future.succeededFuture();
@@ -37,6 +40,8 @@ public final class AsyncUtil {
      * @return  the future
      */
     public static <T,R> Future<R> consumeAsync(Consumer<T> consumer, T arg) {
+        if (consumer == null)
+            return null;
         try {
             consumer.accept(arg);
             return Future.succeededFuture();
@@ -45,6 +50,10 @@ public final class AsyncUtil {
             Logger.getGlobal().log(Level.SEVERE, "Exception raised in Future.consumeAsync()", t);
             return Future.failedFuture(t);
         }
+    }
+
+    public static AsyncSupplier<?> toAsyncSupplier(Runnable runnable) {
+        return runnable == null ? null : () -> runAsync(runnable);
     }
 
     public static Future<Void> allOf(Future... futures) {

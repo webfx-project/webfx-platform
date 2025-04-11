@@ -69,6 +69,8 @@ public final class Meta {
         String applicationModuleName = getApplicationModuleName();
         if (applicationModuleName != null && applicationModuleName.toLowerCase().contains("backoffice"))
             return true;
+        if (applicationModuleName != null && applicationModuleName.toLowerCase().contains("frontoffice"))
+            return false;
         return null; // meaning unspecified
     }
 

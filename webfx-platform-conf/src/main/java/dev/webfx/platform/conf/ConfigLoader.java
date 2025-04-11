@@ -2,7 +2,7 @@ package dev.webfx.platform.conf;
 
 import dev.webfx.platform.async.Batch;
 import dev.webfx.platform.async.Future;
-import dev.webfx.platform.async.FutureBroadcaster;
+import dev.webfx.platform.async.util.FutureBroadcaster;
 import dev.webfx.platform.async.Promise;
 import dev.webfx.platform.conf.impl.ConfigMerger;
 import dev.webfx.platform.conf.spi.ConfigLoaderProvider;

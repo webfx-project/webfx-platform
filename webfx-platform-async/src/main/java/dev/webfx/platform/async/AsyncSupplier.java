@@ -1,6 +1,6 @@
 package dev.webfx.platform.async;
 
-import java.util.function.Function;
+import java.util.function.Supplier;
 
 /**
  * A functional interface for asynchronous operations that take one argument and return a future result.
@@ -9,9 +9,9 @@ import java.util.function.Function;
  */
 
 @FunctionalInterface
-public interface AsyncFunction<A,R> extends Function<A, Future<R>> {
+public interface AsyncSupplier<R> extends Supplier<Future<R>> {
 
     @Override
-    Future<R> apply(A arg);
+    Future<R> get();
 
 }
