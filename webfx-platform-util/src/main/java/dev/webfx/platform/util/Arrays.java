@@ -29,6 +29,12 @@ public final class Arrays {
         return java.util.Arrays.asList(a);
     }
 
+    public static <T> T[] asArray(Object value) {
+        if (!(value instanceof Object[]))
+            return null;
+        return (T[]) value;
+    }
+
     public static <T> int length(T[] array) {
         return array == null ? 0 : array.length;
     }
