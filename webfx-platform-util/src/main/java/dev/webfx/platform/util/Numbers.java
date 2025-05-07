@@ -355,6 +355,22 @@ public final class Numbers {
         return Float.compare(n1.floatValue(), n2.floatValue());
     }
 
+    public static boolean greaterThan(Number n1, Number n2) {
+        return compareNumbers(n1, n2) > 0;
+    }
+
+    public static boolean greaterThanOrEqualTo(Number n1, Number n2) {
+        return compareNumbers(n1, n2) >= 0;
+    }
+
+    public static boolean lessThan(Number n1, Number n2) {
+        return compareNumbers(n1, n2) < 0;
+    }
+
+    public static boolean lessThanOrEqualTo(Number n1, Number n2) {
+        return compareNumbers(n1, n2) <= 0;
+    }
+
     public static boolean identicalObjectsOrNumberValues(Object o1, Object o2) {
         if (java.util.Objects.equals(o1, o2))
             return true;

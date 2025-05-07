@@ -21,6 +21,9 @@ public final class J2clResourceProvider implements ResourceProvider {
     @Override
     public String toUrl(String resourcePath, Class<?> loadingClass) {
         if (resourcePath != null) {
+            // If the resource path is already an absolute URL, we return it as is
+            if (resourcePath.contains("://")) // ex: https://, http://, file://, etc.
+                return resourcePath;
             // We need to return the absolute path of the resource from index.html file (the resource packages are located beside index.html)
             if (resourcePath.startsWith("/")) // If the path provided is already absolute,
                 resourcePath = resourcePath.substring(1); // we just remove the first / to make that path relative to index.html

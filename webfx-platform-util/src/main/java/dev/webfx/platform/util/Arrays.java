@@ -29,6 +29,12 @@ public final class Arrays {
         return java.util.Arrays.asList(a);
     }
 
+    public static <T> T[] asArray(Object value) {
+        if (!(value instanceof Object[]))
+            return null;
+        return (T[]) value;
+    }
+
     public static <T> int length(T[] array) {
         return array == null ? 0 : array.length;
     }
@@ -73,6 +79,14 @@ public final class Arrays {
         B[] bArray = generator.apply(n);
         for (int i = 0; i < n; i++)
             bArray[i] = aToBConverter.apply(i, aArray[i]);
+        return bArray;
+    }
+
+    public static <A, B> B[] flatMap(A[] aArray, Converter<A, B[]> aToBConverter, IntFunction<B[]> generator) {
+        B[] bArray = generator.apply(0);
+        int n = aArray.length;
+        for (int i = 0; i < n; i++)
+            bArray = concat(generator, bArray, aToBConverter.convert(aArray[i]));
         return bArray;
     }
 
@@ -182,6 +196,10 @@ public final class Arrays {
             length += a.length;
         }
         return array;
+    }
+
+    public static <A> A[] add(IntFunction<A[]> arrayGenerator, A[] array, A... a) {
+        return concat(arrayGenerator, array, a);
     }
 
     public static double sum(double... values) {

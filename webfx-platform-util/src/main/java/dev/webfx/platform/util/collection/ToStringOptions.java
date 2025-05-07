@@ -6,6 +6,7 @@ package dev.webfx.platform.util.collection;
 public class ToStringOptions {
 
     public static final ToStringOptions COMMA_SEPARATED_TO_STRING_OPTIONS = new ToStringOptions(null, ", ", false, null, null);
+    public static final ToStringOptions SPACE_SEPARATED_TO_STRING_OPTIONS = new ToStringOptions(null, " ", false, null, null);
     public static final ToStringOptions AMPERSAND_SEPARATED_TO_STRING_OPTIONS = new ToStringOptions(null, "&", false, null, null);
     public static final ToStringOptions SINGLE_QUOTE_TO_STRING_OPTIONS = new ToStringOptions(null, ", ", false, "'", null);
     public static final ToStringOptions BRACKETS_TO_STRING_OPTIONS = new ToStringOptions("[", ", ", false, null, "]");

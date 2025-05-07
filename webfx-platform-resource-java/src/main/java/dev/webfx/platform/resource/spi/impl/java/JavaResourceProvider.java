@@ -16,6 +16,9 @@ public class JavaResourceProvider implements ResourceProvider {
     public String toUrl(String resourcePath, Class<?> loadingClass) {
         if (resourcePath == null)
             return null;
+        // If the resource path is already an absolute URL, we return it as is
+        if (resourcePath.contains("://")) // ex: https://, http://, file://, etc.
+            return resourcePath;
         URL resource = null;
         if (loadingClass != null) {
             resource = loadingClass.getResource(resourcePath); // if the resource is in the same module as the loading class
