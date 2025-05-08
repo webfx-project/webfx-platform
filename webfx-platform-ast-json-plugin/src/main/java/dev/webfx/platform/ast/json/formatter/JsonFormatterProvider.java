@@ -205,6 +205,7 @@ public class JsonFormatterProvider implements AstFormatterProvider {
                     sb.append(c);
                     break;
                 case '/':
+                    // Only escape '/' when it follows '<' (for HTML safety)
                     if (b == '<') {
                         sb.append('\\');
                     }
@@ -227,10 +228,27 @@ public class JsonFormatterProvider implements AstFormatterProvider {
                     break;
                 default:
                     if (c < ' ') {
+                        // Control characters (0x00-0x1F) need to be escaped with Unicode notation
                         t = "000" + Integer.toHexString(c);
                         sb.append("\\u").append(t.substring(t.length() - 4));
-                    } else
+                    } else if (c >= '\uD800' && c <= '\uDBFF' && i + 1 < len) {
+                        // Handle surrogate pairs for characters outside the BMP
+                        // High surrogate is between 0xD800 and 0xDBFF
+                        char next = string.charAt(i + 1);
+                        // Low surrogate is between 0xDC00 and 0xDFFF
+                        if (next >= '\uDC00' && next <= '\uDFFF') {
+                            // This is a valid surrogate pair, append both characters
+                            sb.append(c);
+                            sb.append(next);
+                            i++; // Skip the next character as we've already processed it
+                        } else {
+                            // Invalid surrogate pair, just append the current character
+                            sb.append(c);
+                        }
+                    } else {
+                        // Regular character, append as-is
                         sb.append(c);
+                    }
             }
         }
         return sb.append('"');

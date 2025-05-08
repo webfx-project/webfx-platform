@@ -9,7 +9,7 @@ import static dev.webfx.platform.ast.json.parser.javacup.JsonSymbols.*;
 import        dev.webfx.platform.util.Numbers;
 
 %%
-   
+
 /* -----------------Options and Declarations Section----------------- */
 
 %public
@@ -28,17 +28,17 @@ import        dev.webfx.platform.util.Numbers;
     private Symbol symbol(int type) {
         return new Symbol(type, yyline, yycolumn);
     }
-    
+
     private Symbol symbol(int type, Object value) {
         return new Symbol(type, yyline, yycolumn, value);
     }
 %}
-   
+
 
 /*
   Macro Declarations
 */
-   
+
 LineTerminator = \r|\n|\r\n
 InputCharacter = [^\r\n]
 WhiteSpace     = {LineTerminator} | [ \t\f]
@@ -60,7 +60,7 @@ Exponent = [eE] [+-]? [0-9]+
 
 %%
 /* ------------------------Lexical Rules Section---------------------- */
-   
+
 
 <YYINITIAL> {
 
@@ -116,7 +116,13 @@ Exponent = [eE] [+-]? [0-9]+
   "\\r"                          { string.append( '\r' ); }
   "\\\""                         { string.append( '\"' ); }
   "\\\\"                         { string.append( '\\' ); }
-  \\.                            { string.append( yytext() ); }
+  "\\/"                          { string.append( '/' ); }
+  "\\u"[0-9A-Fa-f]{4}            { 
+                                   String hex = yytext().substring(2); 
+                                   int code = Integer.parseInt(hex, 16);
+                                   string.append((char) code);
+                                 }
+  \\.                            { string.append( yytext().substring(1) ); }
 
   /* error cases */
   {LineTerminator}               { throw new RuntimeException("Unterminated string at end of line"); }
@@ -135,7 +141,13 @@ Exponent = [eE] [+-]? [0-9]+
   "\\r"                          { string.append( '\r' ); }
   "\\\""                         { string.append( '\"' ); }
   "\\\\"                         { string.append( '\\' ); }
-  \\.                            { string.append( yytext() ); }
+  "\\/"                          { string.append( '/' ); }
+  "\\u"[0-9A-Fa-f]{4}            { 
+                                   String hex = yytext().substring(2); 
+                                   int code = Integer.parseInt(hex, 16);
+                                   string.append((char) code);
+                                 }
+  \\.                            { string.append( yytext().substring(1) ); }
 
   /* error cases */
   {LineTerminator}               { throw new RuntimeException("Unterminated string at end of line"); }
@@ -154,7 +166,13 @@ Exponent = [eE] [+-]? [0-9]+
   "\\r"                          { string.append( '\r' ); }
   "\\\""                         { string.append( '\"' ); }
   "\\\\"                         { string.append( '\\' ); }
-  \\.                            { string.append( yytext() ); }
+  "\\/"                          { string.append( '/' ); }
+  "\\u"[0-9A-Fa-f]{4}            { 
+                                   String hex = yytext().substring(2); 
+                                   int code = Integer.parseInt(hex, 16);
+                                   string.append((char) code);
+                                 }
+  \\.                            { string.append( yytext().substring(1) ); }
 
   /* error cases */
   {LineTerminator}               { throw new RuntimeException("Unterminated string at end of line"); }

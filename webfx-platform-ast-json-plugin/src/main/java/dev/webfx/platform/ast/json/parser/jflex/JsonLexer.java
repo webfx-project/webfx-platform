@@ -7,11 +7,10 @@
 
 package dev.webfx.platform.ast.json.parser.jflex;
 
-import dev.webfx.platform.ast.json.parser.javacup.JsonSymbols;
-import dev.webfx.platform.util.Numbers;
-import java_cup.runtime.Symbol;
-
+import java_cup.runtime.*;
+import        dev.webfx.platform.ast.json.parser.javacup.JsonSymbols;
 import static dev.webfx.platform.ast.json.parser.javacup.JsonSymbols.*;
+import        dev.webfx.platform.util.Numbers;
 
 
 @SuppressWarnings("fallthrough")
@@ -76,10 +75,11 @@ public class JsonLexer implements java_cup.runtime.Scanner {
     "\11\0\1\1\1\2\1\3\1\4\1\5\22\0\1\1"+
     "\1\0\1\6\4\0\1\7\2\0\1\10\1\11\1\12"+
     "\1\13\1\14\1\15\1\16\11\17\1\20\6\0\4\21"+
-    "\1\22\25\21\1\23\1\24\1\25\1\0\1\21\1\26"+
-    "\1\27\1\30\2\21\1\31\1\32\5\21\1\33\1\21"+
-    "\1\34\3\21\1\35\1\36\1\37\1\40\5\21\1\41"+
-    "\1\0\1\42\7\0\1\3\u01a2\0\2\3\326\0\u0100\3";
+    "\1\22\1\21\24\23\1\24\1\25\1\26\1\0\1\23"+
+    "\1\27\1\30\1\31\2\21\1\32\1\33\5\23\1\34"+
+    "\1\23\1\35\3\23\1\36\1\37\1\40\1\41\5\23"+
+    "\1\42\1\0\1\43\7\0\1\3\u01a2\0\2\3\326\0"+
+    "\u0100\3";
 
   private static int [] zzUnpackcmap_blocks() {
     int [] result = new int[1024];
@@ -109,12 +109,13 @@ public class JsonLexer implements java_cup.runtime.Scanner {
     "\4\0\1\1\2\2\1\3\1\4\1\5\1\6\2\1"+
     "\2\7\1\10\1\11\1\12\1\13\1\14\3\11\1\15"+
     "\1\16\1\17\2\20\1\21\1\1\2\17\1\22\1\0"+
-    "\1\2\1\22\1\0\3\11\1\17\1\23\1\24\1\25"+
-    "\1\26\1\27\1\30\1\31\3\0\1\22\3\11\1\0"+
-    "\1\11\1\32\1\33\1\34";
+    "\1\2\1\22\1\0\3\11\1\23\1\24\1\25\1\26"+
+    "\1\27\1\30\1\31\1\32\1\33\1\23\3\0\1\22"+
+    "\3\11\2\0\1\11\1\34\1\35\1\0\1\36\1\0"+
+    "\1\37";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[60];
+    int [] result = new int[66];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -139,17 +140,18 @@ public class JsonLexer implements java_cup.runtime.Scanner {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\43\0\106\0\151\0\214\0\214\0\257\0\214"+
-    "\0\214\0\214\0\214\0\322\0\365\0\u0118\0\u013b\0\214"+
-    "\0\u015e\0\214\0\214\0\214\0\u0181\0\u01a4\0\u01c7\0\214"+
-    "\0\214\0\u01ea\0\214\0\u020d\0\214\0\u0230\0\u0253\0\u0276"+
-    "\0\u0299\0\u02bc\0\u02df\0\u0118\0\u0302\0\u0325\0\u0348\0\u036b"+
-    "\0\214\0\214\0\214\0\214\0\214\0\214\0\214\0\214"+
-    "\0\u038e\0\u03b1\0\u03d4\0\u03d4\0\u03f7\0\u041a\0\u043d\0\u0460"+
-    "\0\u0483\0\u015e\0\u015e\0\u015e";
+    "\0\0\0\44\0\110\0\154\0\220\0\220\0\264\0\220"+
+    "\0\220\0\220\0\220\0\330\0\374\0\u0120\0\u0144\0\220"+
+    "\0\u0168\0\220\0\220\0\220\0\u018c\0\u01b0\0\u01d4\0\220"+
+    "\0\220\0\u01f8\0\220\0\u021c\0\220\0\u0240\0\u0264\0\u0288"+
+    "\0\u02ac\0\u02d0\0\u02f4\0\u0120\0\u0318\0\u033c\0\u0360\0\u0384"+
+    "\0\220\0\220\0\220\0\220\0\220\0\220\0\220\0\220"+
+    "\0\220\0\u03a8\0\u03cc\0\u03f0\0\u0414\0\u0414\0\u0438\0\u045c"+
+    "\0\u0480\0\u04a4\0\u04c8\0\u04ec\0\u0168\0\u0168\0\u0510\0\u0168"+
+    "\0\u0534\0\220";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[60];
+    int [] result = new int[66];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -173,39 +175,42 @@ public class JsonLexer implements java_cup.runtime.Scanner {
 
   private static final String ZZ_TRANS_PACKED_0 =
     "\1\5\2\6\1\5\1\6\1\7\1\10\1\11\2\5"+
-    "\1\12\1\13\1\14\1\15\1\16\1\17\1\20\2\21"+
+    "\1\12\1\13\1\14\1\15\1\16\1\17\1\20\3\21"+
     "\1\22\1\5\1\23\1\24\3\21\1\25\1\21\1\26"+
     "\2\21\1\27\1\21\1\30\1\31\2\32\1\33\2\32"+
-    "\1\34\1\32\1\35\14\32\1\36\16\32\2\37\1\33"+
-    "\2\37\1\34\1\35\15\37\1\36\16\37\2\40\1\33"+
-    "\2\40\1\34\16\40\1\36\1\40\1\35\14\40\45\0"+
-    "\1\6\56\0\2\41\33\0\1\42\4\0\1\43\41\0"+
-    "\1\41\1\0\2\44\2\0\1\45\6\0\1\45\25\0"+
-    "\1\41\1\0\2\17\2\0\1\45\6\0\1\45\27\0"+
-    "\2\21\1\0\2\21\4\0\12\21\20\0\2\21\1\0"+
-    "\2\21\4\0\1\46\11\21\20\0\2\21\1\0\2\21"+
-    "\4\0\11\21\1\47\20\0\2\21\1\0\2\21\4\0"+
+    "\1\34\1\32\1\35\15\32\1\36\16\32\2\37\1\33"+
+    "\2\37\1\34\1\35\16\37\1\36\16\37\2\40\1\33"+
+    "\2\40\1\34\17\40\1\36\1\40\1\35\14\40\46\0"+
+    "\1\6\57\0\2\41\34\0\1\42\4\0\1\43\42\0"+
+    "\1\41\1\0\2\44\2\0\1\45\7\0\1\45\25\0"+
+    "\1\41\1\0\2\17\2\0\1\45\7\0\1\45\27\0"+
+    "\2\21\1\0\3\21\4\0\12\21\20\0\2\21\1\0"+
+    "\3\21\4\0\1\46\11\21\20\0\2\21\1\0\3\21"+
+    "\4\0\11\21\1\47\20\0\2\21\1\0\3\21\4\0"+
     "\6\21\1\50\3\21\2\0\2\32\1\0\2\32\1\0"+
-    "\1\32\1\0\14\32\1\0\16\32\2\0\1\33\40\0"+
-    "\2\51\4\0\1\52\15\51\1\53\3\51\1\54\1\51"+
-    "\1\55\1\51\1\56\1\57\1\51\1\60\3\51\2\37"+
-    "\1\0\2\37\2\0\15\37\1\0\16\37\2\40\1\0"+
-    "\2\40\1\0\16\40\1\0\1\40\1\0\14\40\16\0"+
-    "\2\41\2\0\1\45\6\0\1\45\11\0\10\61\1\62"+
-    "\32\61\2\43\1\6\2\43\1\7\35\43\11\0\1\63"+
-    "\1\0\1\63\2\0\2\64\41\0\2\21\1\0\2\21"+
-    "\4\0\4\21\1\65\5\21\20\0\2\21\1\0\2\21"+
-    "\4\0\4\21\1\66\5\21\20\0\2\21\1\0\2\21"+
-    "\4\0\11\21\1\67\2\0\10\61\1\70\32\61\10\0"+
-    "\1\62\4\0\1\6\43\0\2\64\41\0\2\21\1\0"+
-    "\2\21\4\0\7\21\1\71\2\21\20\0\2\21\1\0"+
-    "\2\21\4\0\4\21\1\72\5\21\20\0\2\21\1\0"+
-    "\2\21\4\0\2\21\1\73\7\21\2\0\10\61\1\70"+
-    "\4\61\1\6\25\61\16\0\2\21\1\0\2\21\4\0"+
-    "\2\21\1\74\7\21\2\0";
+    "\1\32\1\0\15\32\1\0\16\32\2\0\1\33\41\0"+
+    "\2\51\4\0\1\52\6\51\1\53\7\51\1\54\3\51"+
+    "\1\55\1\51\1\56\1\51\1\57\1\60\1\51\1\61"+
+    "\1\62\2\51\2\37\1\0\2\37\2\0\16\37\1\0"+
+    "\16\37\2\40\1\0\2\40\1\0\17\40\1\0\1\40"+
+    "\1\0\14\40\16\0\2\41\2\0\1\45\7\0\1\45"+
+    "\11\0\10\63\1\64\33\63\2\43\1\6\2\43\1\7"+
+    "\36\43\11\0\1\65\1\0\1\65\2\0\2\66\42\0"+
+    "\2\21\1\0\3\21\4\0\4\21\1\67\5\21\20\0"+
+    "\2\21\1\0\3\21\4\0\4\21\1\70\5\21\20\0"+
+    "\2\21\1\0\3\21\4\0\11\21\1\71\20\0\2\72"+
+    "\1\0\2\72\5\0\4\72\10\0\10\63\1\73\33\63"+
+    "\10\0\1\64\4\0\1\6\44\0\2\66\42\0\2\21"+
+    "\1\0\3\21\4\0\7\21\1\74\2\21\20\0\2\21"+
+    "\1\0\3\21\4\0\4\21\1\75\5\21\20\0\2\21"+
+    "\1\0\3\21\4\0\2\21\1\76\7\21\20\0\2\77"+
+    "\1\0\2\77\5\0\4\77\10\0\10\63\1\73\4\63"+
+    "\1\6\26\63\16\0\2\21\1\0\3\21\4\0\2\21"+
+    "\1\100\7\21\20\0\2\101\1\0\2\101\5\0\4\101"+
+    "\26\0\2\102\1\0\2\102\5\0\4\102\10\0";
 
   private static int [] zzUnpacktrans() {
-    int [] result = new int[1190];
+    int [] result = new int[1368];
     int offset = 0;
     offset = zzUnpacktrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -250,10 +255,11 @@ public class JsonLexer implements java_cup.runtime.Scanner {
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
     "\4\0\2\11\1\1\4\11\4\1\1\11\1\1\3\11"+
     "\3\1\2\11\1\1\1\11\1\1\1\11\4\1\1\0"+
-    "\2\1\1\0\3\1\10\11\3\0\4\1\1\0\4\1";
+    "\2\1\1\0\3\1\11\11\1\1\3\0\4\1\2\0"+
+    "\3\1\1\0\1\1\1\0\1\11";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[60];
+    int [] result = new int[66];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -335,7 +341,7 @@ public class JsonLexer implements java_cup.runtime.Scanner {
     private Symbol symbol(int type) {
         return new Symbol(type, yyline, yycolumn);
     }
-    
+
     private Symbol symbol(int type, Object value) {
         return new Symbol(type, yyline, yycolumn, value);
     }
@@ -768,142 +774,159 @@ public class JsonLexer implements java_cup.runtime.Scanner {
             { throw new Error("Illegal character <"+yytext()+">");
             }
           // fall through
-          case 29: break;
+          case 32: break;
           case 2:
             { /* ignore */
             }
           // fall through
-          case 30: break;
+          case 33: break;
           case 3:
             { yybegin(STRING_DOUBLE_QUOTE); string.setLength(0);
             }
           // fall through
-          case 31: break;
+          case 34: break;
           case 4:
             { yybegin(STRING_SINGLE_QUOTE); string.setLength(0);
             }
           // fall through
-          case 32: break;
+          case 35: break;
           case 5:
             { return symbol(COMMA);
             }
           // fall through
-          case 33: break;
+          case 36: break;
           case 6:
             { return symbol(MINUS);
             }
           // fall through
-          case 34: break;
+          case 37: break;
           case 7:
             { return symbol(NUMBER, Numbers.parseShortestNumber(yytext()));
             }
           // fall through
-          case 35: break;
+          case 38: break;
           case 8:
             { return symbol(COLON);
             }
           // fall through
-          case 36: break;
+          case 39: break;
           case 9:
             { return symbol(IDENTIFIER, yytext());
             }
           // fall through
-          case 37: break;
+          case 40: break;
           case 10:
             { return symbol(LBRACK);
             }
           // fall through
-          case 38: break;
+          case 41: break;
           case 11:
             { return symbol(RBRACK);
             }
           // fall through
-          case 39: break;
+          case 42: break;
           case 12:
             { yybegin(STRING_GRAVE_ACCENT); string.setLength(0);
             }
           // fall through
-          case 40: break;
+          case 43: break;
           case 13:
             { return symbol(LCURLY);
             }
           // fall through
-          case 41: break;
+          case 44: break;
           case 14:
             { return symbol(RCURLY);
             }
           // fall through
-          case 42: break;
+          case 45: break;
           case 15:
             { string.append( yytext() );
             }
           // fall through
-          case 43: break;
+          case 46: break;
           case 16:
             { throw new RuntimeException("Unterminated string at end of line");
             }
           // fall through
-          case 44: break;
+          case 47: break;
           case 17:
             { yybegin(YYINITIAL); return symbol(STRING, string.toString());
             }
           // fall through
-          case 45: break;
+          case 48: break;
           case 18:
             { return symbol(NUMBER, Double.valueOf(yytext()));
             }
           // fall through
-          case 46: break;
-          case 19:
-            { string.append( '\"' );
-            }
-          // fall through
-          case 47: break;
-          case 20:
-            { string.append( '\\' );
-            }
-          // fall through
-          case 48: break;
-          case 21:
-            { string.append( '\b' );
-            }
-          // fall through
           case 49: break;
-          case 22:
-            { string.append( '\f' );
+          case 19:
+            { string.append( yytext().substring(1) );
             }
           // fall through
           case 50: break;
-          case 23:
-            { string.append( '\n' );
+          case 20:
+            { string.append( '\"' );
             }
           // fall through
           case 51: break;
-          case 24:
-            { string.append( '\r' );
+          case 21:
+            { string.append( '/' );
             }
           // fall through
           case 52: break;
-          case 25:
-            { string.append( '\t' );
+          case 22:
+            { string.append( '\\' );
             }
           // fall through
           case 53: break;
-          case 26:
-            { return symbol(NULL);
+          case 23:
+            { string.append( '\b' );
             }
           // fall through
           case 54: break;
-          case 27:
-            { return symbol(BOOLEAN, Boolean.TRUE);
+          case 24:
+            { string.append( '\f' );
             }
           // fall through
           case 55: break;
-          case 28:
-            { return symbol(BOOLEAN, Boolean.FALSE);
+          case 25:
+            { string.append( '\n' );
             }
           // fall through
           case 56: break;
+          case 26:
+            { string.append( '\r' );
+            }
+          // fall through
+          case 57: break;
+          case 27:
+            { string.append( '\t' );
+            }
+          // fall through
+          case 58: break;
+          case 28:
+            { return symbol(NULL);
+            }
+          // fall through
+          case 59: break;
+          case 29:
+            { return symbol(BOOLEAN, Boolean.TRUE);
+            }
+          // fall through
+          case 60: break;
+          case 30:
+            { return symbol(BOOLEAN, Boolean.FALSE);
+            }
+          // fall through
+          case 61: break;
+          case 31:
+            { String hex = yytext().substring(2); 
+                                   int code = Integer.parseInt(hex, 16);
+                                   string.append((char) code);
+            }
+          // fall through
+          case 62: break;
           default:
             zzScanError(ZZ_NO_MATCH);
         }
