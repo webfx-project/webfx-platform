@@ -101,6 +101,7 @@
         <module>webfx-platform-ast-factory-teavm</module>
         <module>webfx-platform-ast-factory-vertx</module>
         <module>webfx-platform-ast-json-plugin</module>
+        <module>webfx-platform-ast-toml-plugin</module>
         <module>webfx-platform-ast-yaml-plugin</module>
         <module>webfx-platform-async</module>
         <module>webfx-platform-audio</module>
