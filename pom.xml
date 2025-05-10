@@ -110,6 +110,7 @@
         <module>webfx-platform-blob</module>
         <module>webfx-platform-blob-gwt-j2cl</module>
         <module>webfx-platform-blob-java</module>
+        <module>webfx-platform-blob-teavm</module>
         <module>webfx-platform-boot</module>
         <module>webfx-platform-boot-java</module>
         <module>webfx-platform-boot-vertx</module>
