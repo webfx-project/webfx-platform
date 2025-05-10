@@ -178,6 +178,7 @@
         <module>webfx-platform-useragent-gwt-j2cl</module>
         <module>webfx-platform-useragent-java-client</module>
         <module>webfx-platform-useragent-java-server</module>
+        <module>webfx-platform-useragent-teavm</module>
         <module>webfx-platform-util</module>
         <module>webfx-platform-util-http</module>
         <module>webfx-platform-util-teavm</module>
