@@ -141,6 +141,7 @@
         <module>webfx-platform-os-gluon</module>
         <module>webfx-platform-os-gwt-j2cl</module>
         <module>webfx-platform-os-java</module>
+        <module>webfx-platform-os-teavm</module>
         <module>webfx-platform-reflect</module>
         <module>webfx-platform-resource</module>
         <module>webfx-platform-resource-gluon</module>
