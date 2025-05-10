@@ -156,6 +156,7 @@
         <module>webfx-platform-shutdown-gluon</module>
         <module>webfx-platform-shutdown-gwt-j2cl</module>
         <module>webfx-platform-shutdown-java</module>
+        <module>webfx-platform-shutdown-teavm</module>
         <module>webfx-platform-storage</module>
         <module>webfx-platform-storage-gwt-j2cl</module>
         <module>webfx-platform-storage-java</module>
