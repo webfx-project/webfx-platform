@@ -24,7 +24,7 @@ public final class J2clResourceProvider implements ResourceProvider {
             // If the resource path is already an absolute URL, we return it as is
             if (resourcePath.contains("://")) // ex: https://, http://, file://, etc.
                 return resourcePath;
-            // We need to return the absolute path of the resource from index.html file (the resource packages are located beside index.html)
+            // We need to return the absolute path of the resource from the index.html file (the resource packages are located beside index.html)
             if (resourcePath.startsWith("/")) // If the path provided is already absolute,
                 resourcePath = resourcePath.substring(1); // we just remove the first / to make that path relative to index.html
             else if (loadingClass != null) { // If the path is relative to the loading class,
@@ -55,7 +55,7 @@ public final class J2clResourceProvider implements ResourceProvider {
         String text = getText(resourcePath); // let's try
         if (text != null) // Yes it was!
             onSuccess.accept(text);
-        else { // No it wasn't, so it's a remote file that we need to fetch
+        else { // No, it wasn't, so it's a remote file that we need to fetch
             DomGlobal.window.fetch(resourcePath)
                     .then(response -> {
                         if (!response.ok) {
