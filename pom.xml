@@ -159,6 +159,7 @@
         <module>webfx-platform-storage</module>
         <module>webfx-platform-storage-gwt-j2cl</module>
         <module>webfx-platform-storage-java</module>
+        <module>webfx-platform-storage-teavm</module>
         <module>webfx-platform-storagelocation</module>
         <module>webfx-platform-storagelocation-gluon</module>
         <module>webfx-platform-storagelocation-java</module>
