@@ -187,6 +187,7 @@
         <module>webfx-platform-visibility-gluon</module>
         <module>webfx-platform-visibility-gwt-j2cl</module>
         <module>webfx-platform-visibility-java-headless</module>
+        <module>webfx-platform-visibility-teavm</module>
         <module>webfx-platform-webassembly</module>
         <module>webfx-platform-webassembly-teavm</module>
         <module>webfx-platform-webworker</module>
