@@ -117,6 +117,7 @@
         <module>webfx-platform-browser</module>
         <module>webfx-platform-browser-gluon</module>
         <module>webfx-platform-browser-gwt-j2cl</module>
+        <module>webfx-platform-browser-teavm</module>
         <module>webfx-platform-conf</module>
         <module>webfx-platform-conf-file-java-plugin</module>
         <module>webfx-platform-conf-zero</module>
