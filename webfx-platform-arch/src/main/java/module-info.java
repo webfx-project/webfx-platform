@@ -11,6 +11,7 @@ module webfx.platform.arch {
     // Exported packages
     exports dev.webfx.platform.arch;
     exports dev.webfx.platform.arch.spi;
+    exports dev.webfx.platform.arch.spi.impl.web;
 
     // Used services
     uses dev.webfx.platform.arch.spi.ArchProvider;
