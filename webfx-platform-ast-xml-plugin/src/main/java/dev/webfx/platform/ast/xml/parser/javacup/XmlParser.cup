@@ -1,0 +1,167 @@
+package dev.webfx.platform.ast.xml.parser.javacup;
+
+import dev.webfx.platform.ast.AST;
+import dev.webfx.platform.ast.AstArray;
+import dev.webfx.platform.ast.AstObject;
+import dev.webfx.platform.ast.ReadOnlyAstArray;
+import dev.webfx.platform.util.Numbers;
+import dev.webfx.platform.util.tuples.Pair;
+
+/* ----------------------Preliminary Declarations Section--------------------*/
+
+/* Parser code to change the way the parser reports errors (include
+   line and column number of the error). */
+parser code {:
+
+    /* Change the method report_error so it will display the line and
+       column of where the error occurred in the input as well as the
+       reason for the error which is passed into the method in the
+       String 'message'. */
+    public void report_error(String message, Object info) {
+        System.err.println(generateErrorMessage(message, info));
+    }
+   
+    /* Change the method report_fatal_error so when it reports a fatal
+       error it will display the line and column number of where the
+       fatal error occurred in the input as well as the reason for the
+       fatal error which is passed into the method in the object
+       'message' and then exit.*/
+    public void report_fatal_error(String message, Object info) {
+        throw new IllegalArgumentException(generateErrorMessage(message, info));
+    }
+
+    private String generateErrorMessage(String message, Object info) {
+
+        /* Create a StringBuilder called 'm' with the string 'Error' in it. */
+        StringBuilder m = new StringBuilder("Error");
+
+        /* Check if the information passed to the method is the same
+           type as the type java_cup.runtime.Symbol. */
+        if (info instanceof java_cup.runtime.Symbol) {
+            /* Declare a java_cup.runtime.Symbol object 's' with the
+               information in the object info that is being typecasted
+               as a java_cup.runtime.Symbol object. */
+            java_cup.runtime.Symbol s = ((java_cup.runtime.Symbol) info);
+
+            /* Check if the line number in the input is greater or
+               equal to zero. */
+            if (s.left >= 0) {
+                /* Add to the end of the StringBuilder error message
+                   the line number of the error in the input. */
+                m.append(" in line "+(s.left+1));
+                /* Check if the column number in the input is greater
+                   or equal to zero. */
+                if (s.right >= 0)
+                    /* Add to the end of the StringBuilder error message
+                       the column number of the error in the input. */
+                    m.append(", column "+(s.right+1));
+            }
+        }
+
+        /* Add to the end of the StringBuilder error message created in
+           this method the message that was passed into this method. */
+        m.append(" : "+message);
+
+        return m.toString();
+    }
+:};
+
+
+/* ------------Declaration of Terminals and Non Terminals Section----------- */
+
+/* Terminals (tokens returned by the scanner).*/
+terminal          LTAG, RTAG, LTAGSLASH, RTAGSLASH, EQUALS;
+terminal          NULL;
+terminal Object   NUMBER, MINUS;
+terminal Boolean  BOOLEAN;
+terminal String   STRING, IDENTIFIER, TEXT;
+
+/* Non terminals used in the grammar section.*/
+non terminal Object                     xml_element;
+non terminal Object                     xml_scalar;
+non terminal AstObject                  xml_object;
+non terminal Pair<String, Object>       xml_attribute;
+non terminal AstObject                  xml_attributes;
+non terminal String                     xml_tag_name;
+
+/* -------------Precedence and Associatively of Terminals Section----------- */
+
+start with xml_element;
+
+/* ----------------------------Grammar Section-------------------- */
+
+xml_element ::= xml_object:o
+              {: RESULT = o; :}
+            | xml_scalar:s
+              {: RESULT = s; :}
+            ;
+
+xml_scalar
+            ::= NUMBER:n
+              {: RESULT = n; :}
+            | MINUS NUMBER:n
+              {: RESULT = Numbers.negate(n); :}
+            | STRING:s
+              {: RESULT = s; :}
+            | BOOLEAN:b
+              {: RESULT = b; :}
+            | NULL
+              {: RESULT = null; :}
+            | TEXT:t
+              {: RESULT = t; :}
+            ;
+
+xml_object ::= LTAG xml_tag_name:tag xml_attributes:attrs RTAG xml_element:content LTAGSLASH xml_tag_name:endTag RTAG
+               {: 
+                  if (!tag.equals(endTag))
+                      throw new IllegalArgumentException("Mismatched XML tags: " + tag + " and " + endTag);
+
+                  AstObject result;
+                  if (content instanceof AstObject) {
+                      // If content is an object, merge it with attributes
+                      result = attrs;
+                      AstObject contentObj = (AstObject) content;
+                      ReadOnlyAstArray keys = contentObj.keys();
+                      for (int i = 0, size = keys.size(); i < size; i++) {
+                          String key = keys.getString(i);
+                          result.set(key, (Object) contentObj.get(key));
+                      }
+                  } else if (content != null) {
+                      // If content is a scalar value, add it with special key
+                      result = attrs.set("value", content);
+                  } else {
+                      // No content, just return attributes
+                      result = attrs;
+                  }
+
+                  // Create a new object with the tag name as the key and the result as the value
+                  RESULT = AST.createObject().set(tag, result);
+               :}
+            | LTAG xml_tag_name:tag xml_attributes:attrs RTAG LTAGSLASH xml_tag_name:endTag RTAG
+               {: 
+                  if (!tag.equals(endTag))
+                      throw new IllegalArgumentException("Mismatched XML tags: " + tag + " and " + endTag);
+
+                  // Empty tag with attributes
+                  RESULT = AST.createObject().set(tag, attrs);
+               :}
+            | LTAG xml_tag_name:tag xml_attributes:attrs RTAGSLASH
+               {: 
+                  // Self-closing tag, create an object with the tag name as the key
+                  RESULT = AST.createObject().set(tag, attrs);
+               :}
+            ;
+
+xml_tag_name ::= IDENTIFIER:id
+               {: RESULT = id; :}
+            ;
+
+xml_attributes ::= xml_attributes:attrs xml_attribute:attr
+              {: RESULT = attrs.set(attr.get1(), attr.get2()); :}
+            | 
+              {: RESULT = AST.createObject(); :}
+            ;
+
+xml_attribute ::= IDENTIFIER:id EQUALS STRING:value
+               {: RESULT = new Pair(id, value); :}
+            ;
