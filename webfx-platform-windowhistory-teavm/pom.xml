@@ -35,6 +35,12 @@
 
         <dependency>
             <groupId>dev.webfx</groupId>
+            <artifactId>webfx-platform-util-teavm</artifactId>
+            <version>0.1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>dev.webfx</groupId>
             <artifactId>webfx-platform-windowhistory-web</artifactId>
             <version>0.1.0-SNAPSHOT</version>
         </dependency>

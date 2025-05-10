@@ -1,8 +1,8 @@
 package dev.webfx.platform.windowhistory.spi.impl.teavm;
 
 import dev.webfx.platform.ast.ReadOnlyAstObject;
+import dev.webfx.platform.util.teavm.TeaVmUtil;
 import dev.webfx.platform.windowhistory.spi.impl.web.JsWindowHistory;
-import org.teavm.jso.JSBody;
 import org.teavm.jso.JSObject;
 import org.teavm.jso.browser.Window;
 import org.teavm.jso.dom.events.Event;
@@ -33,14 +33,8 @@ public final class TeaVmWindowHistory implements JsWindowHistory {
 
     @Override
     public boolean supportsStates() {
-        return isFunction(getJSProperty(getCurrentHistory(), "pushState"));
+        return TeaVmUtil.isFunction(TeaVmUtil.getJSObject(getCurrentHistory(), "pushState"));
     }
-
-    @JSBody(params = { "obj", "prop" }, script = "return obj[prop];")
-    public static native JSObject getJSProperty(JSObject obj, String prop);
-
-    @JSBody(params = { "o" }, script = "return typeof o === 'function';")
-    public static native boolean isFunction(JSObject o);
 
     @Override
     public ReadOnlyAstObject state() {
@@ -60,7 +54,7 @@ public final class TeaVmWindowHistory implements JsWindowHistory {
     @Override
     public void onPopState(Consumer<ReadOnlyAstObject> stateListener) {
         Window.current().addEventListener("popstate", (Event evt) -> {
-            stateListener.accept((ReadOnlyAstObject) getJSProperty(evt, "state"));
+            stateListener.accept((ReadOnlyAstObject) TeaVmUtil.getJSObject(evt, "state"));
         });
     }
 
