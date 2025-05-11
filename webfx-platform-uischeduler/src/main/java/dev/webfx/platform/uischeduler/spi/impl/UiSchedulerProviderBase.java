@@ -1,5 +1,6 @@
 package dev.webfx.platform.uischeduler.spi.impl;
 
+import dev.webfx.platform.console.Console;
 import dev.webfx.platform.scheduler.Cancellable;
 import dev.webfx.platform.scheduler.Scheduled;
 import dev.webfx.platform.scheduler.Scheduler;
@@ -236,11 +237,11 @@ public abstract class UiSchedulerProviderBase extends SchedulerProviderBase impl
     }
 
     protected void log(String message) {
-        System.out.println(message);
+        Console.log(message);
     }
 
     protected void log(Throwable throwable) {
-        throwable.printStackTrace(System.err);
+        Console.log(throwable);
     }
 
 }

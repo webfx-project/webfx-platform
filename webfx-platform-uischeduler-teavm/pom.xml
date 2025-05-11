@@ -11,28 +11,15 @@
         <version>0.1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>webfx-platform-uischeduler</artifactId>
+    <artifactId>webfx-platform-uischeduler-teavm</artifactId>
 
-    <description>
-        Cross-platform UiScheduler API for scheduling UI tasks.
-        It's an extension of the Scheduler API with additional methods for handling UI tasks.
-        The WebFX Platform provides only the GWT implementation. The WebFX Kit provides the OpenJFX implementation.
-    </description>
+    <description>TeaVM implementation of the UiScheduler API (for the browser).</description>
 
     <dependencies>
 
         <dependency>
-            <groupId>dev.webfx</groupId>
-            <artifactId>webfx-platform-console</artifactId>
-            <version>0.1.0-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>dev.webfx</groupId>
-            <artifactId>webfx-platform-javabase-emul-j2cl</artifactId>
-            <version>0.1.0-SNAPSHOT</version>
-            <scope>runtime</scope>
-            <optional>true</optional>
+            <groupId>org.teavm</groupId>
+            <artifactId>teavm-jso-apis</artifactId>
         </dependency>
 
         <dependency>
@@ -43,13 +30,13 @@
 
         <dependency>
             <groupId>dev.webfx</groupId>
-            <artifactId>webfx-platform-service</artifactId>
+            <artifactId>webfx-platform-uischeduler</artifactId>
             <version>0.1.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>dev.webfx</groupId>
-            <artifactId>webfx-platform-util</artifactId>
+            <artifactId>webfx-platform-util-teavm</artifactId>
             <version>0.1.0-SNAPSHOT</version>
         </dependency>
 

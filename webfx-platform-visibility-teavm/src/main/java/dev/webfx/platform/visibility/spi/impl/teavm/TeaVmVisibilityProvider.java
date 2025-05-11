@@ -16,7 +16,7 @@ public final class TeaVmVisibilityProvider extends VisibilityProviderBase {
 
     @Override
     public VisibilityState getVisibilityState() {
-        return "visible".equals(TeaVmUtil.getJSString(Window.current().getDocument(), "visibilityState")) ? VisibilityState.VISIBLE : VisibilityState.HIDDEN;
+        return "visible".equals(TeaVmUtil.getVisibilityState()) ? VisibilityState.VISIBLE : VisibilityState.HIDDEN;
     }
 
 }

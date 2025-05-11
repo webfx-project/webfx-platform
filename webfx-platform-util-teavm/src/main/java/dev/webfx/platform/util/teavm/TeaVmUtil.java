@@ -33,6 +33,9 @@ public class TeaVmUtil {
     @JSBody(script = "return window.navigator.hardwareConcurrency;")
     public static native Integer getHardwareConcurrency();
 
+    @JSBody(script = "return document.visibilityState;")
+    public static native String getVisibilityState();
+
     @JSBody(params = { "obj", "prop" }, script = "return obj[prop];")
     public static native JSObject getJSObject(JSObject obj, String prop);
 
