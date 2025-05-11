@@ -13,7 +13,7 @@
 
     <artifactId>webfx-platform-console-teavm</artifactId>
 
-    <description>Java implementation of the Console API (for all platforms other than browser).</description>
+    <description>TeaVM implementation of the Console API (for all platforms other than browser).</description>
 
     <dependencies>
 
