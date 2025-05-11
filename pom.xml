@@ -182,6 +182,7 @@
         <module>webfx-platform-substitution-var-windowlocation-plugin</module>
         <module>webfx-platform-typedarray</module>
         <module>webfx-platform-typedarray-gwt-j2cl</module>
+        <module>webfx-platform-typedarray-teavm</module>
         <module>webfx-platform-uischeduler</module>
         <module>webfx-platform-uischeduler-gwt-j2cl</module>
         <module>webfx-platform-uischeduler-teavm</module>
