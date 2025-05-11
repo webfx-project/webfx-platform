@@ -132,6 +132,7 @@
         <module>webfx-platform-fetch-ast-json</module>
         <module>webfx-platform-fetch-gwt-j2cl</module>
         <module>webfx-platform-fetch-java</module>
+        <module>webfx-platform-fetch-teavm</module>
         <module>webfx-platform-fetch-vertx</module>
         <module>webfx-platform-file</module>
         <module>webfx-platform-file-gwt-j2cl</module>
