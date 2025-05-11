@@ -96,6 +96,7 @@
         <module>webfx-platform-arch-gwt-j2cl</module>
         <module>webfx-platform-arch-java</module>
         <module>webfx-platform-arch-teavm</module>
+        <module>webfx-platform-arch-web</module>
         <module>webfx-platform-ast</module>
         <module>webfx-platform-ast-factory-generic</module>
         <module>webfx-platform-ast-factory-gwt</module>
