@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project preview="true">
+
+    <description>GWT/J2CL implementation of the Resource API (for the browser).</description>
+
+    <exported-packages>
+        <source-packages/>
+        <resource-packages/>
+    </exported-packages>
+
+    <dependencies>
+        <used-by-source-modules/>
+    </dependencies>
+
+    <providers>
+        <provider interface="dev.webfx.platform.resource.spi.ResourceProvider">dev.webfx.platform.resource.spi.impl.gwtj2cl.GwtJ2clResourceProvider</provider>
+    </providers>
+
+</project>
