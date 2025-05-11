@@ -7,6 +7,7 @@ import dev.webfx.platform.blob.spi.impl.gwtj2cl.GwtJ2clBlob;
 import dev.webfx.platform.fetch.*;
 import dev.webfx.platform.fetch.spi.FetchProvider;
 import dev.webfx.platform.util.Strings;
+import dev.webfx.platform.util.gwtj2cl.GwtJ2clUtil;
 import elemental2.dom.DomGlobal;
 import elemental2.dom.RequestInit;
 

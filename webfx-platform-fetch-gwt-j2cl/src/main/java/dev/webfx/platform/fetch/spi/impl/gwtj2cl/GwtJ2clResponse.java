@@ -7,6 +7,7 @@ import dev.webfx.platform.fetch.Headers;
 import dev.webfx.platform.fetch.Response;
 import dev.webfx.platform.streams.ReadableStream;
 import dev.webfx.platform.streams.spi.impl.gwtj2cl.GwtJ2clReadableStream;
+import dev.webfx.platform.util.gwtj2cl.GwtJ2clUtil;
 
 /**
  * @author Bruno Salmon

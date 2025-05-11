@@ -1,4 +1,4 @@
-package dev.webfx.platform.fetch.spi.impl.gwtj2cl;
+package dev.webfx.platform.util.gwtj2cl;
 
 import dev.webfx.platform.async.Future;
 import dev.webfx.platform.async.Promise;
@@ -11,9 +11,9 @@ import java.util.function.Function;
 /**
  * @author Bruno Salmon
  */
-final class GwtJ2clUtil {
+public final class GwtJ2clUtil {
 
-    static <J, T> Future<T> jsPromiseToWebFXFuture(elemental2.promise.Promise<J> jsPromise, Function<J, T> onSuccessFunction) {
+    public static <J, T> Future<T> jsPromiseToWebFXFuture(elemental2.promise.Promise<J> jsPromise, Function<J, T> onSuccessFunction) {
         Promise<T> promise = Promise.promise();
         // Not sure about if then() and catch() are exclusive so using tryComplete() and tryFail() to avoid additional exceptions
         jsPromise
@@ -31,7 +31,7 @@ final class GwtJ2clUtil {
         return promise.future();
     }
 
-    static <T> Iterator<T> jsIteratorToJavaIterator(JsIterator<T, ?, ?> jsIterator) {
+    public static <T> Iterator<T> jsIteratorToJavaIterator(JsIterator<T, ?, ?> jsIterator) {
         return new Iterator<>() {
             private JsIIterableResult<T> next = jsIterator.next();
 

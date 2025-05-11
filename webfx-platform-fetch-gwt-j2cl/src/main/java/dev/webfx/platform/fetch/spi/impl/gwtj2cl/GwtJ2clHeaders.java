@@ -1,6 +1,7 @@
 package dev.webfx.platform.fetch.spi.impl.gwtj2cl;
 
 import dev.webfx.platform.fetch.Headers;
+import dev.webfx.platform.util.gwtj2cl.GwtJ2clUtil;
 
 import java.util.Iterator;
 
