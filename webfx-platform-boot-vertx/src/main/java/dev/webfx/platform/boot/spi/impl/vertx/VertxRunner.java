@@ -3,8 +3,6 @@ package dev.webfx.platform.boot.spi.impl.vertx;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Vertx;
 import io.vertx.core.VertxOptions;
-import io.vertx.core.impl.VertxBuilder;
-import io.vertx.core.spi.cluster.ClusterManager;
 
 import java.util.function.Consumer;
 
@@ -13,9 +11,11 @@ import java.util.function.Consumer;
  */
 public final class VertxRunner {
 
+/*
     public static void runClusteredVerticle(Class clazz, ClusterManager clusterManager) {
         runVerticle(clazz, new VertxOptions().setClusterManager(clusterManager), null);
     }
+*/
 
     public static void runVerticle(Class clazz) {
         runVerticle(clazz, null, null);
@@ -66,7 +66,7 @@ public final class VertxRunner {
                 t.printStackTrace();
             }
         };
-        if (options.getClusterManager() != null) {
+        /*if (options.getClusterManager() != null) {
             Vertx.clusteredVertx(options, res -> {
                 if (res.succeeded()) {
                     Vertx vertx = res.result();
@@ -75,11 +75,12 @@ public final class VertxRunner {
                     res.cause().printStackTrace();
                 }
             });
-        } else {
+        } else*/ {
             //Vertx vertx = Vertx.vertx(options);
-            Vertx vertx = new VertxBuilder(options).init()
-                    .fileResolver(new ZipFileResolver())
-                    .vertx();
+            Vertx vertx = Vertx.builder()
+                .with(options)
+                //.fileResolver(new ZipFileResolver())
+                .build();
             runner.accept(vertx);
         }
     }

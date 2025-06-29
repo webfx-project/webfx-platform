@@ -9,7 +9,6 @@ import dev.webfx.platform.shutdown.Shutdown;
 import dev.webfx.platform.vertx.common.VertxInstance;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Context;
-import io.vertx.core.Verticle;
 import io.vertx.core.Vertx;
 
 import java.lang.reflect.Array;
@@ -21,8 +20,8 @@ import java.util.Collection;
  *   1) one initiated by the ApplicationBooter (eventually through the main() method of this class)
  *   2) one initiated by Vertx when deploying this verticle
  *
- *   In case 1), the verticle is not yet deployed so the container need to deploy it (the container will actually create a second instance of this class)
- *   In case 2), the verticle is deployed but the container is not started
+ *   In case 1), the verticle is not yet deployed, so the container needs to deploy it (the container will actually create a second instance of this class)
+ *   In case 2), the verticle is deployed, but the container is not started
  *
  * @author Bruno Salmon
  */
@@ -75,7 +74,8 @@ public final class VertxApplicationBooterVerticle extends AbstractVerticle imple
     public void startApplicationJob(ApplicationJob applicationJob) {
         ApplicationJobVerticle applicationJobVerticle = new ApplicationJobVerticle(applicationJob);
         applicationJobVerticles.add(applicationJobVerticle);
-        VertxInstance.getVertx().deployVerticle(applicationJobVerticle, ar -> applicationJobVerticle.deploymentId = ar.result());
+        VertxInstance.getVertx().deployVerticle(applicationJobVerticle)
+            .onComplete(ar -> applicationJobVerticle.deploymentId = ar.result());
     }
 
     @Override
@@ -86,7 +86,7 @@ public final class VertxApplicationBooterVerticle extends AbstractVerticle imple
                 .ifPresent(v -> VertxInstance.getVertx().undeploy(v.deploymentId));
     }
 
-    private static final class ApplicationJobVerticle implements Verticle {
+    private static final class ApplicationJobVerticle extends AbstractVerticle {
 
         private final ApplicationJob applicationJob;
         private String deploymentId;
@@ -96,25 +96,21 @@ public final class VertxApplicationBooterVerticle extends AbstractVerticle imple
         }
 
         @Override
-        public Vertx getVertx() {
-            return VertxInstance.getVertx();
-        }
-
-        @Override
         public void init(Vertx vertx, Context context) {
+            super.init(vertx, context);
             applicationJob.onInit();
         }
 
         @Override
-        public void start(io.vertx.core.Promise<Void> startPromise) {
+        public void start(io.vertx.core.Promise<Void> startPromise) throws Exception {
             applicationJob.onStart();
-            startPromise.complete();
+            super.start(startPromise);
         }
 
         @Override
-        public void stop(io.vertx.core.Promise<Void> stopPromise) {
+        public void stop(io.vertx.core.Promise<Void> stopPromise) throws Exception {
             applicationJob.onStop();
-            stopPromise.complete();
+            super.stop(stopPromise);
         }
 
     }

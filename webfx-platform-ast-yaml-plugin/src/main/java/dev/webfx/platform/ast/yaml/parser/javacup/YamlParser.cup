@@ -7,7 +7,7 @@ import dev.webfx.platform.util.tuples.Pair;
 import java_cup.runtime.Symbol;
 
 /* ----------------------Preliminary Declarations Section--------------------*/
-   
+
 /* Parser code to change the way the parser reports errors (include
    line and column number of the error). */
 parser code {:
@@ -19,7 +19,7 @@ parser code {:
     public void report_error(String message, Object info) {
         System.err.println(generateErrorMessage(message, info));
     }
-   
+
     /* Change the method report_fatal_error so when it reports a fatal
        error it will display the line and column number of where the
        fatal error occurred in the input as well as the reason for the
@@ -104,14 +104,14 @@ parser code {:
     }
 
 :};
-   
 
-   
+
+
 /* ------------Declaration of Terminals and Non Terminals Section----------- */
-   
+
 /* Terminals (tokens returned by the scanner).*/
 terminal          DOCSTART, DOCEND;
-terminal          LCURLY, RCURLY, LBRACK, RBRACK, COLON, COMMA, PIPE;
+terminal          LCURLY, RCURLY, LBRACK, RBRACK, COLON, COMMA, PIPE, GREATER_THAN;
 terminal          NULL;
 terminal Object   NUMBER, DASH_ARRAY;
 terminal Boolean  BOOLEAN;
@@ -271,6 +271,8 @@ yaml_indent_node /* Here this is for exclusive indent element (excludes json at 
 yaml_indent_additionalstring
             ::= PIPE UNQUOTED_STRING:s
               {: RESULT = YamlCupUnquotedStrings.formatPipe(s); :}
+            | GREATER_THAN UNQUOTED_STRING:s
+              {: RESULT = YamlCupUnquotedStrings.formatFolded(s); :}
             ;
 
 

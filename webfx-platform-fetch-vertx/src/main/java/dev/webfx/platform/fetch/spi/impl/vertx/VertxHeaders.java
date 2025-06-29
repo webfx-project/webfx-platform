@@ -2,7 +2,6 @@ package dev.webfx.platform.fetch.spi.impl.vertx;
 
 import dev.webfx.platform.fetch.Headers;
 import io.vertx.core.MultiMap;
-import io.vertx.core.http.impl.headers.HeadersMultiMap;
 
 import java.util.Iterator;
 
@@ -14,7 +13,7 @@ final class VertxHeaders implements Headers {
     private final MultiMap headersMultiMap;
 
     public VertxHeaders() {
-        this(HeadersMultiMap.headers());
+        this(MultiMap.caseInsensitiveMultiMap());
     }
 
     public VertxHeaders(MultiMap headersMultiMap) {

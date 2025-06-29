@@ -11,7 +11,7 @@ import java_cup.runtime.*;
 import java.util.List;
 
 %%
-   
+
 /* -----------------Options and Declarations Section----------------- */
 
 %public
@@ -32,7 +32,7 @@ import java.util.List;
     private Symbol symbol(int type) {
         return symbol(type, null);
     }
-    
+
     private Symbol symbol(int type, Object value) {
         return new Symbol(type, yyline, yycolumn, value);
     }
@@ -48,7 +48,7 @@ import java.util.List;
 /*
   Macro Declarations
 */
-   
+
 LineTerminator = \R
 InputCharacter = [^\r\n]
 WhiteSpace     = [ ]
@@ -223,6 +223,11 @@ Boolean = {True} | {False}
                                         yybegin(UNQUOTED_INDENT_STRING);
                                         return symbol(PIPE);
                                    }
+    ">"                            {
+                                        sb.setLength(0);
+                                        yybegin(UNQUOTED_INDENT_STRING);
+                                        return symbol(GREATER_THAN);
+                                   }
 
   /* string literal */
     "'"                            { sb.setLength(0); yybegin(SINGLE_QUOTE_STRING); }
@@ -247,15 +252,11 @@ Boolean = {True} | {False}
 
   {SingleQuoteStringCharacter}+  { sb.append( yytext() ); }
 
-  /* escape sequences */
-  "\\b"                          { sb.append( '\b' ); }
-  "\\t"                          { sb.append( '\t' ); }
-  "\\n"                          { sb.append( '\n' ); }
-  "\\f"                          { sb.append( '\f' ); }
-  "\\r"                          { sb.append( '\r' ); }
-  "\\\""                         { sb.append( '\"' ); }
-  "\\\\"                         { sb.append( '\\' ); }
-  \\.                            { sb.append( yytext() ); }
+  /* In single-quoted strings, backslashes are treated as literal characters */
+  "\\"                           { sb.append( '\\' ); }
+
+  /* line continuation */
+  "\\" {LineTerminator}          { /* ignore the line break */ }
 
   /* error cases */
   {LineTerminator}               { throw new RuntimeException("Unterminated string at end of line"); }
@@ -267,14 +268,41 @@ Boolean = {True} | {False}
   {DoubleQuoteStringCharacter}+  { sb.append( yytext() ); }
 
   /* escape sequences */
+  "\\0"                          { sb.append( '\u0000' ); }
+  "\\a"                          { sb.append( '\u0007' ); }
   "\\b"                          { sb.append( '\b' ); }
   "\\t"                          { sb.append( '\t' ); }
   "\\n"                          { sb.append( '\n' ); }
+  "\\v"                          { sb.append( '\u000B' ); }
   "\\f"                          { sb.append( '\f' ); }
   "\\r"                          { sb.append( '\r' ); }
+  "\\e"                          { sb.append( '\u001B' ); }
   "\\\""                         { sb.append( '\"' ); }
   "\\\\"                         { sb.append( '\\' ); }
-  \\.                            { sb.append( yytext() ); }
+  "\\/"                          { sb.append( '/' ); }
+  "\\N"                          { sb.append( '\u0085' ); }  /* Unicode next line character */
+  "\\_"                          { sb.append( '\u00A0' ); }  /* Unicode non-breaking space */
+  "\\L"                          { sb.append( '\u2028' ); }  /* Unicode line separator */
+  "\\P"                          { sb.append( '\u2029' ); }  /* Unicode paragraph separator */
+  "\\x"[0-9A-Fa-f]{2}            { 
+                                   String hex = yytext().substring(2); 
+                                   int code = Integer.parseInt(hex, 16);
+                                   sb.append((char) code);
+                                 }
+  "\\u"[0-9A-Fa-f]{4}            { 
+                                   String hex = yytext().substring(2); 
+                                   int code = Integer.parseInt(hex, 16);
+                                   sb.append((char) code);
+                                 }
+  "\\U"[0-9A-Fa-f]{8}            { 
+                                   String hex = yytext().substring(2); 
+                                   int code = Integer.parseInt(hex, 16);
+                                   sb.append(Character.toChars(code));
+                                 }
+  \\.                            { sb.append( yytext().substring(1) ); }
+
+  /* line continuation */
+  "\\" {LineTerminator}          { /* ignore the line break */ }
 
   /* error cases */
   {LineTerminator}               { throw new RuntimeException("Unterminated string at end of line"); }
@@ -286,14 +314,42 @@ Boolean = {True} | {False}
   {GraveAccentStringCharacter}+  { sb.append( yytext() ); }
 
   /* escape sequences */
+  "\\0"                          { sb.append( '\u0000' ); }
+  "\\a"                          { sb.append( '\u0007' ); }
   "\\b"                          { sb.append( '\b' ); }
   "\\t"                          { sb.append( '\t' ); }
   "\\n"                          { sb.append( '\n' ); }
+  "\\v"                          { sb.append( '\u000B' ); }
   "\\f"                          { sb.append( '\f' ); }
   "\\r"                          { sb.append( '\r' ); }
+  "\\e"                          { sb.append( '\u001B' ); }
   "\\\""                         { sb.append( '\"' ); }
+  "\\`"                          { sb.append( '`' ); }
   "\\\\"                         { sb.append( '\\' ); }
-  \\.                            { sb.append( yytext() ); }
+  "\\/"                          { sb.append( '/' ); }
+  "\\N"                          { sb.append( '\u0085' ); }  /* Unicode next line character */
+  "\\_"                          { sb.append( '\u00A0' ); }  /* Unicode non-breaking space */
+  "\\L"                          { sb.append( '\u2028' ); }  /* Unicode line separator */
+  "\\P"                          { sb.append( '\u2029' ); }  /* Unicode paragraph separator */
+  "\\x"[0-9A-Fa-f]{2}            { 
+                                   String hex = yytext().substring(2); 
+                                   int code = Integer.parseInt(hex, 16);
+                                   sb.append((char) code);
+                                 }
+  "\\u"[0-9A-Fa-f]{4}            { 
+                                   String hex = yytext().substring(2); 
+                                   int code = Integer.parseInt(hex, 16);
+                                   sb.append((char) code);
+                                 }
+  "\\U"[0-9A-Fa-f]{8}            { 
+                                   String hex = yytext().substring(2); 
+                                   int code = Integer.parseInt(hex, 16);
+                                   sb.append(Character.toChars(code));
+                                 }
+  \\.                            { sb.append( yytext().substring(1) ); }
+
+  /* line continuation */
+  "\\" {LineTerminator}          { /* ignore the line break */ }
 
   /* error cases */
   {LineTerminator}               { throw new RuntimeException("Unterminated string at end of line"); }
