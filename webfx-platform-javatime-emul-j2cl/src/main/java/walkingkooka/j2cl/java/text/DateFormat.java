@@ -894,8 +894,8 @@ public abstract class DateFormat extends Format {
             super(fieldName);
             this.calendarField = calendarField;
             if (calendarField != -1
-                    && table.get(new Integer(calendarField)) == null) {
-                table.put(new Integer(calendarField), this);
+                    && table.get(calendarField) == null) {
+                table.put(calendarField, this);
             }
         }
 
