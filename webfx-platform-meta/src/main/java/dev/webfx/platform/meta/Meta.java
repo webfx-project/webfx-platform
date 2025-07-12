@@ -19,6 +19,7 @@ public final class Meta {
     public final static String META_EXE_EXECUTABLE_MODULE_VERSION_KEY = "executableModuleVersion";
     public final static String META_EXE_APPLICATION_MODULE_NAME_KEY = "applicationModuleName";
     public final static String META_EXE_MAVEN_BUILD_TIMESTAMP_NAME_KEY = "mavenBuildTimestamp";
+    public final static String META_EXE_ENVIRONMENT_NAME_KEY = "environment";
     public final static String META_EXE_BACKOFFICE_NAME_KEY = "backoffice";
 
     private static Properties META_PROPERTIES;
@@ -57,6 +58,22 @@ public final class Meta {
 
     public static String getMavenBuildTimestamp() {
         return getMetaProperty(META_EXE_MAVEN_BUILD_TIMESTAMP_NAME_KEY);
+    }
+
+    public static String getEnvironment() {
+        return getMetaProperty(META_EXE_ENVIRONMENT_NAME_KEY);
+    }
+
+    public static boolean isDevelopment() {
+        return "development".equalsIgnoreCase(getEnvironment());
+    }
+
+    public static boolean isStaging() {
+        return "staging".equalsIgnoreCase(getEnvironment());
+    }
+
+    public static boolean isProduction() {
+        return "production".equalsIgnoreCase(getEnvironment());
     }
 
     public static Boolean getBackoffice() {
