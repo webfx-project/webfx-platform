@@ -359,7 +359,7 @@ public final class Numbers {
         return compareNumbers(n1, n2) > 0;
     }
 
-    public static boolean greaterThanOrEqualTo(Number n1, Number n2) {
+    public static boolean greaterThanOrEqual(Number n1, Number n2) {
         return compareNumbers(n1, n2) >= 0;
     }
 
@@ -367,7 +367,7 @@ public final class Numbers {
         return compareNumbers(n1, n2) < 0;
     }
 
-    public static boolean lessThanOrEqualTo(Number n1, Number n2) {
+    public static boolean lessThanOrEqual(Number n1, Number n2) {
         return compareNumbers(n1, n2) <= 0;
     }
 
