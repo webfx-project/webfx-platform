@@ -66,4 +66,23 @@ public interface SchedulerProvider {
     int tasksCount(boolean includeDeferred, boolean includePeriodic, boolean includeBackground, boolean includePending, boolean includeRunning);
 
     default void wakeUp() {}
+
+    default boolean isUiThread() {
+        return false;
+    };
+
+    default void runInUiThread(Runnable runnable) {
+        if (isUiThread())
+            runnable.run();
+        else
+            scheduleDeferred(runnable);
+    }
+
+    default void runOutUiThread(Runnable runnable) {
+        if (!isUiThread())
+            runnable.run();
+        else
+            runInBackground(runnable);
+    }
+
 }

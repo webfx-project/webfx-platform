@@ -35,9 +35,8 @@ public class Scheduler {
     }
 
     /**
-     * Schedules a repeating handler that is scheduled with a constant periodicity. That is, the
-     * handler will be invoked every <code>delayMs</code> milliseconds, regardless of how long the
-     * previous invocation took to complete.
+     * Schedules a repeating handler scheduled with constant periodicity. The handler will be invoked every
+     * <code>delayMs</code> milliseconds, regardless of how long the previous invocation took to complete.
      *
      * @param delayMs the period with which the handler is executed
      * @param runnable the handler to execute
@@ -81,6 +80,35 @@ public class Scheduler {
 
     public static void wakeUp() {
         getProvider().wakeUp();
+    }
+
+
+
+    // The following methods are supposed to be used on the client-side only. They are actually implemented by
+    // UiSchedulerProvider (which extends SchedulerProvider). The reason they are exposed here and not in UiScheduler
+    // is to allow shared modules (usable by both client and server) to propose some client-specific features without
+    // introducing a client dependency (to UiScheduler). This is in particular the case with the implementation of the
+    // convenient Future.inUiThread() method, which is designed for client-side only, while all other Future methods are
+    // designed for both client and server.
+
+
+    private static SchedulerProvider uiSchedulerProvider; // Will be injected by UiSchedulerProviderBase constructor
+    // using the setUiSchedulerProvider() method.
+
+    public static void setUiSchedulerProvider(SchedulerProvider uiSchedulerProvider) {
+        Scheduler.uiSchedulerProvider = uiSchedulerProvider;
+    }
+
+    public static boolean isUiThread() {
+        return uiSchedulerProvider.isUiThread();
+    }
+
+    public static void runInUiThread(Runnable runnable) {
+        uiSchedulerProvider.runInUiThread(runnable);
+    }
+
+    public static void runOutUiThread(Runnable runnable) {
+        uiSchedulerProvider.runOutUiThread(runnable);
     }
 
 }
