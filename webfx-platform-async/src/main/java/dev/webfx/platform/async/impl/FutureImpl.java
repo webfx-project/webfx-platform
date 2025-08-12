@@ -237,12 +237,14 @@ public class FutureImpl<T> extends FutureBase<T> {
     public boolean tryComplete(T result) {
         Listener<T> l;
         synchronized (this) {
-            if (value != null) {
+            if (value != null && !mayCompleteTwice) { // Note: mayCompleteTwice is a WebFX addition (see below)
                 return false;
             }
             value = result == null ? NULL_VALUE : result;
             l = listener;
-            listener = null;
+            if (!mayCompleteTwice)
+                listener = null;
+            mayCompleteTwice = false;
         }
         if (l != null) {
             emitSuccess(result, l);
@@ -315,4 +317,16 @@ public class FutureImpl<T> extends FutureBase<T> {
             this.cause = cause;
         }
     }
+
+    // WebFX additions for asynchronous queries with cache (used only by WebFX Stack EntityStore so far). In that
+    // specific case the future completion can be called twice! The first time can come from the cache reading (if
+    // present), and the second time from the actual fresh query (may fail if no connection). This is a key feature
+    // for offline mode.
+
+    private boolean mayCompleteTwice; // Can be set to true using the constructor below
+
+    FutureImpl(boolean mayCompleteTwice) { // Called only through PromiseImpl(boolean mayCompleteTwice) constructor
+        this.mayCompleteTwice = mayCompleteTwice;
+    }
+
 }
