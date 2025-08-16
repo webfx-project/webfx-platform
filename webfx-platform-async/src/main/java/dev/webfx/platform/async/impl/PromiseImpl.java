@@ -58,12 +58,5 @@ public final class PromiseImpl<T> extends FutureImpl<T> implements PromiseIntern
         }
     }*/
 
-
-    // WebFX additions
-
-    public PromiseImpl(boolean mayCompleteTwice) { // Called only by WebFX Stack EntityStore so far
-        super(mayCompleteTwice);
-    }
-
 }
 
