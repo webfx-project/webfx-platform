@@ -13,7 +13,7 @@ public final class SessionStorage {
 
     private SessionStorage() {}
 
-    private static SessionStorageProvider getProvider() {
+    public static SessionStorageProvider getProvider() {
         return SingleServiceProvider.getProvider(SessionStorageProvider.class, () -> ServiceLoader.load(SessionStorageProvider.class));
     }
 
