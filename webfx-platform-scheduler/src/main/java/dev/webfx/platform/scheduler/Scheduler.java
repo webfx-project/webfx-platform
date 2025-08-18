@@ -100,15 +100,21 @@ public class Scheduler {
     }
 
     public static boolean isUiThread() {
-        return uiSchedulerProvider.isUiThread();
+        return uiSchedulerProvider != null && uiSchedulerProvider.isUiThread();
     }
 
     public static void runInUiThread(Runnable runnable) {
-        uiSchedulerProvider.runInUiThread(runnable);
+        if (uiSchedulerProvider != null)
+            uiSchedulerProvider.runInUiThread(runnable);
+        else // May happen at the very beginning of the application, better to run it now
+            runnable.run();
     }
 
     public static void runOutUiThread(Runnable runnable) {
-        uiSchedulerProvider.runOutUiThread(runnable);
+        if (uiSchedulerProvider != null)
+            uiSchedulerProvider.runOutUiThread(runnable);
+        else // May happen at the very beginning of the application, better to run it now
+            runnable.run();
     }
 
 }
