@@ -21,6 +21,7 @@ public final class Meta {
     public final static String META_EXE_MAVEN_BUILD_TIMESTAMP_NAME_KEY = "mavenBuildTimestamp";
     public final static String META_EXE_ENVIRONMENT_NAME_KEY = "environment";
     public final static String META_EXE_BACKOFFICE_NAME_KEY = "backoffice";
+    public final static String META_EXE_PWA_KEY = "pwa";
 
     private static Properties META_PROPERTIES;
 
@@ -93,6 +94,10 @@ public final class Meta {
 
     public static boolean isBackoffice() {
         return Boolean.TRUE.equals(getBackoffice());
+    }
+
+    public static boolean isPwa() {
+        return "true".equalsIgnoreCase(getMetaProperty(META_EXE_PWA_KEY));
     }
 
 }
