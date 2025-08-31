@@ -26,18 +26,6 @@ public final class UiScheduler extends Scheduler {
         return SingleServiceProvider.getProvider(UiSchedulerProvider.class, () -> ServiceLoader.load(UiSchedulerProvider.class));
     }
 
-    public static boolean isUiThread() {
-        return getProvider().isUiThread();
-    }
-
-    public static void runInUiThread(Runnable runnable) {
-        getProvider().runInUiThread(runnable);
-    }
-
-    public static void runOutUiThread(Runnable runnable) {
-        getProvider().runOutUiThread(runnable);
-    }
-
     public static void requestNextScenePulse() {
         getProvider().requestNextScenePulse();
     }

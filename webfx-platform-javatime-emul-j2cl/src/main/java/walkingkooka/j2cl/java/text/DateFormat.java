@@ -925,7 +925,7 @@ public abstract class DateFormat extends Format {
                 throw new IllegalArgumentException();
             }
 
-            return table.get(new Integer(calendarField));
+            return table.get(calendarField);
         }
 
         /**

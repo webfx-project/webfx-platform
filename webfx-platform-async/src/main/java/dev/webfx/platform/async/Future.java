@@ -3,6 +3,7 @@ package dev.webfx.platform.async;
 import dev.webfx.platform.async.impl.CompositeFutureImpl;
 import dev.webfx.platform.async.impl.FailedFuture;
 import dev.webfx.platform.async.impl.SucceededFuture;
+import dev.webfx.platform.scheduler.Scheduler;
 
 import java.util.List;
 import java.util.concurrent.CompletionStage;
@@ -591,7 +592,7 @@ public interface Future<T> extends AsyncResult<T> {
         return completableFuture;
     }*/
 
-    /**
+    /*
      * Bridges a {@link CompletionStage} object to a Vert.x future instance.
      * <p>
      * The Vert.x future handling methods will be called from the thread that completes {@code completionStage}.
@@ -613,7 +614,7 @@ public interface Future<T> extends AsyncResult<T> {
         return promise.future();
     }*/
 
-    /**
+    /*
      * Bridges a {@link CompletionStage} object to a Vert.x future instance.
      * <p>
      * The Vert.x future handling methods will be called on the provided {@code context}.
@@ -636,7 +637,7 @@ public interface Future<T> extends AsyncResult<T> {
         return promise.future();
     }*/
 
-    /**
+    /*
      * Park the current thread until the {@code future} is completed, when the future
      * is completed the thread is un-parked and
      *
@@ -668,4 +669,13 @@ public interface Future<T> extends AsyncResult<T> {
             return null;
         }
     }*/
+
+    // WebFX additions
+
+    default Future<T> inUiThread() {
+        Promise<T> promise = Promise.promise();
+        onComplete(ar -> Scheduler.runInUiThread(() -> promise.handle(ar)));
+        return promise.future();
+    }
+
 }
