@@ -5,7 +5,7 @@ import dev.webfx.platform.blob.spi.BlobProvider;
 import elemental2.dom.Blob.ConstructorBlobPartsArrayUnionType;
 import elemental2.dom.BlobPropertyBag;
 import elemental2.dom.DomGlobal;
-import elemental2.dom.HTMLLinkElement;
+import elemental2.dom.HTMLAnchorElement;
 
 /**
  * @author Bruno Salmon
@@ -27,7 +27,7 @@ public final class GwtJ2clBlobProvider implements BlobProvider {
 
     @Override
     public void downloadUrl(String url, String fileName) {
-        HTMLLinkElement a = (HTMLLinkElement) DomGlobal.document.createElement("a");
+        HTMLAnchorElement a = (HTMLAnchorElement) DomGlobal.document.createElement("a");
         a.href = url;
         if (fileName != null)
             a.setAttribute("download", fileName);
