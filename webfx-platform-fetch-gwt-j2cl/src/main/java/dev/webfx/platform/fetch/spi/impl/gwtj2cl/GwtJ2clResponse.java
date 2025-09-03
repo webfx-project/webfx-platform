@@ -7,7 +7,7 @@ import dev.webfx.platform.fetch.Headers;
 import dev.webfx.platform.fetch.Response;
 import dev.webfx.platform.streams.ReadableStream;
 import dev.webfx.platform.streams.spi.impl.gwtj2cl.GwtJ2clReadableStream;
-import dev.webfx.platform.util.gwtj2cl.GwtJ2clUtil;
+import dev.webfx.platform.util.gwtj2cl.async.GwtJ2clAsync;
 
 /**
  * @author Bruno Salmon
@@ -56,12 +56,12 @@ public class GwtJ2clResponse implements Response {
 
     @Override
     public Future<Blob> blob() {
-        return GwtJ2clUtil.jsPromiseToWebFXFuture(jsResponse.blob(), GwtJ2clBlob::new);
+        return GwtJ2clAsync.jsPromiseToWebFXFuture(jsResponse.blob(), GwtJ2clBlob::new);
     }
 
     @Override
     public Future<String> text() {
-        return GwtJ2clUtil.jsPromiseToWebFXFuture(jsResponse.text(), text -> text);
+        return GwtJ2clAsync.jsPromiseToWebFXFuture(jsResponse.text(), text -> text);
     }
 
     @Override

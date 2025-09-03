@@ -7,7 +7,7 @@ import dev.webfx.platform.blob.spi.impl.gwtj2cl.GwtJ2clBlob;
 import dev.webfx.platform.fetch.*;
 import dev.webfx.platform.fetch.spi.FetchProvider;
 import dev.webfx.platform.util.Strings;
-import dev.webfx.platform.util.gwtj2cl.GwtJ2clUtil;
+import dev.webfx.platform.util.gwtj2cl.async.GwtJ2clAsync;
 import elemental2.dom.DomGlobal;
 import elemental2.dom.RequestInit;
 
@@ -39,7 +39,7 @@ public class GwtJ2clFetchProvider implements FetchProvider {
                 requestInit.setBody(buildMultipartBody((FormData) body));
             }
         }
-        return GwtJ2clUtil.jsPromiseToWebFXFuture(DomGlobal.window.fetch(url, requestInit), GwtJ2clResponse::new);
+        return GwtJ2clAsync.jsPromiseToWebFXFuture(DomGlobal.window.fetch(url, requestInit), GwtJ2clResponse::new);
     }
 
     @Override
