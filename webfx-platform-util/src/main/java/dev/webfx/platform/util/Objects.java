@@ -31,6 +31,10 @@ public final class Objects {
     }
 
     public static boolean areEquals(Object o1, Object o2) {
+        return areEquals(o1, o2, false);
+    }
+
+    public static boolean areEquals(Object o1, Object o2, boolean numbersFlexibility) {
         if (o1 == o2)
             return true;
         if (o1 == null || o2 == null)
@@ -41,10 +45,12 @@ public final class Objects {
             if (a1.length != a2.length)
                 return false;
             for (int i = 0; i < a1.length; i++)
-                if (!areEquals(a1[i], a2[i]))
+                if (!areEquals(a1[i], a2[i], numbersFlexibility))
                     return false;
             return true;
         }
+        if (numbersFlexibility)
+            return Numbers.compareObjectsOrNumbers(o1, o2) == 0;
         return o1.equals(o2);
     }
 

@@ -27,6 +27,11 @@ public abstract class UiSchedulerProviderBase extends SchedulerProviderBase impl
     private Cancellable longTermAnimationScheduled;
     private long longTermAnimationScheduledTimeMillis;
 
+    public UiSchedulerProviderBase() {
+        // Self-injection in Scheduler API (see Scheduler class for explanation).
+        Scheduler.setUiSchedulerProvider(this);
+    }
+
     @Override
     public Scheduled scheduleDelayInAnimationFrame(long delayMs, Runnable animationTask, int afterFrameCount, AnimationFramePass pass) {
         return scheduleInAnimationFrameImpl(delayMs, animationTask, afterFrameCount, pass, true, false, false, false);

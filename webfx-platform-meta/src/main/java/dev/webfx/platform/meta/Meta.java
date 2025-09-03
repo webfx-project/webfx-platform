@@ -19,7 +19,9 @@ public final class Meta {
     public final static String META_EXE_EXECUTABLE_MODULE_VERSION_KEY = "executableModuleVersion";
     public final static String META_EXE_APPLICATION_MODULE_NAME_KEY = "applicationModuleName";
     public final static String META_EXE_MAVEN_BUILD_TIMESTAMP_NAME_KEY = "mavenBuildTimestamp";
+    public final static String META_EXE_ENVIRONMENT_NAME_KEY = "environment";
     public final static String META_EXE_BACKOFFICE_NAME_KEY = "backoffice";
+    public final static String META_EXE_PWA_KEY = "pwa";
 
     private static Properties META_PROPERTIES;
 
@@ -59,6 +61,22 @@ public final class Meta {
         return getMetaProperty(META_EXE_MAVEN_BUILD_TIMESTAMP_NAME_KEY);
     }
 
+    public static String getEnvironment() {
+        return getMetaProperty(META_EXE_ENVIRONMENT_NAME_KEY);
+    }
+
+    public static boolean isDevelopment() {
+        return "development".equalsIgnoreCase(getEnvironment());
+    }
+
+    public static boolean isStaging() {
+        return "staging".equalsIgnoreCase(getEnvironment());
+    }
+
+    public static boolean isProduction() {
+        return "production".equalsIgnoreCase(getEnvironment());
+    }
+
     public static Boolean getBackoffice() {
         // Note: the WebFX CLI doesn't generate the backoffice property in the exe.properties file at this time, but
         // it will eventually (when specified in webfx.xml).
@@ -76,6 +94,10 @@ public final class Meta {
 
     public static boolean isBackoffice() {
         return Boolean.TRUE.equals(getBackoffice());
+    }
+
+    public static boolean isPwa() {
+        return "true".equalsIgnoreCase(getMetaProperty(META_EXE_PWA_KEY));
     }
 
 }

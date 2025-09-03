@@ -11,34 +11,18 @@ import java.util.function.Consumer;
  */
 public interface UiSchedulerProvider extends SchedulerProvider {
 
-    boolean isUiThread();
-
-    default void runInUiThread(Runnable runnable) {
-        if (isUiThread())
-            runnable.run();
-        else
-            scheduleDeferred(runnable);
-    }
-
-    default void runOutUiThread(Runnable runnable) {
-        if (!isUiThread())
-            runnable.run();
-        else
-            runInBackground(runnable);
-    }
-
     void requestNextScenePulse();
 
     boolean isAnimationFrameNow();
 
     Scheduled scheduleDelayInAnimationFrame(long delayMs, Runnable animationTask, int afterFrameCount, AnimationFramePass pass);
 
-    // Note: may be in the same animation frame if delay make it possible
+    // Note: may be in the same animation frame if delay makes it possible
     default Scheduled scheduleDelayInAnimationFrame(long delayMs, Runnable animationTask, AnimationFramePass pass) {
         return scheduleDelayInAnimationFrame(delayMs, animationTask, 0, pass);
     }
 
-    // Exclude the possibility for an execution in the current animation frame (if called during an animation frame)
+    // Excludes the possibility for an execution in the current animation frame (if called during an animation frame)
     default Scheduled scheduleDelayInFutureAnimationFrame(long delayMs, Runnable animationTask, AnimationFramePass pass) {
         return scheduleDelayInAnimationFrame(delayMs, animationTask, isAnimationFrameNow() ? 1 : 0, pass);
     }
@@ -54,7 +38,7 @@ public interface UiSchedulerProvider extends SchedulerProvider {
         return scheduleDelayInAnimationFrame(0, animationTask, pass);
     }
 
-    // Exclude the possibility for an execution in the current animation frame (if called during an animation frame)
+    // Excludes the possibility for an execution in the current animation frame (if called during an animation frame)
     default Scheduled scheduleInFutureAnimationFrame(Runnable animationTask, AnimationFramePass pass) {
         return scheduleDelayInFutureAnimationFrame(0, animationTask, pass);
     }
@@ -89,7 +73,7 @@ public interface UiSchedulerProvider extends SchedulerProvider {
     }
 
 
-    // Finally repeating the same API but without specifying the animation frame pass (implicitly UI_UPDATE_PASS)
+    // Finally, repeating the same API but without specifying the animation frame pass (implicitly UI_UPDATE_PASS)
 
     default Scheduled scheduleDelayInAnimationFrame(long delayMs, Runnable animationTask, int afterFrameCount) {
         return scheduleDelayInAnimationFrame(delayMs, animationTask, afterFrameCount, AnimationFramePass.UI_UPDATE_PASS);

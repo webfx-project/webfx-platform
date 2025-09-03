@@ -13,7 +13,7 @@ public final class LocalStorage {
 
     private LocalStorage() {}
 
-    private static LocalStorageProvider getProvider() {
+    public static LocalStorageProvider getProvider() {
         return SingleServiceProvider.getProvider(LocalStorageProvider.class, () -> ServiceLoader.load(LocalStorageProvider.class));
     }
 

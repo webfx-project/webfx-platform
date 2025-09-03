@@ -139,4 +139,8 @@ public final class Strings {
         return sb.toString();
     }
 
+    public static String truncate(String s, int maxLength) {
+        return length(s) <= maxLength ? s : s.substring(0, maxLength);
+    }
+
 }

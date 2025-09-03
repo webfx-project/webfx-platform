@@ -19,10 +19,12 @@ public final class Arrays {
 
     private Arrays() {}
 
+    @SafeVarargs
     public static <T> T[] of(T... a) {
         return a;
     }
 
+    @SafeVarargs
     public static <T> List<T> asList(T... a) {
         if (a == null)
             return null;
@@ -53,14 +55,15 @@ public final class Arrays {
     }
 
     public static <T> T[] filter(T[] array, Predicate<T> predicate, IntFunction<T[]> generator) {
-        return java.util.Arrays.stream(array).filter(predicate::test).toArray(generator);
+        return java.util.Arrays.stream(array).filter(predicate).toArray(generator);
     }
 
+    @SafeVarargs
     public static <T> T[] subArray(IntFunction<T[]> generator, int i0, int i1, T... a) {
         int n = i1 - i0;
         T[] subArray = generator.apply(n);
-        for (int i = 0; i < n; i++)
-            subArray[i] = a[i0 + i];
+        if (n >= 0)
+            System.arraycopy(a, i0, subArray, 0, n);
         return subArray;
     }
 
@@ -90,7 +93,6 @@ public final class Arrays {
         return bArray;
     }
 
-
     public static <T> String toString(T[] array, ToStringOptions options) {
         return Collections.toString(asList(array), options);
     }
@@ -119,6 +121,7 @@ public final class Arrays {
         return list;
     }
 
+    @SafeVarargs
     public static <T> T[] nonNulls(IntFunction<T[]> arrayGenerator, T... array) {
         if (allNonNulls(array))
             return array;
@@ -185,6 +188,7 @@ public final class Arrays {
         return Strings.toString(getValue(array, index));
     }
 
+    @SafeVarargs
     public static <A> A[] concat(IntFunction<A[]> arrayGenerator, A[]... as) {
         int length = 0;
         for (A[] a : as)
@@ -198,7 +202,12 @@ public final class Arrays {
         return array;
     }
 
+    @SafeVarargs
     public static <A> A[] add(IntFunction<A[]> arrayGenerator, A[] array, A... a) {
+        if (a.length == 0)
+            return array;
+        if (array.length == 0)
+            return a;
         return concat(arrayGenerator, array, a);
     }
 

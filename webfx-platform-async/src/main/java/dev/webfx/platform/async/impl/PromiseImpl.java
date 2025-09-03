@@ -57,5 +57,6 @@ public final class PromiseImpl<T> extends FutureImpl<T> implements PromiseIntern
             fail(future.cause());
         }
     }*/
+
 }
 
