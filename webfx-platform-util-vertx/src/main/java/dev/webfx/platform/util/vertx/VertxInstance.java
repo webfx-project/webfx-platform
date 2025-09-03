@@ -1,4 +1,4 @@
-package dev.webfx.platform.vertx.common;
+package dev.webfx.platform.util.vertx;
 
 import dev.webfx.platform.console.Console;
 import io.vertx.core.Handler;

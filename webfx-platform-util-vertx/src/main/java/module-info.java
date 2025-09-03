@@ -3,7 +3,7 @@
 /**
  * A set of common classes used by Vert.x implementation modules.
  */
-module webfx.platform.vertx.common {
+module webfx.platform.util.vertx {
 
     // Direct dependencies modules
     requires io.vertx.core;
@@ -12,6 +12,6 @@ module webfx.platform.vertx.common {
     requires webfx.platform.console;
 
     // Exported packages
-    exports dev.webfx.platform.vertx.common;
+    exports dev.webfx.platform.util.vertx;
 
 }

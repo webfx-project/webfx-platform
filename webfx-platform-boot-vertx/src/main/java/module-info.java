@@ -10,7 +10,7 @@ module webfx.platform.boot.vertx {
     requires webfx.platform.boot;
     requires webfx.platform.reflect;
     requires webfx.platform.shutdown;
-    requires webfx.platform.vertx.common;
+    requires webfx.platform.util.vertx;
 
     // Exported packages
     exports dev.webfx.platform.boot.spi.impl.vertx;

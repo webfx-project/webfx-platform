@@ -1,4 +1,4 @@
-package dev.webfx.platform.vertx.common;
+package dev.webfx.platform.util.vertx;
 
 import dev.webfx.platform.async.Future;
 import dev.webfx.platform.async.Promise;
@@ -6,7 +6,7 @@ import dev.webfx.platform.async.Promise;
 /**
  * @author Bruno Salmon
  */
-public final class VertxFuture {
+public final class VertxAsync {
 
     public static <T> Future<T> toWebfxFuture(io.vertx.core.Future<T> vertxFuture) {
         Promise<T> promise = Promise.promise();

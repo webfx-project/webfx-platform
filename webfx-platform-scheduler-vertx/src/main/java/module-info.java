@@ -8,7 +8,7 @@ module webfx.platform.scheduler.vertx {
     // Direct dependencies modules
     requires io.vertx.core;
     requires webfx.platform.scheduler;
-    requires webfx.platform.vertx.common;
+    requires webfx.platform.util.vertx;
 
     // Exported packages
     exports dev.webfx.platform.scheduler.spi.impl.vertx;

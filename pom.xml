@@ -198,7 +198,7 @@
         <module>webfx-platform-util-http</module>
         <module>webfx-platform-util-teavm</module>
         <module>webfx-platform-util-time</module>
-        <module>webfx-platform-vertx-common</module>
+        <module>webfx-platform-util-vertx</module>
         <module>webfx-platform-visibility</module>
         <module>webfx-platform-visibility-gluon</module>
         <module>webfx-platform-visibility-gwt-j2cl</module>

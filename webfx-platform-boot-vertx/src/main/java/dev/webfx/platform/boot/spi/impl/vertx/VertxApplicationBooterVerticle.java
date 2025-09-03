@@ -6,7 +6,7 @@ import dev.webfx.platform.boot.spi.ApplicationJob;
 import dev.webfx.platform.boot.spi.impl.ApplicationModuleBooterManager;
 import dev.webfx.platform.reflect.RArray;
 import dev.webfx.platform.shutdown.Shutdown;
-import dev.webfx.platform.vertx.common.VertxInstance;
+import dev.webfx.platform.util.vertx.VertxInstance;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Context;
 import io.vertx.core.Vertx;
