@@ -1,35 +1,15 @@
 package dev.webfx.platform.util.gwtj2cl;
 
-import dev.webfx.platform.async.Future;
-import dev.webfx.platform.async.Promise;
 import elemental2.core.JsIIterableResult;
 import elemental2.core.JsIterator;
+import elemental2.dom.DomGlobal;
 
 import java.util.Iterator;
-import java.util.function.Function;
 
 /**
  * @author Bruno Salmon
  */
 public final class GwtJ2clUtil {
-
-    public static <J, T> Future<T> jsPromiseToWebFXFuture(elemental2.promise.Promise<J> jsPromise, Function<J, T> onSuccessFunction) {
-        Promise<T> promise = Promise.promise();
-        // Not sure about if then() and catch() are exclusive so using tryComplete() and tryFail() to avoid additional exceptions
-        jsPromise
-                .then(obj -> {
-                    promise.tryComplete(onSuccessFunction.apply(obj));
-                    return null;
-                })
-                .catch_(error -> {
-                    if (error instanceof Throwable)
-                        promise.tryFail((Throwable) error);
-                    else
-                        promise.tryFail(error.toString());
-                    return null;
-                });
-        return promise.future();
-    }
 
     public static <T> Iterator<T> jsIteratorToJavaIterator(JsIterator<T, ?, ?> jsIterator) {
         return new Iterator<>() {
@@ -48,5 +28,19 @@ public final class GwtJ2clUtil {
             }
         };
     }
+
+    private static boolean isSafariCached, safariChecked;
+    public static boolean isSafari() {
+        if (!safariChecked) {
+            String ua = DomGlobal.navigator.userAgent;
+            // Consider Safari when UA has Safari but not Chrome/Chromium/Edge (including iOS variants)
+            boolean safariLike = ua.contains("Safari");
+            boolean excludeChromium = ua.contains("Chrome") || ua.contains("Chromium") || ua.contains("CriOS") || ua.contains("Edg") || ua.contains("OPR") || ua.contains("FxiOS");
+            isSafariCached = safariLike && !excludeChromium;
+            safariChecked = true;
+        }
+        return isSafariCached;
+    }
+
 
 }
