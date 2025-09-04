@@ -1,0 +1,268 @@
+package dev.webfx.platform.ast.toml.parser.javacup;
+
+import dev.webfx.platform.ast.AST;
+import dev.webfx.platform.ast.AstArray;
+import dev.webfx.platform.ast.AstObject;
+import dev.webfx.platform.ast.ReadOnlyAstArray;
+import dev.webfx.platform.util.Numbers;
+import dev.webfx.platform.util.tuples.Pair;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.LocalDateTime;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
+
+/* ----------------------Preliminary Declarations Section--------------------*/
+
+/* Parser code to change the way the parser reports errors (include
+   line and column number of the error). */
+parser code {:
+
+
+    /* Change the method report_error so it will display the line and
+       column of where the error occurred in the input as well as the
+       reason for the error which is passed into the method in the
+       String 'message'. */
+    public void report_error(String message, Object info) {
+        System.err.println(generateErrorMessage(message, info));
+    }
+
+    /* Change the method report_fatal_error so when it reports a fatal
+       error it will display the line and column number of where the
+       fatal error occurred in the input as well as the reason for the
+       fatal error which is passed into the method in the object
+       'message' and then exit.*/
+    public void report_fatal_error(String message, Object info) {
+        throw new IllegalArgumentException(generateErrorMessage(message, info));
+    }
+
+    private String generateErrorMessage(String message, Object info) {
+
+        /* Create a StringBuilder called 'm' with the string 'Error' in it. */
+        StringBuilder m = new StringBuilder("Error");
+
+        /* Check if the information passed to the method is the same
+           type as the type java_cup.runtime.Symbol. */
+        if (info instanceof java_cup.runtime.Symbol) {
+            /* Declare a java_cup.runtime.Symbol object 's' with the
+               information in the object info that is being typecasted
+               as a java_cup.runtime.Symbol object. */
+            java_cup.runtime.Symbol s = ((java_cup.runtime.Symbol) info);
+
+            /* Check if the line number in the input is greater or
+               equal to zero. */
+            if (s.left >= 0) {
+                /* Add to the end of the StringBuilder error message
+                   the line number of the error in the input. */
+                m.append(" in line "+(s.left+1));
+                /* Check if the column number in the input is greater
+                   or equal to zero. */
+                if (s.right >= 0)
+                    /* Add to the end of the StringBuilder error message
+                       the column number of the error in the input. */
+                    m.append(", column "+(s.right+1));
+            }
+        }
+
+        /* Add to the end of the StringBuilder error message created in
+           this method the message that was passed into this method. */
+        m.append(" : "+message);
+
+        return m.toString();
+    }
+:};
+
+
+
+/* ------------Declaration of Terminals and Non Terminals Section----------- */
+
+/* Terminals (tokens returned by the scanner).*/
+terminal          LBRACK, RBRACK, DOT, COMMA, EQUALS;
+terminal          NULL;
+terminal Object   INTEGER, FLOAT;
+terminal Boolean  BOOLEAN;
+terminal String   STRING, IDENTIFIER, DATETIME, DATE, TIME;
+
+/* Non terminals used in the grammar section.*/
+non terminal Object                     toml_document;
+non terminal Object                     toml_element;
+non terminal Object                     toml_scalar;
+non terminal AstArray                   toml_array;
+non terminal AstArray                   toml_array_body;
+non terminal AstObject                  toml_object;
+non terminal AstObject                  toml_object_body;
+non terminal AstObject                  toml_key_value_list;
+non terminal AstObject                  toml_section_list;
+non terminal Pair<String, Object>       toml_key_value;
+non terminal Pair<String, AstObject>    toml_section_item;
+non terminal String                     toml_key;
+non terminal String                     toml_section;
+non terminal String                     toml_section_name;
+
+/* -------------Precedence and Associatively of Terminals Section----------- */
+precedence left LBRACK;
+precedence left RBRACK;
+precedence left STRING, IDENTIFIER;
+
+
+start with toml_document;
+
+/* ----------------------------Grammar Section-------------------- */
+
+toml_document ::= toml_object:o
+              {: RESULT = o; :}
+            ;
+
+toml_object ::= toml_object_body:o
+               {: RESULT = o; :}
+            | /* empty */
+               {: RESULT = AST.createObject(); :}
+            ;
+
+toml_object_body ::= toml_key_value_list:o
+              {: RESULT = o; :}
+            | toml_section_list:o
+              {: RESULT = o; :}
+            | toml_key_value_list:o1 toml_section_list:o2
+              {: 
+                 // Merge the two objects
+                 ReadOnlyAstArray keys = o2.keys();
+                 for (int i = 0; i < keys.size(); i++) {
+                     String key = keys.getString(i);
+                     o1.set(key, (Object) o2.get(key));
+                 }
+                 RESULT = o1;
+              :}
+            ;
+
+toml_key_value_list ::= toml_key_value_list:o toml_key_value:kv
+              {: RESULT = o.set(kv.get1(), kv.get2()); :}
+            | toml_key_value:kv
+              {: RESULT = AST.createObject().set(kv.get1(), kv.get2()); :}
+            ;
+
+toml_section_list ::= toml_section_list:o toml_section_item:si
+              {: 
+                 // Merge the section item into the object
+                 String section = si.get1();
+                 AstObject sectionObj = (AstObject) si.get2();
+
+                 String[] parts = section.split("\\.");
+                 AstObject current = o;
+                 for (int i = 0; i < parts.length - 1; i++) {
+                     String part = parts[i];
+                     if (!current.has(part)) {
+                         current.set(part, AST.createObject());
+                     }
+                     current = (AstObject) current.get(part);
+                 }
+                 String lastPart = parts[parts.length - 1];
+                 current.set(lastPart, sectionObj);
+                 RESULT = o;
+              :}
+            | toml_section_item:si
+              {: 
+                 // Create a new object with the section as the key
+                 String section = si.get1();
+                 AstObject sectionObj = (AstObject) si.get2();
+
+                 AstObject result = AST.createObject();
+                 String[] parts = section.split("\\.");
+                 AstObject current = result;
+                 for (int i = 0; i < parts.length - 1; i++) {
+                     String part = parts[i];
+                     current.set(part, AST.createObject());
+                     current = (AstObject) current.get(part);
+                 }
+                 String lastPart = parts[parts.length - 1];
+                 current.set(lastPart, sectionObj);
+                 RESULT = result;
+              :}
+            ;
+
+toml_section_item ::= toml_section:s toml_key_value_list:o
+               {: RESULT = new Pair(s, o); :}
+            | toml_section:s
+               {: RESULT = new Pair(s, AST.createObject()); :}
+            ;
+
+toml_section ::= LBRACK toml_section_name:s RBRACK
+               {: RESULT = s; :}
+            ;
+
+toml_section_name ::= IDENTIFIER:id
+               {: RESULT = id; :}
+            | toml_section_name:s DOT IDENTIFIER:id
+               {: RESULT = s + "." + id; :}
+            ;
+
+toml_key_value ::= toml_key:k EQUALS toml_element:e
+               {: RESULT = new Pair(k, e); :}
+            ;
+
+toml_key ::= IDENTIFIER:id
+               {: RESULT = id; :}
+            | STRING:s
+               {: RESULT = s; :}
+            ;
+
+toml_element ::= toml_scalar:s
+              {: RESULT = s; :}
+            | toml_array:a
+              {: RESULT = a; :}
+            | toml_object:o
+              {: RESULT = o; :}
+            ;
+
+toml_scalar ::= INTEGER:n
+              {: RESULT = n; :}
+            | FLOAT:f
+              {: RESULT = f; :}
+            | STRING:s
+              {: RESULT = s; :}
+            | BOOLEAN:b
+              {: RESULT = b; :}
+            | NULL
+              {: RESULT = null; :}
+            | DATETIME:dt
+              {: 
+                 try {
+                     if (dt.endsWith("Z") || dt.contains("+") || dt.contains("-")) {
+                         RESULT = Instant.parse(dt);
+                     } else {
+                         RESULT = LocalDateTime.parse(dt);
+                     }
+                 } catch (Exception e) {
+                     RESULT = dt; // Fallback to string if parsing fails
+                 }
+              :}
+            | DATE:d
+              {: 
+                 try {
+                     RESULT = LocalDate.parse(d);
+                 } catch (Exception e) {
+                     RESULT = d; // Fallback to string if parsing fails
+                 }
+              :}
+            | TIME:t
+              {: 
+                 try {
+                     RESULT = LocalTime.parse(t);
+                 } catch (Exception e) {
+                     RESULT = t; // Fallback to string if parsing fails
+                 }
+              :}
+            ;
+
+toml_array ::= LBRACK toml_array_body:a RBRACK
+               {: RESULT = a; :}
+            | LBRACK RBRACK
+               {: RESULT = AST.createArray(); :}
+            ;
+
+toml_array_body ::= toml_element:e
+              {: RESULT = AST.createArray().push(e); :}
+            | toml_array_body:a COMMA toml_element:e
+              {: RESULT = a.push(e); :}
+            ;

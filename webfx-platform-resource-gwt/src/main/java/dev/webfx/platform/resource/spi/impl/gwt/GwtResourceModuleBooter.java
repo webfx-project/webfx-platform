@@ -31,7 +31,7 @@ public class GwtResourceModuleBooter implements ApplicationModuleBooter {
             ((GwtResourceProvider) Resource.getProvider()).register(bundle);
             StringBuilder sb = new StringBuilder();
             for (String resourcePath : bundle.resourcePathsForLogging())
-                sb.append(sb.length() == 0 ? bundle.getClass().getName() + " registered the following resources:\n" : "\n").append(resourcePath);
+                sb.append(sb.length() == 0 /* isEmpty() not supported by GWT */ ? bundle.getClass().getName() + " registered the following resources:\n" : "\n").append(resourcePath);
             log(sb.toString());
         }
     }

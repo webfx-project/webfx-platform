@@ -1,7 +1,7 @@
 package dev.webfx.platform.scheduler.spi.impl.vertx;
 
 import dev.webfx.platform.scheduler.spi.SchedulerProviderBase;
-import dev.webfx.platform.vertx.common.VertxInstance;
+import dev.webfx.platform.util.vertx.VertxInstance;
 import io.vertx.core.Vertx;
 
 /**

@@ -7,7 +7,7 @@ import dev.webfx.platform.fetch.*;
 import dev.webfx.platform.fetch.spi.FetchProvider;
 import dev.webfx.platform.file.spi.impl.java.JavaFile;
 import dev.webfx.platform.util.Strings;
-import dev.webfx.platform.vertx.common.VertxInstance;
+import dev.webfx.platform.util.vertx.VertxInstance;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.file.AsyncFile;
 import io.vertx.core.file.OpenOptions;

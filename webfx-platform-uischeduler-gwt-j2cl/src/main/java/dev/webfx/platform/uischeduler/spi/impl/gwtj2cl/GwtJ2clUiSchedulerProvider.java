@@ -1,6 +1,5 @@
 package dev.webfx.platform.uischeduler.spi.impl.gwtj2cl;
 
-import dev.webfx.platform.console.Console;
 import dev.webfx.platform.scheduler.Cancellable;
 import dev.webfx.platform.uischeduler.spi.impl.UiSchedulerProviderBase;
 import elemental2.dom.DomGlobal;
@@ -26,7 +25,7 @@ public final class GwtJ2clUiSchedulerProvider extends UiSchedulerProviderBase {
 
     @Override
     protected boolean isSystemAnimationFrameRunning() {
-        // Usually the browsers stop honouring animation frames on hidden tabs
+        // Usually the browsers stop honoring animation frames on hidden tabs
         boolean isBrowserTabHidden = "hidden".equalsIgnoreCase(DomGlobal.document.visibilityState);
         return !isBrowserTabHidden;
     }
@@ -54,16 +53,6 @@ public final class GwtJ2clUiSchedulerProvider extends UiSchedulerProviderBase {
         if (!isSystemAnimationFrameRunning()) {
             executeAnimationPipe();
         }
-    }
-
-    @Override
-    protected void log(String message) {
-        Console.log(message);
-    }
-
-    @Override
-    protected void log(Throwable throwable) {
-        Console.log(throwable);
     }
 
 }

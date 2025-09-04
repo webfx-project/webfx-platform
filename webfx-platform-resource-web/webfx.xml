@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project preview="true">
+
+    <description>Abstract web implementation of the Resource API (for the browser).</description>
+
+    <exported-packages>
+        <source-packages/>
+        <resource-packages/>
+    </exported-packages>
+
+    <dependencies>
+        <used-by-source-modules/>
+    </dependencies>
+
+    <providers>
+        <provider interface="dev.webfx.platform.boot.spi.ApplicationModuleBooter">dev.webfx.platform.resource.spi.impl.web.WebResourceModuleBooter</provider>
+    </providers>
+
+</project>

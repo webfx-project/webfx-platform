@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+
+    <description>TeaVM implementation of the Browser API (for the browser).</description>
+
+    <exported-packages>
+        <source-packages/>
+        <resource-packages/>
+    </exported-packages>
+
+    <providers>
+        <provider interface="dev.webfx.platform.browser.spi.BrowserProvider">dev.webfx.platform.browser.spi.impl.teavm.TeaVmBrowserProvider</provider>
+    </providers>
+
+    <dependencies>
+        <used-by-source-modules/>
+    </dependencies>
+
+</project>

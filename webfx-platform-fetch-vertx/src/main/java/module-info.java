@@ -14,7 +14,7 @@ module webfx.platform.fetch.vertx {
     requires webfx.platform.fetch;
     requires webfx.platform.file.java;
     requires webfx.platform.util;
-    requires webfx.platform.vertx.common;
+    requires webfx.platform.util.vertx;
 
     // Exported packages
     exports dev.webfx.platform.fetch.spi.impl.vertx;
