@@ -11,7 +11,7 @@
         <version>0.1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>webfx-platform-console-gwt-j2cl</artifactId>
+    <artifactId>webfx-platform-console-elemental2</artifactId>
 
     <description>GWT implementation of the Console API (for the browser).</description>
 
