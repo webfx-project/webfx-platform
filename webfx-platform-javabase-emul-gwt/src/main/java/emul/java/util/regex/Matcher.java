@@ -114,7 +114,7 @@ public class Matcher {
         //return Object.values(mr)[pos]; // not supported by IE
         //return mr[Object.keys(mr)[pos]];
         JsArray<String> keys = JsObject.keys(mr);
-        String key = keys.at(pos);
+        String key = keys.getAt(pos); // Using getAt() for legacy browser support (avoids Array.prototype.at)
         Object value = Js.asPropertyMap(mr).get(key);
         return value == null ? null : Js.asString(value);
     }
