@@ -45,35 +45,42 @@ public final class AsyncQueue {
 
     public <A, R> Future<R> addAsyncOperation(A argument, AsyncFunction<A, R> executor) {
         // Can it be executed now?
-        if (executingOperations.size() < executingQueueMaxSize) { // Yes
-            return executeOperation(argument, executor);
+        synchronized (executingOperations) {
+            if (executingOperations.size() < executingQueueMaxSize) { // Yes
+                executingOperations.add(argument);
+                return executeOperation(argument, executor);
+            }
         }
+
         // No, so we put it in the waiting queue with a promise
         Promise<R> promise = Promise.promise();
-        waitingOperations.add(new WaitingOperation<>(argument, promise, executor));
+        synchronized (waitingOperations) {
+            waitingOperations.add(new WaitingOperation<>(argument, promise, executor));
+        }
         return promise.future();
     }
 
     private <A, R> Future<R> executeOperation(A argument, AsyncFunction<A, R> executor) {
-        executingOperations.add(argument);
         Future<R> future = executor.apply(argument);
         Scheduled scheduledTimeout;
         if (executionTimeout > 0) {
             Promise<R> promise = Promise.promise();
-            scheduledTimeout = Scheduler.scheduleDelay(executionTimeout, () ->
-                promise.tryFail("Timeout: the operation timed out after " + executionTimeout + " ms for: " + argument));
+            scheduledTimeout = Scheduler.scheduleDelay(executionTimeout, () -> 
+                promise.tryFail("Timeout: the operation exceeded " + executionTimeout + " ms to execute"));
             future.onComplete(ar -> {
                 if (ar.succeeded())
                     promise.tryComplete(ar.result());
-                else
+                else 
                     promise.tryFail(ar.cause());
             });
             future = promise.future();
-        } else
+        } else 
             scheduledTimeout = null;
         return future
             .onComplete(ar -> {
-                executingOperations.remove(argument);
+                synchronized (executingOperations) {
+                    executingOperations.remove(argument);
+                }
                 if (scheduledTimeout != null)
                     scheduledTimeout.cancel();
                 executeNext();
@@ -81,16 +88,37 @@ public final class AsyncQueue {
     }
 
     private void executeNext() {
-        if (executingOperations.size() < executingQueueMaxSize) {
-            WaitingOperation waitingOperation = waitingOperations.poll();
-            if (waitingOperation != null) {
-                executeOperation(waitingOperation.argument, waitingOperation.executor)
-                    .onComplete(waitingOperation.promise);
+        WaitingOperation waitingOperation = null;
+        synchronized (executingOperations) {
+            if (executingOperations.size() < executingQueueMaxSize) {
+                synchronized (waitingOperations) {
+                    waitingOperation = waitingOperations.poll();
+                    if (waitingOperation != null) {
+                        executingOperations.add(waitingOperation.argument);
+                    }
+                }
             }
+        }
+
+        if (waitingOperation != null) {
+            executeOperation(waitingOperation.argument, waitingOperation.executor)
+                .onComplete(waitingOperation.promise);
         }
     }
 
     public void log(String message) {
-        Console.log("[" + (name == null ? " " : name + " | ") + waitingOperations.size() + " | " + executingOperations.size() + " ] " + message);
+        Console.log("[" + (name == null ? " " : name + " | ") + waitingOperationsSize() + " | " + executingOperationsSize() + " ] " + message);
+    }
+
+    private int waitingOperationsSize() {
+        synchronized (waitingOperations) {
+            return waitingOperations.size();
+        }
+    }
+
+    private int executingOperationsSize() {
+        synchronized (executingOperations) {
+            return executingOperations.size();
+        }
     }
 }
