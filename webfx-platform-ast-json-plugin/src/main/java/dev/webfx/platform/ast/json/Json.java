@@ -65,6 +65,10 @@ public final class Json {
         return JsonFormatterProvider.INSTANCE.formatNode(node);
     }
 
+    public static String formatObject(ReadOnlyAstObject object) {
+        return JsonFormatterProvider.INSTANCE.formatObject(object);
+    }
+
     public static String formatArray(ReadOnlyAstArray array) {
         return JsonFormatterProvider.INSTANCE.formatArray(array);
     }

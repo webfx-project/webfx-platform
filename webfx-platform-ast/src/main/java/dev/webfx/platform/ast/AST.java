@@ -331,61 +331,20 @@ public final class AST {
         return new ReadOnlyMergedAstObject(true, astObjects);
     }
 
+    public static AstObject cloneObject(ReadOnlyAstObject astObject) {
+        return cloneObject(astObject, getFactoryProvider());
+    }
+
     public static AstObject cloneObject(ReadOnlyAstObject astObject, AstFactoryProvider factory) {
         return (AstObject) new AstCloneVisitor(factory, false).visitAstObject(astObject);
     }
 
+    public static AstArray cloneArray(ReadOnlyAstArray array) {
+        return cloneArray(array, getFactoryProvider());
+    }
+
     public static AstArray cloneArray(ReadOnlyAstArray array, AstFactoryProvider factory) {
         return (AstArray) new AstCloneVisitor(factory, false).visitAstArray(array);
-    }
-
-    public static AstObject nativeObject(ReadOnlyAstObject astObject, NativeAstFactoryProvider factory) {
-        return (AstObject) new AstCloneVisitor(factory, true).visitAstObject(astObject);
-    }
-
-    public static AstArray nativeArray(ReadOnlyAstArray array, NativeAstFactoryProvider factory) {
-        return (AstArray) new AstCloneVisitor(factory, true).visitAstArray(array);
-    }
-
-    public static Object unwrapNativeObject(ReadOnlyAstObject astObject, NativeAstFactoryProvider factory) {
-        if (!factory.isAstObjectFromThisFactory(astObject)) {
-            astObject = nativeObject(astObject, factory);
-        }
-        return factory.astToNativeObject(astObject);
-    }
-
-    public static Object unwrapNativeArray(ReadOnlyAstArray array, NativeAstFactoryProvider factory) {
-        if (!factory.isAstArrayFromThisFactory(array)) {
-            array = nativeArray(array, factory);
-        }
-        return factory.astToNativeArray(array);
-    }
-
-    public static Object nativePlatformObject(ReadOnlyAstObject astObject, NativeAstFactoryProvider factory) {
-        return null;
-    }
-
-    public static Object nativePlatformArray(ReadOnlyAstArray array, NativeAstFactoryProvider factory) {
-        return null;
-    }
-
-    public static <T> AstArray fromJavaArray(T[] javaArray) {
-        if (javaArray == null)
-            return null;
-        AstArray valuesArray = createArray();
-        for (Object javaValue : javaArray)
-            valuesArray.push(javaValue);
-        return valuesArray;
-    }
-
-    public static Object[] toJavaArray(ReadOnlyAstArray jsonArray) {
-        if (jsonArray == null)
-            return null;
-        int length = jsonArray.size();
-        Object[] javaArray = new Object[length];
-        for (int i = 0; i < length; i++)
-            javaArray[i] = jsonArray.getElement(i);
-        return javaArray;
     }
 
     public static AstObject mergeInto(ReadOnlyAstObject src, AstObject dst) {
