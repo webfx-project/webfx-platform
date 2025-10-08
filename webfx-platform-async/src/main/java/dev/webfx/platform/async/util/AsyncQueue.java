@@ -107,18 +107,7 @@ public final class AsyncQueue {
     }
 
     public void log(String message) {
-        Console.log("[" + (name == null ? " " : name + " | ") + waitingOperationsSize() + " | " + executingOperationsSize() + " ] " + message);
+        Console.log("[" + (name == null ? " " : name + " | ") + waitingOperations.size() + " | " + executingOperations.size() + " ] " + message);
     }
 
-    private int waitingOperationsSize() {
-        synchronized (waitingOperations) {
-            return waitingOperations.size();
-        }
-    }
-
-    private int executingOperationsSize() {
-        synchronized (executingOperations) {
-            return executingOperations.size();
-        }
-    }
 }
