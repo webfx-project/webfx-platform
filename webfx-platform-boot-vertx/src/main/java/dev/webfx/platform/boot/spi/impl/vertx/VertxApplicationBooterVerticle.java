@@ -2,18 +2,13 @@ package dev.webfx.platform.boot.spi.impl.vertx;
 
 import dev.webfx.platform.boot.ApplicationBooter;
 import dev.webfx.platform.boot.spi.ApplicationBooterProvider;
-import dev.webfx.platform.boot.spi.ApplicationJob;
 import dev.webfx.platform.boot.spi.impl.ApplicationModuleBooterManager;
 import dev.webfx.platform.reflect.RArray;
 import dev.webfx.platform.shutdown.Shutdown;
 import dev.webfx.platform.util.vertx.VertxInstance;
 import io.vertx.core.AbstractVerticle;
-import io.vertx.core.Context;
-import io.vertx.core.Vertx;
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Collection;
 
 /**
  * There are 2 possible entry points:
@@ -32,8 +27,6 @@ public final class VertxApplicationBooterVerticle extends AbstractVerticle imple
     }
 
     private boolean entryPoint1;
-
-    private final Collection<ApplicationJobVerticle> applicationJobVerticles = new ArrayList<>();
 
     @Override
     public void boot() { // Entry point 1) called from the main Java application thread
@@ -67,56 +60,6 @@ public final class VertxApplicationBooterVerticle extends AbstractVerticle imple
     public void stop() {
         if (entryPoint1 && !Shutdown.isShuttingDown())
             Shutdown.suspend();
-    }
-
-    @Override
-    public void initApplicationJob(ApplicationJob applicationJob) {
-        // Nothing to do as the onBoot() method will be called during Verticle.init() when starting the application job
-    }
-
-    @Override
-    public void startApplicationJob(ApplicationJob applicationJob) {
-        ApplicationJobVerticle applicationJobVerticle = new ApplicationJobVerticle(applicationJob);
-        applicationJobVerticles.add(applicationJobVerticle);
-        VertxInstance.getVertx().deployVerticle(applicationJobVerticle)
-            .onComplete(ar -> applicationJobVerticle.deploymentId = ar.result());
-    }
-
-    @Override
-    public void stopApplicationJob(ApplicationJob applicationJob) {
-        applicationJobVerticles.stream()
-                .filter(v -> v.applicationJob == applicationJob)
-                .findFirst()
-                .ifPresent(v -> VertxInstance.getVertx().undeploy(v.deploymentId));
-    }
-
-    private static final class ApplicationJobVerticle extends AbstractVerticle {
-
-        private final ApplicationJob applicationJob;
-        private String deploymentId;
-
-        public ApplicationJobVerticle(ApplicationJob applicationJob) {
-            this.applicationJob = applicationJob;
-        }
-
-        @Override
-        public void init(Vertx vertx, Context context) {
-            super.init(vertx, context);
-            applicationJob.onInit();
-        }
-
-        @Override
-        public void start(io.vertx.core.Promise<Void> startPromise) throws Exception {
-            applicationJob.onStart();
-            super.start(startPromise);
-        }
-
-        @Override
-        public void stop(io.vertx.core.Promise<Void> stopPromise) throws Exception {
-            applicationJob.onStop();
-            super.stop(stopPromise);
-        }
-
     }
 
     public static void main(String[] args) {
