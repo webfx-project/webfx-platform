@@ -31,37 +31,41 @@ public final class VertxApplicationBooterVerticle extends AbstractVerticle imple
         RArray.injectJavaArrayNewInstanceMethod(Array::newInstance);
     }
 
-    private static VertxApplicationBooterVerticle containerInstance;
-    private static VertxApplicationBooterVerticle verticleInstance;
+    private boolean entryPoint1;
 
     private final Collection<ApplicationJobVerticle> applicationJobVerticles = new ArrayList<>();
 
     @Override
-    public void boot() { // Entry point 1)
-        containerInstance = this;
-        if (verticleInstance == null)
-            VertxRunner.runVerticle(VertxApplicationBooterVerticle.class); // Uncomment to avoid trace when debugging: , new VertxOptions().setBlockedThreadCheckInterval(9999999999L));
-        ApplicationModuleBooterManager.initialize();
+    public void boot() { // Entry point 1) called from the main Java application thread
+        entryPoint1 = true;
+        // What to do on shutdown (in addition to entry point 2):
         Shutdown.addShutdownHook(e -> {
+            // Undeploy all verticles
             for (String deploymentId : VertxInstance.getVertx().deploymentIDs())
                 VertxInstance.getVertx().undeploy(deploymentId);
+        });
+        // Starting this verticle. This will create a second instance of this class and call entry point 2.
+        VertxRunner.runVerticle(VertxApplicationBooterVerticle.class); // Uncomment to avoid trace when debugging: , new VertxOptions().setBlockedThreadCheckInterval(9999999999L));
+    }
+
+    @Override
+    public void start() { // Entry point 2) called from the main event loop thread
+        // Passing vertx to the VertxInstance for further use by other modules
+        VertxInstance.setVertx(vertx);
+        // Asking the ApplicationModuleBooterManager to initialize all the modules
+        ApplicationModuleBooterManager.initialize();
+        // What to do on shutdown:
+        Shutdown.addShutdownHook(e -> {
+            // Asking the ApplicationModuleBooterManager to shut down all the modules
             ApplicationModuleBooterManager.shutdown();
+            // Closing the vertx instance
             VertxInstance.getVertx().close();
         });
     }
 
     @Override
-    public void start() { // Entry point 2)
-        // Passing vertx to the VertxInstance for further use by other modules
-        VertxInstance.setVertx(vertx);
-        verticleInstance = this;
-        if (containerInstance == null)
-            ApplicationBooter.main(null);
-    }
-
-    @Override
     public void stop() {
-        if (this == containerInstance && !Shutdown.isShuttingDown())
+        if (entryPoint1 && !Shutdown.isShuttingDown())
             Shutdown.suspend();
     }
 
