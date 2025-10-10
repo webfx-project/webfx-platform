@@ -34,6 +34,12 @@ public final class TeaVmShutdownProvider extends ShutdownProviderBase {
         // Otherwise, all 3 events are fired, but our listener will fire only 1 ShutdownEvent
     }
 
+    // For a strange reason, TeaVM doesn't find fireShutdownEvent() in the superclass if it's not overridden here
+    @Override
+    protected void fireShutdownEvent(ShutdownEvent event) {
+        super.fireShutdownEvent(event);
+    }
+
     @Override
     public boolean canExit() {
         // This is apparently the condition that browsers check to allow closing the window:
