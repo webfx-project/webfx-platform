@@ -11,16 +11,13 @@
         <version>0.1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>webfx-platform-console-teavm</artifactId>
-
-    <description>TeaVM implementation of the Console API (for all platforms other than browser).</description>
+    <artifactId>webfx-platform-teavm-elemental2-polyfill</artifactId>
 
     <dependencies>
 
         <dependency>
-            <groupId>dev.webfx</groupId>
-            <artifactId>webfx-platform-console</artifactId>
-            <version>0.1.0-SNAPSHOT</version>
+            <groupId>org.teavm</groupId>
+            <artifactId>teavm-jso</artifactId>
         </dependency>
 
     </dependencies>

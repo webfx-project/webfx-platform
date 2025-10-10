@@ -246,6 +246,13 @@
                 </exported-packages>
             </library>
 
+            <library name="teavm-classlib">
+                <exported-packages>
+                    <package>org.teavm.classlib.java.io</package>
+                    <package>org.teavm.classlib.java.util.concurrent</package>
+                </exported-packages>
+            </library>
+
         </group>
 
         <group>
