@@ -10,11 +10,7 @@ import dev.webfx.platform.shutdown.Shutdown;
 public interface ApplicationBooterProvider {
 
     default void boot() {
-        ApplicationModuleBooterManager.initialize();
-        Shutdown.addShutdownHook(e -> {
-            SimpleApplicationJobManager.shutdown();
-            ApplicationModuleBooterManager.shutdown();
-        });
+        defaultBoot();
     }
 
     default void initApplicationJob(ApplicationJob applicationJob) {
@@ -27,6 +23,14 @@ public interface ApplicationBooterProvider {
 
     default void stopApplicationJob(ApplicationJob applicationJob) {
         SimpleApplicationJobManager.stopApplicationJob(applicationJob);
+    }
+
+    static void defaultBoot() {
+        ApplicationModuleBooterManager.initialize();
+        Shutdown.addShutdownHook(e -> {
+            SimpleApplicationJobManager.shutdown();
+            ApplicationModuleBooterManager.shutdown();
+        });
     }
 
 }

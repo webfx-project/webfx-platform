@@ -3,6 +3,7 @@ package dev.webfx.platform.boot.spi.impl;
 import dev.webfx.platform.boot.spi.ApplicationModuleBooter;
 import dev.webfx.platform.console.Console;
 import dev.webfx.platform.meta.Meta;
+import dev.webfx.platform.util.Strings;
 import dev.webfx.platform.util.collection.Collections;
 
 import java.util.Comparator;
@@ -43,7 +44,7 @@ public final class ApplicationModuleBooterManager {
 
     /* Note regarding log: we will log the header later, so we start by buffering the logs of the first module booter.
        The reason is that the header starts with a frame saying *** Booting xxx *** where xxx is the executable
-       module name that we get from the meta resource file. But when running with GWT, we can't read that resource
+       module name that we get from the meta-resource file. But when running with GWT, we can't read that resource
        file before GwtResourceModuleBooter has been executed. GwtResourceModuleBooter, if present, should be the
        first module booter to be executed as its boot level is RESOURCE_BUNDLE_BOOT_LEVEL = 1. So we buffer all logs
        until we reach a module booter with a higher level, ensuring that GwtResourceModuleBooter has been executed.
@@ -55,7 +56,7 @@ public final class ApplicationModuleBooterManager {
     public static void log(String message) {
         // First stage: we buffer the logs
         if (logBuffer != null) { // non-null at the beginning until logHeaderAndBuffer() is called (=> set logBuffer to null)
-            if (logBuffer.length() > 0)
+            if (logBuffer.length() > 0) // !isEmpty() not supported by GWT
                 logBuffer.append("\n");
             logBuffer.append(message);
         } else // Second stage: we print the logs directly to the console
@@ -67,13 +68,15 @@ public final class ApplicationModuleBooterManager {
         long t0 = System.currentTimeMillis();
 
         // Calling all registered application modules
+        if (!boot)
+            logHeaderAndBuffer(false);
         int n = moduleBooters.size();
         for (int i = 0; i < n; i++) {
             int moduleIndex = boot ? i : n - i - 1;
             ApplicationModuleBooter module = moduleBooters.get(moduleIndex);
             // We log the header and the buffer after RESOURCE_BUNDLE_BOOT_LEVEL has been executed
-            if (logBuffer != null && module.getBootLevel() > RESOURCE_BUNDLE_BOOT_LEVEL)
-                logHeaderAndBuffer(boot);
+            if (boot && logBuffer != null && module.getBootLevel() > RESOURCE_BUNDLE_BOOT_LEVEL)
+                logHeaderAndBuffer(true);
             log(">>>>> " + (boot ? "Booting " : "Exiting ") + (moduleIndex + 1) + ") " + module.getModuleName() + " with " + module.getClass().getSimpleName() + " <<<<<");
             if (boot)
                 module.bootModule();
@@ -88,13 +91,14 @@ public final class ApplicationModuleBooterManager {
 
     private static void logHeaderAndBuffer(boolean boot) {
         // We convert the buffer into a String and set the buffer to null
-        String logBufferString = logBuffer.toString();
+        String logBufferString = Strings.toString(logBuffer);
         logBuffer = null; // So from now, log() will redirect directly to the console
         // We first log the header
         int n = moduleBooters.size();
         String bootingOrExiting = boot ? "Booting " : "Exiting ";
         logInFrame(bootingOrExiting + Meta.getExecutableModuleName());
-        log("Environment: " + Meta.getEnvironment() + ", Maven build timestamp: " + Meta.getMavenBuildTimestamp());
+        if (boot)
+            log("Environment: " + Meta.getEnvironment() + ", Maven build timestamp: " + Meta.getMavenBuildTimestamp());
         log(bootingOrExiting + n + " application modules in the following order:");
         for (int i = 0; i < n; i++) {
             int moduleIndex = boot ? i : n - i - 1;
@@ -102,15 +106,15 @@ public final class ApplicationModuleBooterManager {
             log((moduleIndex + 1) + ") " + module.getModuleName() + " (boot level " + module.getBootLevel() + ")");
         }
         // And then we log the buffer
-        log(logBufferString);
+        if (logBufferString != null)
+            log(logBufferString);
     }
 
     private static void logInFrame(String s) {
         s = "***** " + s + " *****";
         StringBuilder sb = new StringBuilder();
         int length = s.length();
-        for (int i = 0; i < length; i++) // String.repeat() not emulated by GWT
-            sb.append('*');
+        sb.append("*".repeat(length));
         log(sb + "\n" + s + "\n" + sb);
     }
 
