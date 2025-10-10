@@ -1,4 +1,4 @@
-package dev.webfx.platform.console.spi.impl.gwtj2cl;
+package dev.webfx.platform.console.spi.impl.elemental2;
 
 import dev.webfx.platform.console.spi.ConsoleProvider;
 import elemental2.dom.DomGlobal;
@@ -6,7 +6,7 @@ import elemental2.dom.DomGlobal;
 /**
  * @author Bruno Salmon
  */
-public class GwtJ2clConsoleProvider implements ConsoleProvider {
+public class E2ConsoleProvider implements ConsoleProvider {
 
     @Override
     public void log(String message, Throwable throwable) {

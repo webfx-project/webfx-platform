@@ -10,9 +10,9 @@ module webfx.platform.console.elemental2 {
     requires webfx.platform.console;
 
     // Exported packages
-    exports dev.webfx.platform.console.spi.impl.gwtj2cl;
+    exports dev.webfx.platform.console.spi.impl.elemental2;
 
     // Provided services
-    provides dev.webfx.platform.console.spi.ConsoleProvider with dev.webfx.platform.console.spi.impl.gwtj2cl.GwtJ2clConsoleProvider;
+    provides dev.webfx.platform.console.spi.ConsoleProvider with dev.webfx.platform.console.spi.impl.elemental2.E2ConsoleProvider;
 
 }
