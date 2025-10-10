@@ -180,6 +180,7 @@
         <module>webfx-platform-substitution-var-localstorage-plugin</module>
         <module>webfx-platform-substitution-var-sysprop-plugin</module>
         <module>webfx-platform-substitution-var-windowlocation-plugin</module>
+        <module>webfx-platform-teavm-javabase-emul</module>
         <module>webfx-platform-typedarray</module>
         <module>webfx-platform-typedarray-gwt-j2cl</module>
         <module>webfx-platform-typedarray-teavm</module>
