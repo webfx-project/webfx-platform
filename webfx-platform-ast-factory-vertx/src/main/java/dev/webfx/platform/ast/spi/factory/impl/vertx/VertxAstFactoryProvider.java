@@ -40,8 +40,13 @@ public class VertxAstFactoryProvider implements NativeAstFactoryProvider {
     }
 
     @Override
-    public Object astToNativeObject(ReadOnlyAstObject astObjectFromThisFactory) {
-        return astObjectFromThisFactory == null ? null : ((VertxAstObject) astObjectFromThisFactory).getVertxObject();
+    public Object astToNativeObject(ReadOnlyAstObject astObject) {
+        // TODO: do the same checks with clone backfall in other methods
+        if (astObject == null)
+            return null;
+        if (astObject instanceof VertxAstObject vertxAstObject)
+            return vertxAstObject.getVertxObject();
+        return astToNativeObject(AST.cloneObject(astObject, this)); // Should be a VertxAstObject
     }
 
     @Override

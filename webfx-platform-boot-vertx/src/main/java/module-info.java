@@ -8,9 +8,7 @@ module webfx.platform.boot.vertx {
     // Direct dependencies modules
     requires io.vertx.core;
     requires webfx.platform.boot;
-    requires webfx.platform.console;
     requires webfx.platform.reflect;
-    requires webfx.platform.shutdown;
     requires webfx.platform.util.vertx;
 
     // Exported packages
