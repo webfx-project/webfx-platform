@@ -94,7 +94,7 @@
     <modules>
         <module>webfx-platform-arch</module>
         <module>webfx-platform-arch-gwt-j2cl</module>
-        <module>webfx-platform-arch-java</module>
+        <module>webfx-platform-arch-jre</module>
         <module>webfx-platform-arch-teavm</module>
         <module>webfx-platform-arch-web</module>
         <module>webfx-platform-ast</module>
@@ -111,7 +111,7 @@
         <module>webfx-platform-audio-gluon</module>
         <module>webfx-platform-blob</module>
         <module>webfx-platform-blob-gwt-j2cl</module>
-        <module>webfx-platform-blob-java</module>
+        <module>webfx-platform-blob-jre</module>
         <module>webfx-platform-blob-teavm</module>
         <module>webfx-platform-boot</module>
         <module>webfx-platform-boot-java</module>
@@ -121,7 +121,7 @@
         <module>webfx-platform-browser-gwt-j2cl</module>
         <module>webfx-platform-browser-teavm</module>
         <module>webfx-platform-conf</module>
-        <module>webfx-platform-conf-file-java-plugin</module>
+        <module>webfx-platform-conf-file-jre-plugin</module>
         <module>webfx-platform-conf-zero</module>
         <module>webfx-platform-conf-zero-impl</module>
         <module>webfx-platform-console</module>
@@ -130,12 +130,12 @@
         <module>webfx-platform-fetch</module>
         <module>webfx-platform-fetch-ast-json</module>
         <module>webfx-platform-fetch-gwt-j2cl</module>
-        <module>webfx-platform-fetch-java</module>
+        <module>webfx-platform-fetch-jre</module>
         <module>webfx-platform-fetch-teavm</module>
         <module>webfx-platform-fetch-vertx</module>
         <module>webfx-platform-file</module>
         <module>webfx-platform-file-gwt-j2cl</module>
-        <module>webfx-platform-file-java</module>
+        <module>webfx-platform-file-jre</module>
         <module>webfx-platform-file-teavm</module>
         <module>webfx-platform-javabase-emul-gwt</module>
         <module>webfx-platform-javabase-emul-j2cl</module>
@@ -145,7 +145,7 @@
         <module>webfx-platform-os</module>
         <module>webfx-platform-os-gluon</module>
         <module>webfx-platform-os-gwt-j2cl</module>
-        <module>webfx-platform-os-java</module>
+        <module>webfx-platform-os-jre</module>
         <module>webfx-platform-os-teavm</module>
         <module>webfx-platform-reflect</module>
         <module>webfx-platform-resource</module>
@@ -153,25 +153,25 @@
         <module>webfx-platform-resource-gwt</module>
         <module>webfx-platform-resource-gwt-j2cl</module>
         <module>webfx-platform-resource-j2cl</module>
-        <module>webfx-platform-resource-java</module>
+        <module>webfx-platform-resource-jre</module>
         <module>webfx-platform-resource-web</module>
         <module>webfx-platform-scheduler</module>
-        <module>webfx-platform-scheduler-java</module>
+        <module>webfx-platform-scheduler-jre</module>
         <module>webfx-platform-scheduler-vertx</module>
         <module>webfx-platform-service</module>
         <module>webfx-platform-service-gwt-j2cl</module>
         <module>webfx-platform-shutdown</module>
         <module>webfx-platform-shutdown-gluon</module>
         <module>webfx-platform-shutdown-gwt-j2cl</module>
-        <module>webfx-platform-shutdown-java</module>
+        <module>webfx-platform-shutdown-jre</module>
         <module>webfx-platform-shutdown-teavm</module>
         <module>webfx-platform-storage</module>
         <module>webfx-platform-storage-gwt-j2cl</module>
-        <module>webfx-platform-storage-java</module>
+        <module>webfx-platform-storage-jre</module>
         <module>webfx-platform-storage-teavm</module>
         <module>webfx-platform-storagelocation</module>
         <module>webfx-platform-storagelocation-gluon</module>
-        <module>webfx-platform-storagelocation-java</module>
+        <module>webfx-platform-storagelocation-jre</module>
         <module>webfx-platform-substitution</module>
         <module>webfx-platform-substitution-var</module>
         <module>webfx-platform-substitution-var-conf-plugin</module>
@@ -190,8 +190,8 @@
         <module>webfx-platform-useragent</module>
         <module>webfx-platform-useragent-gluon</module>
         <module>webfx-platform-useragent-gwt-j2cl</module>
-        <module>webfx-platform-useragent-java-client</module>
-        <module>webfx-platform-useragent-java-server</module>
+        <module>webfx-platform-useragent-jre-client</module>
+        <module>webfx-platform-useragent-jre-server</module>
         <module>webfx-platform-useragent-teavm</module>
         <module>webfx-platform-util</module>
         <module>webfx-platform-util-gwt-j2cl</module>
@@ -203,22 +203,22 @@
         <module>webfx-platform-visibility</module>
         <module>webfx-platform-visibility-gluon</module>
         <module>webfx-platform-visibility-gwt-j2cl</module>
-        <module>webfx-platform-visibility-java-headless</module>
+        <module>webfx-platform-visibility-jre-headless</module>
         <module>webfx-platform-visibility-teavm</module>
         <module>webfx-platform-webassembly</module>
         <module>webfx-platform-webassembly-teavm</module>
         <module>webfx-platform-webworker</module>
         <module>webfx-platform-webworker-gwt-j2cl</module>
-        <module>webfx-platform-webworker-java</module>
+        <module>webfx-platform-webworker-jre</module>
         <module>webfx-platform-webworker-teavm</module>
         <module>webfx-platform-windowhistory</module>
         <module>webfx-platform-windowhistory-gwt-j2cl</module>
-        <module>webfx-platform-windowhistory-java</module>
+        <module>webfx-platform-windowhistory-jre</module>
         <module>webfx-platform-windowhistory-teavm</module>
         <module>webfx-platform-windowhistory-web</module>
         <module>webfx-platform-windowlocation</module>
         <module>webfx-platform-windowlocation-gwt-j2cl</module>
-        <module>webfx-platform-windowlocation-java</module>
+        <module>webfx-platform-windowlocation-jre</module>
         <module>webfx-platform-windowlocation-teavm</module>
     </modules>
 

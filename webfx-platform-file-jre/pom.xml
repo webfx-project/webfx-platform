@@ -11,27 +11,27 @@
         <version>0.1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>webfx-platform-resource-gluon</artifactId>
+    <artifactId>webfx-platform-file-jre</artifactId>
 
-    <description>Gluon implementation of the Resource API (for mobiles).</description>
+    <description>Java implementation of the File API (for platforms other than the browser).</description>
 
     <dependencies>
 
         <dependency>
-            <groupId>com.gluonhq.attach</groupId>
-            <artifactId>storage</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-
-        <dependency>
             <groupId>dev.webfx</groupId>
-            <artifactId>webfx-platform-resource</artifactId>
+            <artifactId>webfx-platform-async</artifactId>
             <version>0.1.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>dev.webfx</groupId>
-            <artifactId>webfx-platform-resource-jre</artifactId>
+            <artifactId>webfx-platform-blob-jre</artifactId>
+            <version>0.1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>dev.webfx</groupId>
+            <artifactId>webfx-platform-file</artifactId>
             <version>0.1.0-SNAPSHOT</version>
         </dependency>
 
