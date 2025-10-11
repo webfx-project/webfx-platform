@@ -9,9 +9,9 @@ module webfx.platform.shutdown.jre {
     requires webfx.platform.shutdown;
 
     // Exported packages
-    exports dev.webfx.platform.shutdown.spi.impl.java;
+    exports dev.webfx.platform.shutdown.spi.impl.jre;
 
     // Provided services
-    provides dev.webfx.platform.shutdown.spi.ShutdownProvider with dev.webfx.platform.shutdown.spi.impl.java.JavaShutdownProvider;
+    provides dev.webfx.platform.shutdown.spi.ShutdownProvider with dev.webfx.platform.shutdown.spi.impl.jre.JreShutdownProvider;
 
 }

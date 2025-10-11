@@ -8,8 +8,8 @@
     </exported-packages>
 
     <providers>
-        <provider interface="dev.webfx.platform.storage.spi.LocalStorageProvider">dev.webfx.platform.storage.spi.impl.java.JavaLocalStorageProvider</provider>
-        <provider interface="dev.webfx.platform.storage.spi.SessionStorageProvider">dev.webfx.platform.storage.spi.impl.java.JavaSessionStorageProvider</provider>
+        <provider interface="dev.webfx.platform.storage.spi.LocalStorageProvider">dev.webfx.platform.storage.spi.impl.jre.JreLocalStorageProvider</provider>
+        <provider interface="dev.webfx.platform.storage.spi.SessionStorageProvider">dev.webfx.platform.storage.spi.impl.jre.JreSessionStorageProvider</provider>
     </providers>
 
     <dependencies>

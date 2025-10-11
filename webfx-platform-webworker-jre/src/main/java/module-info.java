@@ -12,9 +12,9 @@ module webfx.platform.webworker.jre {
     requires webfx.platform.webworker;
 
     // Exported packages
-    exports dev.webfx.platform.webworker.spi.impl.java;
+    exports dev.webfx.platform.webworker.spi.impl.jre;
 
     // Provided services
-    provides dev.webfx.platform.webworker.spi.WorkerServiceProvider with dev.webfx.platform.webworker.spi.impl.java.JavaWorkerServiceProvider;
+    provides dev.webfx.platform.webworker.spi.WorkerServiceProvider with dev.webfx.platform.webworker.spi.impl.jre.JreWorkerServiceProvider;
 
 }

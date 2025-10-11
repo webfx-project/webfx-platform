@@ -9,9 +9,9 @@ module webfx.platform.resource.jre {
     requires webfx.platform.resource;
 
     // Exported packages
-    exports dev.webfx.platform.resource.spi.impl.java;
+    exports dev.webfx.platform.resource.spi.impl.jre;
 
     // Provided services
-    provides dev.webfx.platform.resource.spi.ResourceProvider with dev.webfx.platform.resource.spi.impl.java.JavaResourceProvider;
+    provides dev.webfx.platform.resource.spi.ResourceProvider with dev.webfx.platform.resource.spi.impl.jre.JreResourceProvider;
 
 }

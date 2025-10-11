@@ -1,1 +1,1 @@
-dev.webfx.platform.storagelocation.spi.impl.java.JavaStorageLocationProvider
+dev.webfx.platform.storagelocation.spi.impl.jre.JreStorageLocationProvider

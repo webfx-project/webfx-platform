@@ -6,9 +6,9 @@ module webfx.platform.blob.jre {
     requires webfx.platform.blob;
 
     // Exported packages
-    exports dev.webfx.platform.blob.spi.impl.java;
+    exports dev.webfx.platform.blob.spi.impl.jre;
 
     // Provided services
-    provides dev.webfx.platform.blob.spi.BlobProvider with dev.webfx.platform.blob.spi.impl.java.JavaBlobProvider;
+    provides dev.webfx.platform.blob.spi.BlobProvider with dev.webfx.platform.blob.spi.impl.jre.JreBlobProvider;
 
 }

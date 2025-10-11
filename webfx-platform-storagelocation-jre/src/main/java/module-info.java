@@ -10,9 +10,9 @@ module webfx.platform.storagelocation.jre {
     requires webfx.platform.storagelocation;
 
     // Exported packages
-    exports dev.webfx.platform.storagelocation.spi.impl.java;
+    exports dev.webfx.platform.storagelocation.spi.impl.jre;
 
     // Provided services
-    provides dev.webfx.platform.storagelocation.spi.StorageLocationProvider with dev.webfx.platform.storagelocation.spi.impl.java.JavaStorageLocationProvider;
+    provides dev.webfx.platform.storagelocation.spi.StorageLocationProvider with dev.webfx.platform.storagelocation.spi.impl.jre.JreStorageLocationProvider;
 
 }

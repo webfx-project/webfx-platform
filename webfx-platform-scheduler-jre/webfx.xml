@@ -8,7 +8,7 @@
     </exported-packages>
 
     <providers>
-        <provider interface="dev.webfx.platform.scheduler.spi.SchedulerProvider">dev.webfx.platform.scheduler.spi.impl.java.JavaSchedulerProvider</provider>
+        <provider interface="dev.webfx.platform.scheduler.spi.SchedulerProvider">dev.webfx.platform.scheduler.spi.impl.jre.JreSchedulerProvider</provider>
     </providers>
 
     <dependencies>

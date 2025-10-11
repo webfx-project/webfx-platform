@@ -17,10 +17,10 @@ module webfx.platform.fetch.jre {
     requires webfx.platform.util.http;
 
     // Exported packages
-    exports dev.webfx.platform.fetch.spi.impl.java;
-    exports dev.webfx.platform.streams.spi.impl.java;
+    exports dev.webfx.platform.fetch.spi.impl.jre;
+    exports dev.webfx.platform.streams.spi.impl.jre;
 
     // Provided services
-    provides dev.webfx.platform.fetch.spi.FetchProvider with dev.webfx.platform.fetch.spi.impl.java.JavaFetchProvider;
+    provides dev.webfx.platform.fetch.spi.FetchProvider with dev.webfx.platform.fetch.spi.impl.jre.JreFetchProvider;
 
 }

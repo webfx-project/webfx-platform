@@ -1,1 +1,1 @@
-dev.webfx.platform.arch.spi.impl.java.JavaArchProvider
+dev.webfx.platform.arch.spi.impl.jre.JreArchProvider

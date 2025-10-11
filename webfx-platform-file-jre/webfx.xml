@@ -4,7 +4,7 @@
     <description>Java implementation of the File API (for platforms other than the browser).</description>
 
     <providers>
-        <provider interface="dev.webfx.platform.file.spi.FileProvider">dev.webfx.platform.file.spi.impl.java.JavaFileProvider</provider>
+        <provider interface="dev.webfx.platform.file.spi.FileProvider">dev.webfx.platform.file.spi.impl.jre.JreFileProvider</provider>
     </providers>
 
     <exported-packages>

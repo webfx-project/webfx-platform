@@ -10,10 +10,10 @@ module webfx.platform.visibility.jre.headless {
     requires webfx.platform.visibility;
 
     // Exported packages
-    exports dev.webfx.platform.visibility.spi.impl.java.headless;
+    exports dev.webfx.platform.visibility.spi.impl.jre.headless;
 
     // Provided services
-    provides dev.webfx.platform.boot.spi.ApplicationJob with dev.webfx.platform.visibility.spi.impl.java.headless.JavaHeadlessVisibilityJob;
-    provides dev.webfx.platform.visibility.spi.VisibilityProvider with dev.webfx.platform.visibility.spi.impl.java.headless.JavaHeadlessVisibilityProvider;
+    provides dev.webfx.platform.boot.spi.ApplicationJob with dev.webfx.platform.visibility.spi.impl.jre.headless.JreHeadlessVisibilityJob;
+    provides dev.webfx.platform.visibility.spi.VisibilityProvider with dev.webfx.platform.visibility.spi.impl.jre.headless.JreHeadlessVisibilityProvider;
 
 }

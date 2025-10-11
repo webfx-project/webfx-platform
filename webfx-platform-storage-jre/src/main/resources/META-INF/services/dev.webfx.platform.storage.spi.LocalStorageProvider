@@ -1,1 +1,1 @@
-dev.webfx.platform.storage.spi.impl.java.JavaLocalStorageProvider
+dev.webfx.platform.storage.spi.impl.jre.JreLocalStorageProvider

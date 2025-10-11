@@ -8,7 +8,7 @@
     </exported-packages>
 
     <providers>
-        <provider interface="dev.webfx.platform.windowlocation.spi.WindowLocationProvider">dev.webfx.platform.windowlocation.spi.impl.java.JavaWindowLocationProvider</provider>
+        <provider interface="dev.webfx.platform.windowlocation.spi.WindowLocationProvider">dev.webfx.platform.windowlocation.spi.impl.jre.JreWindowLocationProvider</provider>
     </providers>
 
     <dependencies>

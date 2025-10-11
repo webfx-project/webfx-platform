@@ -9,9 +9,9 @@ module webfx.platform.scheduler.jre {
     requires webfx.platform.scheduler;
 
     // Exported packages
-    exports dev.webfx.platform.scheduler.spi.impl.java;
+    exports dev.webfx.platform.scheduler.spi.impl.jre;
 
     // Provided services
-    provides dev.webfx.platform.scheduler.spi.SchedulerProvider with dev.webfx.platform.scheduler.spi.impl.java.JavaSchedulerProvider;
+    provides dev.webfx.platform.scheduler.spi.SchedulerProvider with dev.webfx.platform.scheduler.spi.impl.jre.JreSchedulerProvider;
 
 }

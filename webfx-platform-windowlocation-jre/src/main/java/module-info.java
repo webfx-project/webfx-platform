@@ -11,9 +11,9 @@ module webfx.platform.windowlocation.jre {
     requires webfx.platform.windowlocation;
 
     // Exported packages
-    exports dev.webfx.platform.windowlocation.spi.impl.java;
+    exports dev.webfx.platform.windowlocation.spi.impl.jre;
 
     // Provided services
-    provides dev.webfx.platform.windowlocation.spi.WindowLocationProvider with dev.webfx.platform.windowlocation.spi.impl.java.JavaWindowLocationProvider;
+    provides dev.webfx.platform.windowlocation.spi.WindowLocationProvider with dev.webfx.platform.windowlocation.spi.impl.jre.JreWindowLocationProvider;
 
 }

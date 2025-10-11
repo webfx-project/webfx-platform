@@ -12,8 +12,8 @@
     </dependencies>
 
     <providers>
-        <provider interface="dev.webfx.platform.boot.spi.ApplicationJob">dev.webfx.platform.visibility.spi.impl.java.headless.JavaHeadlessVisibilityJob</provider>
-        <provider interface="dev.webfx.platform.visibility.spi.VisibilityProvider">dev.webfx.platform.visibility.spi.impl.java.headless.JavaHeadlessVisibilityProvider</provider>
+        <provider interface="dev.webfx.platform.boot.spi.ApplicationJob">dev.webfx.platform.visibility.spi.impl.jre.headless.JreHeadlessVisibilityJob</provider>
+        <provider interface="dev.webfx.platform.visibility.spi.VisibilityProvider">dev.webfx.platform.visibility.spi.impl.jre.headless.JreHeadlessVisibilityProvider</provider>
     </providers>
 
 </project>

@@ -13,10 +13,10 @@ module webfx.platform.storage.jre {
     requires webfx.platform.visibility;
 
     // Exported packages
-    exports dev.webfx.platform.storage.spi.impl.java;
+    exports dev.webfx.platform.storage.spi.impl.jre;
 
     // Provided services
-    provides dev.webfx.platform.storage.spi.LocalStorageProvider with dev.webfx.platform.storage.spi.impl.java.JavaLocalStorageProvider;
-    provides dev.webfx.platform.storage.spi.SessionStorageProvider with dev.webfx.platform.storage.spi.impl.java.JavaSessionStorageProvider;
+    provides dev.webfx.platform.storage.spi.LocalStorageProvider with dev.webfx.platform.storage.spi.impl.jre.JreLocalStorageProvider;
+    provides dev.webfx.platform.storage.spi.SessionStorageProvider with dev.webfx.platform.storage.spi.impl.jre.JreSessionStorageProvider;
 
 }

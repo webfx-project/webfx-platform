@@ -12,7 +12,7 @@
     </dependencies>
 
     <providers>
-        <provider interface="dev.webfx.platform.arch.spi.ArchProvider">dev.webfx.platform.arch.spi.impl.java.JavaArchProvider</provider>
+        <provider interface="dev.webfx.platform.arch.spi.ArchProvider">dev.webfx.platform.arch.spi.impl.jre.JreArchProvider</provider>
     </providers>
 
 </project>

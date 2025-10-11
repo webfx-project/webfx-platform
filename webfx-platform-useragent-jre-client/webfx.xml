@@ -12,7 +12,7 @@
     </dependencies>
 
     <providers>
-        <provider interface="dev.webfx.platform.useragent.spi.UserAgentProvider">dev.webfx.platform.useragent.spi.impl.java.client.JavaClientUserAgentProvider</provider>
+        <provider interface="dev.webfx.platform.useragent.spi.UserAgentProvider">dev.webfx.platform.useragent.spi.impl.jre.client.JreClientUserAgentProvider</provider>
     </providers>
 
 </project>

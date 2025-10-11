@@ -11,9 +11,9 @@ module webfx.platform.file.jre {
     requires webfx.platform.file;
 
     // Exported packages
-    exports dev.webfx.platform.file.spi.impl.java;
+    exports dev.webfx.platform.file.spi.impl.jre;
 
     // Provided services
-    provides dev.webfx.platform.file.spi.FileProvider with dev.webfx.platform.file.spi.impl.java.JavaFileProvider;
+    provides dev.webfx.platform.file.spi.FileProvider with dev.webfx.platform.file.spi.impl.jre.JreFileProvider;
 
 }

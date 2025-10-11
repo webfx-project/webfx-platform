@@ -9,9 +9,9 @@ module webfx.platform.os.jre {
     requires webfx.platform.os;
 
     // Exported packages
-    exports dev.webfx.platform.os.spi.impl.java;
+    exports dev.webfx.platform.os.spi.impl.jre;
 
     // Provided services
-    provides dev.webfx.platform.os.spi.OperatingSystemProvider with dev.webfx.platform.os.spi.impl.java.JavaOperatingSystemProvider;
+    provides dev.webfx.platform.os.spi.OperatingSystemProvider with dev.webfx.platform.os.spi.impl.jre.JreOperatingSystemProvider;
 
 }

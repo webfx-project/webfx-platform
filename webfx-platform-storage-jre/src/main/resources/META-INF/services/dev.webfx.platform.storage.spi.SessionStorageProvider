@@ -1,1 +1,1 @@
-dev.webfx.platform.storage.spi.impl.java.JavaSessionStorageProvider
+dev.webfx.platform.storage.spi.impl.jre.JreSessionStorageProvider

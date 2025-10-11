@@ -8,7 +8,7 @@
     </exported-packages>
 
     <providers>
-        <provider interface="dev.webfx.platform.webworker.spi.WorkerServiceProvider">dev.webfx.platform.webworker.spi.impl.java.JavaWorkerServiceProvider</provider>
+        <provider interface="dev.webfx.platform.webworker.spi.WorkerServiceProvider">dev.webfx.platform.webworker.spi.impl.jre.JreWorkerServiceProvider</provider>
     </providers>
 
     <dependencies>

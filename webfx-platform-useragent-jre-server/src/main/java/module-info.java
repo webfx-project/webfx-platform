@@ -9,9 +9,9 @@ module webfx.platform.useragent.jre.server {
     requires webfx.platform.useragent;
 
     // Exported packages
-    exports dev.webfx.platform.useragent.spi.impl.java.server;
+    exports dev.webfx.platform.useragent.spi.impl.jre.server;
 
     // Provided services
-    provides dev.webfx.platform.useragent.spi.UserAgentProvider with dev.webfx.platform.useragent.spi.impl.java.server.JavaServerUserAgentProvider;
+    provides dev.webfx.platform.useragent.spi.UserAgentProvider with dev.webfx.platform.useragent.spi.impl.jre.server.JreServerUserAgentProvider;
 
 }

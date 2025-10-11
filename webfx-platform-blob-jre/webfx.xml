@@ -11,7 +11,7 @@
     </dependencies>
 
     <providers>
-        <provider interface="dev.webfx.platform.blob.spi.BlobProvider">dev.webfx.platform.blob.spi.impl.java.JavaBlobProvider</provider>
+        <provider interface="dev.webfx.platform.blob.spi.BlobProvider">dev.webfx.platform.blob.spi.impl.jre.JreBlobProvider</provider>
     </providers>
 
 </project>

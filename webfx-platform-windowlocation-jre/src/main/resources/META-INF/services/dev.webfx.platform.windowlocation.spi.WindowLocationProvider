@@ -1,1 +1,1 @@
-dev.webfx.platform.windowlocation.spi.impl.java.JavaWindowLocationProvider
+dev.webfx.platform.windowlocation.spi.impl.jre.JreWindowLocationProvider

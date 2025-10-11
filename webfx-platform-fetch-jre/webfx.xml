@@ -12,7 +12,7 @@
     </dependencies>
 
     <providers>
-        <provider interface="dev.webfx.platform.fetch.spi.FetchProvider">dev.webfx.platform.fetch.spi.impl.java.JavaFetchProvider</provider>
+        <provider interface="dev.webfx.platform.fetch.spi.FetchProvider">dev.webfx.platform.fetch.spi.impl.jre.JreFetchProvider</provider>
     </providers>
 
 </project>

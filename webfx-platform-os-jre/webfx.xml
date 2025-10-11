@@ -12,7 +12,7 @@
     </dependencies>
 
     <providers>
-        <provider interface="dev.webfx.platform.os.spi.OperatingSystemProvider">dev.webfx.platform.os.spi.impl.java.JavaOperatingSystemProvider</provider>
+        <provider interface="dev.webfx.platform.os.spi.OperatingSystemProvider">dev.webfx.platform.os.spi.impl.jre.JreOperatingSystemProvider</provider>
     </providers>
 
 </project>

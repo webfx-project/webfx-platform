@@ -1,1 +1,1 @@
-dev.webfx.platform.fetch.spi.impl.java.JavaFetchProvider
+dev.webfx.platform.fetch.spi.impl.jre.JreFetchProvider

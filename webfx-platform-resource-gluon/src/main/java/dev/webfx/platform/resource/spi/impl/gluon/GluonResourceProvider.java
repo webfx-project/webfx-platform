@@ -1,6 +1,6 @@
 package dev.webfx.platform.resource.spi.impl.gluon;
 
-import dev.webfx.platform.resource.spi.impl.java.JavaResourceProvider;
+import dev.webfx.platform.resource.spi.impl.jre.JreResourceProvider;
 
 /**
  * The Java implementation is actually already fine for Gluon, but to make it work, the Gluon attach storage module also
@@ -12,5 +12,5 @@ import dev.webfx.platform.resource.spi.impl.java.JavaResourceProvider;
  *
  * @author Bruno Salmon
  */
-public final class GluonResourceProvider extends JavaResourceProvider {
+public final class GluonResourceProvider extends JreResourceProvider {
 }

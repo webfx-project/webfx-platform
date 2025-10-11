@@ -1,1 +1,1 @@
-dev.webfx.platform.blob.spi.impl.java.JavaBlobProvider
+dev.webfx.platform.blob.spi.impl.jre.JreBlobProvider

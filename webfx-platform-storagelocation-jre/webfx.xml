@@ -12,7 +12,7 @@
     </dependencies>
 
     <providers>
-        <provider interface="dev.webfx.platform.storagelocation.spi.StorageLocationProvider">dev.webfx.platform.storagelocation.spi.impl.java.JavaStorageLocationProvider</provider>
+        <provider interface="dev.webfx.platform.storagelocation.spi.StorageLocationProvider">dev.webfx.platform.storagelocation.spi.impl.jre.JreStorageLocationProvider</provider>
     </providers>
 
 </project>

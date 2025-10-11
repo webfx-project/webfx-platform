@@ -9,9 +9,9 @@ module webfx.platform.arch.jre {
     requires webfx.platform.arch;
 
     // Exported packages
-    exports dev.webfx.platform.arch.spi.impl.java;
+    exports dev.webfx.platform.arch.spi.impl.jre;
 
     // Provided services
-    provides dev.webfx.platform.arch.spi.ArchProvider with dev.webfx.platform.arch.spi.impl.java.JavaArchProvider;
+    provides dev.webfx.platform.arch.spi.ArchProvider with dev.webfx.platform.arch.spi.impl.jre.JreArchProvider;
 
 }
