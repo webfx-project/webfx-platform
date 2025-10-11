@@ -3,6 +3,7 @@ package dev.webfx.platform.boot.spi;
 import dev.webfx.platform.boot.spi.impl.ApplicationModuleBooterManager;
 import dev.webfx.platform.boot.spi.impl.SimpleApplicationJobManager;
 import dev.webfx.platform.shutdown.Shutdown;
+import dev.webfx.platform.shutdown.ShutdownEventType;
 
 /**
  * @author Bruno Salmon
@@ -28,8 +29,10 @@ public interface ApplicationBooterProvider {
     static void defaultBoot() {
         ApplicationModuleBooterManager.initialize();
         Shutdown.addShutdownHook(e -> {
-            SimpleApplicationJobManager.shutdown();
-            ApplicationModuleBooterManager.shutdown();
+            if (e.getType() == ShutdownEventType.EXIT) {
+                SimpleApplicationJobManager.shutdown();
+                ApplicationModuleBooterManager.shutdown();
+            }
         });
     }
 
