@@ -77,7 +77,7 @@
                     </executions>
                 </plugin>
 
-                <!-- Removing implementation modules from JavaDoc because 1) they are not useful for users 2) gwt modules don't have a module-info.java which generates JavaDoc errors -->
+                <!-- Removing implementation modules from Javadoc because 1) they are not useful for users 2) gwt modules don't have a module-info.java which generates JavaDoc errors -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
@@ -153,6 +153,7 @@
         <module>webfx-platform-resource-elemental2</module>
         <module>webfx-platform-resource-gluon</module>
         <module>webfx-platform-resource-jre</module>
+        <module>webfx-platform-resource-teavm</module>
         <module>webfx-platform-resource-web</module>
         <module>webfx-platform-scheduler</module>
         <module>webfx-platform-scheduler-jre</module>
