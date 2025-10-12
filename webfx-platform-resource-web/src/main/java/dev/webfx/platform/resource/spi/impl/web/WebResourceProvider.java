@@ -4,6 +4,7 @@ import dev.webfx.platform.resource.spi.ResourceProvider;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * @author Bruno Salmon
@@ -14,16 +15,6 @@ public abstract class WebResourceProvider implements ResourceProvider {
 
     public void register(WebResourceBundle bundle) {
         bundles.add(bundle);
-    }
-
-    @Override
-    public String getText(String resourcePath) {
-        for (WebResourceBundle bundle : bundles) {
-            WebTextResource webTextResource = bundle.getTextResource(resourcePath);
-            if (webTextResource != null)
-                return webTextResource.getText();
-        }
-        return null;
     }
 
     @Override
@@ -47,5 +38,25 @@ public abstract class WebResourceProvider implements ResourceProvider {
         return resourcePath;
     }
 
+    @Override
+    public String getText(String resourcePath) {
+        for (WebResourceBundle bundle : bundles) {
+            WebTextResource webTextResource = bundle.getTextResource(resourcePath);
+            if (webTextResource != null)
+                return webTextResource.getText();
+        }
+        return null;
+    }
 
+    @Override
+    public void loadText(String resourcePath, Consumer<String> onSuccess, Consumer<Throwable> onFailure) {
+        // Maybe the resource is embedded in a GWT bundle?
+        String text = getText(resourcePath); // let's try
+        if (text != null) // Yes it was!
+            onSuccess.accept(text);
+        else // No, it wasn't, so it's a remote file that we need to fetch
+            fetchText(resourcePath, onSuccess, onFailure);
+  }
+
+    protected abstract void fetchText(String resourcePath, Consumer<String> onSuccess, Consumer<Throwable> onFailure);
 }

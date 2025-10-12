@@ -26,7 +26,7 @@ public class WebResourceModuleBooter implements ApplicationModuleBooter {
     public void bootModule() {
         List<WebResourceBundle> bundles = Collections.listOf(ServiceLoader.load(WebResourceBundle.class));
         int count = bundles.size();
-        log((count == 0 ? "No" : count) + " web resource bundle" + (count > 1 ? "s" : "") + " provided");
+        log((count == 0 ? "No" : count) + " resource bundle" + (count > 1 ? "s" : "") + " provided");
         for (WebResourceBundle bundle : bundles) {
             ((WebResourceProvider) Resource.getProvider()).register(bundle);
             StringBuilder sb = new StringBuilder();

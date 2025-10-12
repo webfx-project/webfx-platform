@@ -149,10 +149,8 @@
         <module>webfx-platform-os-teavm</module>
         <module>webfx-platform-reflect</module>
         <module>webfx-platform-resource</module>
+        <module>webfx-platform-resource-elemental2</module>
         <module>webfx-platform-resource-gluon</module>
-        <module>webfx-platform-resource-gwt</module>
-        <module>webfx-platform-resource-gwt-j2cl</module>
-        <module>webfx-platform-resource-j2cl</module>
         <module>webfx-platform-resource-jre</module>
         <module>webfx-platform-resource-web</module>
         <module>webfx-platform-scheduler</module>
@@ -161,10 +159,9 @@
         <module>webfx-platform-service</module>
         <module>webfx-platform-service-gwt-j2cl</module>
         <module>webfx-platform-shutdown</module>
+        <module>webfx-platform-shutdown-elemental2</module>
         <module>webfx-platform-shutdown-gluon</module>
-        <module>webfx-platform-shutdown-gwt-j2cl</module>
         <module>webfx-platform-shutdown-jre</module>
-        <module>webfx-platform-shutdown-teavm</module>
         <module>webfx-platform-storage</module>
         <module>webfx-platform-storage-gwt-j2cl</module>
         <module>webfx-platform-storage-jre</module>
