@@ -9,5 +9,10 @@ public class DomGlobal {
     
     @JSBody(script = "return console;")
     private static native Console getConsole();
-    
+
+    public static final Window window = getWindow();
+
+    @JSBody(script = "return window;")
+    private static native Window getWindow();
+
 }
