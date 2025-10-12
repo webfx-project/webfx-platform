@@ -147,6 +147,7 @@
         <module>webfx-platform-os-gwt-j2cl</module>
         <module>webfx-platform-os-jre</module>
         <module>webfx-platform-os-teavm</module>
+        <module>webfx-platform-polyfillcompat</module>
         <module>webfx-platform-reflect</module>
         <module>webfx-platform-resource</module>
         <module>webfx-platform-resource-elemental2</module>
