@@ -8,7 +8,7 @@
     </exported-packages>
 
     <providers>
-        <provider interface="dev.webfx.platform.console.spi.ConsoleProvider">dev.webfx.platform.console.spi.impl.elemental2.E2ConsoleProvider</provider>
+        <provider interface="dev.webfx.platform.console.spi.ConsoleProvider">dev.webfx.platform.console.spi.impl.elemental2.Elemental2ConsoleProvider</provider>
     </providers>
 
     <dependencies>

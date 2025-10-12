@@ -6,7 +6,7 @@ import elemental2.dom.DomGlobal;
 /**
  * @author Bruno Salmon
  */
-public class E2ConsoleProvider implements ConsoleProvider {
+public class Elemental2ConsoleProvider implements ConsoleProvider {
 
     @Override
     public void log(String message, Throwable throwable) {

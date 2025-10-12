@@ -13,6 +13,6 @@ module webfx.platform.console.elemental2 {
     exports dev.webfx.platform.console.spi.impl.elemental2;
 
     // Provided services
-    provides dev.webfx.platform.console.spi.ConsoleProvider with dev.webfx.platform.console.spi.impl.elemental2.E2ConsoleProvider;
+    provides dev.webfx.platform.console.spi.ConsoleProvider with dev.webfx.platform.console.spi.impl.elemental2.Elemental2ConsoleProvider;
 
 }
