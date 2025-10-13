@@ -3,7 +3,7 @@ package dev.webfx.platform.storagelocation.spi.impl.gluon;
 import com.gluonhq.attach.storage.StorageService;
 import dev.webfx.platform.console.Console;
 import dev.webfx.platform.storagelocation.spi.StorageLocationProvider;
-import dev.webfx.platform.uischeduler.UiScheduler;
+import dev.webfx.platform.scheduler.Scheduler;
 
 import java.io.File;
 
@@ -16,14 +16,14 @@ public final class GluonStorageLocationProvider implements StorageLocationProvid
 
     public GluonStorageLocationProvider() {
         // Note: All Gluon servies must be created in the UI thread, otherwise the application crashes
-        UiScheduler.runInUiThread(this::getStorageService);
+        Scheduler.runInUiThread(this::getStorageService);
     }
 
     private StorageService getStorageService() {
         if (storageService == null) {
             storageService = StorageService.create().orElse(null);
             if (storageService == null) // It seems the audio service is implemented only for Android, so this happens on other platforms
-                Console.log("WARNING [WebFX Platform]: Unable to load Gluon Storage Service (isUiThread: " + (UiScheduler.isUiThread()));
+                Console.log("WARNING [WebFX Platform]: Unable to load Gluon Storage Service (isUiThread: " + (Scheduler.isUiThread()));
         }
         return storageService;
     }

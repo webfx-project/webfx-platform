@@ -2,7 +2,7 @@ package dev.webfx.platform.browser.spi.impl.gluon;
 
 import dev.webfx.platform.browser.spi.BrowserProvider;
 import dev.webfx.platform.console.Console;
-import dev.webfx.platform.uischeduler.UiScheduler;
+import dev.webfx.platform.scheduler.Scheduler;
 
 /**
  * @author Bruno Salmon
@@ -13,7 +13,7 @@ public class GluonBrowserProvider implements BrowserProvider {
 
     public GluonBrowserProvider() {
         // Note: All Gluon servies must be created in the UI thread, otherwise the application crashes
-        UiScheduler.runInUiThread(() -> {
+        Scheduler.runInUiThread(() -> {
             browserService = com.gluonhq.attach.browser.BrowserService.create().orElse(null);
             if (browserService == null)
                 Console.log("WARNING [WebFX Platform]: Unable to load Gluon Browser Service - external browser won't be able to be called");

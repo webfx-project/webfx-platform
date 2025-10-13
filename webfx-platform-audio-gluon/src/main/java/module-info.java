@@ -9,7 +9,7 @@ module webfx.platform.audio.gluon {
     requires com.gluonhq.attach.audio;
     requires webfx.platform.audio;
     requires webfx.platform.console;
-    requires webfx.platform.uischeduler;
+    requires webfx.platform.scheduler;
 
     // Exported packages
     exports dev.webfx.platform.audio.spi.impl.gluon;

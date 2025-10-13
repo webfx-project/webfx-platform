@@ -1,6 +1,6 @@
 package dev.webfx.platform.webworker.spi.impl.jre;
 
-import dev.webfx.platform.uischeduler.UiScheduler;
+import dev.webfx.platform.scheduler.Scheduler;
 import dev.webfx.platform.ast.ReadOnlyAstObject;
 import dev.webfx.platform.console.Console;
 import dev.webfx.platform.webworker.spi.base.JavaCodedWebWorkerBase;
@@ -58,7 +58,7 @@ public class JreWebWorker extends WebWorkerBase { // this instance represents th
         @Override
         public void postMessage(Object msg) {
             // When the application worker call this method, we need to pass this to the onMessageHandler of the proxy
-            UiScheduler.runInUiThread(() -> JreWebWorker.this.getOnMessageHandler().accept(msg));
+            Scheduler.runInUiThread(() -> JreWebWorker.this.getOnMessageHandler().accept(msg));
         }
 
         @Override

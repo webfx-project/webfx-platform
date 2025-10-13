@@ -8,7 +8,7 @@ module webfx.platform.webworker.jre {
     // Direct dependencies modules
     requires webfx.platform.ast;
     requires webfx.platform.console;
-    requires webfx.platform.uischeduler;
+    requires webfx.platform.scheduler;
     requires webfx.platform.webworker;
 
     // Exported packages
