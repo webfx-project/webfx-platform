@@ -9,17 +9,17 @@ import java.util.function.Consumer;
 /**
  * @author Bruno Salmon
  */
-public final class Elemental2ResourceProvider extends WebResourceProvider {
+public class Elemental2ResourceProvider extends WebResourceProvider {
 
     @Override
     protected void fetchText(String resourcePath, Consumer<String> onSuccess, Consumer<Throwable> onFailure) {
         DomGlobal.window.fetch(resourcePath)
             .then(response -> {
-                if (!PolyfillCompat.getResponseOk(response)) {
-                    reportFetchError(resourcePath, PolyfillCompat.getResponseStatusText(response), onFailure);
+                if (!PolyfillCompat.isOk(response)) {
+                    reportFetchError(resourcePath, PolyfillCompat.getStatusText(response), onFailure);
                 } else
-                    response.text().then(text1 -> {
-                        onSuccess.accept(text1);
+                    response.text().then(text -> {
+                        onSuccess.accept(text);
                         return null;
                     }).catch_(error -> {
                         reportFetchError(resourcePath, error, onFailure);
