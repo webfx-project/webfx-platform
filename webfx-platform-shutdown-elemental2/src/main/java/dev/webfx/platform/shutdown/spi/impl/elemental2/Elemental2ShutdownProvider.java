@@ -49,7 +49,7 @@ public final class Elemental2ShutdownProvider extends ShutdownProviderBase {
         // This is apparently the condition that browsers check to allow closing the window:
         // boolean canExit = DomGlobal.window.opener != null || DomGlobal.window.history.length == 1;
         // Rewrote the above code for compatibility with TeaVM elemental2 polyfill:
-        boolean canExit = PolyfillCompat.getWindowOpener(DomGlobal.window) != null || PolyfillCompat.getHistoryLength(PolyfillCompat.getWindowHistory(DomGlobal.window)) == 1;
+        boolean canExit = PolyfillCompat.getOpener(DomGlobal.window) != null || PolyfillCompat.getLength(PolyfillCompat.getHistory(DomGlobal.window)) == 1;
         DomGlobal.console.log("canExit = " + canExit);
         return canExit;
     }

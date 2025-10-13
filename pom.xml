@@ -110,9 +110,8 @@
         <module>webfx-platform-audio</module>
         <module>webfx-platform-audio-gluon</module>
         <module>webfx-platform-blob</module>
-        <module>webfx-platform-blob-gwt-j2cl</module>
+        <module>webfx-platform-blob-elemental2</module>
         <module>webfx-platform-blob-jre</module>
-        <module>webfx-platform-blob-teavm</module>
         <module>webfx-platform-boot</module>
         <module>webfx-platform-boot-java</module>
         <module>webfx-platform-boot-vertx</module>
@@ -129,14 +128,12 @@
         <module>webfx-platform-console-java</module>
         <module>webfx-platform-fetch</module>
         <module>webfx-platform-fetch-ast-json</module>
-        <module>webfx-platform-fetch-gwt-j2cl</module>
+        <module>webfx-platform-fetch-elemental2</module>
         <module>webfx-platform-fetch-jre</module>
-        <module>webfx-platform-fetch-teavm</module>
         <module>webfx-platform-fetch-vertx</module>
         <module>webfx-platform-file</module>
-        <module>webfx-platform-file-gwt-j2cl</module>
+        <module>webfx-platform-file-elemental2</module>
         <module>webfx-platform-file-jre</module>
-        <module>webfx-platform-file-teavm</module>
         <module>webfx-platform-javabase-emul-gwt</module>
         <module>webfx-platform-javabase-emul-j2cl</module>
         <module>webfx-platform-javatime-emul-j2cl</module>
@@ -193,8 +190,8 @@
         <module>webfx-platform-useragent-jre-server</module>
         <module>webfx-platform-useragent-teavm</module>
         <module>webfx-platform-util</module>
-        <module>webfx-platform-util-gwt-j2cl</module>
-        <module>webfx-platform-util-gwt-j2cl-async</module>
+        <module>webfx-platform-util-elemental2</module>
+        <module>webfx-platform-util-elemental2-async</module>
         <module>webfx-platform-util-http</module>
         <module>webfx-platform-util-teavm</module>
         <module>webfx-platform-util-time</module>

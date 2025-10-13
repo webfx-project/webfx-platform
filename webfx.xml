@@ -253,6 +253,12 @@
                 </exported-packages>
             </library>
 
+            <library name="teavm-core">
+                <exported-packages>
+                    <package>org.teavm.classlib</package>
+                </exported-packages>
+            </library>
+
         </group>
 
         <group>
