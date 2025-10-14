@@ -159,9 +159,8 @@
         <module>webfx-platform-shutdown-gluon</module>
         <module>webfx-platform-shutdown-jre</module>
         <module>webfx-platform-storage</module>
-        <module>webfx-platform-storage-gwt-j2cl</module>
+        <module>webfx-platform-storage-elemental2</module>
         <module>webfx-platform-storage-jre</module>
-        <module>webfx-platform-storage-teavm</module>
         <module>webfx-platform-storagelocation</module>
         <module>webfx-platform-storagelocation-gluon</module>
         <module>webfx-platform-storagelocation-jre</module>

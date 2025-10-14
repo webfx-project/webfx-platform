@@ -1,4 +1,4 @@
-package dev.webfx.platform.storage.spi.impl.gwtj2cl;
+package dev.webfx.platform.storage.spi.impl.elemental2;
 
 import elemental2.webstorage.Storage;
 import dev.webfx.platform.storage.spi.StorageProvider;
@@ -8,11 +8,11 @@ import java.util.Iterator;
 /**
  * @author Bruno Salmon
  */
-abstract class GwtJ2clStorageProvider implements StorageProvider {
+abstract class Elemental2StorageProvider implements StorageProvider {
 
     private final Storage storage;
 
-    public GwtJ2clStorageProvider(Storage storage) {
+    public Elemental2StorageProvider(Storage storage) {
         this.storage = storage;
     }
 
@@ -33,8 +33,9 @@ abstract class GwtJ2clStorageProvider implements StorageProvider {
 
     @Override
     public Iterator<String> getKeys() {
-        return new Iterator<String>() {
+        return new Iterator<>() {
             private int index = 0;
+
             @Override
             public boolean hasNext() {
                 return index < storage.getLength();

@@ -1,4 +1,4 @@
-package dev.webfx.platform.storage.spi.impl.gwtj2cl;
+package dev.webfx.platform.storage.spi.impl.elemental2;
 
 
 import dev.webfx.platform.storage.spi.LocalStorageProvider;
@@ -9,9 +9,9 @@ import elemental2.webstorage.WebStorageWindow;
 /**
  * @author Bruno Salmon
  */
-public final class GwtJ2clLocalStorageProvider extends GwtJ2clStorageProvider implements LocalStorageProvider {
+public final class Elemental2LocalStorageProvider extends Elemental2StorageProvider implements LocalStorageProvider {
 
-    public GwtJ2clLocalStorageProvider() {
+    public Elemental2LocalStorageProvider() {
         super(WebStorageWindow.of(DomGlobal.window).localStorage);
     }
 }

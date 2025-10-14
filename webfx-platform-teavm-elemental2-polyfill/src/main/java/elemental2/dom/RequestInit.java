@@ -1,6 +1,6 @@
 package elemental2.dom;
 
-import org.teavm.jso.JSMethod;
+import org.teavm.jso.JSBody;
 import org.teavm.jso.JSObject;
 
 /**
@@ -20,7 +20,7 @@ public interface RequestInit extends JSObject {
 
     void setBody(FormData formData);
 
-    @JSMethod
+    @JSBody(script = "return new RequestInit();")
     static RequestInit create() { return null; }
 
 }

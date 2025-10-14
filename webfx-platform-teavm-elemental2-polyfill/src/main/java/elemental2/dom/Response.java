@@ -2,18 +2,15 @@ package elemental2.dom;
 
 import elemental2.promise.Promise;
 import org.teavm.jso.JSObject;
-import org.teavm.jso.JSProperty;
 
 /**
  * @author Bruno Salmon
  */
 public interface Response extends JSObject {
 
-    @JSProperty
-    boolean isOk();
+    boolean ok = false; // dummy value
 
-    @JSProperty
-    String getStatusText();
+    String statusText = ""; // dummy value
 
     Promise<String> text();
 
