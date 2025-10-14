@@ -138,10 +138,9 @@
         <module>webfx-platform-javatime-emul-tzdb</module>
         <module>webfx-platform-meta</module>
         <module>webfx-platform-os</module>
+        <module>webfx-platform-os-elemental2</module>
         <module>webfx-platform-os-gluon</module>
-        <module>webfx-platform-os-gwt-j2cl</module>
         <module>webfx-platform-os-jre</module>
-        <module>webfx-platform-os-teavm</module>
         <module>webfx-platform-polyfillcompat</module>
         <module>webfx-platform-reflect</module>
         <module>webfx-platform-resource</module>

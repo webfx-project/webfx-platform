@@ -12,7 +12,7 @@
     </dependencies>
 
     <providers>
-        <provider interface="dev.webfx.platform.os.spi.OperatingSystemProvider">dev.webfx.platform.os.spi.impl.gwtj2cl.GwtJ2clOperatingSystemProvider</provider>
+        <provider interface="dev.webfx.platform.os.spi.OperatingSystemProvider">dev.webfx.platform.os.spi.impl.elemental2.Elemental2OperatingSystemProvider</provider>
     </providers>
 
 </project>

@@ -11,21 +11,21 @@
         <version>0.1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>webfx-platform-os-teavm</artifactId>
+    <artifactId>webfx-platform-os-elemental2</artifactId>
 
-    <description>TeaVM implementation of the OS API (for the browser).</description>
+    <description>GWT implementation of the OS API (for the browser).</description>
 
     <dependencies>
 
         <dependency>
-            <groupId>dev.webfx</groupId>
-            <artifactId>webfx-platform-os</artifactId>
-            <version>0.1.0-SNAPSHOT</version>
+            <groupId>com.google.elemental2</groupId>
+            <artifactId>elemental2-dom</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>dev.webfx</groupId>
-            <artifactId>webfx-platform-util-teavm</artifactId>
+            <artifactId>webfx-platform-os</artifactId>
             <version>0.1.0-SNAPSHOT</version>
         </dependency>
 
