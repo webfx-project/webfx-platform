@@ -6,7 +6,6 @@
 module webfx.platform.shutdown.elemental2 {
 
     // Direct dependencies modules
-    requires webfx.platform.polyfillcompat;
     requires webfx.platform.shutdown;
     requires elemental2.dom;
 

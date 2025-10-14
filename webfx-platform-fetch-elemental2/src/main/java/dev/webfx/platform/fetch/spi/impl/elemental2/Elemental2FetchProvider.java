@@ -15,8 +15,6 @@ import elemental2.dom.RequestInit;
 
 import java.util.Map;
 
-import static dev.webfx.platform.polyfillcompat.PolyfillCompat.newFormData;
-
 /**
  * @author Bruno Salmon
  */
@@ -52,7 +50,7 @@ public class Elemental2FetchProvider implements FetchProvider {
     }
 
     private elemental2.dom.FormData buildMultipartBody(FormData formData) {
-        elemental2.dom.FormData jsFormData = newFormData();
+        elemental2.dom.FormData jsFormData = new elemental2.dom.FormData();
 
         for (Map.Entry<String, Object> entry : formData.entries()) {
             Object value = entry.getValue();

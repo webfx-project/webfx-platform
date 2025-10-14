@@ -15,4 +15,9 @@ public class DomGlobal {
     @JSBody(script = "return window;")
     private static native Window getWindow();
 
+    public static final Navigator navigator = getNavigator();
+
+    @JSBody(script = "return navigator;")
+    private static native Navigator getNavigator();
+
 }

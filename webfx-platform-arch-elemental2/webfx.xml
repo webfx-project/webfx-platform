@@ -12,7 +12,7 @@
     </dependencies>
 
     <providers>
-        <provider interface="dev.webfx.platform.arch.spi.ArchProvider">dev.webfx.platform.arch.spi.impl.gwtj2cl.GwtJ2clArchProvider</provider>
+        <provider interface="dev.webfx.platform.arch.spi.ArchProvider">dev.webfx.platform.arch.spi.impl.elemental2.Elemental2ArchProvider</provider>
     </providers>
 
 </project>

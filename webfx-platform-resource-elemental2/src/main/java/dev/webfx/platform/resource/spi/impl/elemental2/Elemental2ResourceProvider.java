@@ -1,6 +1,5 @@
 package dev.webfx.platform.resource.spi.impl.elemental2;
 
-import dev.webfx.platform.polyfillcompat.PolyfillCompat;
 import dev.webfx.platform.resource.spi.impl.web.WebResourceProvider;
 import elemental2.dom.DomGlobal;
 
@@ -15,8 +14,8 @@ public class Elemental2ResourceProvider extends WebResourceProvider {
     protected void fetchText(String resourcePath, Consumer<String> onSuccess, Consumer<Throwable> onFailure) {
         DomGlobal.window.fetch(resourcePath)
             .then(response -> {
-                if (!PolyfillCompat.isOk(response)) {
-                    reportFetchError(resourcePath, PolyfillCompat.getStatusText(response), onFailure);
+                if (!response.ok) {
+                    reportFetchError(resourcePath, response.statusText, onFailure);
                 } else
                     response.text().then(text -> {
                         onSuccess.accept(text);

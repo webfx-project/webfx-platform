@@ -1,6 +1,5 @@
 package dev.webfx.platform.shutdown.spi.impl.elemental2;
 
-import dev.webfx.platform.polyfillcompat.PolyfillCompat;
 import dev.webfx.platform.shutdown.ShutdownEvent;
 import dev.webfx.platform.shutdown.ShutdownEventOrigin;
 import dev.webfx.platform.shutdown.ShutdownEventType;
@@ -19,7 +18,7 @@ public final class Elemental2ShutdownProvider extends ShutdownProviderBase {
         // Note: pagehide/pageshow are working on iOS Safari (but not "unload")
         EventListener pageHideOrUnloadListener = e -> {
             if (!isShuttingDown()) { // ensuring only one event is fired
-                boolean persisted = e instanceof PageTransitionEvent && ((PageTransitionEvent) e).persisted;
+                boolean persisted = e instanceof PageTransitionEvent pageTransitionEvent && pageTransitionEvent.persisted;
                 fireShutdownEvent(new ShutdownEvent(persisted ? ShutdownEventType.SUSPEND : ShutdownEventType.EXIT, ShutdownEventOrigin.USER_OR_SYSTEM));
             }
         };
@@ -49,14 +48,11 @@ public final class Elemental2ShutdownProvider extends ShutdownProviderBase {
         // This is apparently the condition that browsers check to allow closing the window:
         // boolean canExit = DomGlobal.window.opener != null || DomGlobal.window.history.length == 1;
         // Rewrote the above code for compatibility with TeaVM elemental2 polyfill:
-        boolean canExit = PolyfillCompat.getOpener(DomGlobal.window) != null || PolyfillCompat.getLength(PolyfillCompat.getHistory(DomGlobal.window)) == 1;
-        DomGlobal.console.log("canExit = " + canExit);
-        return canExit;
+        return DomGlobal.window.opener != null || DomGlobal.window.history.length == 1;
     }
 
     @Override
     protected void finalExit(int exitStatus) { // exitStatus is ignored
-        DomGlobal.console.log("finalExit");
         DomGlobal.window.close();
     }
 }

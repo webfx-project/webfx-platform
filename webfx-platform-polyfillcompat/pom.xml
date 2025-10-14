@@ -13,14 +13,4 @@
 
     <artifactId>webfx-platform-polyfillcompat</artifactId>
 
-    <dependencies>
-
-        <dependency>
-            <groupId>com.google.elemental2</groupId>
-            <artifactId>elemental2-dom</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-    </dependencies>
-
 </project>

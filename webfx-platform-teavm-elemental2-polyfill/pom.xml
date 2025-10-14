@@ -17,12 +17,6 @@
 
         <dependency>
             <groupId>com.google.elemental2</groupId>
-            <artifactId>elemental2-dom</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.google.elemental2</groupId>
             <artifactId>elemental2-promise</artifactId>
             <scope>provided</scope>
         </dependency>

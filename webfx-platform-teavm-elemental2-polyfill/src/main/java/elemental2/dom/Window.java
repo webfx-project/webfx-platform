@@ -3,18 +3,15 @@ package elemental2.dom;
 import elemental2.promise.Promise;
 import org.teavm.jso.JSMethod;
 import org.teavm.jso.JSObject;
-import org.teavm.jso.JSProperty;
 
 /**
  * @author Bruno Salmon
  */
 public abstract class Window implements JSObject, WindowEventTarget {
 
-    @JSProperty
-    public abstract History getHistory();
+    public History history;
 
-    @JSProperty
-    public abstract Window getOpener();
+    public Window opener;
 
     @JSMethod
     public abstract Promise<Response> fetch(String url);
