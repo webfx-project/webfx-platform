@@ -7,7 +7,7 @@
     </exported-packages>
 
     <providers>
-        <provider interface="dev.webfx.platform.browser.spi.BrowserProvider">dev.webfx.platform.browser.spi.impl.gwtj2cl.GwtJ2clBrowserProvider</provider>
+        <provider interface="dev.webfx.platform.browser.spi.BrowserProvider">dev.webfx.platform.browser.spi.impl.elemental2.Elemental2BrowserProvider</provider>
     </providers>
 
     <dependencies>

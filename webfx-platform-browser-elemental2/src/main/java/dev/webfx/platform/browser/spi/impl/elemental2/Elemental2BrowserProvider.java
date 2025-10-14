@@ -1,4 +1,4 @@
-package dev.webfx.platform.browser.spi.impl.gwtj2cl;
+package dev.webfx.platform.browser.spi.impl.elemental2;
 
 import dev.webfx.platform.browser.spi.BrowserProvider;
 import elemental2.dom.DomGlobal;
@@ -6,7 +6,7 @@ import elemental2.dom.DomGlobal;
 /**
  * @author Bruno Salmon
  */
-public class GwtJ2clBrowserProvider implements BrowserProvider {
+public class Elemental2BrowserProvider implements BrowserProvider {
 
     @Override
     public void launchExternalBrowser(String url) {

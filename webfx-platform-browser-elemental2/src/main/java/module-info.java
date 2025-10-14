@@ -7,6 +7,6 @@ module webfx.platform.browser.gwt {
     requires webfx.platform.browser;
 
     // Exported packages
-    exports dev.webfx.platform.browser.spi.impl.gwtj2cl;
+    exports dev.webfx.platform.browser.spi.impl.elemental2;
 
 }

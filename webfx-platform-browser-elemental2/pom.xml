@@ -11,15 +11,14 @@
         <version>0.1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>webfx-platform-browser-teavm</artifactId>
-
-    <description>TeaVM implementation of the Browser API (for the browser).</description>
+    <artifactId>webfx-platform-browser-elemental2</artifactId>
 
     <dependencies>
 
         <dependency>
-            <groupId>org.teavm</groupId>
-            <artifactId>teavm-jso-apis</artifactId>
+            <groupId>com.google.elemental2</groupId>
+            <artifactId>elemental2-dom</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
