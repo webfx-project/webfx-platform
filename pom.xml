@@ -180,11 +180,10 @@
         <module>webfx-platform-uischeduler-gwt-j2cl</module>
         <module>webfx-platform-uischeduler-teavm</module>
         <module>webfx-platform-useragent</module>
+        <module>webfx-platform-useragent-elemental2</module>
         <module>webfx-platform-useragent-gluon</module>
-        <module>webfx-platform-useragent-gwt-j2cl</module>
         <module>webfx-platform-useragent-jre-client</module>
         <module>webfx-platform-useragent-jre-server</module>
-        <module>webfx-platform-useragent-teavm</module>
         <module>webfx-platform-util</module>
         <module>webfx-platform-util-elemental2</module>
         <module>webfx-platform-util-elemental2-async</module>

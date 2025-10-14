@@ -12,7 +12,7 @@
     </dependencies>
 
     <providers>
-        <provider interface="dev.webfx.platform.useragent.spi.UserAgentProvider">dev.webfx.platform.useragent.spi.impl.gwtj2cl.GwtJ2clUserAgentProvider</provider>
+        <provider interface="dev.webfx.platform.useragent.spi.UserAgentProvider">dev.webfx.platform.useragent.spi.impl.elemental2.Elemental2UserAgentProvider</provider>
     </providers>
 
 </project>

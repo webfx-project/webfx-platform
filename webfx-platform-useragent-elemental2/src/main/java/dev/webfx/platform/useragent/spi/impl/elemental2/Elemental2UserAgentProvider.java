@@ -1,4 +1,4 @@
-package dev.webfx.platform.useragent.spi.impl.gwtj2cl;
+package dev.webfx.platform.useragent.spi.impl.elemental2;
 
 import dev.webfx.platform.useragent.spi.impl.BrowserUserAgentProvider;
 import elemental2.dom.DomGlobal;
@@ -6,9 +6,9 @@ import elemental2.dom.DomGlobal;
 /**
  * @author Bruno Salmon
  */
-public final class GwtJ2clUserAgentProvider extends BrowserUserAgentProvider {
+public final class Elemental2UserAgentProvider extends BrowserUserAgentProvider {
 
-    public GwtJ2clUserAgentProvider() {
+    public Elemental2UserAgentProvider() {
         super(DomGlobal.navigator.userAgent);
     }
 }
