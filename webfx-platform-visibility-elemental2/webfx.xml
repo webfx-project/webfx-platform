@@ -12,7 +12,7 @@
     </dependencies>
 
     <providers>
-        <provider interface="dev.webfx.platform.visibility.spi.VisibilityProvider">dev.webfx.platform.visibility.spi.impl.gwtj2cl.GwtJ2clVisibilityProvider</provider>
+        <provider interface="dev.webfx.platform.visibility.spi.VisibilityProvider">dev.webfx.platform.visibility.spi.impl.elemental2.Elemental2VisibilityProvider</provider>
     </providers>
 
 </project>

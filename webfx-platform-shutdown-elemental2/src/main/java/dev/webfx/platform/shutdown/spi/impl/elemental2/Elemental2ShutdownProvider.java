@@ -34,16 +34,6 @@ public final class Elemental2ShutdownProvider extends ShutdownProviderBase {
     }
 
     @Override
-    public boolean isShuttingDown() {
-        return super.isShuttingDown();
-    }
-
-    @Override
-    protected void fireShutdownEvent(ShutdownEvent event) {
-        super.fireShutdownEvent(event);
-    }
-
-    @Override
     public boolean canExit() {
         // This is apparently the condition that browsers check to allow closing the window:
         // boolean canExit = DomGlobal.window.opener != null || DomGlobal.window.history.length == 1;

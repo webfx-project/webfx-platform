@@ -12,7 +12,6 @@ module webfx.platform.resource.elemental2 {
     requires webfx.platform.resource.web;
     requires elemental2.dom;
     requires elemental2.promise;
-    requires webfx.platform.polyfillcompat;
 
     // Exported packages
     exports dev.webfx.platform.resource.spi.impl.elemental2;

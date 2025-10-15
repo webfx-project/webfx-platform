@@ -20,4 +20,9 @@ public class DomGlobal {
     @JSBody(script = "return navigator;")
     private static native Navigator getNavigator();
 
+    public static final HTMLDocument document = getDocument();
+
+    @JSBody(script = "return document;")
+    private static native HTMLDocument getDocument();
+
 }

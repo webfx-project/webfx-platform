@@ -192,10 +192,9 @@
         <module>webfx-platform-util-time</module>
         <module>webfx-platform-util-vertx</module>
         <module>webfx-platform-visibility</module>
+        <module>webfx-platform-visibility-elemental2</module>
         <module>webfx-platform-visibility-gluon</module>
-        <module>webfx-platform-visibility-gwt-j2cl</module>
         <module>webfx-platform-visibility-jre-headless</module>
-        <module>webfx-platform-visibility-teavm</module>
         <module>webfx-platform-webassembly</module>
         <module>webfx-platform-webassembly-teavm</module>
         <module>webfx-platform-webworker</module>
