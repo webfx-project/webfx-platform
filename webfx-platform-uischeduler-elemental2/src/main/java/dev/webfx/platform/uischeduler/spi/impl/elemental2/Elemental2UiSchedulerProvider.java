@@ -1,4 +1,4 @@
-package dev.webfx.platform.uischeduler.spi.impl.gwtj2cl;
+package dev.webfx.platform.uischeduler.spi.impl.elemental2;
 
 import dev.webfx.platform.scheduler.Cancellable;
 import dev.webfx.platform.uischeduler.spi.impl.UiSchedulerProviderBase;
@@ -8,7 +8,7 @@ import elemental2.dom.DomGlobal;
 /**
  * @author Bruno Salmon
  */
-public final class GwtJ2clUiSchedulerProvider extends UiSchedulerProviderBase {
+public final class Elemental2UiSchedulerProvider extends UiSchedulerProviderBase {
 
     {
         // The browser is stopping animation frames when the tab is hidden, so we ensure all pending animation tasks

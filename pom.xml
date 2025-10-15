@@ -177,8 +177,7 @@
         <module>webfx-platform-typedarray-gwt-j2cl</module>
         <module>webfx-platform-typedarray-teavm</module>
         <module>webfx-platform-uischeduler</module>
-        <module>webfx-platform-uischeduler-gwt-j2cl</module>
-        <module>webfx-platform-uischeduler-teavm</module>
+        <module>webfx-platform-uischeduler-elemental2</module>
         <module>webfx-platform-useragent</module>
         <module>webfx-platform-useragent-elemental2</module>
         <module>webfx-platform-useragent-gluon</module>
