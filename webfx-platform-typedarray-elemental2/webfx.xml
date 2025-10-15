@@ -11,7 +11,7 @@
     </dependencies>
 
     <providers>
-        <provider interface="dev.webfx.platform.typedarray.spi.TypedArrayFactoryProvider">dev.webfx.platform.typedarray.spi.impl.gwtj2cl.GwtJ2clTypedArrayFactoryProvider</provider>
+        <provider interface="dev.webfx.platform.typedarray.spi.TypedArrayFactoryProvider">dev.webfx.platform.typedarray.spi.impl.elemental2.Elemental2TypedArrayFactoryProvider</provider>
     </providers>
 
 </project>

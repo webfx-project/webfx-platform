@@ -174,7 +174,7 @@
         <module>webfx-platform-teavm-elemental2-polyfill</module>
         <module>webfx-platform-teavm-javabase-emul</module>
         <module>webfx-platform-typedarray</module>
-        <module>webfx-platform-typedarray-gwt-j2cl</module>
+        <module>webfx-platform-typedarray-elemental2</module>
         <module>webfx-platform-typedarray-teavm</module>
         <module>webfx-platform-uischeduler</module>
         <module>webfx-platform-uischeduler-elemental2</module>
