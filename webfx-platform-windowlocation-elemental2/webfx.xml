@@ -8,7 +8,7 @@
     </exported-packages>
 
     <providers>
-        <provider interface="dev.webfx.platform.windowlocation.spi.WindowLocationProvider">dev.webfx.platform.windowlocation.spi.impl.gwtj2cl.GwtJ2clWindowLocationProvider</provider>
+        <provider interface="dev.webfx.platform.windowlocation.spi.WindowLocationProvider">dev.webfx.platform.windowlocation.spi.impl.elemental2.Elemental2WindowLocationProvider</provider>
     </providers>
 
     <dependencies>

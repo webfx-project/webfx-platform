@@ -13,6 +13,8 @@ public abstract class Window implements JSObject, WindowEventTarget {
 
     public Window opener;
 
+    public Location location;
+
     public Window.OnpopstateFn onpopstate;
 
     public abstract Window open(String url);

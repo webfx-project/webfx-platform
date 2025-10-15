@@ -1,4 +1,4 @@
-package dev.webfx.platform.windowlocation.spi.impl.gwtj2cl;
+package dev.webfx.platform.windowlocation.spi.impl.elemental2;
 
 import dev.webfx.platform.util.Strings;
 import dev.webfx.platform.windowlocation.spi.WindowLocationProvider;
@@ -7,7 +7,7 @@ import elemental2.dom.DomGlobal;
 /**
  * @author Bruno Salmon
  */
-public final class GwtJ2clWindowLocationProvider implements WindowLocationProvider {
+public final class Elemental2WindowLocationProvider implements WindowLocationProvider {
 
     @Override
     public String getHref() {

@@ -206,9 +206,8 @@
         <module>webfx-platform-windowhistory-jre</module>
         <module>webfx-platform-windowhistory-web</module>
         <module>webfx-platform-windowlocation</module>
-        <module>webfx-platform-windowlocation-gwt-j2cl</module>
+        <module>webfx-platform-windowlocation-elemental2</module>
         <module>webfx-platform-windowlocation-jre</module>
-        <module>webfx-platform-windowlocation-teavm</module>
     </modules>
 
 </project>

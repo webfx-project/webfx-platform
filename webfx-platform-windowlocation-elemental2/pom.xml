@@ -11,15 +11,16 @@
         <version>0.1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>webfx-platform-windowlocation-teavm</artifactId>
+    <artifactId>webfx-platform-windowlocation-elemental2</artifactId>
 
-    <description>TeaVM implementation of the WindowLocation API (for the browser).</description>
+    <description>GWT implementation of the WindowLocation API (for the browser).</description>
 
     <dependencies>
 
         <dependency>
-            <groupId>org.teavm</groupId>
-            <artifactId>teavm-jso-apis</artifactId>
+            <groupId>com.google.elemental2</groupId>
+            <artifactId>elemental2-dom</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
