@@ -11,20 +11,22 @@
         <version>0.1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>webfx-platform-windowhistory-teavm</artifactId>
+    <artifactId>webfx-platform-windowhistory-elemental2</artifactId>
 
-    <description>TeaVM implementation of the WindowHistory API (for the browser).</description>
+    <description>Elemental2 implementation of the WindowHistory API (for the browser).</description>
 
     <dependencies>
 
         <dependency>
-            <groupId>org.teavm</groupId>
-            <artifactId>teavm-jso</artifactId>
+            <groupId>com.google.jsinterop</groupId>
+            <artifactId>base</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
-            <groupId>org.teavm</groupId>
-            <artifactId>teavm-jso-apis</artifactId>
+            <groupId>com.google.elemental2</groupId>
+            <artifactId>elemental2-dom</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -35,8 +37,10 @@
 
         <dependency>
             <groupId>dev.webfx</groupId>
-            <artifactId>webfx-platform-util-teavm</artifactId>
+            <artifactId>webfx-platform-javatime-emul-j2cl</artifactId>
             <version>0.1.0-SNAPSHOT</version>
+            <scope>runtime</scope>
+            <optional>true</optional>
         </dependency>
 
         <dependency>

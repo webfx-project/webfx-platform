@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+
+    <description>Elemental2 implementation of the WindowHistory API (for the browser).</description>
+
+    <exported-packages>
+        <source-packages/>
+    </exported-packages>
+
+    <providers>
+        <provider interface="dev.webfx.platform.windowhistory.spi.impl.web.JsWindowHistory">dev.webfx.platform.windowhistory.spi.impl.elemental2.Elemental2WindowHistory</provider>
+    </providers>
+
+    <dependencies>
+        <used-by-source-modules/>
+    </dependencies>
+
+</project>

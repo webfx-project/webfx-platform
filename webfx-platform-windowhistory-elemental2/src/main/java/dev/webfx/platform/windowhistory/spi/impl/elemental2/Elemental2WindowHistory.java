@@ -1,4 +1,4 @@
-package dev.webfx.platform.windowhistory.spi.impl.gwtj2cl;
+package dev.webfx.platform.windowhistory.spi.impl.elemental2;
 
 import dev.webfx.platform.ast.ReadOnlyAstObject;
 import dev.webfx.platform.windowhistory.spi.impl.web.JsWindowHistory;
@@ -11,9 +11,9 @@ import java.util.function.Function;
 /**
  * @author Bruno Salmon
  */
-public final class GwtJ2clJsWindowHistory implements JsWindowHistory {
+public final class Elemental2WindowHistory implements JsWindowHistory {
 
-    public GwtJ2clJsWindowHistory() {}
+    public Elemental2WindowHistory() {}
 
     @Override
     public int length() {
