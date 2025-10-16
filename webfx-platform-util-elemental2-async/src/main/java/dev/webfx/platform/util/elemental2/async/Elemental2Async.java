@@ -2,29 +2,28 @@ package dev.webfx.platform.util.elemental2.async;
 
 import dev.webfx.platform.async.Future;
 import dev.webfx.platform.async.Promise;
-import java.util.function.Function;
 
 /**
  * @author Bruno Salmon
  */
 public class Elemental2Async {
 
-    public static <J, T> Future<T> jsPromiseToWebFXFuture(elemental2.promise.Promise<J> jsPromise, Function<J, T> onSuccessFunction) {
-        Promise<T> promise = Promise.promise();
-        // Not sure about if then() and catch() are exclusive so using tryComplete() and tryFail() to avoid additional exceptions
+    public static <T> Future<T> jsPromiseToWebFXFuture(elemental2.promise.Promise<T> jsPromise) {
+        Promise<T> p = Promise.promise();
         jsPromise
-                .then(obj -> {
-                    promise.tryComplete(onSuccessFunction.apply(obj));
-                    return null;
-                })
-                .catch_(error -> {
-                    if (error instanceof Throwable)
-                        promise.tryFail((Throwable) error);
-                    else
-                        promise.tryFail(error.toString());
-                    return null;
-                });
-        return promise.future();
+            .then(obj -> {
+                p.tryComplete(obj);
+                return null;
+            })
+            .catch_(error -> {
+                if (error instanceof Throwable)
+                    p.tryFail((Throwable) error);
+                else
+                    p.tryFail(error.toString());
+                return null;
+            });
+        return p.future();
     }
+
 
 }

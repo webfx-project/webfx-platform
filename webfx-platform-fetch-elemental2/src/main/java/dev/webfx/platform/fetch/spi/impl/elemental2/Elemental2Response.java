@@ -56,12 +56,13 @@ public class Elemental2Response implements Response {
 
     @Override
     public Future<Blob> blob() {
-        return Elemental2Async.jsPromiseToWebFXFuture(jsResponse.blob(), Elemental2Blob::new);
+        return Elemental2Async.jsPromiseToWebFXFuture(jsResponse.blob())
+            .map(Elemental2Blob::new);
     }
 
     @Override
     public Future<String> text() {
-        return Elemental2Async.jsPromiseToWebFXFuture(jsResponse.text(), text -> text);
+        return Elemental2Async.jsPromiseToWebFXFuture(jsResponse.text());
     }
 
     @Override

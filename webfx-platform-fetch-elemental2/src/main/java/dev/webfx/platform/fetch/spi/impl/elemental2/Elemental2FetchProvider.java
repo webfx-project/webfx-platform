@@ -41,7 +41,8 @@ public class Elemental2FetchProvider implements FetchProvider {
                 requestInit.setBody(buildMultipartBody(formData));
             }
         }
-        return Elemental2Async.jsPromiseToWebFXFuture(DomGlobal.window.fetch(url, requestInit), Elemental2Response::new);
+        return Elemental2Async.jsPromiseToWebFXFuture(DomGlobal.window.fetch(url, requestInit))
+            .map(Elemental2Response::new);
     }
 
     @Override
