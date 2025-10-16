@@ -3,5 +3,5 @@ package elemental2.dom;
 /**
  * @author Bruno Salmon
  */
-public interface Node extends EventTarget {
+public interface CharacterData extends Node {
 }

@@ -27,6 +27,11 @@ public class DomGlobal {
     @JSBody(script = "return document;")
     private static native HTMLDocument getDocument();
 
+    public static final Screen screen = getScreen();
+
+    @JSBody(script = "return screen;")
+    private static native Screen getScreen();
+
     @JSBody(params = {"callback"}, script = "return requestAnimationFrame(callback);")
     public static native int requestAnimationFrame(FrameRequestCallback callback);
 
