@@ -22,4 +22,10 @@ public interface JsPropertyMap<T> extends JSObject {
     @JSBody(params = {"propertyName", "value"}, script = "this[propertyName] = value;")
     void set(String propertyName, T value);
 
+    static <T> JsPropertyMap<T> of(String k, /*@DoNotAutobox*/ T v) {
+        JsPropertyMap<T> map = of();
+        map.set(k, v);
+        return map;
+    }
+
 }

@@ -1,26 +1,39 @@
 package elemental2.dom;
 
+import dev.webfx.platform.util.teavm.TeaVmUtil;
 import org.teavm.jso.JSBody;
 import org.teavm.jso.JSObject;
 
 /**
  * @author Bruno Salmon
  */
-public interface RequestInit extends JSObject {
+public abstract class RequestInit implements JSObject {
 
-    void setMethod(String method);
+    public void setMethod(String method) {
+        TeaVmUtil.setString(this, "method", method);
+    }
 
-    void setMode(String mode);
+    public void setMode(String mode) {
+        TeaVmUtil.setString(this, "mode", mode);
+    }
 
-    void setHeaders(Headers headers);
+    public void setHeaders(Headers headers) {
+        TeaVmUtil.setJSObject(this, "headers", headers);
+    }
 
-    void setBody(String body);
+    public void setBody(String body) {
+        TeaVmUtil.setString(this, "body", body);
+    }
 
-    void setBody(Blob body);
+    public void setBody(Blob body) {
+        TeaVmUtil.setJSObject(this, "body", body);
+    }
 
-    void setBody(FormData formData);
+    public void setBody(FormData formData) {
+        TeaVmUtil.setJSObject(this, "body", formData);
+    }
 
-    @JSBody(script = "return new RequestInit();")
+    @JSBody(script = "return {};")
     static RequestInit create() { return null; }
 
 }

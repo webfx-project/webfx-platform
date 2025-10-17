@@ -1,12 +1,14 @@
 package elemental2.dom;
 
 import elemental2.promise.Promise;
+import org.teavm.jso.JSClass;
 import org.teavm.jso.JSFunctor;
 import org.teavm.jso.JSObject;
 
 /**
  * @author Bruno Salmon
  */
+@JSClass
 public abstract class Window implements JSObject, WindowEventTarget {
 
     public History history;
@@ -22,6 +24,8 @@ public abstract class Window implements JSObject, WindowEventTarget {
     public abstract Promise<Response> fetch(String url);
 
     public abstract Promise<Response> fetch(String url, RequestInit requestInit);
+
+    public abstract Promise<Response> fetch(Request input);
 
     public abstract void close();
 

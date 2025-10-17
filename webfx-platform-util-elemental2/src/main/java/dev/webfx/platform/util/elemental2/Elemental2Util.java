@@ -139,12 +139,12 @@ public final class Elemental2Util {
 
     // JNI methods (not yet supported in Elemental2) TODO: replace with Elemental2 when available
 
-    private static native void promptInstallPWA(Event e) /*-{
-        e.prompt();
-    }-*/;
+    private static void promptInstallPWA(Event e) {
+        //e.prompt();
+    };
 
-    private static native boolean isNavigatorStandalone() /*-{
-        return navigator.standalone === true;
-    }-*/;
+    private static boolean isNavigatorStandalone() {
+        return false; // navigator.standalone === true;
+    };
 
 }

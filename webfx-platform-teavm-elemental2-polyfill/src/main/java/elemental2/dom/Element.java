@@ -32,4 +32,8 @@ public abstract class Element extends Node {
         void onInvoke(Event p0);
     }
 
+    @JSFunctor
+    public interface OnwheelFn extends JSObject {
+        Object onInvoke(Event p0);
+    }
 }

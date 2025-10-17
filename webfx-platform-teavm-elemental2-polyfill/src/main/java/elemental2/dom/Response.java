@@ -1,5 +1,6 @@
 package elemental2.dom;
 
+import elemental2.core.ArrayBuffer;
 import elemental2.promise.Promise;
 import org.teavm.jso.JSObject;
 
@@ -13,5 +14,7 @@ public interface Response extends JSObject {
     String statusText = ""; // dummy value
 
     Promise<String> text();
+
+    Promise<ArrayBuffer> arrayBuffer();
 
 }

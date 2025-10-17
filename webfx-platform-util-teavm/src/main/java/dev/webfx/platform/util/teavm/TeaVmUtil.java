@@ -15,6 +15,12 @@ public class TeaVmUtil {
     @JSBody(params = { "obj", "prop", "value" }, script = "obj[prop] = value;")
     public static native JSObject setBoolean(JSObject obj, String prop, boolean value);
 
+    @JSBody(params = { "obj", "prop", "value" }, script = "obj[prop] = value;")
+    public static native JSObject setString(JSObject obj, String prop, String value);
+
+    @JSBody(params = { "obj", "prop", "value" }, script = "obj[prop] = value;")
+    public static native JSObject setJSObject(JSObject obj, String prop, JSObject value);
+
     private static JSObject getLastJSObject(JSObject obj, String... props) {
         JSObject result = obj;
         for (int i = 0; i < props.length - 1; i++) {
