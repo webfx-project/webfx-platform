@@ -3,8 +3,10 @@ package elemental2.dom;
 /**
  * @author Bruno Salmon
  */
-public interface HTMLElement extends Element {
+public abstract class HTMLElement extends Element {
 
-    Node appendChild(Node node);
+    public native void setAttribute(String name, String value);
+
+    public native Node appendChild(Node node);
 
 }

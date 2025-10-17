@@ -9,21 +9,11 @@ import org.teavm.jso.core.JSObjects;
  */
 public class TeaVmUtil {
 
-    public static boolean isFunction(JSObject o) {
-        return "function".equals(JSObjects.typeOf(o));
-    }
-
-    @JSBody(script = "return window.navigator.userAgent;")
-    public static native String getUserAgent();
-
-    @JSBody(script = "return window.navigator.platform;")
-    public static native String getPlatform();
-
-    @JSBody(script = "return document.visibilityState;")
-    public static native String getVisibilityState();
-
     @JSBody(params = { "obj", "prop" }, script = "return obj[prop];")
     public static native JSObject getJSObject(JSObject obj, String prop);
+
+    @JSBody(params = { "obj", "prop", "value" }, script = "obj[prop] = value;")
+    public static native JSObject setBoolean(JSObject obj, String prop, boolean value);
 
     private static JSObject getLastJSObject(JSObject obj, String... props) {
         JSObject result = obj;

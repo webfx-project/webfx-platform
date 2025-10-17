@@ -7,6 +7,6 @@ import org.teavm.jso.JSObject;
  * @author Bruno Salmon
  */
 @JSFunctor
-public interface EventListener<E extends Event> extends JSObject {
-    void handleEvent(E evt);
+public interface EventListener extends JSObject {
+    void handleEvent(Event evt);
 }

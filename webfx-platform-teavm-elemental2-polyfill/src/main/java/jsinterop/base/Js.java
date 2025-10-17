@@ -14,6 +14,10 @@ public final class Js {
         return (T) obj;
     }
 
+    public static <T> T uncheckedCast(Object obj) {
+        return (T) obj;
+    }
+
     @JSBody(params = {"obj"}, script = "return typeof obj;")
     public static native String typeof(Object obj);
 
