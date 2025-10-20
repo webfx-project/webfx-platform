@@ -5,7 +5,7 @@ import dev.webfx.platform.async.Promise;
 import dev.webfx.platform.blob.NamedBlob;
 import dev.webfx.platform.fetch.*;
 import dev.webfx.platform.fetch.spi.FetchProvider;
-import dev.webfx.platform.file.spi.impl.java.JavaFile;
+import dev.webfx.platform.file.spi.impl.jre.JreFile;
 import dev.webfx.platform.util.Strings;
 import dev.webfx.platform.util.vertx.VertxInstance;
 import io.vertx.core.buffer.Buffer;
@@ -46,8 +46,8 @@ public class VertxFetchProvider implements FetchProvider {
             Object body = options.getBody();
             if (body instanceof String) { // Simple String body
                 stringBody = (String) body;
-            } else if (body instanceof JavaFile) { // Single file body
-                File file = ((JavaFile) body).getPlatformBlob();
+            } else if (body instanceof JreFile) { // Single file body
+                File file = ((JreFile) body).getPlatformBlob();
                 futureStream = VertxInstance.getVertx().fileSystem().open(file.getAbsolutePath(), new OpenOptions());
                 streamLength = file.length();
             } else if (body instanceof FormData) { // Form body
@@ -65,8 +65,8 @@ public class VertxFetchProvider implements FetchProvider {
                         filename = namedBlob.getName();
                     }
 
-                    if (value instanceof JavaFile) {
-                        JavaFile javaFile = (JavaFile) value;
+                    if (value instanceof JreFile) {
+                        JreFile javaFile = (JreFile) value;
                         File file = (File) javaFile.getPlatformBlob();
                         if (filename == null)
                             filename = file.getName();

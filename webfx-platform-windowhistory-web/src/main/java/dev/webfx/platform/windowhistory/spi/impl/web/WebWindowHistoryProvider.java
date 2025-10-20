@@ -1,7 +1,7 @@
 package dev.webfx.platform.windowhistory.spi.impl.web;
 
 import dev.webfx.platform.ast.ReadOnlyAstObject;
-import dev.webfx.platform.uischeduler.UiScheduler;
+import dev.webfx.platform.scheduler.Scheduler;
 import dev.webfx.platform.util.Objects;
 import dev.webfx.platform.util.Strings;
 import dev.webfx.platform.windowhistory.spi.BrowsingHistoryEvent;
@@ -44,7 +44,7 @@ public final class WebWindowHistoryProvider extends MemoryBrowsingHistory implem
             setMountPoint(mountPath);
             onPopState(supportsStates ? jsWindowHistory.state() : null);
             if (!supportsStates)
-                UiScheduler.schedulePeriodic(500, () -> {
+                Scheduler.schedulePeriodic(500, () -> {
                     if (!Objects.areEquals(WindowLocation.getFragment(), getCurrentLocation().getFragment()))
                         onPopState(null);
                 });
@@ -101,7 +101,7 @@ public final class WebWindowHistoryProvider extends MemoryBrowsingHistory implem
             super.doAcceptedPush(location);
         }
         // For any reason there is a performance issue with Chrome if we fire the location change now, so we defer it
-        UiScheduler.scheduleDeferred(() -> fireLocationChanged(location));
+        Scheduler.scheduleDeferred(() -> fireLocationChanged(location));
         //Console.log("Exiting onPopState");
     }
 

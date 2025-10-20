@@ -49,22 +49,17 @@ public final class OperatingSystem {
     }
 
     public static boolean isDesktop() {
-        switch (getOSFamily()) {
-            case WINDOWS:
-            case MACOS:
-            case LINUX:
-                return true;
-            default: return false;
-        }
+        return switch (getOSFamily()) {
+            case WINDOWS, MACOS, LINUX -> true;
+            default -> false;
+        };
     }
 
     public static boolean isMobile() {
-        switch (getOSFamily()) {
-            case ANDROID:
-            case IOS:
-                return true;
-            default: return false;
-        }
+        return switch (getOSFamily()) {
+            case ANDROID, IOS -> true;
+            default -> false;
+        };
     }
 
 }

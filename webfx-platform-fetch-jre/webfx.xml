@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+
+    <description>Java implementation of the Fetch API (for platforms other than browser and server).</description>
+
+    <exported-packages>
+        <source-packages/>
+    </exported-packages>
+
+    <dependencies>
+        <used-by-source-modules/>
+    </dependencies>
+
+    <providers>
+        <provider interface="dev.webfx.platform.fetch.spi.FetchProvider">dev.webfx.platform.fetch.spi.impl.jre.JreFetchProvider</provider>
+    </providers>
+
+</project>

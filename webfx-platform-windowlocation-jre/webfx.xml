@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+
+    <description>Java implementation of the WindowLocation API (for platforms other than the browser).</description>
+
+    <exported-packages>
+        <source-packages/>
+    </exported-packages>
+
+    <providers>
+        <provider interface="dev.webfx.platform.windowlocation.spi.WindowLocationProvider">dev.webfx.platform.windowlocation.spi.impl.jre.JreWindowLocationProvider</provider>
+    </providers>
+
+    <dependencies>
+        <used-by-source-modules/>
+    </dependencies>
+
+</project>

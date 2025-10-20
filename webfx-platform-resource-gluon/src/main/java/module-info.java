@@ -7,7 +7,7 @@ module webfx.platform.resource.gluon {
 
     // Direct dependencies modules
     requires webfx.platform.resource;
-    requires webfx.platform.resource.java;
+    requires webfx.platform.resource.jre;
 
     // Exported packages
     exports dev.webfx.platform.resource.spi.impl.gluon;

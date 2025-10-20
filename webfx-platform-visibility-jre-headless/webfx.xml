@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+
+    <description>Java headless implementation of the Visibility API.</description>
+
+    <exported-packages>
+        <source-packages/>
+    </exported-packages>
+
+    <dependencies>
+        <used-by-source-modules/>
+    </dependencies>
+
+    <providers>
+        <provider interface="dev.webfx.platform.boot.spi.ApplicationJob">dev.webfx.platform.visibility.spi.impl.jre.headless.JreHeadlessVisibilityJob</provider>
+        <provider interface="dev.webfx.platform.visibility.spi.VisibilityProvider">dev.webfx.platform.visibility.spi.impl.jre.headless.JreHeadlessVisibilityProvider</provider>
+    </providers>
+
+</project>

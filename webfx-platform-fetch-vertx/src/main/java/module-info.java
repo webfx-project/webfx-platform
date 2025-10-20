@@ -12,7 +12,7 @@ module webfx.platform.fetch.vertx {
     requires webfx.platform.async;
     requires webfx.platform.blob;
     requires webfx.platform.fetch;
-    requires webfx.platform.file.java;
+    requires webfx.platform.file.jre;
     requires webfx.platform.util;
     requires webfx.platform.util.vertx;
 

@@ -3,7 +3,7 @@ package dev.webfx.platform.audio.spi.impl.gluon;
 import dev.webfx.platform.audio.Audio;
 import dev.webfx.platform.audio.spi.AudioServiceProvider;
 import dev.webfx.platform.console.Console;
-import dev.webfx.platform.uischeduler.UiScheduler;
+import dev.webfx.platform.scheduler.Scheduler;
 
 import java.io.IOException;
 import java.net.URL;
@@ -18,7 +18,7 @@ public final class GluonAudioServiceProvider implements AudioServiceProvider {
 
     public GluonAudioServiceProvider() {
         // Note: All Gluon servies must be created in the UI thread, otherwise the application crashes
-        UiScheduler.runInUiThread(() -> {
+        Scheduler.runInUiThread(() -> {
             audioService = com.gluonhq.attach.audio.AudioService.create().orElse(null);
             if (audioService == null) // It seems the audio service is implemented only for Android, so this happens on other platforms
                 Console.log("WARNING [WebFX Platform]: Unable to load Gluon Audio Service - No sound/music will be played");
