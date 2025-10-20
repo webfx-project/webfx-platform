@@ -1,6 +1,7 @@
 package dev.webfx.platform.util.elemental2;
 
 import dev.webfx.platform.meta.Meta;
+import dev.webfx.platform.polyfillcompat.PolyfillCompat;
 import elemental2.core.JsIIterableResult;
 import elemental2.core.JsIterator;
 import elemental2.dom.DomGlobal;
@@ -140,11 +141,11 @@ public final class Elemental2Util {
     // JNI methods (not yet supported in Elemental2) TODO: replace with Elemental2 when available
 
     private static void promptInstallPWA(Event e) {
-        //e.prompt();
+        PolyfillCompat.promptInstallPWA(e);
     };
 
     private static boolean isNavigatorStandalone() {
-        return false; // navigator.standalone === true;
+        return PolyfillCompat.isNavigatorStandalone();
     };
 
 }

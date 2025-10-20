@@ -1,7 +1,14 @@
 package elemental2.core;
 
+import org.teavm.jso.JSClass;
+import org.teavm.jso.JSObject;
+
 /**
  * @author Bruno Salmon
  */
-public class ArrayBufferView {
+@JSClass
+public class ArrayBufferView implements JSObject {
+    public ArrayBuffer buffer;
+    public int byteLength;
+    public int byteOffset;
 }

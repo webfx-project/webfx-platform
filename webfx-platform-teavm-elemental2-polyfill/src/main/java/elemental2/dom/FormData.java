@@ -11,7 +11,6 @@ import org.teavm.jso.JSObject;
 public class FormData implements JSObject {
 
     interface SetValueUnionType extends JSObject {
-
         @JSBody(params = {"object"}, script = "return object")
         static SetValueUnionType of(Object object) { return null; }
     }

@@ -2,10 +2,12 @@ package elemental2.dom;
 
 import elemental2.core.JsObject;
 import jsinterop.base.Js;
+import org.teavm.jso.JSClass;
 
 /**
  * @author Bruno Salmon
  */
+@JSClass
 public abstract class HTMLCanvasElement extends HTMLElement {
 
     public native JsObject getContext(String contextId, JsObject args);

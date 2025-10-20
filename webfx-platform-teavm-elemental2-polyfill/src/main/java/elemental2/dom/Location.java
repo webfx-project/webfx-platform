@@ -7,5 +7,7 @@ import org.teavm.jso.JSObject;
  */
 public interface Location extends JSObject {
 
-
+    void assign(String url);/* {
+        assign(Js.<Location.AssignUrlUnionType>uncheckedCast(url));
+    }*/
 }

@@ -6,7 +6,7 @@ import org.teavm.jso.JSObject;
 /**
  * @author Bruno Salmon
  */
-@JSClass
+@JSClass(name = "Object")
 public class JsObject implements JSObject {
 
     public static native JsObject create(JsObject proto);

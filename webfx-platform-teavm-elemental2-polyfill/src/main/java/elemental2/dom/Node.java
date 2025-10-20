@@ -11,6 +11,8 @@ public abstract class Node implements EventTarget {
 
     public native Node insertBefore(Node newChild, Node refChild);
 
+    public native Node replaceChild(Node newChild, Node oldChild);
+
     public native boolean contains(Node n);
 
     public native void append(Node... nodes);

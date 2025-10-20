@@ -6,8 +6,10 @@ import org.teavm.jso.JSClass;
  * @author Bruno Salmon
  */
 @JSClass
-public abstract class Uint8Array extends TypedArray {
+public class Uint8Array extends TypedArray {
 
     public Uint8Array(int length) {}
+
+    public Uint8Array(double[] length) {}
 
 }

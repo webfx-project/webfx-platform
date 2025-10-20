@@ -27,6 +27,8 @@ public abstract class Window implements JSObject, WindowEventTarget {
 
     public abstract Promise<Response> fetch(Request input);
 
+    public abstract Window open(String url, String windowName);
+
     public abstract void close();
 
     @JSFunctor

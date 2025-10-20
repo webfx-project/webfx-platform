@@ -15,4 +15,6 @@ public abstract class Document extends Node {
 
     public native NodeList<Element> getElementsByTagName(String tagname);
 
+    public native void exitFullscreen();
+
 }
