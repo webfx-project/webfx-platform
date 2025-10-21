@@ -2,6 +2,7 @@ package dev.webfx.platform.ast.spi.factory.impl.teavm;
 
 import dev.webfx.platform.ast.spi.factory.nativeast.NativeAstArray;
 import dev.webfx.platform.ast.spi.factory.nativeast.NativeAstFactoryProvider;
+import dev.webfx.platform.util.teavm.TeaVmUtil;
 import org.teavm.jso.JSObject;
 import org.teavm.jso.core.JSArray;
 
@@ -12,7 +13,7 @@ import org.teavm.jso.core.JSArray;
  */
 final class TeaVmAstArray extends TeaVmAstNode implements NativeAstArray {
 
-    public static TeaVmAstArray create(JSArray jsArray) {
+    public static TeaVmAstArray create(JSArray<?> jsArray) {
         if (jsArray == null || isUndefined(jsArray))
             return null;
         return new TeaVmAstArray(jsArray);
@@ -23,20 +24,20 @@ final class TeaVmAstArray extends TeaVmAstNode implements NativeAstArray {
         return TeaVmAstFactoryProvider.INSTANCE;
     }
 
-    TeaVmAstArray(JSArray jsArray) {
+    TeaVmAstArray(JSArray<?> jsArray) {
         super(jsArray);
     }
 
-    <T extends JSObject> JSArray<T> asJSArray() { return nativeElement.cast(); }
+    <T extends JSObject> JSArray<T> asJSArray() { return (JSArray<T>) nativeElement; }
 
     @Override
     public JSObject getNativeElement(int index) {
-        return asJSArray().get(index);
+        return TeaVmUtil.getAt(nativeElement, index);
     }
 
     @Override
     public void setNativeElement(int index, Object value) {
-        asJSArray().set(index, (JSObject) value);
+        TeaVmUtil.setAt(nativeElement, index, value);
     }
 
     public int indexOfNativeElement(Object element) {
