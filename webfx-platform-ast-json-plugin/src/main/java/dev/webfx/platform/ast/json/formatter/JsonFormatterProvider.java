@@ -1,6 +1,10 @@
 package dev.webfx.platform.ast.json.formatter;
 
-import dev.webfx.platform.ast.*;
+import dev.webfx.platform.ast.AST;
+import dev.webfx.platform.ast.ReadOnlyAstArray;
+import dev.webfx.platform.ast.ReadOnlyAstNode;
+import dev.webfx.platform.ast.ReadOnlyAstObject;
+import dev.webfx.platform.ast.spi.factory.nativeast.AstType;
 import dev.webfx.platform.ast.spi.formatter.AstFormatterProvider;
 import dev.webfx.platform.util.Numbers;
 import dev.webfx.platform.util.Strings;
@@ -28,7 +32,6 @@ public class JsonFormatterProvider implements AstFormatterProvider {
         return appendJsonArray((ReadOnlyAstArray) astNode, new StringBuilder()).toString();
     }
 
-
     @Override
     public String formatObject(ReadOnlyAstObject astNode) {
         return appendJsonObject(astNode, new StringBuilder()).toString();
@@ -40,7 +43,7 @@ public class JsonFormatterProvider implements AstFormatterProvider {
     }
 
     public String formatElement(Object e) {
-        return appendNativeElement(e, new StringBuilder()).toString();
+        return appendElement(e, new StringBuilder()).toString();
     }
 
     static StringBuilder appendJsonObject(ReadOnlyAstObject json, StringBuilder sb) {
@@ -53,7 +56,7 @@ public class JsonFormatterProvider implements AstFormatterProvider {
                 sb.append(',');
             appendQuoted(key, sb);
             sb.append(':');
-            appendNativeElement(json.get(key), sb);
+            appendElement(json.get(key), sb);
             first = false;
         }
         return sb.append('}');
@@ -62,66 +65,46 @@ public class JsonFormatterProvider implements AstFormatterProvider {
     static StringBuilder appendJsonArray(ReadOnlyAstArray ca, StringBuilder sb) {
         return join(ca, ",", sb.append('[')).append(']');
     }
-    /**
-     * Make a string from the contents of this JSONArray. The
-     * <code>separator</code> string is inserted between each element.
-     * Warning: This method assumes that the data structure is acyclical.
-     * @param separator A string that will be inserted between the elements.
-     * @return a string.
-     * @throws IllegalArgumentException If the array contains an invalid number.
-     */
+
     static StringBuilder join(ReadOnlyAstArray ca, String separator, StringBuilder sb) {
         int len = ca.size();
         for (int i = 0; i < len; i += 1) {
             if (i > 0)
                 sb.append(separator);
-            appendNativeElement(ca.getElement(i), sb);
+            appendElement(ca.getElement(i), sb);
         }
         return sb;
     }
 
-    /**
-     * Make a JSON text of an Object element. If the object has an
-     * element.toJSONString() method, then that method will be used to produce
-     * the JSON text. The method is required to produce a strictly
-     * conforming text. If the object does not contain a toJSONString
-     * method (which is the most common case), then a text will be
-     * produced by the rules.
-     * <p>
-     * Warning: This method assumes that the data structure is acyclical.
-     *
-     * @param element The element to be serialized.
-     * @return a printable, displayable, transmittable
-     * representation of the object, beginning
-     * with <code>{</code>&nbsp;<small>(left brace)</small> and ending
-     * with <code>}</code>&nbsp;<small>(right brace)</small>.
-     * @throws IllegalArgumentException If the element is or contains an invalid number.
-     */
+    static StringBuilder appendElement(Object element, StringBuilder sb) {
+        if (element == null)
+            return sb.append("null");
+        if (element instanceof String)
+            return appendQuoted((String) element, sb);
+        if (element instanceof Number)
+            return sb.append(numberToString(element));
+        if (element instanceof ReadOnlyAstNode node) {
+            if (node.isObject())
+                return appendJsonObject((ReadOnlyAstObject) node, sb);
+            return appendJsonArray((ReadOnlyAstArray) node, sb);
+        }
+        return appendNativeElement(element, sb);
+    }
+
     static StringBuilder appendNativeElement(Object element, StringBuilder sb) {
         if (AST.NATIVE_FACTORY != null) {
-            switch (AST.NATIVE_FACTORY.getNativeElementAstType(element)) {
-                case NULL:    return sb.append("null");
-                case OBJECT:  return appendJsonObject(AST.NATIVE_FACTORY.nativeToReadOnlyAstObject(element), sb);
-                case ARRAY:   return appendJsonArray(AST.NATIVE_FACTORY.nativeToReadOnlyAstArray(element), sb);
-                case NUMBER:  return sb.append(numberToString(AST.NATIVE_FACTORY.nativeScalarToJavaScalar(element)));
-                case BOOLEAN: return sb.append((Boolean) AST.NATIVE_FACTORY.nativeScalarToJavaScalar(element));
-                case STRING:  return appendQuoted(AST.NATIVE_FACTORY.nativeScalarToJavaScalar(element), sb);
-                default:      return sb.append(element); // ignored when undefined
-            }
+            AstType type = AST.NATIVE_FACTORY.getNativeElementAstType(element);
+            return switch (type) {
+                case NULL -> sb.append("null");
+                case OBJECT -> appendJsonObject(AST.NATIVE_FACTORY.nativeToReadOnlyAstObject(element), sb);
+                case ARRAY -> appendJsonArray(AST.NATIVE_FACTORY.nativeToReadOnlyAstArray(element), sb);
+                case NUMBER -> sb.append(numberToString(AST.NATIVE_FACTORY.nativeScalarToJavaScalar(element)));
+                case BOOLEAN -> sb.append((Boolean) AST.NATIVE_FACTORY.nativeScalarToJavaScalar(element));
+                case STRING -> appendQuoted(AST.NATIVE_FACTORY.nativeScalarToJavaScalar(element), sb);
+                default -> sb.append(element); // ignored when undefined
+            };
         } else {
-            if (element == null)
-                return sb.append("null");
-            if (element instanceof String)
-                return appendQuoted((String) element, sb);
-            if (element instanceof Number)
-                return sb.append(numberToString(element));
-            if (element instanceof ReadOnlyAstNode) {
-                ReadOnlyAstNode node = (ReadOnlyAstNode) element;
-                if (node.isObject())
-                    return appendJsonObject((ReadOnlyAstObject) node, sb);
-                return appendJsonArray((ReadOnlyAstArray) node, sb);
-            }
-            return sb.append(element);
+            return appendElement(element, sb);
         }
     }
 

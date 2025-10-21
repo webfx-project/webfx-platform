@@ -36,7 +36,7 @@ abstract class TeaVmAstNode implements AstNode {
     static native JSObject deleteJSValue(JSObject jso, String key);
 
     @JSBody(params = {"jsa", "value"}, script = "return jsa.indexOf(value);")
-    static native int indexOf(JSArray jsa, JSObject value);
+    static native int indexOf(JSArray<?> jsa, JSObject value);
 
     @JSBody(params = {"jso"}, script = "" +
             "    var keys = [];\n" +
