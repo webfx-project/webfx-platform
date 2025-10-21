@@ -1077,6 +1077,9 @@ public class BaseRenderingContext2D implements CanvasDrawingStyles, CanvasPathMe
 
     public native void strokeText(String text, double x, double y);
 
+    public native void roundRect(
+        double x, double y, double w, double h, CanvasPathMethods.RoundRectRadiiUnionType radii);
+
     public native void transform(
         double m11, double m12, double m21, double m22, double dx, double dy);
 

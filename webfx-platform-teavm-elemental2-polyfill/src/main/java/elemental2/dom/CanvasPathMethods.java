@@ -1,11 +1,19 @@
 package elemental2.dom;
 
+import jsinterop.base.Js;
 import org.teavm.jso.JSObject;
 
 /**
  * @author Bruno Salmon
  */
 public interface CanvasPathMethods extends JSObject {
+
+    interface RoundRectRadiiUnionType extends JSObject {
+        static CanvasPathMethods.RoundRectRadiiUnionType of(Object o) {
+            return Js.cast(o);
+        }
+    }
+
     void arc(
         double x, double y, double radius, double startAngle, double endAngle, boolean anticlockwise);
 
@@ -24,4 +32,6 @@ public interface CanvasPathMethods extends JSObject {
     void quadraticCurveTo(double cpx, double cpy, double x, double y);
 
     void rect(double x, double y, double w, double h);
+
+
 }
