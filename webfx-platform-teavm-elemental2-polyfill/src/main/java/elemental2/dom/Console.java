@@ -1,6 +1,7 @@
 package elemental2.dom;
 
 import org.teavm.jso.JSBody;
+import org.teavm.jso.JSClass;
 import org.teavm.jso.JSObject;
 import org.teavm.jso.core.JSArray;
 import org.teavm.jso.core.JSArrayReader;
@@ -9,6 +10,7 @@ import org.teavm.jso.core.JSString;
 /**
  * TeaVM polyfill for Elemental2's Console class
  */
+@JSClass
 public final class Console implements JSObject {
 
     public void log(Object... args) {

@@ -4,11 +4,11 @@ import org.teavm.jso.JSBody;
 import org.teavm.jso.JSFunctor;
 import org.teavm.jso.JSObject;
 
-public class DomGlobal {
-    
+public final class DomGlobal {
+
     // Static field that returns the browser's console
     public static final Console console = getConsole();
-    
+
     @JSBody(script = "return console;")
     private static native Console getConsole();
 
