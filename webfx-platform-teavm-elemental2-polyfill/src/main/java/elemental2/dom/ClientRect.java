@@ -1,10 +1,12 @@
 package elemental2.dom;
 
+import org.teavm.jso.JSClass;
 import org.teavm.jso.JSObject;
 
 /**
  * @author Bruno Salmon
  */
+@JSClass
 public class ClientRect implements JSObject {
     public double bottom;
     public double height;

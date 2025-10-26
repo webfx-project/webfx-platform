@@ -1,11 +1,13 @@
 package elemental2.dom;
 
+import org.teavm.jso.JSClass;
 import org.teavm.jso.JSFunctor;
 import org.teavm.jso.JSObject;
 
 /**
  * @author Bruno Salmon
  */
+@JSClass
 public abstract class HTMLImageElement extends HTMLElement {
 
     @JSFunctor

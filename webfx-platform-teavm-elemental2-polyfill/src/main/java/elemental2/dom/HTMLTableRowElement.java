@@ -1,8 +1,11 @@
 package elemental2.dom;
 
+import org.teavm.jso.JSClass;
+
 /**
  * @author Bruno Salmon
  */
+@JSClass
 public abstract class HTMLTableRowElement extends HTMLElement {
     public String align;
     public String bgColor;

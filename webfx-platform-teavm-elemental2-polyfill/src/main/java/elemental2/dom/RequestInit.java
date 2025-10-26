@@ -2,11 +2,13 @@ package elemental2.dom;
 
 import dev.webfx.platform.util.teavm.TeaVmUtil;
 import org.teavm.jso.JSBody;
+import org.teavm.jso.JSClass;
 import org.teavm.jso.JSObject;
 
 /**
  * @author Bruno Salmon
  */
+@JSClass
 public abstract class RequestInit implements JSObject {
 
     public void setMethod(String method) {

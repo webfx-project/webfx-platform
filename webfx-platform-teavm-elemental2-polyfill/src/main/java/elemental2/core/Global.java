@@ -10,6 +10,4 @@ public class Global {
 
     public static final JSONType JSON = (JSONType) TeaVmUtil.getJSObject(DomGlobal.window, "JSON");
 
-
-
 }

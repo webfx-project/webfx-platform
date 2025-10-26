@@ -1,9 +1,13 @@
 package elemental2.dom;
 
+import org.teavm.jso.JSClass;
+import org.teavm.jso.JSObject;
+
 /**
  * @author Bruno Salmon
  */
-public class Touch {
+@JSClass
+public class Touch implements JSObject {
     public double clientX;
     public double clientY;
     public double force;

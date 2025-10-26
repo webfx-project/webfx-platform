@@ -1,9 +1,13 @@
 package elemental2.dom;
 
+import org.teavm.jso.JSClass;
+import org.teavm.jso.JSObject;
+
 /**
  * @author Bruno Salmon
  */
-public class DataTransfer {
+@JSClass
+public class DataTransfer implements JSObject {
     public String dropEffect;
     public String effectAllowed;
     //public FileList files;

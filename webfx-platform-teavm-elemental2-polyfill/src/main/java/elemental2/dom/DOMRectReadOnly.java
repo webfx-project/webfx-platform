@@ -1,8 +1,11 @@
 package elemental2.dom;
 
+import org.teavm.jso.JSClass;
+
 /**
  * @author Bruno Salmon
  */
+@JSClass
 public class DOMRectReadOnly extends ClientRect {
     public double bottom;
     public double height;

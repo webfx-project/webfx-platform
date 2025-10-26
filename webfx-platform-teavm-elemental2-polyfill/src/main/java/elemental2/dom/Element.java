@@ -2,12 +2,14 @@ package elemental2.dom;
 
 import elemental2.promise.Promise;
 import jsinterop.base.Js;
+import org.teavm.jso.JSClass;
 import org.teavm.jso.JSFunctor;
 import org.teavm.jso.JSObject;
 
 /**
  * @author Bruno Salmon
  */
+@JSClass
 public abstract class Element extends Node {
 
     public native boolean hasAttribute(String name);
