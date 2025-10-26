@@ -46,6 +46,12 @@ public class TeaVmUtil {
     @JSBody(params = { "array", "index", "value" }, script = "array[index] = value;")
     public static native JSObject setAt(JSObject array, int index, Object value);
 
+    @JSBody(params = { "array", "index", "value" }, script = "array[index] = value;")
+    public static native JSObject setAt(JSObject array, int index, double value);
+
+    @JSBody(params = { "array", "index", "value" }, script = "array[index] = value;")
+    public static native JSObject setAt(JSObject array, int index, boolean value);
+
     @JSBody(params = { "array", "index" }, script = "return array[index];")
     public static native JSObject getAt(JSObject array, int index);
 

@@ -104,7 +104,7 @@ public class JsonFormatterProvider implements AstFormatterProvider {
                 default -> sb.append(element); // ignored when undefined
             };
         } else {
-            return appendElement(element, sb);
+            return sb.append(element);
         }
     }
 

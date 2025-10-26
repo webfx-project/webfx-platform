@@ -2,10 +2,12 @@ package elemental2.webstorage;
 
 import elemental2.dom.Window;
 import org.teavm.jso.JSBody;
+import org.teavm.jso.JSClass;
 
 /**
  * @author Bruno Salmon
  */
+@JSClass
 public abstract class WebStorageWindow extends Window {
 
     public Storage localStorage;

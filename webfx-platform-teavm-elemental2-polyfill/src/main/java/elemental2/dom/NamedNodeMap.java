@@ -1,10 +1,12 @@
 package elemental2.dom;
 
 import jsinterop.base.JsPropertyMap;
+import org.teavm.jso.JSClass;
 
 /**
  * @author Bruno Salmon
  */
+@JSClass
 public class NamedNodeMap<T> implements JsIterable<T>, JsArrayLike<T>, JsPropertyMap<T> {
     public int length;
 

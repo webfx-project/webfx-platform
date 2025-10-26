@@ -2,25 +2,33 @@ package elemental2.dom;
 
 import org.teavm.jso.JSBody;
 import org.teavm.jso.JSObject;
+import org.teavm.jso.core.JSArray;
+import org.teavm.jso.core.JSArrayReader;
+import org.teavm.jso.core.JSString;
 
 /**
  * TeaVM polyfill for Elemental2's Console class
  */
-public interface Console extends JSObject {
+public final class Console implements JSObject {
 
-    @JSBody(params = {"messages"}, script = """
-        var n = messages.length;
-        if (n === 1) {
-            console.log($rt_ustr(messages[0]));
-        } else if (n === 0) {
-            console.log();
-        } else {
-            var args = [];
-            for (var i = 0; i < n; i++) {
-              args.push($rt_ustr(messages[i]));
+    public void log(Object... args) {
+        var jsArgs = new JSArray<JSObject>(args.length);
+        for (int i = 0; i < args.length; i++) {
+            var arg = args[i];
+            if (arg instanceof JSObject jsArg) {
+                jsArgs.set(i, jsArg);
+            } else if (args[i] instanceof String str) {
+                jsArgs.set(i, JSString.valueOf(str));
+            } else {
+                jsArgs.set(i, asJs(arg));
             }
-            console.log.apply(console, args);
-        }""")
-    void log(Object... messages);
+        }
+        logImpl(jsArgs);
+    }
 
+    @JSBody(params = "args", script = "console.log.apply(console, args);")
+    private static native void logImpl(JSArrayReader<JSObject> args);
+
+    @JSBody(params = "o", script = "return o;")
+    private static native JSObject asJs(Object o);
 }

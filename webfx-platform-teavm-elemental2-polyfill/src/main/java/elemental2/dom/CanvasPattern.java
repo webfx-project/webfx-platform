@@ -1,7 +1,11 @@
 package elemental2.dom;
 
+import org.teavm.jso.JSClass;
+import org.teavm.jso.JSObject;
+
 /**
  * @author Bruno Salmon
  */
-public class CanvasPattern {
+@JSClass
+public class CanvasPattern implements JSObject {
 }
