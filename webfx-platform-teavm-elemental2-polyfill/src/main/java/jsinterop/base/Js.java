@@ -24,7 +24,7 @@ public final class Js {
     }
 
     public static <T> T uncheckedCast(Object obj) {
-        return (T) obj;
+        return cast(obj); // (T) obj; was causing issue with the pen heat in the cube demo
     }
 
     @JSBody(params = {"obj"}, script = "return typeof obj;")
