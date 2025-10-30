@@ -2,6 +2,7 @@ package jsinterop.base;
 
 import org.teavm.jso.JSBody;
 import org.teavm.jso.JSObject;
+import org.teavm.jso.core.JSBoolean;
 import org.teavm.jso.core.JSNumber;
 import org.teavm.jso.core.JSString;
 
@@ -20,6 +21,8 @@ public final class Js {
             return (T) JSString.valueOf(s);
         if (o instanceof Number n)
             return (T) JSNumber.valueOf(n.doubleValue());
+        if (o instanceof Boolean b)
+            return (T) JSBoolean.valueOf(b);
         return (T) o;
     }
 
