@@ -65,24 +65,26 @@ public class TeaVmUtil {
         if (value == null || JSObjects.isUndefined(value))
             return null;
         // Check if it's a number and box it properly
-        if (isNumber(value)) {
-            return jsCastToDouble(value);
-        }
-        return jsCastToObject(value);
+        return switch (JSObjects.typeOf(value)) {
+            case "number" -> jsCastToDouble(value);
+            case "boolean" -> jsCastToBoolean(value);
+            case "string" -> jsCastToString(value);
+            default -> jsCastToObject(value);
+        };
     }
 
-    public static <T> T javaToJs(Object o) {
-        if (o == null)
+    public static <T> T javaToJs(Object value) {
+        if (value == null || JSObjects.isUndefined(value))
             return null;
-        if (o instanceof JSObject)
-            return (T) o;
-        if (o instanceof String s)
+        if (value instanceof JSObject)
+            return (T) value;
+        if (value instanceof String s)
             return (T) JSString.valueOf(s);
-        if (o instanceof Number n)
+        if (value instanceof Number n)
             return (T) JSNumber.valueOf(n.doubleValue());
-        if (o instanceof Boolean b)
+        if (value instanceof Boolean b)
             return (T) JSBoolean.valueOf(b);
-        return (T) o;
+        return (T) value;
     }
 
     private static JSObject getLastJSObject(JSObject obj, String... props) {
@@ -123,6 +125,9 @@ public class TeaVmUtil {
 
     @JSBody(params = { "value" }, script = "return value;")
     private static native double jsCastToDouble(JSObject value);
+
+    @JSBody(params = { "value" }, script = "return value;")
+    private static native String jsCastToString(JSObject value);
 
     @JSBody(params = { "value" }, script = "return value;")
     private static native Object jsCastToObject(JSObject value);
