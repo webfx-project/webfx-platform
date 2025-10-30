@@ -2,7 +2,10 @@ package dev.webfx.platform.util.teavm;
 
 import org.teavm.jso.JSBody;
 import org.teavm.jso.JSObject;
+import org.teavm.jso.core.JSBoolean;
+import org.teavm.jso.core.JSNumber;
 import org.teavm.jso.core.JSObjects;
+import org.teavm.jso.core.JSString;
 
 /**
  * @author Bruno Salmon
@@ -68,12 +71,18 @@ public class TeaVmUtil {
         return jsCastToObject(value);
     }
 
-    public static Object javaToJs(Object value) {
-        if (value == null)
+    public static <T> T javaToJs(Object o) {
+        if (o == null)
             return null;
-        if (value instanceof Number n)
-            return n.doubleValue();
-        return value;
+        if (o instanceof JSObject)
+            return (T) o;
+        if (o instanceof String s)
+            return (T) JSString.valueOf(s);
+        if (o instanceof Number n)
+            return (T) JSNumber.valueOf(n.doubleValue());
+        if (o instanceof Boolean b)
+            return (T) JSBoolean.valueOf(b);
+        return (T) o;
     }
 
     private static JSObject getLastJSObject(JSObject obj, String... props) {
@@ -93,7 +102,7 @@ public class TeaVmUtil {
         // Cast JSObject to boolean using a simple JS body that returns the value as-is
         return jsCastToBoolean(value);
     }
-    
+
     @JSBody(params = { "value" }, script = "return value;")
     private static native boolean jsCastToBoolean(JSObject value);
 
