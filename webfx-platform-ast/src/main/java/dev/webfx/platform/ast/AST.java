@@ -110,6 +110,38 @@ public final class AST {
         return getParserProvider(format).parseNode(text);
     }
 
+    public static ReadOnlyAstObject parseObjectSilently(String text, String format) {
+        try {
+            return parseObject(text, format);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public static <T> T parseAnySilently(String text, String format) {
+        try {
+            return parseAny(text, format);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public static ReadOnlyAstArray parseArraySilently(String text, String format) {
+        try {
+            return parseArray(text, format);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public static ReadOnlyAstNode parseNodeSilently(String text, String format) {
+        try {
+            return parseNode(text, format);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     /*==================================================================================================================
      *=============================================== Format methods ===================================================
      *================================================================================================================*/
