@@ -1,9 +1,7 @@
 package jsinterop.base;
 
+import dev.webfx.platform.util.teavm.TeaVmUtil;
 import org.teavm.jso.JSBody;
-import org.teavm.jso.JSObject;
-import org.teavm.jso.core.JSNumber;
-import org.teavm.jso.core.JSString;
 
 /**
  * @author Bruno Salmon
@@ -13,18 +11,12 @@ public final class Js {
     @JSBody(params = {"obj"}, script = "return obj;")
     public static native JsPropertyMap<Object> asPropertyMap(Object obj);
 
-    public static <T> T cast(Object o) {
-        if (o instanceof JSObject)
-            return (T) o;
-        if (o instanceof String s)
-            return (T) JSString.valueOf(s);
-        if (o instanceof Number n)
-            return (T) JSNumber.valueOf(n.doubleValue());
-        return (T) o;
+    public static <T> T cast(Object obj) {
+        return (T) TeaVmUtil.javaToJs(obj);
     }
 
     public static <T> T uncheckedCast(Object obj) {
-        return (T) obj;
+        return cast(obj);
     }
 
     @JSBody(params = {"obj"}, script = "return typeof obj;")
