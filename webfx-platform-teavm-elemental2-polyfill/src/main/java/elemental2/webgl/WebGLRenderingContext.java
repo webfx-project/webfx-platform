@@ -65,492 +65,250 @@ public class WebGLRenderingContext implements JSObject {
     public static int DEPTH_BUFFER_BIT;
     public static int DEPTH_CLEAR_VALUE;
     public static int DEPTH_COMPONENT;
-
     public static int DEPTH_COMPONENT16;
-
     public static int DEPTH_FUNC;
-
     public static int DEPTH_RANGE;
-
     public static int DEPTH_STENCIL;
-
     public static int DEPTH_STENCIL_ATTACHMENT;
-
     public static int DEPTH_TEST;
-
     public static int DEPTH_WRITEMASK;
-
     public static int DITHER;
-
     public static int DONT_CARE;
-
     public static int DST_ALPHA;
-
     public static int DST_COLOR;
-
     public static int DYNAMIC_DRAW;
-
     public static int ELEMENT_ARRAY_BUFFER;
-
     public static int ELEMENT_ARRAY_BUFFER_BINDING;
-
     public static int EQUAL;
-
     public static int FASTEST;
-
     public static int FLOAT;
-
     public static int FLOAT_MAT2;
-
     public static int FLOAT_MAT3;
-
     public static int FLOAT_MAT4;
-
     public static int FLOAT_VEC2;
-
     public static int FLOAT_VEC3;
-
     public static int FLOAT_VEC4;
-
     public static int FRAGMENT_SHADER;
-
     public static int FRAMEBUFFER;
-
     public static int FRAMEBUFFER_ATTACHMENT_OBJECT_NAME;
-
     public static int FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE;
-
     public static int FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE;
-
     public static int FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL;
-
     public static int FRAMEBUFFER_BINDING;
-
     public static int FRAMEBUFFER_COMPLETE;
-
     public static int FRAMEBUFFER_INCOMPLETE_ATTACHMENT;
-
     public static int FRAMEBUFFER_INCOMPLETE_DIMENSIONS;
-
     public static int FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT;
-
     public static int FRAMEBUFFER_UNSUPPORTED;
-
     public static int FRONT;
-
     public static int FRONT_AND_BACK;
-
     public static int FRONT_FACE;
-
     public static int FUNC_ADD;
-
     public static int FUNC_REVERSE_SUBTRACT;
-
     public static int FUNC_SUBTRACT;
-
     public static int GENERATE_MIPMAP_HINT;
-
     public static int GEQUAL;
-
     public static int GREATER;
-
     public static int GREEN_BITS;
-
     public static int HIGH_FLOAT;
-
     public static int HIGH_INT;
-
     public static int IMPLEMENTATION_COLOR_READ_FORMAT;
-
     public static int IMPLEMENTATION_COLOR_READ_TYPE;
-
     public static int INCR;
-
     public static int INCR_WRAP;
-
     public static int INT;
-
     public static int INT_VEC2;
-
     public static int INT_VEC3;
-
     public static int INT_VEC4;
-
     public static int INVALID_ENUM;
-
     public static int INVALID_FRAMEBUFFER_OPERATION;
-
     public static int INVALID_OPERATION;
-
     public static int INVALID_VALUE;
-
     public static int INVERT;
-
     public static int KEEP;
-
     public static int LEQUAL;
-
     public static int LESS;
-
     public static int LINEAR;
-
     public static int LINEAR_MIPMAP_LINEAR;
-
     public static int LINEAR_MIPMAP_NEAREST;
-
     public static int LINES;
-
     public static int LINE_LOOP;
-
     public static int LINE_STRIP;
-
     public static int LINE_WIDTH;
-
     public static int LINK_STATUS;
-
     public static int LOW_FLOAT;
-
     public static int LOW_INT;
-
     public static int LUMINANCE;
-
     public static int LUMINANCE_ALPHA;
-
     public static int MAX_COMBINED_TEXTURE_IMAGE_UNITS;
-
     public static int MAX_CUBE_MAP_TEXTURE_SIZE;
-
     public static int MAX_FRAGMENT_UNIFORM_VECTORS;
-
     public static int MAX_RENDERBUFFER_SIZE;
-
     public static int MAX_TEXTURE_IMAGE_UNITS;
-
     public static int MAX_TEXTURE_SIZE;
-
     public static int MAX_VARYING_VECTORS;
-
     public static int MAX_VERTEX_ATTRIBS;
-
     public static int MAX_VERTEX_TEXTURE_IMAGE_UNITS;
-
     public static int MAX_VERTEX_UNIFORM_VECTORS;
-
     public static int MAX_VIEWPORT_DIMS;
-
     public static int MEDIUM_FLOAT;
-
     public static int MEDIUM_INT;
-
     public static int MIRRORED_REPEAT;
-
     public static int NEAREST;
-
     public static int NEAREST_MIPMAP_LINEAR;
-
     public static int NEAREST_MIPMAP_NEAREST;
-
     public static int NEVER;
-
     public static int NICEST;
-
     public static int NONE;
-
     public static int NOTEQUAL;
-
     public static int NO_ERROR;
-
     public static int ONE;
-
     public static int ONE_MINUS_CONSTANT_ALPHA;
-
     public static int ONE_MINUS_CONSTANT_COLOR;
-
     public static int ONE_MINUS_DST_ALPHA;
-
     public static int ONE_MINUS_DST_COLOR;
-
     public static int ONE_MINUS_SRC_ALPHA;
-
     public static int ONE_MINUS_SRC_COLOR;
-
     public static int OUT_OF_MEMORY;
-
     public static int PACK_ALIGNMENT;
-
     public static int POINTS;
-
     public static int POLYGON_OFFSET_FACTOR;
-
     public static int POLYGON_OFFSET_FILL;
-
     public static int POLYGON_OFFSET_UNITS;
-
     public static int RED_BITS;
-
     public static int RENDERBUFFER;
-
     public static int RENDERBUFFER_ALPHA_SIZE;
-
     public static int RENDERBUFFER_BINDING;
-
     public static int RENDERBUFFER_BLUE_SIZE;
-
     public static int RENDERBUFFER_DEPTH_SIZE;
-
     public static int RENDERBUFFER_GREEN_SIZE;
-
     public static int RENDERBUFFER_HEIGHT;
-
     public static int RENDERBUFFER_INTERNAL_FORMAT;
-
     public static int RENDERBUFFER_RED_SIZE;
-
     public static int RENDERBUFFER_STENCIL_SIZE;
-
     public static int RENDERBUFFER_WIDTH;
-
     public static int RENDERER;
-
     public static int REPEAT;
-
     public static int REPLACE;
-
     public static int RGB;
-
     public static int RGB565;
-
     public static int RGB5_A1;
-
     public static int RGBA;
-
     public static int RGBA4;
-
     public static int SAMPLER_2D;
-
     public static int SAMPLER_CUBE;
-
     public static int SAMPLES;
-
     public static int SAMPLE_ALPHA_TO_COVERAGE;
-
     public static int SAMPLE_BUFFERS;
-
     public static int SAMPLE_COVERAGE;
-
     public static int SAMPLE_COVERAGE_INVERT;
-
     public static int SAMPLE_COVERAGE_VALUE;
-
     public static int SCISSOR_BOX;
-
     public static int SCISSOR_TEST;
-
     public static int SHADER_TYPE;
-
     public static int SHADING_LANGUAGE_VERSION;
-
     public static int SHORT;
-
     public static int SRC_ALPHA;
-
     public static int SRC_ALPHA_SATURATE;
-
     public static int SRC_COLOR;
-
     public static int STATIC_DRAW;
-
     public static int STENCIL_ATTACHMENT;
-
     public static int STENCIL_BACK_FAIL;
-
     public static int STENCIL_BACK_FUNC;
-
     public static int STENCIL_BACK_PASS_DEPTH_FAIL;
-
     public static int STENCIL_BACK_PASS_DEPTH_PASS;
-
     public static int STENCIL_BACK_REF;
-
     public static int STENCIL_BACK_VALUE_MASK;
-
     public static int STENCIL_BACK_WRITEMASK;
-
     public static int STENCIL_BITS;
-
     public static int STENCIL_BUFFER_BIT;
-
     public static int STENCIL_CLEAR_VALUE;
-
     public static int STENCIL_FAIL;
-
     public static int STENCIL_FUNC;
-
     public static double STENCIL_INDEX;
-
     public static int STENCIL_INDEX8;
-
     public static int STENCIL_PASS_DEPTH_FAIL;
-
     public static int STENCIL_PASS_DEPTH_PASS;
-
     public static int STENCIL_REF;
-
     public static int STENCIL_TEST;
-
     public static int STENCIL_VALUE_MASK;
-
     public static int STENCIL_WRITEMASK;
-
     public static int STREAM_DRAW;
-
     public static int SUBPIXEL_BITS;
-
     public static int TEXTURE;
-
     public static int TEXTURE0;
-
     public static int TEXTURE1;
-
     public static int TEXTURE10;
-
     public static int TEXTURE11;
-
     public static int TEXTURE12;
-
     public static int TEXTURE13;
-
     public static int TEXTURE14;
-
     public static int TEXTURE15;
-
     public static int TEXTURE16;
-
     public static int TEXTURE17;
-
     public static int TEXTURE18;
-
     public static int TEXTURE19;
-
     public static int TEXTURE2;
-
     public static int TEXTURE20;
-
     public static int TEXTURE21;
-
     public static int TEXTURE22;
-
     public static int TEXTURE23;
-
     public static int TEXTURE24;
-
     public static int TEXTURE25;
-
     public static int TEXTURE26;
-
     public static int TEXTURE27;
-
     public static int TEXTURE28;
-
     public static int TEXTURE29;
-
     public static int TEXTURE3;
-
     public static int TEXTURE30;
-
     public static int TEXTURE31;
-
     public static int TEXTURE4;
-
     public static int TEXTURE5;
-
     public static int TEXTURE6;
-
     public static int TEXTURE7;
-
     public static int TEXTURE8;
-
     public static int TEXTURE9;
-
     public static int TEXTURE_2D;
-
     public static int TEXTURE_BINDING_2D;
-
     public static int TEXTURE_BINDING_CUBE_MAP;
-
     public static int TEXTURE_CUBE_MAP;
-
     public static int TEXTURE_CUBE_MAP_NEGATIVE_X;
-
     public static int TEXTURE_CUBE_MAP_NEGATIVE_Y;
-
     public static int TEXTURE_CUBE_MAP_NEGATIVE_Z;
-
     public static int TEXTURE_CUBE_MAP_POSITIVE_X;
-
     public static int TEXTURE_CUBE_MAP_POSITIVE_Y;
-
     public static int TEXTURE_CUBE_MAP_POSITIVE_Z;
-
     public static int TEXTURE_MAG_FILTER;
-
     public static int TEXTURE_MIN_FILTER;
-
     public static int TEXTURE_WRAP_S;
-
     public static int TEXTURE_WRAP_T;
-
     public static int TRIANGLES;
-
     public static int TRIANGLE_FAN;
-
     public static int TRIANGLE_STRIP;
-
     public static int UNPACK_ALIGNMENT;
-
     public static int UNPACK_COLORSPACE_CONVERSION_WEBGL;
-
     public static int UNPACK_FLIP_Y_WEBGL;
-
     public static int UNPACK_PREMULTIPLY_ALPHA_WEBGL;
-
     public static int UNSIGNED_BYTE;
-
     public static int UNSIGNED_INT;
-
     public static int UNSIGNED_SHORT;
-
     public static int UNSIGNED_SHORT_4_4_4_4;
-
     public static int UNSIGNED_SHORT_5_5_5_1;
-
     public static int UNSIGNED_SHORT_5_6_5;
-
     public static int VALIDATE_STATUS;
-
     public static int VENDOR;
-
     public static int VERSION;
-
     public static int VERTEX_ATTRIB_ARRAY_BUFFER_BINDING;
-
     public static int VERTEX_ATTRIB_ARRAY_ENABLED;
-
     public static int VERTEX_ATTRIB_ARRAY_NORMALIZED;
-
     public static int VERTEX_ATTRIB_ARRAY_POINTER;
-
     public static int VERTEX_ATTRIB_ARRAY_SIZE;
-
     public static int VERTEX_ATTRIB_ARRAY_STRIDE;
-
     public static int VERTEX_ATTRIB_ARRAY_TYPE;
-
     public static int VERTEX_SHADER;
-
     public static int VIEWPORT;
-
     public static int ZERO;
+
     public HTMLCanvasElement canvas;
     public int drawingBufferHeight;
     public int drawingBufferWidth;
@@ -2073,937 +1831,183 @@ public class WebGLRenderingContext implements JSObject {
         ZERO = WebGLRenderingContext__Constants.ZERO;
     }*/
 
-        public interface BufferDataDataUnionType extends JSObject {
-        //@JsOverlay
+    public interface BufferDataDataUnionType extends JSObject {
         static BufferDataDataUnionType of(Object o) {
-            return (BufferDataDataUnionType)Js.cast(o);
+            return Js.cast(o);
         }
-
-        //@JsOverlay
-        default ArrayBuffer asArrayBuffer() {
-            return (ArrayBuffer)Js.cast(this);
-        }
-
-        //@JsOverlay
-        default ArrayBufferView asArrayBufferView() {
-            return (ArrayBufferView)Js.cast(this);
-        }
-
-        //@JsOverlay
-        /*default double asDouble() {
-            return Js.asDouble(this);
-        }*/
-
-        //@JsOverlay
-        default boolean isArrayBuffer() {
-            return this instanceof ArrayBuffer;
-        }
-
-        //@JsOverlay
-        default boolean isArrayBufferView() {
-            return this instanceof ArrayBufferView;
-        }
-
-        //@JsOverlay
-        /*default boolean isDouble() {
-            return this instanceof Double;
-        }*/
     }
 
     public interface BufferSubDataDataUnionType extends JSObject {
-        //@JsOverlay
         static BufferSubDataDataUnionType of(Object o) {
-            return (BufferSubDataDataUnionType)Js.cast(o);
-        }
-
-        //@JsOverlay
-        default ArrayBuffer asArrayBuffer() {
-            return (ArrayBuffer)Js.cast(this);
-        }
-
-        //@JsOverlay
-        default ArrayBufferView asArrayBufferView() {
-            return (ArrayBufferView)Js.cast(this);
-        }
-
-        //@JsOverlay
-        default boolean isArrayBuffer() {
-            return this instanceof ArrayBuffer;
-        }
-
-        //@JsOverlay
-        default boolean isArrayBufferView() {
-            return this instanceof ArrayBufferView;
+            return Js.cast(o);
         }
     }
 
     public interface PixelStoreiParamUnionType extends JSObject {
-        //@JsOverlay
         static PixelStoreiParamUnionType of(Object o) {
-            return (PixelStoreiParamUnionType)Js.cast(o);
+            return Js.cast(o);
         }
-
-        //@JsOverlay
-        /*default boolean asBoolean() {
-            return Js.asBoolean(this);
-        }
-
-        //@JsOverlay
-        default int asInt() {
-            return Js.asInt(this);
-        }
-
-        //@JsOverlay
-        default boolean isBoolean() {
-            return this instanceof Boolean;
-        }
-
-        //@JsOverlay
-        default boolean isInt() {
-            return this instanceof Double;
-        }*/
     }
 
     public interface TexImage2DImgUnionType extends JSObject {
-        //@JsOverlay
         static TexImage2DImgUnionType of(Object o) {
-            return (TexImage2DImgUnionType)Js.cast(o);
-        }
-
-        //@JsOverlay
-        default HTMLCanvasElement asHTMLCanvasElement() {
-            return (HTMLCanvasElement)Js.cast(this);
-        }
-
-        //@JsOverlay
-        default HTMLImageElement asHTMLImageElement() {
-            return (HTMLImageElement)Js.cast(this);
-        }
-
-        //@JsOverlay
-        default HTMLVideoElement asHTMLVideoElement() {
-            return (HTMLVideoElement)Js.cast(this);
-        }
-
-        //@JsOverlay
-        default ImageBitmap asImageBitmap() {
-            return (ImageBitmap)Js.cast(this);
-        }
-
-        //@JsOverlay
-        default ImageData asImageData() {
-            return (ImageData)Js.cast(this);
-        }
-
-        //@JsOverlay
-        /*default int asInt() {
-            return Js.asInt(this);
-        }*/
-
-        //@JsOverlay
-        default OffscreenCanvas asOffscreenCanvas() {
-            return (OffscreenCanvas)Js.cast(this);
-        }
-
-        //@JsOverlay
-        default boolean isHTMLCanvasElement() {
-            return this instanceof HTMLCanvasElement;
-        }
-
-        //@JsOverlay
-        default boolean isHTMLImageElement() {
-            return this instanceof HTMLImageElement;
-        }
-
-        //@JsOverlay
-        default boolean isHTMLVideoElement() {
-            return this instanceof HTMLVideoElement;
-        }
-
-        //@JsOverlay
-        default boolean isImageData() {
-            return this instanceof ImageData;
-        }
-
-        //@JsOverlay
-        /*default boolean isInt() {
-            return this instanceof Double;
-        }*/
-
-        //@JsOverlay
-        default boolean isOffscreenCanvas() {
-            return this instanceof OffscreenCanvas;
+            return Js.cast(o);
         }
     }
 
-        public interface TexSubImage2DDataUnionType extends JSObject {
-        //@JsOverlay
+    public interface TexSubImage2DDataUnionType extends JSObject {
         static TexSubImage2DDataUnionType of(Object o) {
-            return (TexSubImage2DDataUnionType)Js.cast(o);
-        }
-
-        //@JsOverlay
-/*
-        default double asDouble() {
-            return Js.asDouble(this);
-        }
-*/
-
-        //@JsOverlay
-        default HTMLCanvasElement asHTMLCanvasElement() {
-            return (HTMLCanvasElement)Js.cast(this);
-        }
-
-        //@JsOverlay
-        default HTMLImageElement asHTMLImageElement() {
-            return (HTMLImageElement)Js.cast(this);
-        }
-
-        //@JsOverlay
-        default HTMLVideoElement asHTMLVideoElement() {
-            return (HTMLVideoElement)Js.cast(this);
-        }
-
-        //@JsOverlay
-        default ImageBitmap asImageBitmap() {
-            return (ImageBitmap)Js.cast(this);
-        }
-
-        //@JsOverlay
-        default ImageData asImageData() {
-            return (ImageData)Js.cast(this);
-        }
-
-        //@JsOverlay
-        default OffscreenCanvas asOffscreenCanvas() {
-            return (OffscreenCanvas)Js.cast(this);
-        }
-
-        //@JsOverlay
-/*
-        default boolean isDouble() {
-            return this instanceof Double;
-        }
-*/
-
-        //@JsOverlay
-        default boolean isHTMLCanvasElement() {
-            return this instanceof HTMLCanvasElement;
-        }
-
-        //@JsOverlay
-        default boolean isHTMLImageElement() {
-            return this instanceof HTMLImageElement;
-        }
-
-        //@JsOverlay
-        default boolean isHTMLVideoElement() {
-            return this instanceof HTMLVideoElement;
-        }
-
-        //@JsOverlay
-        default boolean isImageData() {
-            return this instanceof ImageData;
-        }
-
-        //@JsOverlay
-        default boolean isOffscreenCanvas() {
-            return this instanceof OffscreenCanvas;
+            return Js.cast(o);
         }
     }
 
     public interface Uniform1fvValueUnionType extends JSObject {
-        //@JsOverlay
         static Uniform1fvValueUnionType of(Object o) {
-            return (Uniform1fvValueUnionType)Js.cast(o);
-        }
-
-        //@JsOverlay
-        default Float32Array asFloat32Array() {
-            return (Float32Array)Js.cast(this);
-        }
-
-        //@JsOverlay
-        default JsArray<Double> asJsArray() {
-            return (JsArray)Js.cast(this);
-        }
-
-        //@JsOverlay
-        default boolean isFloat32Array() {
-            return this instanceof Float32Array;
-        }
-
-        //@JsOverlay
-        default boolean isJsArray() {
-            return this instanceof JsArray;
+            return Js.cast(o);
         }
     }
 
     public interface Uniform1iValueUnionType extends JSObject {
-        //@JsOverlay
         static Uniform1iValueUnionType of(Object o) {
-            return (Uniform1iValueUnionType)Js.cast(o);
+            return Js.cast(o);
         }
-
-        //@JsOverlay
-/*
-        default boolean asBoolean() {
-            return Js.asBoolean(this);
-        }
-
-        //@JsOverlay
-        default int asInt() {
-            return Js.asInt(this);
-        }
-
-        //@JsOverlay
-        default boolean isBoolean() {
-            return this instanceof Boolean;
-        }
-
-        //@JsOverlay
-        default boolean isInt() {
-            return this instanceof Double;
-        }
-*/
     }
 
     public interface Uniform1ivValueUnionType extends JSObject {
-        //@JsOverlay
         static Uniform1ivValueUnionType of(Object o) {
-            return (Uniform1ivValueUnionType)Js.cast(o);
-        }
-
-        //@JsOverlay
-        default Int32Array asInt32Array() {
-            return (Int32Array)Js.cast(this);
-        }
-
-        //@JsOverlay
-        default JsArray<Object> asJsArray() {
-            return (JsArray)Js.cast(this);
-        }
-
-        //@JsOverlay
-        default boolean isInt32Array() {
-            return this instanceof Int32Array;
-        }
-
-        //@JsOverlay
-        default boolean isJsArray() {
-            return this instanceof JsArray;
+            return Js.cast(o);
         }
     }
 
     public interface Uniform2fvValueUnionType extends JSObject {
-        //@JsOverlay
         static Uniform2fvValueUnionType of(Object o) {
-            return (Uniform2fvValueUnionType)Js.cast(o);
-        }
-
-        //@JsOverlay
-        default Float32Array asFloat32Array() {
-            return (Float32Array)Js.cast(this);
-        }
-
-        //@JsOverlay
-        default JsArray<Double> asJsArray() {
-            return (JsArray)Js.cast(this);
-        }
-
-        //@JsOverlay
-        default boolean isFloat32Array() {
-            return this instanceof Float32Array;
-        }
-
-        //@JsOverlay
-        default boolean isJsArray() {
-            return this instanceof JsArray;
+            return Js.cast(o);
         }
     }
 
     public interface Uniform2iValue1UnionType extends JSObject {
-        //@JsOverlay
         static Uniform2iValue1UnionType of(Object o) {
-            return (Uniform2iValue1UnionType)Js.cast(o);
+            return Js.cast(o);
         }
-
-        //@JsOverlay
-/*
-        default boolean asBoolean() {
-            return Js.asBoolean(this);
-        }
-
-        //@JsOverlay
-        default int asInt() {
-            return Js.asInt(this);
-        }
-
-        //@JsOverlay
-        default boolean isBoolean() {
-            return this instanceof Boolean;
-        }
-
-        //@JsOverlay
-        default boolean isInt() {
-            return this instanceof Double;
-        }
-*/
     }
 
     public interface Uniform2iValue2UnionType extends JSObject {
-        //@JsOverlay
         static Uniform2iValue2UnionType of(Object o) {
-            return (Uniform2iValue2UnionType)Js.cast(o);
+            return Js.cast(o);
         }
-
-        //@JsOverlay
-/*
-        default boolean asBoolean() {
-            return Js.asBoolean(this);
-        }
-
-        //@JsOverlay
-        default int asInt() {
-            return Js.asInt(this);
-        }
-
-        //@JsOverlay
-        default boolean isBoolean() {
-            return this instanceof Boolean;
-        }
-
-        //@JsOverlay
-        default boolean isInt() {
-            return this instanceof Double;
-        }
-*/
     }
 
     public interface Uniform2ivValueUnionType extends JSObject {
-        //@JsOverlay
         static Uniform2ivValueUnionType of(Object o) {
-            return (Uniform2ivValueUnionType)Js.cast(o);
-        }
-
-        //@JsOverlay
-        default Int32Array asInt32Array() {
-            return (Int32Array)Js.cast(this);
-        }
-
-        //@JsOverlay
-        default JsArray<Object> asJsArray() {
-            return (JsArray)Js.cast(this);
-        }
-
-        //@JsOverlay
-        default boolean isInt32Array() {
-            return this instanceof Int32Array;
-        }
-
-        //@JsOverlay
-        default boolean isJsArray() {
-            return this instanceof JsArray;
+            return Js.cast(o);
         }
     }
 
     public interface Uniform3fvValueUnionType extends JSObject {
-        //@JsOverlay
         static Uniform3fvValueUnionType of(Object o) {
-            return (Uniform3fvValueUnionType)Js.cast(o);
-        }
-
-        //@JsOverlay
-        default Float32Array asFloat32Array() {
-            return (Float32Array)Js.cast(this);
-        }
-
-        //@JsOverlay
-        default JsArray<Double> asJsArray() {
-            return (JsArray)Js.cast(this);
-        }
-
-        //@JsOverlay
-        default boolean isFloat32Array() {
-            return this instanceof Float32Array;
-        }
-
-        //@JsOverlay
-        default boolean isJsArray() {
-            return this instanceof JsArray;
+            return Js.cast(o);
         }
     }
 
     public interface Uniform3iValue1UnionType {
-        //@JsOverlay
         static Uniform3iValue1UnionType of(Object o) {
-            return (Uniform3iValue1UnionType)Js.cast(o);
+            return Js.cast(o);
         }
-
-        //@JsOverlay
-/*
-        default boolean asBoolean() {
-            return Js.asBoolean(this);
-        }
-
-        //@JsOverlay
-        default int asInt() {
-            return Js.asInt(this);
-        }
-
-        //@JsOverlay
-        default boolean isBoolean() {
-            return this instanceof Boolean;
-        }
-
-        //@JsOverlay
-        default boolean isInt() {
-            return this instanceof Double;
-        }
-*/
     }
 
     public interface Uniform3iValue2UnionType extends JSObject {
-        //@JsOverlay
         static Uniform3iValue2UnionType of(Object o) {
-            return (Uniform3iValue2UnionType)Js.cast(o);
+            return Js.cast(o);
         }
-
-/*
-        //@JsOverlay
-        default boolean asBoolean() {
-            return Js.asBoolean(this);
-        }
-
-        //@JsOverlay
-        default int asInt() {
-            return Js.asInt(this);
-        }
-
-        //@JsOverlay
-        default boolean isBoolean() {
-            return this instanceof Boolean;
-        }
-
-        //@JsOverlay
-        default boolean isInt() {
-            return this instanceof Double;
-        }
-*/
     }
 
     public interface Uniform3iValue3UnionType extends JSObject {
-        //@JsOverlay
         static Uniform3iValue3UnionType of(Object o) {
-            return (Uniform3iValue3UnionType)Js.cast(o);
+            return Js.cast(o);
         }
-
-/*
-        //@JsOverlay
-        default boolean asBoolean() {
-            return Js.asBoolean(this);
-        }
-
-        //@JsOverlay
-        default int asInt() {
-            return Js.asInt(this);
-        }
-
-        //@JsOverlay
-        default boolean isBoolean() {
-            return this instanceof Boolean;
-        }
-
-        //@JsOverlay
-        default boolean isInt() {
-            return this instanceof Double;
-        }
-*/
     }
 
     public interface Uniform3ivValueUnionType extends JSObject {
-        //@JsOverlay
         static Uniform3ivValueUnionType of(Object o) {
-            return (Uniform3ivValueUnionType)Js.cast(o);
-        }
-
-        //@JsOverlay
-        default Int32Array asInt32Array() {
-            return (Int32Array)Js.cast(this);
-        }
-
-        //@JsOverlay
-        default JsArray<Object> asJsArray() {
-            return (JsArray)Js.cast(this);
-        }
-
-        //@JsOverlay
-        default boolean isInt32Array() {
-            return this instanceof Int32Array;
-        }
-
-        //@JsOverlay
-        default boolean isJsArray() {
-            return this instanceof JsArray;
+            return Js.cast(o);
         }
     }
 
     public interface Uniform4fvValueUnionType extends JSObject {
-        //@JsOverlay
         static Uniform4fvValueUnionType of(Object o) {
-            return (Uniform4fvValueUnionType)Js.cast(o);
-        }
-
-        //@JsOverlay
-        default Float32Array asFloat32Array() {
-            return (Float32Array)Js.cast(this);
-        }
-
-        //@JsOverlay
-        default JsArray<Double> asJsArray() {
-            return (JsArray)Js.cast(this);
-        }
-
-        //@JsOverlay
-        default boolean isFloat32Array() {
-            return this instanceof Float32Array;
-        }
-
-        //@JsOverlay
-        default boolean isJsArray() {
-            return this instanceof JsArray;
+            return Js.cast(o);
         }
     }
 
     public interface Uniform4iValue1UnionType extends JSObject {
-        //@JsOverlay
         static Uniform4iValue1UnionType of(Object o) {
-            return (Uniform4iValue1UnionType)Js.cast(o);
+            return Js.cast(o);
         }
-
-        //@JsOverlay
-/*
-        default boolean asBoolean() {
-            return Js.asBoolean(this);
-        }
-
-        //@JsOverlay
-        default int asInt() {
-            return Js.asInt(this);
-        }
-
-        //@JsOverlay
-        default boolean isBoolean() {
-            return this instanceof Boolean;
-        }
-
-        //@JsOverlay
-        default boolean isInt() {
-            return this instanceof Double;
-        }
-*/
     }
 
     public interface Uniform4iValue2UnionType extends JSObject {
-        //@JsOverlay
         static Uniform4iValue2UnionType of(Object o) {
-            return (Uniform4iValue2UnionType)Js.cast(o);
+            return Js.cast(o);
         }
-
-        //@JsOverlay
-/*
-        default boolean asBoolean() {
-            return Js.asBoolean(this);
-        }
-
-        //@JsOverlay
-        default int asInt() {
-            return Js.asInt(this);
-        }
-
-        //@JsOverlay
-        default boolean isBoolean() {
-            return this instanceof Boolean;
-        }
-
-        //@JsOverlay
-        default boolean isInt() {
-            return this instanceof Double;
-        }
-*/
     }
 
     public interface Uniform4iValue3UnionType extends JSObject {
-        //@JsOverlay
         static Uniform4iValue3UnionType of(Object o) {
-            return (Uniform4iValue3UnionType)Js.cast(o);
+            return Js.cast(o);
         }
-
-/*
-        //@JsOverlay
-        default boolean asBoolean() {
-            return Js.asBoolean(this);
-        }
-
-        //@JsOverlay
-        default int asInt() {
-            return Js.asInt(this);
-        }
-
-        //@JsOverlay
-        default boolean isBoolean() {
-            return this instanceof Boolean;
-        }
-
-        //@JsOverlay
-        default boolean isInt() {
-            return this instanceof Double;
-        }
-*/
     }
 
     public interface Uniform4iValue4UnionType extends JSObject {
-        //@JsOverlay
         static Uniform4iValue4UnionType of(Object o) {
-            return (Uniform4iValue4UnionType)Js.cast(o);
+            return Js.cast(o);
         }
-
-        //@JsOverlay
-/*
-        default boolean asBoolean() {
-            return Js.asBoolean(this);
-        }
-
-        //@JsOverlay
-        default int asInt() {
-            return Js.asInt(this);
-        }
-
-        //@JsOverlay
-        default boolean isBoolean() {
-            return this instanceof Boolean;
-        }
-
-        //@JsOverlay
-        default boolean isInt() {
-            return this instanceof Double;
-        }
-*/
     }
 
     public interface Uniform4ivValueUnionType extends JSObject {
-        //@JsOverlay
         static Uniform4ivValueUnionType of(Object o) {
-            return (Uniform4ivValueUnionType)Js.cast(o);
-        }
-
-        //@JsOverlay
-        default Int32Array asInt32Array() {
-            return (Int32Array)Js.cast(this);
-        }
-
-        //@JsOverlay
-        default JsArray<Object> asJsArray() {
-            return (JsArray)Js.cast(this);
-        }
-
-        //@JsOverlay
-        default boolean isInt32Array() {
-            return this instanceof Int32Array;
-        }
-
-        //@JsOverlay
-        default boolean isJsArray() {
-            return this instanceof JsArray;
+            return Js.cast(o);
         }
     }
 
     public interface UniformMatrix2fvDataUnionType extends JSObject {
-        //@JsOverlay
         static UniformMatrix2fvDataUnionType of(Object o) {
-            return (UniformMatrix2fvDataUnionType)Js.cast(o);
-        }
-
-        //@JsOverlay
-        default Float32Array asFloat32Array() {
-            return (Float32Array)Js.cast(this);
-        }
-
-        //@JsOverlay
-        default JsArray<Double> asJsArray() {
-            return (JsArray)Js.cast(this);
-        }
-
-        //@JsOverlay
-        default boolean isFloat32Array() {
-            return this instanceof Float32Array;
-        }
-
-        //@JsOverlay
-        default boolean isJsArray() {
-            return this instanceof JsArray;
+            return Js.cast(o);
         }
     }
 
     public interface UniformMatrix3fvDataUnionType extends JSObject {
-        //@JsOverlay
         static UniformMatrix3fvDataUnionType of(Object o) {
-            return (UniformMatrix3fvDataUnionType)Js.cast(o);
-        }
-
-        //@JsOverlay
-        default Float32Array asFloat32Array() {
-            return (Float32Array)Js.cast(this);
-        }
-
-        //@JsOverlay
-        default JsArray<Double> asJsArray() {
-            return (JsArray)Js.cast(this);
-        }
-
-        //@JsOverlay
-        default boolean isFloat32Array() {
-            return this instanceof Float32Array;
-        }
-
-        //@JsOverlay
-        default boolean isJsArray() {
-            return this instanceof JsArray;
+            return Js.cast(o);
         }
     }
 
     public interface UniformMatrix4fvDataUnionType extends JSObject {
-        //@JsOverlay
         static UniformMatrix4fvDataUnionType of(Object o) {
-            return (UniformMatrix4fvDataUnionType)Js.cast(o);
-        }
-
-        //@JsOverlay
-        default Float32Array asFloat32Array() {
-            return (Float32Array)Js.cast(this);
-        }
-
-        //@JsOverlay
-        default JsArray<Double> asJsArray() {
-            return (JsArray)Js.cast(this);
-        }
-
-        //@JsOverlay
-        default boolean isFloat32Array() {
-            return this instanceof Float32Array;
-        }
-
-        //@JsOverlay
-        default boolean isJsArray() {
-            return this instanceof JsArray;
+            return Js.cast(o);
         }
     }
 
     public interface VertexAttrib1fvValuesUnionType extends JSObject {
-        //@JsOverlay
         static VertexAttrib1fvValuesUnionType of(Object o) {
-            return (VertexAttrib1fvValuesUnionType)Js.cast(o);
-        }
-
-        //@JsOverlay
-        default Float32Array asFloat32Array() {
-            return (Float32Array)Js.cast(this);
-        }
-
-        //@JsOverlay
-        default JsArray<Double> asJsArray() {
-            return (JsArray)Js.cast(this);
-        }
-
-        //@JsOverlay
-        default boolean isFloat32Array() {
-            return this instanceof Float32Array;
-        }
-
-        //@JsOverlay
-        default boolean isJsArray() {
-            return this instanceof JsArray;
+            return Js.cast(o);
         }
     }
 
     public interface VertexAttrib2fvValuesUnionType extends JSObject {
-        //@JsOverlay
         static VertexAttrib2fvValuesUnionType of(Object o) {
-            return (VertexAttrib2fvValuesUnionType)Js.cast(o);
-        }
-
-        //@JsOverlay
-        default Float32Array asFloat32Array() {
-            return (Float32Array)Js.cast(this);
-        }
-
-        //@JsOverlay
-        default JsArray<Double> asJsArray() {
-            return (JsArray)Js.cast(this);
-        }
-
-        //@JsOverlay
-        default boolean isFloat32Array() {
-            return this instanceof Float32Array;
-        }
-
-        //@JsOverlay
-        default boolean isJsArray() {
-            return this instanceof JsArray;
+            return Js.cast(o);
         }
     }
 
     public interface VertexAttrib3fvValuesUnionType extends JSObject {
-        //@JsOverlay
         static VertexAttrib3fvValuesUnionType of(Object o) {
-            return (VertexAttrib3fvValuesUnionType)Js.cast(o);
-        }
-
-        //@JsOverlay
-        default Float32Array asFloat32Array() {
-            return (Float32Array)Js.cast(this);
-        }
-
-        //@JsOverlay
-        default JsArray<Double> asJsArray() {
-            return (JsArray)Js.cast(this);
-        }
-
-        //@JsOverlay
-        default boolean isFloat32Array() {
-            return this instanceof Float32Array;
-        }
-
-        //@JsOverlay
-        default boolean isJsArray() {
-            return this instanceof JsArray;
+            return Js.cast(o);
         }
     }
 
     public interface VertexAttrib4fvValuesUnionType extends JSObject {
-        //@JsOverlay
         static VertexAttrib4fvValuesUnionType of(Object o) {
-            return (VertexAttrib4fvValuesUnionType)Js.cast(o);
-        }
-
-        //@JsOverlay
-        default Float32Array asFloat32Array() {
-            return (Float32Array)Js.cast(this);
-        }
-
-        //@JsOverlay
-        default JsArray<Double> asJsArray() {
-            return (JsArray)Js.cast(this);
-        }
-
-        //@JsOverlay
-        default boolean isFloat32Array() {
-            return this instanceof Float32Array;
-        }
-
-        //@JsOverlay
-        default boolean isJsArray() {
-            return this instanceof JsArray;
+            return Js.cast(o);
         }
     }
 }
