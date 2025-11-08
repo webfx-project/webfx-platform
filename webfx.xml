@@ -247,6 +247,12 @@
                 </exported-packages>
             </library>
 
+            <library name="teavm-jso-impl">
+                <exported-packages>
+                    <package>org.teavm.jso.impl</package>
+                </exported-packages>
+            </library>
+
             <library name="teavm-classlib">
                 <exported-packages>
                     <package>org.teavm.classlib.java.io</package>
