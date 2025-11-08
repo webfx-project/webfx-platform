@@ -196,10 +196,6 @@
         <module>webfx-platform-visibility-jre-headless</module>
         <module>webfx-platform-webassembly</module>
         <module>webfx-platform-webassembly-teavm</module>
-        <module>webfx-platform-webworker</module>
-        <module>webfx-platform-webworker-gwt-j2cl</module>
-        <module>webfx-platform-webworker-jre</module>
-        <module>webfx-platform-webworker-teavm</module>
         <module>webfx-platform-windowhistory</module>
         <module>webfx-platform-windowhistory-elemental2</module>
         <module>webfx-platform-windowhistory-jre</module>
@@ -207,6 +203,13 @@
         <module>webfx-platform-windowlocation</module>
         <module>webfx-platform-windowlocation-elemental2</module>
         <module>webfx-platform-windowlocation-jre</module>
+        <module>webfx-platform-worker</module>
+        <module>webfx-platform-worker-mainthread</module>
+        <module>webfx-platform-worker-mainthread-elemental2</module>
+        <module>webfx-platform-worker-mainthread-jre</module>
+        <module>webfx-platform-worker-workerthread</module>
+        <module>webfx-platform-worker-workerthread-jre</module>
+        <module>webfx-platform-worker-workerthread-teavm</module>
     </modules>
 
 </project>
