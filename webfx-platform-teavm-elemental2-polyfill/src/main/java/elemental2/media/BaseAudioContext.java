@@ -4,6 +4,8 @@ import elemental2.core.ArrayBuffer;
 import elemental2.dom.EventTarget;
 import elemental2.promise.Promise;
 import org.teavm.jso.JSClass;
+import org.teavm.jso.JSMethod;
+import org.teavm.jso.core.JSUndefined;
 
 /**
  * @author Bruno Salmon
@@ -19,7 +21,12 @@ public abstract class BaseAudioContext implements EventTarget {
 
     public native AnalyserNode createAnalyser();
 
-    public native Promise<Void> resume();
+    public Promise<Void> resume() {
+        return resumeImpl().then(ignored -> null);
+    }
+
+    @JSMethod("resume")
+    public native Promise<JSUndefined> resumeImpl();
 
     public native Promise<AudioBuffer> decodeAudioData(ArrayBuffer audioData);
 

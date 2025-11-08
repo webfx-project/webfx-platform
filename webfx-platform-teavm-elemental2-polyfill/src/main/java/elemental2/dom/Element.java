@@ -4,7 +4,9 @@ import elemental2.promise.Promise;
 import jsinterop.base.Js;
 import org.teavm.jso.JSClass;
 import org.teavm.jso.JSFunctor;
+import org.teavm.jso.JSMethod;
 import org.teavm.jso.JSObject;
+import org.teavm.jso.core.JSUndefined;
 
 /**
  * @author Bruno Salmon
@@ -26,7 +28,12 @@ public abstract class Element extends Node {
 
     public native DOMRect getBoundingClientRect();
 
-    public native Promise<Void> requestFullscreen();
+    public Promise<Void> requestFullscreen() {
+        return requestFullscreenImpl().then(jsUndefined -> null);
+    }
+
+    @JSMethod("requestFullscreen")
+    public native Promise<JSUndefined> requestFullscreenImpl();
 
     public final void scrollIntoView(ScrollIntoViewOptions top) {
         scrollIntoView(Js.<Element.ScrollIntoViewTopUnionType>uncheckedCast(top));

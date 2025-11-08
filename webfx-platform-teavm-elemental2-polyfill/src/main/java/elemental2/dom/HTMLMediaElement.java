@@ -3,7 +3,9 @@ package elemental2.dom;
 import elemental2.promise.Promise;
 import org.teavm.jso.JSClass;
 import org.teavm.jso.JSFunctor;
+import org.teavm.jso.JSMethod;
 import org.teavm.jso.JSObject;
+import org.teavm.jso.core.JSUndefined;
 
 /**
  * @author Bruno Salmon
@@ -61,6 +63,11 @@ public abstract class HTMLMediaElement extends HTMLElement {
 
     public native void pause();
 
-    public native Promise<Void> play();
+    public final Promise<Void> play() {
+        return playImpl().then(jsUndefined -> null);
+    }
+
+    @JSMethod("play")
+    public native Promise<JSUndefined> playImpl();
 
 }
