@@ -61,21 +61,30 @@ public class VertxAstFactoryProvider implements NativeAstFactoryProvider {
 
     @Override
     public AstObject nativeToAstObject(Object nativeObject) {
-        if (nativeObject instanceof JsonObject)
-            return new VertxAstObject((JsonObject) nativeObject);
-        if (nativeObject instanceof Map)
-            return new VertxAstObject((Map) nativeObject);
+        if (nativeObject == null)
+            return null;
+        if (nativeObject instanceof JsonObject vertxJsonObject)
+            return new VertxAstObject(vertxJsonObject);
+        if (nativeObject instanceof Map<?, ?> map)
+            return new VertxAstObject(map);
+        if (nativeObject instanceof AstObject astObject)
+            return astObject;
+        // Possible ClassCastException, especially with AST.createReadOnlySingleKeyAstObject() or other methods returning
+        // a ReadOnlyAstObject. TODO: provide nativeToReadOnlyAstObject() method to avoid this
         return (AstObject) nativeObject;
     }
 
     @Override
     public AstArray nativeToAstArray(Object nativeArray) {
-        if (nativeArray instanceof AstArray)
-            return (AstArray) nativeArray;
-        if (nativeArray instanceof JsonArray)
-            return new VertxAstArray((JsonArray) nativeArray);
-        if (nativeArray instanceof List)
-            return new VertxAstArray((List) nativeArray);
+        if (nativeArray == null)
+            return null;
+        if (nativeArray instanceof JsonArray vertxJsonArray)
+            return new VertxAstArray(vertxJsonArray);
+        if (nativeArray instanceof List list)
+            return new VertxAstArray(list);
+        if (nativeArray instanceof AstArray astArray)
+            return astArray;
+        // TODO: provide nativeToReadOnlyAstArray() method to avoid this
         return (AstArray) nativeArray; // will throw a ClassCast exception
     }
 
