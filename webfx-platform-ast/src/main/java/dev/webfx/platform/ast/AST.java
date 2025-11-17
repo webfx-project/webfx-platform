@@ -126,6 +126,38 @@ public final class AST {
         return getParserProvider(format).parseNode(text);
     }
 
+    public static ReadOnlyAstObject parseObjectSilently(String text, String format) {
+        try {
+            return parseObject(text, format);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public static <T> T parseAnySilently(String text, String format) {
+        try {
+            return parseAny(text, format);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public static ReadOnlyAstArray parseArraySilently(String text, String format) {
+        try {
+            return parseArray(text, format);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public static ReadOnlyAstNode parseNodeSilently(String text, String format) {
+        try {
+            return parseNode(text, format);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     /*==================================================================================================================
      *=============================================== Format methods ===================================================
      *================================================================================================================*/
@@ -238,11 +270,21 @@ public final class AST {
                 objectMap.put(valueKey, entry.getValue());
             }
         }
-        // Second pass: moving back dotKeysMap objects to finalMap after recursive interpretation (necessary when the
+        // Second pass: moving back dotKeysMap objects to `finalMap` after recursive interpretation (necessary when the
         // map contains keys with several dots)
         if (dotKeysMap != null) {
             for (Map.Entry<String, Map<Object, Object>> entry : dotKeysMap.entrySet()) {
-                finalMap.put(entry.getKey(), interpretDotKeys(entry.getValue()));
+                String key = entry.getKey();
+                Map<Object, Object> values = interpretDotKeys(entry.getValue());
+                // If there is already a String value registered, we move it to the "text" key. This is a bit of a hack
+                // for I18n dictionaries where you can have, for example,
+                // SuperAdmin = Super Admin <= Considered as SuperAdmin.text = Super Admin
+                // SuperAdmin.graphic = ...
+                Object previousValue = finalMap.get(key);
+                if (previousValue instanceof String) {
+                    values.put("text", previousValue);
+                }
+                finalMap.put(key, values);
             }
         }
         return finalMap;

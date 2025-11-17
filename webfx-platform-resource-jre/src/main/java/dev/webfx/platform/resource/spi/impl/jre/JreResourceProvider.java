@@ -44,20 +44,50 @@ public class JreResourceProvider implements ResourceProvider {
     }
 
     private InputStream getResourceInputStream(String resourcePath) {
-        InputStream inputStream = null;
-        try {
-            // trying directly with the provided resourcePath
-            // Note: this may fail if resourcePath is actually a URL path such as file:/... => raises an exception on
-            // Windows, but just returns null on other platforms
-            inputStream = getClass().getClassLoader().getResourceAsStream(resourcePath);
-        } catch (Exception ignored) { }
-        if (inputStream == null) {
-            try {
-                // Now trying with a URL path
-                inputStream = new URL(resourcePath).openStream();
-            } catch (Exception ignored) { }
+        if (resourcePath == null || resourcePath.isEmpty()) {
+            return null;
         }
-        return inputStream;
+
+        // 1) If the path looks like a URL, use URL.openStream() directly
+        //    (file:, http:, https:, jar:, etc.)
+        if (resourcePath.contains("://") || resourcePath.startsWith("file:")) {
+            try {
+                return new URL(resourcePath).openStream();
+            } catch (Exception e) {
+                // fall through and try other strategies
+            }
+        }
+
+        // 2) If the path looks like a Windows absolute path (e.g. C:\dir\file.txt),
+        //    treat it as a file on disk.
+        if (resourcePath.matches("^[a-zA-Z]:\\\\.*")) {
+            try {
+                return new java.io.FileInputStream(resourcePath);
+            } catch (Exception e) {
+                // fall through and try classpath lookups
+            }
+        }
+
+        // 3) Classpath resource lookup: use '/' separators
+        String classpathName = resourcePath.replace('\\', '/');
+
+        // First try with this class's classloader
+        ClassLoader cl = getClass().getClassLoader();
+        InputStream inputStream = cl.getResourceAsStream(classpathName);
+        if (inputStream != null) {
+            return inputStream;
+        }
+
+        // Also try system classloader in case resource is there
+        inputStream = ClassLoader.getSystemResourceAsStream(
+                classpathName.startsWith("/") ? classpathName.substring(1) : classpathName
+        );
+        if (inputStream != null) {
+            return inputStream;
+        }
+
+        // Nothing worked
+        return null;
     }
 
     private static Scanner createScanner(InputStream inputStream) {
