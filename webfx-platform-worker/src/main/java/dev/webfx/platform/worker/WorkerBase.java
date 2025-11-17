@@ -1,20 +1,20 @@
 package dev.webfx.platform.worker;
 
-import java.util.function.Consumer;
+import java.util.function.BiConsumer;
 
 /**
  * @author Bruno Salmon
  */
 public abstract class WorkerBase implements Worker {
 
-    private Consumer<Object> onMessageHandler;
+    private BiConsumer<Object, Object[]> onMessageHandler;
 
-    public Consumer<Object> getOnMessageHandler() {
+    public BiConsumer<Object, Object[]> getOnMessageHandler() {
         return onMessageHandler;
     }
 
     @Override
-    public void setOnMessageHandler(Consumer<Object> onMessageHandler) {
+    public void setOnMessageHandler(BiConsumer<Object, Object[]> onMessageHandler) {
         this.onMessageHandler = onMessageHandler;
     }
 }

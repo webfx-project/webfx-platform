@@ -34,9 +34,9 @@ public final class JreWorker extends WorkerBase { // this instance represents th
     }
 
     @Override
-    public void postMessage(Object msg) {
+    public void postMessage(Object msg, Object... transferables) {
         // When the application calls this method, we need to pass this to the onMessageHandler of the application
-        workerExecutor.schedule(() -> jrePlatformAdapter.getOnMessageHandler().accept(msg), 0, TimeUnit.SECONDS);
+        workerExecutor.schedule(() -> jrePlatformAdapter.getOnMessageHandler().accept(msg, transferables), 0, TimeUnit.SECONDS);
     }
 
     @Override

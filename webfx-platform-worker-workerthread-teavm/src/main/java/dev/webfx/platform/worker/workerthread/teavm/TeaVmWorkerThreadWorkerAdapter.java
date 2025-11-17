@@ -9,9 +9,8 @@ import org.teavm.jso.core.JSArray;
 import org.teavm.jso.core.JSNumber;
 import org.teavm.jso.dom.events.EventListener;
 import org.teavm.jso.dom.events.MessageEvent;
-import org.teavm.jso.impl.JSWrapper;
 
-import java.util.function.Consumer;
+import java.util.function.BiConsumer;
 
 /**
  * @author Bruno Salmon
@@ -34,8 +33,17 @@ public final class TeaVmWorkerThreadWorkerAdapter implements PlatformWorkerThrea
     }
 
     @Override
-    public void postMessage(Object msg) {
-        native_postMessage(JSWrapper.unwrap(msg));
+    public void postMessage(Object msg, Object... transferables) {
+        JSObject jsoMsg = (JSObject) msg;
+        if (transferables.length == 0) {
+            native_postMessage(jsoMsg);
+        } else {
+            JSArray<JSObject> transferableArray = new JSArray<>();
+            for (Object transferable : transferables) {
+                transferableArray.push((JSObject) transferable);
+            }
+            native_postMessageWithTransferables(jsoMsg, transferableArray);
+        }
     }
 
     @Override
@@ -98,8 +106,8 @@ public final class TeaVmWorkerThreadWorkerAdapter implements PlatformWorkerThrea
     private static native void native_setDoubleArray(JSArray<?> jsArray, int index, double value);
 
     @Override
-    public void setOnMessageHandler(Consumer<Object> onMessageHandler) {
-        native_setOnMessageHandler(evt -> onMessageHandler.accept(evt.getData()));
+    public void setOnMessageHandler(BiConsumer<Object, Object[]> onMessageHandler) {
+        native_setOnMessageHandler(evt -> onMessageHandler.accept(evt.getData(), null));
     }
 
     @Override
@@ -114,9 +122,9 @@ public final class TeaVmWorkerThreadWorkerAdapter implements PlatformWorkerThrea
     @Import(name = "postMessageObject")
     private static native void native_postMessage(JSObject message);
 
-    @JSBody(params={"msg","param"}, script="self.postMessage(msg,param)")
-    @Import(name = "postMessageObjectWithParam")
-    private static native void native_postMessage(JSObject message, JSObject param);
+    @JSBody(params={"msg","transferables"}, script="self.postMessage(msg, transferables)")
+    @Import(name = "postMessageWithTransferables")
+    private static native void native_postMessageWithTransferables(JSObject message, JSArray<JSObject> transferables);
 
     @JSBody(params={"msg"}, script="self.postMessage(msg)")
     @Import(name = "postMessageString")

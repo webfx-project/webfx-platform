@@ -1,6 +1,6 @@
 package dev.webfx.platform.worker;
 
-import java.util.function.Consumer;
+import java.util.function.BiConsumer;
 
 /**
  * @author Bruno Salmon
@@ -21,12 +21,12 @@ public class DelegatingWorker implements Worker {
     }
 
     @Override
-    public void postMessage(Object msg) {
-        delegate.postMessage(msg);
+    public void postMessage(Object msg, Object... transferables) {
+        delegate.postMessage(msg, transferables);
     }
 
     @Override
-    public void setOnMessageHandler(Consumer<Object> onMessageHandler) {
+    public void setOnMessageHandler(BiConsumer<Object, Object[]> onMessageHandler) {
         delegate.setOnMessageHandler(onMessageHandler);
     }
 

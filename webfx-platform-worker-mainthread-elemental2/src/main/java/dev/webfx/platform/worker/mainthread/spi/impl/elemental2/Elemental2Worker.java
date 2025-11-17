@@ -2,7 +2,7 @@ package dev.webfx.platform.worker.mainthread.spi.impl.elemental2;
 
 import dev.webfx.platform.worker.Worker;
 
-import java.util.function.Consumer;
+import java.util.function.BiConsumer;
 
 /**
  * @author Bruno Salmon
@@ -16,13 +16,13 @@ public final class Elemental2Worker implements Worker {
     }
 
     @Override
-    public void postMessage(Object msg) {
+    public void postMessage(Object msg, Object... transferables) {
         e2Worker.postMessage(msg);
     }
 
     @Override
-    public void setOnMessageHandler(Consumer<Object> onMessageHandler) {
-        e2Worker.onmessage = messageEvent -> onMessageHandler.accept(messageEvent.data);
+    public void setOnMessageHandler(BiConsumer<Object, Object[]> onMessageHandler) {
+        e2Worker.onmessage = messageEvent -> onMessageHandler.accept(messageEvent.data, null);
     }
 
     @Override

@@ -53,9 +53,9 @@ public final class JreWorkerThreadWorkerAdapter extends WorkerBase implements Pl
     }
 
     @Override
-    public void postMessage(Object msg) {
+    public void postMessage(Object msg, Object... transferables) {
         // When the application worker calls this method, we need to pass this to the onMessageHandler of the proxy
-        Scheduler.runInUiThread(() -> mainThreadWebWorker.getOnMessageHandler().accept(msg));
+        Scheduler.runInUiThread(() -> mainThreadWebWorker.getOnMessageHandler().accept(msg, transferables));
     }
 
     @Override

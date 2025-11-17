@@ -33,11 +33,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.teavm</groupId>
-            <artifactId>teavm-jso-impl</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>dev.webfx</groupId>
             <artifactId>webfx-platform-worker-workerthread</artifactId>
             <version>0.1.0-SNAPSHOT</version>
