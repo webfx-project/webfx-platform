@@ -54,28 +54,32 @@ final class TeaVmWebAssemblyModule implements WebAssemblyModule {
     @JSBody(params = {"charCode"}, script = "return String.fromCharCode(charCode)")
     private static native String charCodeToString(int charCode);
 
-    @JSBody(params = {"module", "imports", "instanceHandler", "putwchar"}, script = "\n" +
-            "  WebAssembly.instantiate(module, Object.assign(imports, {teavm : {\n" +
-            "            currentTimeMillis: function() { return new Date().getTime(); },\n" +
-            "            isnan: isNaN,\n" +
-            "            teavm_getNaN: function() { return NaN; },\n" +
-            "            isinf: function(n) { return !isFinite(n) },\n" +
-            "            isfinite: isFinite,\n" +
-            "            putwchar: putwchar,\n" +
-            "            putwcharsErr: function() { },\n" + // Added to fix LinkError, but not sure what this function (signature) is
-            "            towlower: function (code) { return String.fromCharCode(code).toLowerCase().charCodeAt(0); },\n" +
-            "            towupper: function (code) { return String.fromCharCode(code).toUpperCase().charCodeAt(0); },\n" +
-            "            getNativeOffset: function (instant) { return new Date(instant).getTimezoneOffset(); },\n" +
-            "            logString: console.log,\n" +
-            "            logInt: console.log,\n" +
-            "            logOutOfMemory: function() { console.log('Out of memory') }\n" +
-            "        }, teavmMath: {\n" +
-            "            sqrt: Math.sqrt,\n" +
-            "            pow: Math.pow,\n" +
-            "            sin: Math.sin,\n" +
-            "            cos: Math.cos,\n" +
-            "        }}))\n" +
-            ".then( function(instance) { return instanceHandler(instance) } )")
+    @JSBody(params = {"module", "imports", "instanceHandler", "putwchar"}, // Added to fix LinkError, but not sure what this function (signature) is
+        script = """
+             WebAssembly.instantiate(module,
+                Object.assign(imports, {
+                    teavm : {
+                        currentTimeMillis: function() { return new Date().getTime(); },
+                        isnan: isNaN,
+                        teavm_getNaN: function() { return NaN; },
+                        isinf: function(n) { return !isFinite(n) },
+                        isfinite: isFinite,
+                        putwchar: putwchar,
+                        putwcharsErr: function() { },
+                        towlower: function (code) { return String.fromCharCode(code).toLowerCase().charCodeAt(0); },
+                        towupper: function (code) { return String.fromCharCode(code).toUpperCase().charCodeAt(0); },
+                        getNativeOffset: function (instant) { return new Date(instant).getTimezoneOffset(); },
+                        logString: console.log,
+                        logInt: console.log,
+                        logOutOfMemory: function() { console.log('Out of memory') }
+                    }, teavmMath: {
+                        sqrt: Math.sqrt,
+                        pow: Math.pow,
+                        sin: Math.sin,
+                        cos: Math.cos,
+                    }
+                })
+            ).then( function(instance) { return instanceHandler(instance) } )""")
     private static native void instantiateModule(JSObject module, JSObject imports, JSObjectHandler instanceHandler, IntHandler putwchar);
 
     @JSFunctor
