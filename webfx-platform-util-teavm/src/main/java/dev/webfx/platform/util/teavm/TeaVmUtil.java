@@ -58,9 +58,6 @@ public class TeaVmUtil {
     @JSBody(params = { "array", "index" }, script = "return array[index];")
     public static native JSObject getAt(JSObject array, int index);
 
-    @JSBody(params = { "value" }, script = "return typeof value === 'number';")
-    public static native boolean isNumber(JSObject value);
-
     public static Object jsToJava(JSObject value) {
         if (value == null || JSObjects.isUndefined(value))
             return null;
@@ -73,55 +70,30 @@ public class TeaVmUtil {
         };
     }
 
-    public static <T> T javaToJs(Object value) {
+    public static Object javaToJs(Object value) {
         if (value == null || JSObjects.isUndefined(value))
             return null;
         if (value instanceof JSObject)
-            return (T) value;
+            return value;
         if (value instanceof String s)
-            return (T) JSString.valueOf(s);
-        if (value instanceof Number n)
-            return (T) JSNumber.valueOf(n.doubleValue());
-        if (value instanceof Boolean b)
-            return (T) JSBoolean.valueOf(b);
-        return (T) value;
-    }
-
-    private static JSObject getLastJSObject(JSObject obj, String... props) {
-        JSObject result = obj;
-        for (int i = 0; i < props.length - 1; i++) {
-            result = getJSObject(result, props[i]);
-            if (result == null || JSObjects.isUndefined(result))
-                break;
+            return JSString.valueOf(s);
+        if (value instanceof Number n) {
+            if (n instanceof Double)
+                return JSNumber.valueOf(n.doubleValue());
+            if (n instanceof Float)
+                return JSNumber.valueOf(n.floatValue());
+            return JSNumber.valueOf(n.intValue());
         }
-        return result;
+        if (value instanceof Boolean b)
+            return JSBoolean.valueOf(b);
+        if (value instanceof Character c)
+            return JSString.valueOf(String.valueOf(c));
+        return value;
     }
 
-    public static Boolean getJSBoolean(JSObject obj, String prop) {
-        JSObject value = getJSObject(obj, prop);
-        if (value == null || JSObjects.isUndefined(value))
-            return null;
-        // Cast JSObject to boolean using a simple JS body that returns the value as-is
-        return jsCastToBoolean(value);
-    }
 
     @JSBody(params = { "value" }, script = "return value;")
     private static native boolean jsCastToBoolean(JSObject value);
-
-    public static Boolean getJSBoolean(JSObject obj, String... props) {
-        JSObject result = getLastJSObject(obj, props);
-        return result == null ? null : getJSBoolean(result, props[props.length - 1]);
-    }
-
-    public static Integer getJSInteger(JSObject obj, String prop) {
-        JSObject value = getJSObject(obj, prop);
-        if (value == null || JSObjects.isUndefined(value))
-            return null;
-        return jsCastToInt(value);
-    }
-
-    @JSBody(params = { "value" }, script = "return value;")
-    private static native int jsCastToInt(JSObject value);
 
     @JSBody(params = { "value" }, script = "return value;")
     private static native double jsCastToDouble(JSObject value);
@@ -131,10 +103,5 @@ public class TeaVmUtil {
 
     @JSBody(params = { "value" }, script = "return value;")
     private static native Object jsCastToObject(JSObject value);
-
-    public static Integer getJSInteger(JSObject obj, String... props) {
-        JSObject result = getLastJSObject(obj, props);
-        return result == null ? null : getJSInteger(result, props[props.length - 1]);
-    }
 
 }

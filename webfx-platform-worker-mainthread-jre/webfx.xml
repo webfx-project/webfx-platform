@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+
+    <description>Java implementation (based in Java Threads) of the WebWorker API (for platforms other than the browser).</description>
+
+    <exported-packages>
+        <source-packages/>
+    </exported-packages>
+
+    <providers>
+        <provider interface="dev.webfx.platform.worker.mainthread.spi.WorkerServiceProvider">dev.webfx.platform.worker.mainthead.spi.impl.jre.JreWorkerServiceProvider</provider>
+    </providers>
+
+    <dependencies>
+        <used-by-source-modules/>
+    </dependencies>
+
+</project>

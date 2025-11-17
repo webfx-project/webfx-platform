@@ -35,17 +35,21 @@ public final class AST {
     public static AstObject createObject(Object nativeObject) {
         if (NATIVE_FACTORY != null)
             return NATIVE_FACTORY.nativeToAstObject(nativeObject);
-        return createObject();
+        if (nativeObject instanceof AstObject astObject)
+            return astObject;
+        throw new IllegalArgumentException("Unsupported native object type: " + nativeObject.getClass());
     }
 
     public static AstArray createArray() {
         return getFactoryProvider().createArray();
     }
 
-    public static AstArray createArray(Object nativeObject) {
+    public static AstArray createArray(Object nativeArray) {
         if (NATIVE_FACTORY != null)
-            return NATIVE_FACTORY.nativeToAstArray(nativeObject);
-        return createArray();
+            return NATIVE_FACTORY.nativeToAstArray(nativeArray);
+        if (nativeArray instanceof AstArray astArray)
+            return astArray;
+        throw new IllegalArgumentException("Unsupported native array type: " + nativeArray.getClass());
     }
 
     public static boolean isNode(Object value) {
@@ -66,6 +70,18 @@ public final class AST {
 
     public static boolean isArray(ReadOnlyAstNode value) {
         return value.isArray();
+    }
+
+    public static Object nativeObject(ReadOnlyAstObject astObject) {
+        if (NATIVE_FACTORY != null)
+            return NATIVE_FACTORY.astToNativeObject(astObject);
+        return astObject;
+    }
+
+    public static Object nativeArray(ReadOnlyAstArray astArray) {
+        if (NATIVE_FACTORY != null)
+            return NATIVE_FACTORY.astToNativeArray(astArray);
+        return astArray;
     }
 
     /*==================================================================================================================
@@ -108,6 +124,38 @@ public final class AST {
 
     public static ReadOnlyAstNode parseNode(String text, String format) {
         return getParserProvider(format).parseNode(text);
+    }
+
+    public static ReadOnlyAstObject parseObjectSilently(String text, String format) {
+        try {
+            return parseObject(text, format);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public static <T> T parseAnySilently(String text, String format) {
+        try {
+            return parseAny(text, format);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public static ReadOnlyAstArray parseArraySilently(String text, String format) {
+        try {
+            return parseArray(text, format);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public static ReadOnlyAstNode parseNodeSilently(String text, String format) {
+        try {
+            return parseNode(text, format);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     /*==================================================================================================================
@@ -222,11 +270,21 @@ public final class AST {
                 objectMap.put(valueKey, entry.getValue());
             }
         }
-        // Second pass: moving back dotKeysMap objects to finalMap after recursive interpretation (necessary when the
+        // Second pass: moving back dotKeysMap objects to `finalMap` after recursive interpretation (necessary when the
         // map contains keys with several dots)
         if (dotKeysMap != null) {
             for (Map.Entry<String, Map<Object, Object>> entry : dotKeysMap.entrySet()) {
-                finalMap.put(entry.getKey(), interpretDotKeys(entry.getValue()));
+                String key = entry.getKey();
+                Map<Object, Object> values = interpretDotKeys(entry.getValue());
+                // If there is already a String value registered, we move it to the "text" key. This is a bit of a hack
+                // for I18n dictionaries where you can have, for example,
+                // SuperAdmin = Super Admin <= Considered as SuperAdmin.text = Super Admin
+                // SuperAdmin.graphic = ...
+                Object previousValue = finalMap.get(key);
+                if (previousValue instanceof String) {
+                    values.put("text", previousValue);
+                }
+                finalMap.put(key, values);
             }
         }
         return finalMap;
@@ -260,11 +318,12 @@ public final class AST {
         };
     }
 
-    public static Map astObjectToMap(ReadOnlyAstObject o) {
-        Map map = new HashMap();
+    public static Map<String, Object> astObjectToMap(ReadOnlyAstObject o) {
+        Map<String, Object> map = new HashMap<>();
         for (Object key : o.keys()) {
-            Object value = o.get((String) key);
-            map.put(key, astValueToMapList(value));
+            String sKey = (String) key;
+            Object value = o.get(sKey);
+            map.put(sKey, astValueToMapList(value));
         }
         return map;
     }
@@ -277,8 +336,8 @@ public final class AST {
         return value;
     }
 
-    public static List astArrayToList(ReadOnlyAstArray a) {
-        List list = new ArrayList();
+    public static List<Object> astArrayToList(ReadOnlyAstArray a) {
+        List<Object> list = new ArrayList<>();
         for (Object value : a) {
             list.add(astValueToMapList(value));
         }

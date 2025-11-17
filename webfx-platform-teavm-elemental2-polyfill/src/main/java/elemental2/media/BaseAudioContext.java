@@ -22,7 +22,6 @@ public abstract class BaseAudioContext implements EventTarget {
     public native AnalyserNode createAnalyser();
 
     public Promise<Void> resume() {
-        // Elemental2 is mixing JS Promise with Java Void, which doesn't work with TeaVM, so here is the fix:
         return resumeImpl().then(ignored -> null);
     }
 
