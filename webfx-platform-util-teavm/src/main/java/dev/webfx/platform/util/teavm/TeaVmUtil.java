@@ -91,6 +91,7 @@ public class TeaVmUtil {
         return value;
     }
 
+
     @JSBody(params = { "value" }, script = "return value;")
     private static native boolean jsCastToBoolean(JSObject value);
 

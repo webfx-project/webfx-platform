@@ -29,6 +29,7 @@ public abstract class Element extends Node {
     public native DOMRect getBoundingClientRect();
 
     public Promise<Void> requestFullscreen() {
+        // Elemental2 is mixing JS Promise with Java Void, which doesn't work with TeaVM, so here is the fix:
         return requestFullscreenImpl().then(jsUndefined -> null);
     }
 

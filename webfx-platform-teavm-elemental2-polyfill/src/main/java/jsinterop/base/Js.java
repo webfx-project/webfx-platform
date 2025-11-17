@@ -12,11 +12,11 @@ public final class Js {
     public static native JsPropertyMap<Object> asPropertyMap(Object obj);
 
     public static <T> T cast(Object obj) {
-        return (T) TeaVmUtil.javaToJs(obj);
+        return TeaVmUtil.javaToJs(obj);
     }
 
     public static <T> T uncheckedCast(Object obj) {
-        return cast(obj);
+        return TeaVmUtil.javaToJs(obj);
     }
 
     @JSBody(params = {"obj"}, script = "return typeof obj;")

@@ -64,6 +64,7 @@ public abstract class HTMLMediaElement extends HTMLElement {
     public native void pause();
 
     public final Promise<Void> play() {
+        // Elemental2 is mixing JS Promise with Java Void, which doesn't work with TeaVM, so here is the fix:
         return playImpl().then(jsUndefined -> null);
     }
 
