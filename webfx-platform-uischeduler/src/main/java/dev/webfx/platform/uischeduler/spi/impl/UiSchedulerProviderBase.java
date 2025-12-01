@@ -137,15 +137,23 @@ public abstract class UiSchedulerProviderBase extends SchedulerProviderBase impl
     private final List<AnimationScheduled> uiAnimations = new ArrayList<>();
     private final List<AnimationScheduled> propertiesAnimations = new ArrayList<>();
     private final List<AnimationScheduled> pulseAnimations = new ArrayList<>();
-    private final ThreadLocal<Boolean> animationFrame = new ThreadLocal<>();
+    private boolean animationFrame;
+    private int animationFrameNumber;
+
     @Override
     public boolean isAnimationFrameNow() {
-        return animationFrame.get() == Boolean.TRUE;
+        return animationFrame;
+    }
+
+    @Override
+    public int getAnimationFrameNumber() {
+        return animationFrameNumber;
     }
 
     protected void executeAnimationPipe() {
         nextAnimationExecutionTimeMillis = -1;
-        animationFrame.set(Boolean.TRUE);
+        animationFrame = true;
+        animationFrameNumber++;
         long uiPassStart = System.nanoTime();
         executeAnimations(uiAnimations);
         long propertiesPassStart = System.nanoTime();
@@ -154,7 +162,7 @@ public abstract class UiSchedulerProviderBase extends SchedulerProviderBase impl
         executeAnimations(pulseAnimations);
         long nanoEnd = System.nanoTime();
         long animationDuration = nanoEnd - uiPassStart;
-        animationFrame.set(Boolean.FALSE);
+        animationFrame = false;
 
         // Logging
         if (LOG_LONG_ANIMATIONS && animationDuration > MAX_ANIMATION_FRAME_DURATION_NANO) {

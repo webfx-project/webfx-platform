@@ -15,6 +15,8 @@ public interface UiSchedulerProvider extends SchedulerProvider {
 
     boolean isAnimationFrameNow();
 
+    int getAnimationFrameNumber();
+
     Scheduled scheduleDelayInAnimationFrame(long delayMs, Runnable animationTask, int afterFrameCount, AnimationFramePass pass);
 
     // Note: may be in the same animation frame if delay makes it possible

@@ -34,6 +34,10 @@ public final class UiScheduler extends Scheduler {
         return getProvider().isAnimationFrameNow();
     }
 
+    public static int getAnimationFrameNumber() {
+        return getProvider().getAnimationFrameNumber();
+    }
+
     public static Scheduled scheduleDelayInAnimationFrame(long delayMs, Runnable animationTask, int afterFrameCount, AnimationFramePass pass) {
         return getProvider().scheduleDelayInAnimationFrame(delayMs, animationTask, afterFrameCount, pass);
     }
