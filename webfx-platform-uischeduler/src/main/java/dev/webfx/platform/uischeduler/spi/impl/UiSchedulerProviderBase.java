@@ -142,7 +142,7 @@ public abstract class UiSchedulerProviderBase extends SchedulerProviderBase impl
 
     @Override
     public boolean isAnimationFrameNow() {
-        return animationFrame;
+        return isUiThread() && animationFrame;
     }
 
     @Override
