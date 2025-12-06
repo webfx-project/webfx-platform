@@ -10,7 +10,7 @@ import elemental2.dom.DomGlobal;
 public final class Elemental2OperatingSystemProvider extends OperatingSystemProviderBase {
 
     public Elemental2OperatingSystemProvider() {
-        super(DomGlobal.navigator.userAgent);
+        super(DomGlobal.navigator.userAgent, DomGlobal.navigator.maxTouchPoints);
     }
 }
 
