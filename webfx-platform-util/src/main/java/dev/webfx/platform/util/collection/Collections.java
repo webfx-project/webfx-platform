@@ -267,12 +267,11 @@ public final class Collections {
     }
 
     public static <T> T first(List<T> list) {
-        return isEmpty(list) ? null : list.get(0);
+        return get(list, 0);
     }
 
     public static <T> T last(List<T> list) {
-        int size = size(list);
-        return size == 0 ? null : list.get(size - 1);
+        return get(list, size(list) - 1);
     }
 
     public static <T> T get(List<T> list, int i) {
