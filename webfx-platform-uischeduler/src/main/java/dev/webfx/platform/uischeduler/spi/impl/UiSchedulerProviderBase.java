@@ -254,7 +254,7 @@ public abstract class UiSchedulerProviderBase extends SchedulerProviderBase impl
     }
 
     protected void log(Throwable throwable) {
-        Console.log(throwable);
+        Console.error(throwable);
     }
 
 }

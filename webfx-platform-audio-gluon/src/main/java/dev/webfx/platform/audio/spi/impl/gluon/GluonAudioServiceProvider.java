@@ -46,10 +46,10 @@ public final class GluonAudioServiceProvider implements AudioServiceProvider {
             Optional<com.gluonhq.attach.audio.Audio> audio = music ? audioService.loadMusic(url) : audioService.loadSound(url);
             GluonAudio gluonAudio = audio.map(GluonAudio::new).orElse(null);
             if (gluonAudio == null)
-                Console.log("WARNING [WebFX Platform]: Unable to load " + urlString);
+                Console.warn("[WebFX Platform] Unable to load " + urlString);
             return gluonAudio;
         } catch (IOException  e) {
-            Console.log("ERROR [WebFX Platform]: while loading " + urlString, e);
+            Console.error("[WebFX Platform] Error while loading " + urlString, e);
             throw new RuntimeException(e);
         }
     }

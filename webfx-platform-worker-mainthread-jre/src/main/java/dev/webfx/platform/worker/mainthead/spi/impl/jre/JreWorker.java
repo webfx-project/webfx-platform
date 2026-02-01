@@ -26,7 +26,7 @@ public final class JreWorker extends WorkerBase { // this instance represents th
             javaApplicationWorker = (ApplicationWorkerThreadWorkerBase) workerClass.getDeclaredConstructor().newInstance();
             javaApplicationWorker.setPlatformAdapter(jrePlatformAdapter);
         } catch (Exception e) {
-            Console.log(e);
+            Console.error(e);
             javaApplicationWorker = null;
         }
         this.applicationWorker = javaApplicationWorker;

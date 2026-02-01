@@ -33,9 +33,9 @@ public final class Meta {
                 if (content != null)
                     META_PROPERTIES.load(new StringReader(content));
                 else
-                    Console.log("[WARNING] Absent meta resource file " + META_EXE_RESOURCE_FILE_PATH);
+                    Console.warn("Absent meta resource file " + META_EXE_RESOURCE_FILE_PATH);
             } catch (Exception e) {
-                Console.log("[ERROR] Failed to read meta resource file " + META_EXE_RESOURCE_FILE_PATH, e);
+                Console.error("Failed to read meta resource file " + META_EXE_RESOURCE_FILE_PATH, e);
             }
         }
         return META_PROPERTIES;

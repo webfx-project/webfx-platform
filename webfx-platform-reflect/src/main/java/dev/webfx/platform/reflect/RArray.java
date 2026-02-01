@@ -30,7 +30,7 @@ public class RArray {
         Function<Integer, Object> arrayConstructor = ARRAY_CONSTRUCTORS.get(componentType);
         if (arrayConstructor != null)
             return arrayConstructor.apply(length);
-        Console.log("⚠️ WARNING: No array constructor found for " + componentType + ", using new Object[] instead");
+        Console.warn("No array constructor found for " + componentType + ", using new Object[] instead");
         return new Object[length];
     }
 

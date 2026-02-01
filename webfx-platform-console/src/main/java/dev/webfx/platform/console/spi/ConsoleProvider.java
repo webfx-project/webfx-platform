@@ -1,33 +1,43 @@
 package dev.webfx.platform.console.spi;
 
-import java.io.PrintStream;
-
 /**
  * @author Bruno Salmon
  */
 public interface ConsoleProvider {
 
-    default void log(Object message) {
-        if (message instanceof Throwable)
-            log(null, (Throwable) message);
-        else
-            log(message == null ? "null" : message.toString());
-    }
-
     default void log(String message) {
-        log(message, null);
+        error(message, null);
     }
 
-    default void log(String message, Throwable error) {
-        PrintStream printStream = error == null ? System.out : System.err;
+    default void error(Throwable error) {
+        error(null, error);
+    }
+
+    default void error(String message, Throwable error) {
         if (message != null)
-            printStream.println(message);
+            System.err.println("⛔️ " + message);
         if (error != null)
-            error.printStackTrace(printStream);
+            error.printStackTrace(System.err);
     }
 
     default void logNative(Object nativeObject) {
         System.out.println(nativeObject);
+    }
+
+    default void info(String message) {
+        log("[INFO] " + message);
+    }
+
+    default void debug(String message) {
+        log("[DEBUG] " + message);
+    }
+
+    default void warn(String message) {
+        log("[WARN] ⚠️ " + message);
+    }
+
+    default void error(String message) {
+        error(message, null);
     }
 
 }
