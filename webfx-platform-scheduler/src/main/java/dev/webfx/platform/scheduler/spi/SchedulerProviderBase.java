@@ -127,7 +127,7 @@ public abstract class SchedulerProviderBase implements SchedulerProvider {
             try {
                 runnable.run();
             } catch (Throwable t) {
-                Console.log("Uncaught exception occurred in scheduled runnable " + runnable, t);
+                Console.error("Uncaught exception occurred in scheduled runnable " + runnable, t);
             } finally {
                 decreaseRunningCount();
                 isFinished = cancelled || !periodic;

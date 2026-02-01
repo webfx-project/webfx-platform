@@ -9,16 +9,36 @@ import elemental2.dom.DomGlobal;
 public class Elemental2ConsoleProvider implements ConsoleProvider {
 
     @Override
-    public void log(String message, Throwable throwable) {
+    public void error(String message, Throwable throwable) {
         if (message != null)
-            logConsole(message);
+            error(message);
         if (throwable != null)
-            logConsole(throwable);
+            DomGlobal.console.trace(throwable);
     }
 
     @Override
     public void logNative(Object nativeObject) {
         logConsole(nativeObject);
+    }
+
+    @Override
+    public void info(String message) {
+        DomGlobal.console.info(message);
+    }
+
+    @Override
+    public void debug(String message) {
+        DomGlobal.console.debug(message);
+    }
+
+    @Override
+    public void warn(String message) {
+        DomGlobal.console.warn(message);
+    }
+
+    @Override
+    public void error(String message) {
+        DomGlobal.console.error(message);
     }
 
     private static void logConsole(Object message) {

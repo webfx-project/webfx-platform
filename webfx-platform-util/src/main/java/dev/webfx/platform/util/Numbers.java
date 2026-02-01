@@ -41,18 +41,18 @@ public final class Numbers {
     public static Number negate(Number value) {
         if (value == null)
             return null;
-        if (value instanceof Double)
-            return -(Double) value;
-        if (value instanceof Float)
-            return -(Float) value;
-        if (value instanceof Long)
-            return -(Long) value;
-        if (value instanceof Integer)
-            return -(Integer) value;
-        if (value instanceof Short)
-            return -(Short) value;
-        if (value instanceof Byte)
-            return -(Byte) value;
+        if (value instanceof Double d)
+            return -d;
+        if (value instanceof Float f)
+            return -f;
+        if (value instanceof Long l)
+            return -l;
+        if (value instanceof Integer i)
+            return -i;
+        if (value instanceof Short s)
+            return -s;
+        if (value instanceof Byte b)
+            return -b;
         return null;
     }
 
@@ -79,27 +79,27 @@ public final class Numbers {
     }
 
     public static Double asDouble(Object value) {
-        return value == null ? null : value instanceof Double ? (Double) value : value instanceof Number ? ((Number) value).doubleValue() : null;
+        return value == null ? null : value instanceof Double d ? d : value instanceof Number n ? n.doubleValue() : null;
     }
 
     public static Float asFloat(Object value) {
-        return value == null ? null : value instanceof Float ? (Float) value : value instanceof Number ? ((Number) value).floatValue() : null;
+        return value == null ? null : value instanceof Float f ? f : value instanceof Number n ? n.floatValue() : null;
     }
 
     public static Long asLong(Object value) {
-        return value == null ? null : value instanceof Long ? (Long) value : value instanceof Number ? ((Number) value).longValue() : null;
+        return value == null ? null : value instanceof Long l ? l : value instanceof Number n ? n.longValue() : null;
     }
 
     public static Short asShort(Object value){
-        return value == null ? null : value instanceof Short ? (Short) value : value instanceof Number ? ((Number) value).shortValue() : null;
+        return value == null ? null : value instanceof Short s ? s : value instanceof Number n ? n.shortValue() : null;
     }
 
     public static Integer asInteger(Object value) {
-        return value == null ? null : value instanceof Integer ? (Integer) value : value instanceof Number ? ((Number) value).intValue() : null;
+        return value == null ? null : value instanceof Integer i ? i : value instanceof Number n ? n.intValue() : null;
     }
 
     public static Byte asByte(Object value){
-        return value == null ? null : value instanceof Byte ? (Byte) value : value instanceof Number ? ((Number) value).byteValue() : null;
+        return value == null ? null : value instanceof Byte b ? b : value instanceof Number n ? n.byteValue() : null;
     }
 
     public static Double parseDouble(String s) {
@@ -164,8 +164,6 @@ public final class Numbers {
 
     public static Number parseShortestNumber(String s) {
         Long longValue = parseLong(s);
-        if (longValue == null)
-            return Double.valueOf(s);
         return toShortestNumber(longValue);
     }
 
@@ -267,16 +265,16 @@ public final class Numbers {
     }
 
     public static Number toShortestNumber(Number value) {
-        if (value instanceof Double)
-            return toShortestNumber((Double) value);
-        if (value instanceof Float)
-            return toShortestNumber((Float) value);
-        if (value instanceof Long)
-            return toShortestNumber((Long) value);
-        if (value instanceof Integer)
-            return toShortestNumber((Integer) value);
-        if (value instanceof Short)
-            return toShortestNumber((Short) value);
+        if (value instanceof Double d)
+            return toShortestNumber(d);
+        if (value instanceof Float f)
+            return toShortestNumber(f);
+        if (value instanceof Long l)
+            return toShortestNumber(l);
+        if (value instanceof Integer i)
+            return toShortestNumber(i);
+        if (value instanceof Short s)
+            return toShortestNumber(s);
         return value;
     }
 

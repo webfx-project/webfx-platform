@@ -12,7 +12,11 @@ public class OperatingSystemProviderBase implements OperatingSystemProvider {
     private final OSFamily osFamily;
 
     public OperatingSystemProviderBase(String osName) {
-        this(osName, guessOSFamily(osName));
+        this(osName, -1);
+    }
+
+    public OperatingSystemProviderBase(String osName, int maxTouchPoints) {
+        this(osName, guessOSFamily(osName, maxTouchPoints));
     }
 
     public OperatingSystemProviderBase(String osName, OSFamily osFamily) {
@@ -30,7 +34,7 @@ public class OperatingSystemProviderBase implements OperatingSystemProvider {
         return osFamily;
     }
 
-    private static OSFamily guessOSFamily(String osName) {
+    private static OSFamily guessOSFamily(String osName, int maxTouchPoints) {
         osName = osName.toLowerCase().replaceAll(" ", "");
         if (osName.contains("android"))
             return OSFamily.ANDROID;
@@ -39,7 +43,8 @@ public class OperatingSystemProviderBase implements OperatingSystemProvider {
         if (osName.contains("windows"))
             return OSFamily.WINDOWS;
         if (osName.contains("mac") || osName.contains("darwin"))
-            return OSFamily.MACOS;
+            // Using maxTouchPoints to detect iPadOS masquerading as macOS (iPadOS 13+)
+            return maxTouchPoints > 0 ? OSFamily.IOS : OSFamily.MACOS;
         if (osName.contains("linux"))
             return OSFamily.LINUX;
         return OSFamily.OTHER;

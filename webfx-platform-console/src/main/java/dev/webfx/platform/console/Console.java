@@ -16,20 +16,40 @@ public final class Console {
         return SingleServiceProvider.getProvider(ConsoleProvider.class, () -> ServiceLoader.load(ConsoleProvider.class));
     }
 
-    public static void log(Object message) {
-        getProvider().log(message);
-    }
-
     public static void log(String message) {
         getProvider().log(message);
     }
 
-    public static void log(String message, Throwable error) {
-        getProvider().log(message, error);
+    public static void log(Object message) {
+        log(String.valueOf(message));
+    }
+
+    public static void error(Throwable message) {
+        getProvider().error(message);
+    }
+
+    public static void error(String message, Throwable error) {
+        getProvider().error(message, error);
     }
 
     public static void logNative(Object nativeObject) {
         getProvider().logNative(nativeObject);
+    }
+
+    public static void info(String message) {
+        getProvider().info(message);
+    }
+
+    public static void debug(String message) {
+        getProvider().debug(message);
+    }
+
+    public static void warn(String message) {
+        getProvider().warn(message);
+    }
+
+    public static void error(String message) {
+        getProvider().error(message);
     }
 
     public static String captureStackTrace(Throwable exception) {

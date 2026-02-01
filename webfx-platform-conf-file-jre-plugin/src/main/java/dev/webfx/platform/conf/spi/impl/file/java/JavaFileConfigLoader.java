@@ -30,13 +30,13 @@ public class JavaFileConfigLoader implements ConfigLoaderProvider {
             Config sourcesConfig = SourcesConfig.getSourcesRootConfig().childConfigAt(SRC_CONFIG_PATH);
             String configDirPath = sourcesConfig.getString(SRC_CONFIG_DIR_KEY);
             if (configDirPath == null) {
-                Console.log("⚠️ Configuration directory is not defined! Please specify a configuration value at " + SRC_CONFIG_PATH + "." + SRC_CONFIG_DIR_KEY);
+                Console.warn("Configuration directory is not defined! Please specify a configuration value at " + SRC_CONFIG_PATH + "." + SRC_CONFIG_DIR_KEY);
             } else {
                 File configDirectory = new File(configDirPath);
                 if (!configDirectory.exists()) {
-                    Console.log("⚠️ Specified configuration directory doesn't exist: " + configDirPath);
+                    Console.warn("Specified configuration directory doesn't exist: " + configDirPath);
                 } else if (!configDirectory.isDirectory()) {
-                    Console.log("⚠️ Specified configuration directory is actually not a directory: " + configDirPath);
+                    Console.warn("Specified configuration directory is actually not a directory: " + configDirPath);
                 } else {
                     Console.log("✓ Configuration directory location: " + configDirPath);
                     readConfigDirectory(configDirectory, fileConfigs);
@@ -44,7 +44,7 @@ public class JavaFileConfigLoader implements ConfigLoaderProvider {
                 }
             }
         } catch (Exception e) {
-            Console.log("⛔️️ Error reading config directory!", e);
+            Console.error("Error reading config directory!", e);
             return Future.failedFuture(e);
         }
         return Future.succeededFuture(config);
@@ -53,11 +53,11 @@ public class JavaFileConfigLoader implements ConfigLoaderProvider {
     private void readConfigDirectory(File configDirectory, List<Config> configs) {
         File[] files = configDirectory.listFiles();
         if (files == null || files.length == 0) {
-            Console.log("⚠️ Configuration directory is empty: " + configDirectory.getAbsolutePath());
+            Console.warn("Configuration directory is empty: " + configDirectory.getAbsolutePath());
         } else {
             for (File file : files) {
                 if (file.isHidden()) {
-                    Console.log("⚠️ Ignoring hidden config file " + file.getAbsolutePath());
+                    Console.warn("Ignoring hidden config file " + file.getAbsolutePath());
                 } else if (file.isDirectory()) {
                     readConfigDirectory(file, configs);
                 } else {
@@ -67,7 +67,7 @@ public class JavaFileConfigLoader implements ConfigLoaderProvider {
                         Config fileConfig = ConfigParser.parseConfigFile(fileContent, path.toString());
                         configs.add(fileConfig);
                     } catch (Exception e) {
-                        Console.log("⛔️️ Error reading config file " + file.getAbsolutePath(), e);
+                        Console.error("Error reading config file " + file.getAbsolutePath(), e);
                     }
                 }
             }
