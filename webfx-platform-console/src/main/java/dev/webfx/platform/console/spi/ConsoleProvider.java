@@ -6,6 +6,10 @@ package dev.webfx.platform.console.spi;
 public interface ConsoleProvider {
 
     default void log(String message) {
+        System.out.println(message);
+    }
+
+    default void error(String message) {
         error(message, null);
     }
 
@@ -34,10 +38,6 @@ public interface ConsoleProvider {
 
     default void warn(String message) {
         log("[WARN] ⚠️ " + message);
-    }
-
-    default void error(String message) {
-        error(message, null);
     }
 
 }
