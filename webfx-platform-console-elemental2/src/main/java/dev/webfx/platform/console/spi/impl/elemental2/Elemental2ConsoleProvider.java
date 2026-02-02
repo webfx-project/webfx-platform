@@ -9,6 +9,11 @@ import elemental2.dom.DomGlobal;
 public class Elemental2ConsoleProvider implements ConsoleProvider {
 
     @Override
+    public void log(String message) {
+        logNative(message);
+    }
+
+    @Override
     public void error(String message, Throwable throwable) {
         if (message != null)
             error(message);
@@ -18,7 +23,7 @@ public class Elemental2ConsoleProvider implements ConsoleProvider {
 
     @Override
     public void logNative(Object nativeObject) {
-        logConsole(nativeObject);
+        DomGlobal.console.log(nativeObject);
     }
 
     @Override
@@ -39,10 +44,6 @@ public class Elemental2ConsoleProvider implements ConsoleProvider {
     @Override
     public void error(String message) {
         DomGlobal.console.error(message);
-    }
-
-    private static void logConsole(Object message) {
-        DomGlobal.console.log(message);
     }
 
 }
