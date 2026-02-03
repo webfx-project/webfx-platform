@@ -2,10 +2,8 @@ package elemental2.dom;
 
 import elemental2.promise.Promise;
 import jsinterop.base.Js;
-import org.teavm.jso.JSClass;
-import org.teavm.jso.JSFunctor;
-import org.teavm.jso.JSMethod;
-import org.teavm.jso.JSObject;
+import jsinterop.base.JsPropertyMap;
+import org.teavm.jso.*;
 import org.teavm.jso.core.JSUndefined;
 
 /**
@@ -25,6 +23,8 @@ public abstract class Element extends Node {
     public native void removeAttribute(String name);
 
     public native void focus();
+
+    public native void focus(Element.FocusOptionsType options);
 
     public native DOMRect getBoundingClientRect();
 
@@ -86,6 +86,17 @@ public abstract class Element extends Node {
     @JSFunctor
     public interface OnscrollFn extends JSObject {
         Object onInvoke(Event p0);
+    }
+
+    public interface FocusOptionsType extends JSObject {
+
+        static FocusOptionsType create() {
+            return Js.uncheckedCast(JsPropertyMap.of());
+        }
+
+        boolean isPreventScroll();
+
+        void setPreventScroll(boolean preventScroll);
     }
 
 }
