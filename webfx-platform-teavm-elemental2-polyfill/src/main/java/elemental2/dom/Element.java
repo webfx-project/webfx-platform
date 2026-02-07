@@ -94,8 +94,10 @@ public abstract class Element extends Node {
             return Js.uncheckedCast(JsPropertyMap.of());
         }
 
+        @JSProperty
         boolean isPreventScroll();
 
+        @JSProperty
         void setPreventScroll(boolean preventScroll);
     }
 
