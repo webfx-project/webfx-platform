@@ -6,6 +6,7 @@ module webfx.platform.conf.file.jre.plugin {
     requires webfx.platform.async;
     requires webfx.platform.conf;
     requires webfx.platform.console;
+    requires webfx.platform.secret.jre;
 
     // Exported packages
     exports dev.webfx.platform.conf.spi.impl.file.java;

@@ -57,4 +57,18 @@ public class FetchOptions {
         this.body = body;
         return this;
     }
+
+    /**
+     * Set a raw binary body. Use this when the caller already has the bytes
+     * to send (e.g. an encrypted Web Push payload). The Content-Type header
+     * is NOT inferred from the body — the caller must set it explicitly via
+     * {@link #setHeaders(Headers)} (Web Push uses "application/octet-stream").
+     * <p>
+     * Mirrors the Web Fetch API's acceptance of {@code BufferSource}
+     * (ArrayBuffer / typed array) as a request body.
+     */
+    public FetchOptions setBody(byte[] body) {
+        this.body = body;
+        return this;
+    }
 }

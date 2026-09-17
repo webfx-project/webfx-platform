@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+
+    <description>Resolves opt-in configuration variables (ex: a database password) by asking the developer to type them at startup, so they don't have to be stored on disk.</description>
+
+    <exported-packages>
+        <source-packages/>
+        <resource-packages/>
+    </exported-packages>
+
+    <dependencies>
+        <used-by-source-modules/>
+    </dependencies>
+
+    <providers>
+        <provider interface="dev.webfx.platform.substitution.var.spi.VariablesResolver">dev.webfx.platform.substitution.var.spi.impl.prompt.PromptVariablesResolver</provider>
+    </providers>
+
+</project>

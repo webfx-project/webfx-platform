@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+
+    <description>Passphrase-based encryption of configuration files, and the masked prompt asking for it.</description>
+
+    <exported-packages>
+        <source-packages/>
+        <resource-packages/>
+    </exported-packages>
+
+    <dependencies>
+        <used-by-source-modules/>
+    </dependencies>
+
+</project>

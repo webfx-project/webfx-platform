@@ -153,6 +153,7 @@
         <module>webfx-platform-scheduler</module>
         <module>webfx-platform-scheduler-jre</module>
         <module>webfx-platform-scheduler-vertx</module>
+        <module>webfx-platform-secret-jre</module>
         <module>webfx-platform-service</module>
         <module>webfx-platform-service-gwt-j2cl</module>
         <module>webfx-platform-shutdown</module>
@@ -170,6 +171,7 @@
         <module>webfx-platform-substitution-var-conf-plugin</module>
         <module>webfx-platform-substitution-var-env-plugin</module>
         <module>webfx-platform-substitution-var-localstorage-plugin</module>
+        <module>webfx-platform-substitution-var-prompt-jre-plugin</module>
         <module>webfx-platform-substitution-var-sysprop-plugin</module>
         <module>webfx-platform-substitution-var-windowlocation-plugin</module>
         <module>webfx-platform-teavm-elemental2-polyfill</module>

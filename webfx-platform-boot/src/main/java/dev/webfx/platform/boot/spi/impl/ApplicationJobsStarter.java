@@ -20,17 +20,13 @@ public class ApplicationJobsStarter implements ApplicationModuleBooter {
 
     @Override
     public void bootModule() {
-        ApplicationJobsInitializer.PROVIDED_JOBS.forEach(job -> {
-            log("- Starting " + job.getClass().getSimpleName());
-            ApplicationBooter.startApplicationJob(job);
-        });
+        // Per-job try/catch (see runJobPhase): one job failing to start must not abort the rest.
+        ApplicationJobsInitializer.runJobPhase("Starting", ApplicationBooter::startApplicationJob);
     }
 
     @Override
     public void exitModule() {
-        ApplicationJobsInitializer.PROVIDED_JOBS.forEach(job -> {
-            log("Stopping " + job.getClass().getSimpleName());
-            ApplicationBooter.stopApplicationJob(job);
-        });
+        // Same isolation on shutdown: one job throwing while stopping must not leave the others un-stopped.
+        ApplicationJobsInitializer.runJobPhase("Stopping", ApplicationBooter::stopApplicationJob);
     }
 }

@@ -7,6 +7,8 @@ import dev.webfx.platform.conf.SourcesConfig;
 import dev.webfx.platform.conf.impl.ConfigMerger;
 import dev.webfx.platform.conf.spi.ConfigLoaderProvider;
 import dev.webfx.platform.console.Console;
+import dev.webfx.platform.secret.SecretFile;
+import dev.webfx.platform.secret.SecretPassphrase;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -62,12 +64,35 @@ public class JavaFileConfigLoader implements ConfigLoaderProvider {
                     readConfigDirectory(file, configs);
                 } else {
                     Path path = file.toPath();
+                    boolean encrypted = SecretFile.isSecretFileName(file.getName());
                     try {
                         String fileContent = new String(Files.readAllBytes(path));
+                        if (encrypted) {
+                            // An encrypted config file: it is decrypted here, and the configuration machinery then
+                            // sees it under its name without the .secret extension, so its format (properties, json,
+                            // yaml) and the config path it contributes to are read from that name as usual.
+                            path = path.resolveSibling(SecretFile.plainFileName(file.getName()));
+                            if (Files.exists(path)) {
+                                Console.log("⚠️ Both " + file.getName() + " and its decrypted twin " + path.getFileName()
+                                            + " are present: the decrypted one also loads, and whichever is read last wins."
+                                            + " Delete it once its content is in the encrypted file.");
+                            }
+                            fileContent = SecretPassphrase.decrypt(fileContent, file.getName());
+                        }
                         Config fileConfig = ConfigParser.parseConfigFile(fileContent, path.toString());
                         configs.add(fileConfig);
-                    } catch (Exception e) {
-                        Console.error("Error reading config file " + file.getAbsolutePath(), e);
+                    } catch (Exception | LinkageError e) {
+                        Console.error("❌ Could not read config file " + file.getAbsolutePath()
+                                      + " — the configuration it holds is MISSING", e);
+                        // An encrypted file that won't open is not a config file with a typo in it: it is the secrets
+                        // of this installation being absent, and continuing would mean running on whatever the
+                        // application does when its credentials are missing. So the whole configuration fails to load:
+                        // nothing waiting on it is called, so the application initialises none of what it configures
+                        // and serves nothing, with the cause logged above.
+                        // LinkageError is caught as well: decrypting reaches code that a Java runtime built without
+                        // java.desktop can't load, and that must be reported the same way rather than escaping raw.
+                        if (encrypted)
+                            throw new IllegalStateException("Could not read encrypted config file " + file.getAbsolutePath(), e);
                     }
                 }
             }

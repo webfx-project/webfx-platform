@@ -35,6 +35,7 @@ public class VertxFetchProvider implements FetchProvider {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setAbsoluteURI(url);
         String stringBody = null;
+        byte[] bytesBody = null;
         io.vertx.core.Future<AsyncFile> futureStream = null;
         long streamLength = -1;
         MultipartForm multipartForm = null;
@@ -46,6 +47,8 @@ public class VertxFetchProvider implements FetchProvider {
             Object body = options.getBody();
             if (body instanceof String) { // Simple String body
                 stringBody = (String) body;
+            } else if (body instanceof byte[]) { // Raw binary body (e.g. Web Push encrypted payload)
+                bytesBody = (byte[]) body;
             } else if (body instanceof JreFile) { // Single file body
                 File file = ((JreFile) body).getPlatformBlob();
                 futureStream = VertxInstance.getVertx().fileSystem().open(file.getAbsolutePath(), new OpenOptions());
@@ -83,6 +86,8 @@ public class VertxFetchProvider implements FetchProvider {
 
         if (stringBody != null) { // Sending a simple String body
             vertxFuture = request.sendBuffer(Buffer.buffer(stringBody));
+        } else if (bytesBody != null) { // Sending raw bytes
+            vertxFuture = request.sendBuffer(Buffer.buffer(bytesBody));
         } else if (futureStream != null) { // Sending a single file
             if (streamLength >= 0)
                 request.putHeader("content-length", "" + streamLength);

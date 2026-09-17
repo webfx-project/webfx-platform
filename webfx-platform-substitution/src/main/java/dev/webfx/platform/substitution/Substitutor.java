@@ -4,6 +4,7 @@ import dev.webfx.platform.substitution.spi.SubstitutorProvider;
 import dev.webfx.platform.service.SingleServiceProvider;
 
 import java.util.ServiceLoader;
+import java.util.regex.Pattern;
 
 /**
  * @author Bruno Salmon
@@ -17,6 +18,24 @@ public final class Substitutor {
     public static String substitute(String text) {
         SubstitutorProvider provider = getProvider();
         return provider == null ? text : provider.substitute(text);
+    }
+
+    // Utility methods
+
+    private static final Pattern VARIABLE_PATTERN = Pattern.compile("\\$?\\{\\{(.+)}}");
+
+    public static boolean areValuesNullOrResolved(String... values) {
+        for (String value : values)
+            if (value != null && VARIABLE_PATTERN.matcher(value).find())
+                return false;
+        return true;
+    }
+
+    public static boolean areValuesNonNullAndResolved(String... values) {
+        for (String value : values)
+            if (value == null || VARIABLE_PATTERN.matcher(value).find())
+                return false;
+        return true;
     }
 
 }
