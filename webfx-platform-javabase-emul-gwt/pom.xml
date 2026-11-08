@@ -48,13 +48,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.treblereel.gwt.nio</groupId>
-            <artifactId>gwt-nio</artifactId>
-            <version>1.1</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
             <groupId>org.gwtproject</groupId>
             <artifactId>gwt-user</artifactId>
         </dependency>
