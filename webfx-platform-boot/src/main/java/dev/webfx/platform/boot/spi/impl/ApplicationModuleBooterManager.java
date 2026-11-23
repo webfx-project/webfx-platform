@@ -53,14 +53,41 @@ public final class ApplicationModuleBooterManager {
 
     private static StringBuilder logBuffer = new StringBuilder();
 
+    /**
+     * Whether the boot sequence is printed. Null until it is decided, which happens at the moment the buffer is
+     * flushed — see {@link #logHeaderAndBuffer}, and note that this is exactly what the buffering above was
+     * already for: the decision needs {@link Meta}, and on GWT the meta resource cannot be read until
+     * {@code GwtResourceModuleBooter} has run.
+     *
+     * <p>Not final, because {@link #setBootLogging} may settle it earlier. Deliberately NOT read from a system
+     * property here: this class is compiled into the browser, where {@code System.getProperty} is not something
+     * to rely on, so the override arrives from the JRE booter instead.
+     */
+    private static Boolean bootLogging;
+
+    /**
+     * Overrides whether the boot sequence is printed, before the boot starts.
+     *
+     * <p>For a platform that has a way for an operator to ask — {@code webfx-platform-boot-java} reads a system
+     * property and calls this. Without it, a command-line executable could never be made to show its own boot,
+     * which is precisely what one needs when a boot is what is going wrong.
+     */
+    public static void setBootLogging(boolean logging) {
+        bootLogging = logging;
+    }
+
     public static void log(String message) {
         // First stage: we buffer the logs
         if (logBuffer != null) { // non-null at the beginning until logHeaderAndBuffer() is called (=> set logBuffer to null)
             if (logBuffer.length() > 0) // !isEmpty() not supported by GWT
                 logBuffer.append("\n");
             logBuffer.append(message);
-        } else // Second stage: we print the logs directly to the console
+        } else if (Boolean.TRUE.equals(bootLogging)) // Second stage: we print the logs directly to the console
             Console.log(message);
+        // Third possibility: the boot sequence is not being printed at all (a command-line executable), and the
+        // message is dropped. Only PROGRESS comes through here; a failure is reported with Console.error by
+        // whoever hit it (see ApplicationJobsInitializer.runJobPhase and ApplicationJobFailures), so a boot
+        // that goes wrong still says so even when a boot that goes right says nothing.
     }
 
     private static void callModules(boolean boot) {
@@ -93,6 +120,12 @@ public final class ApplicationModuleBooterManager {
         // We convert the buffer into a String and set the buffer to null
         String logBufferString = Strings.toString(logBuffer);
         logBuffer = null; // So from now, log() will redirect directly to the console
+        // This is the first moment Meta can be asked (see the note on bootLogging), so it is where the
+        // decision is made when nothing has made it already.
+        if (bootLogging == null)
+            bootLogging = !Meta.isCLI();
+        if (!bootLogging) // The buffered progress is dropped with the rest of the sequence
+            return;
         // We first log the header
         int n = moduleBooters.size();
         String bootingOrExiting = boot ? "Booting " : "Exiting ";
