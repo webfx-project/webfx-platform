@@ -31,6 +31,8 @@ public abstract class Window implements JSObject, WindowEventTarget {
 
     public abstract void close();
 
+    public abstract MediaQueryList matchMedia(String query);
+
     @JSFunctor
     public interface OnabortFn extends JSObject {
         Object onInvoke(Event p0);
