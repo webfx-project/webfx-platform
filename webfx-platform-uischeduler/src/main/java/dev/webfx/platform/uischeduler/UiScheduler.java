@@ -26,6 +26,11 @@ public final class UiScheduler extends Scheduler {
         return SingleServiceProvider.getProvider(UiSchedulerProvider.class, () -> ServiceLoader.load(UiSchedulerProvider.class));
     }
 
+    /** See {@link UiSchedulerProvider#isUiThreadReady()} — whether there is a UI thread to marshal onto yet. */
+    public static boolean isUiThreadReady() {
+        return getProvider().isUiThreadReady();
+    }
+
     public static void requestNextScenePulse() {
         getProvider().requestNextScenePulse();
     }
