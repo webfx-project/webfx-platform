@@ -76,6 +76,23 @@ public final class ApplicationModuleBooterManager {
         bootLogging = logging;
     }
 
+    /**
+     * Whether this executable prints platform progress — the boot sequence, and anything else of that kind.
+     *
+     * <p>Exposed so that progress chatter outside the boot can follow the same decision instead of inventing a
+     * second switch. {@code VariablesResolverBase} is the first caller: its "‹ VAR › was resolved from …" lines
+     * are the same category of message, and in a one-shot command they arrive before every invocation while
+     * saying nothing an operator asked for.
+     *
+     * <p>Answers the settled value when there is one — {@link #setBootLogging} has run, or the boot has already
+     * decided — and otherwise makes the same default the boot would: a command-line executable is quiet. It does
+     * not SETTLE the field, because an operator's {@code -Dwebfx.boot.log} arrives before the boot starts and
+     * must still win.
+     */
+    public static boolean isProgressLogging() {
+        return bootLogging != null ? bootLogging : !Meta.isCLI();
+    }
+
     public static void log(String message) {
         // First stage: we buffer the logs
         if (logBuffer != null) { // non-null at the beginning until logHeaderAndBuffer() is called (=> set logBuffer to null)
