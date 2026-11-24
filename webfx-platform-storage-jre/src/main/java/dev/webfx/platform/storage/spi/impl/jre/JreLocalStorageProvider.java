@@ -1,5 +1,6 @@
 package dev.webfx.platform.storage.spi.impl.jre;
 
+import dev.webfx.platform.boot.spi.impl.ApplicationModuleBooterManager;
 import dev.webfx.platform.console.Console;
 import dev.webfx.platform.scheduler.Scheduled;
 import dev.webfx.platform.scheduler.Scheduler;
@@ -46,7 +47,13 @@ public final class JreLocalStorageProvider extends JreStorageProvider implements
                 Console.log("Exception while creating local storage file: " + e.getMessage());
             }
             try (OutputStream os = new FileOutputStream(locateStorageFile)) {
-                Console.log("Saving local storage file");
+                // Progress, not an event: a successful save is the normal case, and it happens whenever
+                // anything is stored. In a one-shot command-line program it arrived mid-sentence, between a
+                // prompt and the answer being typed into it - the worst possible place for a line that says
+                // nothing. The two Console.log calls either side of it stay unconditional: a storage file that
+                // could not be created or written IS worth saying, whatever kind of executable this is.
+                if (ApplicationModuleBooterManager.isProgressLogging())
+                    Console.log("Saving local storage file");
                 properties.store(os, null);
                 markAsSaved();
             } catch (Exception e) {

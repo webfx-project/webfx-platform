@@ -10,6 +10,12 @@ import elemental2.dom.DomGlobal;
  */
 public final class Elemental2UiSchedulerProvider extends UiSchedulerProviderBase {
 
+    @Override
+    public boolean isUiThreadReady() {
+        // A browser has one thread and the document is already there by the time anything runs.
+        return true;
+    }
+
     {
         // The browser is stopping animation frames when the tab is hidden, so we ensure all pending animation tasks
         // are executed as soon as the user goes back to the tab.

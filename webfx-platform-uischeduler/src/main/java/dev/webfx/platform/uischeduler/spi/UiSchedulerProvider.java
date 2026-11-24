@@ -11,6 +11,32 @@ import java.util.function.Consumer;
  */
 public interface UiSchedulerProvider extends SchedulerProvider {
 
+    /**
+     * Whether there is a UI thread to marshal onto yet — asked by code that must decide between running
+     * something inline and handing it to {@link #runInUiThread}.
+     *
+     * <h3>Why it lives here and not on the UI kit</h3>
+     *
+     * <p>It used to be asked of {@code WebFxKitLauncher.isReady()}, which meant any module needing the answer
+     * required {@code webfx-kit-launcher} — and through it real JavaFX. {@code webfx-stack-session-state-client}
+     * did, for this one question, which is how a headless command-line client came to carry javafx-base and
+     * javafx-graphics and to boot a UI kit launcher purely to be told there was nothing to launch. The question
+     * is about the SCHEDULER, so each scheduler provider can answer it without anybody depending on a kit.
+     *
+     * <h3>Why the default is false</h3>
+     *
+     * <p>Because the two wrong answers are not equally wrong. False means "run it inline", which is safe at
+     * boot and is what the code asking this already did when no kit was present. True means "marshal it", and a
+     * provider that DEFERS until a UI exists would queue boot-time work for a moment that never comes — which
+     * is not hypothetical: {@code OpenJFXUiSchedulerProvider} posts to {@code WebFxKitLauncher.onReady(...)},
+     * and a command-line program never launches a JavaFX application. A provider with a real UI thread that
+     * forgets to override this runs some callbacks inline, which is loud if it matters; the inverse hangs
+     * silently.
+     */
+    default boolean isUiThreadReady() {
+        return false;
+    }
+
     void requestNextScenePulse();
 
     boolean isAnimationFrameNow();
